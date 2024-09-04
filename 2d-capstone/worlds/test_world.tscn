@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=4 uid="uid://6nuay86jv12b"]
+
+[ext_resource type="PackedScene" uid="uid://ddhmsyfxae2qi" path="res://player/player.tscn" id="1_hws6x"]
+[ext_resource type="Texture2D" uid="uid://crmrqgi7pgwh2" path="res://worldObjects/block.png" id="2_4rwep"]
+[ext_resource type="PackedScene" uid="uid://e77840gwbhm2" path="res://worldObjects/block.tscn" id="3_t33j4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34wdf"]
+texture = ExtResource("2_4rwep")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_nlhue"]
+sources/0 = SubResource("TileSetAtlasSource_34wdf")
+
+[node name="testWorld" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_hws6x")]
+position = Vector2(110, 349)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+visible = false
+tile_map_data = PackedByteArray("AAAAABoAAAABAAAAAAABABoAAAABAAAAAAACABoAAAABAAAAAAADABoAAAABAAAAAAAEABoAAAABAAAAAAAFABoAAAABAAAAAAAGABoAAAABAAAAAAAHABoAAAABAAAAAAAIABoAAAABAAAAAAAJABoAAAABAAAAAAAKABoAAAABAAAAAAALABoAAAABAAAAAAALABsAAAABAAAAAAAMABsAAAABAAAAAAANABsAAAABAAAAAAAOABsAAAABAAAAAAAOABoAAAABAAAAAAAPABoAAAABAAAAAAAPABsAAAABAAAAAAAQABsAAAABAAAAAAARABsAAAABAAAAAAASABsAAAABAAAAAAATABsAAAABAAAAAAAUABsAAAABAAAAAAAVABsAAAABAAAAAAAWABsAAAABAAAAAAAXABsAAAABAAAAAAAYABsAAAABAAAAAAAZABsAAAABAAAAAAAaABsAAAABAAAAAAAbABsAAAABAAAAAAAbABoAAAABAAAAAAAaABoAAAABAAAAAAAZABoAAAABAAAAAAAYABoAAAABAAAAAAAXABoAAAABAAAAAAAWABoAAAABAAAAAAAVABoAAAABAAAAAAAUABoAAAABAAAAAAATABoAAAABAAAAAAASABoAAAABAAAAAAARABoAAAABAAAAAAAQABoAAAABAAAAAAAMABoAAAABAAAAAAADABsAAAABAAAAAAACABsAAAABAAAAAAABABsAAAABAAAAAAAAABsAAAABAAAAAAAEABsAAAABAAAAAAAFABsAAAABAAAAAAAGABsAAAABAAAAAAAHABsAAAABAAAAAAAIABsAAAABAAAAAAAJABsAAAABAAAAAAAKABsAAAABAAAAAAANABoAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_nlhue")
+
+[node name="blocks" type="Node2D" parent="."]
+position = Vector2(160, 448)
+
+[node name="Block" parent="blocks" instance=ExtResource("3_t33j4")]
+position = Vector2(-128, 0)
+
+[node name="Block2" parent="blocks" instance=ExtResource("3_t33j4")]
+position = Vector2(-96, 0)
+
+[node name="Block3" parent="blocks" instance=ExtResource("3_t33j4")]
+position = Vector2(-64, 0)
+
+[node name="Block4" parent="blocks" instance=ExtResource("3_t33j4")]
+position = Vector2(-32, 0)
+
+[node name="Block5" parent="blocks" instance=ExtResource("3_t33j4")]
