@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://6nuay86jv12b"]
+[gd_scene load_steps=14 format=4 uid="uid://6nuay86jv12b"]
 
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="1_dng8c"]
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_q8qkj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bsadp0sxt2eo8" path="res://worldObjects/circlePlaceholder.png" id="5_tat6k"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="7_jceee"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="8_tqh2j"]
+[ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="10_ekjrw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34wdf"]
 texture = ExtResource("2_4rwep")
@@ -345,3 +346,9 @@ shape = SubResource("RectangleShape2D_ucf8l")
 
 [node name="KillFloor2" parent="." instance=ExtResource("8_tqh2j")]
 position = Vector2(-37, 207)
+
+[node name="LevelUI" parent="." instance=ExtResource("10_ekjrw")]
+offset_left = 342.0
+offset_top = 292.0
+offset_right = 342.0
+offset_bottom = 292.0
