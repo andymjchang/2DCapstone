@@ -125,7 +125,7 @@ position = Vector2(-80, -68)
 position = Vector2(-112, -68)
 
 [node name="blocks3" type="Node2D" parent="blocks/blocks2/blocks"]
-position = Vector2(160, 0)
+position = Vector2(-673, 0)
 
 [node name="Block" parent="blocks/blocks2/blocks/blocks3" instance=ExtResource("3_t33j4")]
 position = Vector2(-48, -68)

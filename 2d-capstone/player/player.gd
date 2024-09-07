@@ -1,12 +1,15 @@
 extends CharacterBody2D
 
 signal takeDamage(amount)
+signal revive(who)
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -400.0
 var health = 3 # 3 hits
 var invuln = false
+var dead = false
 var attack
+var canAttack = true
 var left
 var right
 var jump
@@ -27,10 +30,9 @@ func _ready():
 		punch = "punch2"
 
 	attack = get_node("AttackHitbox")
-	print("attack loaded")
 
-	print("loading signals")
 	self.takeDamage.connect(_onTakeDamage)
+	self.revive.connect(_onRevive)
 
 
 func _physics_process(delta: float) -> void:
@@ -51,29 +53,44 @@ func _physics_process(delta: float) -> void:
 
 	# Other player mechanics
 	if Input.is_action_just_pressed(jump) and is_on_floor():
-		print("Jump!")
 		velocity.y = JUMP_VELOCITY
 
 	if Input.is_action_just_pressed(punch):
-		attack.disabled = false
-		attack.visible = true
-		print("Punch!")
-		await get_tree().create_timer(0.2).timeout
-		print("Punch over")
-		attack.disabled = true
-		attack.visible = false
+		if canAttack:
+			print("Punch!")
+			attack.disabled = false
+			attack.visible = true
+			canAttack = false
+			await get_tree().create_timer(0.2).timeout
+			canAttack = true
+			attack.disabled = true
+			attack.visible = false
 
 	move_and_slide()
 
 func _onTakeDamage(amount):
 	print("Got hit!")
-	if amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
+	if !dead and amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
 		health -= amount
-		print("Health now: ", health)
+
 		if health <= 0:
 			print("Player died!")
-			self.visible = false
-		invuln = true
-		await get_tree().create_timer(1.0).timeout
-		print("invuln over")
+			#self.visible = false
+			get_node("ProtoMc").self_modulate.a = 0.5
+			await get_tree().create_timer(3.0).timeout
+			emit_signal("revive", self)
+			dead = true
+			invuln = false
+
+		else:
+			invuln = true
+			await get_tree().create_timer(1.0).timeout
+			print("invuln over")
+			invuln = false
 	pass # Replace with function body.
+
+
+func _onRevive(who):
+	who.get_node("ProtoMc").self_modulate.a = 1
+	who.health = 3
+	who.dead = false
