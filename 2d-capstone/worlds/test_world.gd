@@ -1,6 +1,7 @@
 extends Node2D
 
 var time : float = 0
+var count = 0
 @onready var timer
 
 func _ready():
@@ -18,5 +19,12 @@ func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	print("made here")
+
+
+func _on_enemy_playerspotted() -> void:
+	count = count + 1
+	print("count: ", count)
+	#if count > 2:
+		#print("HIII")
+	
+	
