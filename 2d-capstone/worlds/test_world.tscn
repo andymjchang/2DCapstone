@@ -109,6 +109,3 @@ position = Vector2(-80, -68)
 position = Vector2(-112, -68)
 
 [node name="KillWall" parent="." instance=ExtResource("7_jceee")]
-
-[connection signal="takeDamage" from="Player2" to="Player2" method="_onTakeDamage"]
-[connection signal="takeDamage" from="Player1" to="Player1" method="_onTakeDamage"]

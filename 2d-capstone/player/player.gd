@@ -5,7 +5,7 @@ signal takeDamage()
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var health = 3 # 3 hits
-var inLevel = false
+var invuln = false
 var attack
 var left
 var right
@@ -39,16 +39,14 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# If not currently in a song, allow regular movement, otherwise begin autoscroll
-	if !inLevel:
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
+	if Globals.inLevel:
+		velocity.x = 1.0 * SPEED
+	else:
 		var direction := Input.get_axis(left, right)
 		if direction:
 			velocity.x = direction * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-	else:
-		velocity.x = 1.0 * SPEED
 
 	# Other player mechanics
 	if Input.is_action_just_pressed(jump) and is_on_floor():
@@ -68,9 +66,13 @@ func _physics_process(delta: float) -> void:
 
 func _onTakeDamage():
 	print("Got hit!")
-	health -= 1
-	print("Health now: ", health)
-	if health <= 0:
-		print("Player died!")
-		self.visible = false
+	if !invuln:
+		health -= 1
+		print("Health now: ", health)
+		if health <= 0:
+			print("Player died!")
+			self.visible = false
+		invuln = true
+		await get_tree().create_timer(1.0).timeout
+		print("invuln over")
 	pass # Replace with function body.
