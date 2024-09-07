@@ -2,4 +2,4 @@
 
 [ext_resource type="PackedScene" uid="uid://ddhmsyfxae2qi" path="res://player/player.tscn" id="1_n4oaj"]
 
-[node name="Player" instance=ExtResource("1_n4oaj")]
+[node name="Player2" instance=ExtResource("1_n4oaj")]
