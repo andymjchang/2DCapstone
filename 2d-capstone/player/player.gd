@@ -3,7 +3,11 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+var attack
 
+func _ready():
+	attack = get_node("AttackHitbox")
+	print("attack loaded")
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -16,10 +20,24 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	#var direction := Input.get_axis("ui_left", "ui_right")
+	#if direction:
+		#velocity.x = direction * SPEED
+	#else:
+		#velocity.x = move_toward(velocity.x, 0, SPEED)
+	#velocity.x = 1.0 * SPEED
+
+	if Input.is_action_just_pressed("punch"):
+		attack.disabled = false
+		attack.visible = true
+		print("Punch!")
+		await get_tree().create_timer(0.2).timeout
+		print("Punch over")
+		attack.disabled = true
+		attack.visible = false
+
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		print("Jump!")
+		velocity.y = JUMP_VELOCITY
 
 	move_and_slide()
