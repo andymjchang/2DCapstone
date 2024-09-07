@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bsyerlhiksbo5"]
+[gd_scene load_steps=10 format=4 uid="uid://bsyerlhiksbo5"]
 
 [ext_resource type="Script" path="res://worlds/testWorldA.gd" id="1_ojhvj"]
 [ext_resource type="Texture2D" uid="uid://crmrqgi7pgwh2" path="res://worldObjects/block.png" id="2_qsfi7"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ddhmsyfxae2qi" path="res://player/player.tscn" id="4_b0blb"]
 [ext_resource type="AudioStream" uid="uid://d2ot58lf8x2cx" path="res://audioTracks/PresentationDEMO.mp3" id="5_kj27x"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_iceo8"]
+[ext_resource type="Script" path="res://worlds/camera.gd" id="7_u8d2w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34wdf"]
 texture = ExtResource("2_qsfi7")
@@ -17,7 +18,7 @@ texture = ExtResource("2_qsfi7")
 [sub_resource type="TileSet" id="TileSet_nlhue"]
 sources/0 = SubResource("TileSetAtlasSource_34wdf")
 
-[node name="testWorld" type="Node2D"]
+[node name="testWorldA" type="Node2D"]
 script = ExtResource("1_ojhvj")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -40,6 +41,21 @@ position = Vector2(320, 256)
 [node name="Block3" parent="blocks1" instance=ExtResource("3_h1mol")]
 position = Vector2(448, 256)
 
+[node name="Block4" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(640, 208)
+
+[node name="Block5" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(768, 208)
+
+[node name="Block7" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(896, 208)
+
+[node name="Block8" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(1024, 208)
+
+[node name="Block11" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(1152, 208)
+
 [node name="blocks2" type="Node2D" parent="."]
 
 [node name="Block6" parent="blocks2" instance=ExtResource("3_h1mol")]
@@ -54,7 +70,30 @@ position = Vector2(320, 496)
 [node name="Block3" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(448, 496)
 
+[node name="Block5" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(576, 528)
+
+[node name="Block7" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(704, 560)
+
+[node name="Block8" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(832, 560)
+
+[node name="Block9" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(960, 560)
+
+[node name="Block10" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(1088, 560)
+
+[node name="Block11" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(1216, 560)
+
 [node name="blocksGeneral" type="Node2D" parent="."]
+
+[node name="indicators" type="Node2D" parent="."]
+
+[node name="ActionIndicator" parent="indicators" instance=ExtResource("6_iceo8")]
+position = Vector2(496, 224)
 
 [node name="Player" parent="." instance=ExtResource("4_b0blb")]
 position = Vector2(96, 176)
@@ -68,38 +107,6 @@ offset_left = 1040.0
 offset_right = 1152.0
 offset_bottom = 64.0
 
-[node name="Block" parent="." instance=ExtResource("3_h1mol")]
-position = Vector2(640, 208)
-
-[node name="Block2" parent="." instance=ExtResource("3_h1mol")]
-position = Vector2(768, 208)
-
-[node name="Block3" parent="." instance=ExtResource("3_h1mol")]
-position = Vector2(896, 208)
-
-[node name="Block4" parent="." instance=ExtResource("3_h1mol")]
-position = Vector2(1024, 208)
-
-[node name="Block5" parent="." instance=ExtResource("3_h1mol")]
-position = Vector2(576, 528)
-
-[node name="Block6" parent="." instance=ExtResource("3_h1mol")]
-position = Vector2(704, 560)
-
-[node name="Block7" parent="." instance=ExtResource("3_h1mol")]
-position = Vector2(832, 560)
-
-[node name="Block8" parent="." instance=ExtResource("3_h1mol")]
-position = Vector2(960, 560)
-
-[node name="Block9" parent="." instance=ExtResource("3_h1mol")]
-position = Vector2(1088, 560)
-
-[node name="Block10" parent="." instance=ExtResource("3_h1mol")]
-position = Vector2(1216, 560)
-
-[node name="Block11" parent="." instance=ExtResource("3_h1mol")]
-position = Vector2(1152, 208)
-
-[node name="ActionIndicator" parent="." instance=ExtResource("6_iceo8")]
-position = Vector2(496, 224)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+script = ExtResource("7_u8d2w")

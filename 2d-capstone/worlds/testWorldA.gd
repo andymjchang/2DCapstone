@@ -3,9 +3,13 @@ extends Node2D
 var time : float = 0
 var bpm: int = 100
 @onready var timer
+@onready var player
+@onready var camera
 
 func _ready():
 	timer = $Timer
+	player = $Player
+	camera = $Camera2D
 	
 # autoscroller manager
 func _process(delta: float) -> void:
@@ -17,3 +21,7 @@ func updateTime(delta: float):
 	
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
+	
+#func updateCameraPosition():
+	#camera.position.x = player.position.x
+	
