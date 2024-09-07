@@ -1,8 +1,8 @@
 extends Node2D
 
 @export var startingScale : float
-@export var animation_time: float = 10.0
-@export var target_time: float = 1.0
+@export var animation_time: float = 1.0
+var target_time: float = 1.0
 var elapsed_time: float = 0
 var active: bool = false
 var starting_scale
@@ -14,8 +14,11 @@ func _ready() -> void:
 	starting_scale = Vector2(startingScale, startingScale)
 	outer_circle.scale = starting_scale
 	outer_circle.modulate.a = 0.0 # Starting opacity (fully transparent)
-
-	#start_transition()
+	
+	# decide target_time based on world position
+	# currently camera moves at 300 pixels / second
+	var time = position.x / 300
+	set_target_time(time)
 
 # Set the time over which the transition occurs
 func set_target_time(time: float) -> void:
