@@ -7,7 +7,7 @@ var bpm: int = 100
 @onready var camera
 
 func _ready():
-	timer = $Timer
+	timer = $CanvasLayer/Timer
 	player = $Player
 	camera = $Camera2D
 	
