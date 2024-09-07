@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddhmsyfxae2qi"]
+[gd_scene load_steps=6 format=3 uid="uid://ddhmsyfxae2qi"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_etm0r"]
 [ext_resource type="Texture2D" uid="uid://bryw5h3235gyw" path="res://player/player.png" id="1_ws4wu"]
@@ -6,6 +6,8 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
 size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nopuc"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_etm0r")
@@ -21,3 +23,15 @@ shape = SubResource("RectangleShape2D_44r6d")
 position = Vector2(-8.19933, -0.437501)
 scale = Vector2(0.153781, 0.143559)
 texture = ExtResource("3_f8qq2")
+
+[node name="AttackHitbox" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(28, 0)
+shape = SubResource("RectangleShape2D_nopuc")
+disabled = true
+
+[node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0

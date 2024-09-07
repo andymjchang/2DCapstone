@@ -21,10 +21,5 @@ func round_to_dec(num, digit):
 
 
 
-func _on_enemy_playerspotted() -> void:
-	count = count + 1
-	print("count: ", count)
-	#if count > 2:
-		#print("HIII")
 	
 	
