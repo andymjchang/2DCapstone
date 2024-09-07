@@ -13,13 +13,6 @@ func _process(delta: float) -> void:
 	pass
 	
 	
-
-
-func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	print("HIII")
-
-
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	count = count + 1
 	print("count: ", count)
