@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://killFloor.gd" id="1_edwjd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0f686"]
-size = Vector2(909, 52)
+size = Vector2(909, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ruah7"]
-size = Vector2(908, 50)
+size = Vector2(908, 37)
 
 [node name="KillFloor" type="StaticBody2D"]
 script = ExtResource("1_edwjd")
@@ -14,11 +14,11 @@ script = ExtResource("1_edwjd")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(549, 306)
+position = Vector2(549, 302)
 shape = SubResource("RectangleShape2D_0f686")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(549, 314)
+position = Vector2(549, 307.5)
 shape = SubResource("RectangleShape2D_ruah7")
 
 [node name="ColorRect" type="ColorRect" parent="."]

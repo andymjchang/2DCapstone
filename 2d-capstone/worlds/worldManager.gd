@@ -12,7 +12,7 @@ func _ready():
 	player1 = get_node("Player1")
 	player2 = get_node("Player2")
 	killWall = get_node("KillWall")
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(0).timeout
 	Globals.inLevel = true
 	pass # Replace with function body.
 
@@ -27,9 +27,9 @@ func _onResetPosition(who):
 	print("resetting player pos")
 	if who == "Player1":
 		player1.position.x = killWall.position.x + 45
-		player1.position.y -= 100
+		player1.velocity -= player2.get_gravity() * player2.get_process_delta_time() * 50
 		pass
 	elif who == "Player2":
 		player2.position.x = killWall.position.x + 45
-		player2.position.y -= 100
+		player2.velocity -= player2.get_gravity() * player2.get_process_delta_time() * 50
 		pass

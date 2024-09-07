@@ -27,7 +27,7 @@ size = Vector2(22, 677)
 script = ExtResource("1_q8qkj")
 
 [node name="Player2" parent="." groups=["players"] instance=ExtResource("2_3lw4w")]
-position = Vector2(44, 238)
+position = Vector2(56, 214)
 
 [node name="Player1" parent="." groups=["players"] instance=ExtResource("1_dng8c")]
 position = Vector2(51, 441)
@@ -64,49 +64,10 @@ position = Vector2(-48, -68)
 [node name="Block2" parent="blocks/blocks3" instance=ExtResource("3_t33j4")]
 position = Vector2(-16, -68)
 
-[node name="Block3" parent="blocks/blocks3" instance=ExtResource("3_t33j4")]
-position = Vector2(16, -68)
-
 [node name="Block4" parent="blocks/blocks3" instance=ExtResource("3_t33j4")]
 position = Vector2(-80, -68)
 
 [node name="Block5" parent="blocks/blocks3" instance=ExtResource("3_t33j4")]
-position = Vector2(-112, -68)
-
-[node name="blocks" type="Node2D" parent="blocks"]
-position = Vector2(321, 0)
-
-[node name="Block" parent="blocks/blocks" instance=ExtResource("3_t33j4")]
-position = Vector2(-48, -68)
-
-[node name="Block2" parent="blocks/blocks" instance=ExtResource("3_t33j4")]
-position = Vector2(-16, -68)
-
-[node name="Block3" parent="blocks/blocks" instance=ExtResource("3_t33j4")]
-position = Vector2(16, -68)
-
-[node name="Block4" parent="blocks/blocks" instance=ExtResource("3_t33j4")]
-position = Vector2(-80, -68)
-
-[node name="Block5" parent="blocks/blocks" instance=ExtResource("3_t33j4")]
-position = Vector2(-112, -68)
-
-[node name="blocks3" type="Node2D" parent="blocks/blocks"]
-position = Vector2(160, 0)
-
-[node name="Block" parent="blocks/blocks/blocks3" instance=ExtResource("3_t33j4")]
-position = Vector2(-48, -68)
-
-[node name="Block2" parent="blocks/blocks/blocks3" instance=ExtResource("3_t33j4")]
-position = Vector2(-16, -68)
-
-[node name="Block3" parent="blocks/blocks/blocks3" instance=ExtResource("3_t33j4")]
-position = Vector2(16, -68)
-
-[node name="Block4" parent="blocks/blocks/blocks3" instance=ExtResource("3_t33j4")]
-position = Vector2(-80, -68)
-
-[node name="Block5" parent="blocks/blocks/blocks3" instance=ExtResource("3_t33j4")]
 position = Vector2(-112, -68)
 
 [node name="blocks2" type="Node2D" parent="blocks"]
@@ -181,8 +142,32 @@ position = Vector2(-80, -68)
 [node name="Block5" parent="blocks/blocks2/blocks/blocks3" instance=ExtResource("3_t33j4")]
 position = Vector2(-112, -68)
 
+[node name="blocks" type="Node2D" parent="blocks/blocks2/blocks"]
+position = Vector2(-641, 0)
+
+[node name="Block3" parent="blocks/blocks2/blocks/blocks" instance=ExtResource("3_t33j4")]
+position = Vector2(16, -68)
+
+[node name="blocks3" type="Node2D" parent="blocks/blocks2/blocks/blocks"]
+position = Vector2(160, 0)
+
+[node name="Block" parent="blocks/blocks2/blocks/blocks/blocks3" instance=ExtResource("3_t33j4")]
+position = Vector2(-48, -68)
+
+[node name="Block2" parent="blocks/blocks2/blocks/blocks/blocks3" instance=ExtResource("3_t33j4")]
+position = Vector2(-16, -68)
+
+[node name="Block3" parent="blocks/blocks2/blocks/blocks/blocks3" instance=ExtResource("3_t33j4")]
+position = Vector2(16, -68)
+
+[node name="Block4" parent="blocks/blocks2/blocks/blocks/blocks3" instance=ExtResource("3_t33j4")]
+position = Vector2(-80, -68)
+
+[node name="Block5" parent="blocks/blocks2/blocks/blocks/blocks3" instance=ExtResource("3_t33j4")]
+position = Vector2(-112, -68)
+
 [node name="blocks4" type="Node2D" parent="blocks"]
-position = Vector2(4, -203)
+position = Vector2(4, -228)
 
 [node name="Block" parent="blocks/blocks4" instance=ExtResource("3_t33j4")]
 position = Vector2(-48, -68)
@@ -220,15 +205,6 @@ position = Vector2(-112, -68)
 [node name="blocks" type="Node2D" parent="blocks/blocks4"]
 position = Vector2(321, 0)
 
-[node name="Block" parent="blocks/blocks4/blocks" instance=ExtResource("3_t33j4")]
-position = Vector2(-48, -68)
-
-[node name="Block2" parent="blocks/blocks4/blocks" instance=ExtResource("3_t33j4")]
-position = Vector2(-16, -68)
-
-[node name="Block3" parent="blocks/blocks4/blocks" instance=ExtResource("3_t33j4")]
-position = Vector2(16, -68)
-
 [node name="Block4" parent="blocks/blocks4/blocks" instance=ExtResource("3_t33j4")]
 position = Vector2(-80, -68)
 
@@ -249,9 +225,6 @@ position = Vector2(16, -68)
 
 [node name="Block4" parent="blocks/blocks4/blocks/blocks3" instance=ExtResource("3_t33j4")]
 position = Vector2(-80, -68)
-
-[node name="Block5" parent="blocks/blocks4/blocks/blocks3" instance=ExtResource("3_t33j4")]
-position = Vector2(-112, -68)
 
 [node name="blocks2" type="Node2D" parent="blocks/blocks4"]
 position = Vector2(641, 0)
@@ -362,10 +335,13 @@ texture = ExtResource("5_tat6k")
 [node name="KillWall" parent="." instance=ExtResource("7_jceee")]
 
 [node name="KillFloor" parent="." instance=ExtResource("8_tqh2j")]
-position = Vector2(198, 6)
+position = Vector2(173, -22)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(1174, 328)
 shape = SubResource("RectangleShape2D_ucf8l")
+
+[node name="KillFloor2" parent="." instance=ExtResource("8_tqh2j")]
+position = Vector2(-37, 207)
