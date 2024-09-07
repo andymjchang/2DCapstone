@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 window/stretch/mode="viewport"
 
+[dotnet]
+
+project/assembly_name="2D Capstone"
+
 [rendering]
 
 renderer/rendering_method="mobile"
