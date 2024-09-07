@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 signal takeDamage()
+signal resetPosition()
 
-const SPEED = 300.0
+const SPEED = 100.0
 const JUMP_VELOCITY = -400.0
 var health = 3 # 3 hits
 var invuln = false
@@ -30,7 +31,6 @@ func _ready():
 	print("attack loaded")
 
 	print("loading signals")
-	self.takeDamage.connect(_onTakeDamage)
 
 
 func _physics_process(delta: float) -> void:
@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 
 	# If not currently in a song, allow regular movement, otherwise begin autoscroll
 	if Globals.inLevel:
-		velocity.x = 1.0 * SPEED
+		position.x += 2.0
 	else:
 		var direction := Input.get_axis(left, right)
 		if direction:
