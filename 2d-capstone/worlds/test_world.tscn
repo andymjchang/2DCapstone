@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://6nuay86jv12b"]
+[gd_scene load_steps=8 format=4 uid="uid://6nuay86jv12b"]
 
 [ext_resource type="PackedScene" uid="uid://ddhmsyfxae2qi" path="res://player/player.tscn" id="1_hws6x"]
 [ext_resource type="Script" path="res://worlds/test_world.gd" id="1_rxv07"]
 [ext_resource type="Texture2D" uid="uid://crmrqgi7pgwh2" path="res://worldObjects/block.png" id="2_4rwep"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="3_5sfpd"]
+[ext_resource type="AudioStream" uid="uid://d2ot58lf8x2cx" path="res://audioTracks/PresentationDEMO.mp3" id="5_r3hdt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34wdf"]
 texture = ExtResource("2_4rwep")
@@ -56,3 +57,12 @@ position = Vector2(448, 496)
 
 [node name="Player" parent="." instance=ExtResource("1_hws6x")]
 position = Vector2(96, 176)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_r3hdt")
+autoplay = true
+
+[node name="Timer" type="RichTextLabel" parent="."]
+offset_left = 1040.0
+offset_right = 1152.0
+offset_bottom = 64.0
