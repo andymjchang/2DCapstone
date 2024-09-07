@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bsyerlhiksbo5"]
+[gd_scene load_steps=11 format=4 uid="uid://bsyerlhiksbo5"]
 
 [ext_resource type="Script" path="res://worlds/testWorldA.gd" id="1_ojhvj"]
 [ext_resource type="Texture2D" uid="uid://crmrqgi7pgwh2" path="res://worldObjects/block.png" id="2_qsfi7"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://d2ot58lf8x2cx" path="res://audioTracks/PresentationDEMO.mp3" id="5_kj27x"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_iceo8"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="7_u8d2w"]
+[ext_resource type="PackedScene" uid="uid://c81yi7uqx3rdl" path="res://worldObjects/action_indicator_manager.tscn" id="8_5o20m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34wdf"]
 texture = ExtResource("2_qsfi7")
@@ -144,11 +145,6 @@ position = Vector2(2592, 512)
 
 [node name="blocksGeneral" type="Node2D" parent="."]
 
-[node name="indicators" type="Node2D" parent="."]
-
-[node name="ActionIndicator" parent="indicators" instance=ExtResource("6_iceo8")]
-position = Vector2(496, 224)
-
 [node name="Player" parent="." instance=ExtResource("4_b0blb")]
 position = Vector2(96, 176)
 
@@ -167,14 +163,23 @@ offset_left = 1104.0
 offset_right = 1152.0
 offset_bottom = 64.0
 
-[node name="ActionIndicator" parent="." instance=ExtResource("6_iceo8")]
+[node name="actionIndicatorManager" parent="." instance=ExtResource("8_5o20m")]
+
+[node name="ActionIndicator5" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(496, 224)
+
+[node name="ActionIndicator" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1264, 528)
+target_time = 5.0
 
-[node name="ActionIndicator2" parent="." instance=ExtResource("6_iceo8")]
+[node name="ActionIndicator2" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1200, 176)
+target_time = 5.0
 
-[node name="ActionIndicator3" parent="." instance=ExtResource("6_iceo8")]
+[node name="ActionIndicator3" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1936, 528)
+target_time = 7.5
 
-[node name="ActionIndicator4" parent="." instance=ExtResource("6_iceo8")]
+[node name="ActionIndicator4" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1872, 208)
+target_time = 7.5

@@ -1,7 +1,8 @@
 extends Node2D
 
 @export var startingScale : float
-@export var target_time: float = 10.0
+@export var animation_time: float = 10.0
+@export var target_time: float = 1.0
 var elapsed_time: float = 0
 var active: bool = false
 var starting_scale
@@ -14,16 +15,19 @@ func _ready() -> void:
 	outer_circle.scale = starting_scale
 	outer_circle.modulate.a = 0.0 # Starting opacity (fully transparent)
 
-	start_transition()
+	#start_transition()
 
 # Set the time over which the transition occurs
 func set_target_time(time: float) -> void:
 	target_time = time
+func get_target_time():
+	return target_time - animation_time
 
 # Activate the transition
 func start_transition():
-	elapsed_time = 0
-	active = true
+	if active == false:
+		elapsed_time = 0
+		active = true
 
 # Update the outer circle's scale and opacity each frame
 func _process(delta: float) -> void:
@@ -34,7 +38,7 @@ func _process(delta: float) -> void:
 	elapsed_time += delta
 	
 	# Calculate the lerp factor based on the elapsed time and target time
-	var t = clamp(elapsed_time / target_time, 0.0, 1.0)
+	var t = clamp(elapsed_time / animation_time, 0.0, 1.0)
 	
 	# Lerp the scale from its current value to 1.0
 	outer_circle.scale = starting_scale.lerp(Vector2(1.0, 1.0), t)
@@ -47,3 +51,4 @@ func _process(delta: float) -> void:
 	# Stop the transition if the time has been reached
 	if t >= 1.0:
 		queue_free()
+		
