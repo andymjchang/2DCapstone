@@ -146,6 +146,12 @@ offset_left = 1104.0
 offset_right = 1152.0
 offset_bottom = 64.0
 
+[node name="Score" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1056.0
+offset_right = 1104.0
+offset_bottom = 64.0
+text = "0"
+
 [node name="actionIndicatorManager" parent="." instance=ExtResource("8_5o20m")]
 
 [node name="ActionIndicator5" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]

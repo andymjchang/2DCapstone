@@ -6,11 +6,15 @@ var target_time: float = 1.0
 var elapsed_time: float = 0
 var active: bool = false
 var starting_scale
+@onready var actionIndicatorManager
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
+signal scored
 
 # Start with higher scale and 0 opacity
 func _ready() -> void:
+	actionIndicatorManager = get_parent()
+	
 	starting_scale = Vector2(startingScale, startingScale)
 	outer_circle.scale = starting_scale
 	outer_circle.modulate.a = 0.0 # Starting opacity (fully transparent)
@@ -53,5 +57,6 @@ func _process(delta: float) -> void:
 	
 	# Stop the transition if the time has been reached
 	if t >= 1.0:
+		emit_signal("scored")
 		queue_free()
 		
