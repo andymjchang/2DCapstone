@@ -1,6 +1,7 @@
 extends Node2D
 
 var time : float = 0
+var bpm: int = 100
 @onready var timer
 
 func _ready():

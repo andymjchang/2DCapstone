@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://6nuay86jv12b"]
+[gd_scene load_steps=9 format=4 uid="uid://6nuay86jv12b"]
 
 [ext_resource type="PackedScene" uid="uid://ddhmsyfxae2qi" path="res://player/player.tscn" id="1_hws6x"]
 [ext_resource type="Script" path="res://worlds/test_world.gd" id="1_rxv07"]
 [ext_resource type="Texture2D" uid="uid://crmrqgi7pgwh2" path="res://worldObjects/block.png" id="2_4rwep"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="3_5sfpd"]
 [ext_resource type="AudioStream" uid="uid://d2ot58lf8x2cx" path="res://audioTracks/PresentationDEMO.mp3" id="5_r3hdt"]
+[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_115c6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34wdf"]
 texture = ExtResource("2_4rwep")
@@ -66,3 +67,39 @@ autoplay = true
 offset_left = 1040.0
 offset_right = 1152.0
 offset_bottom = 64.0
+
+[node name="Block" parent="." instance=ExtResource("3_5sfpd")]
+position = Vector2(640, 208)
+
+[node name="Block2" parent="." instance=ExtResource("3_5sfpd")]
+position = Vector2(768, 208)
+
+[node name="Block3" parent="." instance=ExtResource("3_5sfpd")]
+position = Vector2(896, 208)
+
+[node name="Block4" parent="." instance=ExtResource("3_5sfpd")]
+position = Vector2(1024, 208)
+
+[node name="Block5" parent="." instance=ExtResource("3_5sfpd")]
+position = Vector2(576, 528)
+
+[node name="Block6" parent="." instance=ExtResource("3_5sfpd")]
+position = Vector2(704, 560)
+
+[node name="Block7" parent="." instance=ExtResource("3_5sfpd")]
+position = Vector2(832, 560)
+
+[node name="Block8" parent="." instance=ExtResource("3_5sfpd")]
+position = Vector2(960, 560)
+
+[node name="Block9" parent="." instance=ExtResource("3_5sfpd")]
+position = Vector2(1088, 560)
+
+[node name="Block10" parent="." instance=ExtResource("3_5sfpd")]
+position = Vector2(1216, 560)
+
+[node name="Block11" parent="." instance=ExtResource("3_5sfpd")]
+position = Vector2(1152, 208)
+
+[node name="ActionIndicator" parent="." instance=ExtResource("6_115c6")]
+position = Vector2(496, 224)
