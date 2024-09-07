@@ -18,5 +18,4 @@ func _process(delta):
 func _onKillWallBodyEntered(body:Node2D):
 	if "players" in body.get_groups() and Globals.inLevel:	
 		print(body, " Entered")
-		body.emit_signal("takeDamage")
-		body.emit_signal("resetPosition", false)
+		body.emit_signal("takeDamage", 10)

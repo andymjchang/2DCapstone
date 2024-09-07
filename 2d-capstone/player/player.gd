@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
-signal takeDamage()
-signal resetPosition()
+signal takeDamage(amount)
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -400.0
@@ -31,6 +30,7 @@ func _ready():
 	print("attack loaded")
 
 	print("loading signals")
+	self.takeDamage.connect(_onTakeDamage)
 
 
 func _physics_process(delta: float) -> void:
@@ -64,10 +64,10 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func _onTakeDamage():
+func _onTakeDamage(amount):
 	print("Got hit!")
-	if !invuln:
-		health -= 1
+	if amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
+		health -= amount
 		print("Health now: ", health)
 		if health <= 0:
 			print("Player died!")
