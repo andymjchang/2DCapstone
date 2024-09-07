@@ -16,3 +16,7 @@ func updateTime(delta: float):
 	
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	print("made here")
