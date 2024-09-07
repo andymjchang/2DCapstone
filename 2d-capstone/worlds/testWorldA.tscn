@@ -14,58 +14,58 @@ script = ExtResource("1_ojhvj")
 [node name="blocks1" type="Node2D" parent="."]
 
 [node name="Block6" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(64, 256)
+position = Vector2(1952, 256)
 
 [node name="Block" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(192, 256)
+position = Vector2(2080, 256)
 
 [node name="Block2" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(320, 256)
+position = Vector2(2208, 256)
 
 [node name="Block3" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(448, 256)
+position = Vector2(2336, 256)
 
 [node name="Block4" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(640, 208)
+position = Vector2(2528, 208)
 
 [node name="Block5" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(768, 208)
+position = Vector2(2656, 208)
 
 [node name="Block7" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(896, 208)
+position = Vector2(2784, 208)
 
 [node name="Block8" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(1024, 208)
+position = Vector2(2912, 208)
 
 [node name="Block11" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(1152, 208)
+position = Vector2(3040, 208)
 
 [node name="Block9" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(1440, 240)
+position = Vector2(3328, 240)
 
 [node name="Block10" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(1568, 240)
+position = Vector2(3456, 240)
 
 [node name="Block12" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(1696, 240)
+position = Vector2(3584, 240)
 
 [node name="Block13" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(1824, 240)
+position = Vector2(3712, 240)
 
 [node name="Block14" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(2016, 192)
+position = Vector2(3904, 192)
 
 [node name="Block15" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(2144, 192)
+position = Vector2(4032, 192)
 
 [node name="Block16" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(2272, 192)
+position = Vector2(4160, 192)
 
 [node name="Block17" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(2400, 192)
+position = Vector2(4288, 192)
 
 [node name="Block18" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(2528, 192)
+position = Vector2(4416, 192)
 
 [node name="blocks2" type="Node2D" parent="."]
 
@@ -155,16 +155,55 @@ text = "0"
 [node name="actionIndicatorManager" parent="." instance=ExtResource("8_5o20m")]
 
 [node name="ActionIndicator5" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(496, 224)
-
-[node name="ActionIndicator" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(1264, 528)
+position = Vector2(304, 240)
 
 [node name="ActionIndicator2" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(1200, 176)
-
-[node name="ActionIndicator3" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(1936, 528)
+position = Vector2(944, 240)
 
 [node name="ActionIndicator4" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(1872, 208)
+position = Vector2(1264, 240)
+
+[node name="ActionIndicator" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(624, 240)
+
+[node name="Block" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(64, 272)
+
+[node name="Block2" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(192, 272)
+
+[node name="Block3" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(320, 272)
+
+[node name="Block4" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(448, 272)
+
+[node name="Block5" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(576, 272)
+
+[node name="Block6" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(704, 272)
+
+[node name="Block7" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(832, 272)
+
+[node name="Block8" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(960, 272)
+
+[node name="Block9" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(1088, 272)
+
+[node name="Block10" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(1216, 272)
+
+[node name="Block11" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(1344, 272)
+
+[node name="Block12" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(1472, 272)
+
+[node name="Block13" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(1600, 272)
+
+[node name="Block14" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(1728, 272)

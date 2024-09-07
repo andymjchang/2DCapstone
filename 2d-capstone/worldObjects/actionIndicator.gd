@@ -9,7 +9,8 @@ var starting_scale
 @onready var actionIndicatorManager
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
-signal scored
+@onready var timer = $Timer
+signal scored(indicator_position)
 
 # Start with higher scale and 0 opacity
 func _ready() -> void:
@@ -57,6 +58,10 @@ func _process(delta: float) -> void:
 	
 	# Stop the transition if the time has been reached
 	if t >= 1.0:
-		emit_signal("scored")
-		queue_free()
-		
+		scored.emit(position.x)
+		active = false
+		timer.start()
+
+
+func _on_timer_timeout() -> void:
+	queue_free()

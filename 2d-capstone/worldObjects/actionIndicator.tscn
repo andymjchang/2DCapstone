@@ -15,3 +15,8 @@ texture = ExtResource("1_55u4d")
 [node name="outerCircle" type="Sprite2D" parent="."]
 scale = Vector2(10, 10)
 texture = ExtResource("3_glxat")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
