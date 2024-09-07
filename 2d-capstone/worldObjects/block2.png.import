@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv3e0mgecpbqc"
-path="res://.godot/imported/proto_mc.png-4894d470397d6ee5bdfc2604dc5da5df.ctex"
+uid="uid://bjqh3v4ll2mvb"
+path="res://.godot/imported/block2.png-cf9673aa433545097ad14384d5a34d81.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/proto_mc.png"
-dest_files=["res://.godot/imported/proto_mc.png-4894d470397d6ee5bdfc2604dc5da5df.ctex"]
+source_file="res://worldObjects/block2.png"
+dest_files=["res://.godot/imported/block2.png-cf9673aa433545097ad14384d5a34d81.ctex"]
 
 [params]
 

@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
+signal takeDamage()
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+var health = 3 # 3 hits
 var inLevel = false
 var attack
 var left
@@ -26,6 +28,10 @@ func _ready():
 
 	attack = get_node("AttackHitbox")
 	print("attack loaded")
+
+	print("loading signals")
+	self.takeDamage.connect(_onTakeDamage)
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -59,3 +65,12 @@ func _physics_process(delta: float) -> void:
 		attack.visible = false
 
 	move_and_slide()
+
+func _onTakeDamage():
+	print("Got hit!")
+	health -= 1
+	print("Health now: ", health)
+	if health <= 0:
+		print("Player died!")
+		self.visible = false
+	pass # Replace with function body.

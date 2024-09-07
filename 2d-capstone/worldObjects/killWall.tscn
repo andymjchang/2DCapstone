@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://jbnrqqpvtubf"]
+
+[ext_resource type="Script" path="res://worldObjects/kill_wall.gd" id="1_3wcxa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0f686"]
+size = Vector2(20, 736)
+
+[node name="KillWall" type="Area2D"]
+script = ExtResource("1_3wcxa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 341)
+shape = SubResource("RectangleShape2D_0f686")
+
+[node name="ColorRect" type="ColorRect" parent="CollisionShape2D"]
+offset_left = -12.0
+offset_top = -369.0
+offset_right = 8.0
+offset_bottom = 372.0

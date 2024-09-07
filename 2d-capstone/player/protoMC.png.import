@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsadp0sxt2eo8"
-path="res://.godot/imported/circle_placeholder.png-e155eed26962752f5146046b938cd427.ctex"
+uid="uid://dv3e0mgecpbqc"
+path="res://.godot/imported/protoMC.png-1fb6d41730648c6322c8ebcb869a3201.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://worldObjects/circle_placeholder.png"
-dest_files=["res://.godot/imported/circle_placeholder.png-e155eed26962752f5146046b938cd427.ctex"]
+source_file="res://player/protoMC.png"
+dest_files=["res://.godot/imported/protoMC.png-1fb6d41730648c6322c8ebcb869a3201.ctex"]
 
 [params]
 
