@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://6nuay86jv12b"]
+[gd_scene load_steps=11 format=4 uid="uid://6nuay86jv12b"]
 
 [ext_resource type="PackedScene" uid="uid://ddhmsyfxae2qi" path="res://player/player.tscn" id="1_hws6x"]
 [ext_resource type="Script" path="res://worlds/test_world.gd" id="1_rxv07"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://d2ot58lf8x2cx" path="res://audioTracks/PresentationDEMO.mp3" id="5_r3hdt"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_115c6"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="7_fn0m4"]
+[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://wall/breakable_wall.tscn" id="8_243sp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34wdf"]
 texture = ExtResource("2_4rwep")
@@ -108,13 +109,16 @@ position = Vector2(496, 224)
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Enemy" parent="Node2D" instance=ExtResource("7_fn0m4")]
-position = Vector2(-213, 276)
+position = Vector2(241, 48)
 
 [node name="Enemy2" parent="Node2D" instance=ExtResource("7_fn0m4")]
-position = Vector2(-138, 274)
+position = Vector2(258, -67)
 
 [node name="Enemy3" parent="Node2D" instance=ExtResource("7_fn0m4")]
-position = Vector2(-59, 273)
+position = Vector2(518, -78)
 
 [node name="Enemy4" parent="Node2D" instance=ExtResource("7_fn0m4")]
-position = Vector2(23, 274)
+position = Vector2(405, 5)
+
+[node name="breakableWall" parent="." instance=ExtResource("8_243sp")]
+position = Vector2(-1485, -754)
