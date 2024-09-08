@@ -30,8 +30,6 @@ func round_to_dec(num, digit):
 	
 func updateScore(indicator_position):
 	var score_to_add = 100 - (indicator_position - player.position.x)
-	print("indicator pos" + str(indicator_position))
-	print("player pos" + str(player.position.x))
 	score += score_to_add
 	scoreText.text = str(int(score))
 	var textPopup = textPopupScene.instantiate()
