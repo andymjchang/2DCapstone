@@ -10,9 +10,28 @@ var killWall
 var countdownUI
 var statusMessage
 var restartButton
+var music
+
+var time : float = 0
+var bpm: int = 100
+var score = 0
+
+@onready var timerText
+@onready var player
+@onready var camera
+@onready var scoreText
+
+var textPopupScene = preload("res://worldObjects/scoreText.tscn")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	timerText = $CanvasLayer/Timer
+	player = $Player1
+	camera = $Camera2D
+	scoreText = $CanvasLayer/Score
+	music = $AudioStreamPlayer2D
+	
 	# Setting signals
 	self.resetPosition.connect(_onResetPosition)
 	self.gameOver.connect(_onGameOver)
@@ -21,8 +40,8 @@ func _ready():
 	# Getting nodes to manage
 	player1 = get_node("Player1")
 	player2 = get_node("Player2")
-	killWall = get_node("KillWall")
-	countdownUI = killWall.get_node("LevelUI")
+	#killWall = get_node("KillWall")
+	countdownUI = get_node("LevelUI")
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
 	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
 
@@ -31,6 +50,7 @@ func _ready():
 	changeCountdown()
 	await get_tree().create_timer(3.0).timeout
 	Globals.inLevel = true
+	music.playing = true
 
 func changeCountdown():
 	await get_tree().create_timer(1.0).timeout
@@ -58,9 +78,24 @@ func showGameOver():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#print(killWall.position.x)
+	updateTime(delta)
 	pass
 
+func updateTime(delta: float):
+	time = time + delta
+	timerText.text = str(round_to_dec(time, 2))
+	
+func round_to_dec(num, digit):
+	return round(num * pow(10.0, digit)) / pow(10.0, digit)
+	
+func updateScore(indicator_position):
+	var score_to_add = 100 - (indicator_position - player.position.x)
+	score += score_to_add
+	scoreText.text = str(int(score))
+	var textPopup = textPopupScene.instantiate()
+	textPopup.initText(score_to_add, player.position)
+	add_child(textPopup)
+	
 # Hard coded right now
 func _onResetPosition(who):
 	print("resetting player pos")

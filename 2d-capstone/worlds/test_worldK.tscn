@@ -348,7 +348,3 @@ position = Vector2(173, -22)
 [node name="KillWall" parent="." instance=ExtResource("7_jceee")]
 
 [node name="LevelUI" parent="KillWall" instance=ExtResource("10_ekjrw")]
-offset_left = 342.0
-offset_top = 292.0
-offset_right = 342.0
-offset_bottom = 292.0

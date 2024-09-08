@@ -29,7 +29,7 @@ func _ready() -> void:
 func set_target_time(time: float) -> void:
 	target_time = time
 func get_target_time():
-	return target_time - animation_time
+	return target_time - animation_time + 3
 
 # Activate the transition
 func start_transition():

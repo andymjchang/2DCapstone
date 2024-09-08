@@ -1,15 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsyerlhiksbo5"]
+[gd_scene load_steps=11 format=3 uid="uid://bsyerlhiksbo5"]
 
-[ext_resource type="Script" path="res://worlds/testWorldA.gd" id="1_ojhvj"]
+[ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_5l70f"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="3_2ouxg"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="3_h1mol"]
+[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="3_tdt43"]
 [ext_resource type="AudioStream" uid="uid://d2ot58lf8x2cx" path="res://audioTracks/PresentationDEMO.mp3" id="5_kj27x"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_iceo8"]
 [ext_resource type="PackedScene" uid="uid://b06gkr46rf8gm" path="res://worldObjects/action_indicator_manager.tscn" id="6_im0um"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="7_u8d2w"]
+[ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="8_b43qi"]
+[ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="9_txb0v"]
 
 [node name="testWorldA" type="Node2D"]
-script = ExtResource("1_ojhvj")
+script = ExtResource("1_5l70f")
 
 [node name="blocks1" type="Node2D" parent="."]
 
@@ -137,17 +140,21 @@ position = Vector2(2592, 576)
 
 [node name="blocksGeneral" type="Node2D" parent="."]
 
-[node name="Player1" parent="." instance=ExtResource("3_2ouxg")]
+[node name="Player2" parent="." instance=ExtResource("3_tdt43")]
 position = Vector2(0, 224)
+
+[node name="Player1" parent="." instance=ExtResource("3_2ouxg")]
+position = Vector2(41, 520)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_kj27x")
-autoplay = true
 max_distance = 10000.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 324)
 script = ExtResource("7_u8d2w")
+
+[node name="LevelUI" parent="." instance=ExtResource("8_b43qi")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -193,3 +200,9 @@ position = Vector2(3280, 368)
 
 [node name="ActionIndicator10" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(4140, 528)
+
+[node name="KillFloor" parent="." instance=ExtResource("9_txb0v")]
+position = Vector2(36, -1)
+
+[node name="KillFloor2" parent="." instance=ExtResource("9_txb0v")]
+position = Vector2(842, 356)

@@ -7,4 +7,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position.x = position.x + bpm * delta
+	if Globals.inLevel:
+		position.x = position.x + bpm * delta
