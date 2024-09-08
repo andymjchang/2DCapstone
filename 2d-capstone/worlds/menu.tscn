@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://kr3xmev8c2by"]
+
+[ext_resource type="Script" path="res://worlds/startButton.gd" id="1_h7wu1"]
+[ext_resource type="Texture2D" uid="uid://bsadp0sxt2eo8" path="res://worldObjects/circlePlaceholder.png" id="1_wpqf4"]
+
+[node name="Menu" type="CanvasLayer"]
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.708
+anchor_right = 0.5
+anchor_bottom = 0.708
+offset_left = -140.0
+offset_top = -38.784
+offset_right = 140.0
+offset_bottom = 38.216
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "Start Game!"
+script = ExtResource("1_h7wu1")
+
+[node name="Controls" type="RichTextLabel" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -379.0
+offset_top = -145.5
+offset_bottom = 145.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "[center][u][b]Player 1 Controls[/b][/u]
+W: Jump
+E: Punch[/center]
+
+[center][u][b]Player 2 Controls[/b][/u]
+Up: Jump
+Shift: Punch[/center]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 43.0
+offset_top = 49.0
+offset_right = 543.0
+offset_bottom = 335.0
+
+[node name="Premise" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 150)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "[center]Avoid obstacles and punch enemies to get to the end of the level! Watch for the green indicators in the level to know when to jump or punch:[/center]"
+
+[node name="CirclePlaceholder" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(146, 208)
+scale = Vector2(2.375, 2.375)
+texture = ExtResource("1_wpqf4")
+
+[connection signal="pressed" from="StartButton" to="StartButton" method="_onPressed"]

@@ -9,17 +9,25 @@ var player2
 var killWall
 var countdownUI
 var statusMessage
+var restartButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Setting signals
 	self.resetPosition.connect(_onResetPosition)
 	self.gameOver.connect(_onGameOver)
 	self.checkGameOver.connect(_onCheckGameOver)
+
+	# Getting nodes to manage
 	player1 = get_node("Player1")
 	player2 = get_node("Player2")
 	killWall = get_node("KillWall")
 	countdownUI = killWall.get_node("LevelUI")
-	statusMessage = countdownUI.get_node("Status")
+	statusMessage = countdownUI.get_node("Box").get_node("Status")
+	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
+
+	# Start game
+	restartButton.visible = false
 	changeCountdown()
 	await get_tree().create_timer(3.0).timeout
 	Globals.inLevel = true
@@ -46,6 +54,7 @@ func _onGameOver():
 
 func showGameOver():
 	statusMessage.text = "Game over!"
+	restartButton.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
