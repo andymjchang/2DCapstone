@@ -15,6 +15,7 @@ var enemyscene = preload("res://enemy/enemy.tscn")
 
 func _ready():
 	print("my name is: ",self.name)
+	add_to_group("players")
 	# Controls for player1
 	if self.name == "Player1":
 		left = "left1"

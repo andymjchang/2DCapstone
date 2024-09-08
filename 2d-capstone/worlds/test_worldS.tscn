@@ -28,10 +28,10 @@ size = Vector2(22, 677)
 [node name="testWorld" type="Node2D"]
 script = ExtResource("1_p74kk")
 
-[node name="Player2" parent="." groups=["players"] instance=ExtResource("2_5s6q7")]
+[node name="Player2" parent="." instance=ExtResource("2_5s6q7")]
 position = Vector2(56, 214)
 
-[node name="Player1" parent="." groups=["players"] instance=ExtResource("3_klle5")]
+[node name="Player1" parent="." instance=ExtResource("3_klle5")]
 position = Vector2(51, 441)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]

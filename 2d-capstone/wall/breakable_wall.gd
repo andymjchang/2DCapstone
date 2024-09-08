@@ -11,25 +11,18 @@ func _process(delta: float) -> void:
 	pass
 	
 	
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	print("In wall zone!")
-	
-	count = count + 1
-	print("count: ", count)
-	#WHHYYYY
-	#TODO fix 
-	if count >= 1:
-		if body.attack.visible:
-			self.visible = false
-
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	print("In wall zone!")
-	
 	count = count + 1
-	print("count: ", count)
-	#WHHYYYY
-	#TODO fix 
-	if count >= 1:
-		if body.attack.visible:
-			self.visible = false
+	var all_players = get_tree().get_nodes_in_group("players")
+	var bothPunching = true
+	
+	for player in all_players:
+		print("Player name: ", player.name)
+		if !player.attack.visible:
+			bothPunching = false
+			
+	if bothPunching and count >= 1:
+		self.visible = false	
+	
