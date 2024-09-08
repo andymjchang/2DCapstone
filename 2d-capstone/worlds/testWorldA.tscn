@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://bsyerlhiksbo5"]
 
 [ext_resource type="Script" path="res://worlds/testWorldA.gd" id="1_ojhvj"]
+[ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="3_2ouxg"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="3_h1mol"]
-[ext_resource type="PackedScene" uid="uid://ddhmsyfxae2qi" path="res://player/player.tscn" id="4_b0blb"]
 [ext_resource type="AudioStream" uid="uid://d2ot58lf8x2cx" path="res://audioTracks/PresentationDEMO.mp3" id="5_kj27x"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_iceo8"]
+[ext_resource type="PackedScene" path="res://worldObjects/action_indicator_manager.tscn" id="6_im0um"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="7_u8d2w"]
-[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="8_5o20m"]
 
 [node name="testWorldA" type="Node2D"]
 script = ExtResource("1_ojhvj")
@@ -137,7 +137,7 @@ position = Vector2(2592, 576)
 
 [node name="blocksGeneral" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("4_b0blb")]
+[node name="Player1" parent="." instance=ExtResource("3_2ouxg")]
 position = Vector2(0, 224)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -162,7 +162,7 @@ offset_right = 1104.0
 offset_bottom = 64.0
 text = "0"
 
-[node name="actionIndicatorManager" parent="." instance=ExtResource("8_5o20m")]
+[node name="actionIndicatorManager" parent="." instance=ExtResource("6_im0um")]
 
 [node name="ActionIndicator5" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(235, 240)

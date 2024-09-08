@@ -13,7 +13,7 @@ var textPopupScene = preload("res://worldObjects/scoreText.tscn")
 
 func _ready():
 	timerText = $CanvasLayer/Timer
-	player = $Player
+	player = $Player1
 	camera = $Camera2D
 	scoreText = $CanvasLayer/Score
 	

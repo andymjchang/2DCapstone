@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal takeDamage(amount)
 signal revive(who)
 
-const SPEED = 100.0
+const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var health = 3 # 3 hits
 var invuln = false
@@ -40,9 +40,11 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
+	velocity.x = SPEED
+
 	# If not currently in a song, allow regular movement, otherwise begin autoscroll
 	if Globals.inLevel:
-		position.x += 2.0
+		velocity.x = SPEED
 	else:
 		pass # Right now just don't give regular controls
 		# var direction := Input.get_axis(left, right)
