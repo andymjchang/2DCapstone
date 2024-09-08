@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" path="res://worldObjects/killWall.tscn" id="8_mp701"]
 [ext_resource type="PackedScene" path="res://worldObjects/killFloor.tscn" id="9_ah3d1"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="10_mgvrl"]
-[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://wall/breakable_wall.tscn" id="11_23yss"]
+[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://wall/breakableWall.tscn" id="11_23yss"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34wdf"]
 texture = ExtResource("4_kovi1")

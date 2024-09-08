@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkheaf7o2rr1e"
-path="res://.godot/imported/single_bot.webp-372552e9879cbc68de9dee9043568335.ctex"
+uid="uid://cxdhrplc2qstb"
+path="res://.godot/imported/singleBot.png-e69847fc6ef9836d0bc61e2b044e74b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://worldObjects/single_bot.webp"
-dest_files=["res://.godot/imported/single_bot.webp-372552e9879cbc68de9dee9043568335.ctex"]
+source_file="res://worldObjects/singleBot.png"
+dest_files=["res://.godot/imported/singleBot.png-e69847fc6ef9836d0bc61e2b044e74b2.ctex"]
 
 [params]
 

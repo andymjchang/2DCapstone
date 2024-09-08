@@ -1,5 +1,4 @@
 extends Node2D
-var count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,8 +12,6 @@ func _process(delta: float) -> void:
 	
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	print("In wall zone!")
-	count = count + 1
 	var all_players = get_tree().get_nodes_in_group("players")
 	var bothPunching = true
 	
@@ -23,5 +20,7 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 			bothPunching = false
 			
 	if bothPunching:
-		self.visible = false	
+		self.visible = false
+	else:
+		body.emit_signal("takeDamage",3)	
 	

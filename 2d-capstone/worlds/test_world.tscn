@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://d2ot58lf8x2cx" path="res://audioTracks/PresentationDEMO.mp3" id="5_r3hdt"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_115c6"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="7_fn0m4"]
-[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://wall/breakable_wall.tscn" id="8_243sp"]
+[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://wall/breakableWall.tscn" id="8_243sp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34wdf"]
 texture = ExtResource("2_4rwep")
