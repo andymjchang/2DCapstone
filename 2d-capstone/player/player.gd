@@ -14,9 +14,11 @@ var left
 var right
 var jump
 var punch
+var enemyscene = preload("res://enemy/enemy.tscn")
 
 func _ready():
 	print("my name is: ",self.name)
+	add_to_group("players")
 	# Controls for player1
 	if self.name == "Player1":
 		left = "left1"
@@ -34,17 +36,21 @@ func _ready():
 	self.takeDamage.connect(_onTakeDamage)
 	self.revive.connect(_onRevive)
 
-
+	
+	var enemy_instance= enemyscene.instantiate()
+	var enemy_node = enemy_instance.get_node("enemy")
+	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	velocity.x = SPEED
+	#velocity.x = SPEED
 
 	# If not currently in a song, allow regular movement, otherwise begin autoscroll
 	if Globals.inLevel:
 		velocity.x = SPEED
+		#position.x += 2.0
 	else:
 		pass # Right now just don't give regular controls
 		# var direction := Input.get_axis(left, right)
@@ -67,6 +73,7 @@ func _physics_process(delta: float) -> void:
 			canAttack = true
 			attack.disabled = true
 			attack.visible = false
+
 
 	move_and_slide()
 

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="3_h1mol"]
 [ext_resource type="AudioStream" uid="uid://d2ot58lf8x2cx" path="res://audioTracks/PresentationDEMO.mp3" id="5_kj27x"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_iceo8"]
-[ext_resource type="PackedScene" path="res://worldObjects/action_indicator_manager.tscn" id="6_im0um"]
+[ext_resource type="PackedScene" uid="uid://b06gkr46rf8gm" path="res://worldObjects/action_indicator_manager.tscn" id="6_im0um"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="7_u8d2w"]
 
 [node name="testWorldA" type="Node2D"]

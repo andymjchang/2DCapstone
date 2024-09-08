@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bsbq6v7ueradk"]
 
-[ext_resource type="Script" path="res://worldObjects/killFloor.gd" id="1_mw5fv"]
+[ext_resource type="Script" path="res://worldObjects/killFloor.gd" id="1_edwjd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0f686"]
 size = Vector2(909, 44)
@@ -9,7 +9,7 @@ size = Vector2(909, 44)
 size = Vector2(908, 37)
 
 [node name="KillFloor" type="StaticBody2D"]
-script = ExtResource("1_mw5fv")
+script = ExtResource("1_edwjd")
 
 [node name="Area2D" type="Area2D" parent="."]
 

@@ -14,7 +14,7 @@ func _process(delta):
 	if Globals.inLevel:
 		position.x += SPEED
 	pass
-
+	
 func _onKillWallBodyEntered(body:Node2D):
 	if "players" in body.get_groups() and Globals.inLevel:	
 		print(body, " Entered")
