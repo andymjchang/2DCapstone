@@ -34,24 +34,10 @@ func _ready():
 	print("loading signals")
 	self.takeDamage.connect(_onTakeDamage)
 
-
-#
-#func _ready():
 	
 	var enemy_instance= enemyscene.instantiate()
 	var enemy_node = enemy_instance.get_node("enemy")
-	print("in player eady")
 	
-	if enemy_node:
-		print("in if")
-		enemy_node.connect("playerspotted", Callable(func(): print("Clicked")))
-	
-
-func _on_playerspotted() -> void:
-	print("enemy spotted me!")
-	
-func handleplayerspotted():
-	print("enemy has spotted me!")
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
