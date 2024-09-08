@@ -1,0 +1,195 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsyerlhiksbo5"]
+
+[ext_resource type="Script" path="res://worlds/testWorldA.gd" id="1_ojhvj"]
+[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="3_h1mol"]
+[ext_resource type="PackedScene" uid="uid://ddhmsyfxae2qi" path="res://player/player.tscn" id="4_b0blb"]
+[ext_resource type="AudioStream" uid="uid://d2ot58lf8x2cx" path="res://audioTracks/PresentationDEMO.mp3" id="5_kj27x"]
+[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_iceo8"]
+[ext_resource type="Script" path="res://worlds/camera.gd" id="7_u8d2w"]
+[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="8_5o20m"]
+
+[node name="testWorldA" type="Node2D"]
+script = ExtResource("1_ojhvj")
+
+[node name="blocks1" type="Node2D" parent="."]
+
+[node name="Block6" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(2192, 256)
+
+[node name="Block3" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(2320, 256)
+
+[node name="Block5" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(2576, 208)
+
+[node name="Block7" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(2704, 208)
+
+[node name="Block9" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(3168, 400)
+
+[node name="Block10" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(3296, 400)
+
+[node name="Block12" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(3424, 400)
+
+[node name="Block13" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(3552, 432)
+
+[node name="Block14" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(3680, 464)
+
+[node name="Block15" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(3808, 496)
+
+[node name="Block16" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(3936, 528)
+
+[node name="Block17" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(4064, 560)
+
+[node name="Block18" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(4192, 560)
+
+[node name="Block19" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(64, 272)
+
+[node name="Block20" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(192, 272)
+
+[node name="Block22" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(512, 272)
+
+[node name="Block25" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(816, 272)
+
+[node name="Block28" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(1136, 272)
+
+[node name="Block29" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(1440, 272)
+
+[node name="Block32" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(1728, 272)
+
+[node name="Block" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(2064, 256)
+
+[node name="blocks2" type="Node2D" parent="."]
+
+[node name="Block6" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(64, 560)
+
+[node name="Block" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(192, 560)
+
+[node name="Block2" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(320, 560)
+
+[node name="Block3" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(448, 560)
+
+[node name="Block5" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(576, 592)
+
+[node name="Block7" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(704, 624)
+
+[node name="Block8" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(832, 624)
+
+[node name="Block9" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(960, 624)
+
+[node name="Block10" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(1088, 624)
+
+[node name="Block11" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(1216, 624)
+
+[node name="Block12" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(1504, 624)
+
+[node name="Block4" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(1632, 624)
+
+[node name="Block13" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(1760, 624)
+
+[node name="Block14" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(1888, 624)
+
+[node name="Block15" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(2080, 576)
+
+[node name="Block16" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(2208, 576)
+
+[node name="Block17" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(2336, 576)
+
+[node name="Block18" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(2464, 576)
+
+[node name="Block19" parent="blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(2592, 576)
+
+[node name="blocksGeneral" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("4_b0blb")]
+position = Vector2(0, 224)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_kj27x")
+autoplay = true
+max_distance = 10000.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 324)
+script = ExtResource("7_u8d2w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Timer" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1104.0
+offset_right = 1152.0
+offset_bottom = 64.0
+
+[node name="Score" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1056.0
+offset_right = 1104.0
+offset_bottom = 64.0
+text = "0"
+
+[node name="actionIndicatorManager" parent="." instance=ExtResource("8_5o20m")]
+
+[node name="ActionIndicator5" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(235, 240)
+
+[node name="ActionIndicator2" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(860, 240)
+
+[node name="ActionIndicator4" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(1180, 240)
+
+[node name="ActionIndicator" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(550, 240)
+
+[node name="ActionIndicator3" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(1480, 240)
+
+[node name="ActionIndicator6" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(1785, 240)
+
+[node name="ActionIndicator7" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(2360, 224)
+
+[node name="ActionIndicator8" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(2755, 176)
+
+[node name="ActionIndicator9" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(3280, 368)
+
+[node name="ActionIndicator10" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(4140, 528)
