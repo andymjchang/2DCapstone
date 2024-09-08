@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cxdhrplc2qstb" path="res://worldObjects/singleBot.png" id="2_fvj88"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gswvj"]
-size = Vector2(78, 123)
+size = Vector2(41, 61)
 
 [node name="Enemy" type="Node2D" groups=["enemies"]]
 script = ExtResource("1_fjqgg")
@@ -12,12 +12,11 @@ script = ExtResource("1_fjqgg")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(414, -101)
+position = Vector2(2.5, 1.5)
 shape = SubResource("RectangleShape2D_gswvj")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-position = Vector2(408, -104)
-scale = Vector2(0.245333, 0.167)
+scale = Vector2(0.1, 0.0838816)
 texture = ExtResource("2_fvj88")
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
