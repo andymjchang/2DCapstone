@@ -28,10 +28,10 @@ size = Vector2(22, 677)
 script = ExtResource("1_q8qkj")
 
 [node name="Player2" parent="." groups=["players"] instance=ExtResource("2_3lw4w")]
-position = Vector2(56, 214)
+position = Vector2(50, 214)
 
 [node name="Player1" parent="." groups=["players"] instance=ExtResource("1_dng8c")]
-position = Vector2(51, 441)
+position = Vector2(50, 441)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false
@@ -333,10 +333,8 @@ visible = false
 position = Vector2(237, 366)
 texture = ExtResource("5_tat6k")
 
-[node name="KillWall" parent="." instance=ExtResource("7_jceee")]
-
-[node name="KillFloor" parent="." instance=ExtResource("8_tqh2j")]
-position = Vector2(173, -22)
+[node name="KillFloor2" parent="." instance=ExtResource("8_tqh2j")]
+position = Vector2(-37, 207)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -344,10 +342,12 @@ position = Vector2(173, -22)
 position = Vector2(1174, 328)
 shape = SubResource("RectangleShape2D_ucf8l")
 
-[node name="KillFloor2" parent="." instance=ExtResource("8_tqh2j")]
-position = Vector2(-37, 207)
+[node name="KillFloor" parent="." instance=ExtResource("8_tqh2j")]
+position = Vector2(173, -22)
 
-[node name="LevelUI" parent="." instance=ExtResource("10_ekjrw")]
+[node name="KillWall" parent="." instance=ExtResource("7_jceee")]
+
+[node name="LevelUI" parent="KillWall" instance=ExtResource("10_ekjrw")]
 offset_left = 342.0
 offset_top = 292.0
 offset_right = 342.0

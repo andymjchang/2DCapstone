@@ -8,7 +8,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Countdown" type="Label" parent="."]
+[node name="Status" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -22,5 +22,5 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.901107, 0.308083, 0.364575, 1)
-theme_override_font_sizes/font_size = 300
+theme_override_font_sizes/font_size = 100
 text = "3"

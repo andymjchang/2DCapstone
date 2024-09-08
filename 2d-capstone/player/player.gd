@@ -77,10 +77,12 @@ func _onTakeDamage(amount):
 			print("Player died!")
 			#self.visible = false
 			get_node("ProtoMc").self_modulate.a = 0.5
-			await get_tree().create_timer(3.0).timeout
-			emit_signal("revive", self)
 			dead = true
 			invuln = false
+			get_parent().emit_signal("checkGameOver")
+			if Globals.inLevel:
+				await get_tree().create_timer(3.0).timeout
+				emit_signal("revive", self)
 
 		else:
 			invuln = true
