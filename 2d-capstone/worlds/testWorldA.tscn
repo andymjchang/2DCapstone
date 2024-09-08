@@ -1,16 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsyerlhiksbo5"]
+[gd_scene load_steps=11 format=3 uid="uid://bsyerlhiksbo5"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_5l70f"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="3_2ouxg"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="3_h1mol"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="3_tdt43"]
-[ext_resource type="AudioStream" uid="uid://d2ot58lf8x2cx" path="res://audioTracks/PresentationDEMO.mp3" id="5_kj27x"]
+[ext_resource type="AudioStream" uid="uid://dru5nx0p4ipej" path="res://audioTracks/155 Tempo Track.wav" id="5_vdg2a"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_iceo8"]
 [ext_resource type="PackedScene" uid="uid://b06gkr46rf8gm" path="res://worldObjects/action_indicator_manager.tscn" id="6_im0um"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="7_u8d2w"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="8_b43qi"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="9_txb0v"]
-[ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="11_ohvw8"]
 
 [node name="testWorldA" type="Node2D"]
 script = ExtResource("1_5l70f")
@@ -63,22 +62,28 @@ position = Vector2(64, 272)
 position = Vector2(192, 272)
 
 [node name="Block22" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(512, 272)
+position = Vector2(448, 272)
 
 [node name="Block25" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(816, 272)
+position = Vector2(704, 272)
 
 [node name="Block28" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(1136, 272)
+position = Vector2(832, 272)
 
 [node name="Block29" parent="blocks1" instance=ExtResource("3_h1mol")]
-position = Vector2(1440, 272)
+position = Vector2(960, 272)
 
 [node name="Block32" parent="blocks1" instance=ExtResource("3_h1mol")]
 position = Vector2(1728, 272)
 
 [node name="Block" parent="blocks1" instance=ExtResource("3_h1mol")]
 position = Vector2(2064, 256)
+
+[node name="Block2" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(320, 272)
+
+[node name="Block4" parent="blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(576, 272)
 
 [node name="blocks2" type="Node2D" parent="."]
 
@@ -142,13 +147,13 @@ position = Vector2(2592, 576)
 [node name="blocksGeneral" type="Node2D" parent="."]
 
 [node name="Player2" parent="." instance=ExtResource("3_tdt43")]
-position = Vector2(16, 240)
+position = Vector2(0, 240)
 
 [node name="Player1" parent="." instance=ExtResource("3_2ouxg")]
-position = Vector2(41, 520)
+position = Vector2(0, 520)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_kj27x")
+stream = ExtResource("5_vdg2a")
 max_distance = 10000.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -173,40 +178,34 @@ text = "0"
 [node name="actionIndicatorManager" parent="." instance=ExtResource("6_im0um")]
 
 [node name="ActionIndicator5" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(235, 240)
+position = Vector2(100, 240)
 
 [node name="ActionIndicator2" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(860, 240)
+position = Vector2(200, 240)
 
 [node name="ActionIndicator4" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(1180, 240)
+position = Vector2(300, 240)
 
 [node name="ActionIndicator" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(550, 240)
+position = Vector2(400, 240)
 
 [node name="ActionIndicator3" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(1480, 240)
+position = Vector2(500, 240)
 
 [node name="ActionIndicator6" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(1785, 240)
+position = Vector2(600, 240)
 
 [node name="ActionIndicator7" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(2360, 224)
+position = Vector2(700, 224)
 
 [node name="ActionIndicator8" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(2755, 176)
+position = Vector2(800, 176)
 
 [node name="ActionIndicator9" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(3280, 368)
+position = Vector2(1200, 368)
 
 [node name="ActionIndicator10" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(4140, 528)
-
-[node name="KillFloor" parent="." instance=ExtResource("9_txb0v")]
-position = Vector2(36, -1)
+position = Vector2(1600, 528)
 
 [node name="KillFloor2" parent="." instance=ExtResource("9_txb0v")]
 position = Vector2(842, 356)
-
-[node name="Enemy" parent="." instance=ExtResource("11_ohvw8")]
-position = Vector2(85, 224)

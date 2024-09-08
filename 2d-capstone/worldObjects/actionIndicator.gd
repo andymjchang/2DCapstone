@@ -22,7 +22,7 @@ func _ready() -> void:
 	
 	# decide target_time based on world position
 	# currently camera moves at 300 pixels / second
-	var time = position.x / 300
+	var time = position.x / 258.33333
 	set_target_time(time)
 
 # Set the time over which the transition occurs
@@ -58,6 +58,7 @@ func _process(delta: float) -> void:
 	
 	# Stop the transition if the time has been reached
 	if t >= 1.0:
+		outer_circle.visible = true
 		scored.emit(position.x)
 		active = false
 		timer.start()

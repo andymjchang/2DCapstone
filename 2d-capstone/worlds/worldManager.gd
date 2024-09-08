@@ -50,7 +50,7 @@ func _ready():
 	changeCountdown()
 	await get_tree().create_timer(3.0).timeout
 	Globals.inLevel = true
-	music.playing = true
+	music.play(0.0)
 
 func changeCountdown():
 	await get_tree().create_timer(1.0).timeout

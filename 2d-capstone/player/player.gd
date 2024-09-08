@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal takeDamage(amount)
 signal revive(who)
 
-const SPEED = 300.0
+const SPEED = 258.3333333
 const JUMP_VELOCITY = -400.0
 var health = 3 # 3 hits
 var invuln = false
