@@ -349,19 +349,25 @@ shape = SubResource("RectangleShape2D_ucf8l")
 position = Vector2(-37, 207)
 
 [node name="Enemy3" parent="." instance=ExtResource("10_mgvrl")]
-position = Vector2(245, 50)
+position = Vector2(-278, 295)
 
 [node name="Enemy4" parent="." instance=ExtResource("10_mgvrl")]
-position = Vector2(434, -16)
+position = Vector2(-100, 295)
 
 [node name="Enemy5" parent="." instance=ExtResource("10_mgvrl")]
-position = Vector2(454, 8)
+position = Vector2(-191, 297)
 
 [node name="Enemy6" parent="." instance=ExtResource("10_mgvrl")]
-position = Vector2(513, -96)
+position = Vector2(-12, 297)
+
+[node name="Enemy7" parent="." instance=ExtResource("10_mgvrl")]
+position = Vector2(-298, 493)
+
+[node name="Enemy8" parent="." instance=ExtResource("10_mgvrl")]
+position = Vector2(-217, 496)
+
+[node name="Enemy9" parent="." instance=ExtResource("10_mgvrl")]
+position = Vector2(-135, 494)
 
 [node name="breakableWall" parent="." instance=ExtResource("11_23yss")]
-position = Vector2(-274, -243)
-
-[node name="breakableWall2" parent="." instance=ExtResource("11_23yss")]
-position = Vector2(-1505, -751)
+position = Vector2(-343, -320)

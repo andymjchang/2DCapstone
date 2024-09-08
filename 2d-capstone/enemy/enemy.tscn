@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gswvj"]
 size = Vector2(78, 123)
 
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="Node2D" groups=["enemies"]]
 script = ExtResource("1_fjqgg")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -20,4 +20,4 @@ position = Vector2(408, -104)
 scale = Vector2(0.245333, 0.167)
 texture = ExtResource("2_fvj88")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

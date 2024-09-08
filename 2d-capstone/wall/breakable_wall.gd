@@ -19,10 +19,9 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 	var bothPunching = true
 	
 	for player in all_players:
-		print("Player name: ", player.name)
 		if !player.attack.visible:
 			bothPunching = false
 			
-	if bothPunching and count >= 1:
+	if bothPunching:
 		self.visible = false	
 	
