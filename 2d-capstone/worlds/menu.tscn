@@ -1,20 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://kr3xmev8c2by"]
+[gd_scene load_steps=4 format=3 uid="uid://kr3xmev8c2by"]
 
 [ext_resource type="Script" path="res://worlds/startButton.gd" id="1_h7wu1"]
 [ext_resource type="Texture2D" uid="uid://bsadp0sxt2eo8" path="res://worldObjects/circlePlaceholder.png" id="1_wpqf4"]
+[ext_resource type="Texture2D" uid="uid://dv3e0mgecpbqc" path="res://player/protoMC.png" id="2_hjywm"]
 
 [node name="Menu" type="CanvasLayer"]
 
 [node name="StartButton" type="Button" parent="."]
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.708
+anchor_top = 0.879
 anchor_right = 0.5
-anchor_bottom = 0.708
-offset_left = -140.0
-offset_top = -38.784
-offset_right = 140.0
-offset_bottom = 38.216
+anchor_bottom = 0.879
+offset_left = -147.0
+offset_top = -38.592
+offset_right = 147.0
+offset_bottom = 38.408
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 50
@@ -27,9 +28,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -379.0
-offset_top = -145.5
-offset_bottom = 145.5
+offset_left = -459.0
+offset_top = -271.0
+offset_right = -80.0
+offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 25
@@ -44,10 +46,10 @@ Up: Jump
 Shift: Punch[/center]"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 43.0
-offset_top = 49.0
-offset_right = 543.0
-offset_bottom = 335.0
+offset_left = 32.0
+offset_top = 22.0
+offset_right = 532.0
+offset_bottom = 506.0
 
 [node name="Premise" type="RichTextLabel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(500, 150)
@@ -57,8 +59,33 @@ theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
 text = "[center]Avoid obstacles and punch enemies to get to the end of the level! Watch for the green indicators in the level to know when to jump or punch:[/center]"
 
+[node name="CirclePlaceholder2" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(365, 321)
+scale = Vector2(2.0625, 2.0625)
+texture = ExtResource("1_wpqf4")
+
+[node name="ProtoMc3" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(338, 434)
+scale = Vector2(0.457424, 0.457424)
+texture = ExtResource("2_hjywm")
+
+[node name="CirclePlaceholder3" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(364, 444)
+scale = Vector2(1.375, 1.375)
+texture = ExtResource("1_wpqf4")
+
+[node name="ProtoMc2" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(214, 324)
+scale = Vector2(0.457424, 0.457424)
+texture = ExtResource("2_hjywm")
+
+[node name="ProtoMc" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(90, 205)
+scale = Vector2(0.457424, 0.457424)
+texture = ExtResource("2_hjywm")
+
 [node name="CirclePlaceholder" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(146, 208)
+position = Vector2(365, 204)
 scale = Vector2(2.375, 2.375)
 texture = ExtResource("1_wpqf4")
 
