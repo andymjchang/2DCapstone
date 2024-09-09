@@ -22,7 +22,7 @@ func _ready() -> void:
 	
 	# decide target_time based on world position
 	# currently camera moves at 300 pixels / second
-	var time = position.x / 258.33333
+	var time = position.x / 388
 	set_target_time(time)
 
 # Set the time over which the transition occurs
