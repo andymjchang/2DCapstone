@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsyerlhiksbo5"]
+[gd_scene load_steps=12 format=3 uid="uid://bsyerlhiksbo5"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_5l70f"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="3_2ouxg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://worlds/camera.gd" id="7_u8d2w"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="8_b43qi"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="9_txb0v"]
+[ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="11_0ynpn"]
 
 [node name="testWorldA" type="Node2D"]
 script = ExtResource("1_5l70f")
@@ -315,5 +316,37 @@ position = Vector2(3150, 203)
 [node name="ActionIndicator27" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(3450, 200)
 
+[node name="ActionIndicator28" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(11800, 500)
+scale = Vector2(1.01726, 0.322199)
+
+[node name="ActionIndicator29" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(3750, 200)
+
+[node name="ActionIndicator30" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(4050, 200)
+
+[node name="ActionIndicator31" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(4350, 200)
+
+[node name="ActionIndicator32" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(4650, 200)
+
+[node name="ActionIndicator33" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(4950, 200)
+
+[node name="ActionIndicator34" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(5250, 200)
+
+[node name="ActionIndicator35" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(5400, 200)
+
+[node name="ActionIndicator36" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(5550, 200)
+scale = Vector2(1.02914, 2.25522)
+
 [node name="KillFloor2" parent="." instance=ExtResource("9_txb0v")]
 position = Vector2(842, 356)
+
+[node name="Enemy" parent="." instance=ExtResource("11_0ynpn")]
+position = Vector2(253, 209)

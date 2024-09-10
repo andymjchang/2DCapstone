@@ -3,6 +3,8 @@ signal playerspotted
 signal takeDamage
 
 var count = 0
+var ifDead = false
+
 
 var soundPlayer := AudioStreamPlayer.new()
 
@@ -14,12 +16,15 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if ifDead:
+		$Sprite2D.position.y += 4
+		$Sprite2D.rotation = 0.8
+
 	
 	
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.is_in_group("players") and body.attack.visible:
-		self.visible = false
+		self.ifDead = true
 	elif body.is_in_group("players"):
 		#here if we want it lol, doesnt work as of now
 		#var soundEffect = load("res://audioTracks/record-scratches-31350.mp3")
