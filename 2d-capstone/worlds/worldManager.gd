@@ -79,7 +79,6 @@ func showGameOver():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	updateTime(delta)
-	pass
 
 func updateTime(delta: float):
 	time = time + delta

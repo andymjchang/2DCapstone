@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var bpm = 300
+@export var bpm = 388
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	make_current()

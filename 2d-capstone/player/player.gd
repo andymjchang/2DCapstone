@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal takeDamage(amount)
 signal revive(who)
 
-const SPEED = 258.3333333
+const SPEED = 388.0
 const JUMP_VELOCITY = -400.0
 var health = 3 # 3 hits
 var invuln = false
@@ -43,7 +43,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta * 2
 
 	#velocity.x = SPEED
 
@@ -62,7 +62,9 @@ func _physics_process(delta: float) -> void:
 	# Other player mechanics
 	if Input.is_action_just_pressed(jump) and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
+	
+	
+	
 	if Input.is_action_just_pressed(punch):
 		if canAttack:
 			print("Punch!")
