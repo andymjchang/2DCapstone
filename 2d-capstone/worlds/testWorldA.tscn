@@ -280,22 +280,40 @@ position = Vector2(5900, 400)
 position = Vector2(2700, 200)
 
 [node name="ActionIndicator14" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(2900, 200)
+position = Vector2(3000, 200)
 
 [node name="ActionIndicator20" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(3300, 200)
 
 [node name="ActionIndicator16" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(3500, 200)
+position = Vector2(3600, 200)
 
 [node name="ActionIndicator17" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(3900, 200)
 
 [node name="ActionIndicator21" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(4100, 200)
+position = Vector2(4200, 200)
 
 [node name="ActionIndicator11" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(300, 200)
+
+[node name="ActionIndicator22" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(4500, 192)
+
+[node name="ActionIndicator23" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(4800, 192)
+
+[node name="ActionIndicator24" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(5100, 192)
+
+[node name="ActionIndicator25" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(2850, 200)
+
+[node name="ActionIndicator26" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(3150, 203)
+
+[node name="ActionIndicator27" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
+position = Vector2(3450, 200)
 
 [node name="KillFloor2" parent="." instance=ExtResource("9_txb0v")]
 position = Vector2(842, 356)

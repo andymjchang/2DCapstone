@@ -20,5 +20,8 @@ position = Vector2(1411, 421)
 scale = Vector2(0.24, 0.217333)
 texture = ExtResource("1_1xpll")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 4
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
