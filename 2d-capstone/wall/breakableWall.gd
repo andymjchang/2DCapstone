@@ -35,4 +35,5 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 			
 	if bothPunching:
 		self.visible = false
+		queue_free()
 	pass # Replace with function body.
