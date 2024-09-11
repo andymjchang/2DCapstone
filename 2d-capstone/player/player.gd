@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += (1.5 * get_gravity()) * delta
-
+	invuln = true
 	#velocity.x = SPEED
 
 	# If not currently in a song, allow regular movement, otherwise begin autoscroll

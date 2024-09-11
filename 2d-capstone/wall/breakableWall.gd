@@ -11,6 +11,20 @@ func _process(delta: float) -> void:
 	
 	
 
+
+	
+
+
+#func _on_area_2d_entered(body: Node2D) -> void:
+	#
+		#
+	##if len(all_players) > 1:
+		##print("wall died")
+		##self.visible = false
+	##else:
+		##body.emit_signal("takeDamage",3)	
+
+
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	var all_players = get_tree().get_nodes_in_group("players")
 	var bothPunching = true
@@ -21,6 +35,4 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 			
 	if bothPunching:
 		self.visible = false
-	else:
-		body.emit_signal("takeDamage",3)	
-	
+	pass # Replace with function body.
