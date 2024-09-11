@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="8_b43qi"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="9_txb0v"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="11_0ynpn"]
-[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://wall/breakableWall.tscn" id="12_nebbc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6yxuh"]
+size = Vector2(45, 656)
 
 [node name="testWorldA" type="Node2D"]
 script = ExtResource("1_5l70f")
@@ -25,6 +27,13 @@ position = Vector2(45, 202)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_d1ks4")
 max_distance = 10000.0
+
+[node name="EndGameBound" type="Area2D" parent="."]
+position = Vector2(0, 9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndGameBound"]
+position = Vector2(8070, 308)
+shape = SubResource("RectangleShape2D_6yxuh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 324)
@@ -266,6 +275,27 @@ position = Vector2(8688, 300)
 [node name="Block83" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(8788, 300)
 
+[node name="Block22" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(-832, -50)
+
+[node name="Block23" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(-704, -50)
+
+[node name="Block28" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(-448, -50)
+
+[node name="Block29" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(-192, -50)
+
+[node name="Block33" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(-64, -50)
+
+[node name="Block4" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(-576, -50)
+
+[node name="Block6" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
+position = Vector2(-320, -50)
+
 [node name="actionIndicatorManager" parent="Player2Level" instance=ExtResource("6_im0um")]
 
 [node name="ActionIndicator11" parent="Player2Level/actionIndicatorManager" instance=ExtResource("6_iceo8")]
@@ -366,6 +396,45 @@ position = Vector2(7050, 233)
 
 [node name="ActionIndicator68" parent="Player2Level/actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(7125, 240)
+
+[node name="KillFloor15" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(4278, -30)
+
+[node name="KillFloor2" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(998, 291)
+
+[node name="KillFloor3" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(2632, 291)
+
+[node name="KillFloor4" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(3520, 295)
+
+[node name="KillFloor5" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(5947, 290)
+
+[node name="KillFloor" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(694, 293)
+
+[node name="KillFloor16" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(4929, -42)
+
+[node name="KillFloor6" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(3602, -37)
+
+[node name="KillFloor7" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(2846, -70)
+
+[node name="KillFloor8" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(3255, -65)
+
+[node name="KillFloor18" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(6150, -88)
+
+[node name="KillFloor17" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(5634, -68)
+
+[node name="KillFloor9" parent="Player2Level" instance=ExtResource("9_txb0v")]
+position = Vector2(6390, -108)
 
 [node name="Player1Level" type="Node2D" parent="."]
 position = Vector2(0, -33)
@@ -573,6 +642,27 @@ position = Vector2(8600, 230)
 [node name="Block82" parent="Player1Level/blocks1" instance=ExtResource("3_h1mol")]
 position = Vector2(8700, 230)
 
+[node name="Block27" parent="Player1Level/blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(-911, 592)
+
+[node name="Block34" parent="Player1Level/blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(-783, 592)
+
+[node name="Block47" parent="Player1Level/blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(-527, 592)
+
+[node name="Block50" parent="Player1Level/blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(-271, 592)
+
+[node name="Block60" parent="Player1Level/blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(-143, 592)
+
+[node name="Block7" parent="Player1Level/blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(-655, 592)
+
+[node name="Block9" parent="Player1Level/blocks1" instance=ExtResource("3_h1mol")]
+position = Vector2(-399, 592)
+
 [node name="actionIndicatorManager2" parent="Player1Level" instance=ExtResource("6_im0um")]
 
 [node name="ActionIndicator9" parent="Player1Level/actionIndicatorManager2" instance=ExtResource("6_iceo8")]
@@ -623,8 +713,9 @@ position = Vector2(6300, 150)
 [node name="ActionIndicator4" parent="Player1Level/actionIndicatorManager2" instance=ExtResource("6_iceo8")]
 position = Vector2(1500, 240)
 
-[node name="KillFloor" parent="Player1Level" instance=ExtResource("9_txb0v")]
-position = Vector2(3923, 6)
+[node name="KillFloor6" parent="Player1Level" instance=ExtResource("9_txb0v")]
+position = Vector2(2941, 585)
+scale = Vector2(0.5, 0.5)
 
 [node name="Enemy2" parent="Player1Level" instance=ExtResource("11_0ynpn")]
 position = Vector2(1500, 230)
@@ -647,14 +738,41 @@ position = Vector2(4050, 230)
 [node name="Enemy7" parent="Player1Level" instance=ExtResource("11_0ynpn")]
 position = Vector2(3900, 230)
 
-[node name="KillFloor3" parent="Player1Level" instance=ExtResource("9_txb0v")]
-position = Vector2(2538, -32)
+[node name="KillFloor7" parent="Player1Level" instance=ExtResource("9_txb0v")]
+position = Vector2(3836, 585)
+scale = Vector2(0.5, 0.5)
 
-[node name="KillFloor4" parent="Player1Level" instance=ExtResource("9_txb0v")]
-position = Vector2(3158, -22)
+[node name="KillFloor8" parent="Player1Level" instance=ExtResource("9_txb0v")]
+position = Vector2(384, 619)
 
-[node name="KillFloor5" parent="Player1Level" instance=ExtResource("9_txb0v")]
-position = Vector2(5832, -59)
+[node name="KillFloor2" parent="Player1Level" instance=ExtResource("9_txb0v")]
+position = Vector2(1285, 615)
+
+[node name="KillFloor9" parent="Player1Level" instance=ExtResource("9_txb0v")]
+position = Vector2(4131, 586)
+scale = Vector2(0.5, 0.5)
+
+[node name="KillFloor10" parent="Player1Level" instance=ExtResource("9_txb0v")]
+position = Vector2(4451, 586)
+scale = Vector2(0.5, 0.5)
+
+[node name="KillFloor11" parent="Player1Level" instance=ExtResource("9_txb0v")]
+position = Vector2(4733, 586)
+scale = Vector2(0.5, 0.5)
+
+[node name="KillFloor12" parent="Player1Level" instance=ExtResource("9_txb0v")]
+position = Vector2(5031, 586)
+scale = Vector2(0.5, 0.5)
+
+[node name="KillFloor13" parent="Player1Level" instance=ExtResource("9_txb0v")]
+position = Vector2(5347, 607)
+
+[node name="KillFloor15" parent="Player1Level" instance=ExtResource("9_txb0v")]
+position = Vector2(2567, 275)
+
+[node name="KillFloor14" parent="Player1Level" instance=ExtResource("9_txb0v")]
+position = Vector2(3232, 586)
+scale = Vector2(0.5, 0.5)
 
 [node name="Enemy8" parent="Player1Level" instance=ExtResource("11_0ynpn")]
 position = Vector2(5400, 192)
@@ -668,5 +786,37 @@ position = Vector2(5850, 200)
 [node name="Enemy9" parent="Player1Level" instance=ExtResource("11_0ynpn")]
 position = Vector2(5850, 191)
 
-[node name="breakableWall" parent="." instance=ExtResource("12_nebbc")]
-position = Vector2(-1130, -46)
+[node name="Block77" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(8916, 589)
+
+[node name="Block78" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(9038, 589)
+
+[node name="Block79" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(9138, 589)
+
+[node name="Block81" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(9238, 589)
+
+[node name="Block82" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(9338, 589)
+
+[node name="Block83" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(9438, 589)
+
+[node name="Block80" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(8828, 197)
+
+[node name="Block84" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(8928, 197)
+
+[node name="Block85" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(9028, 197)
+
+[node name="Block86" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(9128, 197)
+
+[node name="Block87" parent="." instance=ExtResource("3_h1mol")]
+position = Vector2(9228, 197)
+
+[connection signal="body_entered" from="EndGameBound" to="." method="_onEndGameBodyEntered"]
