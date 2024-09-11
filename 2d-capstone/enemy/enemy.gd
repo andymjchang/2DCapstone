@@ -19,8 +19,7 @@ func _process(delta: float) -> void:
 	if ifDead:
 		$Sprite2D.position.y += 4
 		$Sprite2D.rotation = 0.8
-
-	
+		
 	
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.is_in_group("players") and body.attack.visible:

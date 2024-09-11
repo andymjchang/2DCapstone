@@ -101,9 +101,9 @@ func _onResetPosition(who):
 	print("resetting player pos")
 	if who == "Player1":
 		#player1.position.x = killWall.position.x + 50
-		player1.velocity -= player2.get_gravity() * player2.get_process_delta_time() * 50
+		player1.velocity -= 0.75 * player2.get_gravity() * player2.get_process_delta_time() * 50
 		pass
 	elif who == "Player2":
 		#player2.position.x = killWall.position.x + 50
-		player2.velocity -= player2.get_gravity() * player2.get_process_delta_time() * 50
+		player2.velocity -= 0.75 * player2.get_gravity() * player2.get_process_delta_time() * 50
 		pass

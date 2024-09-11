@@ -8,6 +8,7 @@
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nopuc"]
+size = Vector2(32, 32)
 
 [node name="Player" type="CharacterBody2D" groups=["players"]]
 script = ExtResource("1_etm0r")
@@ -26,12 +27,11 @@ texture = ExtResource("3_f8qq2")
 
 [node name="AttackHitbox" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(28, 0)
 shape = SubResource("RectangleShape2D_nopuc")
 disabled = true
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
