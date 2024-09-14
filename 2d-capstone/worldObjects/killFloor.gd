@@ -16,4 +16,4 @@ func _onKillFloorBodyEntered(body:Node2D):
 	if "players" in body.get_groups():
 		print(body, " Entered")
 		body.emit_signal("takeDamage", 3)
-		get_parent().emit_signal("resetPosition", body.name)
+		get_parent().emit_signal("resetPosition", body)
