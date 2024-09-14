@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsyerlhiksbo5"]
+[gd_scene load_steps=11 format=3 uid="uid://rdhbkwcl71l5"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_5l70f"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="3_2ouxg"]
@@ -11,391 +11,391 @@
 [ext_resource type="Script" path="res://worlds/camera.gd" id="7_u8d2w"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="8_b43qi"]
 
-[node name="testWorldA" type="Node2D"]
+[node name="testWorldA2" type="Node2D"]
 script = ExtResource("1_5l70f")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 324)
 script = ExtResource("7_u8d2w")
 
-[node name="blocks1" type="Node2D" parent="."]
+[node name="blocks2" type="Node2D" parent="."]
 
-[node name="Block19" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block19" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(120, 270)
 
-[node name="Block20" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block20" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(-15, 270)
 
-[node name="Block21" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block21" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(255, 270)
 
-[node name="Block25" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block25" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(846, 270)
 
-[node name="Block32" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block32" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(1145, 270)
 
-[node name="Block" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(1984, 270)
 
-[node name="Block2" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block2" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(541, 270)
 
-[node name="Block24" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block24" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(1580, 270)
 
-[node name="Block26" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block26" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(1445, 270)
 
-[node name="Block27" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block27" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(1715, 270)
 
-[node name="Block8" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block8" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(1850, 270)
 
-[node name="Block3" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block3" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(2499, 270)
 
-[node name="Block30" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block30" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(2115, 270)
 
-[node name="Block31" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block31" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(2243, 270)
 
-[node name="Block9" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block9" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(2371, 270)
 
-[node name="Block5" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block5" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(3010, 235)
 
-[node name="Block34" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block34" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(2753, 270)
 
-[node name="Block10" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block10" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(2881, 270)
 
-[node name="Block35" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block35" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(3135, 270)
 
-[node name="Block36" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block36" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(3270, 255)
 
-[node name="Block11" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block11" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(3391, 270)
 
-[node name="Block7" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block7" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(4029, 270)
 
-[node name="Block37" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block37" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(3645, 270)
 
-[node name="Block38" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block38" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(3773, 270)
 
-[node name="Block12" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block12" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(3900, 235)
 
-[node name="Block13" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block13" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(4525, 255)
 
-[node name="Block39" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block39" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(4165, 260)
 
-[node name="Block40" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block40" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(4283, 270)
 
-[node name="Block14" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block14" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(4411, 270)
 
-[node name="Block15" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block15" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(5070, 255)
 
-[node name="Block41" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block41" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(4665, 270)
 
-[node name="Block42" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block42" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(4790, 255)
 
-[node name="Block16" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block16" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(4921, 270)
 
-[node name="Block43" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block43" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(5200, 270)
 
-[node name="Block44" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block44" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(5436, 270)
 
-[node name="Block46" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block46" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(5564, 270)
 
-[node name="Block48" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block48" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(6071, 270)
 
-[node name="Block49" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block49" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(6204, 270)
 
-[node name="Block50" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block50" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(6332, 270)
 
-[node name="Block17" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block17" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(7100, 270)
 
-[node name="Block18" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block18" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(5692, 270)
 
-[node name="Block51" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block51" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(6460, 270)
 
-[node name="Block52" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block52" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(6716, 270)
 
-[node name="Block53" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block53" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(6588, 270)
 
-[node name="Block54" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block54" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(6844, 270)
 
-[node name="Block55" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block55" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(6972, 270)
 
-[node name="Block56" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block56" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(7610, 371)
 
-[node name="Block57" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block57" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(7231, 270)
 
-[node name="Block58" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block58" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(7360, 300)
 
-[node name="Block59" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block59" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(7490, 330)
 
-[node name="Block60" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block60" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(8125, 372)
 
-[node name="Block61" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block61" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(7740, 370)
 
-[node name="Block62" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block62" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(7869, 372)
 
-[node name="Block63" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block63" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(7997, 372)
 
-[node name="Block65" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block65" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(8251, 405)
 
-[node name="Block66" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block66" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(8379, 437)
 
-[node name="Block67" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block67" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(8507, 470)
 
-[node name="Block68" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block68" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(9145, 457)
 
-[node name="Block69" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block69" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(8761, 470)
 
-[node name="Block70" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block70" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(8889, 470)
 
-[node name="Block71" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block71" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(9017, 457)
 
-[node name="Block72" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block72" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(9655, 457)
 
-[node name="Block73" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block73" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(9271, 457)
 
-[node name="Block74" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block74" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(9399, 457)
 
-[node name="Block75" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block75" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(9527, 457)
 
-[node name="Block76" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block76" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(10165, 457)
 
-[node name="Block77" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block77" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(9781, 457)
 
-[node name="Block78" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block78" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(9909, 457)
 
-[node name="Block79" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block79" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(10037, 457)
 
-[node name="Block81" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block81" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(10295, 457)
 
-[node name="Block82" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block82" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(10805, 457)
 
-[node name="Block83" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block83" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(10421, 457)
 
-[node name="Block84" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block84" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(10549, 457)
 
-[node name="Block85" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block85" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(10677, 457)
 
-[node name="Block86" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block86" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(11315, 457)
 
-[node name="Block87" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block87" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(10931, 457)
 
-[node name="Block88" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block88" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(11059, 457)
 
-[node name="Block89" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block89" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(11187, 457)
 
-[node name="Block90" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block90" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(11445, 457)
 
-[node name="Block91" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block91" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(11955, 457)
 
-[node name="Block92" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block92" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(11571, 457)
 
-[node name="Block93" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block93" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(11699, 457)
 
-[node name="Block94" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block94" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(11827, 457)
 
-[node name="Block95" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block95" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(12465, 457)
 
-[node name="Block96" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block96" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(12081, 457)
 
-[node name="Block97" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block97" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(12209, 457)
 
-[node name="Block98" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block98" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(12337, 457)
 
-[node name="Block99" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block99" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(12851, 457)
 
-[node name="Block100" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block100" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(12595, 457)
 
-[node name="Block101" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block101" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(12723, 457)
 
-[node name="Block102" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block102" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(12981, 457)
 
-[node name="Block103" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block103" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(13491, 355)
 
-[node name="Block104" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block104" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(13107, 457)
 
-[node name="Block105" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block105" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(13235, 355)
 
-[node name="Block106" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block106" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(13363, 355)
 
-[node name="Block107" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block107" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(14001, 355)
 
-[node name="Block108" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block108" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(13617, 355)
 
-[node name="Block109" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block109" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(13745, 355)
 
-[node name="Block110" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block110" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(13873, 355)
 
-[node name="Block111" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block111" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(14386, 355)
 
-[node name="Block112" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block112" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(14130, 355)
 
-[node name="Block113" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block113" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(14258, 355)
 
-[node name="Block114" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block114" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(14516, 355)
 
-[node name="Block115" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block115" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(15026, 355)
 
-[node name="Block116" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block116" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(14642, 355)
 
-[node name="Block117" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block117" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(14770, 355)
 
-[node name="Block118" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block118" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(14898, 355)
 
-[node name="Block119" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block119" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(15536, 355)
 
-[node name="Block120" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block120" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(15152, 355)
 
-[node name="Block121" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block121" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(15280, 355)
 
-[node name="Block122" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block122" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(15408, 355)
 
-[node name="Block80" parent="blocks1" instance=ExtResource("3_h1mol")]
+[node name="Block80" parent="blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(5820, 270)
 
-[node name="Enemy" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(1797, 229)
 
-[node name="Enemy2" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy2" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(1947, 229)
 
-[node name="Enemy3" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy3" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(2097, 229)
 
-[node name="Enemy4" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy4" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(2172, 229)
 
-[node name="Enemy5" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy5" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(2248, 229)
 
-[node name="Enemy6" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy6" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(2323, 229)
 
-[node name="Enemy7" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy7" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(9448, 413)
 
-[node name="Enemy8" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy8" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(9522, 413)
 
-[node name="Enemy9" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy9" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(9597, 413)
 
-[node name="Enemy10" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy10" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(5547, 227)
 
-[node name="Enemy11" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy11" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(6147, 222)
 
-[node name="Enemy12" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy12" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(6447, 222)
 
-[node name="Enemy13" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy13" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(6747, 222)
 
-[node name="Enemy14" parent="blocks1" instance=ExtResource("3_58l2g")]
+[node name="Enemy14" parent="blocks2" instance=ExtResource("3_58l2g")]
 position = Vector2(7648, 325)
 
 [node name="blocksGeneral" type="Node2D" parent="."]
@@ -429,235 +429,177 @@ text = "0"
 
 [node name="ActionIndicator11" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(300, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator2" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(600, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator4" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(900, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator3" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1200, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator6" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1500, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator7" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1800, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator8" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1200, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator10" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1500, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator13" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1800, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator14" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1950, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator15" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(2100, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator39" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(2175, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator40" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(2325, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator16" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(2250, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator22" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(300, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator25" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(2550, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator26" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(2850, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator27" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(3150, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator28" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(3450, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator29" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(3750, 235)
-animation_time = 0.75
 
 [node name="ActionIndicator30" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(4050, 235)
-animation_time = 0.75
 
 [node name="ActionIndicator31" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(4350, 235)
-animation_time = 0.75
 
 [node name="ActionIndicator32" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(4650, 235)
-animation_time = 0.75
 
 [node name="ActionIndicator33" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(4950, 238)
-animation_time = 0.75
 
 [node name="ActionIndicator35" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(5250, 238)
-animation_time = 0.75
 
 [node name="ActionIndicator36" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(5550, 238)
-animation_time = 0.75
 
 [node name="ActionIndicator37" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(5850, 238)
-animation_time = 0.75
 
 [node name="ActionIndicator38" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(6150, 233)
-animation_time = 0.75
 
 [node name="ActionIndicator41" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(6450, 233)
-animation_time = 0.75
 
 [node name="ActionIndicator42" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(6750, 233)
-animation_time = 0.75
 
 [node name="ActionIndicator43" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(7200, 233)
-animation_time = 0.75
 
 [node name="ActionIndicator69" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(7050, 233)
-animation_time = 0.75
 
 [node name="ActionIndicator68" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(7125, 240)
-animation_time = 0.75
 
 [node name="ActionIndicator45" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(7650, 336)
-animation_time = 0.75
 
 [node name="ActionIndicator46" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(7950, 336)
-animation_time = 0.75
 
 [node name="ActionIndicator47" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(8250, 369)
-animation_time = 0.75
 
 [node name="ActionIndicator48" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(8550, 437)
-animation_time = 0.75
 
 [node name="ActionIndicator49" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(8850, 437)
-animation_time = 0.75
 
 [node name="ActionIndicator50" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(9150, 424)
-animation_time = 0.75
 
 [node name="ActionIndicator51" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(9450, 424)
-animation_time = 0.75
 
 [node name="ActionIndicator52" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(9750, 419)
-animation_time = 0.75
 
 [node name="ActionIndicator70" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(9525, 424)
-animation_time = 0.75
 
 [node name="ActionIndicator71" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(9600, 424)
-animation_time = 0.75
 
 [node name="ActionIndicator53" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(10050, 419)
-animation_time = 0.75
 
 [node name="ActionIndicator54" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(10350, 419)
-animation_time = 0.75
 
 [node name="ActionIndicator55" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(10650, 419)
-animation_time = 0.75
 
 [node name="ActionIndicator56" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(10950, 427)
-animation_time = 0.75
 
 [node name="ActionIndicator57" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(11250, 427)
-animation_time = 0.75
 
 [node name="ActionIndicator58" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(11550, 427)
-animation_time = 0.75
 
 [node name="ActionIndicator59" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(11850, 427)
-animation_time = 0.75
 
 [node name="ActionIndicator60" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(12150, 430)
-animation_time = 0.75
 
 [node name="ActionIndicator61" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(12450, 430)
-animation_time = 0.75
 
 [node name="ActionIndicator62" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(12750, 430)
-animation_time = 0.75
 
 [node name="ActionIndicator63" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(13050, 430)
-animation_time = 0.75
 
 [node name="ActionIndicator64" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(13350, 323)
-animation_time = 0.75
 
 [node name="ActionIndicator65" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(13650, 323)
-animation_time = 0.75
 
 [node name="ActionIndicator66" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(13950, 323)
-animation_time = 0.75
 
 [node name="ActionIndicator67" parent="actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(14250, 323)
-animation_time = 0.75
 
 [node name="Enemy" parent="." instance=ExtResource("3_58l2g")]
 position = Vector2(7047, 222)

@@ -3,6 +3,8 @@ extends Node2D
 signal resetPosition(who)
 signal gameOver()
 signal checkGameOver()
+signal levelCompleted()
+signal checkLevelCompleted()
 
 var player1 
 var player2
@@ -36,6 +38,9 @@ func _ready():
 	self.resetPosition.connect(_onResetPosition)
 	self.gameOver.connect(_onGameOver)
 	self.checkGameOver.connect(_onCheckGameOver)
+	self.checkLevelCompleted.connect(_onCheckLevelCompleted)
+	self.levelCompleted.connect(_onLevelCompleted)
+
 
 	# Getting nodes to manage
 	player1 = get_node("Player1")
@@ -68,6 +73,20 @@ func _onCheckGameOver():
 		print("Both dead")
 		self.emit_signal("gameOver")
 
+func _onCheckLevelCompleted():
+	print("checking if level completed!")
+	var allGoals= get_tree().get_nodes_in_group("goals") 
+	#I dont think I should be checking this all the time
+	var allReached = true
+	for goal in allGoals:
+		if goal.get_class() == "Node2D" and !goal.reached:
+			allReached = false
+			
+	#all player goals have been reached 
+	print("all reached = ", allReached)
+	if allReached:
+		self.emit_signal("levelCompleted")
+
 func _onGameOver():
 	showGameOver()
 	Globals.inLevel = false
@@ -75,6 +94,14 @@ func _onGameOver():
 func showGameOver():
 	statusMessage.text = "Game over!"
 	restartButton.visible = true
+	
+func showLevelCompleted():
+	statusMessage.text = "Level Completed!"
+	restartButton.visible = true
+	
+func _onLevelCompleted():
+	showLevelCompleted()
+	Globals.inLevel = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
