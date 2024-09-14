@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://jyq0f66qgj68"]
+
+[ext_resource type="PackedScene" uid="uid://c3scjbrj2kk5x" path="res://shadow/enemy_block.tscn" id="1_287l3"]
+
+[node name="TestWorld1" type="Node2D"]
+
+[node name="enemyBlock" parent="." instance=ExtResource("1_287l3")]
+
+[node name="Camera2D" type="Camera2D" parent="."]

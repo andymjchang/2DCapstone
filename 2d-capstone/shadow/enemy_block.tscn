@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3scjbrj2kk5x"]
+
+[ext_resource type="Script" path="res://enemyBlock.gd" id="1_6q6ov"]
+[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_w3jcn"]
+[ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="3_4p3g3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fn35s"]
+size = Vector2(128, 32)
+
+[node name="enemyBlock" type="Node2D"]
+script = ExtResource("1_6q6ov")
+
+[node name="Block" parent="." instance=ExtResource("2_w3jcn")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Block"]
+shape = SubResource("RectangleShape2D_fn35s")
+
+[node name="Enemy" parent="." instance=ExtResource("3_4p3g3")]
+position = Vector2(4, -48)
