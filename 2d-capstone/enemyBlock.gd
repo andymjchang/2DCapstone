@@ -49,6 +49,6 @@ func bindToNearestBeat():
 		#snap the enemys x coordinates to the beat
 		print("block x -> ", self.position.x)
 		print("closest indicator X -> ", closetIndicatorX)
-		blockEnemy.get_parent().position.x = closetIndicatorX
+		blockEnemy.global_position.x = closetIndicatorX
 		print("block enemy x - > ", blockEnemy.position.x)
 	
