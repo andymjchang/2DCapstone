@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgbbeq63rjuhl"]
+
+[ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_15vlh")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TextEdit" type="TextEdit" parent="UI"]
+offset_right = 115.0
+offset_bottom = 50.0
+placeholder_text = "BPM: "
+
+[connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
