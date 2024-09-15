@@ -3,8 +3,16 @@ var blockEnemy
 var colliderUpperLeft
 var colliderLowerRight
 var curBlock
+var dragging = false
+var dragDif = Vector2(0,0)
+var up
+var down 
+var left
+var right
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	#need to add controls to the block
 	blockEnemy = get_node("Enemy")
 	curBlock = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
 	#get the upper limits of the block so that we can bind the enemy to it 
@@ -13,20 +21,37 @@ func _ready() -> void:
 	colliderUpperLeft = pos - curBlock.extents
 	colliderLowerRight = pos + curBlock.extents
 	
+	
 	#starting off we are gonna bind the enemy to the center. We need min y and mid x
 	var centerX = (colliderUpperLeft.x + colliderLowerRight.x)/2
 	#TODO , make this a constant and also find an algortithim way to reposition the enemy
 	var centerCoords = Vector2(centerX, colliderUpperLeft.y-20)
 	
 	blockEnemy.position = centerCoords
+	
+	#set up block controls, TODO add a check here to see if we are in level editor
+	up = "up"
+	down = "down"
+	left = "left"
+	right = "right"
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#question, should I constantly be changing the upper bound values?
+	if Input.is_action_just_pressed(up):
+		self.global_position.y -= 10
+	if Input.is_action_just_pressed(down):
+		self.global_position.y += 10
+	if Input.is_action_just_pressed(left):
+		self.global_position.x -= 10
+	if Input.is_action_just_pressed(right):
+		self.global_position.x += 10
+		#go a certain amount of pixels up
 	bindToNearestBeat()
 	pass
+
 	
 func bindToNearestBeat():
 	#loop through all of the indicators in a scene, if one has x coords that
