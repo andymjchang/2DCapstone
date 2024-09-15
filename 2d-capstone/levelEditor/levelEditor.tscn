@@ -1,15 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgbbeq63rjuhl"]
+[gd_scene load_steps=5 format=3 uid="uid://cgbbeq63rjuhl"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
+[ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="2_cfyqp"]
+[ext_resource type="Texture2D" uid="uid://c7wbwq6l81brv" path="res://icon.svg" id="2_glsw6"]
+[ext_resource type="Script" path="res://levelEditor/measure_lines.gd" id="2_mulbo"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
+testBlock = ExtResource("2_cfyqp")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="TextEdit" type="TextEdit" parent="UI"]
 offset_right = 115.0
 offset_bottom = 50.0
+text = "4"
 placeholder_text = "BPM: "
 
+[node name="objectSelector" type="Node2D" parent="UI"]
+
+[node name="testPlacer" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 15.0
+offset_top = 940.0
+offset_right = 143.0
+offset_bottom = 1068.0
+texture_normal = ExtResource("2_glsw6")
+
+[node name="measureLines" type="Node2D" parent="."]
+script = ExtResource("2_mulbo")
+
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="button_down" from="UI/objectSelector/testPlacer" to="." method="_on_test_placer_button_down"]
