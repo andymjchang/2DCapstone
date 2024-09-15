@@ -57,50 +57,57 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Premise" type="RichTextLabel" parent="VBoxContainer"]
+clip_contents = false
 custom_minimum_size = Vector2(500, 150)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
-text = "[center]Avoid obstacles and punch enemies to get to the end of the level! Watch for the green indicators in the level to know when to jump or punch:[/center]"
+text = "[center]Tempo Tails
+Avoid obstacles and punch enemies to get to the end of the level! Watch for the green indicators in the level to know when to jump or punch:[/center]"
 
 [node name="ProtoMc3" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(338, 434)
+position = Vector2(338, 471)
 scale = Vector2(0.457424, 0.457424)
 texture = ExtResource("2_hjywm")
 
 [node name="ProtoMc2" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(214, 324)
+position = Vector2(214, 361)
 scale = Vector2(0.457424, 0.457424)
 texture = ExtResource("2_hjywm")
 
 [node name="ProtoMc" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(90, 205)
+position = Vector2(90, 242)
 scale = Vector2(0.457424, 0.457424)
 texture = ExtResource("2_hjywm")
 
 [node name="CirclePlaceholder" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(366, 204)
+position = Vector2(367, 362)
+scale = Vector2(2.375, 2.375)
+texture = ExtResource("1_wpqf4")
+
+[node name="CirclePlaceholder6" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(366, 241)
 scale = Vector2(2.375, 2.375)
 texture = ExtResource("1_wpqf4")
 
 [node name="CirclePlaceholder2" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(365, 206)
+position = Vector2(365, 243)
 scale = Vector2(4.10937, 4.10937)
 texture = ExtResource("4_k7ioe")
 
 [node name="CirclePlaceholder3" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(367.063, 323.062)
+position = Vector2(367.063, 360.062)
 scale = Vector2(3.62109, 3.62109)
 texture = ExtResource("4_k7ioe")
 
 [node name="CirclePlaceholder5" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(366, 430)
+position = Vector2(366, 467)
 scale = Vector2(2.375, 2.375)
 texture = ExtResource("1_wpqf4")
 
 [node name="CirclePlaceholder4" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(365.563, 428.562)
+position = Vector2(365.563, 465.562)
 scale = Vector2(2.46484, 2.46484)
 texture = ExtResource("4_k7ioe")
 

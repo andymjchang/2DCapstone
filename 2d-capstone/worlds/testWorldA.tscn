@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bsyerlhiksbo5"]
+[gd_scene load_steps=15 format=3 uid="uid://bsyerlhiksbo5"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_5l70f"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="3_2ouxg"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="3_h1mol"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="3_tdt43"]
 [ext_resource type="AudioStream" uid="uid://dr2b0v0vlmc3o" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="5_d1ks4"]
+[ext_resource type="Texture2D" uid="uid://eaxiu3v8mgwp" path="res://worlds/menuBG.png" id="6_a6n1f"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_iceo8"]
 [ext_resource type="PackedScene" uid="uid://b06gkr46rf8gm" path="res://worldObjects/action_indicator_manager.tscn" id="6_im0um"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="7_u8d2w"]
@@ -18,6 +19,15 @@ size = Vector2(45, 656)
 
 [node name="testWorldA" type="Node2D"]
 script = ExtResource("1_5l70f")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 324)
+script = ExtResource("7_u8d2w")
+
+[node name="MenuBg" type="Sprite2D" parent="Camera2D"]
+position = Vector2(-12.4999, -11.5)
+scale = Vector2(0.209722, 0.209722)
+texture = ExtResource("6_a6n1f")
 
 [node name="Player2" parent="." instance=ExtResource("3_tdt43")]
 position = Vector2(45, 525)
@@ -35,10 +45,6 @@ position = Vector2(0, 9)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EndGameBound"]
 position = Vector2(8070, 308)
 shape = SubResource("RectangleShape2D_6yxuh")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, 324)
-script = ExtResource("7_u8d2w")
 
 [node name="LevelUI" parent="." instance=ExtResource("8_b43qi")]
 
