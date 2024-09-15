@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="1_qbg64"]
 
-[node name="actionIndicatorManager" type="Node2D"]
+[node name="actionIndicatorManager" type="Node2D" groups=["indicatorManagers"]]
 script = ExtResource("1_qbg64")

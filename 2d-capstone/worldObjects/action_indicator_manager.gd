@@ -12,7 +12,7 @@ func _ready():
 	for indicator in actionIndicatorArray:
 		indicator.connect("scored", on_scored)
 	
-	currentWorldScene = get_parent().get_parent()
+	currentWorldScene = get_parent()
 
 func sortIndicators(a, b):
 	if a.get_target_time() < b.get_target_time():
