@@ -101,17 +101,17 @@ func updateScore(indicator_position):
 func getNearestCheckpoint(who):
 	var nearestPoint = checkpoints.get_child(0)
 	var shortestDistance = who.position.distance_to(nearestPoint.position)
-	print("Initial shortest: ", shortestDistance)
+	#print("Initial shortest: ", shortestDistance)
 	for i in checkpoints.get_children():
-		print("Checking: ", i)
+		#print("Checking: ", i)
 		var distance = who.position.distance_to(i.position)
-		print("Distance: ", distance)
-		print("Cur shortest: ", shortestDistance)
+		#print("Distance: ", distance)
+		#print("Cur shortest: ", shortestDistance)
 		if distance < shortestDistance:
-			print("Closest node: ", i)
+			#print("Closest node: ", i)
 			nearestPoint = i
 			shortestDistance = distance
-	print("Nearest final: ", nearestPoint)
+	#print("Nearest final: ", nearestPoint)
 	return nearestPoint
 	
 # Hard coded right now
@@ -120,10 +120,11 @@ func _onResetPosition(who):
 		print("resetting player pos")
 		#player1.position.x = killWall.position.x + 50
 		var nearestPoint = getNearestCheckpoint(who)
+
 		#player1.velocity -= player2.get_gravity() * player2.get_process_delta_time() * 50
-		player1.position = nearestPoint.position
+		who.emit_signal("relocate", nearestPoint)
 		pass
 	elif who.name == "Player2":
 		#player2.position.x = killWall.position.x + 50
-		player2.velocity -= player2.get_gravity() * player2.get_process_delta_time() * 50
+		who.velocity -= who.get_gravity() * who.get_process_delta_time() * 50
 		pass

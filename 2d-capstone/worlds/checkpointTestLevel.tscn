@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="1_1jngf"]
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_232eq"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="2_5mni6"]
-[ext_resource type="PackedScene" uid="uid://ddhmsyfxae2qi" path="res://player/player.tscn" id="3_dvxs5"]
+[ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="4_dicbs"]
 
 [node name="CheckpointTestLevel" type="Node2D"]
 script = ExtResource("1_232eq")
@@ -30,7 +30,7 @@ position = Vector2(-485, 33)
 [node name="KillFloor" parent="." instance=ExtResource("2_5mni6")]
 position = Vector2(-109, 161)
 
-[node name="Player1" parent="." instance=ExtResource("3_dvxs5")]
-position = Vector2(-307, 58)
-
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player1" parent="." instance=ExtResource("4_dicbs")]
+position = Vector2(-288, 55)

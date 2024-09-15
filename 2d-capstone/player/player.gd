@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal takeDamage(amount)
 signal revive(who)
+signal relocate(nearestPoint)
 
 const SPEED = 388.0
 const JUMP_VELOCITY = -400.0
@@ -14,6 +15,7 @@ var left
 var right
 var jump
 var punch
+var relocating = false
 var enemyscene = preload("res://enemy/enemy.tscn")
 
 func _ready():
@@ -35,47 +37,46 @@ func _ready():
 
 	self.takeDamage.connect(_onTakeDamage)
 	self.revive.connect(_onRevive)
+	self.relocate.connect(_onRelocate)
 
 	
 	var enemy_instance= enemyscene.instantiate()
 	var enemy_node = enemy_instance.get_node("enemy")
 	
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta * 2
+	if not relocating:
+		# Add the gravity.
+		if not is_on_floor():
+			velocity += get_gravity() * delta * 2
 
-	#velocity.x = SPEED
+		#velocity.x = SPEED
 
-	# If not currently in a song, allow regular movement, otherwise begin autoscroll
-	if Globals.inLevel:
-		velocity.x = SPEED
-		#position.x += 2.0
-	else:
-		#pass # Right now just don't give regular controls
-		var direction := Input.get_axis(left, right)
-		if direction:
-			velocity.x = direction * SPEED
+		# If not currently in a song, allow regular movement, otherwise begin autoscroll
+		if Globals.inLevel:
+			velocity.x = SPEED
+			#position.x += 2.0
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+			#pass # Right now just don't give regular controls
+			var direction = Input.get_axis(left, right)
+			if direction:
+				velocity.x = direction * SPEED
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	# Other player mechanics
-	if Input.is_action_just_pressed(jump) and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-	
-	
-	
-	if Input.is_action_just_pressed(punch):
-		if canAttack:
-			print("Punch!")
-			attack.disabled = false
-			attack.visible = true
-			canAttack = false
-			await get_tree().create_timer(0.2).timeout
-			canAttack = true
-			attack.disabled = true
-			attack.visible = false
-
+		# Other player mechanics
+		if Input.is_action_just_pressed(jump) and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+		
+		if Input.is_action_just_pressed(punch):
+			if canAttack:
+				print("Punch!")
+				attack.disabled = false
+				attack.visible = true
+				canAttack = false
+				await get_tree().create_timer(0.2).timeout
+				canAttack = true
+				attack.disabled = true
+				attack.visible = false
 
 	move_and_slide()
 
@@ -107,3 +108,12 @@ func _onRevive(who):
 	who.get_node("ProtoMc").self_modulate.a = 1
 	who.health = 3
 	who.dead = false
+
+func _onRelocate(nearestPoint):
+	print("relocating")
+	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
+	relocating = true
+	print("Nearest: ", nearestPoint)
+	velocity.x = (nearestPoint.position.x - position.x) * SPEED/2 * get_process_delta_time()
+	velocity.y = (nearestPoint.position.y - position.y) * SPEED/2 * get_process_delta_time()
+	print("Vel: ", velocity)
