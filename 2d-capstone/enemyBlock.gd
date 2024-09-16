@@ -39,6 +39,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+
 	#question, should I constantly be changing the upper bound values?
 	if Input.is_action_just_pressed(up):
 		self.global_position.y -= 10
@@ -49,6 +50,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed(right):
 		self.global_position.x += 10
 		#go a certain amount of pixels up
+		size = curBlock.extents * 2
+	var pos = get_node("Block/CollisionShape2D2").global_position
+	colliderUpperLeft = pos - curBlock.extents
+	colliderLowerRight = pos + curBlock.extents
 	bindToNearestBeat()
 	pass
 
@@ -62,18 +67,27 @@ func bindToNearestBeat():
 	for indicatorList in indicators:
 		#sort through all of the indicators
 		for indicator in indicatorList.get_children():
-			var xDifference = indicator.position.x - self.position.x
-			if abs(closetIndicatorX - self.position.x) > abs(xDifference):
+			var xDifference = indicator.position.x - self.global_position.x
+			if abs(closetIndicatorX - self.global_position.x) > abs(xDifference):
 				#we have found a closer beat. 
-				print("Indicator X -> ", indicator.position.x)
 				closetIndicatorX = indicator.position.x
 				
 	#out of for loop and now I have the closest indicators X
 	#check to see if that indicator is within the x bounds of our block
+	print("Upper left x: ",colliderUpperLeft.x )
+	print("Lower right x: ", colliderLowerRight.x)
+	print("indicator X", closetIndicatorX)
 	if closetIndicatorX >= colliderUpperLeft.x and closetIndicatorX <= colliderLowerRight.x:
 		#snap the enemys x coordinates to the beat
-		print("block x -> ", self.position.x)
-		print("closest indicator X -> ", closetIndicatorX)
 		blockEnemy.global_position.x = closetIndicatorX
-		print("block enemy x - > ", blockEnemy.position.x)
+	else:
+		print("out of bounds")
+		blockEnemy.global_position.x = colliderUpperLeft.x
+	#elif closetIndicatorX < colliderUpperLeft.x:
+		##theres no indicator within bounds, lock to either end
+		#blockEnemy.global_position.x = colliderUpperLeft.x
+		#
+	#elif closetIndicatorX > colliderLowerRight.x:
+		#blockEnemy.global_position.x = colliderLowerRight.x
+		
 	
