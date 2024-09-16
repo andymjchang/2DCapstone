@@ -80,9 +80,11 @@ func bindToNearestBeat():
 	if closetIndicatorX >= colliderUpperLeft.x and closetIndicatorX <= colliderLowerRight.x:
 		#snap the enemys x coordinates to the beat
 		blockEnemy.global_position.x = closetIndicatorX
-	else:
-		print("out of bounds")
+	elif closetIndicatorX < colliderUpperLeft.x:
+		print("closest indicator is to right")
 		blockEnemy.global_position.x = colliderUpperLeft.x
+	else:
+		blockEnemy.global_position.x = colliderLowerRight.x
 	#elif closetIndicatorX < colliderUpperLeft.x:
 		##theres no indicator within bounds, lock to either end
 		#blockEnemy.global_position.x = colliderUpperLeft.x
