@@ -105,13 +105,19 @@ func sizeUp():
 		for indicator in indicatorList.get_children():
 			if indicator.position.x >= self.global_position.x:
 				#we have found the next beat to extend out to 
-				#var newWidth = abs(indicator.position.x-self.global_position.x)
-				#var temp = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
-				#temp.extents.x = newWidth/2
-				#self.global_position.x = newWidth/2
-				#var temp1 = get_node("Block/CollisionShape2D2/ColorRect") as ColorRect
-				#temp1.rect_size.x = colliderUpperLeft.x
-				self.scale.x *= 2
+				# now we need to know how much to strecth,
+				var goalWidth = abs(indicator.position.x - self.colliderUpperLeft.x)
+				var orgWidth = abs(self.colliderLowerRight.x - self.colliderUpperLeft.x)
+				var newScale = goalWidth / orgWidth
+				self.scale.x = newScale
+				self.global_position.x = self.colliderUpperLeft.x
+				
+				
+	
+			
+				#
+				#todo dont scale enemy haha
+				self.scale.x *= newScale
 				
 				
 				
