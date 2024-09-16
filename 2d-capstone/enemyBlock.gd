@@ -9,9 +9,12 @@ var up
 var down 
 var left
 var right
+var beatLength = 0.0
+var originPos = Vector2(0,0)
+var blockChildren
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+	originPos = self.global_position
 	#need to add controls to the block
 	blockEnemy = get_node("Enemy")
 	curBlock = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
@@ -20,7 +23,6 @@ func _ready() -> void:
 	var pos = get_node("Block/CollisionShape2D2").position
 	colliderUpperLeft = pos - curBlock.extents
 	colliderLowerRight = pos + curBlock.extents
-	
 	
 	#starting off we are gonna bind the enemy to the center. We need min y and mid x
 	var centerX = (colliderUpperLeft.x + colliderLowerRight.x)/2
@@ -49,8 +51,10 @@ func _process(delta: float) -> void:
 		self.global_position.x -= 10
 	if Input.is_action_just_pressed(right):
 		self.global_position.x += 10
-		#go a certain amount of pixels up
-		size = curBlock.extents * 2
+		#go a certain amount of pixels up 
+	if Input.is_action_just_pressed("sizeUp"):
+		sizeUp()
+	size = curBlock.extents * 2
 	var pos = get_node("Block/CollisionShape2D2").global_position
 	colliderUpperLeft = pos - curBlock.extents
 	colliderLowerRight = pos + curBlock.extents
@@ -71,7 +75,6 @@ func bindToNearestBeat():
 			if abs(closetIndicatorX - self.global_position.x) > abs(xDifference):
 				#we have found a closer beat. 
 				closetIndicatorX = indicator.position.x
-				
 	#out of for loop and now I have the closest indicators X
 	#check to see if that indicator is within the x bounds of our block
 	print("Upper left x: ",colliderUpperLeft.x )
@@ -81,15 +84,40 @@ func bindToNearestBeat():
 		#snap the enemys x coordinates to the beat
 		blockEnemy.global_position.x = closetIndicatorX
 	elif closetIndicatorX < colliderUpperLeft.x:
-		print("closest indicator is to right")
+		print("closest indicator is to0 the right")
 		blockEnemy.global_position.x = colliderUpperLeft.x
 	else:
 		blockEnemy.global_position.x = colliderLowerRight.x
-	#elif closetIndicatorX < colliderUpperLeft.x:
-		##theres no indicator within bounds, lock to either end
-		#blockEnemy.global_position.x = colliderUpperLeft.x
-		#
-	#elif closetIndicatorX > colliderLowerRight.x:
-		#blockEnemy.global_position.x = colliderLowerRight.x
 		
+		
+		
+#TODO add a functionality so that based off of a button press, 
+#it extends either right or left
+func sizeUp():
+	#size up by one beat, to the right
+	#theres a better way to do this but I am tire TODO,
+	#TODO update indicators list via a process call
+	var indicators = get_tree().get_nodes_in_group("indicatorManagers")
+	#TODO set closet indicataor x to the first in the list 
+	var closetIndicatorX = -1000
+	for indicatorList in indicators:
+		#sort through all of the indicators
+		for indicator in indicatorList.get_children():
+			if indicator.position.x >= self.global_position.x:
+				#we have found the next beat to extend out to 
+				#var newWidth = abs(indicator.position.x-self.global_position.x)
+				#var temp = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
+				#temp.extents.x = newWidth/2
+				#self.global_position.x = newWidth/2
+				#var temp1 = get_node("Block/CollisionShape2D2/ColorRect") as ColorRect
+				#temp1.rect_size.x = colliderUpperLeft.x
+				self.scale.x *= 2
+				
+				
+				
+			
+			
 	
+	
+#func sizeDown():
+	#size down by one beat
