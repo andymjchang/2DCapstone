@@ -6,8 +6,11 @@ const JUMP_VELOCITY = -400.0
 var dragging = false
 signal dragSignal
 
+
+#I dont remeber doing this
 func _ready() -> void:
-	connect("dragSignal",self,"_set_drag_pc")
+	print("I dont remeber doing this")
+	#connect("dragSignal",self,"_set_drag_pc")
 
 
 func _physics_process(delta: float) -> void:

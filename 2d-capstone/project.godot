@@ -29,7 +29,7 @@ project/assembly_name="2D Capstone"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/codeandweb.texturepacker/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

@@ -12,6 +12,7 @@ var right
 var beatLength = 0.0
 var originPos = Vector2(0,0)
 var blockChildren
+#TODO create a stack of all the indicators we are using 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	originPos = self.global_position
@@ -106,11 +107,22 @@ func sizeUp():
 			if indicator.position.x >= self.global_position.x:
 				#we have found the next beat to extend out to 
 				# now we need to know how much to strecth,
+				#i dont know how to math im gonna kms
 				var goalWidth = abs(indicator.position.x - self.colliderUpperLeft.x)
 				var orgWidth = abs(self.colliderLowerRight.x - self.colliderUpperLeft.x)
 				var newScale = goalWidth / orgWidth
-				self.scale.x = newScale
+				self.scale.x *= newScale
 				self.global_position.x = self.colliderUpperLeft.x
+				
+				#ok new method, just craft a whole new enemy block and shit and delete the old ones
+				#should I be pre-loading this
+				var newEnemy = load("res://enemy/enemy.tscn").new()
+				var newColShape = CollisionShape2D.new()
+				var newBlock = load("res://worldObjects/blockLong.tscn").new()
+				var newEnemyBlock = load("res://shadow/enemy_block.tscn").new()
+				var newRectangleShape = RectangleShape2D.new()
+				
+				
 				
 				
 	

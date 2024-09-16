@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dcehy21ekao56"]
 
-[ext_resource type="Script" path="res://goalBlock.gd" id="1_mtsv6"]
+[ext_resource type="Script" path="res://shadow/goalBlock.gd" id="1_mtsv6"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_p1e2s"]
 [ext_resource type="Texture2D" uid="uid://cheyr4ahq0rl7" path="res://shadow/OIP.jpg" id="3_d66if"]
 

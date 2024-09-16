@@ -16,6 +16,3 @@ position = Vector2(56, 40)
 [node name="actionIndicatorManager" parent="." instance=ExtResource("2_d05vp")]
 
 [node name="ActionIndicator" parent="actionIndicatorManager" instance=ExtResource("3_gdo6n")]
-
-[node name="ActionIndicator2" parent="actionIndicatorManager" instance=ExtResource("3_gdo6n")]
-position = Vector2(-313, -7)
