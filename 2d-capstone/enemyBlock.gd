@@ -12,6 +12,8 @@ var right
 var beatLength = 0.0
 var originPos = Vector2(0,0)
 var blockChildren
+var tempX = 0.0
+var toScale = true
 #TODO create a stack of all the indicators we are using 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -96,19 +98,22 @@ func sizeUp():
 	for indicatorList in indicators:
 		#sort through all of the indicators
 		for indicator in indicatorList.get_children():
-			if indicator.position.x >= self.global_position.x:
+			if indicator.position.x >= self.global_position.x and tempX != indicator.position.x:
 				#we have found the next beat to extend out to 
 				# now we need to know how much to strecth,
-				#i dont know how to math im gonna kms
 				print("before snap: ")
 				print("Block low X - > ", colliderUpperLeft)
 				print("Block High X - > ", colliderLowerRight)
-				curBlock = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
+				print("blocks position b4 - > ", self.position)
 				var goalWidth = abs(indicator.position.x - self.colliderUpperLeft.x)
 				var orgWidth = abs(self.colliderLowerRight.x - self.colliderUpperLeft.x)
 				var newScale = goalWidth / orgWidth
 				self.scale.x = newScale
+				var oldMinX = colliderUpperLeft.x
 				curBlock = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
+				var newExtents = Vector2(goalWidth / 2, curBlock.extents.y )
+				curBlock.extents = newExtents
+				print("blocks position after - > ", self.position)
 				var pos = self.position
 				colliderUpperLeft = pos - curBlock.extents
 				colliderLowerRight = pos + curBlock.extents
@@ -118,9 +123,14 @@ func sizeUp():
 				print("Block low X - > ", colliderUpperLeft)
 				print("Block High X - > ", colliderLowerRight)
 				#have to find how much to transform by
+				#
+				var toMove = abs(colliderUpperLeft.x - oldMinX)
+				var xDifference = abs(indicator.position.x - colliderUpperLeft.x)
+				if toScale:
+					self.position.x += toMove
+					toScale = false
 				
-				var xDifference = abs(indicator.position.x - self.position.x)
-				self.position.x += xDifference
+				tempX = indicator.position.x
 				break
 				
 #func sizeDown():
