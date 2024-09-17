@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dqobtn3ymtkd4"]
+[gd_scene load_steps=15 format=3 uid="uid://bgsv8433dgnnb"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_dt31b"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="2_dunhg"]
@@ -17,7 +17,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yxuh"]
 size = Vector2(45, 656)
 
-[node name="testWorldA" type="Node2D"]
+[node name="testWorldA4" type="Node2D"]
 script = ExtResource("1_dt31b")
 
 [node name="Player2" parent="." instance=ExtResource("2_dunhg")]
