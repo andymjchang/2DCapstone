@@ -1,33 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdtfsnkyix4rt"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="1_3ei1s"]
-[ext_resource type="Texture2D" uid="uid://ot5u02sx1r5m" path="res://levelEditor/testBlock.png" id="2_44s68"]
-[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_o7o4d"]
-[ext_resource type="Texture2D" uid="uid://bsadp0sxt2eo8" path="res://worldObjects/circlePlaceholder.png" id="5_20smq"]
-[ext_resource type="Texture2D" uid="uid://bc5u63xl3n7e" path="res://worldObjects/circlePlaceholder2.png" id="6_jebpx"]
+[ext_resource type="PackedScene" path="res://levelEditor/testBlock.tscn" id="1_lmcse"]
+[ext_resource type="Texture2D" path="res://levelEditor/testBlock.png" id="2_mrrth"]
 
 [node name="objectList" type="Node2D"]
 
-[node name="TestBlock" parent="." instance=ExtResource("1_3ei1s")]
-position = Vector2(450, 450)
+[node name="TestBlock" type="Node2D" parent="." instance=ExtResource("1_lmcse")]
+position = Vector2(600, 450)
 
-[node name="Polygon2D2" type="Polygon2D" parent="TestBlock"]
+[node name="Polygon2D" type="Polygon2D" parent="TestBlock"]
 visible = false
 polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
 
-[node name="Sprite2D2" type="Sprite2D" parent="TestBlock"]
-texture = ExtResource("2_44s68")
-
-[node name="ActionIndicator" parent="." instance=ExtResource("3_o7o4d")]
-position = Vector2(450, 450)
-
-[node name="innerCircle2" type="Sprite2D" parent="ActionIndicator"]
-texture = ExtResource("5_20smq")
-
-[node name="outerCircle2" type="Sprite2D" parent="ActionIndicator"]
-modulate = Color(1, 1, 1, 0)
-scale = Vector2(10, 10)
-texture = ExtResource("6_jebpx")
-
-[node name="Timer2" type="Timer" parent="ActionIndicator"]
-wait_time = 0.5
+[node name="Sprite2D" type="Sprite2D" parent="TestBlock"]
+texture = ExtResource("2_mrrth")

@@ -63,14 +63,6 @@ func _on_up_button_button_down() -> void:
 	
 func save_scene_to_file():
 	var root = objectList
-	#root.name = "RootNode"
-	
-	## Add all placed blocks
-	#print(objectList.get_children())
-	#for child in objectList.get_children():
-		#var child_copy = child.duplicate(15)
-		#child_copy.set_owner(root)  # Set the owner of the duplicated child
-		#root.add_child(child_copy)
 	
 	# Ensure all nested children have their owner set
 	_set_owner_recursive(root, root)
