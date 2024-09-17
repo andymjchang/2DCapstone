@@ -103,12 +103,16 @@ func getNearestCheckpoint(who):
 	var nearestPoint = checkpoints.get_child(0)
 	var shortestDistance = who.position.distance_to(nearestPoint.position)
 	for i in checkpoints.get_children():
+		print("Checking: ", i)
 		var distance = who.position.distance_to(i.position)
-		
-		if distance < shortestDistance:
-			#print("Closest node: ", i)
-			nearestPoint = i
-			shortestDistance = distance
+		# Check if checkpoint in front of player
+		var direction = (i.position.x - who.position.x)
+		print("dir: ", direction)
+		if (direction >= 0):
+			if distance < shortestDistance:
+				#print("Closest node: ", i)
+				nearestPoint = i
+				shortestDistance = distance
 	return nearestPoint
 	
 # Basic checkpointing system

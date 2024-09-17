@@ -24,7 +24,7 @@ position = Vector2(-433, 4)
 position = Vector2(-259, 88)
 
 [node name="Block3" parent="Blocks" instance=ExtResource("1_1jngf")]
-position = Vector2(-4, 17)
+position = Vector2(-275, -69)
 
 [node name="Block4" parent="Blocks" instance=ExtResource("1_1jngf")]
 position = Vector2(-59, 416)
@@ -41,4 +41,4 @@ position = Vector2(-260, 161)
 position = Vector2(-288, 55)
 
 [node name="Player2" parent="." instance=ExtResource("5_j7ls8")]
-position = Vector2(-110, 387)
+position = Vector2(-307, -101)
