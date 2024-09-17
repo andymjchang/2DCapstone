@@ -6,11 +6,14 @@ var placedBlocks = []
 var currentBlock
 
 @export var testBlock : PackedScene
+@export var actionIndicator : PackedScene
+
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var measureLines = $measureLines
+
 var bpm : int = 4
-var stepSize : int = 100
+var stepSize : int = 150
 
 func _ready():
 	measureLines.beatsPerMeasure = bpm
@@ -35,7 +38,11 @@ func _on_test_placer_button_down() -> void:
 	add_child(blockInstance)
 	blockInstance.position = Vector2(450, 450)
 	currentBlock = blockInstance
-
+func _on_test_placer_2_button_down() -> void:
+	var actionInstance = actionIndicator.instantiate()
+	add_child(actionInstance)
+	actionInstance.position = Vector2(450, 450)
+	currentBlock = actionInstance
 
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return

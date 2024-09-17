@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgbbeq63rjuhl"]
+[gd_scene load_steps=11 format=3 uid="uid://cgbbeq63rjuhl"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="2_cfyqp"]
-[ext_resource type="Texture2D" uid="uid://c7wbwq6l81brv" path="res://icon.svg" id="2_glsw6"]
 [ext_resource type="Script" path="res://levelEditor/measure_lines.gd" id="2_mulbo"]
+[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="2_otlxm"]
+[ext_resource type="Texture2D" uid="uid://iocnhlyh4yw6" path="res://levelEditor/action.png" id="3_kgvx7"]
 [ext_resource type="Texture2D" uid="uid://bamwfgoa14ig1" path="res://levelEditor/right.png" id="4_7fuo1"]
+[ext_resource type="Texture2D" uid="uid://vwontoywjedu" path="res://levelEditor/block.png" id="4_rduon"]
 [ext_resource type="Texture2D" uid="uid://cnj8sgwkjxidi" path="res://levelEditor/up.png" id="5_8qxnf"]
 [ext_resource type="Texture2D" uid="uid://77x6f2ngvprm" path="res://levelEditor/left.png" id="5_cuiw6"]
 [ext_resource type="Texture2D" uid="uid://2hplcty35vpl" path="res://levelEditor/down.png" id="7_u6v8f"]
@@ -12,6 +14,7 @@
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
 testBlock = ExtResource("2_cfyqp")
+actionIndicator = ExtResource("2_otlxm")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -25,44 +28,51 @@ placeholder_text = "BPM: "
 offset_top = 52.0
 offset_right = 115.0
 offset_bottom = 102.0
-text = "100"
+text = "150"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Node2D" parent="UI"]
 
 [node name="testPlacer" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 15.0
-offset_top = 940.0
-offset_right = 143.0
-offset_bottom = 1068.0
-texture_normal = ExtResource("2_glsw6")
+offset_left = 36.0
+offset_top = 955.0
+offset_right = 136.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("4_rduon")
+
+[node name="testPlacer2" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 139.0
+offset_top = 955.0
+offset_right = 239.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("3_kgvx7")
 
 [node name="rightButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 270.0
-offset_top = 955.0
-offset_right = 370.0
-offset_bottom = 1055.0
+offset_left = 1579.0
+offset_top = 954.0
+offset_right = 1679.0
+offset_bottom = 1054.0
 texture_normal = ExtResource("4_7fuo1")
 
 [node name="upButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 373.0
-offset_top = 955.0
-offset_right = 473.0
-offset_bottom = 1055.0
+offset_left = 1682.0
+offset_top = 954.0
+offset_right = 1782.0
+offset_bottom = 1054.0
 texture_normal = ExtResource("5_8qxnf")
 
 [node name="leftButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 167.0
-offset_top = 955.0
-offset_right = 267.0
-offset_bottom = 1055.0
+offset_left = 1476.0
+offset_top = 954.0
+offset_right = 1576.0
+offset_bottom = 1054.0
 texture_normal = ExtResource("5_cuiw6")
 
 [node name="downButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 476.0
-offset_top = 955.0
-offset_right = 576.0
-offset_bottom = 1055.0
+offset_left = 1785.0
+offset_top = 954.0
+offset_right = 1885.0
+offset_bottom = 1054.0
 texture_normal = ExtResource("7_u6v8f")
 
 [node name="measureLines" type="Node2D" parent="."]
@@ -71,6 +81,7 @@ script = ExtResource("2_mulbo")
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
 [connection signal="button_down" from="UI/objectSelector/testPlacer" to="." method="_on_test_placer_button_down"]
+[connection signal="button_down" from="UI/objectSelector/testPlacer2" to="." method="_on_test_placer_2_button_down"]
 [connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/leftButton" to="." method="_on_left_button_button_down"]

@@ -2,7 +2,7 @@ extends Node2D
 
 var measurePixels = 600
 var beatsPerMeasure = 3
-var stepSize = 100  # This will define the spacing for the grid lines
+var stepSize = 150  # This will define the spacing for the grid lines
 
 var viewport_width
 var viewport_height
