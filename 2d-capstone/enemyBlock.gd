@@ -38,11 +38,8 @@ func _ready() -> void:
 	left = "left"
 	right = "right"
 	pass # Replace with function body.
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-
 	#question, should I constantly be changing the upper bound values?
 	if Input.is_action_just_pressed(up):
 		self.global_position.y -= 10
@@ -61,7 +58,6 @@ func _process(delta: float) -> void:
 	colliderLowerRight = pos + curBlock.extents
 	bindToNearestBeat()
 	pass
-
 	
 func bindToNearestBeat():
 	#loop through all of the indicators in a scene, if one has x coords that
@@ -121,20 +117,11 @@ func sizeUp():
 				print("nearest indicator x: ", indicator.position.x)
 				print("Block low X - > ", colliderUpperLeft)
 				print("Block High X - > ", colliderLowerRight)
-				self.position.x += 125
+				#have to find how much to transform by
+				
+				var xDifference = abs(indicator.position.x - self.position.x)
+				self.position.x += xDifference
 				break
 				
-				
-				#ok new method, just craft a whole new enemy block and shit and delete the old ones
-				#should I be pre-loading this
-				#todo dont scale enemy haha
-				
-				
-				
-				
-			
-			
-	
-	
 #func sizeDown():
 	#size down by one beat
