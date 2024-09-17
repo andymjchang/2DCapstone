@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cgbbeq63rjuhl"]
+[gd_scene load_steps=15 format=3 uid="uid://cgbbeq63rjuhl"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="2_cfyqp"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bbiq7u5yvg7al" path="res://levelEditor/mouse.png" id="7_dw7u5"]
 [ext_resource type="Texture2D" uid="uid://2hplcty35vpl" path="res://levelEditor/down.png" id="7_u6v8f"]
 [ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/rac.png" id="8_w245c"]
+[ext_resource type="Script" path="res://levelEditor/camera_2d.gd" id="14_wt7o4"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
@@ -121,6 +122,7 @@ texture_normal = ExtResource("7_u6v8f")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
+script = ExtResource("14_wt7o4")
 
 [node name="objectList" type="Node2D" parent="."]
 
