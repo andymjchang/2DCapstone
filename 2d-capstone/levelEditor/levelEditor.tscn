@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgbbeq63rjuhl"]
+[gd_scene load_steps=7 format=3 uid="uid://cgbbeq63rjuhl"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="2_cfyqp"]
 [ext_resource type="Texture2D" uid="uid://c7wbwq6l81brv" path="res://icon.svg" id="2_glsw6"]
 [ext_resource type="Script" path="res://levelEditor/measure_lines.gd" id="2_mulbo"]
+[ext_resource type="Texture2D" uid="uid://bamwfgoa14ig1" path="res://levelEditor/right.png" id="4_7fuo1"]
+[ext_resource type="Texture2D" uid="uid://77x6f2ngvprm" path="res://levelEditor/left.png" id="5_cuiw6"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
@@ -17,6 +19,13 @@ offset_bottom = 50.0
 text = "4"
 placeholder_text = "BPM: "
 
+[node name="TextEdit2" type="TextEdit" parent="UI"]
+offset_top = 52.0
+offset_right = 115.0
+offset_bottom = 102.0
+text = "100"
+placeholder_text = "Step Size:"
+
 [node name="objectSelector" type="Node2D" parent="UI"]
 
 [node name="testPlacer" type="TextureButton" parent="UI/objectSelector"]
@@ -26,8 +35,25 @@ offset_right = 143.0
 offset_bottom = 1068.0
 texture_normal = ExtResource("2_glsw6")
 
+[node name="rightButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 270.0
+offset_top = 955.0
+offset_right = 370.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("4_7fuo1")
+
+[node name="leftButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 167.0
+offset_top = 955.0
+offset_right = 267.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("5_cuiw6")
+
 [node name="measureLines" type="Node2D" parent="."]
 script = ExtResource("2_mulbo")
 
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
 [connection signal="button_down" from="UI/objectSelector/testPlacer" to="." method="_on_test_placer_button_down"]
+[connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/leftButton" to="." method="_on_left_button_button_down"]

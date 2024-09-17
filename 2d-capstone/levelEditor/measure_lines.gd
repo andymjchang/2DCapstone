@@ -2,6 +2,7 @@ extends Node2D
 
 var measurePixels = 600
 var beatsPerMeasure = 3
+var stepSize = 50  # This will define the spacing for the grid lines
 
 var viewport_width
 var viewport_height
@@ -11,6 +12,14 @@ func _ready():
 	viewport_height = get_viewport_rect().size.y
 
 func _draw():
+	# Draw grid lines
+	for y in range(0, int(viewport_height / stepSize) + 1):
+		var grid_y = y * stepSize
+		draw_line(Vector2(0, grid_y), Vector2(viewport_width, grid_y), Color.GRAY, 2.0)
+	for x in range(0, int(viewport_width / stepSize) + 1):
+		var grid_x = x * stepSize
+		draw_line(Vector2(grid_x, 0), Vector2(grid_x, viewport_height), Color.GRAY, 2.0)
+
 	# Draw measure lines
 	for x in range(0, int(viewport_width / measurePixels) + 1):
 		var measure_x = x * measurePixels
