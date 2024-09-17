@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgbbeq63rjuhl"]
+[gd_scene load_steps=12 format=3 uid="uid://cgbbeq63rjuhl"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="2_cfyqp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://vwontoywjedu" path="res://levelEditor/block.png" id="4_rduon"]
 [ext_resource type="Texture2D" uid="uid://cnj8sgwkjxidi" path="res://levelEditor/up.png" id="5_8qxnf"]
 [ext_resource type="Texture2D" uid="uid://77x6f2ngvprm" path="res://levelEditor/left.png" id="5_cuiw6"]
+[ext_resource type="Texture2D" uid="uid://44ffttq2jugp" path="res://levelEditor/save.png" id="7_0wc3n"]
 [ext_resource type="Texture2D" uid="uid://2hplcty35vpl" path="res://levelEditor/down.png" id="7_u6v8f"]
 
 [node name="Node2D" type="Node2D"]
@@ -16,18 +17,38 @@ script = ExtResource("1_15vlh")
 testBlock = ExtResource("2_cfyqp")
 actionIndicator = ExtResource("2_otlxm")
 
+[node name="measureLines" type="Node2D" parent="."]
+script = ExtResource("2_mulbo")
+
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="bpmLabel" type="RichTextLabel" parent="UI"]
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 143.0
+offset_bottom = 51.0
+text = "Beats per measure"
+
+[node name="bpmLabel2" type="RichTextLabel" parent="UI"]
+offset_left = 5.0
+offset_top = 56.0
+offset_right = 143.0
+offset_bottom = 104.0
+text = "Step size"
+
 [node name="TextEdit" type="TextEdit" parent="UI"]
-offset_right = 115.0
-offset_bottom = 50.0
+offset_left = 93.0
+offset_top = 3.0
+offset_right = 208.0
+offset_bottom = 53.0
 text = "4"
 placeholder_text = "BPM: "
 
 [node name="TextEdit2" type="TextEdit" parent="UI"]
-offset_top = 52.0
-offset_right = 115.0
-offset_bottom = 102.0
+offset_left = 93.0
+offset_top = 55.0
+offset_right = 208.0
+offset_bottom = 105.0
 text = "150"
 placeholder_text = "Step Size:"
 
@@ -46,6 +67,13 @@ offset_top = 955.0
 offset_right = 239.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("3_kgvx7")
+
+[node name="testPlacer3" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 242.0
+offset_top = 955.0
+offset_right = 342.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("7_0wc3n")
 
 [node name="rightButton" type="TextureButton" parent="UI/objectSelector"]
 offset_left = 1579.0
@@ -75,13 +103,16 @@ offset_right = 1885.0
 offset_bottom = 1054.0
 texture_normal = ExtResource("7_u6v8f")
 
-[node name="measureLines" type="Node2D" parent="."]
-script = ExtResource("2_mulbo")
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="objectList" type="Node2D" parent="."]
 
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
 [connection signal="button_down" from="UI/objectSelector/testPlacer" to="." method="_on_test_placer_button_down"]
 [connection signal="button_down" from="UI/objectSelector/testPlacer2" to="." method="_on_test_placer_2_button_down"]
+[connection signal="button_down" from="UI/objectSelector/testPlacer3" to="." method="_on_test_placer_3_button_down"]
 [connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/leftButton" to="." method="_on_left_button_button_down"]
