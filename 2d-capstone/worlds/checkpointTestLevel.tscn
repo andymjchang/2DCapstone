@@ -1,20 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://fusj3vkh8hli"]
+[gd_scene load_steps=7 format=3 uid="uid://dn7eew0qs5vk"]
 
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="1_1jngf"]
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_232eq"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="2_5mni6"]
+[ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="2_xrlme"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="4_dicbs"]
+[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="5_j7ls8"]
 
 [node name="CheckpointTestLevel" type="Node2D"]
 script = ExtResource("1_232eq")
 
 [node name="CheckpointManager" type="Node2D" parent="."]
 
-[node name="Checkpoint" type="Marker2D" parent="CheckpointManager"]
-position = Vector2(-55, -6)
+[node name="Checkpoint" parent="CheckpointManager" instance=ExtResource("2_xrlme")]
+position = Vector2(-40, -33)
 
-[node name="Checkpoint2" type="Marker2D" parent="CheckpointManager"]
-position = Vector2(-428, 12)
+[node name="Checkpoint2" parent="CheckpointManager" instance=ExtResource("2_xrlme")]
+position = Vector2(-433, 4)
 
 [node name="Blocks" type="Node2D" parent="."]
 
@@ -24,13 +26,19 @@ position = Vector2(-259, 88)
 [node name="Block3" parent="Blocks" instance=ExtResource("1_1jngf")]
 position = Vector2(-4, 17)
 
+[node name="Block4" parent="Blocks" instance=ExtResource("1_1jngf")]
+position = Vector2(-59, 416)
+
 [node name="Block2" parent="Blocks" instance=ExtResource("1_1jngf")]
 position = Vector2(-485, 33)
 
 [node name="KillFloor" parent="." instance=ExtResource("2_5mni6")]
-position = Vector2(-109, 161)
+position = Vector2(-260, 161)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Player1" parent="." instance=ExtResource("4_dicbs")]
 position = Vector2(-288, 55)
+
+[node name="Player2" parent="." instance=ExtResource("5_j7ls8")]
+position = Vector2(-110, 387)

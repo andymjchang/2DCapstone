@@ -98,23 +98,20 @@ func updateScore(indicator_position):
 	textPopup.initText(score_to_add, player.position)
 	add_child(textPopup)
 
+# Helper function that grabs the target player's closest forward checkpoint
 func getNearestCheckpoint(who):
 	var nearestPoint = checkpoints.get_child(0)
 	var shortestDistance = who.position.distance_to(nearestPoint.position)
-	#print("Initial shortest: ", shortestDistance)
 	for i in checkpoints.get_children():
-		#print("Checking: ", i)
 		var distance = who.position.distance_to(i.position)
-		#print("Distance: ", distance)
-		#print("Cur shortest: ", shortestDistance)
+		
 		if distance < shortestDistance:
 			#print("Closest node: ", i)
 			nearestPoint = i
 			shortestDistance = distance
-	#print("Nearest final: ", nearestPoint)
 	return nearestPoint
 	
-# Hard coded right now
+# Basic checkpointing system
 func _onResetPosition(who):
 	if who.name == "Player1":
 		print("resetting player pos")

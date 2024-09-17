@@ -15,8 +15,11 @@ var left
 var right
 var jump
 var punch
+var reachedCheckpoint = true
 var relocating = false
 var enemyscene = preload("res://enemy/enemy.tscn")
+var checkpoint
+var otherPlayer
 
 func _ready():
 	print("my name is: ",self.name)
@@ -27,11 +30,13 @@ func _ready():
 		right = "right1"
 		jump = "jump1"
 		punch = "punch1"
+		otherPlayer = "Player2"
 	elif self.name == "Player2":
 		left = "left2"
 		right = "right2"
 		jump = "jump2"
 		punch = "punch2"
+		otherPlayer = "Player1"
 
 	attack = get_node("AttackHitbox")
 
@@ -77,7 +82,16 @@ func _physics_process(delta: float) -> void:
 				canAttack = true
 				attack.disabled = true
 				attack.visible = false
-
+	elif reachedCheckpoint:
+		# Wait to respawn relocating player when teammate has aligned
+		if get_parent().get_node(otherPlayer).position.x >= self.position.x:
+			# Reset relocating player position and allow control
+			get_node("CollisionShape2D").call_deferred("set", "disabled", false)
+			relocating = false
+			reachedCheckpoint = true
+			self.position.y = checkpoint.get_node("Point").position.y
+			self.position.x = get_parent().get_node(otherPlayer).position.x
+		pass
 	move_and_slide()
 
 func _onTakeDamage(amount):
@@ -101,7 +115,6 @@ func _onTakeDamage(amount):
 			await get_tree().create_timer(1.0).timeout
 			print("invuln over")
 			invuln = false
-	pass # Replace with function body.
 
 
 func _onRevive(who):
@@ -110,10 +123,12 @@ func _onRevive(who):
 	who.dead = false
 
 func _onRelocate(nearestPoint):
-	print("relocating")
+	# Disable collisions, change flags for relocation
 	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
 	relocating = true
-	print("Nearest: ", nearestPoint)
+	reachedCheckpoint = false
+
+	# Set destination, begin move to point
+	checkpoint = nearestPoint
 	velocity.x = (nearestPoint.position.x - position.x) * SPEED/2 * get_process_delta_time()
 	velocity.y = (nearestPoint.position.y - position.y) * SPEED/2 * get_process_delta_time()
-	print("Vel: ", velocity)

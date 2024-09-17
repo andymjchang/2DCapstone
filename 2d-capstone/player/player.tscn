@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddhmsyfxae2qi"]
+[gd_scene load_steps=7 format=3 uid="uid://ddhmsyfxae2qi"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_etm0r"]
 [ext_resource type="Texture2D" uid="uid://bryw5h3235gyw" path="res://player/player.png" id="1_ws4wu"]
@@ -8,6 +8,8 @@
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_otrtv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dyub"]
 
 [node name="Player" type="CharacterBody2D" groups=["players"]]
 script = ExtResource("1_etm0r")
@@ -36,3 +38,8 @@ offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
 offset_bottom = 10.0
+
+[node name="CheckpointHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
+shape = SubResource("RectangleShape2D_2dyub")
