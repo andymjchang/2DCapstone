@@ -78,14 +78,10 @@ func bindToNearestBeat():
 				closetIndicatorX = indicator.position.x
 	#out of for loop and now I have the closest indicators X
 	#check to see if that indicator is within the x bounds of our block
-	print("Upper left x: ",colliderUpperLeft.x )
-	print("Lower right x: ", colliderLowerRight.x)
-	print("indicator X", closetIndicatorX)
 	if closetIndicatorX >= colliderUpperLeft.x and closetIndicatorX <= colliderLowerRight.x:
 		#snap the enemys x coordinates to the beat
 		blockEnemy.global_position.x = closetIndicatorX
 	elif closetIndicatorX < colliderUpperLeft.x:
-		print("closest indicator is to0 the right")
 		blockEnemy.global_position.x = colliderUpperLeft.x
 	else:
 		blockEnemy.global_position.x = colliderLowerRight.x
@@ -108,28 +104,29 @@ func sizeUp():
 				#we have found the next beat to extend out to 
 				# now we need to know how much to strecth,
 				#i dont know how to math im gonna kms
-				var goalWidth = abs(indicator.position.x - self.colliderUpperLeft.x)
+				print("before snap: ")
+				print("Block low X - > ", colliderUpperLeft)
+				print("Block High X - > ", colliderLowerRight)
+				curBlock = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
+				var goalWidth = abs(indicator.position.x - self.colliderUpperLeft.x)*2
 				var orgWidth = abs(self.colliderLowerRight.x - self.colliderUpperLeft.x)
 				var newScale = goalWidth / orgWidth
-				self.scale.x *= newScale
-				self.global_position.x = self.colliderUpperLeft.x
+				self.scale.x = newScale
+				curBlock = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
+				var pos = self.position
+				colliderUpperLeft = pos - curBlock.extents
+				colliderLowerRight = pos + curBlock.extents
+
+				print("After snap: ")
+				print("nearest indicator x: ", indicator.position.x)
+				print("Block low X - > ", colliderUpperLeft)
+				print("Block High X - > ", colliderLowerRight)
+				
 				
 				#ok new method, just craft a whole new enemy block and shit and delete the old ones
 				#should I be pre-loading this
-				var newEnemy = load("res://enemy/enemy.tscn").new()
-				var newColShape = CollisionShape2D.new()
-				var newBlock = load("res://worldObjects/blockLong.tscn").new()
-				var newEnemyBlock = load("res://shadow/enemy_block.tscn").new()
-				var newRectangleShape = RectangleShape2D.new()
-				
-				
-				
-				
-	
-			
-				#
 				#todo dont scale enemy haha
-				self.scale.x *= newScale
+				
 				
 				
 				
