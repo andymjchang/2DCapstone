@@ -108,7 +108,7 @@ func sizeUp():
 				print("Block low X - > ", colliderUpperLeft)
 				print("Block High X - > ", colliderLowerRight)
 				curBlock = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
-				var goalWidth = abs(indicator.position.x - self.colliderUpperLeft.x)*2
+				var goalWidth = abs(indicator.position.x - self.colliderUpperLeft.x)
 				var orgWidth = abs(self.colliderLowerRight.x - self.colliderUpperLeft.x)
 				var newScale = goalWidth / orgWidth
 				self.scale.x = newScale
@@ -121,6 +121,8 @@ func sizeUp():
 				print("nearest indicator x: ", indicator.position.x)
 				print("Block low X - > ", colliderUpperLeft)
 				print("Block High X - > ", colliderLowerRight)
+				self.position.x += 125
+				break
 				
 				
 				#ok new method, just craft a whole new enemy block and shit and delete the old ones
