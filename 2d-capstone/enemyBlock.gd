@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 		#go a certain amount of pixels up 
 	if Input.is_action_just_pressed("sizeUp"):
 		sizeUp()
-	size = curBlock.extents * 2
+	
 	var pos = get_node("Block/CollisionShape2D2").global_position
 	colliderUpperLeft = pos - curBlock.extents
 	colliderLowerRight = pos + curBlock.extents
@@ -87,7 +87,7 @@ func bindToNearestBeat():
 		
 		
 #TODO add a functionality so that based off of a button press, 
-#it extends either right or left
+#it extends either right or left, right now it only does it to the right 
 func sizeUp():
 	#size up by one beat, to the right
 	#theres a better way to do this but I am tire TODO,
@@ -99,31 +99,20 @@ func sizeUp():
 		#sort through all of the indicators
 		for indicator in indicatorList.get_children():
 			if indicator.position.x >= self.global_position.x and tempX != indicator.position.x:
-				#we have found the next beat to extend out to 
-				# now we need to know how much to strecth,
-				print("before snap: ")
-				print("Block low X - > ", colliderUpperLeft)
-				print("Block High X - > ", colliderLowerRight)
-				print("blocks position b4 - > ", self.position)
+				#getting the scale so that we can stretch to the next beat
 				var goalWidth = abs(indicator.position.x - self.colliderUpperLeft.x)
 				var orgWidth = abs(self.colliderLowerRight.x - self.colliderUpperLeft.x)
 				var newScale = goalWidth / orgWidth
 				self.scale.x = newScale
+				#updating the collision box and its extents so that it will reflect this new scaling
 				var oldMinX = colliderUpperLeft.x
 				curBlock = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
 				var newExtents = Vector2(goalWidth / 2, curBlock.extents.y )
 				curBlock.extents = newExtents
-				print("blocks position after - > ", self.position)
 				var pos = self.position
 				colliderUpperLeft = pos - curBlock.extents
 				colliderLowerRight = pos + curBlock.extents
-
-				print("After snap: ")
-				print("nearest indicator x: ", indicator.position.x)
-				print("Block low X - > ", colliderUpperLeft)
-				print("Block High X - > ", colliderLowerRight)
-				#have to find how much to transform by
-				#
+				#grabbing the transform value so that we can correctly shift the newly scaled block
 				var toMove = abs(colliderUpperLeft.x - oldMinX)
 				var xDifference = abs(indicator.position.x - colliderUpperLeft.x)
 				if toScale:
@@ -134,4 +123,6 @@ func sizeUp():
 				break
 				
 #func sizeDown():
-	#size down by one beat
+	#size down by one beatq
+	
+#TODO add functionality 
