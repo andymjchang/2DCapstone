@@ -234,29 +234,32 @@ func place_block(instance, parent):
 		placePos = currentPosition
 	
 	parent.add_child(instance)
+	print("mamma mia", instance.name)
+
 	instance.index = lEindex
 	lEindex+=1
 	instance.position = snap_position(placePos)
-	#now add a kill floor right below it
-	var blockBounds = instance.activeSprite.texture.get_size()*instance.scale/2
-	var upperLeftCorner = (instance.position - (blockBounds))/2
-	var lowerRightCorner = (instance.position + (blockBounds))/2
-	
-	#kfloor deets
-	var kFloorInstance = killFloor.instantiate()
-	killFloorList.add_child(kFloorInstance)
-	var kFloorBounds = kFloorInstance as RectangleShape2D
-	var kUpperLeftCorner = instance.position - blockBounds
-	var kLowerRightCorner = instance.position + blockBounds
-	print(upperLeftCorner.y )
-	print(lowerRightCorner.y)
-	var moveDown = instance.position.y + abs(upperLeftCorner.y - lowerRightCorner.y)/10
-	print(blockBounds.y)
-	kFloorInstance.position = Vector2(instance.position.x,moveDown)
-	print("Pos ", kFloorInstance.position)
-	print("Pos ", instance.position)
+	#now add a kill floor right below it, only want to do this with blocl
+	if instance.name == "Block":
+		var blockBounds = instance.activeSprite.texture.get_size()*instance.scale/2
+		var upperLeftCorner = (instance.position - (blockBounds))/2
+		var lowerRightCorner = (instance.position + (blockBounds))/2
+		
+		#kfloor deets
+		var kFloorInstance = killFloor.instantiate()
+		killFloorList.add_child(kFloorInstance)
+		var kFloorBounds = kFloorInstance as RectangleShape2D
+		var kUpperLeftCorner = instance.position - blockBounds
+		var kLowerRightCorner = instance.position + blockBounds
+		print(upperLeftCorner.y )
+		print(lowerRightCorner.y)
+		var moveDown = instance.position.y + abs(upperLeftCorner.y - lowerRightCorner.y)/10
+		print(blockBounds.y)
+		kFloorInstance.position = Vector2(instance.position.x,moveDown)
+		print("Pos ", kFloorInstance.position)
+		print("Pos ", instance.position)
+		killFDict[instance] = kFloorInstance
 	currentBlock = instance
-	killFDict[instance] = kFloorInstance
 	print("placed node type: ", currentBlock)
 	reset_drag_tracking()
 

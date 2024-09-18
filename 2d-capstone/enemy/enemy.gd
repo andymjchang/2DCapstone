@@ -10,7 +10,7 @@ var up
 var down 
 var left
 var right
-
+var index = 0
 
 var soundPlayer := AudioStreamPlayer.new()
 

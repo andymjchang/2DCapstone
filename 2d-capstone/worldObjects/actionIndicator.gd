@@ -12,6 +12,8 @@ var starting_scale
 @onready var timer = $Timer
 signal scored(indicator_position)
 
+var index = 0
+
 # Start with higher scale and 0 opacity
 func _ready() -> void:
 	actionIndicatorManager = get_parent()

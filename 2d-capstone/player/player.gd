@@ -21,6 +21,7 @@ var enemyscene = preload("res://enemy/enemy.tscn")
 var checkpoint
 var otherPlayer
 var editing = false
+var index = 0
 
 func _ready():
 	print("my name is: ",self.name)
