@@ -5,6 +5,7 @@ signal objectClicked(instance)
 # const values
 const measurePixels = 600
 const holdTime = 0.15
+var lEindex = 0.0
 
 var placedBlocks = []
 var currentBlock
@@ -122,6 +123,7 @@ func _on_mouse_button_button_up() -> void:
 func placeObject(placedNode):
 	placedNode.position = Vector2(450, 450)
 	currentBlock = placedNode
+
 	
 	
 	
@@ -232,6 +234,8 @@ func place_block(instance, parent):
 		placePos = currentPosition
 	
 	parent.add_child(instance)
+	instance.index = lEindex
+	lEindex+=1
 	instance.position = snap_position(placePos)
 	#now add a kill floor right below it
 	var blockBounds = instance.activeSprite.texture.get_size()*instance.scale/2
@@ -253,6 +257,7 @@ func place_block(instance, parent):
 	print("Pos ", instance.position)
 	currentBlock = instance
 	killFDict[instance] = kFloorInstance
+	print("placed node type: ", currentBlock)
 	reset_drag_tracking()
 
 func reset_drag_tracking():
@@ -280,7 +285,14 @@ func checkIntersection():
 	#	if kf.intersecting:
 			#kf.scale /= 1.001
 			
-func _onObjectClicked(objInstance : Node):
-	print("made it here", objInstance)
-	currentBlock = objInstance
+func _onObjectClicked(index : int):
+	print("made it here",index)
+
+	var list = get_node("objectList/testBlocks").get_children()
+	print("list ", list)
+	for block in list:
+		if block.index == index:
+			currentBlock = block
+			return
+	
 		

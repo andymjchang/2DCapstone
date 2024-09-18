@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 var activeSprite
-
+var index = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("blocks")
@@ -13,5 +13,5 @@ func _ready():
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("click"):
 		print("click")
-		get_parent().get_parent().get_parent().emit_signal("objectClicked",self.get_parent())
+		get_parent().get_parent().get_parent().emit_signal("objectClicked",index)
 	pass # Replace with function body.
