@@ -1,91 +1,48 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5abkyfg0vx3k"]
+[gd_scene load_steps=3 format=3 uid="uid://c5abkyfg0vx3k"]
 
-[ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_xjtq6"]
-[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="1_ynjbj"]
-[ext_resource type="Texture2D" uid="uid://ljo48af3c257" path="res://worldObjects/Platform.png" id="3_egt68"]
-[ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="4_1nu87"]
-[ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/Platform_2.png" id="4_06uha"]
-[ext_resource type="AudioStream" uid="uid://bi32k1rjy681g" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="6_4dv4g"]
+[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="1_76wue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]
-size = Vector2(128, 32)
+size = Vector2(150, 50)
 
 [node name="objectList" type="Node2D"]
-script = ExtResource("1_xjtq6")
 
 [node name="testBlocks" type="Node2D" parent="."]
 
-[node name="Block" parent="testBlocks" instance=ExtResource("1_ynjbj")]
-position = Vector2(750, 600)
-
-[node name="Platform3" type="Sprite2D" parent="testBlocks/Block"]
-position = Vector2(-1, 7)
-scale = Vector2(0.107701, 0.0832813)
-texture = ExtResource("3_egt68")
-
-[node name="Platform4" type="Sprite2D" parent="testBlocks/Block"]
-visible = false
-position = Vector2(-1, 7)
-scale = Vector2(0.104219, 0.104219)
-texture = ExtResource("4_06uha")
+[node name="Block" parent="testBlocks" instance=ExtResource("1_76wue")]
+position = Vector2(600, 450)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/Block"]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
-[node name="@StaticBody2D@14" parent="testBlocks" instance=ExtResource("1_ynjbj")]
-position = Vector2(900, 600)
+[node name="sprite2D2" type="Node2D" parent="testBlocks/Block"]
 
-[node name="Platform3" type="Sprite2D" parent="testBlocks/@StaticBody2D@14"]
-position = Vector2(-1, 7)
-scale = Vector2(0.107701, 0.0832813)
-texture = ExtResource("3_egt68")
-
-[node name="Platform4" type="Sprite2D" parent="testBlocks/@StaticBody2D@14"]
-visible = false
-position = Vector2(-1, 7)
-scale = Vector2(0.104219, 0.104219)
-texture = ExtResource("4_06uha")
+[node name="@StaticBody2D@14" parent="testBlocks" instance=ExtResource("1_76wue")]
+position = Vector2(750, 450)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/@StaticBody2D@14"]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
-[node name="@StaticBody2D@15" parent="testBlocks" instance=ExtResource("1_ynjbj")]
-position = Vector2(1050, 600)
+[node name="sprite2D2" type="Node2D" parent="testBlocks/@StaticBody2D@14"]
 
-[node name="Platform3" type="Sprite2D" parent="testBlocks/@StaticBody2D@15"]
-position = Vector2(-1, 7)
-scale = Vector2(0.107701, 0.0832813)
-texture = ExtResource("3_egt68")
-
-[node name="Platform4" type="Sprite2D" parent="testBlocks/@StaticBody2D@15"]
-position = Vector2(-1, 7)
-scale = Vector2(0.104219, 0.104219)
-texture = ExtResource("4_06uha")
+[node name="@StaticBody2D@15" parent="testBlocks" instance=ExtResource("1_76wue")]
+position = Vector2(900, 450)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/@StaticBody2D@15"]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
-[node name="@StaticBody2D@16" parent="testBlocks" instance=ExtResource("1_ynjbj")]
-position = Vector2(1200, 600)
+[node name="sprite2D2" type="Node2D" parent="testBlocks/@StaticBody2D@15"]
 
-[node name="Platform3" type="Sprite2D" parent="testBlocks/@StaticBody2D@16"]
-position = Vector2(-1, 7)
-scale = Vector2(0.107701, 0.0832813)
-texture = ExtResource("3_egt68")
-
-[node name="Platform4" type="Sprite2D" parent="testBlocks/@StaticBody2D@16"]
-position = Vector2(-1, 7)
-scale = Vector2(0.104219, 0.104219)
-texture = ExtResource("4_06uha")
+[node name="@StaticBody2D@16" parent="testBlocks" instance=ExtResource("1_76wue")]
+position = Vector2(1050, 450)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/@StaticBody2D@16"]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
+[node name="sprite2D2" type="Node2D" parent="testBlocks/@StaticBody2D@16"]
+
 [node name="actionIndicators" type="Node2D" parent="."]
-
-[node name="Player1" parent="." instance=ExtResource("4_1nu87")]
-position = Vector2(720, 502)
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_4dv4g")
-max_distance = 9999.0

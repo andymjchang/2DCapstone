@@ -14,12 +14,15 @@ script = ExtResource("1_kddth")
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
-[node name="Platform2" type="Sprite2D" parent="."]
+[node name="sprite2D" type="Node2D" parent="."]
+
+[node name="Platform2" type="Sprite2D" parent="sprite2D"]
+visible = false
 position = Vector2(0, 9)
 scale = Vector2(0.119609, 0.119609)
 texture = ExtResource("3_85d55")
 
-[node name="Platform1" type="Sprite2D" parent="."]
+[node name="Platform1" type="Sprite2D" parent="sprite2D"]
 visible = false
 position = Vector2(-1, 9)
 scale = Vector2(0.121745, 0.0941406)
