@@ -45,9 +45,6 @@ func _ready():
 	self.relocate.connect(_onRelocate)
 
 	
-	# var enemy_instance= enemyscene.instantiate()
-	# var enemy_node = enemy_instance.get_node("enemy")
-	
 func _physics_process(delta: float) -> void:
 	if not relocating:
 		# Add the gravity.

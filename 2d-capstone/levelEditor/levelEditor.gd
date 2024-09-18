@@ -9,6 +9,8 @@ var saveFileName = "new_scene"
 @export var testBlock : PackedScene
 @export var actionIndicator : PackedScene
 @export var checkpoint : PackedScene
+@export var worldManager : Script
+@export var levelUI : PackedScene
 
 @onready var objectList = $objectList
 @onready var testBlockList = $objectList/testBlocks
@@ -78,24 +80,36 @@ func _on_up_button_button_down() -> void:
 	currentBlock.position.y -= stepSize
 	
 func save_scene_to_file():
-	var root = objectList
-	
+	var newRoot = objectList.duplicate()
+	newRoot.set_script(worldManager)
 	#var worldManager = load(** world manager scene path **)
 	#var worldManagerInstance = worldManager.instantiate()
 	#root.add_child(worldManagerInstance)
-	
+
+	# Add essential level objects
+
+	# UI
+	newRoot.add_child(levelUI.instantiate())
+
+	# Camera
+	var newCam = Camera2D.new()
+	newCam.position.x = get_viewport().size.x / 2
+	newCam.position.y = get_viewport().size.y / 2
+	newCam.name = "Camera2D"
+	newRoot.add_child(newCam)
+
 	# Ensure all nested children have their owner set
-	_set_owner_recursive(root, root)
-	
+	_set_owner_recursive(newRoot, newRoot)
+
 	# Pack scene
 	var new_scene = PackedScene.new()
-	var result = new_scene.pack(root)
+	var result = new_scene.pack(newRoot)
 	if result == OK:
 		# Save scene
 		var scene_path = "res://savedScenes/" + saveFileName + ".tscn"
 		var error = ResourceSaver.save(new_scene, scene_path)
 		if error == OK:
-			print("Scene saved successfully.")
+			print("Scene saved successfully.")	
 		else:
 			print("Failed to save scene. Error code: ", error)
 	else:
@@ -106,4 +120,3 @@ func _set_owner_recursive(node: Node, root: Node):
 	for child in node.get_children():
 		child.set_owner(root)
 		_set_owner_recursive(child, root)
-

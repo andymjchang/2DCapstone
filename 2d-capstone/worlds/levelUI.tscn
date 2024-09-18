@@ -31,4 +31,18 @@ theme_override_font_sizes/font_size = 50
 text = "Try again?"
 script = ExtResource("1_sir47")
 
+[node name="TimerScore" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Timer" type="RichTextLabel" parent="TimerScore"]
+offset_left = 1104.0
+offset_right = 1152.0
+offset_bottom = 64.0
+
+[node name="Score" type="RichTextLabel" parent="TimerScore"]
+offset_left = 1056.0
+offset_right = 1104.0
+offset_bottom = 64.0
+text = "0"
+
 [connection signal="pressed" from="Box/RestartButton" to="Box/RestartButton" method="_onPressed"]

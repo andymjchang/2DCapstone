@@ -1,37 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5abkyfg0vx3k"]
+[gd_scene load_steps=5 format=3 uid="uid://b7qrykawaxwle"]
 
-[ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="1_osmdm"]
-[ext_resource type="Texture2D" uid="uid://ot5u02sx1r5m" path="res://levelEditor/testBlock.png" id="2_0y74v"]
-[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_a6tib"]
-[ext_resource type="Texture2D" uid="uid://bsadp0sxt2eo8" path="res://worldObjects/circlePlaceholder.png" id="5_etdb2"]
-[ext_resource type="Texture2D" uid="uid://bc5u63xl3n7e" path="res://worldObjects/circlePlaceholder2.png" id="6_s0y2w"]
+[ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_me7kq"]
+[ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="2_8viir"]
+[ext_resource type="Texture2D" uid="uid://bhq62ks818th3" path="res://worldObjects/checkpoint.png" id="4_msxjk"]
+[ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="5_kq2ed"]
 
 [node name="objectList" type="Node2D"]
+script = ExtResource("1_me7kq")
 
 [node name="testBlocks" type="Node2D" parent="."]
 
-[node name="TestBlock" parent="testBlocks" instance=ExtResource("1_osmdm")]
-position = Vector2(450, 450)
-
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/TestBlock"]
-visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
-
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/TestBlock"]
-texture = ExtResource("2_0y74v")
-
 [node name="actionIndicators" type="Node2D" parent="."]
 
-[node name="ActionIndicator" parent="actionIndicators" instance=ExtResource("3_a6tib")]
-position = Vector2(450, 450)
+[node name="checkpoints" type="Node2D" parent="."]
 
-[node name="innerCircle2" type="Sprite2D" parent="actionIndicators/ActionIndicator"]
-texture = ExtResource("5_etdb2")
+[node name="Checkpoint" parent="checkpoints" instance=ExtResource("2_8viir")]
+position = Vector2(1200, 600)
 
-[node name="outerCircle2" type="Sprite2D" parent="actionIndicators/ActionIndicator"]
-modulate = Color(1, 1, 1, 0)
-scale = Vector2(10, 10)
-texture = ExtResource("6_s0y2w")
+[node name="Point2" type="Marker2D" parent="checkpoints/Checkpoint"]
 
-[node name="Timer2" type="Timer" parent="actionIndicators/ActionIndicator"]
-wait_time = 0.5
+[node name="Sprite2D2" type="Sprite2D" parent="checkpoints/Checkpoint"]
+position = Vector2(3.75509e-06, 3.8147e-06)
+scale = Vector2(0.91, 0.91)
+texture = ExtResource("4_msxjk")
+
+[node name="LevelUI" parent="." instance=ExtResource("5_kq2ed")]
+
+[node name="Box2" type="VBoxContainer" parent="LevelUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = -74.0
+offset_right = 126.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="TimerScore2" type="CanvasLayer" parent="LevelUI"]
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(959, 599)
