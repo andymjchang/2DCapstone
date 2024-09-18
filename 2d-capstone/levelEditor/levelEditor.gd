@@ -42,6 +42,8 @@ var saveFileName
 @onready var measureLines = $measureLines
 @onready var camera = $Camera2D
 
+
+
 var bpm : int = 4
 var stepSize : int = 150
 
@@ -55,7 +57,9 @@ func _process(delta: float) -> void:
 	if (trackingPosition):
 		currentPosition = get_global_mouse_position()
 		timeHeld += delta
-	#checkIntersection()
+	if Input.is_action_just_pressed("click"):
+		var mouseCoords = get_global_mouse_position()
+		#check to see if we have any objects within those bounds
 
 func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():
