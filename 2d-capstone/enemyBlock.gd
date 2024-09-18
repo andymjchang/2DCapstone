@@ -14,6 +14,7 @@ var originPos = Vector2(0,0)
 var blockChildren
 var tempX = 0.0
 var toScale = true
+var secondTime = false
 #TODO create a stack of all the indicators we are using 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,12 +54,13 @@ func _process(delta: float) -> void:
 		self.global_position.x += 10
 		#go a certain amount of pixels up 
 	if Input.is_action_just_pressed("sizeUp"):
-		sizeUp()
+		#sizeUp()
+		sizeUpBeat()
 	
 	var pos = get_node("Block/CollisionShape2D2").global_position
 	colliderUpperLeft = pos - curBlock.extents
 	colliderLowerRight = pos + curBlock.extents
-	bindToNearestBeat()
+	#bindToNearestBeat()
 	pass
 	
 func bindToNearestBeat():
@@ -124,5 +126,58 @@ func sizeUp():
 				
 #func sizeDown():
 	#size down by one beatq
+
+#
+func sizeUpBeat():
+	#get the list of measures and size up the blockk by one of those
+	var stepSize = Globals.stepSize
+	var newRightBound = 0.0
 	
-#TODO add functionality 
+	if secondTime:
+		newRightBound = stepSize + colliderLowerRight.x
+	else:
+		newRightBound = stepSize + self.position.x
+		secondTime = true
+	
+	#print("New right Bound: ", newRightBound)
+	print("1 ->", colliderUpperLeft.x)
+	var stepX = abs(colliderLowerRight.x+stepSize)
+	var goalWidth = abs(newRightBound - colliderUpperLeft.x)
+	var orgWidth = abs(colliderLowerRight.x - colliderUpperLeft.x)
+	var newScale = goalWidth / orgWidth
+	self.scale.x = newScale
+	print("new scale:", newScale)
+	#updating the collision box and its extents so that it will reflect this new scaling
+	var oldMinX = colliderUpperLeft.x
+	curBlock = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
+	var newExtents = Vector2(goalWidth / 2, curBlock.extents.y )
+	curBlock.extents = newExtents
+	var pos = self.position
+	var colliderHolder = colliderUpperLeft
+	print("2 ->", colliderUpperLeft.x)
+	colliderUpperLeft = pos - curBlock.extents
+	colliderLowerRight = pos + curBlock.extents
+	print("3 ->", colliderUpperLeft.x)
+	#grabbing the transform value so that we can correctly shift the newly scaled block
+	var toMove = abs(colliderUpperLeft.x - oldMinX)
+	colliderUpperLeft = colliderHolder
+	print("4 ->", colliderUpperLeft.x)
+	#if toScale:
+	self.position.x += toMove
+	print("Extnets at the end: ", curBlock.extents)
+	print("pos at the end: ", self.position)
+	print("left X: ", colliderUpperLeft.x)
+	#colliderLowerRight = self.position + curBlock.extents
+	#goalWidth =abs( colliderUpperLeft.x - (colliderLowerRight.x+toMove))
+	#newExtents =  Vector2(goalWidth / 2, curBlock.extents.y )
+	#curBlock.extents = newExtents
+	#colliderLowerRight = pos + curBlock.extents
+	#colliderLowerRight.x += toMove
+	#colliderUpperLeft.x +=toMove
+	#toScale = false
+	#tempX = indicator.position.x
+	
+	
+#func resize(beateList : ):
+	#print("temp")
+##TODO add functionality 

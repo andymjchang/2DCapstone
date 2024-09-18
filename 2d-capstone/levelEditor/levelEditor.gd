@@ -20,8 +20,17 @@ var saveFileName
 @export var player1 : PackedScene
 @export var player2 : PackedScene
 
+#new blocks added
+#TODO get rid of enemy block, should just be a normal platform
+@export var platformBlock: PackedScene
+@export var enemyCharacter : PackedScene
+@export var goalBlock : PackedScene
+
+
 @onready var objectList = $objectList
 @onready var testBlockList = $objectList/testBlocks
+@onready var platformBlockList = $objectList/platformBlocks
+@onready var enemyList = $objectList/enemies
 @onready var actionIndicatorList = $objectList/actionIndicators
 @onready var checkpointList = $objectList/checkpoints
 @onready var playerList = $objectList/players
@@ -38,6 +47,7 @@ func _ready():
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
 	saveFileName = fileLabel.text
+	Globals.stepSize = stepSize
 	
 func _process(delta: float) -> void:
 	if (trackingPosition):
@@ -55,6 +65,7 @@ func _on_text_edit_2_text_changed() -> void:
 		if (step < 25):
 			step = 25
 		stepSize = step
+		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
 		measureLines.queue_redraw()
 
@@ -64,6 +75,16 @@ func _on_text_edit_3_text_changed() -> void:
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
 func _on_test_placer_2_button_down() -> void:
+	var actionInstance = actionIndicator.instantiate()
+	actionIndicatorList.add_child(actionInstance)
+	actionInstance.position = Vector2(450, 450)
+	currentBlock = actionInstance
+#TODO dlete this haha
+func _on_platform_block_button_down() -> void:
+	var platformBlockInstance = platformBlock.instantiate()
+	platformBlockList.add_child(platformBlockInstance)
+	platformBlockInstance.position = Vector2(450, 450)
+	currentBlock = platformBlockInstance
 	trackingPosition = true
 
 func _on_test_placer_3_button_down() -> void:
@@ -101,6 +122,9 @@ func _on_mouse_button_pressed() -> void:
 func placeObject(placedNode):
 	placedNode.position = Vector2(450, 450)
 	currentBlock = placedNode
+	
+	
+	
 	
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
@@ -156,6 +180,37 @@ func _set_owner_recursive(node: Node, root: Node):
 	for child in node.get_children():
 		child.set_owner(root)
 		_set_owner_recursive(child, root)
+
+
+func _on_block_type_drop_down_item_selected(index: int) -> void:
+	#based on this instance
+	if index == 0:
+		#put a normal block
+		var platformBlockInstance = platformBlock.instantiate()
+		platformBlockList.add_child(platformBlockInstance)
+		platformBlockInstance.position = Vector2(450, 450)
+		currentBlock = platformBlockInstance
+	if index == 1:
+		#put a goal block
+		#design question: should we make a list of all the seperate block types?
+		var goalBlockInstance = goalBlock.instantiate()
+		platformBlockList.add_child(goalBlockInstance)
+		goalBlockInstance.position = Vector2(450, 450)
+		currentBlock = goalBlockInstance
+	if index ==  2:
+		var enemyInstance = enemyCharacter.instantiate()
+		enemyList.add_child(enemyInstance)
+		enemyInstance.position = Vector2(450, 450)
+		currentBlock = enemyInstance
+		
+#TODO P button should extend currnt block/enemy by one measure
+# Q should move the enemy back by one button 
+# make the items reclickable
+# bind enemies to block, and when bound to a block they should auto snap
+	
+func startBlockOnNearstBeat(blockInstance):
+	var blockX = blockInstance.position.x
+	
 		
 func snap_position(pos : Vector2) -> Vector2:
 	var x = round_to_step(pos.x)
