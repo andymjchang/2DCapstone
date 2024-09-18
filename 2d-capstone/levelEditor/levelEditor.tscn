@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cgbbeq63rjuhl"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
-[ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="2_cfyqp"]
+[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_1at3l"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="2_otlxm"]
 [ext_resource type="Texture2D" uid="uid://iocnhlyh4yw6" path="res://levelEditor/programmerArtAssets/action.png" id="3_kgvx7"]
@@ -17,7 +17,7 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
-testBlock = ExtResource("2_cfyqp")
+testBlock = ExtResource("2_1at3l")
 actionIndicator = ExtResource("2_otlxm")
 
 [node name="measureLines" type="Node2D" parent="."]

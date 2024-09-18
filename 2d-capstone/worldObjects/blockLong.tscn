@@ -5,21 +5,22 @@
 [ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/Platform_2.png" id="3_85d55"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]
-size = Vector2(128, 32)
+size = Vector2(150, 50)
 
 [node name="Block" type="StaticBody2D"]
 script = ExtResource("1_kddth")
 
-[node name="Platform1" type="Sprite2D" parent="."]
-position = Vector2(-1, 7)
-scale = Vector2(0.107701, 0.0832813)
-texture = ExtResource("1_h40a7")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_tpulb")
 
 [node name="Platform2" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-1, 7)
-scale = Vector2(0.104219, 0.104219)
+position = Vector2(0, 9)
+scale = Vector2(0.119609, 0.119609)
 texture = ExtResource("3_85d55")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_tpulb")
+[node name="Platform1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, 9)
+scale = Vector2(0.121745, 0.0941406)
+texture = ExtResource("1_h40a7")
