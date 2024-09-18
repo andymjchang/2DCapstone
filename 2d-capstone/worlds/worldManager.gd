@@ -31,9 +31,10 @@ var textPopupScene = preload("res://worldObjects/scoreText.tscn")
 func _ready():
 	#timerText = $CanvasLayer/Timer
 	player = $Player1
-	#camera = $Camera2D
+	camera = $Camera2D
 	checkpoints = $CheckpointManager
 	#scoreText = $CanvasLayer/Score
+	scoreText = $CanvasLayer/Score
 	music = $AudioStreamPlayer2D
 	
 	# Setting signals
@@ -48,12 +49,15 @@ func _ready():
 	#self.checkGameOver.connect(_onCheckGameOver)
 
 	# Getting nodes to manage
-	player1 = get_node("Player1")
-	#player2 = get_node("Player2")
+	player1 = get_node("players").get_node("Player1")
+	player2 = get_node("players").get_node("Player2")
+	# Prep players
+	player1.editing = false
+	player2.editing = false
 	#killWall = get_node("KillWall")
-	#countdownUI = get_node("LevelUI")
-	#statusMessage = countdownUI.get_node("Box").get_node("Status")
-	#restartButton = countdownUI.get_node("Box").get_node("RestartButton")
+	countdownUI = get_node("LevelUI")
+	statusMessage = countdownUI.get_node("Box").get_node("Status")
+	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
 
 	# Start game
 	#restartButton.visible = false
@@ -61,6 +65,11 @@ func _ready():
 	#await get_tree().create_timer(3.0).timeout
 	Globals.inLevel = true
 	music.play(0.0)
+	restartButton.visible = false
+	changeCountdown()
+	await get_tree().create_timer(3.0).timeout
+	Globals.inLevel = true
+	#music.play(0.0)
 
 func changeCountdown():
 	await get_tree().create_timer(1.0).timeout
@@ -148,16 +157,12 @@ func getNearestCheckpoint(who):
 # Basic checkpointing system
 func _onResetPosition(who):
 	if who.name == "Player1":
-		print("resetting player pos")
-		#player1.position.x = killWall.position.x + 50
 		var nearestPoint = getNearestCheckpoint(who)
-
-		#player1.velocity -= player2.get_gravity() * player2.get_process_delta_time() * 50
 		who.emit_signal("relocate", nearestPoint)
 		pass
 	elif who.name == "Player2":
-		#player2.position.x = killWall.position.x + 50
-		who.velocity -= who.get_gravity() * who.get_process_delta_time() * 50
+		var nearestPoint = getNearestCheckpoint(who)
+		who.emit_signal("relocate", nearestPoint)
 		pass
 
 

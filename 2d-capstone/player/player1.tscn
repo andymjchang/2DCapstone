@@ -1,5 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=3 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="PackedScene" uid="uid://ddhmsyfxae2qi" path="res://player/player.tscn" id="1_anmrk"]
+[ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="2_a5rf3"]
 
 [node name="Player1" instance=ExtResource("1_anmrk")]
+
+[node name="ProtoMc" parent="." index="2"]
+position = Vector2(2.38419e-07, 0)
+scale = Vector2(0.368884, 0.344364)
+texture = ExtResource("2_a5rf3")

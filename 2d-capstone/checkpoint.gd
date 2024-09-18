@@ -13,6 +13,7 @@ func _process(delta):
 func _onBoundsAreaEntered(area):
 	# Relocating player has reached checkpoint
 	if area.name == "CheckpointHitbox" && area.get_parent().relocating:
+		print("Hit!")
 		area.get_parent().reachedCheckpoint = true
 		area.get_parent().velocity.x = 0
 		area.get_parent().velocity.y = 0

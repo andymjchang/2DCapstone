@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cirfgjuhwnmvm"]
+
+[node name="objectList" type="Node2D"]
+
+[node name="testBlocks" type="Node2D" parent="."]
+
+[node name="actionIndicators" type="Node2D" parent="."]

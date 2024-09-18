@@ -10,34 +10,36 @@
 
 [node name="MenuBg" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.4)
-position = Vector2(580.958, 334.375)
-scale = Vector2(0.194236, 0.194236)
+position = Vector2(975.958, 571.375)
+scale = Vector2(0.325903, 0.325903)
 texture = ExtResource("1_u1fvf")
 
 [node name="StartButton" type="Button" parent="."]
-anchors_preset = -1
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.879
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.879
-offset_left = -147.0
-offset_top = -28.592
-offset_right = 147.0
-offset_bottom = 48.408
+anchor_bottom = 1.0
+offset_left = -219.0
+offset_top = -149.0
+offset_right = 75.0
+offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(1.5, 1.5)
 theme_override_font_sizes/font_size = 50
 text = "Start Game!"
 script = ExtResource("1_h7wu1")
 
 [node name="Controls" type="RichTextLabel" parent="."]
-offset_right = 289.0
-offset_bottom = 291.0
+offset_left = 1.0
+offset_right = 290.0
+offset_bottom = 198.0
+scale = Vector2(1.5, 1.5)
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
 text = "
-
 [center][u][b]Player 1 Controls[/b][/u]
 W: Jump
 E: Punch[/center]
@@ -49,12 +51,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -248.0
-offset_top = -294.0
-offset_right = 252.0
-offset_bottom = 190.0
+offset_left = -412.0
+offset_top = -474.0
+offset_right = 88.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.65, 1.65)
 
 [node name="Premise" type="RichTextLabel" parent="VBoxContainer"]
 clip_contents = false
@@ -63,8 +66,7 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
-text = "[center]Tempo Tails
-Avoid obstacles and punch enemies to get to the end of the level! Watch for the green indicators in the level to know when to jump or punch:[/center]"
+text = "[center]Avoid obstacles and punch enemies to get to the end of the level! Watch for the green indicators in the level to know when to jump or punch:[/center]"
 
 [node name="ProtoMc3" type="Sprite2D" parent="VBoxContainer"]
 position = Vector2(338, 471)
@@ -115,14 +117,15 @@ texture = ExtResource("4_k7ioe")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -291.0
-offset_bottom = 291.0
+offset_left = -437.0
+offset_right = -146.0
+offset_bottom = 165.0
 grow_horizontal = 0
+scale = Vector2(1.5, 1.5)
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
 text = "
-
 [center][u][b]Player 2 Controls[/b][/u]
 Up: Jump
 Shift: Punch[/center]"
