@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baid4a4l5n6m5"
-path="res://.godot/imported/checkpoint.png-46bbf4d6e71a101ded9f025df3504742.ctex"
+uid="uid://cyh8bef4a3qeo"
+path="res://.godot/imported/enemy.png-83d0538296ab4d6e5e5ce7d9a9808472.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levelEditor/checkpoint.png"
-dest_files=["res://.godot/imported/checkpoint.png-46bbf4d6e71a101ded9f025df3504742.ctex"]
+source_file="res://levelEditor/programmerArtAssets/enemy.png"
+dest_files=["res://.godot/imported/enemy.png-83d0538296ab4d6e5e5ce7d9a9808472.ctex"]
 
 [params]
 

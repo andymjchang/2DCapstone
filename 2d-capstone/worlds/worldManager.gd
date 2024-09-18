@@ -52,8 +52,8 @@ func _ready():
 	player1 = get_node("players").get_node("Player1")
 	player2 = get_node("players").get_node("Player2")
 	# Prep players
-	player1.editing = false
-	player2.editing = false
+	#player1.editing = false
+	#player2.editing = false
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
@@ -64,7 +64,7 @@ func _ready():
 	#changeCountdown()
 	#await get_tree().create_timer(3.0).timeout
 	Globals.inLevel = true
-	music.play(0.0)
+	#music.play(0.0)
 	restartButton.visible = false
 	changeCountdown()
 	await get_tree().create_timer(3.0).timeout

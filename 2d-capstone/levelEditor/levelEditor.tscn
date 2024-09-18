@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cgbbeq63rjuhl"]
+[gd_scene load_steps=23 format=3 uid="uid://cgbbeq63rjuhl"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_1at3l"]
@@ -14,13 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="6_47xe5"]
 [ext_resource type="Texture2D" uid="uid://44ffttq2jugp" path="res://levelEditor/programmerArtAssets/save.png" id="7_0wc3n"]
 [ext_resource type="Texture2D" uid="uid://bbiq7u5yvg7al" path="res://levelEditor/programmerArtAssets/mouse.png" id="7_dw7u5"]
-[ext_resource type="Texture2D" uid="uid://ctosvjaft7ggn" path="res://levelEditor/exit.png" id="7_esiun"]
+[ext_resource type="Texture2D" uid="uid://ctosvjaft7ggn" path="res://levelEditor/programmerArtAssets/exit.png" id="7_esiun"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="7_h5cy3"]
 [ext_resource type="Texture2D" uid="uid://2hplcty35vpl" path="res://levelEditor/programmerArtAssets/down.png" id="7_u6v8f"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="8_d3hii"]
 [ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/programmerArtAssets/rac.png" id="8_w245c"]
-[ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/checkpoint.png" id="9_wpw0u"]
+[ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/programmerArtAssets/checkpoint.png" id="9_wpw0u"]
 [ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
+[ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
@@ -151,6 +152,13 @@ offset_right = 549.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("9_wpw0u")
 
+[node name="goalButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 552.0
+offset_top = 955.0
+offset_right = 652.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("17_3udhx")
+
 [node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
 offset_left = 1680.0
 offset_top = 16.0
@@ -198,12 +206,16 @@ offset_bottom = 948.0
 [connection signal="pressed" from="UI/objectSelector/exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="button_down" from="UI/objectSelector/blockButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/blockButton" to="." method="_on_block_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/actionButton" to="." method="_on_test_placer_2_button_down"]
+[connection signal="button_down" from="UI/objectSelector/actionButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/actionButton" to="." method="_on_action_button_button_up"]
-[connection signal="pressed" from="UI/objectSelector/mouseButton" to="." method="_on_mouse_button_pressed"]
-[connection signal="pressed" from="UI/objectSelector/racButton" to="." method="_on_rac_button_pressed"]
-[connection signal="pressed" from="UI/objectSelector/checkpointButton" to="." method="_on_checkpoint_button_pressed"]
-[connection signal="button_down" from="UI/objectSelector/saveButton" to="." method="_on_test_placer_3_button_down"]
+[connection signal="button_down" from="UI/objectSelector/mouseButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/mouseButton" to="." method="_on_mouse_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/racButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/racButton" to="." method="_on_rac_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/checkpointButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/checkpointButton" to="." method="_on_checkpoint_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/goalButton" to="." method="_on_save_button_down"]
+[connection signal="button_down" from="UI/objectSelector/saveButton" to="." method="_on_save_button_down"]
 [connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/leftButton" to="." method="_on_left_button_button_down"]

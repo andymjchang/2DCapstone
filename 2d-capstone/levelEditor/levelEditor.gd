@@ -21,7 +21,6 @@ var saveFileName
 @export var player2 : PackedScene
 
 #new blocks added
-#TODO get rid of enemy block, should just be a normal platform
 @export var platformBlock: PackedScene
 @export var enemyCharacter : PackedScene
 @export var goalBlock : PackedScene
@@ -68,37 +67,25 @@ func _on_text_edit_2_text_changed() -> void:
 		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
 		measureLines.queue_redraw()
-
+		
+func _on_save_button_down() -> void:
+	save_scene_to_file()
+	
 func _on_text_edit_3_text_changed() -> void:
 	saveFileName = fileLabel.text
 
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
-func _on_test_placer_2_button_down() -> void:
-	var actionInstance = actionIndicator.instantiate()
-	actionIndicatorList.add_child(actionInstance)
-	actionInstance.position = Vector2(450, 450)
-	currentBlock = actionInstance
-#TODO dlete this haha
-func _on_platform_block_button_down() -> void:
-	var platformBlockInstance = platformBlock.instantiate()
-	platformBlockList.add_child(platformBlockInstance)
-	platformBlockInstance.position = Vector2(450, 450)
-	currentBlock = platformBlockInstance
-	trackingPosition = true
 
-func _on_test_placer_3_button_down() -> void:
-	save_scene_to_file()
 
-func _on_checkpoint_button_pressed() -> void:
+func _on_checkpoint_button_button_up() -> void:
 	var checkpointInstance = checkpoint.instantiate()
-	checkpointList.add_child(checkpointInstance)
-	placeObject(checkpointInstance)
+	place_block(checkpointInstance, checkpointList)
 
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
 	
-func _on_rac_button_pressed() -> void:
+func _on_rac_button_button_up() -> void:
 	if !playerList.has_node("Player1"):
 		var player1Instance = player1.instantiate()
 		player1Instance.editing = true
@@ -107,8 +94,9 @@ func _on_rac_button_pressed() -> void:
 		placeObject(player1Instance)
 	else:
 		currentBlock = playerList.get_node("Player1")
+		reset_drag_tracking()
 
-func _on_mouse_button_pressed() -> void:
+func _on_mouse_button_button_up() -> void:
 	if !playerList.has_node("Player2"):
 		var player2Instance = player2.instantiate()
 		player2Instance.editing = true
@@ -117,6 +105,7 @@ func _on_mouse_button_pressed() -> void:
 		placeObject(player2Instance)
 	else:
 		currentBlock = playerList.get_node("Player2")
+		reset_drag_tracking()
 
 
 func placeObject(placedNode):
@@ -138,6 +127,7 @@ func _on_down_button_button_down() -> void:
 func _on_up_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y -= stepSize
+
 	
 func save_scene_to_file():
 	var newRoot = objectList.duplicate()
@@ -221,22 +211,25 @@ func round_to_step(value) -> int:
 	var intMultiplier = value / stepSize
 	return round(intMultiplier) * stepSize
 
-func place_block(instance):
+func place_block(instance, parent):
 	var placePos = camera.position
 	if (timeHeld >= holdTime):
 		placePos = currentPosition
 	
-	testBlockList.add_child(instance)
+	parent.add_child(instance)
 	instance.position = snap_position(placePos)
 	
 	currentBlock = instance
+	reset_drag_tracking()
+
+func reset_drag_tracking():
 	trackingPosition = false
 	currentPosition = camera.position
 	timeHeld = 0.0
 
 func _on_block_button_button_up() -> void:
 	var blockInstance = testBlock.instantiate()
-	place_block(blockInstance)
+	place_block(blockInstance, testBlockList)
 func _on_action_button_button_up() -> void:
 	var actionInstance = actionIndicator.instantiate()
-	place_block(actionInstance)
+	place_block(actionInstance, actionIndicatorList)
