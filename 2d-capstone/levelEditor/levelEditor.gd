@@ -8,8 +8,15 @@ var currentBlock
 @export var testBlock : PackedScene
 @export var actionIndicator : PackedScene
 
+#new blocks added
+@export var platformBlock : PackedScene
+@export var enemyCharacter : PackedScene
+
+
 @onready var objectList = $objectList
 @onready var testBlockList = $objectList/testBlocks
+@onready var platformBlockList = $objectList/platformBlocks
+@onready var enemyList = $objectList/enemies
 @onready var actionIndicatorList = $objectList/actionIndicators
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
