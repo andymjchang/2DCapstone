@@ -3,6 +3,8 @@ extends Camera2D
 var is_panning = false
 var last_mouse_position = Vector2.ZERO
 
+@onready var measureLines = get_parent().get_node("measureLines")
+
 # Zoom variables
 var zoom_speed = 0.1
 var min_zoom = 0.5
