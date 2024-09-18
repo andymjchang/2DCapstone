@@ -1,5 +1,7 @@
 extends Node2D
 
+
+signal objectClicked(instance)
 # const values
 const measurePixels = 600
 const holdTime = 0.15
@@ -48,6 +50,7 @@ var bpm : int = 4
 var stepSize : int = 150
 
 func _ready():
+	self.objectClicked.connect(_onObjectClicked)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
 	saveFileName = fileLabel.text
@@ -126,7 +129,7 @@ func placeObject(placedNode):
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x += stepSize
-	killFDict[currentBlock].position.x += stepSize
+	#killFDict[currentBlock].position.x += stepSize
 func _on_left_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x -= stepSize
@@ -276,4 +279,8 @@ func checkIntersection():
 		var kf = killFDict[block]
 	#	if kf.intersecting:
 			#kf.scale /= 1.001
+			
+func _onObjectClicked(objInstance : Node):
+	print("made it here", objInstance)
+	currentBlock = objInstance
 		
