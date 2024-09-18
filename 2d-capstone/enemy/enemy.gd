@@ -5,6 +5,7 @@ signal takeDamage
 var count = 0
 var ifDead = false
 var secondTime = false
+var blockType = "enemy"
 
 var up
 var down 

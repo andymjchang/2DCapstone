@@ -1,6 +1,7 @@
 extends MyBaseObject
 var reached = false
 var index = 0
+var blockType = "goalBlock"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

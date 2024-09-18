@@ -6,6 +6,7 @@ var target_time: float = 1.0
 var elapsed_time: float = 0
 var active: bool = false
 var starting_scale
+var blockType = "actionIndicator"
 @onready var actionIndicatorManager
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle

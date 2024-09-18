@@ -2,6 +2,7 @@ extends StaticBody2D
 
 var activeSprite
 var index = 0
+var blockType = "normal"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("blocks")
