@@ -11,11 +11,14 @@ var saveFileName = "new_scene"
 @export var checkpoint : PackedScene
 @export var worldManager : Script
 @export var levelUI : PackedScene
+@export var player1 : PackedScene
+@export var player2 : PackedScene
 
 @onready var objectList = $objectList
 @onready var testBlockList = $objectList/testBlocks
 @onready var actionIndicatorList = $objectList/actionIndicators
 @onready var checkpointList = $objectList/checkpoints
+@onready var playerList = $objectList/players
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -48,23 +51,48 @@ func _on_text_edit_3_text_changed() -> void:
 func _on_test_placer_button_down() -> void:
 	var blockInstance = testBlock.instantiate()
 	testBlockList.add_child(blockInstance)
-	blockInstance.position = Vector2(450, 450)
-	currentBlock = blockInstance
+	placeObject(blockInstance)
+
 func _on_test_placer_2_button_down() -> void:
 	var actionInstance = actionIndicator.instantiate()
 	actionIndicatorList.add_child(actionInstance)
-	actionInstance.position = Vector2(450, 450)
-	currentBlock = actionInstance
+	placeObject(actionInstance)
+
 func _on_test_placer_3_button_down() -> void:
 	save_scene_to_file()
+
 func _on_checkpoint_button_pressed() -> void:
 	var checkpointInstance = checkpoint.instantiate()
 	checkpointList.add_child(checkpointInstance)
-	checkpointInstance.position = Vector2(450, 450)
-	currentBlock = checkpointInstance
+	placeObject(checkpointInstance)
+
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
 	
+func _on_rac_button_pressed() -> void:
+	if !playerList.has_node("Player1"):
+		var player1Instance = player1.instantiate()
+		player1Instance.editing = true
+		player1Instance.add_to_group("Players")
+		playerList.add_child(player1Instance)
+		placeObject(player1Instance)
+	else:
+		currentBlock = playerList.get_node("Player1")
+
+func _on_mouse_button_pressed() -> void:
+	if !playerList.has_node("Player2"):
+		var player2Instance = player2.instantiate()
+		player2Instance.editing = true
+		player2Instance.add_to_group("Players")
+		playerList.add_child(player2Instance)
+		placeObject(player2Instance)
+	else:
+		currentBlock = playerList.get_node("Player2")
+
+
+func placeObject(placedNode):
+	placedNode.position = Vector2(450, 450)
+	currentBlock = placedNode
 	
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
@@ -80,8 +108,8 @@ func _on_up_button_button_down() -> void:
 	currentBlock.position.y -= stepSize
 	
 func save_scene_to_file():
-	var newRoot = objectList.duplicate()
-	newRoot.set_script(worldManager)
+	var root = objectList
+	root.set_script(worldManager)
 	#var worldManager = load(** world manager scene path **)
 	#var worldManagerInstance = worldManager.instantiate()
 	#root.add_child(worldManagerInstance)
@@ -89,27 +117,24 @@ func save_scene_to_file():
 	# Add essential level objects
 
 	# UI
-	newRoot.add_child(levelUI.instantiate())
+	root.add_child(levelUI.instantiate())
 
 	# Camera
 	var newCam = Camera2D.new()
-	newCam.position.x = get_viewport().size.x / 2
-	newCam.position.y = get_viewport().size.y / 2
-	newCam.name = "Camera2D"
-	newRoot.add_child(newCam)
-
+	root.add_child(newCam)
+	
 	# Ensure all nested children have their owner set
-	_set_owner_recursive(newRoot, newRoot)
-
+	_set_owner_recursive(root, root)
+	
 	# Pack scene
 	var new_scene = PackedScene.new()
-	var result = new_scene.pack(newRoot)
+	var result = new_scene.pack(root)
 	if result == OK:
 		# Save scene
 		var scene_path = "res://savedScenes/" + saveFileName + ".tscn"
 		var error = ResourceSaver.save(new_scene, scene_path)
 		if error == OK:
-			print("Scene saved successfully.")	
+			print("Scene saved successfully.")
 		else:
 			print("Failed to save scene. Error code: ", error)
 	else:

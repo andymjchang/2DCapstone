@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cgbbeq63rjuhl"]
+[gd_scene load_steps=22 format=3 uid="uid://cgbbeq63rjuhl"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="2_cfyqp"]
@@ -15,7 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://44ffttq2jugp" path="res://levelEditor/save.png" id="7_0wc3n"]
 [ext_resource type="Texture2D" uid="uid://bbiq7u5yvg7al" path="res://levelEditor/mouse.png" id="7_dw7u5"]
 [ext_resource type="Texture2D" uid="uid://ctosvjaft7ggn" path="res://levelEditor/exit.png" id="7_esiun"]
+[ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="7_h5cy3"]
 [ext_resource type="Texture2D" uid="uid://2hplcty35vpl" path="res://levelEditor/down.png" id="7_u6v8f"]
+[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="8_d3hii"]
 [ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/rac.png" id="8_w245c"]
 [ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/checkpoint.png" id="9_wpw0u"]
 [ext_resource type="Script" path="res://levelEditor/camera_2d.gd" id="14_wt7o4"]
@@ -27,6 +29,8 @@ actionIndicator = ExtResource("2_otlxm")
 checkpoint = ExtResource("4_iqk0t")
 worldManager = ExtResource("5_c8prk")
 levelUI = ExtResource("6_47xe5")
+player1 = ExtResource("7_h5cy3")
+player2 = ExtResource("8_d3hii")
 
 [node name="measureLines" type="Node2D" parent="."]
 script = ExtResource("2_mulbo")
@@ -81,9 +85,9 @@ placeholder_text = "Step Size:"
 [node name="objectSelector" type="Node2D" parent="UI"]
 
 [node name="exitButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 1698.0
+offset_left = 1795.0
 offset_top = 15.0
-offset_right = 1798.0
+offset_right = 1895.0
 offset_bottom = 115.0
 texture_normal = ExtResource("7_esiun")
 
@@ -123,10 +127,10 @@ offset_bottom = 1055.0
 texture_normal = ExtResource("9_wpw0u")
 
 [node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 1806.0
-offset_top = 15.0
-offset_right = 1906.0
-offset_bottom = 115.0
+offset_left = 1680.0
+offset_top = 16.0
+offset_right = 1780.0
+offset_bottom = 116.0
 texture_normal = ExtResource("7_0wc3n")
 
 [node name="rightButton" type="TextureButton" parent="UI/objectSelector"]
@@ -169,12 +173,16 @@ script = ExtResource("14_wt7o4")
 
 [node name="checkpoints" type="Node2D" parent="objectList"]
 
+[node name="players" type="Node2D" parent="objectList"]
+
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit3" to="." method="_on_text_edit_3_text_changed"]
 [connection signal="pressed" from="UI/objectSelector/exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="button_down" from="UI/objectSelector/blockButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_down" from="UI/objectSelector/actionButton" to="." method="_on_test_placer_2_button_down"]
+[connection signal="pressed" from="UI/objectSelector/mouseButton" to="." method="_on_mouse_button_pressed"]
+[connection signal="pressed" from="UI/objectSelector/racButton" to="." method="_on_rac_button_pressed"]
 [connection signal="pressed" from="UI/objectSelector/checkpointButton" to="." method="_on_checkpoint_button_pressed"]
 [connection signal="button_down" from="UI/objectSelector/saveButton" to="." method="_on_test_placer_3_button_down"]
 [connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
