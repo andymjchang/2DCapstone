@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="4_e6bbs"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="5_4cywo"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="6_evw43"]
-[ext_resource type="AudioStream" uid="uid://cvi7eq2uyrmxc" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="7_ml18t"]
+[ext_resource type="AudioStream" uid="uid://bi32k1rjy681g" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="7_ml18t"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="8_hftpx"]
 [ext_resource type="PackedScene" uid="uid://b06gkr46rf8gm" path="res://worldObjects/action_indicator_manager.tscn" id="9_u2tc0"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="10_fejq3"]
