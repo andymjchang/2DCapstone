@@ -12,6 +12,8 @@ var starting_scale
 @onready var timer = $Timer
 signal scored(indicator_position)
 
+var index = 0
+
 # Start with higher scale and 0 opacity
 func _ready() -> void:
 	actionIndicatorManager = get_parent()
@@ -65,3 +67,9 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	queue_free()
+	
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event.is_action_pressed("click"):
+		print("click")
+		get_parent().get_parent().get_parent().emit_signal("objectClicked",index)
+	pass # Replace with function body.

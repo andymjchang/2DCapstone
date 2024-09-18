@@ -1,8 +1,11 @@
 extends Node2D
 
+
+signal objectClicked(instance)
 # const values
 const measurePixels = 600
 const holdTime = 0.15
+var lEindex = 0.0
 
 var placedBlocks = []
 var currentBlock
@@ -10,6 +13,7 @@ var currentPosition : Vector2 = Vector2(450, 450)
 var trackingPosition : bool = false
 var defaultSpawnPosition = Vector2(450, 450)
 var timeHeld = 0.0
+var killFDict: Dictionary = {}
 var saveFileName 
 var isPlaying = false
 
@@ -23,6 +27,7 @@ var isPlaying = false
 @export var levelUI : PackedScene
 @export var player1 : PackedScene
 @export var player2 : PackedScene
+@export var killFloor : PackedScene
 
 
 
@@ -34,16 +39,20 @@ var isPlaying = false
 @onready var actionIndicatorList = $objectList/actionIndicators
 @onready var checkpointList = $objectList/checkpoints
 @onready var playerList = $objectList/players
+@onready var killFloorList = $objectList/killFloors
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
 @onready var measureLines = $measureLines
 @onready var camera = $Camera2D
 
+
+
 var bpm : int = 4
 var stepSize : int = 150
 
 func _ready():
+	self.objectClicked.connect(_onObjectClicked)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
 	saveFileName = fileLabel.text
@@ -53,6 +62,9 @@ func _process(delta: float) -> void:
 	if (trackingPosition):
 		currentPosition = get_global_mouse_position()
 		timeHeld += delta
+	if Input.is_action_just_pressed("click"):
+		var mouseCoords = get_global_mouse_position()
+		#check to see if we have any objects within those bounds
 
 func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():
@@ -121,6 +133,7 @@ func _on_play_audio_button_pressed() -> void:
 func placeObject(placedNode):
 	placedNode.position = Vector2(450, 450)
 	currentBlock = placedNode
+
 	
 	
 	
@@ -128,15 +141,24 @@ func placeObject(placedNode):
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x += stepSize
+	if currentBlock.name == "Block":
+		killFDict[currentBlock].position.x += stepSize
 func _on_left_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x -= stepSize
+	if currentBlock.name == "Block":
+		killFDict[currentBlock].position.x -= stepSize
 func _on_down_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y += stepSize
+	if currentBlock.name == "Block":
+		killFDict[currentBlock].position.y += stepSize
 func _on_up_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y -= stepSize
+	if currentBlock.name == "Block":
+		killFDict[currentBlock].position.y -= stepSize
+	
 
 	
 func save_scene_to_file():
@@ -227,9 +249,33 @@ func place_block(instance, parent):
 		placePos = currentPosition
 	
 	parent.add_child(instance)
+
+	instance.index = lEindex
+	lEindex+=1
 	instance.position = snap_position(placePos)
-	
+	#now add a kill floor right below it, only want to do this with blocl
+	print("instnace name ", instance.name)
+	if instance.name == "Block":
+		var blockBounds = instance.activeSprite.texture.get_size()*instance.scale/2
+		var upperLeftCorner = (instance.position - (blockBounds))/2
+		var lowerRightCorner = (instance.position + (blockBounds))/2
+		
+		#kfloor deets
+		var kFloorInstance = killFloor.instantiate()
+		killFloorList.add_child(kFloorInstance)
+		var kFloorBounds = kFloorInstance as RectangleShape2D
+		var kUpperLeftCorner = instance.position - blockBounds
+		var kLowerRightCorner = instance.position + blockBounds
+		print(upperLeftCorner.y )
+		print(lowerRightCorner.y)
+		var moveDown = instance.position.y + abs(upperLeftCorner.y - lowerRightCorner.y)/10
+		print(blockBounds.y)
+		kFloorInstance.position = Vector2(instance.position.x,moveDown)
+		print("Pos ", kFloorInstance.position)
+		print("Pos ", instance.position)
+		killFDict[instance] = kFloorInstance
 	currentBlock = instance
+	print("placed node type: ", currentBlock)
 	reset_drag_tracking()
 
 func reset_drag_tracking():
@@ -249,3 +295,38 @@ func _on_goal_button_button_up() -> void:
 func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()
 	place_block(enemyInstance, testBlockList)
+
+			
+func _onObjectClicked(index : int):
+	print("made it here",index)
+
+	var list = get_node("objectList/testBlocks").get_children()
+	print("list ", list)
+	for block in list:
+		if block.index == index:
+			currentBlock = block
+			return
+			
+	list = get_node("objectList/checkpoints").get_children()
+	for check in list:
+		if check.index == index:
+			currentBlock = check
+			return
+		
+	list = get_node("objectList/actionIndicators").get_children()
+	for ai in list:
+		if ai.index == index:
+			currentBlock = ai
+			return
+			
+	list = get_node("objectList/players").get_children()
+	for player in list:
+		if player.index == index:
+			currentBlock = player
+			return
+			
+
+		
+		
+	
+		

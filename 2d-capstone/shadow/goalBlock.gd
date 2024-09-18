@@ -1,5 +1,6 @@
 extends MyBaseObject
 var reached = false
+var index = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,3 +25,9 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 		reached = true
 		get_parent().get_parent().emit_signal("checkLevelCompleted")
 	pass # Replace with function Sbody.
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event.is_action_pressed("click"):
+		print("click")
+		get_parent().get_parent().get_parent().emit_signal("objectClicked",index)
+	pass # Replace with function body.

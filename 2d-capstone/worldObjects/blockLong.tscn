@@ -7,12 +7,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]
 size = Vector2(150, 50)
 
-[node name="Block" type="StaticBody2D"]
+[node name="Block" type="StaticBody2D" groups=["blocks"]]
 script = ExtResource("1_kddth")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
-shape = SubResource("RectangleShape2D_tpulb")
 
 [node name="sprite2D" type="Node2D" parent="."]
 
@@ -27,3 +23,12 @@ visible = false
 position = Vector2(-1, 9)
 scale = Vector2(0.121745, 0.0941406)
 texture = ExtResource("1_h40a7")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tpulb")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

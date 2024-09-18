@@ -151,7 +151,7 @@ func getNearestCheckpoint(who):
 		print("dir: ", direction)
 		if (direction >= 0):
 			if distance < shortestDistance:
-				#print("Closest node: ", i)
+				#print("foClosest node: ", i)
 				nearestPoint = i
 				shortestDistance = distance
 	return nearestPoint

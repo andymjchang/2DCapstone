@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cgbbeq63rjuhl"]
+[gd_scene load_steps=29 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_1at3l"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/programmerArtAssets/rac.png" id="8_w245c"]
 [ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/programmerArtAssets/checkpoint.png" id="9_wpw0u"]
 [ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
+[ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="11_ghgfb"]
 [ext_resource type="AudioStream" uid="uid://cmxsfbbfnb2j0" path="res://audioTracks/Sprint2_GminBmaj_156bpm.mp3" id="13_vpjxf"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
 [ext_resource type="Texture2D" uid="uid://drnvhk52xrn80" path="res://levelEditor/programmerArtAssets/playAudio.png" id="20_n1qdn"]
@@ -39,6 +40,7 @@ worldManager = ExtResource("5_c8prk")
 levelUI = ExtResource("6_47xe5")
 player1 = ExtResource("7_h5cy3")
 player2 = ExtResource("8_d3hii")
+killFloor = ExtResource("11_ghgfb")
 
 [node name="measureLines" type="Node2D" parent="."]
 script = ExtResource("2_mulbo")
@@ -59,6 +61,8 @@ stream = ExtResource("13_vpjxf")
 [node name="checkpoints" type="Node2D" parent="objectList"]
 
 [node name="players" type="Node2D" parent="objectList"]
+
+[node name="killFloors" type="Node" parent="objectList"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
