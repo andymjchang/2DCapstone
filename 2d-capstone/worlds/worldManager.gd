@@ -36,7 +36,9 @@ func _ready():
 	checkpoints = get_node("checkpoints")
 	scoreText = $CanvasLayer/Score
 	scoreText = $CanvasLayer/Score
-	music = $AudioStreamPlayer2D
+	music = $audio
+	
+	self.move_child(camera, 0)
 	
 	# Setting signals
 	self.resetPosition.connect(_onResetPosition)
@@ -66,11 +68,11 @@ func _ready():
 	changeCountdown()
 	await get_tree().create_timer(3.0).timeout
 	Globals.inLevel = true
-	#music.play(0.0)
+	music.play(0.0)
 	restartButton.visible = false
-	changeCountdown()
-	await get_tree().create_timer(3.0).timeout
-	Globals.inLevel = true
+	#changeCountdown()
+	#await get_tree().create_timer(3.0).timeout
+	#Globals.inLevel = true
 	#music.play(0.0)
 
 func changeCountdown():

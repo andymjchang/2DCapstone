@@ -133,10 +133,6 @@ func _on_play_audio_button_pressed() -> void:
 func placeObject(placedNode):
 	placedNode.position = Vector2(450, 450)
 	currentBlock = placedNode
-
-	
-	
-	
 	
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
@@ -159,17 +155,13 @@ func _on_up_button_button_down() -> void:
 	if currentBlock.name == "Block":
 		killFDict[currentBlock].position.y -= stepSize
 	
-
-	
 func save_scene_to_file():
 	var newRoot = objectList.duplicate()
 	newRoot.set_script(worldManager)
 	#var worldManager = load(** world manager scene path **)
 	#var worldManagerInstance = worldManager.instantiate()
 	#root.add_child(worldManagerInstance)
-
 	# Add essential level objects
-
 	# UI
 	newRoot.add_child(levelUI.instantiate())
 
@@ -178,10 +170,25 @@ func save_scene_to_file():
 	newCam.position.x = get_viewport().size.x / 2
 	newCam.position.y = get_viewport().size.y / 2
 	newCam.name = "Camera2D"
-	newRoot.add_child(newCam)
 	
+	# BG
+	var newBG = Sprite2D.new()
+	newBG.texture = load("res://backgrounds/bkg_scroll.png")
+	newBG.scale.x = 0.5
+	newBG.scale.y = 0.5
+	newCam.add_child(newBG)
+	
+	# Audio
+	var newAudio = AudioStreamPlayer2D.new()
+	newAudio.stream = load("res://audioTracks/Sprint2_GminBmaj_156bpm.mp3")
+	newCam.add_child(newAudio)
+	
+	newRoot.add_child(newCam)
+
 	# Ensure all nested children have their owner set
 	_set_owner_recursive(newRoot, newRoot)
+
+	newRoot.move_child(newCam, 0)
 	
 	# Pack scene
 	var new_scene = PackedScene.new()
