@@ -1,13 +1,116 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_u5202"]
-[ext_resource type="PackedScene" path="res://worlds/levelUI.tscn" id="2_fkath"]
-[ext_resource type="Script" path="res://worlds/restartButton.gd" id="3_0noy6"]
+[ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_qp6ks"]
+[ext_resource type="PackedScene" path="res://worldObjects/blockLong.tscn" id="2_8iyyn"]
+[ext_resource type="Script" path="res://worldObjects/blockLong.gd" id="3_gymmp"]
+[ext_resource type="Texture2D" path="res://worldObjects/Platform_2.png" id="4_i13b8"]
+[ext_resource type="Texture2D" path="res://worldObjects/Platform.png" id="5_hkqgs"]
+[ext_resource type="PackedScene" path="res://player/player2.tscn" id="6_n2qxf"]
+[ext_resource type="Script" path="res://player/player.gd" id="7_6ue7y"]
+[ext_resource type="Texture2D" path="res://player/player2.png" id="8_ms3bl"]
+[ext_resource type="PackedScene" path="res://worlds/levelUI.tscn" id="9_4mfhl"]
+[ext_resource type="Script" path="res://worlds/restartButton.gd" id="10_7xabu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]
+size = Vector2(150, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nopuc"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
+size = Vector2(32, 32)
 
 [node name="objectList" type="Node2D"]
-script = ExtResource("1_u5202")
+script = ExtResource("1_qp6ks")
 
 [node name="testBlocks" type="Node2D" parent="."]
+
+[node name="Block" type="StaticBody2D" parent="testBlocks" instance=ExtResource("2_8iyyn")]
+position = Vector2(150, 1050)
+script = ExtResource("3_gymmp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="testBlocks/Block"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_tpulb")
+
+[node name="sprite2D" type="Node2D" parent="testBlocks/Block"]
+
+[node name="Platform2" type="Sprite2D" parent="testBlocks/Block/sprite2D"]
+position = Vector2(0, 9)
+scale = Vector2(0.119609, 0.119609)
+texture = ExtResource("4_i13b8")
+
+[node name="Platform1" type="Sprite2D" parent="testBlocks/Block/sprite2D"]
+visible = false
+position = Vector2(-1, 9)
+scale = Vector2(0.121745, 0.0941406)
+texture = ExtResource("5_hkqgs")
+
+[node name="_StaticBody2D_20" type="StaticBody2D" parent="testBlocks" instance=ExtResource("2_8iyyn")]
+position = Vector2(750, 450)
+script = ExtResource("3_gymmp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_20"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_tpulb")
+
+[node name="sprite2D" type="Node2D" parent="testBlocks/_StaticBody2D_20"]
+
+[node name="Platform2" type="Sprite2D" parent="testBlocks/_StaticBody2D_20/sprite2D"]
+visible = false
+position = Vector2(0, 9)
+scale = Vector2(0.119609, 0.119609)
+texture = ExtResource("4_i13b8")
+
+[node name="Platform1" type="Sprite2D" parent="testBlocks/_StaticBody2D_20/sprite2D"]
+position = Vector2(-1, 9)
+scale = Vector2(0.121745, 0.0941406)
+texture = ExtResource("5_hkqgs")
+
+[node name="_StaticBody2D_21" type="StaticBody2D" parent="testBlocks" instance=ExtResource("2_8iyyn")]
+position = Vector2(900, 450)
+script = ExtResource("3_gymmp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_21"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_tpulb")
+
+[node name="sprite2D" type="Node2D" parent="testBlocks/_StaticBody2D_21"]
+
+[node name="Platform2" type="Sprite2D" parent="testBlocks/_StaticBody2D_21/sprite2D"]
+visible = false
+position = Vector2(0, 9)
+scale = Vector2(0.119609, 0.119609)
+texture = ExtResource("4_i13b8")
+
+[node name="Platform1" type="Sprite2D" parent="testBlocks/_StaticBody2D_21/sprite2D"]
+position = Vector2(-1, 9)
+scale = Vector2(0.121745, 0.0941406)
+texture = ExtResource("5_hkqgs")
+
+[node name="_StaticBody2D_22" type="StaticBody2D" parent="testBlocks" instance=ExtResource("2_8iyyn")]
+position = Vector2(1050, 450)
+script = ExtResource("3_gymmp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_22"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_tpulb")
+
+[node name="sprite2D" type="Node2D" parent="testBlocks/_StaticBody2D_22"]
+
+[node name="Platform2" type="Sprite2D" parent="testBlocks/_StaticBody2D_22/sprite2D"]
+position = Vector2(0, 9)
+scale = Vector2(0.119609, 0.119609)
+texture = ExtResource("4_i13b8")
+
+[node name="Platform1" type="Sprite2D" parent="testBlocks/_StaticBody2D_22/sprite2D"]
+visible = false
+position = Vector2(-1, 9)
+scale = Vector2(0.121745, 0.0941406)
+texture = ExtResource("5_hkqgs")
 
 [node name="actionIndicators" type="Node2D" parent="."]
 
@@ -15,7 +118,36 @@ script = ExtResource("1_u5202")
 
 [node name="players" type="Node2D" parent="."]
 
-[node name="LevelUI" type="CanvasLayer" parent="." instance=ExtResource("2_fkath")]
+[node name="Player2" type="CharacterBody2D" parent="players" groups=["players"] instance=ExtResource("6_n2qxf")]
+position = Vector2(750, 300)
+scale = Vector2(4, 4)
+script = ExtResource("7_6ue7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="players/Player2"]
+shape = SubResource("RectangleShape2D_44r6d")
+
+[node name="ProtoMc" type="Sprite2D" parent="players/Player2"]
+position = Vector2(1.52791, 0.625757)
+scale = Vector2(0.369442, 0.344885)
+texture = ExtResource("8_ms3bl")
+
+[node name="AttackHitbox" type="CollisionShape2D" parent="players/Player2"]
+visible = false
+shape = SubResource("RectangleShape2D_nopuc")
+disabled = true
+
+[node name="ColorRect" type="ColorRect" parent="players/Player2/AttackHitbox"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="CheckpointHitbox" type="Area2D" parent="players/Player2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="players/Player2/CheckpointHitbox"]
+shape = SubResource("RectangleShape2D_s4g51")
+
+[node name="LevelUI" type="CanvasLayer" parent="." instance=ExtResource("9_4mfhl")]
 
 [node name="Box" type="VBoxContainer" parent="LevelUI"]
 anchors_preset = 8
@@ -42,7 +174,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Try again?"
-script = ExtResource("3_0noy6")
+script = ExtResource("10_7xabu")
 
 [node name="TimerScore" type="CanvasLayer" parent="LevelUI"]
 visible = false

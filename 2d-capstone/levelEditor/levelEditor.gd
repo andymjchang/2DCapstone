@@ -22,6 +22,7 @@ var saveFileName
 @export var levelUI : PackedScene
 @export var player1 : PackedScene
 @export var player2 : PackedScene
+@export var killFloor : PackedScene
 
 
 
@@ -33,6 +34,7 @@ var saveFileName
 @onready var actionIndicatorList = $objectList/actionIndicators
 @onready var checkpointList = $objectList/checkpoints
 @onready var playerList = $objectList/players
+@onready var killFloorList = $objectList/killFloors
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -218,7 +220,24 @@ func place_block(instance, parent):
 	
 	parent.add_child(instance)
 	instance.position = snap_position(placePos)
+	#now add a kill floor right below it
+	var blockBounds = instance.activeSprite.texture.get_size()*instance.scale/2
+	var upperLeftCorner = (instance.position - (blockBounds))/2
+	var lowerRightCorner = (instance.position + (blockBounds))/2
 	
+	#kfloor deets
+	var kFloorInstance = killFloor.instantiate()
+	killFloorList.add_child(kFloorInstance)
+	var kFloorBounds = kFloorInstance as RectangleShape2D
+	var kUpperLeftCorner = instance.position - blockBounds
+	var kLowerRightCorner = instance.position + blockBounds
+	print(upperLeftCorner.y )
+	print(lowerRightCorner.y)
+	var moveDown = instance.position.y + abs(upperLeftCorner.y - lowerRightCorner.y)/10
+	print(blockBounds.y)
+	kFloorInstance.position = Vector2(instance.position.x,moveDown)
+	print("Pos ", kFloorInstance.position)
+	print("Pos ", instance.position)
 	currentBlock = instance
 	reset_drag_tracking()
 
