@@ -138,22 +138,22 @@ func placeObject(placedNode):
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x += stepSize
-	if currentBlock.name == "Block":
+	if currentBlock.blockType == "normal":
 		killFDict[currentBlock].position.x += stepSize
 func _on_left_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x -= stepSize
-	if currentBlock.name == "Block":
+	if currentBlock.blockType == "normal":
 		killFDict[currentBlock].position.x -= stepSize
 func _on_down_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y += stepSize
-	if currentBlock.name == "Block":
+	if currentBlock.blockType == "normal":
 		killFDict[currentBlock].position.y += stepSize
 func _on_up_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y -= stepSize
-	if currentBlock.name == "Block":
+	if currentBlock.blockType == "normal":
 		killFDict[currentBlock].position.y -= stepSize
 	
 func save_scene_to_file():
