@@ -349,7 +349,7 @@ shape = SubResource("RectangleShape2D_ucf8l")
 position = Vector2(-37, 207)
 
 [node name="Enemy3" parent="." instance=ExtResource("10_mgvrl")]
-position = Vector2(-278, 295)
+position = Vector2(123, 195)
 
 [node name="Enemy4" parent="." instance=ExtResource("10_mgvrl")]
 position = Vector2(-100, 295)

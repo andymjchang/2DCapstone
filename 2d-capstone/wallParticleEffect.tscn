@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://b41wf35nd17qi"]
+
+[ext_resource type="Script" path="res://wallParticleEffect.gd" id="1_md881"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_is4u7"]
+
+[sub_resource type="Curve" id="Curve_j8s7y"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(0.358974, -360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_xj5hh"]
+_data = [Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[node name="wallParticleEffect" type="Node2D"]
+script = ExtResource("1_md881")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_is4u7")
+amount = 5
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 7.4
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 433.18
+initial_velocity_max = 433.18
+angle_curve = SubResource("Curve_j8s7y")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_xj5hh")

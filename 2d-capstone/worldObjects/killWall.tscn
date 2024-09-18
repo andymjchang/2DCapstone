@@ -26,7 +26,3 @@ offset_bottom = 334.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 325.5)
 shape = SubResource("RectangleShape2D_1aka3")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(326, 305)
-zoom = Vector2(1.7, 1.7)

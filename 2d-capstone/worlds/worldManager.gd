@@ -159,3 +159,9 @@ func _onResetPosition(who):
 		#player2.position.x = killWall.position.x + 50
 		who.velocity -= who.get_gravity() * who.get_process_delta_time() * 50
 		pass
+
+
+func _onEndGameBodyEntered(body:Node2D):
+	if (body.is_in_group("players")):
+		print("Game over!")
+		self.emit_signal("gameOver")

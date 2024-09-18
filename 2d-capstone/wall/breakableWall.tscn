@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://wall/breakableWall.gd" id="1_73afi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1mny3"]
-size = Vector2(230, 671)
+size = Vector2(174, 671)
 
 [node name="breakableWall" type="Node2D"]
 script = ExtResource("1_73afi")
@@ -16,9 +16,24 @@ position = Vector2(1395, 426.5)
 shape = SubResource("RectangleShape2D_1mny3")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+visible = false
 position = Vector2(1411, 421)
 scale = Vector2(0.24, 0.217333)
 texture = ExtResource("1_1xpll")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/StaticBody2D"]
+position = Vector2(1423, 426.5)
+shape = SubResource("RectangleShape2D_1mny3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D/StaticBody2D"]
+position = Vector2(1411, 421)
+scale = Vector2(0.24, 0.217333)
+texture = ExtResource("1_1xpll")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 4
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

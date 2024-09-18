@@ -6,7 +6,7 @@ signal relocate(nearestPoint)
 
 const SPEED = 388.0
 const JUMP_VELOCITY = -400.0
-var health = 3 # 3 hits
+var health = 99999999 # 3 hits
 var invuln = false
 var dead = false
 var attack
@@ -45,8 +45,8 @@ func _ready():
 	self.relocate.connect(_onRelocate)
 
 	
-	var enemy_instance= enemyscene.instantiate()
-	var enemy_node = enemy_instance.get_node("enemy")
+	# var enemy_instance= enemyscene.instantiate()
+	# var enemy_node = enemy_instance.get_node("enemy")
 	
 func _physics_process(delta: float) -> void:
 	if not relocating:
@@ -95,8 +95,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _onTakeDamage(amount):
-	print("Got hit!")
-	if !dead and amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
+	print("Got hit! Health now: ", self.health)
+	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
 		health -= amount
 
 		if health <= 0:

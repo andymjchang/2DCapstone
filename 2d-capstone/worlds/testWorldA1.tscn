@@ -1,17 +1,29 @@
+<<<<<<< HEAD
 [gd_scene load_steps=11 format=3 uid="uid://qvro4hvgcqew"]
+=======
+[gd_scene load_steps=11 format=3 uid="uid://bfu6trwmlea5h"]
+>>>>>>> origin/level-editor
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_5l70f"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="3_2ouxg"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="3_58l2g"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="3_h1mol"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="3_tdt43"]
+<<<<<<< HEAD
 [ext_resource type="AudioStream" uid="uid://cvi7eq2uyrmxc" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="5_k5tup"]
+=======
+[ext_resource type="AudioStream" uid="uid://dr2b0v0vlmc3o" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="5_k5tup"]
+>>>>>>> origin/level-editor
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="6_iceo8"]
 [ext_resource type="PackedScene" uid="uid://b06gkr46rf8gm" path="res://worldObjects/action_indicator_manager.tscn" id="6_im0um"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="7_u8d2w"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="8_b43qi"]
 
+<<<<<<< HEAD
 [node name="testWorldA2" type="Node2D"]
+=======
+[node name="testWorldA" type="Node2D"]
+>>>>>>> origin/level-editor
 script = ExtResource("1_5l70f")
 
 [node name="Camera2D" type="Camera2D" parent="."]

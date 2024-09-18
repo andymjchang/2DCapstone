@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-const SPEED = 2.0
+const SPEED = 300
 var area
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,10 +12,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Globals.inLevel:
-		position.x += SPEED
+		position.x += SPEED * delta
 	pass
 	
 func _onKillWallBodyEntered(body:Node2D):
 	if "players" in body.get_groups() and Globals.inLevel:	
 		print(body, " Entered")
 		body.emit_signal("takeDamage", 10)
+		body.position.x += self.position.x + 45
+		get_parent().emit_signal("resetPosition", body.name)

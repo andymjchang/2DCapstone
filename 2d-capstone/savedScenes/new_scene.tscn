@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://levelEditor/testBlock.tscn" id="1_lmcse"]
+[ext_resource type="Texture2D" path="res://levelEditor/testBlock.png" id="2_mrrth"]
+
+[node name="objectList" type="Node2D"]
+
+[node name="TestBlock" type="Node2D" parent="." instance=ExtResource("1_lmcse")]
+position = Vector2(600, 450)
+
+[node name="Polygon2D" type="Polygon2D" parent="TestBlock"]
+visible = false
+polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
+
+[node name="Sprite2D" type="Sprite2D" parent="TestBlock"]
+texture = ExtResource("2_mrrth")

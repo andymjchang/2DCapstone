@@ -1,0 +1,137 @@
+[gd_scene load_steps=15 format=3 uid="uid://cgbbeq63rjuhl"]
+
+[ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
+[ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="2_cfyqp"]
+[ext_resource type="Script" path="res://levelEditor/measure_lines.gd" id="2_mulbo"]
+[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="2_otlxm"]
+[ext_resource type="Texture2D" uid="uid://iocnhlyh4yw6" path="res://levelEditor/action.png" id="3_kgvx7"]
+[ext_resource type="Texture2D" uid="uid://bamwfgoa14ig1" path="res://levelEditor/right.png" id="4_7fuo1"]
+[ext_resource type="Texture2D" uid="uid://vwontoywjedu" path="res://levelEditor/block.png" id="4_rduon"]
+[ext_resource type="Texture2D" uid="uid://cnj8sgwkjxidi" path="res://levelEditor/up.png" id="5_8qxnf"]
+[ext_resource type="Texture2D" uid="uid://77x6f2ngvprm" path="res://levelEditor/left.png" id="5_cuiw6"]
+[ext_resource type="Texture2D" uid="uid://44ffttq2jugp" path="res://levelEditor/save.png" id="7_0wc3n"]
+[ext_resource type="Texture2D" uid="uid://bbiq7u5yvg7al" path="res://levelEditor/mouse.png" id="7_dw7u5"]
+[ext_resource type="Texture2D" uid="uid://2hplcty35vpl" path="res://levelEditor/down.png" id="7_u6v8f"]
+[ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/rac.png" id="8_w245c"]
+[ext_resource type="Script" path="res://levelEditor/camera_2d.gd" id="14_wt7o4"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_15vlh")
+testBlock = ExtResource("2_cfyqp")
+actionIndicator = ExtResource("2_otlxm")
+
+[node name="measureLines" type="Node2D" parent="."]
+script = ExtResource("2_mulbo")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="bpmLabel" type="RichTextLabel" parent="UI"]
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 143.0
+offset_bottom = 51.0
+text = "Beats per measure"
+
+[node name="bpmLabel2" type="RichTextLabel" parent="UI"]
+offset_left = 5.0
+offset_top = 56.0
+offset_right = 143.0
+offset_bottom = 104.0
+text = "Step size"
+
+[node name="TextEdit" type="TextEdit" parent="UI"]
+offset_left = 93.0
+offset_top = 3.0
+offset_right = 208.0
+offset_bottom = 53.0
+text = "4"
+placeholder_text = "BPM: "
+
+[node name="TextEdit2" type="TextEdit" parent="UI"]
+offset_left = 93.0
+offset_top = 55.0
+offset_right = 208.0
+offset_bottom = 105.0
+text = "150"
+placeholder_text = "Step Size:"
+
+[node name="objectSelector" type="Node2D" parent="UI"]
+
+[node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 36.0
+offset_top = 955.0
+offset_right = 136.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("4_rduon")
+
+[node name="actionButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 139.0
+offset_top = 955.0
+offset_right = 239.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("3_kgvx7")
+
+[node name="mouseButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 242.0
+offset_top = 955.0
+offset_right = 342.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("7_dw7u5")
+
+[node name="racButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 345.0
+offset_top = 955.0
+offset_right = 445.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("8_w245c")
+
+[node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1806.0
+offset_top = 15.0
+offset_right = 1906.0
+offset_bottom = 115.0
+texture_normal = ExtResource("7_0wc3n")
+
+[node name="rightButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1579.0
+offset_top = 954.0
+offset_right = 1679.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("4_7fuo1")
+
+[node name="upButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1682.0
+offset_top = 954.0
+offset_right = 1782.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("5_8qxnf")
+
+[node name="leftButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1476.0
+offset_top = 954.0
+offset_right = 1576.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("5_cuiw6")
+
+[node name="downButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1785.0
+offset_top = 954.0
+offset_right = 1885.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("7_u6v8f")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("14_wt7o4")
+
+[node name="objectList" type="Node2D" parent="."]
+
+[connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
+[connection signal="button_down" from="UI/objectSelector/blockButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_down" from="UI/objectSelector/actionButton" to="." method="_on_test_placer_2_button_down"]
+[connection signal="button_down" from="UI/objectSelector/saveButton" to="." method="_on_test_placer_3_button_down"]
+[connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/leftButton" to="." method="_on_left_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/downButton" to="." method="_on_down_button_button_down"]

@@ -15,7 +15,8 @@ script = ExtResource("1_fjqgg")
 position = Vector2(2.5, 1.5)
 shape = SubResource("RectangleShape2D_gswvj")
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3, -2)
 scale = Vector2(0.1, 0.0838816)
 texture = ExtResource("2_fvj88")
 
