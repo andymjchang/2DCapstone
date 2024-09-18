@@ -55,6 +55,7 @@ func _process(delta: float) -> void:
 	if (trackingPosition):
 		currentPosition = get_global_mouse_position()
 		timeHeld += delta
+	#checkIntersection()
 
 func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():
@@ -264,3 +265,11 @@ func _on_goal_button_button_up() -> void:
 func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()
 	place_block(enemyInstance, testBlockList)
+
+func checkIntersection():
+	for block in killFDict.keys():
+		print("made it here")
+		var kf = killFDict[block]
+	#	if kf.intersecting:
+			#kf.scale /= 1.001
+		
