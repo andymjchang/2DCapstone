@@ -134,6 +134,8 @@ func _on_block_type_drop_down_item_selected(index: int) -> void:
 #TODO P button should extend currnt block/enemy by one measure
 # Q should move the enemy back by one button 
 # make the items reclickable
-# 
+# bind enemies to block, and when bound to a block they should auto snap
 	
+func startBlockOnNearstBeat(blockInstance):
+	var blockX = blockInstance.position.x
 	
