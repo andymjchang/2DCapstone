@@ -166,6 +166,7 @@ func sizeUpBeat():
 	self.position.x += toMove
 	print("Extnets at the end: ", curBlock.extents)
 	print("pos at the end: ", self.position)
+	print("left X: ", colliderUpperLeft.x)
 	#colliderLowerRight = self.position + curBlock.extents
 	#goalWidth =abs( colliderUpperLeft.x - (colliderLowerRight.x+toMove))
 	#newExtents =  Vector2(goalWidth / 2, curBlock.extents.y )
