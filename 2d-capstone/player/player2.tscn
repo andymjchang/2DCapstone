@@ -46,11 +46,6 @@ script = ExtResource("1_yl2m7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_44r6d")
 
-[node name="ProtoMc" type="Sprite2D" parent="."]
-position = Vector2(1.52791, 0.625757)
-scale = Vector2(0.369442, 0.344885)
-texture = ExtResource("2_1yk2g")
-
 [node name="AttackHitbox" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_nopuc")
@@ -68,5 +63,7 @@ offset_bottom = 16.0
 shape = SubResource("RectangleShape2D_s4g51")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.25, 0.75)
+scale = Vector2(0.4475, 0.4475)
 sprite_frames = SubResource("SpriteFrames_2tkvf")
 animation = &"Run"
