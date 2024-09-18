@@ -50,6 +50,7 @@ var isPlaying = false
 var bpm : int = 4
 var stepSize : int = 150
 
+
 func _ready():
 	self.objectClicked.connect(_onObjectClicked)
 	measureLines.beatsPerMeasure = bpm
@@ -268,6 +269,7 @@ func place_block(instance, parent):
 		
 		#kfloor deets
 		var kFloorInstance = killFloor.instantiate()
+		kFloorInstance.index = lEindex - 1
 		print("kf script change regsitered")
 		kFloorInstance.set_script(killFloorScript)
 		killFloorList.add_child(kFloorInstance)
