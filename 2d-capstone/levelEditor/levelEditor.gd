@@ -239,12 +239,12 @@ func place_block(instance, parent):
 		placePos = currentPosition
 	
 	parent.add_child(instance)
-	print("mamma mia", instance.name)
 
 	instance.index = lEindex
 	lEindex+=1
 	instance.position = snap_position(placePos)
 	#now add a kill floor right below it, only want to do this with blocl
+	print("instnace name ", instance.name)
 	if instance.name == "Block":
 		var blockBounds = instance.activeSprite.texture.get_size()*instance.scale/2
 		var upperLeftCorner = (instance.position - (blockBounds))/2
@@ -286,12 +286,6 @@ func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()
 	place_block(enemyInstance, testBlockList)
 
-func checkIntersection():
-	for block in killFDict.keys():
-		print("made it here")
-		var kf = killFDict[block]
-	#	if kf.intersecting:
-			#kf.scale /= 1.001
 			
 func _onObjectClicked(index : int):
 	print("made it here",index)
@@ -302,5 +296,27 @@ func _onObjectClicked(index : int):
 		if block.index == index:
 			currentBlock = block
 			return
+			
+	list = get_node("objectList/checkpoints").get_children()
+	for check in list:
+		if check.index == index:
+			currentBlock = check
+			return
+		
+	list = get_node("objectList/actionIndicators").get_children()
+	for ai in list:
+		if ai.index == index:
+			currentBlock = ai
+			return
+			
+	list = get_node("objectList/players").get_children()
+	for player in list:
+		if player.index == index:
+			currentBlock = player
+			return
+			
+
+		
+		
 	
 		

@@ -21,4 +21,10 @@ position = Vector2(3.75509e-06, 3.8147e-06)
 scale = Vector2(0.91, 0.91)
 texture = ExtResource("2_psdh8")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qpgxu")
+
 [connection signal="area_entered" from="Point/Bounds" to="." method="_onBoundsAreaEntered"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
