@@ -42,6 +42,6 @@ func _unhandled_input(event):
 		# Update the last mouse position
 		last_mouse_position = event.position
 
-func _process(delta):
+func _process(_delta):
 	# Smoothly interpolate current zoom to target zoom
 	zoom = zoom.lerp(target_zoom, 0.1)

@@ -51,10 +51,7 @@ func _on_text_edit_2_text_changed() -> void:
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
 func _on_test_placer_2_button_down() -> void:
-	var actionInstance = actionIndicator.instantiate()
-	actionIndicatorList.add_child(actionInstance)
-	actionInstance.position = snap_position(camera.position)
-	currentBlock = actionInstance
+	trackingPosition = true
 func _on_test_placer_3_button_down() -> void:
 	save_scene_to_file()
 	
@@ -112,18 +109,21 @@ func round_to_step(value) -> int:
 	return round(intMultiplier) * stepSize
 
 func place_block(instance):
+	var placePos = camera.position
+	if (timeHeld >= holdTime):
+		placePos = currentPosition
+	
+	testBlockList.add_child(instance)
+	instance.position = snap_position(placePos)
+	
 	currentBlock = instance
 	trackingPosition = false
 	currentPosition = camera.position
 	timeHeld = 0.0
 
 func _on_block_button_button_up() -> void:
-	var placePos = camera.position
-	if (timeHeld >= holdTime):
-		placePos = currentPosition
-		
 	var blockInstance = testBlock.instantiate()
-	testBlockList.add_child(blockInstance)
-	blockInstance.position = snap_position(placePos)
-	
 	place_block(blockInstance)
+func _on_action_button_button_up() -> void:
+	var actionInstance = actionIndicator.instantiate()
+	place_block(actionInstance)

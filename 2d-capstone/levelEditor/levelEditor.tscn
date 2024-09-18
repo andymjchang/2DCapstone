@@ -135,6 +135,7 @@ script = ExtResource("14_wt7o4")
 [connection signal="button_down" from="UI/objectSelector/blockButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/blockButton" to="." method="_on_block_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/actionButton" to="." method="_on_test_placer_2_button_down"]
+[connection signal="button_up" from="UI/objectSelector/actionButton" to="." method="_on_action_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/saveButton" to="." method="_on_test_placer_3_button_down"]
 [connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]
