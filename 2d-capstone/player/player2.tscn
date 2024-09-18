@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://8ka2tcx6hk3p" path="res://player/player2.png" id="2_1yk2g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(32, 32)
+size = Vector2(25.75, 20.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nopuc"]
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
-size = Vector2(32, 32)
+size = Vector2(25.5, 20.5)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2tkvf"]
 animations = [{
@@ -40,10 +40,12 @@ animations = [{
 }]
 
 [node name="Player2" type="CharacterBody2D" groups=["players"]]
+position = Vector2(2, -48)
 scale = Vector2(4, 4)
 script = ExtResource("1_yl2m7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 11.75)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="AttackHitbox" type="CollisionShape2D" parent="."]
@@ -60,10 +62,11 @@ offset_bottom = 16.0
 [node name="CheckpointHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
+position = Vector2(-0.5, 12)
 shape = SubResource("RectangleShape2D_s4g51")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(2.25, 0.75)
-scale = Vector2(0.4475, 0.4475)
+position = Vector2(-0.75, 11.375)
+scale = Vector2(0.225, 0.1925)
 sprite_frames = SubResource("SpriteFrames_2tkvf")
 animation = &"Run"
