@@ -24,6 +24,7 @@ var isPlaying = false
 @export var enemyCharacter : PackedScene
 @export var goalBlock : PackedScene
 @export var worldManager : Script
+@export var cameraScript : Script
 @export var levelUI : PackedScene
 @export var player1 : PackedScene
 @export var player2 : PackedScene
@@ -169,6 +170,7 @@ func save_scene_to_file():
 	var newCam = Camera2D.new()
 	newCam.position.x = get_viewport().size.x / 2
 	newCam.position.y = get_viewport().size.y / 2
+	newCam.set_script(cameraScript)
 	newCam.name = "Camera2D"
 	
 	# BG
@@ -187,8 +189,6 @@ func save_scene_to_file():
 
 	# Ensure all nested children have their owner set
 	_set_owner_recursive(newRoot, newRoot)
-
-	newRoot.move_child(newCam, 0)
 	
 	# Pack scene
 	var new_scene = PackedScene.new()
