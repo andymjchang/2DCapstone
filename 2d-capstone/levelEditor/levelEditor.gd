@@ -25,19 +25,19 @@ var isPlaying = false
 @export var goalBlock : PackedScene
 @export var worldManager : Script
 @export var cameraScript : Script
+@export var actionManager : Script
+@export var killFloorScript : Script
 @export var levelUI : PackedScene
 @export var player1 : PackedScene
 @export var player2 : PackedScene
 @export var killFloor : PackedScene
 
 
-
-
 @onready var objectList = $objectList
 @onready var testBlockList = $objectList/testBlocks
 @onready var platformBlockList = $objectList/platformBlocks
 @onready var enemyList = $objectList/enemies
-@onready var actionIndicatorList = $objectList/actionIndicators
+@onready var actionIndicatorList = $objectList/actionIndicatorManager
 @onready var checkpointList = $objectList/checkpoints
 @onready var playerList = $objectList/players
 @onready var killFloorList = $objectList/killFloors
@@ -46,8 +46,6 @@ var isPlaying = false
 @onready var fileLabel = $UI/TextEdit3
 @onready var measureLines = $measureLines
 @onready var camera = $Camera2D
-
-
 
 var bpm : int = 4
 var stepSize : int = 150
@@ -159,6 +157,7 @@ func _on_up_button_button_down() -> void:
 func save_scene_to_file():
 	var newRoot = objectList.duplicate()
 	newRoot.set_script(worldManager)
+	actionIndicatorList.set_script(actionManager)
 	#var worldManager = load(** world manager scene path **)
 	#var worldManagerInstance = worldManager.instantiate()
 	#root.add_child(worldManagerInstance)
@@ -269,6 +268,8 @@ func place_block(instance, parent):
 		
 		#kfloor deets
 		var kFloorInstance = killFloor.instantiate()
+		print("kf script change regsitered")
+		kFloorInstance.set_script(killFloorScript)
 		killFloorList.add_child(kFloorInstance)
 		var kFloorBounds = kFloorInstance as RectangleShape2D
 		var kUpperLeftCorner = instance.position - blockBounds

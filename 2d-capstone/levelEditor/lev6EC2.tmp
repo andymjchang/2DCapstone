@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=32 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_1at3l"]
@@ -24,7 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/programmerArtAssets/rac.png" id="8_w245c"]
 [ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="9_6gh41"]
 [ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/programmerArtAssets/checkpoint.png" id="9_wpw0u"]
-[ext_resource type="Script" path="res://worldObjects/killFloor.gd" id="10_jxp0h"]
 [ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="11_ghgfb"]
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="13_87vi8"]
@@ -43,7 +42,6 @@ goalBlock = ExtResource("2_60mmb")
 worldManager = ExtResource("5_c8prk")
 cameraScript = ExtResource("8_nimfa")
 actionManager = ExtResource("9_6gh41")
-killFloorScript = ExtResource("10_jxp0h")
 levelUI = ExtResource("6_47xe5")
 player1 = ExtResource("7_h5cy3")
 player2 = ExtResource("8_d3hii")

@@ -23,7 +23,7 @@ func _onKillFloorBodyEntered(body:Node2D):
 	if "players" in body.get_groups():
 		print(body, " Entered")
 		body.emit_signal("takeDamage", 1)
-		get_parent().emit_signal("resetPosition", body)
+		get_parent().get_parent().emit_signal("resetPosition", body)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
