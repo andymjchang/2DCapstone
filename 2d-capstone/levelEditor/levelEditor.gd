@@ -43,6 +43,7 @@ func _on_text_edit_2_text_changed() -> void:
 		if (step < 25):
 			step = 25
 		stepSize = step
+		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
 		measureLines.queue_redraw()
 
@@ -129,7 +130,10 @@ func _on_block_type_drop_down_item_selected(index: int) -> void:
 		goalBlockInstance.position = Vector2(450, 450)
 		currentBlock = goalBlockInstance
 	if index ==  2:
-		print("idk what block to put here")
+		var enemyInstance = enemyCharacter.instantiate()
+		enemyList.add_child(enemyInstance)
+		enemyInstance.position = Vector2(450, 450)
+		currentBlock = enemyInstance
 		
 #TODO P button should extend currnt block/enemy by one measure
 # Q should move the enemy back by one button 
