@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="1_1jngf"]
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_232eq"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="2_5mni6"]
-[ext_resource type="PackedScene" path="res://worldObjects/checkpoint.tscn" id="2_xrlme"]
+[ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="2_xrlme"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="4_dicbs"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="5_j7ls8"]
 

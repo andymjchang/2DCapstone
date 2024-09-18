@@ -77,18 +77,18 @@ placeholder_text = "Step Size:"
 [node name="objectSelector" type="Node2D" parent="UI"]
 
 [node name="exitButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 1698.0
-offset_top = 15.0
-offset_right = 1798.0
-offset_bottom = 115.0
-texture_normal = ExtResource("7_esiun")
-
-[node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 34.0
+offset_left = 36.0
 offset_top = 955.0
-offset_right = 134.0
+offset_right = 136.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("4_rduon")
+
+[node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1696.0
+offset_top = 15.0
+offset_right = 1796.0
+offset_bottom = 115.0
+texture_normal = ExtResource("7_esiun")
 
 [node name="actionButton" type="TextureButton" parent="UI/objectSelector"]
 offset_left = 139.0

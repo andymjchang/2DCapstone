@@ -4,15 +4,19 @@ extends Node2D
 const measurePixels = 600
 var placedBlocks = []
 var currentBlock
+var saveFileName = "new_scene"
 
 @export var testBlock : PackedScene
 @export var actionIndicator : PackedScene
+@export var checkpoint : PackedScene
 
 @onready var objectList = $objectList
 @onready var testBlockList = $objectList/testBlocks
 @onready var actionIndicatorList = $objectList/actionIndicators
+@onready var checkpointList = $objectList/checkpoints
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
+@onready var fileLabel = $UI/TextEdit3
 @onready var measureLines = $measureLines
 
 var bpm : int = 4
@@ -36,6 +40,9 @@ func _on_text_edit_2_text_changed() -> void:
 		measureLines.stepSize = stepSize
 		measureLines.queue_redraw()
 
+func _on_text_edit_3_text_changed() -> void:
+	saveFileName = fileLabel.text
+
 func _on_test_placer_button_down() -> void:
 	var blockInstance = testBlock.instantiate()
 	testBlockList.add_child(blockInstance)
@@ -48,6 +55,13 @@ func _on_test_placer_2_button_down() -> void:
 	currentBlock = actionInstance
 func _on_test_placer_3_button_down() -> void:
 	save_scene_to_file()
+func _on_checkpoint_button_pressed() -> void:
+	var checkpointInstance = checkpoint.instantiate()
+	checkpointList.add_child(checkpointInstance)
+	checkpointInstance.position = Vector2(450, 450)
+	currentBlock = checkpointInstance
+func _on_exit_button_pressed() -> void:
+	get_tree().quit()
 	
 	
 func _on_right_button_button_down() -> void:
@@ -78,7 +92,7 @@ func save_scene_to_file():
 	var result = new_scene.pack(root)
 	if result == OK:
 		# Save scene
-		var scene_path = "res://savedScenes/new_scene.tscn"
+		var scene_path = "res://savedScenes/" + saveFileName + ".tscn"
 		var error = ResourceSaver.save(new_scene, scene_path)
 		if error == OK:
 			print("Scene saved successfully.")
@@ -92,3 +106,4 @@ func _set_owner_recursive(node: Node, root: Node):
 	for child in node.get_children():
 		child.set_owner(root)
 		_set_owner_recursive(child, root)
+
