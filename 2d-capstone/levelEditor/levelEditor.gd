@@ -2,8 +2,14 @@ extends Node2D
 
 # const values
 const measurePixels = 600
+const holdTime = 0.15
+
 var placedBlocks = []
 var currentBlock
+var currentPosition : Vector2 = Vector2(450, 450)
+var trackingPosition : bool = false
+var defaultSpawnPosition = Vector2(450, 450)
+var timeHeld = 0.0
 
 @export var testBlock : PackedScene
 @export var actionIndicator : PackedScene
@@ -23,6 +29,7 @@ var currentBlock
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var measureLines = $measureLines
+@onready var camera = $Camera2D
 
 var bpm : int = 4
 var stepSize : int = 150
@@ -31,6 +38,11 @@ func _ready():
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
 	Globals.stepSize = stepSize
+	
+func _process(delta: float) -> void:
+	if (trackingPosition):
+		currentPosition = get_global_mouse_position()
+		timeHeld += delta
 
 func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():
@@ -48,10 +60,7 @@ func _on_text_edit_2_text_changed() -> void:
 		measureLines.queue_redraw()
 
 func _on_test_placer_button_down() -> void:
-	var blockInstance = testBlock.instantiate()
-	testBlockList.add_child(blockInstance)
-	blockInstance.position = Vector2(450, 450)
-	currentBlock = blockInstance
+	trackingPosition = true
 func _on_test_placer_2_button_down() -> void:
 	var actionInstance = actionIndicator.instantiate()
 	actionIndicatorList.add_child(actionInstance)
@@ -63,6 +72,7 @@ func _on_platform_block_button_down() -> void:
 	platformBlockList.add_child(platformBlockInstance)
 	platformBlockInstance.position = Vector2(450, 450)
 	currentBlock = platformBlockInstance
+	trackingPosition = true
 func _on_test_placer_3_button_down() -> void:
 	save_scene_to_file()
 	
@@ -143,3 +153,32 @@ func _on_block_type_drop_down_item_selected(index: int) -> void:
 func startBlockOnNearstBeat(blockInstance):
 	var blockX = blockInstance.position.x
 	
+		
+func snap_position(pos : Vector2) -> Vector2:
+	var x = round_to_step(pos.x)
+	var y = round_to_step(pos.y)
+	return Vector2(x, y)
+	
+func round_to_step(value) -> int:
+	var intMultiplier = value / stepSize
+	return round(intMultiplier) * stepSize
+
+func place_block(instance):
+	var placePos = camera.position
+	if (timeHeld >= holdTime):
+		placePos = currentPosition
+	
+	testBlockList.add_child(instance)
+	instance.position = snap_position(placePos)
+	
+	currentBlock = instance
+	trackingPosition = false
+	currentPosition = camera.position
+	timeHeld = 0.0
+
+func _on_block_button_button_up() -> void:
+	var blockInstance = testBlock.instantiate()
+	place_block(blockInstance)
+func _on_action_button_button_up() -> void:
+	var actionInstance = actionIndicator.instantiate()
+	place_block(actionInstance)

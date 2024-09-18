@@ -2,6 +2,7 @@ extends Camera2D
 
 var is_panning = false
 var last_mouse_position = Vector2.ZERO
+var redraw = false
 
 @onready var measureLines = get_parent().get_node("measureLines")
 
@@ -41,6 +42,6 @@ func _unhandled_input(event):
 		# Update the last mouse position
 		last_mouse_position = event.position
 
-func _process(delta):
+func _process(_delta):
 	# Smoothly interpolate current zoom to target zoom
 	zoom = zoom.lerp(target_zoom, 0.1)

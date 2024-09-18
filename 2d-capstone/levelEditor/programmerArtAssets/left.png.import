@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw8ug6v7ohq0i"
-path="res://.godot/imported/rac.png-a65187921904c7d99d246d4067b65fd0.ctex"
+uid="uid://77x6f2ngvprm"
+path="res://.godot/imported/left.png-31bf7f762eb4cd1a93f9663247a235f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levelEditor/rac.png"
-dest_files=["res://.godot/imported/rac.png-a65187921904c7d99d246d4067b65fd0.ctex"]
+source_file="res://levelEditor/programmerArtAssets/left.png"
+dest_files=["res://.godot/imported/left.png-31bf7f762eb4cd1a93f9663247a235f5.ctex"]
 
 [params]
 

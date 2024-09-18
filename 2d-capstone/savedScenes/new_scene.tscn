@@ -1,37 +1,91 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5abkyfg0vx3k"]
+[gd_scene load_steps=8 format=3 uid="uid://c5abkyfg0vx3k"]
 
-[ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="1_osmdm"]
-[ext_resource type="Texture2D" uid="uid://ot5u02sx1r5m" path="res://levelEditor/testBlock.png" id="2_0y74v"]
-[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_a6tib"]
-[ext_resource type="Texture2D" uid="uid://bsadp0sxt2eo8" path="res://worldObjects/circlePlaceholder.png" id="5_etdb2"]
-[ext_resource type="Texture2D" uid="uid://bc5u63xl3n7e" path="res://worldObjects/circlePlaceholder2.png" id="6_s0y2w"]
+[ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_xjtq6"]
+[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="1_ynjbj"]
+[ext_resource type="Texture2D" uid="uid://ljo48af3c257" path="res://worldObjects/Platform.png" id="3_egt68"]
+[ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="4_1nu87"]
+[ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/Platform_2.png" id="4_06uha"]
+[ext_resource type="AudioStream" uid="uid://bi32k1rjy681g" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="6_4dv4g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]
+size = Vector2(128, 32)
 
 [node name="objectList" type="Node2D"]
+script = ExtResource("1_xjtq6")
 
 [node name="testBlocks" type="Node2D" parent="."]
 
-[node name="TestBlock" parent="testBlocks" instance=ExtResource("1_osmdm")]
-position = Vector2(450, 450)
+[node name="Block" parent="testBlocks" instance=ExtResource("1_ynjbj")]
+position = Vector2(750, 600)
 
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/TestBlock"]
+[node name="Platform3" type="Sprite2D" parent="testBlocks/Block"]
+position = Vector2(-1, 7)
+scale = Vector2(0.107701, 0.0832813)
+texture = ExtResource("3_egt68")
+
+[node name="Platform4" type="Sprite2D" parent="testBlocks/Block"]
 visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
+position = Vector2(-1, 7)
+scale = Vector2(0.104219, 0.104219)
+texture = ExtResource("4_06uha")
 
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/TestBlock"]
-texture = ExtResource("2_0y74v")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/Block"]
+shape = SubResource("RectangleShape2D_tpulb")
+
+[node name="@StaticBody2D@14" parent="testBlocks" instance=ExtResource("1_ynjbj")]
+position = Vector2(900, 600)
+
+[node name="Platform3" type="Sprite2D" parent="testBlocks/@StaticBody2D@14"]
+position = Vector2(-1, 7)
+scale = Vector2(0.107701, 0.0832813)
+texture = ExtResource("3_egt68")
+
+[node name="Platform4" type="Sprite2D" parent="testBlocks/@StaticBody2D@14"]
+visible = false
+position = Vector2(-1, 7)
+scale = Vector2(0.104219, 0.104219)
+texture = ExtResource("4_06uha")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/@StaticBody2D@14"]
+shape = SubResource("RectangleShape2D_tpulb")
+
+[node name="@StaticBody2D@15" parent="testBlocks" instance=ExtResource("1_ynjbj")]
+position = Vector2(1050, 600)
+
+[node name="Platform3" type="Sprite2D" parent="testBlocks/@StaticBody2D@15"]
+position = Vector2(-1, 7)
+scale = Vector2(0.107701, 0.0832813)
+texture = ExtResource("3_egt68")
+
+[node name="Platform4" type="Sprite2D" parent="testBlocks/@StaticBody2D@15"]
+position = Vector2(-1, 7)
+scale = Vector2(0.104219, 0.104219)
+texture = ExtResource("4_06uha")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/@StaticBody2D@15"]
+shape = SubResource("RectangleShape2D_tpulb")
+
+[node name="@StaticBody2D@16" parent="testBlocks" instance=ExtResource("1_ynjbj")]
+position = Vector2(1200, 600)
+
+[node name="Platform3" type="Sprite2D" parent="testBlocks/@StaticBody2D@16"]
+position = Vector2(-1, 7)
+scale = Vector2(0.107701, 0.0832813)
+texture = ExtResource("3_egt68")
+
+[node name="Platform4" type="Sprite2D" parent="testBlocks/@StaticBody2D@16"]
+position = Vector2(-1, 7)
+scale = Vector2(0.104219, 0.104219)
+texture = ExtResource("4_06uha")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/@StaticBody2D@16"]
+shape = SubResource("RectangleShape2D_tpulb")
 
 [node name="actionIndicators" type="Node2D" parent="."]
 
-[node name="ActionIndicator" parent="actionIndicators" instance=ExtResource("3_a6tib")]
-position = Vector2(450, 450)
+[node name="Player1" parent="." instance=ExtResource("4_1nu87")]
+position = Vector2(720, 502)
 
-[node name="innerCircle2" type="Sprite2D" parent="actionIndicators/ActionIndicator"]
-texture = ExtResource("5_etdb2")
-
-[node name="outerCircle2" type="Sprite2D" parent="actionIndicators/ActionIndicator"]
-modulate = Color(1, 1, 1, 0)
-scale = Vector2(10, 10)
-texture = ExtResource("6_s0y2w")
-
-[node name="Timer2" type="Timer" parent="actionIndicators/ActionIndicator"]
-wait_time = 0.5
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_4dv4g")
+max_distance = 9999.0

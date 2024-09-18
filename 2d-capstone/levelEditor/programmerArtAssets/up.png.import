@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cnj8sgwkjxidi"
-path="res://.godot/imported/up.png-36cb9b0c71574636d083d758a22d65b3.ctex"
+path="res://.godot/imported/up.png-ec4231b1577663d010c0af014aea720c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levelEditor/up.png"
-dest_files=["res://.godot/imported/up.png-36cb9b0c71574636d083d758a22d65b3.ctex"]
+source_file="res://levelEditor/programmerArtAssets/up.png"
+dest_files=["res://.godot/imported/up.png-ec4231b1577663d010c0af014aea720c.ctex"]
 
 [params]
 
