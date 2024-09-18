@@ -10,6 +10,7 @@ var currentPosition : Vector2 = Vector2(450, 450)
 var trackingPosition : bool = false
 var defaultSpawnPosition = Vector2(450, 450)
 var timeHeld = 0.0
+var killFDict: Dictionary = {}
 var saveFileName 
 
 @export var testBlock : PackedScene
@@ -120,15 +121,19 @@ func placeObject(placedNode):
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x += stepSize
+	killFDict[currentBlock].position.x += stepSize
 func _on_left_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x -= stepSize
+	killFDict[currentBlock].position.x -= stepSize
 func _on_down_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y += stepSize
+	killFDict[currentBlock].position.y += stepSize
 func _on_up_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y -= stepSize
+	killFDict[currentBlock].position.y -= stepSize
 
 	
 func save_scene_to_file():
@@ -239,6 +244,7 @@ func place_block(instance, parent):
 	print("Pos ", kFloorInstance.position)
 	print("Pos ", instance.position)
 	currentBlock = instance
+	killFDict[instance] = kFloorInstance
 	reset_drag_tracking()
 
 func reset_drag_tracking():
