@@ -9,7 +9,8 @@ var currentBlock
 @export var actionIndicator : PackedScene
 
 #new blocks added
-@export var platformBlock : PackedScene
+#TODO get rid of enemy block, should just be a normal platform
+@export var platformBlock: PackedScene
 @export var enemyCharacter : PackedScene
 
 
@@ -53,8 +54,17 @@ func _on_test_placer_2_button_down() -> void:
 	actionIndicatorList.add_child(actionInstance)
 	actionInstance.position = Vector2(450, 450)
 	currentBlock = actionInstance
+#TODO dlete this haha
+func _on_platform_block_button_down() -> void:
+	var platformBlockInstance = platformBlock.instantiate()
+	platformBlockList.add_child(platformBlockInstance)
+	platformBlockInstance.position = Vector2(450, 450)
+	currentBlock = platformBlockInstance
 func _on_test_placer_3_button_down() -> void:
 	save_scene_to_file()
+	
+	
+	
 	
 	
 func _on_right_button_button_down() -> void:
@@ -99,3 +109,12 @@ func _set_owner_recursive(node: Node, root: Node):
 	for child in node.get_children():
 		child.set_owner(root)
 		_set_owner_recursive(child, root)
+
+
+func _on_block_type_drop_down_item_selected(index: int) -> void:
+	#based on this instance
+	var platformBlockInstance = platformBlock.instantiate()
+	platformBlockList.add_child(platformBlockInstance)
+	platformBlockInstance.position = Vector2(450, 450)
+	currentBlock = platformBlockInstance
+	
