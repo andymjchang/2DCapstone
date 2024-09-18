@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dakwrycm2d4ei"]
+[gd_scene load_steps=7 format=3 uid="uid://dakwrycm2d4ei"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yl2m7"]
 [ext_resource type="Texture2D" uid="uid://8ka2tcx6hk3p" path="res://player/player2.png" id="2_1yk2g"]
@@ -11,6 +11,33 @@ size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
 size = Vector2(32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2tkvf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1yk2g")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1yk2g")
+}],
+"loop": true,
+"name": &"Punch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1yk2g")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
 
 [node name="Player2" type="CharacterBody2D" groups=["players"]]
 scale = Vector2(4, 4)
@@ -39,3 +66,7 @@ offset_bottom = 16.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
 shape = SubResource("RectangleShape2D_s4g51")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2tkvf")
+animation = &"Run"

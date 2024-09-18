@@ -1,0 +1,303 @@
+{
+	"textures": [
+		{
+			"image": "raccoon.png",
+			"size": {
+				"w": 2000,
+				"h": 1967
+			},
+			"sprites": [
+				{
+					"filename": "assets/000.png",
+					"region": {
+						"x": 0,
+						"y": 0,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/002.png",
+					"region": {
+						"x": 500,
+						"y": 0,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/003.png",
+					"region": {
+						"x": 1000,
+						"y": 0,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/004.png",
+					"region": {
+						"x": 1500,
+						"y": 0,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/006.png",
+					"region": {
+						"x": 0,
+						"y": 281,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/Raccon_Punch_0.png",
+					"region": {
+						"x": 500,
+						"y": 281,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/Raccon_Run_0.png",
+					"region": {
+						"x": 1000,
+						"y": 281,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/Raccon_Run_1.png",
+					"region": {
+						"x": 1500,
+						"y": 281,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/Raccon_Run_2.png",
+					"region": {
+						"x": 0,
+						"y": 562,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/Raccon_Run_3.png",
+					"region": {
+						"x": 0,
+						"y": 843,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/Raccon_Run_4.png",
+					"region": {
+						"x": 0,
+						"y": 1124,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/Raccon_Run_5.png",
+					"region": {
+						"x": 0,
+						"y": 1405,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/Raccon_Run_6.png",
+					"region": {
+						"x": 0,
+						"y": 1686,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/Raccon_Run_7.png",
+					"region": {
+						"x": 500,
+						"y": 562,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/Raccoon_Punch_1.png",
+					"region": {
+						"x": 1000,
+						"y": 562,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/001.png",
+					"region": {
+						"x": 0,
+						"y": 0,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/007.png",
+					"region": {
+						"x": 0,
+						"y": 0,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/005.png",
+					"region": {
+						"x": 1000,
+						"y": 0,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "assets/Raccon_Run_8.png",
+					"region": {
+						"x": 500,
+						"y": 562,
+						"w": 500,
+						"h": 281
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "http://free-tex-packer.com",
+		"version": "0.6.7",
+		"format": "RGBA8888",
+	}
+}

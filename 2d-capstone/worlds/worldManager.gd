@@ -30,9 +30,10 @@ var textPopupScene = preload("res://worldObjects/scoreText.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#timerText = $CanvasLayer/Timer
-	player = $Player1
+	player = get_node("players").get_node("Player1")
+	
 	camera = $Camera2D
-	checkpoints = $CheckpointManager
+	checkpoints = get_node("checkpoints")
 	#scoreText = $CanvasLayer/Score
 	scoreText = $CanvasLayer/Score
 	music = $AudioStreamPlayer2D
@@ -55,9 +56,10 @@ func _ready():
 	#player1.editing = false
 	#player2.editing = false
 	#killWall = get_node("KillWall")
-	countdownUI = get_node("LevelUI")
-	statusMessage = countdownUI.get_node("Box").get_node("Status")
-	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
+	#countdownUI = get_node("LevelUI")
+	
+	#statusMessage = countdownUI.get_node("Box").get_node("Status")
+	#restartButton = countdownUI.get_node("Box").get_node("RestartButton")
 
 	# Start game
 	#restartButton.visible = false

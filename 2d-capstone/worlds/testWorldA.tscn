@@ -25,16 +25,19 @@ position = Vector2(0, 324)
 script = ExtResource("7_u8d2w")
 
 [node name="MenuBg" type="Sprite2D" parent="Camera2D"]
+visible = false
 position = Vector2(-12.4999, -11.5)
 scale = Vector2(0.209722, 0.209722)
 texture = ExtResource("6_a6n1f")
 
-[node name="Player2" parent="." instance=ExtResource("3_tdt43")]
-position = Vector2(45, 525)
+[node name="players" type="Node2D" parent="."]
+
+[node name="Player1" parent="players" instance=ExtResource("3_2ouxg")]
+position = Vector2(45, 202)
 scale = Vector2(1, 1)
 
-[node name="Player1" parent="." instance=ExtResource("3_2ouxg")]
-position = Vector2(45, 202)
+[node name="Player2" parent="players" instance=ExtResource("3_tdt43")]
+position = Vector2(45, 423)
 scale = Vector2(1, 1)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -69,16 +72,16 @@ position = Vector2(0, 289)
 [node name="blocks2" type="Node2D" parent="Player2Level"]
 
 [node name="Block19" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
-position = Vector2(120, 270)
+position = Vector2(120, 168)
 
 [node name="Block20" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
-position = Vector2(-15, 270)
+position = Vector2(-15, 168)
 
 [node name="Block21" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
-position = Vector2(255, 270)
+position = Vector2(255, 168)
 
 [node name="Block25" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
-position = Vector2(846, 270)
+position = Vector2(846, 168)
 
 [node name="Block32" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(1145, 270)
@@ -87,7 +90,7 @@ position = Vector2(1145, 270)
 position = Vector2(1984, 270)
 
 [node name="Block2" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
-position = Vector2(541, 270)
+position = Vector2(541, 168)
 
 [node name="Block24" parent="Player2Level/blocks2" instance=ExtResource("3_h1mol")]
 position = Vector2(1580, 270)
@@ -308,13 +311,13 @@ position = Vector2(-320, -50)
 [node name="actionIndicatorManager" parent="Player2Level" instance=ExtResource("6_im0um")]
 
 [node name="ActionIndicator11" parent="Player2Level/actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(300, 240)
+position = Vector2(300, 138)
 
 [node name="ActionIndicator2" parent="Player2Level/actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(600, 240)
+position = Vector2(600, 138)
 
 [node name="ActionIndicator4" parent="Player2Level/actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(900, 240)
+position = Vector2(900, 138)
 
 [node name="ActionIndicator3" parent="Player2Level/actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(1200, 240)
@@ -350,7 +353,7 @@ position = Vector2(2325, 240)
 position = Vector2(2250, 240)
 
 [node name="ActionIndicator22" parent="Player2Level/actionIndicatorManager" instance=ExtResource("6_iceo8")]
-position = Vector2(300, 240)
+position = Vector2(300, 138)
 
 [node name="ActionIndicator25" parent="Player2Level/actionIndicatorManager" instance=ExtResource("6_iceo8")]
 position = Vector2(2550, 240)
@@ -422,7 +425,7 @@ position = Vector2(3520, 295)
 position = Vector2(5947, 290)
 
 [node name="KillFloor" parent="Player2Level" instance=ExtResource("9_txb0v")]
-position = Vector2(694, 293)
+position = Vector2(694, 191)
 
 [node name="KillFloor16" parent="Player2Level" instance=ExtResource("9_txb0v")]
 position = Vector2(4929, -42)
@@ -752,7 +755,7 @@ position = Vector2(3836, 585)
 scale = Vector2(0.5, 0.5)
 
 [node name="KillFloor8" parent="Player1Level" instance=ExtResource("9_txb0v")]
-position = Vector2(384, 619)
+position = Vector2(384, 517)
 
 [node name="KillFloor2" parent="Player1Level" instance=ExtResource("9_txb0v")]
 position = Vector2(1285, 615)
