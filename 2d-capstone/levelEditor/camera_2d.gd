@@ -2,6 +2,7 @@ extends Camera2D
 
 var is_panning = false
 var last_mouse_position = Vector2.ZERO
+var redraw = false
 
 @onready var measureLines = get_parent().get_node("measureLines")
 

@@ -2,9 +2,14 @@ extends Node2D
 
 # const values
 const measurePixels = 600
+const holdTime = 0.075
+
 var placedBlocks = []
 var currentBlock
+var currentPosition : Vector2 = Vector2(450, 450)
+var trackingPosition : bool = false
 var defaultSpawnPosition = Vector2(450, 450)
+var timeHeld = 0.0
 
 @export var testBlock : PackedScene
 @export var actionIndicator : PackedScene
@@ -23,6 +28,11 @@ var stepSize : int = 150
 func _ready():
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
+	
+func _process(delta: float) -> void:
+	if (trackingPosition):
+		currentPosition = get_global_mouse_position()
+		timeHeld += delta
 
 func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():
@@ -39,10 +49,7 @@ func _on_text_edit_2_text_changed() -> void:
 		measureLines.queue_redraw()
 
 func _on_test_placer_button_down() -> void:
-	var blockInstance = testBlock.instantiate()
-	testBlockList.add_child(blockInstance)
-	blockInstance.position = snap_position(camera.position)
-	currentBlock = blockInstance
+	trackingPosition = true
 func _on_test_placer_2_button_down() -> void:
 	var actionInstance = actionIndicator.instantiate()
 	actionIndicatorList.add_child(actionInstance)
@@ -102,4 +109,21 @@ func snap_position(pos : Vector2) -> Vector2:
 	
 func round_to_step(value) -> int:
 	var intMultiplier = value / stepSize
-	return int(intMultiplier) * stepSize
+	return round(intMultiplier) * stepSize
+
+func place_block(instance):
+	currentBlock = instance
+	trackingPosition = false
+	currentPosition = camera.position
+	timeHeld = 0.0
+
+func _on_block_button_button_up() -> void:
+	var placePos = camera.position
+	if (timeHeld >= holdTime):
+		placePos = currentPosition
+		
+	var blockInstance = testBlock.instantiate()
+	testBlockList.add_child(blockInstance)
+	blockInstance.position = snap_position(placePos)
+	
+	place_block(blockInstance)
