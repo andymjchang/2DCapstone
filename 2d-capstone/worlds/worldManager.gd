@@ -34,7 +34,7 @@ func _ready():
 	
 	camera = $Camera2D
 	checkpoints = get_node("checkpoints")
-	#scoreText = $CanvasLayer/Score
+	scoreText = $CanvasLayer/Score
 	scoreText = $CanvasLayer/Score
 	music = $AudioStreamPlayer2D
 	
@@ -56,15 +56,15 @@ func _ready():
 	#player1.editing = false
 	#player2.editing = false
 	#killWall = get_node("KillWall")
-	#countdownUI = get_node("LevelUI")
+	countdownUI = get_node("LevelUI")
 	
-	#statusMessage = countdownUI.get_node("Box").get_node("Status")
-	#restartButton = countdownUI.get_node("Box").get_node("RestartButton")
+	statusMessage = countdownUI.get_node("Box").get_node("Status")
+	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
 
 	# Start game
-	#restartButton.visible = false
-	#changeCountdown()
-	#await get_tree().create_timer(3.0).timeout
+	restartButton.visible = false
+	changeCountdown()
+	await get_tree().create_timer(3.0).timeout
 	Globals.inLevel = true
 	#music.play(0.0)
 	restartButton.visible = false

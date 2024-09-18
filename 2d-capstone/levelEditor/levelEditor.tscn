@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cgbbeq63rjuhl"]
+[gd_scene load_steps=28 format=3 uid="uid://cgbbeq63rjuhl"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_1at3l"]
@@ -23,7 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/programmerArtAssets/rac.png" id="8_w245c"]
 [ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/programmerArtAssets/checkpoint.png" id="9_wpw0u"]
 [ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
+[ext_resource type="AudioStream" uid="uid://cmxsfbbfnb2j0" path="res://audioTracks/Sprint2_GminBmaj_156bpm.mp3" id="13_vpjxf"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
+[ext_resource type="Texture2D" uid="uid://drnvhk52xrn80" path="res://levelEditor/programmerArtAssets/playAudio.png" id="20_n1qdn"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
 
 [node name="Node2D" type="Node2D"]
@@ -46,6 +48,9 @@ position = Vector2(960, 540)
 script = ExtResource("10_seu87")
 
 [node name="objectList" type="Node2D" parent="."]
+
+[node name="audio" type="AudioStreamPlayer2D" parent="objectList"]
+stream = ExtResource("13_vpjxf")
 
 [node name="testBlocks" type="Node2D" parent="objectList"]
 
@@ -157,6 +162,13 @@ offset_right = 549.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("9_wpw0u")
 
+[node name="playAudioButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 759.0
+offset_top = 955.0
+offset_right = 859.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("20_n1qdn")
+
 [node name="goalButton" type="TextureButton" parent="UI/objectSelector"]
 offset_left = 552.0
 offset_top = 955.0
@@ -226,6 +238,7 @@ offset_bottom = 948.0
 [connection signal="button_up" from="UI/objectSelector/racButton" to="." method="_on_rac_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/checkpointButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/checkpointButton" to="." method="_on_checkpoint_button_button_up"]
+[connection signal="pressed" from="UI/objectSelector/playAudioButton" to="." method="_on_play_audio_button_pressed"]
 [connection signal="button_down" from="UI/objectSelector/goalButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/goalButton" to="." method="_on_goal_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/enemyButton" to="." method="_on_test_placer_button_down"]

@@ -135,26 +135,26 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(129, 71)
+size = Vector2(31.25, 22.875)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nopuc"]
 size = Vector2(128.5, 71.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
-size = Vector2(129.5, 70.75)
+size = Vector2(30.75, 23.0313)
 
 [node name="Player1" type="CharacterBody2D" groups=["players"]]
 scale = Vector2(4, 4)
 script = ExtResource("1_qyaa7")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3.5, -23.75)
-scale = Vector2(0.305827, 0.305827)
+position = Vector2(-1.25, -12)
+scale = Vector2(0.0880783, 0.0880783)
 sprite_frames = SubResource("SpriteFrames_h8xup")
 animation = &"Run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6.25, -19.5)
+position = Vector2(-2.125, -11.8125)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="ProtoMc" type="Sprite2D" parent="."]
@@ -178,5 +178,5 @@ offset_bottom = 16.0
 [node name="CheckpointHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
-position = Vector2(-6.25, -18.875)
+position = Vector2(-2.125, -11.8907)
 shape = SubResource("RectangleShape2D_s4g51")

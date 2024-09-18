@@ -11,6 +11,7 @@ var trackingPosition : bool = false
 var defaultSpawnPosition = Vector2(450, 450)
 var timeHeld = 0.0
 var saveFileName 
+var isPlaying = false
 
 @export var testBlock : PackedScene
 @export var actionIndicator : PackedScene
@@ -107,6 +108,15 @@ func _on_mouse_button_button_up() -> void:
 		currentBlock = playerList.get_node("Player2")
 		reset_drag_tracking()
 
+func _on_play_audio_button_pressed() -> void:
+	if not isPlaying:
+		objectList.get_node("audio").play()
+		get_node("UI").get_node("objectSelector").get_node("playAudioButton").texture_normal = load("res://levelEditor/programmerArtAssets/replayTrack.png")
+		isPlaying = true
+	else:
+		isPlaying = false
+		get_node("UI").get_node("objectSelector").get_node("playAudioButton").texture_normal = load("res://levelEditor/programmerArtAssets/playAudio.png")
+		objectList.get_node("audio").stop()
 
 func placeObject(placedNode):
 	placedNode.position = Vector2(450, 450)
