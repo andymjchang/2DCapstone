@@ -1,7 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://cgbbeq63rjuhl"]
+[gd_scene load_steps=26 format=3 uid="uid://cgbbeq63rjuhl"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_1at3l"]
+[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://shadow/goal_block.tscn" id="2_60mmb"]
+[ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="2_651dv"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="2_otlxm"]
 [ext_resource type="Texture2D" uid="uid://iocnhlyh4yw6" path="res://levelEditor/programmerArtAssets/action.png" id="3_kgvx7"]
@@ -22,12 +24,15 @@
 [ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/programmerArtAssets/checkpoint.png" id="9_wpw0u"]
 [ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
+[ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
 testBlock = ExtResource("2_1at3l")
 actionIndicator = ExtResource("2_otlxm")
 checkpoint = ExtResource("4_iqk0t")
+enemyCharacter = ExtResource("2_651dv")
+goalBlock = ExtResource("2_60mmb")
 worldManager = ExtResource("5_c8prk")
 levelUI = ExtResource("6_47xe5")
 player1 = ExtResource("7_h5cy3")
@@ -159,6 +164,13 @@ offset_right = 652.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("17_3udhx")
 
+[node name="enemyButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 655.0
+offset_top = 955.0
+offset_right = 755.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("20_rbssn")
+
 [node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
 offset_left = 1680.0
 offset_top = 16.0
@@ -214,7 +226,10 @@ offset_bottom = 948.0
 [connection signal="button_up" from="UI/objectSelector/racButton" to="." method="_on_rac_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/checkpointButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/checkpointButton" to="." method="_on_checkpoint_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/goalButton" to="." method="_on_save_button_down"]
+[connection signal="button_down" from="UI/objectSelector/goalButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/goalButton" to="." method="_on_goal_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/enemyButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/enemyButton" to="." method="_on_enemy_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/saveButton" to="." method="_on_save_button_down"]
 [connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]

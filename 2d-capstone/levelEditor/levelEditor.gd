@@ -15,15 +15,15 @@ var saveFileName
 @export var testBlock : PackedScene
 @export var actionIndicator : PackedScene
 @export var checkpoint : PackedScene
+@export var platformBlock: PackedScene
+@export var enemyCharacter : PackedScene
+@export var goalBlock : PackedScene
 @export var worldManager : Script
 @export var levelUI : PackedScene
 @export var player1 : PackedScene
 @export var player2 : PackedScene
 
-#new blocks added
-@export var platformBlock: PackedScene
-@export var enemyCharacter : PackedScene
-@export var goalBlock : PackedScene
+
 
 
 @onready var objectList = $objectList
@@ -233,3 +233,9 @@ func _on_block_button_button_up() -> void:
 func _on_action_button_button_up() -> void:
 	var actionInstance = actionIndicator.instantiate()
 	place_block(actionInstance, actionIndicatorList)
+func _on_goal_button_button_up() -> void:
+	var goalInstance = goalBlock.instantiate()
+	place_block(goalInstance, testBlockList)
+func _on_enemy_button_button_up() -> void:
+	var enemyInstance = enemyCharacter.instantiate()
+	place_block(enemyInstance, testBlockList)
