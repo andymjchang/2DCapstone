@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bo0nbkm4luiga"]
 
-[ext_resource type="Texture2D" uid="uid://ot5u02sx1r5m" path="res://levelEditor/testBlock.png" id="1_x2eis"]
+[ext_resource type="Texture2D" uid="uid://ot5u02sx1r5m" path="res://levelEditor/programmerArtAssets/testBlock.png" id="1_x2eis"]
 
 [node name="TestBlock" type="Node2D"]
 

@@ -2,7 +2,7 @@ extends Node2D
 
 # const values
 const measurePixels = 600
-const holdTime = 0.075
+const holdTime = 0.15
 
 var placedBlocks = []
 var currentBlock

@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="2_cfyqp"]
-[ext_resource type="Script" path="res://levelEditor/measure_lines.gd" id="2_mulbo"]
+[ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="2_otlxm"]
-[ext_resource type="Texture2D" uid="uid://iocnhlyh4yw6" path="res://levelEditor/action.png" id="3_kgvx7"]
-[ext_resource type="Texture2D" uid="uid://bamwfgoa14ig1" path="res://levelEditor/right.png" id="4_7fuo1"]
-[ext_resource type="Texture2D" uid="uid://vwontoywjedu" path="res://levelEditor/block.png" id="4_rduon"]
-[ext_resource type="Texture2D" uid="uid://cnj8sgwkjxidi" path="res://levelEditor/up.png" id="5_8qxnf"]
-[ext_resource type="Texture2D" uid="uid://77x6f2ngvprm" path="res://levelEditor/left.png" id="5_cuiw6"]
-[ext_resource type="Texture2D" uid="uid://44ffttq2jugp" path="res://levelEditor/save.png" id="7_0wc3n"]
-[ext_resource type="Texture2D" uid="uid://bbiq7u5yvg7al" path="res://levelEditor/mouse.png" id="7_dw7u5"]
-[ext_resource type="Texture2D" uid="uid://2hplcty35vpl" path="res://levelEditor/down.png" id="7_u6v8f"]
-[ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/rac.png" id="8_w245c"]
-[ext_resource type="Script" path="res://levelEditor/camera_2d.gd" id="14_wt7o4"]
+[ext_resource type="Texture2D" uid="uid://iocnhlyh4yw6" path="res://levelEditor/programmerArtAssets/action.png" id="3_kgvx7"]
+[ext_resource type="Texture2D" uid="uid://bamwfgoa14ig1" path="res://levelEditor/programmerArtAssets/right.png" id="4_7fuo1"]
+[ext_resource type="Texture2D" uid="uid://vwontoywjedu" path="res://levelEditor/programmerArtAssets/block.png" id="4_rduon"]
+[ext_resource type="Texture2D" uid="uid://cnj8sgwkjxidi" path="res://levelEditor/programmerArtAssets/up.png" id="5_8qxnf"]
+[ext_resource type="Texture2D" uid="uid://77x6f2ngvprm" path="res://levelEditor/programmerArtAssets/left.png" id="5_cuiw6"]
+[ext_resource type="Texture2D" uid="uid://44ffttq2jugp" path="res://levelEditor/programmerArtAssets/save.png" id="7_0wc3n"]
+[ext_resource type="Texture2D" uid="uid://bbiq7u5yvg7al" path="res://levelEditor/programmerArtAssets/mouse.png" id="7_dw7u5"]
+[ext_resource type="Texture2D" uid="uid://2hplcty35vpl" path="res://levelEditor/programmerArtAssets/down.png" id="7_u6v8f"]
+[ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/programmerArtAssets/rac.png" id="8_w245c"]
+[ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="14_wt7o4"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
@@ -23,6 +23,16 @@ actionIndicator = ExtResource("2_otlxm")
 [node name="measureLines" type="Node2D" parent="."]
 script = ExtResource("2_mulbo")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("14_wt7o4")
+
+[node name="objectList" type="Node2D" parent="."]
+
+[node name="testBlocks" type="Node2D" parent="objectList"]
+
+[node name="actionIndicators" type="Node2D" parent="objectList"]
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="bpmLabel" type="RichTextLabel" parent="UI"]
@@ -31,6 +41,7 @@ offset_top = 3.0
 offset_right = 143.0
 offset_bottom = 51.0
 text = "Beats per measure"
+metadata/_edit_use_anchors_ = true
 
 [node name="bpmLabel2" type="RichTextLabel" parent="UI"]
 offset_left = 5.0
@@ -38,6 +49,7 @@ offset_top = 56.0
 offset_right = 143.0
 offset_bottom = 104.0
 text = "Step size"
+metadata/_edit_use_anchors_ = true
 
 [node name="TextEdit" type="TextEdit" parent="UI"]
 offset_left = 93.0
@@ -46,6 +58,7 @@ offset_right = 208.0
 offset_bottom = 53.0
 text = "4"
 placeholder_text = "BPM: "
+metadata/_edit_use_anchors_ = true
 
 [node name="TextEdit2" type="TextEdit" parent="UI"]
 offset_left = 93.0
@@ -54,8 +67,16 @@ offset_right = 208.0
 offset_bottom = 105.0
 text = "150"
 placeholder_text = "Step Size:"
+metadata/_edit_use_anchors_ = true
 
 [node name="objectSelector" type="Node2D" parent="UI"]
+
+[node name="ColorRect" type="ColorRect" parent="UI/objectSelector"]
+offset_left = -1.0
+offset_top = 915.0
+offset_right = 1922.0
+offset_bottom = 1107.0
+color = Color(0.259294, 0.259294, 0.259294, 1)
 
 [node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
 offset_left = 36.0
@@ -120,15 +141,11 @@ offset_right = 1885.0
 offset_bottom = 1054.0
 texture_normal = ExtResource("7_u6v8f")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(960, 540)
-script = ExtResource("14_wt7o4")
-
-[node name="objectList" type="Node2D" parent="."]
-
-[node name="testBlocks" type="Node2D" parent="objectList"]
-
-[node name="actionIndicators" type="Node2D" parent="objectList"]
+[node name="CheckButton" type="CheckButton" parent="UI/objectSelector"]
+offset_left = 64.0
+offset_top = 924.0
+offset_right = 108.0
+offset_bottom = 948.0
 
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]

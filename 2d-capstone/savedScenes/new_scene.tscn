@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c5abkyfg0vx3k"]
 
 [ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="1_osmdm"]
-[ext_resource type="Texture2D" uid="uid://ot5u02sx1r5m" path="res://levelEditor/testBlock.png" id="2_0y74v"]
+[ext_resource type="Texture2D" uid="uid://ot5u02sx1r5m" path="res://levelEditor/programmerArtAssets/testBlock.png" id="2_0y74v"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_a6tib"]
 [ext_resource type="Texture2D" uid="uid://bsadp0sxt2eo8" path="res://worldObjects/circlePlaceholder.png" id="5_etdb2"]
 [ext_resource type="Texture2D" uid="uid://bc5u63xl3n7e" path="res://worldObjects/circlePlaceholder2.png" id="6_s0y2w"]
