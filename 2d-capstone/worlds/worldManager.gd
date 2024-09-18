@@ -38,16 +38,14 @@ func _ready():
 	
 	# Setting signals
 	self.resetPosition.connect(_onResetPosition)
-<<<<<<< HEAD
+
 	self.gameOver.connect(_onGameOver)
 	self.checkGameOver.connect(_onCheckGameOver)
 	self.checkLevelCompleted.connect(_onCheckLevelCompleted)
 	self.levelCompleted.connect(_onLevelCompleted)
 
-=======
 	#self.gameOver.connect(_onGameOver)
 	#self.checkGameOver.connect(_onCheckGameOver)
->>>>>>> origin/checkpointing
 
 	# Getting nodes to manage
 	player1 = get_node("Player1")
