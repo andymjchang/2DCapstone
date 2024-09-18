@@ -4,6 +4,7 @@ extends Node2D
 const measurePixels = 600
 var placedBlocks = []
 var currentBlock
+var defaultSpawnPosition = Vector2(450, 450)
 
 @export var testBlock : PackedScene
 @export var actionIndicator : PackedScene
@@ -14,6 +15,7 @@ var currentBlock
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var measureLines = $measureLines
+@onready var camera = $Camera2D
 
 var bpm : int = 4
 var stepSize : int = 150
@@ -39,12 +41,12 @@ func _on_text_edit_2_text_changed() -> void:
 func _on_test_placer_button_down() -> void:
 	var blockInstance = testBlock.instantiate()
 	testBlockList.add_child(blockInstance)
-	blockInstance.position = Vector2(450, 450)
+	blockInstance.position = snap_position(camera.position)
 	currentBlock = blockInstance
 func _on_test_placer_2_button_down() -> void:
 	var actionInstance = actionIndicator.instantiate()
 	actionIndicatorList.add_child(actionInstance)
-	actionInstance.position = Vector2(450, 450)
+	actionInstance.position = snap_position(camera.position)
 	currentBlock = actionInstance
 func _on_test_placer_3_button_down() -> void:
 	save_scene_to_file()
@@ -92,3 +94,12 @@ func _set_owner_recursive(node: Node, root: Node):
 	for child in node.get_children():
 		child.set_owner(root)
 		_set_owner_recursive(child, root)
+		
+func snap_position(pos : Vector2) -> Vector2:
+	var x = round_to_step(pos.x)
+	var y = round_to_step(pos.y)
+	return Vector2(x, y)
+	
+func round_to_step(value) -> int:
+	var intMultiplier = value / stepSize
+	return int(intMultiplier) * stepSize
