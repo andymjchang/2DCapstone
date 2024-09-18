@@ -39,6 +39,8 @@ position = Vector2(-260, 161)
 
 [node name="Player1" parent="." instance=ExtResource("4_dicbs")]
 position = Vector2(-288, 55)
+scale = Vector2(1, 1)
 
 [node name="Player2" parent="." instance=ExtResource("5_j7ls8")]
 position = Vector2(-307, -101)
+scale = Vector2(1, 1)

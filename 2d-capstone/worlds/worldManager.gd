@@ -48,8 +48,8 @@ func _ready():
 	#self.checkGameOver.connect(_onCheckGameOver)
 
 	# Getting nodes to manage
-	player1 = get_node("Player1")
-	player2 = get_node("Player2")
+	player1 = get_node("players").get_node("Player1")
+	player2 = get_node("players").get_node("Player2")
 	# Prep players
 	player1.editing = false
 	player2.editing = false
