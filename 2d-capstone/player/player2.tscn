@@ -1,11 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://dakwrycm2d4ei"]
+[gd_scene load_steps=6 format=3 uid="uid://dakwrycm2d4ei"]
 
-[ext_resource type="PackedScene" uid="uid://ddhmsyfxae2qi" path="res://player/player.tscn" id="1_n4oaj"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_yl2m7"]
 [ext_resource type="Texture2D" uid="uid://8ka2tcx6hk3p" path="res://player/player2.png" id="2_1yk2g"]
 
-[node name="Player2" instance=ExtResource("1_n4oaj")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
+size = Vector2(32, 32)
 
-[node name="ProtoMc" parent="." index="2"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nopuc"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
+size = Vector2(32, 32)
+
+[node name="Player2" type="CharacterBody2D" groups=["players"]]
+scale = Vector2(4, 4)
+script = ExtResource("1_yl2m7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_44r6d")
+
+[node name="ProtoMc" type="Sprite2D" parent="."]
 position = Vector2(1.52791, 0.625757)
 scale = Vector2(0.369442, 0.344885)
 texture = ExtResource("2_1yk2g")
+
+[node name="AttackHitbox" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_nopuc")
+disabled = true
+
+[node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="CheckpointHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
+shape = SubResource("RectangleShape2D_s4g51")

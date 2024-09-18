@@ -10,6 +10,7 @@ var currentPosition : Vector2 = Vector2(450, 450)
 var trackingPosition : bool = false
 var defaultSpawnPosition = Vector2(450, 450)
 var timeHeld = 0.0
+var saveFileName 
 
 @export var testBlock : PackedScene
 @export var actionIndicator : PackedScene
@@ -36,6 +37,7 @@ var stepSize : int = 150
 func _ready():
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
+	saveFileName = fileLabel.text
 	
 func _process(delta: float) -> void:
 	if (trackingPosition):
@@ -63,14 +65,6 @@ func _on_test_placer_button_down() -> void:
 	trackingPosition = true
 func _on_test_placer_2_button_down() -> void:
 	trackingPosition = true
-	var blockInstance = testBlock.instantiate()
-	testBlockList.add_child(blockInstance)
-	placeObject(blockInstance)
-
-func _on_test_placer_2_button_down() -> void:
-	var actionInstance = actionIndicator.instantiate()
-	actionIndicatorList.add_child(actionInstance)
-	placeObject(actionInstance)
 
 func _on_test_placer_3_button_down() -> void:
 	save_scene_to_file()

@@ -1,16 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://b7qrykawaxwle"]
+[gd_scene load_steps=11 format=3 uid="uid://s01cumpd4l0v"]
 
-[ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_xmixt"]
-[ext_resource type="PackedScene" uid="uid://bo0nbkm4luiga" path="res://levelEditor/testBlock.tscn" id="2_txv2d"]
-[ext_resource type="Texture2D" uid="uid://ot5u02sx1r5m" path="res://levelEditor/testBlock.png" id="3_wdwa5"]
-[ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_7lgca"]
-[ext_resource type="Texture2D" uid="uid://bhq62ks818th3" path="res://worldObjects/checkpoint.png" id="6_5ivmy"]
-[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="7_7a7c2"]
-[ext_resource type="Texture2D" uid="uid://bryw5h3235gyw" path="res://player/player.png" id="9_1stnj"]
-[ext_resource type="Texture2D" uid="uid://8ka2tcx6hk3p" path="res://player/player2.png" id="10_n7mj4"]
-[ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="11_mbc3m"]
-[ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="12_2ycv2"]
-[ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="13_7veap"]
+[ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_f4kd5"]
+[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_o507m"]
+[ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="6_6bo7p"]
+[ext_resource type="Texture2D" uid="uid://bhq62ks818th3" path="res://worldObjects/checkpoint.png" id="8_wnulp"]
+[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="9_548iw"]
+[ext_resource type="Texture2D" uid="uid://8ka2tcx6hk3p" path="res://player/player2.png" id="11_xcgak"]
+[ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="12_n43bp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]
+size = Vector2(150, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
 size = Vector2(32, 32)
@@ -19,142 +18,55 @@ size = Vector2(32, 32)
 size = Vector2(32, 32)
 
 [node name="objectList" type="Node2D"]
-script = ExtResource("1_xmixt")
+script = ExtResource("1_f4kd5")
 
 [node name="testBlocks" type="Node2D" parent="."]
 
-[node name="TestBlock" parent="testBlocks" instance=ExtResource("2_txv2d")]
-position = Vector2(450, 450)
+[node name="Block" parent="testBlocks" instance=ExtResource("2_o507m")]
+position = Vector2(900, 600)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/Block"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/TestBlock"]
-texture = ExtResource("3_wdwa5")
+[node name="sprite2D2" type="Node2D" parent="testBlocks/Block"]
 
-[node name="_Node2D_20" parent="testBlocks" instance=ExtResource("2_txv2d")]
-position = Vector2(1050, 450)
+[node name="_StaticBody2D_20" parent="testBlocks" instance=ExtResource("2_o507m")]
+position = Vector2(1050, 600)
 
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/_Node2D_20"]
-visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_20"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_tpulb")
 
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/_Node2D_20"]
-texture = ExtResource("3_wdwa5")
+[node name="sprite2D2" type="Node2D" parent="testBlocks/_StaticBody2D_20"]
 
-[node name="_Node2D_21" parent="testBlocks" instance=ExtResource("2_txv2d")]
-position = Vector2(900, 450)
+[node name="_StaticBody2D_21" parent="testBlocks" instance=ExtResource("2_o507m")]
+position = Vector2(750, 600)
 
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/_Node2D_21"]
-visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_21"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_tpulb")
 
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/_Node2D_21"]
-texture = ExtResource("3_wdwa5")
-
-[node name="_Node2D_22" parent="testBlocks" instance=ExtResource("2_txv2d")]
-position = Vector2(750, 450)
-
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/_Node2D_22"]
-visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
-
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/_Node2D_22"]
-texture = ExtResource("3_wdwa5")
-
-[node name="_Node2D_23" parent="testBlocks" instance=ExtResource("2_txv2d")]
-position = Vector2(600, 450)
-
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/_Node2D_23"]
-visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
-
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/_Node2D_23"]
-texture = ExtResource("3_wdwa5")
-
-[node name="_Node2D_24" parent="testBlocks" instance=ExtResource("2_txv2d")]
-position = Vector2(450, 900)
-
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/_Node2D_24"]
-visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
-
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/_Node2D_24"]
-texture = ExtResource("3_wdwa5")
-
-[node name="_Node2D_25" parent="testBlocks" instance=ExtResource("2_txv2d")]
-position = Vector2(600, 900)
-
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/_Node2D_25"]
-visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
-
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/_Node2D_25"]
-texture = ExtResource("3_wdwa5")
-
-[node name="_Node2D_26" parent="testBlocks" instance=ExtResource("2_txv2d")]
-position = Vector2(750, 900)
-
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/_Node2D_26"]
-visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
-
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/_Node2D_26"]
-texture = ExtResource("3_wdwa5")
-
-[node name="_Node2D_27" parent="testBlocks" instance=ExtResource("2_txv2d")]
-position = Vector2(900, 900)
-
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/_Node2D_27"]
-visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
-
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/_Node2D_27"]
-texture = ExtResource("3_wdwa5")
-
-[node name="_Node2D_28" parent="testBlocks" instance=ExtResource("2_txv2d")]
-position = Vector2(1200, 900)
-
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/_Node2D_28"]
-visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
-
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/_Node2D_28"]
-texture = ExtResource("3_wdwa5")
-
-[node name="_Node2D_29" parent="testBlocks" instance=ExtResource("2_txv2d")]
-position = Vector2(1050, 900)
-
-[node name="Polygon2D2" type="Polygon2D" parent="testBlocks/_Node2D_29"]
-visible = false
-polygon = PackedVector2Array(-10, -5, -10, 5, 10, 5, 10, -5)
-
-[node name="Sprite2D2" type="Sprite2D" parent="testBlocks/_Node2D_29"]
-texture = ExtResource("3_wdwa5")
+[node name="sprite2D2" type="Node2D" parent="testBlocks/_StaticBody2D_21"]
 
 [node name="actionIndicators" type="Node2D" parent="."]
 
 [node name="checkpoints" type="Node2D" parent="."]
 
-[node name="Checkpoint" parent="checkpoints" instance=ExtResource("4_7lgca")]
-position = Vector2(1050, 300)
+[node name="Checkpoint" parent="checkpoints" instance=ExtResource("6_6bo7p")]
+position = Vector2(450, 450)
 
 [node name="Point2" type="Marker2D" parent="checkpoints/Checkpoint"]
 
 [node name="Sprite2D2" type="Sprite2D" parent="checkpoints/Checkpoint"]
 position = Vector2(3.75509e-06, 3.8147e-06)
 scale = Vector2(0.91, 0.91)
-texture = ExtResource("6_5ivmy")
+texture = ExtResource("8_wnulp")
 
 [node name="players" type="Node2D" parent="."]
 
-[node name="Player2" parent="players" instance=ExtResource("7_7a7c2")]
-position = Vector2(450, 300)
-
-[node name="Sprite2D2" type="Sprite2D" parent="players/Player2"]
-visible = false
-texture = ExtResource("9_1stnj")
+[node name="Player2" parent="players" instance=ExtResource("9_548iw")]
+position = Vector2(750, 450)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="players/Player2"]
 shape = SubResource("RectangleShape2D_44r6d")
@@ -162,7 +74,7 @@ shape = SubResource("RectangleShape2D_44r6d")
 [node name="ProtoMc2" type="Sprite2D" parent="players/Player2"]
 position = Vector2(1.52791, 0.625757)
 scale = Vector2(0.369442, 0.344885)
-texture = ExtResource("10_n7mj4")
+texture = ExtResource("11_xcgak")
 
 [node name="AttackHitbox2" type="CollisionShape2D" parent="players/Player2"]
 visible = false
@@ -171,29 +83,7 @@ disabled = true
 
 [node name="CheckpointHitbox2" type="Area2D" parent="players/Player2"]
 
-[node name="Player1" parent="players" instance=ExtResource("11_mbc3m")]
-position = Vector2(450, 750)
-
-[node name="Sprite2D2" type="Sprite2D" parent="players/Player1"]
-visible = false
-texture = ExtResource("9_1stnj")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="players/Player1"]
-shape = SubResource("RectangleShape2D_44r6d")
-
-[node name="ProtoMc2" type="Sprite2D" parent="players/Player1"]
-position = Vector2(2.38419e-07, 0)
-scale = Vector2(0.368884, 0.344364)
-texture = ExtResource("12_2ycv2")
-
-[node name="AttackHitbox2" type="CollisionShape2D" parent="players/Player1"]
-visible = false
-shape = SubResource("RectangleShape2D_nopuc")
-disabled = true
-
-[node name="CheckpointHitbox2" type="Area2D" parent="players/Player1"]
-
-[node name="LevelUI" parent="." instance=ExtResource("13_7veap")]
+[node name="LevelUI" parent="." instance=ExtResource("12_n43bp")]
 
 [node name="Box2" type="VBoxContainer" parent="LevelUI"]
 anchors_preset = 8
@@ -213,4 +103,4 @@ theme_override_constants/separation = 50
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(959, 599)
+position = Vector2(959, 539)
