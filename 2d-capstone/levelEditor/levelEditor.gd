@@ -30,8 +30,8 @@ func _on_text_edit_text_changed() -> void:
 func _on_text_edit_2_text_changed() -> void:
 	if stepLabel.text.is_valid_int():
 		var step = int(stepLabel.text)
-		if (step < 10):
-			step = 0
+		if (step < 25):
+			step = 25
 		stepSize = step
 		measureLines.stepSize = stepSize
 		measureLines.queue_redraw()
