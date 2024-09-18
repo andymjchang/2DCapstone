@@ -9,6 +9,8 @@ var currentBlock
 @export var actionIndicator : PackedScene
 
 @onready var objectList = $objectList
+@onready var testBlockList = $objectList/testBlocks
+@onready var actionIndicatorList = $objectList/actionIndicators
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var measureLines = $measureLines
@@ -36,12 +38,12 @@ func _on_text_edit_2_text_changed() -> void:
 
 func _on_test_placer_button_down() -> void:
 	var blockInstance = testBlock.instantiate()
-	objectList.add_child(blockInstance)
+	testBlockList.add_child(blockInstance)
 	blockInstance.position = Vector2(450, 450)
 	currentBlock = blockInstance
 func _on_test_placer_2_button_down() -> void:
 	var actionInstance = actionIndicator.instantiate()
-	objectList.add_child(actionInstance)
+	actionIndicatorList.add_child(actionInstance)
 	actionInstance.position = Vector2(450, 450)
 	currentBlock = actionInstance
 func _on_test_placer_3_button_down() -> void:
@@ -63,6 +65,10 @@ func _on_up_button_button_down() -> void:
 	
 func save_scene_to_file():
 	var root = objectList
+	
+	#var worldManager = load(** world manager scene path **)
+	#var worldManagerInstance = worldManager.instantiate()
+	#root.add_child(worldManagerInstance)
 	
 	# Ensure all nested children have their owner set
 	_set_owner_recursive(root, root)

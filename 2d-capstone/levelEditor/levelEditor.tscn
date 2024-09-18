@@ -126,6 +126,10 @@ script = ExtResource("14_wt7o4")
 
 [node name="objectList" type="Node2D" parent="."]
 
+[node name="testBlocks" type="Node2D" parent="objectList"]
+
+[node name="actionIndicators" type="Node2D" parent="objectList"]
+
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
 [connection signal="button_down" from="UI/objectSelector/blockButton" to="." method="_on_test_placer_button_down"]
