@@ -53,7 +53,8 @@ func _process(delta: float) -> void:
 		self.global_position.x += 10
 		#go a certain amount of pixels up 
 	if Input.is_action_just_pressed("sizeUp"):
-		sizeUp()
+		#sizeUp()
+		sizeUpBeat()
 	
 	var pos = get_node("Block/CollisionShape2D2").global_position
 	colliderUpperLeft = pos - curBlock.extents
@@ -124,5 +125,36 @@ func sizeUp():
 				
 #func sizeDown():
 	#size down by one beatq
+
+#
+func sizeUpBeat():
+	#get the list of measures and size up the blockk by one of those
+	var stepSize = Globals.stepSize
+	print("current step size: ", stepSize)
+	print("Current blocks x: ", self.position.x)
+	var stepX = abs(colliderLowerRight.x+stepSize)
+	print("X we are stretching too: ", stepX)
+	var goalWidth = abs(stepX - self.colliderUpperLeft.x)
+	var orgWidth = abs(self.colliderLowerRight.x - self.colliderUpperLeft.x)
+	var newScale = goalWidth / orgWidth
+	self.scale.x = newScale
+	#updating the collision box and its extents so that it will reflect this new scaling
+	var oldMinX = colliderUpperLeft.x
+	curBlock = get_node("Block/CollisionShape2D2").shape as RectangleShape2D
+	var newExtents = Vector2(goalWidth / 2, curBlock.extents.y )
+	curBlock.extents = newExtents
+	var pos = self.position
+	colliderUpperLeft = pos - curBlock.extents
+	colliderLowerRight = pos + curBlock.extents
+	#grabbing the transform value so that we can correctly shift the newly scaled block
+	var toMove = abs(colliderUpperLeft.x - oldMinX)
+	var xDifference = abs(stepX- colliderUpperLeft.x)
+	#if toScale:
+	self.position.x += toMove
+	#toScale = false
+	#tempX = indicator.position.x
 	
+	
+func resize(beateList : ):
+	print("temp")
 #TODO add functionality 

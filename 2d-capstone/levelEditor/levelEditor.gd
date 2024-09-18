@@ -12,6 +12,7 @@ var currentBlock
 #TODO get rid of enemy block, should just be a normal platform
 @export var platformBlock: PackedScene
 @export var enemyCharacter : PackedScene
+@export var goalBlock : PackedScene
 
 
 @onready var objectList = $objectList
@@ -29,6 +30,7 @@ var stepSize : int = 150
 func _ready():
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
+	Globals.stepSize = stepSize
 
 func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():
@@ -113,8 +115,25 @@ func _set_owner_recursive(node: Node, root: Node):
 
 func _on_block_type_drop_down_item_selected(index: int) -> void:
 	#based on this instance
-	var platformBlockInstance = platformBlock.instantiate()
-	platformBlockList.add_child(platformBlockInstance)
-	platformBlockInstance.position = Vector2(450, 450)
-	currentBlock = platformBlockInstance
+	if index == 0:
+		#put a normal block
+		var platformBlockInstance = platformBlock.instantiate()
+		platformBlockList.add_child(platformBlockInstance)
+		platformBlockInstance.position = Vector2(450, 450)
+		currentBlock = platformBlockInstance
+	if index == 1:
+		#put a goal block
+		#design question: should we make a list of all the seperate block types?
+		var goalBlockInstance = goalBlock.instantiate()
+		platformBlockList.add_child(goalBlockInstance)
+		goalBlockInstance.position = Vector2(450, 450)
+		currentBlock = goalBlockInstance
+	if index ==  2:
+		print("idk what block to put here")
+		
+#TODO P button should extend currnt block/enemy by one measure
+# Q should move the enemy back by one button 
+# make the items reclickable
+# 
+	
 	
