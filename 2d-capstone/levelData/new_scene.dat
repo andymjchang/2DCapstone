@@ -1,7 +1,9 @@
 testBlocks
-900, 600
-750, 600
+450, 600
+600, 450
 actionIndicators
 checkpoints
-players
-killFloors
+player1
+600, 300
+player2
+450, 450

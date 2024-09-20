@@ -39,7 +39,8 @@ var isPlaying = false
 @onready var enemyList = $objectList/enemies
 @onready var actionIndicatorList = $objectList/actionIndicators
 @onready var checkpointList = $objectList/checkpoints
-@onready var playerList = $objectList/players
+@onready var player1List = $objectList/player1
+@onready var player2List = $objectList/player2
 @onready var killFloorList = $objectList/killFloors
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
@@ -100,25 +101,25 @@ func _on_exit_button_pressed() -> void:
 	get_tree().quit()
 	
 func _on_rac_button_button_up() -> void:
-	if !playerList.has_node("Player1"):
+	if !player1List.has_node("Player1"):
 		var player1Instance = player1.instantiate()
 		player1Instance.editing = true
 		player1Instance.add_to_group("Players")
-		playerList.add_child(player1Instance)
+		player1List.add_child(player1Instance)
 		placeObject(player1Instance)
 	else:
-		currentBlock = playerList.get_node("Player1")
+		currentBlock = player1List.get_node("Player1")
 		reset_drag_tracking()
 
 func _on_mouse_button_button_up() -> void:
-	if !playerList.has_node("Player2"):
+	if !player2List.has_node("Player2"):
 		var player2Instance = player2.instantiate()
 		player2Instance.editing = true
 		player2Instance.add_to_group("Players")
-		playerList.add_child(player2Instance)
+		player2List.add_child(player2Instance)
 		placeObject(player2Instance)
 	else:
-		currentBlock = playerList.get_node("Player2")
+		currentBlock = player2List.get_node("Player2")
 		reset_drag_tracking()
 
 func _on_play_audio_button_pressed() -> void:
