@@ -157,52 +157,52 @@ func _on_up_button_button_down() -> void:
 		killFDict[currentBlock].position.y -= stepSize
 	
 func save_scene_to_file():
-	var newRoot = objectList.duplicate()
-	newRoot.set_script(worldManager)
-	#var worldManager = load(** world manager scene path **)
-	#var worldManagerInstance = worldManager.instantiate()
-	#root.add_child(worldManagerInstance)
-	# Add essential level objects
-	# UI
-	newRoot.add_child(levelUI.instantiate())
+	var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
+	for itemList in objectList.get_children():
+		print("Item list: ", itemList.name)
+		newFile.store_string(itemList.name + "\n")
+		for item in itemList.get_children():
+			#newFile.store_string(item.name + "\n")
+			newFile.store_string(str(item.position.x) + ", " + str(item.position.y) + "\n")
+			print("Storing: ", item.name)
+			print("Storing pos: ", str(item.position.x) + ", " + str(item.position.y))
 
-	# Camera
-	var newCam = Camera2D.new()
-	newCam.position.x = get_viewport().size.x / 2
-	newCam.position.y = get_viewport().size.y / 2
-	newCam.set_script(cameraScript)
-	newCam.name = "Camera2D"
-	
-	# BG
-	var newBG = Sprite2D.new()
-	newBG.texture = load("res://backgrounds/bkg_scroll.png")
-	newBG.scale.x = 0.5
-	newBG.scale.y = 0.5
-	newCam.add_child(newBG)
-	
-	# Audio
-	var newAudio = AudioStreamPlayer2D.new()
-	newAudio.stream = load("res://audioTracks/Sprint2_GminBmaj_156bpm.mp3")
-	newCam.add_child(newAudio)
-	
-	newRoot.add_child(newCam)
+	#newFile.store_string("test")
+	pass
+	# var newRoot = objectList.duplicate()
+	# newRoot.set_script(worldManager)
+	# #var worldManager = load(** world manager scene path **)
+	# #var worldManagerInstance = worldManager.instantiate()
+	# #root.add_child(worldManagerInstance)
 
-	# Ensure all nested children have their owner set
-	_set_owner_recursive(newRoot, newRoot)
+	# # Add essential level objects
+
+	# # UI
+	# newRoot.add_child(levelUI.instantiate())
+
+	# # Camera
+	# var newCam = Camera2D.new()
+	# newCam.position.x = get_viewport().size.x / 2
+	# newCam.position.y = get_viewport().size.y / 2
+	# newCam.name = "Camera2D"
+	# newRoot.add_child(newCam)
 	
-	# Pack scene
-	var new_scene = PackedScene.new()
-	var result = new_scene.pack(newRoot)
-	if result == OK:
-		# Save scene
-		var scene_path = "res://savedScenes/" + saveFileName + ".tscn"
-		var error = ResourceSaver.save(new_scene, scene_path)
-		if error == OK:
-			print("Scene saved successfully.")
-		else:
-			print("Failed to save scene. Error code: ", error)
-	else:
-		print("Failed to pack scene.")
+	# # Ensure all nested children have their owner set
+	# _set_owner_recursive(newRoot, newRoot)
+	
+	# # Pack scene
+	# var new_scene = PackedScene.new()
+	# var result = new_scene.pack(newRoot)
+	# if result == OK:
+	# 	# Save scene
+	# 	var scene_path = "res://savedScenes/" + saveFileName + ".tscn"
+	# 	var error = ResourceSaver.save(new_scene, scene_path)
+	# 	if error == OK:
+	# 		print("Scene saved successfully.")
+	# 	else:
+	# 		print("Failed to save scene. Error code: ", error)
+	# else:
+	# 	print("Failed to pack scene.")
 
 # Recursive function to set owner for all children
 func _set_owner_recursive(node: Node, root: Node):
