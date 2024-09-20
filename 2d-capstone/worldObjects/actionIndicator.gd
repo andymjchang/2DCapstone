@@ -1,4 +1,4 @@
-extends Node2D
+extends BaseObject
 
 @export var startingScale : float
 @export var animation_time: float = 1.0
@@ -6,14 +6,12 @@ var target_time: float = 1.0
 var elapsed_time: float = 0
 var active: bool = false
 var starting_scale
-var blockType = "actionIndicator"
 @onready var actionIndicatorManager
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
 @onready var timer = $Timer
 signal scored(indicator_position)
 
-var index = 0
 
 # Start with higher scale and 0 opacity
 func _ready() -> void:
@@ -27,6 +25,7 @@ func _ready() -> void:
 	# currently camera moves at 300 pixels / second
 	var time = position.x / 388
 	set_target_time(time)
+	self.blockType = "actionIndicator"
 
 # Set the time over which the transition occurs
 func set_target_time(time: float) -> void:
@@ -72,5 +71,5 @@ func _on_timer_timeout() -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("click"):
 		print("click")
-		get_parent().get_parent().get_parent().emit_signal("objectClicked",index)
+		get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType)
 	pass # Replace with function body.

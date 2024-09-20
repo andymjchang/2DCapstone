@@ -143,5 +143,5 @@ func _onRelocate(nearestPoint):
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("click"):
 		print("click")
-		get_parent().get_parent().get_parent().emit_signal("objectClicked",index)
+		get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType)
 	pass # Replace with function body.

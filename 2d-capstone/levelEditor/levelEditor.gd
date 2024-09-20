@@ -31,6 +31,7 @@ var isPlaying = false
 @export var player1 : PackedScene
 @export var player2 : PackedScene
 @export var killFloor : PackedScene
+@export var baseObject : PackedScene
 
 
 @onready var objectList = $objectList
@@ -72,7 +73,7 @@ func _on_text_edit_text_changed() -> void:
 		measureLines.beatsPerMeasure = bpm
 		measureLines.queue_redraw()
 func _on_text_edit_2_text_changed() -> void:
-	if stepLabel.text.is_valid_int():
+	if stepLabel.text.is_valid_int() and currentBlock.blockType != "actionIndicator":
 		var step = int(stepLabel.text)
 		if (step < 25):
 			step = 25
@@ -133,6 +134,8 @@ func _on_play_audio_button_pressed() -> void:
 func placeObject(placedNode):
 	placedNode.position = Vector2(450, 450)
 	currentBlock = placedNode
+	
+	
 	
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
@@ -244,6 +247,8 @@ func startBlockOnNearstBeat(blockInstance):
 func snap_position(pos : Vector2) -> Vector2:
 	var x = round_to_step(pos.x)
 	var y = round_to_step(pos.y)
+	
+	#for 
 	return Vector2(x, y)
 	
 func round_to_step(value) -> int:
@@ -256,14 +261,15 @@ func place_block(instance, parent):
 		placePos = currentPosition
 	
 	parent.add_child(instance)
-
+	if instance.blockType == "actionIndicator":
+		stepSize=50
 	instance.index = lEindex
 	lEindex+=1
 	instance.position = snap_position(placePos)
 	#now add a kill floor right below it, only want to do this with blocl
-	print("instnace name ", instance.name)
 	if instance.blockType == "normal":
-		var blockBounds = instance.activeSprite.texture.get_size()*instance.scale/2
+		print("block type: ", instance.get_child(0))
+		var blockBounds = instance.get_child(0).activeSprite.texture.get_size()*instance.scale/2
 		var upperLeftCorner = (instance.position - (blockBounds))/2
 		var lowerRightCorner = (instance.position + (blockBounds))/2
 		
@@ -295,48 +301,67 @@ func reset_drag_tracking():
 
 func _on_block_button_button_up() -> void:
 	var blockInstance = testBlock.instantiate()
-	place_block(blockInstance, testBlockList)
+	var blockParent = baseObject.instantiate()
+	blockParent.add_child(blockInstance)
+	blockParent.blockType = "normal"
+	testBlockList.add_child(blockParent)
+	place_block(blockParent, testBlockList)
 func _on_action_button_button_up() -> void:
 	var actionInstance = actionIndicator.instantiate()
-	place_block(actionInstance, actionIndicatorList)
+	var actionParent = baseObject.instantiate()
+	actionParent.add_child(actionInstance)
+	actionParent.blockType = "actionIndicator"
+	actionIndicatorList.add_child(actionParent)
+	place_block(actionParent, actionIndicatorList)
 func _on_goal_button_button_up() -> void:
 	var goalInstance = goalBlock.instantiate()
-	place_block(goalInstance, testBlockList)
+	var goalParent = baseObject.instantiate()
+	goalParent.add_child(goalInstance)
+	goalParent.blockType = "goalBlock"
+	testBlockList.add_child(goalParent)
+	place_block(goalParent, testBlockList)
 func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()
-	place_block(enemyInstance, testBlockList)
+	var enemyParent = baseObject.instantiate()
+	enemyParent.add_child(enemyInstance)
+	enemyParent.blockType = "enemy"
+	enemyList.add_child(enemyParent)
+	place_block(enemyParent, testBlockList)
 
 			
-func _onObjectClicked(index : int):
-	print("made it here",index)
+func _onObjectClicked(index : int, blockType: String):
+	print("made it here shadow",index)
 
-	var list = get_node("objectList/testBlocks").get_children()
+	print("block type: ", blockType)
+	var list = getList(blockType).get_children()
 	print("list ", list)
 	for block in list:
 		if block.index == index:
 			currentBlock = block
 			return
-			
-	list = get_node("objectList/checkpoints").get_children()
-	for check in list:
-		if check.index == index:
-			currentBlock = check
-			return
-		
-	list = get_node("objectList/actionIndicators").get_children()
-	for ai in list:
-		if ai.index == index:
-			currentBlock = ai
-			return
-			
-	list = get_node("objectList/players").get_children()
-	for player in list:
-		if player.index == index:
-			currentBlock = player
-			return
-			
+						
 
+func getList(blockType : String) -> Node:
+	if blockType == "actionIndicator":
+		print("made it to 1 block list check")
+		return get_node("objectList/actionIndicatorManager")
+	if blockType == "normal":
+		print("made it to 2 block list check")
+		return get_node("objectList/testBlocks")
+	if blockType == "enemy":
+		print("made it to 3 block list check")
+		return get_node("objectList/players")
+	if blockType == "player":
+		print("made it to 4 block list check")
+		return get_node("objectList/players")
+	if blockType == "goalBlock":
+		print("made it to 5 block list check")
+		print("made it to goal block list check")
+		return get_node("objectList/testBlocks")
+	if blockType == "checkpoint":
+		return get_node("objectList/checkpoints")
 		
+	return null
 		
 	
 		
