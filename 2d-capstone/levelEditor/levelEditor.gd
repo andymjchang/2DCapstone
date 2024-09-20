@@ -268,8 +268,7 @@ func place_block(instance, parent):
 	instance.position = snap_position(placePos)
 	#now add a kill floor right below it, only want to do this with blocl
 	if instance.blockType == "normal":
-		print("block type: ", instance.get_child(0))
-		var blockBounds = instance.get_child(0).activeSprite.texture.get_size()*instance.scale/2
+		var blockBounds = instance.get_child(1).activeSprite.texture.get_size()*instance.scale/2
 		var upperLeftCorner = (instance.position - (blockBounds))/2
 		var lowerRightCorner = (instance.position + (blockBounds))/2
 		
