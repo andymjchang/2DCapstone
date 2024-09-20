@@ -1,17 +1,17 @@
-extends BaseObject
+extends Node2D
 signal playerspotted
 signal takeDamage
 
 var count = 0
 var ifDead = false
 var secondTime = false
-#var blockType = "enemy"
+var blockType = "enemy"
 
 var up
 var down 
 var left
 var right
-#var index = 0
+var index = 0
 
 var soundPlayer := AudioStreamPlayer.new()
 
@@ -23,7 +23,6 @@ func _ready() -> void:
 	down = "down"
 	left = "left"
 	right = "right"
-	self.blockType = "enemy"
 	pass # Replace with function body.
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,5 +43,12 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 		body.emit_signal("takeDamage",1)
 	pass # Replace with function body.
 
+func snapToNextBeat():
+	var stepSize = Globals.stepSize
+	print("step size: ", stepSize)
+	self.position.x += stepSize
+	
+
+		
 	
 	

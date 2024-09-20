@@ -38,7 +38,7 @@ var isPlaying = false
 @onready var platformBlockList = $objectList/platformBlocks
 @onready var goalBlockList = $objectList/goalBlocks
 @onready var enemyList = $objectList/enemies
-@onready var actionIndicatorList = $objectList/actionIndicatorManager
+@onready var actionIndicatorList = $objectList/actionIndicators
 @onready var checkpointList = $objectList/checkpoints
 @onready var playerList = $objectList/players
 @onready var killFloorList = $objectList/killFloors
@@ -322,15 +322,12 @@ func _onObjectClicked(index : int, blockType: String):
 		if block.index == index:
 			currentBlock = block
 			_on_text_edit_2_text_changed()
-			if (timeHeld >= holdTime):
-				currentBlock.get_child(0).position = currentPosition
-				#reset_drag_tracking()
 			return
 						
 
 func getList(blockType : String) -> Node:
 	if blockType == "actionIndicator":
-		return get_node("objectList/actionIndicatorManager")
+		return get_node("objectList/actionIndicators")
 	if blockType == "normal":
 		return get_node("objectList/platformBlocks")
 	if blockType == "enemy":
@@ -344,6 +341,9 @@ func getList(blockType : String) -> Node:
 	if blockType == "killFloor":
 		return get_node("objectList/killFloors")
 	return null
+	
+func setTrackingPosition(setVal : bool) -> void:
+	trackingPosition = setVal
 		
 	
 		
