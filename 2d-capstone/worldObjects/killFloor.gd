@@ -3,7 +3,6 @@ extends StaticBody2D
 var area
 var intersecting = false
 var downsize
-var index = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#area = get_node("Area2d")
@@ -13,9 +12,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("downsize"):
+	#this seems like a lot of get parents
+	if Input.is_action_just_pressed("downsize") and self.get_parent().get_parent().get_parent().get_parent().currentBlock.index == self.get_parent().index :
 		self.scale/=1.05
-	if Input.is_action_just_pressed("sizeUp"):
+	if Input.is_action_just_pressed("sizeUp")  and self.get_parent().get_parent().get_parent().get_parent().currentBlock.index == self.get_parent().index :
 		self.scale*=1.05
 	pass
 	
@@ -36,3 +36,8 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("blocks"):
 		intersecting = false
 	pass # Replace with function body.
+	
+#func temp () -> void:
+	#print("shadow look here: ",get_node("Area2D") )
+	#self.get_parent().setArea2D(get_node("Area2D").duplicate())
+	

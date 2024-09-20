@@ -33,10 +33,10 @@ var isPlaying = false
 @export var killFloor : PackedScene
 @export var baseObject : PackedScene
 
-
 @onready var objectList = $objectList
 @onready var testBlockList = $objectList/testBlocks
 @onready var platformBlockList = $objectList/platformBlocks
+@onready var goalBlockList = $objectList/goalBlocks
 @onready var enemyList = $objectList/enemies
 @onready var actionIndicatorList = $objectList/actionIndicatorManager
 @onready var checkpointList = $objectList/checkpoints
@@ -154,23 +154,15 @@ func placeObject(placedNode):
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x += stepSize
-	if currentBlock.blockType == "normal":
-		killFDict[currentBlock].position.x += stepSize
 func _on_left_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x -= stepSize
-	if currentBlock.blockType == "normal":
-		killFDict[currentBlock].position.x -= stepSize
 func _on_down_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y += stepSize
-	if currentBlock.blockType == "normal":
-		killFDict[currentBlock].position.y += stepSize
 func _on_up_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y -= stepSize
-	if currentBlock.blockType == "normal":
-		killFDict[currentBlock].position.y -= stepSize
 	
 func save_scene_to_file():
 	var newRoot = objectList.duplicate()
@@ -274,7 +266,7 @@ func place_block(instance, parent):
 	if (timeHeld >= holdTime):
 		placePos = currentPosition
 	
-	parent.add_child(instance)
+	parent.add_child(instance)	
 	instance.setArea2D(instance.get_child(0).get_node("Area2D"))
 	instance.index = lEindex
 	lEindex+=1
@@ -294,35 +286,33 @@ func _on_block_button_button_up() -> void:
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = "normal"
-	testBlockList.add_child(blockParent)
-	place_block(blockParent, testBlockList)
+	place_block(blockParent, platformBlockList)
 func _on_action_button_button_up() -> void:
 	var actionInstance = actionIndicator.instantiate()
 	var actionParent = baseObject.instantiate()
 	actionParent.add_child(actionInstance)
 	actionParent.blockType = "actionIndicator"
-	actionIndicatorList.add_child(actionParent)
 	place_block(actionParent, actionIndicatorList)
 func _on_goal_button_button_up() -> void:
 	var goalInstance = goalBlock.instantiate()
 	var goalParent = baseObject.instantiate()
 	goalParent.add_child(goalInstance)
 	goalParent.blockType = "goalBlock"
-	testBlockList.add_child(goalParent)
-	place_block(goalParent, testBlockList)
+	place_block(goalParent, goalBlockList)
 func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()
 	var enemyParent = baseObject.instantiate()
 	enemyParent.add_child(enemyInstance)
 	enemyParent.blockType = "enemy"
-	playerList.add_child(enemyParent)
-	place_block(enemyParent, testBlockList)
+	place_block(enemyParent, enemyList)
+	
 func _on_kill_floor_button_button_up() -> void:
 	var kfInstance = killFloor.instantiate()
 	var kfParent = baseObject.instantiate()
 	kfParent.add_child(kfInstance)
+	print("button works")
 	kfParent.blockType = "killFloor"
-	killFloorList.add_child(kfParent)
+	kfParent.temp()
 	place_block(kfParent, killFloorList)
 
 
@@ -340,15 +330,17 @@ func getList(blockType : String) -> Node:
 	if blockType == "actionIndicator":
 		return get_node("objectList/actionIndicatorManager")
 	if blockType == "normal":
-		return get_node("objectList/testBlocks")
+		return get_node("objectList/platformBlocks")
 	if blockType == "enemy":
-		return get_node("objectList/players")
+		return get_node("objectList/enemies")
 	if blockType == "player":
 		return get_node("objectList/players")
 	if blockType == "goalBlock":
-		return get_node("objectList/testBlocks")
+		return get_node("objectList/goalBlocks")
 	if blockType == "checkpoint":
 		return get_node("objectList/checkpoints")
+	if blockType == "killFloor":
+		return get_node("objectList/killFloors")
 	return null
 		
 	
