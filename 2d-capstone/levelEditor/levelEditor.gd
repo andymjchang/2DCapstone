@@ -115,8 +115,8 @@ func _on_rac_button_button_up() -> void:
 		playerParent.add_child(player1Instance)
 		playerParent.blockType = "player"
 		playerList.add_child(playerParent)
-		#placeObject(playerParent) <--why this one?
-		place_block(playerParent, playerList)
+		placeObject(playerParent)
+		#place_block(playerParent, playerList)
 	else:
 		currentBlock = playerList.get_node("Player1")
 		reset_drag_tracking()
@@ -130,8 +130,8 @@ func _on_mouse_button_button_up() -> void:
 		playerParent.add_child(player2Instance)
 		playerParent.blockType = "player"
 		playerList.add_child(playerParent)
-		#placeObject(playerParent)
-		place_block(playerParent, playerList)
+		placeObject(playerParent)
+		#place_block(playerParent, playerList)
 	else:
 		currentBlock = playerList.get_node("Player2")
 		reset_drag_tracking()
@@ -148,6 +148,9 @@ func _on_play_audio_button_pressed() -> void:
 
 func placeObject(placedNode):
 	placedNode.position = Vector2(450, 450)
+	placedNode.setArea2D(placedNode.get_child(0).get_node("Area2D"))
+	placedNode.index = lEindex
+	lEindex+=1
 	currentBlock = placedNode
 	
 	
