@@ -3,7 +3,7 @@ extends StaticBody2D
 var area
 var intersecting = false
 var downsize
-
+var index = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#area = get_node("Area2d")
@@ -13,9 +13,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("downsize"):
+	if Input.is_action_just_pressed("downsize") and self.get_parent().get_parent().get_parent().currentBlock.index == index :
 		self.scale/=1.05
-	if Input.is_action_just_pressed("sizeUp"):
+	if Input.is_action_just_pressed("sizeUp")  and self.get_parent().get_parent().get_parent().currentBlock.index == index :
 		self.scale*=1.05
 	pass
 	
@@ -23,7 +23,7 @@ func _onKillFloorBodyEntered(body:Node2D):
 	if "players" in body.get_groups():
 		print(body, " Entered")
 		body.emit_signal("takeDamage", 1)
-		get_parent().emit_signal("resetPosition", body)
+		get_parent().get_parent().emit_signal("resetPosition", body)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

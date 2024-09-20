@@ -1,16 +1,17 @@
-extends Node2D
+extends BaseObject
 signal playerspotted
 signal takeDamage
 
 var count = 0
 var ifDead = false
 var secondTime = false
+#var blockType = "enemy"
 
 var up
 var down 
 var left
 var right
-var index = 0
+#var index = 0
 
 var soundPlayer := AudioStreamPlayer.new()
 
@@ -22,6 +23,7 @@ func _ready() -> void:
 	down = "down"
 	left = "left"
 	right = "right"
+	self.blockType = "enemy"
 	pass # Replace with function body.
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,18 +31,6 @@ func _process(delta: float) -> void:
 	if ifDead:
 		$Sprite2D.position.y += 4
 		$Sprite2D.rotation = 0.8
-	if Input.is_action_just_pressed(up):
-		self.global_position.y -= 10
-	if Input.is_action_just_pressed(down):
-		self.global_position.y += 10
-	if Input.is_action_just_pressed(left):
-		self.global_position.x -= 10
-	if Input.is_action_just_pressed(right):
-		self.global_position.x += 10
-		#go a certain amount of pixels up 
-	if Input.is_action_just_pressed("sizeUp"):
-		#sizeUp()
-		snapToNextBeat()
 		
 	
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
@@ -54,19 +44,5 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 		body.emit_signal("takeDamage",1)
 	pass # Replace with function body.
 
-func snapToNextBeat():
-	var stepSize = Globals.stepSize
-	print("step size: ", stepSize)
-	self.position.x += stepSize
-	
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event.is_action_pressed("click"):
-		print("click")
-		get_parent().get_parent().get_parent().emit_signal("objectClicked",index)
-	pass # Replace with function body.
-
-	
-
-		
 	
 	

@@ -25,19 +25,20 @@ var isPlaying = false
 @export var goalBlock : PackedScene
 @export var worldManager : Script
 @export var cameraScript : Script
+@export var actionManager : Script
+@export var killFloorScript : Script
 @export var levelUI : PackedScene
 @export var player1 : PackedScene
 @export var player2 : PackedScene
 @export var killFloor : PackedScene
-
-
+@export var baseObject : PackedScene
 
 
 @onready var objectList = $objectList
 @onready var testBlockList = $objectList/testBlocks
 @onready var platformBlockList = $objectList/platformBlocks
 @onready var enemyList = $objectList/enemies
-@onready var actionIndicatorList = $objectList/actionIndicators
+@onready var actionIndicatorList = $objectList/actionIndicatorManager
 @onready var checkpointList = $objectList/checkpoints
 @onready var player1List = $objectList/player1
 @onready var player2List = $objectList/player2
@@ -48,10 +49,9 @@ var isPlaying = false
 @onready var measureLines = $measureLines
 @onready var camera = $Camera2D
 
-
-
 var bpm : int = 4
 var stepSize : int = 150
+
 
 func _ready():
 	self.objectClicked.connect(_onObjectClicked)
@@ -78,6 +78,8 @@ func _on_text_edit_2_text_changed() -> void:
 		var step = int(stepLabel.text)
 		if (step < 25):
 			step = 25
+		if currentBlock.blockType == "actionIndicator":
+			step = 50
 		stepSize = step
 		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
@@ -88,38 +90,49 @@ func _on_save_button_down() -> void:
 	
 func _on_text_edit_3_text_changed() -> void:
 	saveFileName = fileLabel.text
-
+	
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
-
-
+	
 func _on_checkpoint_button_button_up() -> void:
 	var checkpointInstance = checkpoint.instantiate()
-	place_block(checkpointInstance, checkpointList)
-
+	var checkParent = baseObject.instantiate()
+	checkParent.add_child(checkpointInstance)
+	checkParent.blockType = "checkpoint"
+	checkpointList.add_child(checkParent)
+	place_block(checkParent, checkpointList)
+	
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
 	
 func _on_rac_button_button_up() -> void:
-	if !player1List.has_node("Player1"):
+	if !player1List.has_node("baseObject"):
 		var player1Instance = player1.instantiate()
 		player1Instance.editing = true
 		player1Instance.add_to_group("Players")
-		player1List.add_child(player1Instance)
-		placeObject(player1Instance)
+		var playerParent = baseObject.instantiate()
+		playerParent.add_child(player1Instance)
+		playerParent.blockType = "player1"
+		player1List.add_child(playerParent)
+		placeObject(playerParent)
+		#place_block(playerParent, playerList)
 	else:
-		currentBlock = player1List.get_node("Player1")
+		currentBlock = player1List.get_node("baseObject").get_node("Player1")
 		reset_drag_tracking()
 
 func _on_mouse_button_button_up() -> void:
-	if !player2List.has_node("Player2"):
+	if !player2List.has_node("baseObject"):
 		var player2Instance = player2.instantiate()
 		player2Instance.editing = true
 		player2Instance.add_to_group("Players")
-		player2List.add_child(player2Instance)
-		placeObject(player2Instance)
+		var playerParent = baseObject.instantiate()
+		playerParent.add_child(player2Instance)
+		playerParent.blockType = "player2"
+		player2List.add_child(playerParent)
+		placeObject(playerParent)
+		#place_block(playerParent, playerList)
 	else:
-		currentBlock = player2List.get_node("Player2")
+		currentBlock = player2List.get_node("baseObject").get_node("Player2")
 		reset_drag_tracking()
 
 func _on_play_audio_button_pressed() -> void:
@@ -131,87 +144,55 @@ func _on_play_audio_button_pressed() -> void:
 		isPlaying = false
 		get_node("UI").get_node("objectSelector").get_node("playAudioButton").texture_normal = load("res://levelEditor/programmerArtAssets/playAudio.png")
 		objectList.get_node("audio").stop()
-
+		
 func placeObject(placedNode):
 	placedNode.position = Vector2(450, 450)
+	placedNode.setArea2D(placedNode.get_child(0).get_node("Area2D"))
+	placedNode.index = lEindex
+	lEindex+=1
 	currentBlock = placedNode
 	
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x += stepSize
-	if currentBlock.name == "Block":
+	if currentBlock.blockType == "normal":
 		killFDict[currentBlock].position.x += stepSize
 func _on_left_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x -= stepSize
-	if currentBlock.name == "Block":
+	if currentBlock.blockType == "normal":
 		killFDict[currentBlock].position.x -= stepSize
 func _on_down_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y += stepSize
-	if currentBlock.name == "Block":
+	if currentBlock.blockType == "normal":
 		killFDict[currentBlock].position.y += stepSize
 func _on_up_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y -= stepSize
-	if currentBlock.name == "Block":
+	if currentBlock.blockType == "normal":
 		killFDict[currentBlock].position.y -= stepSize
 	
 func save_scene_to_file():
-	var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
-	for itemList in objectList.get_children():
-		print("Item list: ", itemList.name)
-		newFile.store_string(itemList.name + "\n")
-		for item in itemList.get_children():
-			#newFile.store_string(item.name + "\n")
-			newFile.store_string(str(item.position.x) + ", " + str(item.position.y) + "\n")
-			print("Storing: ", item.name)
-			print("Storing pos: ", str(item.position.x) + ", " + str(item.position.y))
-
-	#newFile.store_string("test")
-	pass
-	# var newRoot = objectList.duplicate()
-	# newRoot.set_script(worldManager)
-	# #var worldManager = load(** world manager scene path **)
-	# #var worldManagerInstance = worldManager.instantiate()
-	# #root.add_child(worldManagerInstance)
-
-	# # Add essential level objects
-
-	# # UI
-	# newRoot.add_child(levelUI.instantiate())
-
-	# # Camera
-	# var newCam = Camera2D.new()
-	# newCam.position.x = get_viewport().size.x / 2
-	# newCam.position.y = get_viewport().size.y / 2
-	# newCam.name = "Camera2D"
-	# newRoot.add_child(newCam)
-	
-	# # Ensure all nested children have their owner set
-	# _set_owner_recursive(newRoot, newRoot)
-	
-	# # Pack scene
-	# var new_scene = PackedScene.new()
-	# var result = new_scene.pack(newRoot)
-	# if result == OK:
-	# 	# Save scene
-	# 	var scene_path = "res://savedScenes/" + saveFileName + ".tscn"
-	# 	var error = ResourceSaver.save(new_scene, scene_path)
-	# 	if error == OK:
-	# 		print("Scene saved successfully.")
-	# 	else:
-	# 		print("Failed to save scene. Error code: ", error)
-	# else:
-	# 	print("Failed to pack scene.")
-
+	if player1List.get_child_count() == 1 and player2List.get_child_count() == 1:
+		var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
+		for itemList in objectList.get_children():
+			print("Item list: ", itemList.name)
+			newFile.store_string(itemList.name + "\n")
+			for item in itemList.get_children():
+				#newFile.store_string(item.name + "\n")
+				newFile.store_string(str(item.position.x) + ", " + str(item.position.y) + "\n")
+				print("Storing: ", item.name)
+				print("Storing pos: ", str(item.position.x) + ", " + str(item.position.y))
+	else:
+		print("Unable to save. Need 2 players.")
+		
 # Recursive function to set owner for all children
 func _set_owner_recursive(node: Node, root: Node):
 	for child in node.get_children():
 		child.set_owner(root)
 		_set_owner_recursive(child, root)
-
-
+		
 func _on_block_type_drop_down_item_selected(index: int) -> void:
 	#based on this instance
 	if index == 0:
@@ -241,10 +222,10 @@ func _on_block_type_drop_down_item_selected(index: int) -> void:
 func startBlockOnNearstBeat(blockInstance):
 	var blockX = blockInstance.position.x
 	
-		
 func snap_position(pos : Vector2) -> Vector2:
 	var x = round_to_step(pos.x)
 	var y = round_to_step(pos.y)
+	
 	return Vector2(x, y)
 	
 func round_to_step(value) -> int:
@@ -257,33 +238,34 @@ func place_block(instance, parent):
 		placePos = currentPosition
 	
 	parent.add_child(instance)
-
+	instance.setArea2D(instance.get_child(0).get_node("Area2D"))
 	instance.index = lEindex
 	lEindex+=1
 	instance.position = snap_position(placePos)
 	#now add a kill floor right below it, only want to do this with blocl
-	print("instnace name ", instance.name)
-	if instance.name == "Block":
-		var blockBounds = instance.activeSprite.texture.get_size()*instance.scale/2
+	if instance.blockType == "normal":
+		var blockBounds = instance.get_child(0).activeSprite.texture.get_size()*instance.scale/2
 		var upperLeftCorner = (instance.position - (blockBounds))/2
 		var lowerRightCorner = (instance.position + (blockBounds))/2
 		
 		#kfloor deets
+		#var kFloorChild = killFloor.instantiate()
+		#var kFloorInstance = baseObject.instantiate()
 		var kFloorInstance = killFloor.instantiate()
+		#kFloorInstance.add_child(kFloorChild)
+		kFloorInstance.index = lEindex - 1
+		kFloorInstance.set_script(killFloorScript)
 		killFloorList.add_child(kFloorInstance)
 		var kFloorBounds = kFloorInstance as RectangleShape2D
 		var kUpperLeftCorner = instance.position - blockBounds
 		var kLowerRightCorner = instance.position + blockBounds
-		print(upperLeftCorner.y )
-		print(lowerRightCorner.y)
 		var moveDown = instance.position.y + abs(upperLeftCorner.y - lowerRightCorner.y)/10
 		print(blockBounds.y)
 		kFloorInstance.position = Vector2(instance.position.x,moveDown)
-		print("Pos ", kFloorInstance.position)
-		print("Pos ", instance.position)
 		killFDict[instance] = kFloorInstance
 	currentBlock = instance
-	print("placed node type: ", currentBlock)
+
+	_on_text_edit_2_text_changed()
 	reset_drag_tracking()
 
 func reset_drag_tracking():
@@ -293,48 +275,58 @@ func reset_drag_tracking():
 
 func _on_block_button_button_up() -> void:
 	var blockInstance = testBlock.instantiate()
-	place_block(blockInstance, testBlockList)
+	var blockParent = baseObject.instantiate()
+	blockParent.add_child(blockInstance)
+	blockParent.blockType = "normal"
+	testBlockList.add_child(blockParent)
+	place_block(blockParent, testBlockList)
 func _on_action_button_button_up() -> void:
 	var actionInstance = actionIndicator.instantiate()
-	place_block(actionInstance, actionIndicatorList)
+	var actionParent = baseObject.instantiate()
+	actionParent.add_child(actionInstance)
+	actionParent.blockType = "actionIndicator"
+	actionIndicatorList.add_child(actionParent)
+	place_block(actionParent, actionIndicatorList)
 func _on_goal_button_button_up() -> void:
 	var goalInstance = goalBlock.instantiate()
-	place_block(goalInstance, testBlockList)
+	var goalParent = baseObject.instantiate()
+	goalParent.add_child(goalInstance)
+	goalParent.blockType = "goalBlock"
+	testBlockList.add_child(goalParent)
+	place_block(goalParent, testBlockList)
 func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()
-	place_block(enemyInstance, testBlockList)
-
-			
-func _onObjectClicked(index : int):
-	print("made it here",index)
-
-	var list = get_node("objectList/testBlocks").get_children()
-	print("list ", list)
+	var enemyParent = baseObject.instantiate()
+	enemyParent.add_child(enemyInstance)
+	enemyParent.blockType = "enemy"
+	enemyList.add_child(enemyParent)
+	place_block(enemyParent, testBlockList)
+	
+func _onObjectClicked(index : int, blockType: String):
+	print("Block type: ", blockType)
+	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
 			currentBlock = block
+			_on_text_edit_2_text_changed()
 			return
-			
-	list = get_node("objectList/checkpoints").get_children()
-	for check in list:
-		if check.index == index:
-			currentBlock = check
-			return
-		
-	list = get_node("objectList/actionIndicators").get_children()
-	for ai in list:
-		if ai.index == index:
-			currentBlock = ai
-			return
-			
-	list = get_node("objectList/players").get_children()
-	for player in list:
-		if player.index == index:
-			currentBlock = player
-			return
-			
-
-		
+	
+func getList(blockType : String) -> Node:
+	if blockType == "actionIndicator":
+		return get_node("objectList/actionIndicatorManager")
+	if blockType == "normal":
+		return get_node("objectList/testBlocks")
+	if blockType == "enemy":
+		return get_node("objectList/players")
+	if blockType == "player1":
+		return get_node("objectList/player1")
+	if blockType == "player2":
+		return get_node("objectList/player2")
+	if blockType == "goalBlock":
+		return get_node("objectList/testBlocks")
+	if blockType == "checkpoint":
+		return get_node("objectList/checkpoints")
+	return null
 		
 	
 		

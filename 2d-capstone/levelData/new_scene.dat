@@ -1,9 +1,8 @@
-testBlocks
-450, 600
+platformBlocks
+150, 1050
 600, 450
-actionIndicators
-checkpoints
+600, 750
 player1
-600, 300
+600, 450
 player2
-450, 450
+600, 600

@@ -6,6 +6,7 @@ var target_time: float = 1.0
 var elapsed_time: float = 0
 var active: bool = false
 var starting_scale
+var blockType = "actionIndicator"
 @onready var actionIndicatorManager
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
@@ -71,5 +72,5 @@ func _on_timer_timeout() -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("click"):
 		print("click")
-		get_parent().get_parent().get_parent().emit_signal("objectClicked",index)
+		get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType)
 	pass # Replace with function body.

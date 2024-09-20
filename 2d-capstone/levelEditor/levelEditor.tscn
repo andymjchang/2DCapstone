@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=33 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_1at3l"]
@@ -22,10 +22,13 @@
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="8_d3hii"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="8_nimfa"]
 [ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/programmerArtAssets/rac.png" id="8_w245c"]
+[ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="9_6gh41"]
 [ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/programmerArtAssets/checkpoint.png" id="9_wpw0u"]
+[ext_resource type="Script" path="res://worldObjects/killFloor.gd" id="10_jxp0h"]
 [ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="11_ghgfb"]
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="13_87vi8"]
+[ext_resource type="PackedScene" uid="uid://bdfklxl1c8rjj" path="res://shadow/baseObject.tscn" id="15_mrsrj"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
 [ext_resource type="Texture2D" uid="uid://drnvhk52xrn80" path="res://levelEditor/programmerArtAssets/playAudio.png" id="20_n1qdn"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
@@ -39,10 +42,13 @@ enemyCharacter = ExtResource("2_651dv")
 goalBlock = ExtResource("2_60mmb")
 worldManager = ExtResource("5_c8prk")
 cameraScript = ExtResource("8_nimfa")
+actionManager = ExtResource("9_6gh41")
+killFloorScript = ExtResource("10_jxp0h")
 levelUI = ExtResource("6_47xe5")
 player1 = ExtResource("7_h5cy3")
 player2 = ExtResource("8_d3hii")
 killFloor = ExtResource("11_ghgfb")
+baseObject = ExtResource("15_mrsrj")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(932, 594)
@@ -60,7 +66,9 @@ script = ExtResource("10_seu87")
 
 [node name="testBlocks" type="Node2D" parent="objectList"]
 
-[node name="actionIndicators" type="Node2D" parent="objectList"]
+[node name="platformBlockList" type="Node2D" parent="objectList"]
+
+[node name="actionIndicatorManager" type="Node2D" parent="objectList"]
 
 [node name="checkpoints" type="Node2D" parent="objectList"]
 
@@ -68,7 +76,9 @@ script = ExtResource("10_seu87")
 
 [node name="player2" type="Node2D" parent="objectList"]
 
-[node name="killFloors" type="Node" parent="objectList"]
+[node name="enemies" type="Node2D" parent="objectList"]
+
+[node name="killFloors" type="Node2D" parent="objectList"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 

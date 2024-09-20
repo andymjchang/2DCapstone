@@ -7,14 +7,20 @@ signal levelCompleted()
 signal checkLevelCompleted()
 
 @export var levelFile : String
-@export var testBlockInstance : PackedScene
+@export var platformBlockInstance : PackedScene
+@export var goalBlockInstance : PackedScene
+@export var killFloorInstance : PackedScene
 @export var actionIndicatorInstance : PackedScene
 @export var checkpointInstance : PackedScene
 @export var player1Instance : PackedScene
 @export var player2Instance : PackedScene
+@export var enemyInstance : PackedScene
 
 @onready var objectList = $objectList
-@onready var testBlocksList = $objectList/testBlocks
+@onready var platformBlocksList = $objectList/platformBlocks
+@onready var goalBlocksList = $objectList/goalBlocks
+@onready var killFloorsList = $objectList/killFloors
+@onready var enemiesList = $objectList/enemies
 @onready var actionIndicatorsList = $objectList/actionIndicators
 @onready var checkpointsList = $objectList/checkpoints
 @onready var playersList = $objectList/players
@@ -70,12 +76,14 @@ func _ready():
 	restartButton.visible = false
 	changeCountdown()
 	await get_tree().create_timer(3.0).timeout
-	Globals.inLevel = true
+	#Globals.inLevel = true
 	music.play(0.0)
 
 func loadLevel():
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()
-	var instanceList = {"testBlocks": [testBlockInstance, testBlocksList], 
+	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
+		"goalBlocks": [goalBlockInstance, goalBlocksList],
+		"killFloors": [killFloorInstance, killFloorsList],
 		"actionIndicators": [actionIndicatorInstance, actionIndicatorsList], 
 		"checkpoints": [checkpointInstance, checkpointsList], 
 		"player1": [player1Instance, playersList],
@@ -83,13 +91,13 @@ func loadLevel():
 	var instance
 	var instanceParent
 	for line in content.split("\n"):
-		#print("Current line: ", line)
+		print("Current line: ", line)
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
 		# Position
 		if line.contains(", "):
-			#print("Object: ", instance)
+			print("Object: ", instance)
 			var instancedObj = instance.instantiate()
 			var posPoints = []
 			for pos in line.split(", "):

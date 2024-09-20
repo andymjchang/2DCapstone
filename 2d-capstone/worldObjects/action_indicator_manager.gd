@@ -13,6 +13,7 @@ func _ready():
 		indicator.connect("scored", on_scored)
 	
 	currentWorldScene = get_parent().get_parent()
+	print("current world scene: ", currentWorldScene)
 
 func sortIndicators(a, b):
 	if a.get_target_time() < b.get_target_time():
@@ -25,6 +26,8 @@ func _process(_delta: float) -> void:
 	while current_index < actionIndicatorArray.size():
 		var indicator = actionIndicatorArray[current_index]
 		current_index += 1
+		#print("World time: ", currentWorldScene.time)
+		#print("indictor target time: ", indicator.get_target_time())
 		if currentWorldScene.time >= indicator.get_target_time():
 			indicator.start_transition()
 			starting_index += 1 # don't search through here again

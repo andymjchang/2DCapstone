@@ -7,6 +7,7 @@ signal relocate(nearestPoint)
 const SPEED = 388.0
 const JUMP_VELOCITY = -400.0
 var health = 99999999 # 3 hits
+var blockType = "player"
 var invuln = false
 var dead = false
 var attack
@@ -139,8 +140,3 @@ func _onRelocate(nearestPoint):
 	velocity.x = (nearestPoint.position.x - position.x) * SPEED/2 * get_process_delta_time()
 	velocity.y = (nearestPoint.position.y - position.y) * SPEED/2 * get_process_delta_time()
 	
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event.is_action_pressed("click"):
-		print("click")
-		get_parent().get_parent().get_parent().emit_signal("objectClicked",index)
-	pass # Replace with function body.

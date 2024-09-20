@@ -1,0 +1,264 @@
+[gd_scene load_steps=32 format=3 uid="uid://b4c6vpxf6xmjv"]
+
+[ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
+[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_1at3l"]
+[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://shadow/goal_block.tscn" id="2_60mmb"]
+[ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="2_651dv"]
+[ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
+[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="2_otlxm"]
+[ext_resource type="Texture2D" uid="uid://iocnhlyh4yw6" path="res://levelEditor/programmerArtAssets/action.png" id="3_kgvx7"]
+[ext_resource type="Texture2D" uid="uid://bamwfgoa14ig1" path="res://levelEditor/programmerArtAssets/right.png" id="4_7fuo1"]
+[ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_iqk0t"]
+[ext_resource type="Texture2D" uid="uid://vwontoywjedu" path="res://levelEditor/programmerArtAssets/block.png" id="4_rduon"]
+[ext_resource type="Texture2D" uid="uid://cnj8sgwkjxidi" path="res://levelEditor/programmerArtAssets/up.png" id="5_8qxnf"]
+[ext_resource type="Script" path="res://worlds/worldManager.gd" id="5_c8prk"]
+[ext_resource type="Texture2D" uid="uid://77x6f2ngvprm" path="res://levelEditor/programmerArtAssets/left.png" id="5_cuiw6"]
+[ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="6_47xe5"]
+[ext_resource type="Texture2D" uid="uid://44ffttq2jugp" path="res://levelEditor/programmerArtAssets/save.png" id="7_0wc3n"]
+[ext_resource type="Texture2D" uid="uid://bbiq7u5yvg7al" path="res://levelEditor/programmerArtAssets/mouse.png" id="7_dw7u5"]
+[ext_resource type="Texture2D" uid="uid://ctosvjaft7ggn" path="res://levelEditor/programmerArtAssets/exit.png" id="7_esiun"]
+[ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="7_h5cy3"]
+[ext_resource type="Texture2D" uid="uid://2hplcty35vpl" path="res://levelEditor/programmerArtAssets/down.png" id="7_u6v8f"]
+[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="8_d3hii"]
+[ext_resource type="Script" path="res://worlds/camera.gd" id="8_nimfa"]
+[ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/programmerArtAssets/rac.png" id="8_w245c"]
+[ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="9_6gh41"]
+[ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/programmerArtAssets/checkpoint.png" id="9_wpw0u"]
+[ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
+[ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="11_ghgfb"]
+[ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="13_87vi8"]
+[ext_resource type="AudioStream" uid="uid://cmxsfbbfnb2j0" path="res://audioTracks/Sprint2_GminBmaj_156bpm.mp3" id="13_vpjxf"]
+[ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
+[ext_resource type="Texture2D" uid="uid://drnvhk52xrn80" path="res://levelEditor/programmerArtAssets/playAudio.png" id="20_n1qdn"]
+[ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_15vlh")
+testBlock = ExtResource("2_1at3l")
+actionIndicator = ExtResource("2_otlxm")
+checkpoint = ExtResource("4_iqk0t")
+enemyCharacter = ExtResource("2_651dv")
+goalBlock = ExtResource("2_60mmb")
+worldManager = ExtResource("5_c8prk")
+cameraScript = ExtResource("8_nimfa")
+actionManager = ExtResource("9_6gh41")
+levelUI = ExtResource("6_47xe5")
+player1 = ExtResource("7_h5cy3")
+player2 = ExtResource("8_d3hii")
+killFloor = ExtResource("11_ghgfb")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(932, 594)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("13_87vi8")
+
+[node name="measureLines" type="Node2D" parent="."]
+script = ExtResource("2_mulbo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("10_seu87")
+
+[node name="objectList" type="Node2D" parent="."]
+
+[node name="audio" type="AudioStreamPlayer2D" parent="objectList"]
+stream = ExtResource("13_vpjxf")
+
+[node name="testBlocks" type="Node2D" parent="objectList"]
+
+[node name="actionIndicatorManager" type="Node2D" parent="objectList"]
+
+[node name="checkpoints" type="Node2D" parent="objectList"]
+
+[node name="players" type="Node2D" parent="objectList"]
+
+[node name="killFloors" type="Node" parent="objectList"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="bpmLabel" type="RichTextLabel" parent="UI"]
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 143.0
+offset_bottom = 51.0
+text = "Beats per measure"
+metadata/_edit_use_anchors_ = true
+
+[node name="bpmLabel2" type="RichTextLabel" parent="UI"]
+offset_left = 5.0
+offset_top = 56.0
+offset_right = 143.0
+offset_bottom = 104.0
+text = "Step size"
+metadata/_edit_use_anchors_ = true
+
+[node name="bpmLabel3" type="RichTextLabel" parent="UI"]
+offset_left = 5.0
+offset_top = 107.0
+offset_right = 143.0
+offset_bottom = 155.0
+text = "File name"
+
+[node name="TextEdit" type="TextEdit" parent="UI"]
+offset_left = 93.0
+offset_top = 3.0
+offset_right = 208.0
+offset_bottom = 53.0
+text = "4"
+placeholder_text = "BPM: "
+metadata/_edit_use_anchors_ = true
+
+[node name="TextEdit2" type="TextEdit" parent="UI"]
+offset_left = 93.0
+offset_top = 55.0
+offset_right = 208.0
+offset_bottom = 105.0
+text = "150"
+placeholder_text = "Step Size:"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextEdit3" type="TextEdit" parent="UI"]
+offset_left = 93.0
+offset_top = 107.0
+offset_right = 208.0
+offset_bottom = 157.0
+text = "new_scene"
+placeholder_text = "Step Size:"
+
+[node name="objectSelector" type="Node2D" parent="UI"]
+
+[node name="ColorRect" type="ColorRect" parent="UI/objectSelector"]
+offset_left = -1.0
+offset_top = 915.0
+offset_right = 1922.0
+offset_bottom = 1107.0
+color = Color(0.259294, 0.259294, 0.259294, 1)
+
+[node name="exitButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1795.0
+offset_top = 15.0
+offset_right = 1895.0
+offset_bottom = 115.0
+texture_normal = ExtResource("7_esiun")
+
+[node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 34.0
+offset_top = 955.0
+offset_right = 134.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("4_rduon")
+
+[node name="actionButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 139.0
+offset_top = 955.0
+offset_right = 239.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("3_kgvx7")
+
+[node name="mouseButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 242.0
+offset_top = 955.0
+offset_right = 342.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("7_dw7u5")
+
+[node name="racButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 345.0
+offset_top = 955.0
+offset_right = 445.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("8_w245c")
+
+[node name="checkpointButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 449.0
+offset_top = 955.0
+offset_right = 549.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("9_wpw0u")
+
+[node name="playAudioButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 759.0
+offset_top = 955.0
+offset_right = 859.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("20_n1qdn")
+
+[node name="goalButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 552.0
+offset_top = 955.0
+offset_right = 652.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("17_3udhx")
+
+[node name="enemyButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 655.0
+offset_top = 955.0
+offset_right = 755.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("20_rbssn")
+
+[node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1680.0
+offset_top = 16.0
+offset_right = 1780.0
+offset_bottom = 116.0
+texture_normal = ExtResource("7_0wc3n")
+
+[node name="rightButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1579.0
+offset_top = 954.0
+offset_right = 1679.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("4_7fuo1")
+
+[node name="upButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1682.0
+offset_top = 954.0
+offset_right = 1782.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("5_8qxnf")
+
+[node name="leftButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1476.0
+offset_top = 954.0
+offset_right = 1576.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("5_cuiw6")
+
+[node name="downButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1785.0
+offset_top = 954.0
+offset_right = 1885.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("7_u6v8f")
+
+[node name="CheckButton" type="CheckButton" parent="UI/objectSelector"]
+offset_left = 64.0
+offset_top = 924.0
+offset_right = 108.0
+offset_bottom = 948.0
+
+[connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
+[connection signal="text_changed" from="UI/TextEdit3" to="." method="_on_text_edit_3_text_changed"]
+[connection signal="pressed" from="UI/objectSelector/exitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="button_down" from="UI/objectSelector/blockButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/blockButton" to="." method="_on_block_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/actionButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/actionButton" to="." method="_on_action_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/mouseButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/mouseButton" to="." method="_on_mouse_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/racButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/racButton" to="." method="_on_rac_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/checkpointButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/checkpointButton" to="." method="_on_checkpoint_button_button_up"]
+[connection signal="pressed" from="UI/objectSelector/playAudioButton" to="." method="_on_play_audio_button_pressed"]
+[connection signal="button_down" from="UI/objectSelector/goalButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/goalButton" to="." method="_on_goal_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/enemyButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/enemyButton" to="." method="_on_enemy_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/saveButton" to="." method="_on_save_button_down"]
+[connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/leftButton" to="." method="_on_left_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/downButton" to="." method="_on_down_button_button_down"]

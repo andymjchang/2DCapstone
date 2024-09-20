@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0oiqgrybgte5"]
+[gd_scene load_steps=12 format=3 uid="uid://b0oiqgrybgte5"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
-[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_bcj01"]
+[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_78xmt"]
 [ext_resource type="AudioStream" uid="uid://bi32k1rjy681g" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="3_avb0v"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_o6usx"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="4_nttx1"]
@@ -10,15 +10,17 @@
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
 [ext_resource type="Texture2D" uid="uid://eaxiu3v8mgwp" path="res://worlds/menuBG.png" id="5_xy8kd"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
+[ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="7_po4yx"]
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
 levelFile = "new_scene"
-testBlockInstance = ExtResource("2_bcj01")
+platformBlockInstance = ExtResource("2_78xmt")
 actionIndicatorInstance = ExtResource("3_o6usx")
 checkpointInstance = ExtResource("4_ph2wq")
 player1Instance = ExtResource("5_dfiyk")
 player2Instance = ExtResource("6_5q6wy")
+enemyInstance = ExtResource("7_po4yx")
 
 [node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
 
@@ -51,7 +53,13 @@ texture = ExtResource("5_xy8kd")
 
 [node name="objectList" type="Node2D" parent="."]
 
-[node name="testBlocks" type="Node2D" parent="objectList"]
+[node name="platformBlocks" type="Node2D" parent="objectList"]
+
+[node name="goalBlocks" type="Node2D" parent="objectList"]
+
+[node name="killFloors" type="Node2D" parent="objectList"]
+
+[node name="enemies" type="Node2D" parent="objectList"]
 
 [node name="actionIndicators" type="Node2D" parent="objectList"]
 
