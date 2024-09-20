@@ -116,7 +116,6 @@ func _on_rac_button_button_up() -> void:
 		playerParent.blockType = "player"
 		playerList.add_child(playerParent)
 		placeObject(playerParent)
-		#place_block(playerParent, playerList)
 	else:
 		currentBlock = playerList.get_node("Player1")
 		reset_drag_tracking()
@@ -131,7 +130,6 @@ func _on_mouse_button_button_up() -> void:
 		playerParent.blockType = "player"
 		playerList.add_child(playerParent)
 		placeObject(playerParent)
-		#place_block(playerParent, playerList)
 	else:
 		currentBlock = playerList.get_node("Player2")
 		reset_drag_tracking()
@@ -152,8 +150,6 @@ func placeObject(placedNode):
 	placedNode.index = lEindex
 	lEindex+=1
 	currentBlock = placedNode
-	
-	
 	
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
@@ -283,27 +279,6 @@ func place_block(instance, parent):
 	instance.index = lEindex
 	lEindex+=1
 	instance.position = snap_position(placePos)
-	#now add a kill floor right below it, only want to do this with blocl
-	if instance.blockType == "normal":
-		var blockBounds = instance.get_child(0).activeSprite.texture.get_size()*instance.scale/2
-		var upperLeftCorner = (instance.position - (blockBounds))/2
-		var lowerRightCorner = (instance.position + (blockBounds))/2
-		
-		#kfloor deets
-		#var kFloorChild = killFloor.instantiate()
-		#var kFloorInstance = baseObject.instantiate()
-		var kFloorInstance = killFloor.instantiate()
-		#kFloorInstance.add_child(kFloorChild)
-		kFloorInstance.index = lEindex - 1
-		kFloorInstance.set_script(killFloorScript)
-		killFloorList.add_child(kFloorInstance)
-		var kFloorBounds = kFloorInstance as RectangleShape2D
-		var kUpperLeftCorner = instance.position - blockBounds
-		var kLowerRightCorner = instance.position + blockBounds
-		var moveDown = instance.position.y + abs(upperLeftCorner.y - lowerRightCorner.y)/10
-		print(blockBounds.y)
-		kFloorInstance.position = Vector2(instance.position.x,moveDown)
-		killFDict[instance] = kFloorInstance
 	currentBlock = instance
 
 	_on_text_edit_2_text_changed()
@@ -342,6 +317,14 @@ func _on_enemy_button_button_up() -> void:
 	enemyParent.blockType = "enemy"
 	playerList.add_child(enemyParent)
 	place_block(enemyParent, testBlockList)
+func _on_kill_floor_button_button_up() -> void:
+	var kfInstance = killFloor.instantiate()
+	var kfParent = baseObject.instantiate()
+	kfParent.add_child(kfInstance)
+	kfParent.blockType = "killFloor"
+	killFloorList.add_child(kfParent)
+	place_block(kfParent, killFloorList)
+
 
 			
 func _onObjectClicked(index : int, blockType: String):

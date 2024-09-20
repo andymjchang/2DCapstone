@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=35 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_1at3l"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
 [ext_resource type="Texture2D" uid="uid://drnvhk52xrn80" path="res://levelEditor/programmerArtAssets/playAudio.png" id="20_n1qdn"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
+[ext_resource type="Texture2D" uid="uid://bv8ou5u1pkb2k" path="res://shadow/R (1).jpg" id="34_wwivc"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
@@ -242,6 +243,15 @@ offset_top = 924.0
 offset_right = 108.0
 offset_bottom = 948.0
 
+[node name="killFloorButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 870.0
+offset_top = 958.0
+offset_right = 977.0
+offset_bottom = 1057.0
+texture_normal = ExtResource("34_wwivc")
+ignore_texture_size = true
+stretch_mode = 0
+
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit3" to="." method="_on_text_edit_3_text_changed"]
@@ -266,3 +276,4 @@ offset_bottom = 948.0
 [connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/leftButton" to="." method="_on_left_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/downButton" to="." method="_on_down_button_button_down"]
+[connection signal="button_up" from="UI/objectSelector/killFloorButton" to="." method="_on_kill_floor_button_button_up"]

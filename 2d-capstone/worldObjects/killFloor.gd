@@ -13,9 +13,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("downsize") and self.get_parent().get_parent().get_parent().currentBlock.index == index :
+	if Input.is_action_just_pressed("downsize"):
 		self.scale/=1.05
-	if Input.is_action_just_pressed("sizeUp")  and self.get_parent().get_parent().get_parent().currentBlock.index == index :
+	if Input.is_action_just_pressed("sizeUp"):
 		self.scale*=1.05
 	pass
 	
