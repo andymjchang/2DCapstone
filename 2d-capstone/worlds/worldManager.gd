@@ -43,41 +43,35 @@ var textPopupScene = preload("res://worldObjects/scoreText.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	loadLevel()
-	#timerText = $CanvasLayer/Timer
-	# player = $Player1
-	# camera = $Camera2D
-	# checkpoints = $CheckpointManager
-	# scoreText = $CanvasLayer/Score
-	# music = $AudioStreamPlayer2D
+	timerText = $CanvasLayer/Timer
+	player1 = playersList.get_node("Player1")
+	player2 = playersList.get_node("Player2")
+	camera = $Camera2D
+	checkpoints = $CheckpointManager
+	scoreText = $CanvasLayer/Score
+	music = $Music
 	
-	# # Setting signals
-	# self.resetPosition.connect(_onResetPosition)
+	# Setting signals
+	self.resetPosition.connect(_onResetPosition)
+	self.gameOver.connect(_onGameOver)
+	self.checkGameOver.connect(_onCheckGameOver)
+	self.checkLevelCompleted.connect(_onCheckLevelCompleted)
+	self.levelCompleted.connect(_onLevelCompleted)
 
-	# self.gameOver.connect(_onGameOver)
-	# self.checkGameOver.connect(_onCheckGameOver)
-	# self.checkLevelCompleted.connect(_onCheckLevelCompleted)
-	# self.levelCompleted.connect(_onLevelCompleted)
+	# Prep players
+	player1.editing = false
+	player2.editing = false
+	#killWall = get_node("KillWall")
+	countdownUI = get_node("LevelUI")
+	statusMessage = countdownUI.get_node("Box").get_node("Status")
+	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
 
-	# #self.gameOver.connect(_onGameOver)
-	# #self.checkGameOver.connect(_onCheckGameOver)
-
-	# # Getting nodes to manage
-	# player1 = get_node("players").get_node("Player1")
-	# player2 = get_node("players").get_node("Player2")
-	# # Prep players
-	# player1.editing = false
-	# player2.editing = false
-	# #killWall = get_node("KillWall")
-	# countdownUI = get_node("LevelUI")
-	# statusMessage = countdownUI.get_node("Box").get_node("Status")
-	# restartButton = countdownUI.get_node("Box").get_node("RestartButton")
-
-	# # Start game
-	# restartButton.visible = false
-	# changeCountdown()
-	# await get_tree().create_timer(3.0).timeout
-	# Globals.inLevel = true
-	#music.play(0.0)
+	# Start game
+	restartButton.visible = false
+	changeCountdown()
+	await get_tree().create_timer(3.0).timeout
+	Globals.inLevel = true
+	music.play(0.0)
 
 func loadLevel():
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()
@@ -89,13 +83,13 @@ func loadLevel():
 	var instance
 	var instanceParent
 	for line in content.split("\n"):
-		print("Current line: ", line)
+		#print("Current line: ", line)
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
 		# Position
 		if line.contains(", "):
-			print("Object: ", instance)
+			#print("Object: ", instance)
 			var instancedObj = instance.instantiate()
 			var posPoints = []
 			for pos in line.split(", "):
