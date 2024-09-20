@@ -70,3 +70,9 @@ position = Vector2(-0.75, 11.375)
 scale = Vector2(0.225, 0.1925)
 sprite_frames = SubResource("SpriteFrames_2tkvf")
 animation = &"Run"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 11.75)
+shape = SubResource("RectangleShape2D_44r6d")

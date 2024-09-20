@@ -94,7 +94,12 @@ func _on_test_placer_button_down() -> void:
 
 func _on_checkpoint_button_button_up() -> void:
 	var checkpointInstance = checkpoint.instantiate()
-	place_block(checkpointInstance, checkpointList)
+	var checkParent = baseObject.instantiate()
+	checkParent.add_child(checkpointInstance)
+	checkParent.blockType = "checkpoint"
+	checkpointList.add_child(checkParent)
+
+	place_block(checkParent, checkpointList)
 
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
@@ -104,8 +109,12 @@ func _on_rac_button_button_up() -> void:
 		var player1Instance = player1.instantiate()
 		player1Instance.editing = true
 		player1Instance.add_to_group("Players")
-		playerList.add_child(player1Instance)
-		placeObject(player1Instance)
+		var playerParent = baseObject.instantiate()
+		playerParent.add_child(player1Instance)
+		playerParent.blockType = "player"
+		playerList.add_child(playerParent)
+		#placeObject(playerParent) <--why this one?
+		place_block(playerParent, playerList)
 	else:
 		currentBlock = playerList.get_node("Player1")
 		reset_drag_tracking()
@@ -115,8 +124,12 @@ func _on_mouse_button_button_up() -> void:
 		var player2Instance = player2.instantiate()
 		player2Instance.editing = true
 		player2Instance.add_to_group("Players")
-		playerList.add_child(player2Instance)
-		placeObject(player2Instance)
+		var playerParent = baseObject.instantiate()
+		playerParent.add_child(player2Instance)
+		playerParent.blockType = "player"
+		playerList.add_child(playerParent)
+		#placeObject(playerParent)
+		place_block(playerParent, playerList)
 	else:
 		currentBlock = playerList.get_node("Player2")
 		reset_drag_tracking()
@@ -261,6 +274,8 @@ func place_block(instance, parent):
 		placePos = currentPosition
 	
 	parent.add_child(instance)
+	print("b4 the area2d: ", instance.get_child(0).get_node("Area2D"))
+	instance.setArea2D(instance.get_child(0).get_node("Area2D"))
 	if instance.blockType == "actionIndicator":
 		stepSize=50
 	instance.index = lEindex
@@ -268,7 +283,7 @@ func place_block(instance, parent):
 	instance.position = snap_position(placePos)
 	#now add a kill floor right below it, only want to do this with blocl
 	if instance.blockType == "normal":
-		var blockBounds = instance.get_child(1).activeSprite.texture.get_size()*instance.scale/2
+		var blockBounds = instance.get_child(0).activeSprite.texture.get_size()*instance.scale/2
 		var upperLeftCorner = (instance.position - (blockBounds))/2
 		var lowerRightCorner = (instance.position + (blockBounds))/2
 		
@@ -324,7 +339,7 @@ func _on_enemy_button_button_up() -> void:
 	var enemyParent = baseObject.instantiate()
 	enemyParent.add_child(enemyInstance)
 	enemyParent.blockType = "enemy"
-	enemyList.add_child(enemyParent)
+	playerList.add_child(enemyParent)
 	place_block(enemyParent, testBlockList)
 
 			

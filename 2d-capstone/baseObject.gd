@@ -14,12 +14,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-#Resize collision shape per node
-func resizeCollision(newSize: float):
-	print("not done")
-	
 	
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("click"):
 		print("click")
 		get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType)
+		
+func setArea2D(newArea):
+	#should only get here if we have a child already
+	self.add_child(newArea)
+	#dont use so many getters
+	newArea.connect("input_event",  _on_area_2d_input_event)
