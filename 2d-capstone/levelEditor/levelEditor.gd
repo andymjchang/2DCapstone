@@ -279,7 +279,7 @@ func place_block(instance, parent):
 func reset_drag_tracking():
 	trackingPosition = false
 	currentPosition = camera.position
-	timeHeld = 0.0
+	timeHeld = 0.0	
 
 func _on_block_button_button_up() -> void:
 	var blockInstance = testBlock.instantiate()
@@ -310,19 +310,21 @@ func _on_kill_floor_button_button_up() -> void:
 	var kfInstance = killFloor.instantiate()
 	var kfParent = baseObject.instantiate()
 	kfParent.add_child(kfInstance)
-	print("button works")
 	kfParent.blockType = "killFloor"
-	kfParent.temp()
+	#kfParent.temp()	
 	place_block(kfParent, killFloorList)
-
 
 			
 func _onObjectClicked(index : int, blockType: String):
+	trackingPosition = true
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
 			currentBlock = block
 			_on_text_edit_2_text_changed()
+			if (timeHeld >= holdTime):
+				currentBlock.get_child(0).position = currentPosition
+				#reset_drag_tracking()
 			return
 						
 
