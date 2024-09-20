@@ -21,7 +21,5 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType)
 		
 func setArea2D(newArea):
-	#should only get here if we have a child already
 	self.add_child(newArea)
-	#dont use so many getters
 	newArea.connect("input_event",  _on_area_2d_input_event)

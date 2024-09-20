@@ -274,7 +274,6 @@ func place_block(instance, parent):
 		placePos = currentPosition
 	
 	parent.add_child(instance)
-	print("b4 the area2d: ", instance.get_child(0).get_node("Area2D"))
 	instance.setArea2D(instance.get_child(0).get_node("Area2D"))
 	if instance.blockType == "actionIndicator":
 		stepSize=50
@@ -288,9 +287,10 @@ func place_block(instance, parent):
 		var lowerRightCorner = (instance.position + (blockBounds))/2
 		
 		#kfloor deets
-		var kFloorInstance = killFloor.instantiate()
+		var kFloorChild = killFloor.instantiate()
+		var kFloorInstance = baseObject.instantiate()
+		kFloorInstance.add_child(kFloorChild)
 		kFloorInstance.index = lEindex - 1
-		print("kf script change regsitered")
 		kFloorInstance.set_script(killFloorScript)
 		killFloorList.add_child(kFloorInstance)
 		var kFloorBounds = kFloorInstance as RectangleShape2D
@@ -301,11 +301,8 @@ func place_block(instance, parent):
 		var moveDown = instance.position.y + abs(upperLeftCorner.y - lowerRightCorner.y)/10
 		print(blockBounds.y)
 		kFloorInstance.position = Vector2(instance.position.x,moveDown)
-		print("Pos ", kFloorInstance.position)
-		print("Pos ", instance.position)
 		killFDict[instance] = kFloorInstance
 	currentBlock = instance
-	print("placed node type: ", currentBlock)
 	reset_drag_tracking()
 
 func reset_drag_tracking():
@@ -344,11 +341,7 @@ func _on_enemy_button_button_up() -> void:
 
 			
 func _onObjectClicked(index : int, blockType: String):
-	print("made it here shadow",index)
-
-	print("block type: ", blockType)
 	var list = getList(blockType).get_children()
-	print("list ", list)
 	for block in list:
 		if block.index == index:
 			currentBlock = block
@@ -357,24 +350,17 @@ func _onObjectClicked(index : int, blockType: String):
 
 func getList(blockType : String) -> Node:
 	if blockType == "actionIndicator":
-		print("made it to 1 block list check")
 		return get_node("objectList/actionIndicatorManager")
 	if blockType == "normal":
-		print("made it to 2 block list check")
 		return get_node("objectList/testBlocks")
 	if blockType == "enemy":
-		print("made it to 3 block list check")
 		return get_node("objectList/players")
 	if blockType == "player":
-		print("made it to 4 block list check")
 		return get_node("objectList/players")
 	if blockType == "goalBlock":
-		print("made it to 5 block list check")
-		print("made it to goal block list check")
 		return get_node("objectList/testBlocks")
 	if blockType == "checkpoint":
 		return get_node("objectList/checkpoints")
-		
 	return null
 		
 	
