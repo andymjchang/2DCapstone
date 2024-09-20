@@ -73,10 +73,12 @@ func _on_text_edit_text_changed() -> void:
 		measureLines.beatsPerMeasure = bpm
 		measureLines.queue_redraw()
 func _on_text_edit_2_text_changed() -> void:
-	if stepLabel.text.is_valid_int() and currentBlock.blockType != "actionIndicator":
+	if stepLabel.text.is_valid_int():
 		var step = int(stepLabel.text)
 		if (step < 25):
 			step = 25
+		if currentBlock.blockType == "actionIndicator":
+			step = 50
 		stepSize = step
 		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
@@ -275,8 +277,6 @@ func place_block(instance, parent):
 	
 	parent.add_child(instance)
 	instance.setArea2D(instance.get_child(0).get_node("Area2D"))
-	if instance.blockType == "actionIndicator":
-		stepSize=50
 	instance.index = lEindex
 	lEindex+=1
 	instance.position = snap_position(placePos)
@@ -287,22 +287,23 @@ func place_block(instance, parent):
 		var lowerRightCorner = (instance.position + (blockBounds))/2
 		
 		#kfloor deets
-		var kFloorChild = killFloor.instantiate()
-		var kFloorInstance = baseObject.instantiate()
-		kFloorInstance.add_child(kFloorChild)
+		#var kFloorChild = killFloor.instantiate()
+		#var kFloorInstance = baseObject.instantiate()
+		var kFloorInstance = killFloor.instantiate()
+		#kFloorInstance.add_child(kFloorChild)
 		kFloorInstance.index = lEindex - 1
 		kFloorInstance.set_script(killFloorScript)
 		killFloorList.add_child(kFloorInstance)
 		var kFloorBounds = kFloorInstance as RectangleShape2D
 		var kUpperLeftCorner = instance.position - blockBounds
 		var kLowerRightCorner = instance.position + blockBounds
-		print(upperLeftCorner.y )
-		print(lowerRightCorner.y)
 		var moveDown = instance.position.y + abs(upperLeftCorner.y - lowerRightCorner.y)/10
 		print(blockBounds.y)
 		kFloorInstance.position = Vector2(instance.position.x,moveDown)
 		killFDict[instance] = kFloorInstance
 	currentBlock = instance
+
+	_on_text_edit_2_text_changed()
 	reset_drag_tracking()
 
 func reset_drag_tracking():
@@ -345,6 +346,7 @@ func _onObjectClicked(index : int, blockType: String):
 	for block in list:
 		if block.index == index:
 			currentBlock = block
+			_on_text_edit_2_text_changed()
 			return
 						
 
