@@ -96,7 +96,7 @@ func _physics_process(delta: float) -> void:
 				get_node("CollisionShape2D").call_deferred("set", "disabled", false)
 				relocating = false
 				reachedCheckpoint = true
-				self.position.y = checkpoint.get_node("Point").position.y
+				#self.position.y = checkpoint.get_node("Point").position.y
 				self.position.x = get_parent().get_node(otherPlayer).position.x
 			pass
 		move_and_slide()
@@ -131,14 +131,15 @@ func _onRevive(who):
 func _onRelocate(nearestPoint):
 	# Disable collisions, change flags for relocation
 	#self.get_node("CollisionShape2D").call_deferred("set", "disabled", true)
+	velocity = Vector2(0, 0)
 	self.get_node("CollisionShape2D").disabled = true
+	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
 	print("Disabled? ", get_node("CollisionShape2D").disabled)
 	relocating = true
 	reachedCheckpoint = false
-
+	var newVelocity = Vector2((nearestPoint.position - self.position) * (SPEED / 2 * get_process_delta_time()))
+	await get_tree().create_timer(0.5).timeout
 	# Set destination, begin move to point
 	checkpoint = nearestPoint
 	print("setting velocity to: ", nearestPoint.position - self.position)
-	velocity.x = (nearestPoint.position.x - self.position.x) * SPEED/2 * get_process_delta_time()
-	velocity.y = (nearestPoint.position.y - self.position.y) * SPEED/2 * get_process_delta_time()
-	
+	velocity = newVelocity

@@ -53,7 +53,7 @@ func _ready():
 	player2 = playersList.get_node("Player2")
 	camera = $Camera2D
 	scoreText = $CanvasLayer/Score
-	music = $Music
+	music = camera.get_node("Music")
 	
 	# Setting signals
 	self.resetPosition.connect(_onResetPosition)
