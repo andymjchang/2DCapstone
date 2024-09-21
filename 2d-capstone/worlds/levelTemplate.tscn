@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0oiqgrybgte5"]
+[gd_scene load_steps=15 format=3 uid="uid://b0oiqgrybgte5"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_78xmt"]
+[ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="3_6me16"]
 [ext_resource type="AudioStream" uid="uid://bi32k1rjy681g" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="3_avb0v"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_o6usx"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="4_nttx1"]
@@ -11,11 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://eaxiu3v8mgwp" path="res://worlds/menuBG.png" id="5_xy8kd"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="7_po4yx"]
+[ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="13_euntf"]
+[ext_resource type="Script" path="res://checkpoint.gd" id="14_rbu47"]
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
 levelFile = "new_scene"
 platformBlockInstance = ExtResource("2_78xmt")
+killFloorInstance = ExtResource("3_6me16")
 actionIndicatorInstance = ExtResource("3_o6usx")
 checkpointInstance = ExtResource("4_ph2wq")
 player1Instance = ExtResource("5_dfiyk")
@@ -62,7 +66,9 @@ texture = ExtResource("5_xy8kd")
 [node name="enemies" type="Node2D" parent="objectList"]
 
 [node name="actionIndicators" type="Node2D" parent="objectList"]
+script = ExtResource("13_euntf")
 
 [node name="checkpoints" type="Node2D" parent="objectList"]
+script = ExtResource("14_rbu47")
 
 [node name="players" type="Node2D" parent="objectList"]

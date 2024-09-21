@@ -102,10 +102,9 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 func _onTakeDamage(amount):
-	print("Got hit! Health now: ", self.health)
 	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
 		health -= amount
-
+		print("Got hit! Health now: ", self.health)
 		if health <= 0:
 			print("Player died!")
 			#self.visible = false
@@ -131,12 +130,15 @@ func _onRevive(who):
 
 func _onRelocate(nearestPoint):
 	# Disable collisions, change flags for relocation
-	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
+	#self.get_node("CollisionShape2D").call_deferred("set", "disabled", true)
+	self.get_node("CollisionShape2D").disabled = true
+	print("Disabled? ", get_node("CollisionShape2D").disabled)
 	relocating = true
 	reachedCheckpoint = false
 
 	# Set destination, begin move to point
 	checkpoint = nearestPoint
-	velocity.x = (nearestPoint.position.x - position.x) * SPEED/2 * get_process_delta_time()
-	velocity.y = (nearestPoint.position.y - position.y) * SPEED/2 * get_process_delta_time()
+	print("setting velocity to: ", nearestPoint.position - self.position)
+	velocity.x = (nearestPoint.position.x - self.position.x) * SPEED/2 * get_process_delta_time()
+	velocity.y = (nearestPoint.position.y - self.position.y) * SPEED/2 * get_process_delta_time()
 	

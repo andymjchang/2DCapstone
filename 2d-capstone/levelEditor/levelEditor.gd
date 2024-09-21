@@ -33,10 +33,10 @@ var isPlaying = false
 @export var killFloor : PackedScene
 @export var baseObject : PackedScene
 
-
 @onready var objectList = $objectList
 @onready var testBlockList = $objectList/testBlocks
 @onready var platformBlockList = $objectList/platformBlocks
+@onready var goalBlockList = $objectList/goalBlocks
 @onready var enemyList = $objectList/enemies
 @onready var actionIndicatorList = $objectList/actionIndicatorManager
 @onready var checkpointList = $objectList/checkpoints
@@ -115,7 +115,6 @@ func _on_rac_button_button_up() -> void:
 		playerParent.blockType = "player1"
 		player1List.add_child(playerParent)
 		placeObject(playerParent)
-		#place_block(playerParent, playerList)
 	else:
 		currentBlock = player1List.get_node("baseObject").get_node("Player1")
 		reset_drag_tracking()
@@ -130,7 +129,6 @@ func _on_mouse_button_button_up() -> void:
 		playerParent.blockType = "player2"
 		player2List.add_child(playerParent)
 		placeObject(playerParent)
-		#place_block(playerParent, playerList)
 	else:
 		currentBlock = player2List.get_node("baseObject").get_node("Player2")
 		reset_drag_tracking()
@@ -155,23 +153,15 @@ func placeObject(placedNode):
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x += stepSize
-	if currentBlock.blockType == "normal":
-		killFDict[currentBlock].position.x += stepSize
 func _on_left_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.x -= stepSize
-	if currentBlock.blockType == "normal":
-		killFDict[currentBlock].position.x -= stepSize
 func _on_down_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y += stepSize
-	if currentBlock.blockType == "normal":
-		killFDict[currentBlock].position.y += stepSize
 func _on_up_button_button_down() -> void:
 	if (currentBlock == null): return
 	currentBlock.position.y -= stepSize
-	if currentBlock.blockType == "normal":
-		killFDict[currentBlock].position.y -= stepSize
 	
 func save_scene_to_file():
 	if player1List.get_child_count() == 1 and player2List.get_child_count() == 1:
@@ -237,32 +227,11 @@ func place_block(instance, parent):
 	if (timeHeld >= holdTime):
 		placePos = currentPosition
 	
-	parent.add_child(instance)
+	parent.add_child(instance)	
 	instance.setArea2D(instance.get_child(0).get_node("Area2D"))
 	instance.index = lEindex
 	lEindex+=1
 	instance.position = snap_position(placePos)
-	#now add a kill floor right below it, only want to do this with blocl
-	if instance.blockType == "normal":
-		var blockBounds = instance.get_child(0).activeSprite.texture.get_size()*instance.scale/2
-		var upperLeftCorner = (instance.position - (blockBounds))/2
-		var lowerRightCorner = (instance.position + (blockBounds))/2
-		
-		#kfloor deets
-		#var kFloorChild = killFloor.instantiate()
-		#var kFloorInstance = baseObject.instantiate()
-		var kFloorInstance = killFloor.instantiate()
-		#kFloorInstance.add_child(kFloorChild)
-		kFloorInstance.index = lEindex - 1
-		kFloorInstance.set_script(killFloorScript)
-		killFloorList.add_child(kFloorInstance)
-		var kFloorBounds = kFloorInstance as RectangleShape2D
-		var kUpperLeftCorner = instance.position - blockBounds
-		var kLowerRightCorner = instance.position + blockBounds
-		var moveDown = instance.position.y + abs(upperLeftCorner.y - lowerRightCorner.y)/10
-		print(blockBounds.y)
-		kFloorInstance.position = Vector2(instance.position.x,moveDown)
-		killFDict[instance] = kFloorInstance
 	currentBlock = instance
 
 	_on_text_edit_2_text_changed()
@@ -278,30 +247,37 @@ func _on_block_button_button_up() -> void:
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = "normal"
-	testBlockList.add_child(blockParent)
-	place_block(blockParent, testBlockList)
+	place_block(blockParent, platformBlockList)
 func _on_action_button_button_up() -> void:
 	var actionInstance = actionIndicator.instantiate()
 	var actionParent = baseObject.instantiate()
 	actionParent.add_child(actionInstance)
 	actionParent.blockType = "actionIndicator"
-	actionIndicatorList.add_child(actionParent)
 	place_block(actionParent, actionIndicatorList)
 func _on_goal_button_button_up() -> void:
 	var goalInstance = goalBlock.instantiate()
 	var goalParent = baseObject.instantiate()
 	goalParent.add_child(goalInstance)
 	goalParent.blockType = "goalBlock"
-	testBlockList.add_child(goalParent)
-	place_block(goalParent, testBlockList)
+	place_block(goalParent, goalBlockList)
 func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()
 	var enemyParent = baseObject.instantiate()
 	enemyParent.add_child(enemyInstance)
 	enemyParent.blockType = "enemy"
-	enemyList.add_child(enemyParent)
-	place_block(enemyParent, testBlockList)
+	place_block(enemyParent, enemyList)
 	
+func _on_kill_floor_button_button_up() -> void:
+	var kfInstance = killFloor.instantiate()
+	var kfParent = baseObject.instantiate()
+	kfParent.add_child(kfInstance)
+	print("button works")
+	kfParent.blockType = "killFloor"
+	kfParent.temp()
+	place_block(kfParent, killFloorList)
+
+
+			
 func _onObjectClicked(index : int, blockType: String):
 	print("Block type: ", blockType)
 	var list = getList(blockType).get_children()
@@ -315,7 +291,7 @@ func getList(blockType : String) -> Node:
 	if blockType == "actionIndicator":
 		return get_node("objectList/actionIndicatorManager")
 	if blockType == "normal":
-		return get_node("objectList/testBlocks")
+		return get_node("objectList/platformBlocks")
 	if blockType == "enemy":
 		return get_node("objectList/players")
 	if blockType == "player1":
@@ -323,9 +299,11 @@ func getList(blockType : String) -> Node:
 	if blockType == "player2":
 		return get_node("objectList/player2")
 	if blockType == "goalBlock":
-		return get_node("objectList/testBlocks")
+		return get_node("objectList/goalBlocks")
 	if blockType == "checkpoint":
 		return get_node("objectList/checkpoints")
+	if blockType == "killFloor":
+		return get_node("objectList/killFloors")
 	return null
 		
 	

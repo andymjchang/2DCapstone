@@ -22,4 +22,12 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		
 func setArea2D(newArea):
 	self.add_child(newArea)
+	#print(get_node("Area2D")s)
+	newArea.connect("input_event",  _on_area_2d_input_event)
+
+func temp () -> void:
+	print("shadow look here: ",self.get_child(0).get_node("Area2D"))
+	var newArea = self.get_child(0).get_node("Area2D").duplicate()
+	self.add_child(newArea)
+	
 	newArea.connect("input_event",  _on_area_2d_input_event)

@@ -32,7 +32,6 @@ var countdownUI
 var statusMessage
 var restartButton
 var music
-var checkpoints
 
 var time : float = 0
 var bpm: int = 100
@@ -53,7 +52,6 @@ func _ready():
 	player1 = playersList.get_node("Player1")
 	player2 = playersList.get_node("Player2")
 	camera = $Camera2D
-	checkpoints = $CheckpointManager
 	scoreText = $CanvasLayer/Score
 	music = $Music
 	
@@ -91,13 +89,13 @@ func loadLevel():
 	var instance
 	var instanceParent
 	for line in content.split("\n"):
-		print("Current line: ", line)
+		#print("Current line: ", line)
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
 		# Position
 		if line.contains(", "):
-			print("Object: ", instance)
+			#print("Object: ", instance)
 			var instancedObj = instance.instantiate()
 			var posPoints = []
 			for pos in line.split(", "):
@@ -173,9 +171,9 @@ func updateScore(indicator_position):
 
 # Helper function that grabs the target player's closest forward checkpoint
 func getNearestCheckpoint(who):
-	var nearestPoint = checkpoints.get_child(0)
+	var nearestPoint = checkpointsList.get_child(0)
 	var shortestDistance = who.position.distance_to(nearestPoint.position)
-	for i in checkpoints.get_children():
+	for i in checkpointsList.get_children():
 		print("Checking: ", i)
 		var distance = who.position.distance_to(i.position)
 		# Check if checkpoint in front of player
