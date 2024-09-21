@@ -28,7 +28,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.pressed:
 		print("mouse released")
 		var endPosition = self.get_parent().get_parent().get_parent().currentPosition
-		self.position = get_global_mouse_position()
+		self.position = self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
+		
 		self.get_parent().get_parent().get_parent().reset_drag_tracking()
 		
 func setArea2D(newArea):
