@@ -36,9 +36,9 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
-testBlock = ExtResource("2_1at3l")
 actionIndicator = ExtResource("2_otlxm")
 checkpoint = ExtResource("4_iqk0t")
+platformBlock = ExtResource("2_1at3l")
 enemyCharacter = ExtResource("2_651dv")
 goalBlock = ExtResource("2_60mmb")
 worldManager = ExtResource("5_c8prk")
@@ -63,9 +63,9 @@ script = ExtResource("2_mulbo")
 position = Vector2(960, 540)
 script = ExtResource("10_seu87")
 
-[node name="objectList" type="Node2D" parent="."]
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
 
-[node name="audio" type="AudioStreamPlayer2D" parent="objectList"]
+[node name="objectList" type="Node2D" parent="."]
 
 [node name="platformBlocks" type="Node2D" parent="objectList"]
 

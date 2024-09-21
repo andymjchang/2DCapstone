@@ -17,7 +17,6 @@ var killFDict: Dictionary = {}
 var saveFileName 
 var isPlaying = false
 
-@export var testBlock : PackedScene
 @export var actionIndicator : PackedScene
 @export var checkpoint : PackedScene
 @export var platformBlock: PackedScene
@@ -34,15 +33,14 @@ var isPlaying = false
 @export var baseObject : PackedScene
 
 @onready var objectList = $objectList
-@onready var testBlockList = $objectList/testBlocks
-@onready var platformBlockList = $objectList/platformBlocks
-@onready var goalBlockList = $objectList/goalBlocks
+@onready var platformBlocksList = $objectList/platformBlocks
+@onready var goalBlocksList = $objectList/goalBlocks
 @onready var enemyList = $objectList/enemies
-@onready var actionIndicatorList = $objectList/actionIndicatorManager
-@onready var checkpointList = $objectList/checkpoints
+@onready var actionIndicatorsList = $objectList/actionIndicators
+@onready var checkpointsList = $objectList/checkpoints
 @onready var player1List = $objectList/player1
 @onready var player2List = $objectList/player2
-@onready var killFloorList = $objectList/killFloors
+@onready var killFloorsList = $objectList/killFloors
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -59,6 +57,7 @@ func _ready():
 	measureLines.stepSize = stepSize
 	saveFileName = fileLabel.text
 	Globals.stepSize = stepSize
+	loadLevel()
 	
 func _process(delta: float) -> void:
 	if (trackingPosition):
@@ -85,6 +84,35 @@ func _on_text_edit_2_text_changed() -> void:
 		measureLines.stepSize = stepSize
 		measureLines.queue_redraw()
 		
+
+func loadLevel():
+	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
+	var instanceList = {"platformBlocks": [platformBlock, platformBlocksList], 
+		"goalBlocks": [goalBlock, goalBlocksList],
+		"killFloors": [killFloor, killFloorsList],
+		"actionIndicators": [actionIndicator, actionIndicatorsList], 
+		"checkpoints": [checkpoint, checkpointsList], 
+		"player1": [player1, player1List],
+		"player2": [player2, player2List]}
+	var instance
+	var instanceParent
+	for line in content.split("\n"):
+		#print("Current line: ", line)
+		if line in instanceList.keys():
+			instance = instanceList.get(line)[0]
+			instanceParent = instanceList.get(line)[1]
+		# Position
+		if line.contains(", "):
+			var parent = baseObject.instantiate()
+			#print("Object: ", instance)
+			var instancedObj = instance.instantiate()
+			var posPoints = []
+			for pos in line.split(", "):
+				posPoints.append(pos.to_float())
+			instancedObj.position = Vector2(posPoints[0], posPoints[1])
+			parent.add_child(instancedObj)
+			instanceParent.add_child(parent)
+
 func _on_save_button_down() -> void:
 	save_scene_to_file()
 	
@@ -99,8 +127,8 @@ func _on_checkpoint_button_button_up() -> void:
 	var checkParent = baseObject.instantiate()
 	checkParent.add_child(checkpointInstance)
 	checkParent.blockType = "checkpoint"
-	checkpointList.add_child(checkParent)
-	place_block(checkParent, checkpointList)
+	checkpointsList.add_child(checkParent)
+	place_block(checkParent, checkpointsList)
 	
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
@@ -188,14 +216,14 @@ func _on_block_type_drop_down_item_selected(index: int) -> void:
 	if index == 0:
 		#put a normal block
 		var platformBlockInstance = platformBlock.instantiate()
-		platformBlockList.add_child(platformBlockInstance)
+		platformBlocksList.add_child(platformBlockInstance)
 		platformBlockInstance.position = Vector2(450, 450)
 		currentBlock = platformBlockInstance
 	if index == 1:
 		#put a goal block
 		#design question: should we make a list of all the seperate block types?
 		var goalBlockInstance = goalBlock.instantiate()
-		platformBlockList.add_child(goalBlockInstance)
+		platformBlocksList.add_child(goalBlockInstance)
 		goalBlockInstance.position = Vector2(450, 450)
 		currentBlock = goalBlockInstance
 	if index ==  2:
@@ -243,23 +271,23 @@ func reset_drag_tracking():
 	timeHeld = 0.0
 
 func _on_block_button_button_up() -> void:
-	var blockInstance = testBlock.instantiate()
+	var blockInstance = platformBlock.instantiate()
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = "normal"
-	place_block(blockParent, platformBlockList)
+	place_block(blockParent, platformBlocksList)
 func _on_action_button_button_up() -> void:
 	var actionInstance = actionIndicator.instantiate()
 	var actionParent = baseObject.instantiate()
 	actionParent.add_child(actionInstance)
 	actionParent.blockType = "actionIndicator"
-	place_block(actionParent, actionIndicatorList)
+	place_block(actionParent, actionIndicatorsList)
 func _on_goal_button_button_up() -> void:
 	var goalInstance = goalBlock.instantiate()
 	var goalParent = baseObject.instantiate()
 	goalParent.add_child(goalInstance)
 	goalParent.blockType = "goalBlock"
-	place_block(goalParent, goalBlockList)
+	place_block(goalParent, goalBlocksList)
 func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()
 	var enemyParent = baseObject.instantiate()
@@ -274,7 +302,7 @@ func _on_kill_floor_button_button_up() -> void:
 	print("button works")
 	kfParent.blockType = "killFloor"
 	kfParent.temp()
-	place_block(kfParent, killFloorList)
+	place_block(kfParent, killFloorsList)
 
 
 			
