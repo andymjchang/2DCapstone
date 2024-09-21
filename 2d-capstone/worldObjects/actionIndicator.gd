@@ -7,6 +7,7 @@ var elapsed_time: float = 0
 var active: bool = false
 var starting_scale
 var blockType = "actionIndicator"
+var curSprite
 @onready var actionIndicatorManager
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
@@ -19,6 +20,7 @@ var index = 0
 func _ready() -> void:
 	actionIndicatorManager = get_parent()
 	
+	curSprite = get_node("innerCircle").duplicate()
 	starting_scale = Vector2(startingScale, startingScale)
 	outer_circle.scale = starting_scale
 	outer_circle.modulate.a = 0.0 # Starting opacity (fully transparent)

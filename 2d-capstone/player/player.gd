@@ -4,6 +4,7 @@ signal takeDamage(amount)
 signal revive(who)
 signal relocate(nearestPoint)
 
+var curSprite
 const SPEED = 388.0
 const JUMP_VELOCITY = -400.0
 var health = 99999999 # 3 hits
@@ -26,6 +27,7 @@ var index = 0
 
 func _ready():
 	print("my name is: ",self.name)
+	curSprite = get_node("Animation").duplicate()
 	add_to_group("players")
 	# Controls for player1
 	if self.name == "Player1":

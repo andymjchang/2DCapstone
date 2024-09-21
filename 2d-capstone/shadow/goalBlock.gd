@@ -1,10 +1,11 @@
 extends Node2D
 var reached = false
-
+var curSprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group('goals')
+	curSprite = get_node("Area2D/Sprite2D").duplicate()
 	pass # Replace with function body.
 
 

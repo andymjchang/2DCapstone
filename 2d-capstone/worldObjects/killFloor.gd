@@ -3,11 +3,14 @@ extends StaticBody2D
 var area
 var intersecting = false
 var downsize
+var curSprite
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#area = get_node("Area2d")
 	get_node("Area2D").body_entered.connect(_onKillFloorBodyEntered)
 	downsize = "downsize"
+	
+	curSprite = get_node("ColorRect").duplicate()
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

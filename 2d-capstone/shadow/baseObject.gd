@@ -10,6 +10,9 @@ var size: Vector2
 func _ready() -> void:
 	set_process_input(true)
 	sprite = self.get_child(0).curSprite
+	sprite.modulate.a = 0.5
+	self.add_child(sprite)
+	sprite.visible = false
 	pass # Replace with function body.
 
 
@@ -17,12 +20,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if isDragging:
 		print("")
-		#sprite.visible = true
-		print("sprint type ", sprite)
+		sprite.visible = true
 		sprite.global_position = get_global_mouse_position()
 	else:
 		print()
-		#sprite.visible = false
+		sprite.visible = false
 	pass
 	
 	
