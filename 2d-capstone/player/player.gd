@@ -132,14 +132,11 @@ func _onRelocate(nearestPoint):
 	# Disable collisions, change flags for relocation
 	#self.get_node("CollisionShape2D").call_deferred("set", "disabled", true)
 	velocity = Vector2(0, 0)
-	self.get_node("CollisionShape2D").disabled = true
-	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
-	print("Disabled? ", get_node("CollisionShape2D").disabled)
 	relocating = true
+	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
 	reachedCheckpoint = false
 	var newVelocity = Vector2((nearestPoint.position - self.position) * (SPEED / 2 * get_process_delta_time()))
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.0001).timeout
 	# Set destination, begin move to point
 	checkpoint = nearestPoint
-	print("setting velocity to: ", nearestPoint.position - self.position)
 	velocity = newVelocity

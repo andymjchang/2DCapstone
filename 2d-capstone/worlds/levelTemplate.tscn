@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b0oiqgrybgte5"]
+[gd_scene load_steps=16 format=3 uid="uid://b0oiqgrybgte5"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="7_po4yx"]
 [ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="13_euntf"]
+[ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://checkpoint.gd" id="14_rbu47"]
 
 [node name="level" type="Node2D"]
@@ -55,6 +56,10 @@ texture = ExtResource("5_xy8kd")
 position = Vector2(-960, -540)
 stream = ExtResource("3_avb0v")
 max_distance = 10000.0
+
+[node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
+position = Vector2(-625, -481)
+scale = Vector2(1.5, 1.5)
 
 [node name="objectList" type="Node2D" parent="."]
 

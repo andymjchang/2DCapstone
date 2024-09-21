@@ -6,7 +6,7 @@
 size = Vector2(31, 672)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1aka3"]
-size = Vector2(21, 671)
+size = Vector2(14, 671)
 
 [node name="KillWall" type="StaticBody2D"]
 script = ExtResource("1_1o0bc")
@@ -18,11 +18,12 @@ position = Vector2(5.5, 326)
 shape = SubResource("RectangleShape2D_43i5s")
 
 [node name="ColorRect" type="ColorRect" parent="Area2D/CollisionShape2D"]
+visible = false
 offset_left = -14.0
 offset_top = -331.0
 offset_right = 13.0
 offset_bottom = 334.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 325.5)
+position = Vector2(-3, 325.5)
 shape = SubResource("RectangleShape2D_1aka3")

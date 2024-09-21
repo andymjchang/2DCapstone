@@ -75,7 +75,7 @@ func _ready():
 	changeCountdown()
 	await get_tree().create_timer(3.0).timeout
 	#Globals.inLevel = true
-	music.play(0.0)
+	#music.play(0.0)
 
 func loadLevel():
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()
@@ -174,11 +174,11 @@ func getNearestCheckpoint(who):
 	var nearestPoint = checkpointsList.get_child(0)
 	var shortestDistance = who.position.distance_to(nearestPoint.position)
 	for i in checkpointsList.get_children():
-		print("Checking: ", i)
+		#print("Checking: ", i)
 		var distance = who.position.distance_to(i.position)
 		# Check if checkpoint in front of player
 		var direction = (i.position.x - who.position.x)
-		print("dir: ", direction)
+		#print("dir: ", direction)
 		if (direction >= 0):
 			if distance < shortestDistance:
 				#print("foClosest node: ", i)

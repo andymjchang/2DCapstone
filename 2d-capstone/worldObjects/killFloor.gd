@@ -15,7 +15,7 @@ func _process(delta):
 	
 func _onKillFloorBodyEntered(body:Node2D):
 	if "players" in body.get_groups():
-		print(body, " Entered")
+		#print(body, " Entered")
 		body.emit_signal("takeDamage", 1)
 		get_parent().get_parent().get_parent().emit_signal("resetPosition", body)
 
