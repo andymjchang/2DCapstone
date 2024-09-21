@@ -2,18 +2,27 @@ class_name BaseObject
 extends Node2D
 var blockType = ""
 var index = 0
-var spritePath = ""
+var sprite
 var isDragging = false
 
 var size: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_process_input(true)
+	sprite = self.get_child(0).curSprite
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if isDragging:
+		print("")
+		#sprite.visible = true
+		print("sprint type ", sprite)
+		sprite.global_position = get_global_mouse_position()
+	else:
+		print()
+		#sprite.visible = false
 	pass
 	
 	
@@ -21,9 +30,9 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 	if event.is_action_pressed("click"):
 		print("click")
 		get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType)
-		print("Shadow look here: ", self.get_parent().get_parent().get_parent())
 		self.get_parent().get_parent().get_parent().setTrackingPosition(true)
 		isDragging = true
+		
 		print("mouse pressed")
 	
 func _input(event: InputEvent) -> void:
