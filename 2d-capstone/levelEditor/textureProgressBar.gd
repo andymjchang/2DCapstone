@@ -24,7 +24,6 @@ func _process(delta: float) -> void:
 	if isDragging:
 		print("in isdragging")
 		#stop the audio
-		
 		var clickPos = get_local_mouse_position()
 	
 		var barWidth = self.get_node("Area2D/CollisionShape2D").shape as RectangleShape2D
@@ -32,9 +31,7 @@ func _process(delta: float) -> void:
 		var percentage = abs(clickPos.x/width)
 		var clickVal = percentage * self.max_value
 		audioPlayer.seek(clickVal)
-		
-		
-		
+			
 	self.value = audioPlayer.get_playback_position()
 	timeLeft.set_text(format_time(audioPlayer.stream.get_length() - self.value))
 	timeInto.set_text(format_time(self.value))

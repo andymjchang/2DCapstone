@@ -352,3 +352,7 @@ func _on_audio_progress_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and  event.pressed:
 		self.get_node("UI/objectSelector/audioProgress").isDragging=true
 		print("click") # Replace with function body.
+
+
+			
+	
