@@ -18,5 +18,6 @@ func _onBoundsAreaEntered(area):
 		area.get_parent().reachedCheckpoint = true
 		area.get_parent().velocity.x = 0
 		area.get_parent().velocity.y = 0
+		area.get_parent().position = self.position
 	pass
 	

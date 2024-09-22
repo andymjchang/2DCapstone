@@ -1,0 +1,80 @@
+[gd_scene load_steps=16 format=3 uid="uid://b0oiqgrybgte5"]
+
+[ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_fl71r"]
+[ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
+[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_78xmt"]
+[ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="3_6me16"]
+[ext_resource type="AudioStream" uid="uid://bi32k1rjy681g" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="3_avb0v"]
+[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_o6usx"]
+[ext_resource type="Script" path="res://worlds/camera.gd" id="4_nttx1"]
+[ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
+[ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
+[ext_resource type="Texture2D" uid="uid://eaxiu3v8mgwp" path="res://worlds/menuBG.png" id="5_xy8kd"]
+[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
+[ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="7_po4yx"]
+[ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="13_euntf"]
+[ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
+[ext_resource type="Script" path="res://checkpoint.gd" id="14_rbu47"]
+
+[node name="level" type="Node2D"]
+script = ExtResource("1_fl71r")
+levelFile = "new_scene"
+platformBlockInstance = ExtResource("2_78xmt")
+killFloorInstance = ExtResource("3_6me16")
+actionIndicatorInstance = ExtResource("3_o6usx")
+checkpointInstance = ExtResource("4_ph2wq")
+player1Instance = ExtResource("5_dfiyk")
+player2Instance = ExtResource("6_5q6wy")
+enemyInstance = ExtResource("7_po4yx")
+
+[node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Timer" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1104.0
+offset_right = 1152.0
+offset_bottom = 64.0
+
+[node name="Score" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1056.0
+offset_right = 1104.0
+offset_bottom = 64.0
+text = "0"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+zoom = Vector2(1.5, 1.5)
+script = ExtResource("4_nttx1")
+
+[node name="MenuBg" type="Sprite2D" parent="Camera2D"]
+position = Vector2(15.8338, 5.50021)
+scale = Vector2(0.219167, 0.219167)
+texture = ExtResource("5_xy8kd")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
+position = Vector2(-960, -540)
+stream = ExtResource("3_avb0v")
+max_distance = 10000.0
+
+[node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
+position = Vector2(-625, -481)
+scale = Vector2(1.5, 1.5)
+
+[node name="objectList" type="Node2D" parent="."]
+
+[node name="platformBlocks" type="Node2D" parent="objectList"]
+
+[node name="goalBlocks" type="Node2D" parent="objectList"]
+
+[node name="killFloors" type="Node2D" parent="objectList"]
+
+[node name="enemies" type="Node2D" parent="objectList"]
+
+[node name="actionIndicators" type="Node2D" parent="objectList"]
+script = ExtResource("13_euntf")
+
+[node name="checkpoints" type="Node2D" parent="objectList"]
+script = ExtResource("14_rbu47")
+
+[node name="players" type="Node2D" parent="objectList"]

@@ -12,7 +12,7 @@ script = ExtResource("1_mtsv6")
 
 [node name="Block" parent="." instance=ExtResource("2_p1e2s")]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Block"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Block"]
 modulate = Color(0.935511, 0.479721, 0.526804, 1)
 position = Vector2(23, -33)
 shape = SubResource("RectangleShape2D_5h2xg")

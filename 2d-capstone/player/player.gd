@@ -98,16 +98,17 @@ func _physics_process(delta: float) -> void:
 				get_node("CollisionShape2D").call_deferred("set", "disabled", false)
 				relocating = false
 				reachedCheckpoint = true
-				self.position.y = checkpoint.get_node("Point").position.y
+				#self.position.y = checkpoint.get_node("Point").position.y
 				self.position.x = get_parent().get_node(otherPlayer).position.x
 			pass
 		move_and_slide()
+	else:
+		invuln = true
 
 func _onTakeDamage(amount):
-	print("Got hit! Health now: ", self.health)
 	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
 		health -= amount
-
+		print("Got hit! Health now: ", self.health)
 		if health <= 0:
 			print("Player died!")
 			#self.visible = false
@@ -133,12 +134,13 @@ func _onRevive(who):
 
 func _onRelocate(nearestPoint):
 	# Disable collisions, change flags for relocation
-	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
+	#self.get_node("CollisionShape2D").call_deferred("set", "disabled", true)
+	velocity = Vector2(0, 0)
 	relocating = true
+	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
 	reachedCheckpoint = false
-
+	var newVelocity = Vector2((nearestPoint.position - self.position) * (SPEED / 2 * get_process_delta_time()))
+	await get_tree().create_timer(0.0001).timeout
 	# Set destination, begin move to point
 	checkpoint = nearestPoint
-	velocity.x = (nearestPoint.position.x - position.x) * SPEED/2 * get_process_delta_time()
-	velocity.y = (nearestPoint.position.y - position.y) * SPEED/2 * get_process_delta_time()
-	
+	velocity = newVelocity

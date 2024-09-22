@@ -170,7 +170,7 @@ position = Vector2(900, 600)
 [node name="Area2D2" type="Area2D" parent="testBlocks/Block"]
 position = Vector2(0, 8)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/Block"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="testBlocks/Block"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
@@ -182,7 +182,7 @@ position = Vector2(1050, 600)
 [node name="Area2D2" type="Area2D" parent="testBlocks/_StaticBody2D_20"]
 position = Vector2(0, 8)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_20"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_20"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
@@ -194,7 +194,7 @@ position = Vector2(1200, 600)
 [node name="Area2D2" type="Area2D" parent="testBlocks/_StaticBody2D_22"]
 position = Vector2(0, 8)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_22"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_22"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
@@ -206,7 +206,7 @@ position = Vector2(450, 1050)
 [node name="Area2D2" type="Area2D" parent="testBlocks/_StaticBody2D_24"]
 position = Vector2(0, 8)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_24"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_24"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
@@ -218,7 +218,7 @@ position = Vector2(750, 600)
 [node name="Area2D2" type="Area2D" parent="testBlocks/_StaticBody2D_26"]
 position = Vector2(0, 8)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_26"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="testBlocks/_StaticBody2D_26"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
@@ -269,7 +269,7 @@ disabled = true
 [node name="KillFloor" parent="killFloors" instance=ExtResource("14_66ucl")]
 position = Vector2(900, 640)
 
-[node name="Area2D2" type="Area2D" parent="killFloors/KillFloor"]
+[node name="Area2D3" type="Area2D" parent="killFloors/KillFloor"]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="killFloors/KillFloor"]
 position = Vector2(0, 2.5)
@@ -285,7 +285,7 @@ offset_bottom = 22.0
 [node name="_StaticBody2D_21" parent="killFloors" instance=ExtResource("14_66ucl")]
 position = Vector2(1050, 640)
 
-[node name="Area2D2" type="Area2D" parent="killFloors/_StaticBody2D_21"]
+[node name="Area2D3" type="Area2D" parent="killFloors/_StaticBody2D_21"]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="killFloors/_StaticBody2D_21"]
 position = Vector2(0, 2.5)
@@ -301,7 +301,7 @@ offset_bottom = 22.0
 [node name="_StaticBody2D_23" parent="killFloors" instance=ExtResource("14_66ucl")]
 position = Vector2(1200, 640)
 
-[node name="Area2D2" type="Area2D" parent="killFloors/_StaticBody2D_23"]
+[node name="Area2D3" type="Area2D" parent="killFloors/_StaticBody2D_23"]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="killFloors/_StaticBody2D_23"]
 position = Vector2(0, 2.5)
@@ -317,7 +317,7 @@ offset_bottom = 22.0
 [node name="_StaticBody2D_25" parent="killFloors" instance=ExtResource("14_66ucl")]
 position = Vector2(450, 1090)
 
-[node name="Area2D2" type="Area2D" parent="killFloors/_StaticBody2D_25"]
+[node name="Area2D3" type="Area2D" parent="killFloors/_StaticBody2D_25"]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="killFloors/_StaticBody2D_25"]
 position = Vector2(0, 2.5)
@@ -333,7 +333,7 @@ offset_bottom = 22.0
 [node name="_StaticBody2D_27" parent="killFloors" instance=ExtResource("14_66ucl")]
 position = Vector2(750, 640)
 
-[node name="Area2D2" type="Area2D" parent="killFloors/_StaticBody2D_27"]
+[node name="Area2D3" type="Area2D" parent="killFloors/_StaticBody2D_27"]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="killFloors/_StaticBody2D_27"]
 position = Vector2(0, 2.5)

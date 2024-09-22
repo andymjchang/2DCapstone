@@ -6,6 +6,25 @@ signal checkGameOver()
 signal levelCompleted()
 signal checkLevelCompleted()
 
+@export var levelFile : String
+@export var platformBlockInstance : PackedScene
+@export var goalBlockInstance : PackedScene
+@export var killFloorInstance : PackedScene
+@export var actionIndicatorInstance : PackedScene
+@export var checkpointInstance : PackedScene
+@export var player1Instance : PackedScene
+@export var player2Instance : PackedScene
+@export var enemyInstance : PackedScene
+
+@onready var objectList = $objectList
+@onready var platformBlocksList = $objectList/platformBlocks
+@onready var goalBlocksList = $objectList/goalBlocks
+@onready var killFloorsList = $objectList/killFloors
+@onready var enemiesList = $objectList/enemies
+@onready var actionIndicatorsList = $objectList/actionIndicators
+@onready var checkpointsList = $objectList/checkpoints
+@onready var playersList = $objectList/players
+
 var player1 
 var player2
 var killWall
@@ -13,7 +32,6 @@ var countdownUI
 var statusMessage
 var restartButton
 var music
-var checkpoints
 
 var time : float = 0
 var bpm: int = 100
@@ -29,37 +47,26 @@ var textPopupScene = preload("res://worldObjects/scoreText.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#timerText = $CanvasLayer/Timer
-	player = get_node("players").get_node("Player1")
-	
+	loadLevel()
+	timerText = $CanvasLayer/Timer
+	player1 = playersList.get_node("Player1")
+	player2 = playersList.get_node("Player2")
 	camera = $Camera2D
-	checkpoints = get_node("checkpoints")
 	scoreText = $CanvasLayer/Score
-	scoreText = $CanvasLayer/Score
-	music = $audio
-	
-	self.move_child(camera, 0)
+	music = camera.get_node("Music")
 	
 	# Setting signals
 	self.resetPosition.connect(_onResetPosition)
-
 	self.gameOver.connect(_onGameOver)
 	self.checkGameOver.connect(_onCheckGameOver)
 	self.checkLevelCompleted.connect(_onCheckLevelCompleted)
 	self.levelCompleted.connect(_onLevelCompleted)
 
-	#self.gameOver.connect(_onGameOver)
-	#self.checkGameOver.connect(_onCheckGameOver)
-
-	# Getting nodes to manage
-	player1 = get_node("players").get_node("Player1")
-	player2 = get_node("players").get_node("Player2")
 	# Prep players
-	#player1.editing = false
-	#player2.editing = false
+	player1.editing = false
+	player2.editing = false
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
-	
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
 	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
 
@@ -67,13 +74,34 @@ func _ready():
 	restartButton.visible = false
 	changeCountdown()
 	await get_tree().create_timer(3.0).timeout
-	Globals.inLevel = true
-	music.play(0.0)
-	restartButton.visible = false
-	#changeCountdown()
-	#await get_tree().create_timer(3.0).timeout
 	#Globals.inLevel = true
 	#music.play(0.0)
+
+func loadLevel():
+	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()
+	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
+		"goalBlocks": [goalBlockInstance, goalBlocksList],
+		"killFloors": [killFloorInstance, killFloorsList],
+		"actionIndicators": [actionIndicatorInstance, actionIndicatorsList], 
+		"checkpoints": [checkpointInstance, checkpointsList], 
+		"player1": [player1Instance, playersList],
+		"player2": [player2Instance, playersList]}
+	var instance
+	var instanceParent
+	for line in content.split("\n"):
+		#print("Current line: ", line)
+		if line in instanceList.keys():
+			instance = instanceList.get(line)[0]
+			instanceParent = instanceList.get(line)[1]
+		# Position
+		if line.contains(", "):
+			#print("Object: ", instance)
+			var instancedObj = instance.instantiate()
+			var posPoints = []
+			for pos in line.split(", "):
+				posPoints.append(pos.to_float())
+			instancedObj.position = Vector2(posPoints[0], posPoints[1])
+			instanceParent.add_child(instancedObj)
 
 func changeCountdown():
 	await get_tree().create_timer(1.0).timeout
@@ -143,14 +171,14 @@ func updateScore(indicator_position):
 
 # Helper function that grabs the target player's closest forward checkpoint
 func getNearestCheckpoint(who):
-	var nearestPoint = checkpoints.get_child(0)
+	var nearestPoint = checkpointsList.get_child(0)
 	var shortestDistance = who.position.distance_to(nearestPoint.position)
-	for i in checkpoints.get_children():
-		print("Checking: ", i)
+	for i in checkpointsList.get_children():
+		#print("Checking: ", i)
 		var distance = who.position.distance_to(i.position)
 		# Check if checkpoint in front of player
 		var direction = (i.position.x - who.position.x)
-		print("dir: ", direction)
+		#print("dir: ", direction)
 		if (direction >= 0):
 			if distance < shortestDistance:
 				#print("foClosest node: ", i)

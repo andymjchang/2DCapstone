@@ -13,16 +13,9 @@ script = ExtResource("1_6q6ov")
 
 [node name="Block" parent="." instance=ExtResource("2_w3jcn")]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Block"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Block"]
 shape = SubResource("RectangleShape2D_fn35s")
 debug_color = Color(0.772112, 0.28509, 0.8457, 0.42)
-
-[node name="ColorRect" type="ColorRect" parent="Block/CollisionShape2D2"]
-offset_left = -64.0
-offset_top = -16.0
-offset_right = 65.0
-offset_bottom = 17.0
-color = Color(1, 0.196078, 1, 1)
 
 [node name="Enemy" parent="." instance=ExtResource("3_4p3g3")]
 visible = false

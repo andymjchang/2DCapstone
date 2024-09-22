@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 	
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("click"):
-		print("click")
+		print("clicking")
 		get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType)
 		self.get_parent().get_parent().get_parent().setTrackingPosition(true)
 		isDragging = true
@@ -45,7 +45,9 @@ func _input(event: InputEvent) -> void:
 		self.get_parent().get_parent().get_parent().reset_drag_tracking()
 		isDragging = false
 		
-func setArea2D(newArea):
+func setArea2D():
+	var newArea = self.get_child(0).get_node("Area2D").duplicate()
+	newArea.name = "EditorArea"
 	self.add_child(newArea)
 	newArea.connect("input_event",  _on_area_2d_input_event)
 	print("object type: ",self)

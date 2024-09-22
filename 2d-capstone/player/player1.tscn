@@ -159,7 +159,7 @@ shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="ProtoMc" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(2.38419e-07, 0)
+position = Vector2(-2.5, -11.75)
 scale = Vector2(0.368884, 0.344364)
 texture = ExtResource("2_a5rf3")
 

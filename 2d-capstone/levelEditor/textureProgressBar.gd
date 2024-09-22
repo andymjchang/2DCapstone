@@ -10,7 +10,7 @@ var timeInto
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	audioPlayer = self.get_parent().get_parent().get_parent().get_node("objectList").get_node("audio")
+	audioPlayer = self.get_parent().get_parent().get_parent().get_node("Camera2D").get_node("audio")
 	self.min_value = 0
 	self.max_value = audioPlayer.stream.get_length()
 	set_process(true)
