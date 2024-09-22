@@ -9,7 +9,7 @@ var size: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_process_input(true)
-	sprite = self.get_child(0).curSprite
+	sprite = self.get_child(0).get_node("Sprite2D").duplicate()
 	sprite.modulate.a = 0.5
 	self.add_child(sprite)
 	sprite.visible = false
@@ -48,6 +48,7 @@ func setArea2D(newArea):
 	newArea.connect("input_event",  _on_area_2d_input_event)
 	print("object type: ",self)
 	print("its children: ", self.get_children())
+
 
 func temp () -> void:
 	var newArea = self.get_child(0).get_node("Area2D").duplicate()

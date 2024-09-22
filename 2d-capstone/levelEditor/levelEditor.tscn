@@ -1,20 +1,20 @@
 [gd_scene load_steps=38 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
-[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_1at3l"]
-[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://shadow/goal_block.tscn" id="2_60mmb"]
-[ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="2_651dv"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
-[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="2_otlxm"]
+[ext_resource type="PackedScene" uid="uid://ddnsnvsdn3aet" path="res://levelEditorObjects/actionIndicatorScene.tscn" id="3_ayep8"]
 [ext_resource type="Texture2D" uid="uid://iocnhlyh4yw6" path="res://levelEditor/programmerArtAssets/action.png" id="3_kgvx7"]
 [ext_resource type="Texture2D" uid="uid://bamwfgoa14ig1" path="res://levelEditor/programmerArtAssets/right.png" id="4_7fuo1"]
-[ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_iqk0t"]
+[ext_resource type="PackedScene" uid="uid://m7qqiokd3152" path="res://levelEditorObjects/checkpointScene.tscn" id="4_enory"]
 [ext_resource type="Texture2D" uid="uid://vwontoywjedu" path="res://levelEditor/programmerArtAssets/block.png" id="4_rduon"]
+[ext_resource type="PackedScene" uid="uid://yau5rmr187fi" path="res://levelEditorObjects/platformBlockScene.tscn" id="5_5etgx"]
 [ext_resource type="Texture2D" uid="uid://cnj8sgwkjxidi" path="res://levelEditor/programmerArtAssets/up.png" id="5_8qxnf"]
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="5_c8prk"]
 [ext_resource type="Texture2D" uid="uid://77x6f2ngvprm" path="res://levelEditor/programmerArtAssets/left.png" id="5_cuiw6"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="6_47xe5"]
+[ext_resource type="PackedScene" uid="uid://jixi0wddqipj" path="res://levelEditorObjects/enemyScene.tscn" id="6_qlmlw"]
 [ext_resource type="Texture2D" uid="uid://44ffttq2jugp" path="res://levelEditor/programmerArtAssets/save.png" id="7_0wc3n"]
+[ext_resource type="PackedScene" uid="uid://c57gt1oqgpg2" path="res://levelEditorObjects/goalBlockScene.tscn" id="7_c0pjh"]
 [ext_resource type="Texture2D" uid="uid://bbiq7u5yvg7al" path="res://levelEditor/programmerArtAssets/mouse.png" id="7_dw7u5"]
 [ext_resource type="Texture2D" uid="uid://ctosvjaft7ggn" path="res://levelEditor/programmerArtAssets/exit.png" id="7_esiun"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="7_h5cy3"]
@@ -26,9 +26,9 @@
 [ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/programmerArtAssets/checkpoint.png" id="9_wpw0u"]
 [ext_resource type="Script" path="res://worldObjects/killFloor.gd" id="10_jxp0h"]
 [ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
-[ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="11_ghgfb"]
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="13_87vi8"]
 [ext_resource type="AudioStream" uid="uid://cmxsfbbfnb2j0" path="res://audioTracks/Sprint2_GminBmaj_156bpm.mp3" id="13_vpjxf"]
+[ext_resource type="PackedScene" uid="uid://bq7uuovqf0df7" path="res://levelEditorObjects/killFloorScene.tscn" id="14_26o8v"]
 [ext_resource type="PackedScene" uid="uid://bdfklxl1c8rjj" path="res://shadow/baseObject.tscn" id="15_mrsrj"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
 [ext_resource type="Texture2D" uid="uid://drnvhk52xrn80" path="res://levelEditor/programmerArtAssets/playAudio.png" id="20_n1qdn"]
@@ -42,11 +42,12 @@ size = Vector2(278, 43)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
-testBlock = ExtResource("2_1at3l")
-actionIndicator = ExtResource("2_otlxm")
-checkpoint = ExtResource("4_iqk0t")
-enemyCharacter = ExtResource("2_651dv")
-goalBlock = ExtResource("2_60mmb")
+testBlock = ExtResource("5_5etgx")
+actionIndicator = ExtResource("3_ayep8")
+checkpoint = ExtResource("4_enory")
+platformBlock = ExtResource("5_5etgx")
+enemyCharacter = ExtResource("6_qlmlw")
+goalBlock = ExtResource("7_c0pjh")
 worldManager = ExtResource("5_c8prk")
 cameraScript = ExtResource("8_nimfa")
 actionManager = ExtResource("9_6gh41")
@@ -54,7 +55,7 @@ killFloorScript = ExtResource("10_jxp0h")
 levelUI = ExtResource("6_47xe5")
 player1 = ExtResource("7_h5cy3")
 player2 = ExtResource("8_d3hii")
-killFloor = ExtResource("11_ghgfb")
+killFloor = ExtResource("14_26o8v")
 baseObject = ExtResource("15_mrsrj")
 
 [node name="Background" type="Sprite2D" parent="."]

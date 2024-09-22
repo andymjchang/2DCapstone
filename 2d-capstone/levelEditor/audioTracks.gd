@@ -13,8 +13,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func addButton(fileName) -> void:
-	print("delete this idk")
 	
 func fillAudioScroll() -> void:
 	var audioDirPath = "res://audioTracks"

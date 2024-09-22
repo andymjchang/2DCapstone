@@ -45,12 +45,6 @@ func format_time(seconds: float) -> String:
 	return str(minutesStr) + ":" + str(secondsStr)
 	
 
-#func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	#if event is InputEventMouseButton and  event.pressed:
-		#print("click")
-		#isDragging = true
-		#
-		#print("mouse pressed")
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.pressed:

@@ -282,7 +282,7 @@ func reset_drag_tracking():
 	timeHeld = 0.0	
 
 func _on_block_button_button_up() -> void:
-	var blockInstance = testBlock.instantiate()
+	var blockInstance = platformBlock.instantiate()
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = "normal"
@@ -339,6 +339,7 @@ func getList(blockType : String) -> Node:
 	if blockType == "checkpoint":
 		return get_node("objectList/checkpoints")
 	if blockType == "killFloor":
+		print("getting here!")
 		return get_node("objectList/killFloors")
 	return null
 	
