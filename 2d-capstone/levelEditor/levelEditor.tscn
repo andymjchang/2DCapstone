@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=35 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_1at3l"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="13_87vi8"]
 [ext_resource type="PackedScene" uid="uid://bdfklxl1c8rjj" path="res://shadow/baseObject.tscn" id="15_mrsrj"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
+[ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="19_jlcy1"]
 [ext_resource type="Texture2D" uid="uid://drnvhk52xrn80" path="res://levelEditor/programmerArtAssets/playAudio.png" id="20_n1qdn"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
 [ext_resource type="Texture2D" uid="uid://bv8ou5u1pkb2k" path="res://shadow/R (1).jpg" id="34_wwivc"]
@@ -63,7 +64,9 @@ script = ExtResource("2_mulbo")
 position = Vector2(960, 540)
 script = ExtResource("10_seu87")
 
-[node name="audio" type="AudioStreamPlayer2D" parent="."]
+[node name="audio" type="AudioStreamPlayer2D" parent="Camera2D"]
+position = Vector2(-960, -540)
+stream = ExtResource("19_jlcy1")
 
 [node name="objectList" type="Node2D" parent="."]
 
@@ -256,6 +259,70 @@ texture_normal = ExtResource("34_wwivc")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="StatusWindow" type="CanvasLayer" parent="."]
+
+[node name="ColorRect2" type="ColorRect" parent="StatusWindow"]
+modulate = Color(1, 1, 1, 0.458824)
+offset_right = 1927.0
+offset_bottom = 1079.0
+
+[node name="ColorRect" type="ColorRect" parent="StatusWindow"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -508.0
+offset_top = -324.0
+offset_right = 508.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="HBoxContainer" parent="StatusWindow"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.5
+offset_top = 104.5
+offset_right = 260.5
+offset_bottom = 249.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 200
+
+[node name="Yes" type="Button" parent="StatusWindow/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Yes"
+
+[node name="No" type="Button" parent="StatusWindow/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "No
+"
+
+[node name="StatusMessage" type="Label" parent="StatusWindow"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -498.5
+offset_top = -277.5
+offset_right = 498.5
+offset_bottom = -0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Unable to save.
+Need 2 players."
+horizontal_alignment = 1
+clip_text = true
+
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit3" to="." method="_on_text_edit_3_text_changed"]
@@ -281,3 +348,5 @@ stretch_mode = 0
 [connection signal="button_down" from="UI/objectSelector/leftButton" to="." method="_on_left_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/downButton" to="." method="_on_down_button_button_down"]
 [connection signal="button_up" from="UI/objectSelector/killFloorButton" to="." method="_on_kill_floor_button_button_up"]
+[connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]

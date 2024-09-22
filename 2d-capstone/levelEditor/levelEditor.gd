@@ -16,6 +16,14 @@ var timeHeld = 0.0
 var killFDict: Dictionary = {}
 var saveFileName 
 var isPlaying = false
+var levelDataPath = "res://levelData/"
+var overwrite = false
+var isLoad = true
+var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint"]
+
+var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
+var OVERWRITE_FILE = "Overwrite existing\nfile?"
+var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 
 @export var actionIndicator : PackedScene
 @export var checkpoint : PackedScene
@@ -46,6 +54,7 @@ var isPlaying = false
 @onready var fileLabel = $UI/TextEdit3
 @onready var measureLines = $measureLines
 @onready var camera = $Camera2D
+@onready var status = $StatusWindow
 
 var bpm : int = 4
 var stepSize : int = 150
@@ -57,7 +66,8 @@ func _ready():
 	measureLines.stepSize = stepSize
 	saveFileName = fileLabel.text
 	Globals.stepSize = stepSize
-	loadLevel()
+	if FileAccess.file_exists(levelDataPath + saveFileName + ".dat"):
+		displayStatus(FILE_EXISTS_PATH, true)
 	
 func _process(delta: float) -> void:
 	if (trackingPosition):
@@ -87,31 +97,36 @@ func _on_text_edit_2_text_changed() -> void:
 
 func loadLevel():
 	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
-	var instanceList = {"platformBlocks": [platformBlock, platformBlocksList], 
-		"goalBlocks": [goalBlock, goalBlocksList],
-		"killFloors": [killFloor, killFloorsList],
-		"actionIndicators": [actionIndicator, actionIndicatorsList], 
-		"checkpoints": [checkpoint, checkpointsList], 
-		"player1": [player1, player1List],
-		"player2": [player2, player2List]}
+	var instanceList = {"platformBlocks": [platformBlock, platformBlocksList, blockTypes[2]], 
+		"goalBlocks": [goalBlock, goalBlocksList, blockTypes[4]],
+		"killFloors": [killFloor, killFloorsList, blockTypes[6]],
+		"actionIndicators": [actionIndicator, actionIndicatorsList, blockTypes[3]], 
+		"checkpoints": [checkpoint, checkpointsList, blockTypes[7]], 
+		"player1": [player1, player1List, blockTypes[0]],
+		"player2": [player2, player2List, blockTypes[1]]}
 	var instance
 	var instanceParent
+	var blockType = blockTypes[2]
 	for line in content.split("\n"):
 		#print("Current line: ", line)
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
+			blockType = instanceList.get(line)[2]
 		# Position
 		if line.contains(", "):
 			var parent = baseObject.instantiate()
-			#print("Object: ", instance)
 			var instancedObj = instance.instantiate()
+			if "player" in blockType:
+				instancedObj.editing = true
+				instancedObj.add_to_group("Players")
+			parent.blockType = blockType
 			var posPoints = []
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
-			instancedObj.position = Vector2(posPoints[0], posPoints[1])
 			parent.add_child(instancedObj)
-			instanceParent.add_child(parent)
+			#instancedObj.position = Vector2(posPoints[0], posPoints[1])
+			place_block(parent, instanceParent, Vector2(posPoints[0], posPoints[1]))
 
 func _on_save_button_down() -> void:
 	save_scene_to_file()
@@ -126,9 +141,9 @@ func _on_checkpoint_button_button_up() -> void:
 	var checkpointInstance = checkpoint.instantiate()
 	var checkParent = baseObject.instantiate()
 	checkParent.add_child(checkpointInstance)
-	checkParent.blockType = "checkpoint"
+	checkParent.blockType = blockTypes[7]
 	checkpointsList.add_child(checkParent)
-	place_block(checkParent, checkpointsList)
+	place_block(checkParent, checkpointsList, camera.position)
 	
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
@@ -140,9 +155,9 @@ func _on_rac_button_button_up() -> void:
 		player1Instance.add_to_group("Players")
 		var playerParent = baseObject.instantiate()
 		playerParent.add_child(player1Instance)
-		playerParent.blockType = "player1"
+		playerParent.blockType = blockTypes[0]
 		player1List.add_child(playerParent)
-		placeObject(playerParent)
+		place_block(playerParent, player1List, camera.position)
 	else:
 		currentBlock = player1List.get_node("baseObject").get_node("Player1")
 		reset_drag_tracking()
@@ -154,29 +169,59 @@ func _on_mouse_button_button_up() -> void:
 		player2Instance.add_to_group("Players")
 		var playerParent = baseObject.instantiate()
 		playerParent.add_child(player2Instance)
-		playerParent.blockType = "player2"
+		playerParent.blockType = blockTypes[1]
 		player2List.add_child(playerParent)
-		placeObject(playerParent)
+		place_block(playerParent, player2List, camera.position)
 	else:
 		currentBlock = player2List.get_node("baseObject").get_node("Player2")
 		reset_drag_tracking()
 
+func _on_block_button_button_up() -> void:
+	var blockInstance = platformBlock.instantiate()
+	var blockParent = baseObject.instantiate()
+	blockParent.add_child(blockInstance)
+	blockParent.blockType = blockTypes[2]
+	place_block(blockParent, platformBlocksList, camera.position)
+
+func _on_action_button_button_up() -> void:
+	var actionInstance = actionIndicator.instantiate()
+	var actionParent = baseObject.instantiate()
+	actionParent.add_child(actionInstance)
+	actionParent.blockType = blockTypes[3]
+	place_block(actionParent, actionIndicatorsList, camera.position)
+
+func _on_goal_button_button_up() -> void:
+	var goalInstance = goalBlock.instantiate()
+	var goalParent = baseObject.instantiate()
+	goalParent.add_child(goalInstance)
+	goalParent.blockType = blockTypes[4]
+	place_block(goalParent, goalBlocksList, camera.position)
+
+func _on_enemy_button_button_up() -> void:
+	var enemyInstance = enemyCharacter.instantiate()
+	var enemyParent = baseObject.instantiate()
+	enemyParent.add_child(enemyInstance)
+	enemyParent.blockType = blockTypes[5]
+	place_block(enemyParent, enemyList, camera.position)
+
+func _on_kill_floor_button_button_up() -> void:
+	var kfInstance = killFloor.instantiate()
+	var kfParent = baseObject.instantiate()
+	kfParent.add_child(kfInstance)
+	print("button works")
+	kfParent.blockType = blockTypes[6]
+	kfParent.temp()
+	place_block(kfParent, killFloorsList, camera.position)
+
 func _on_play_audio_button_pressed() -> void:
 	if not isPlaying:
-		objectList.get_node("audio").play()
+		camera.get_node("audio").play()
 		get_node("UI").get_node("objectSelector").get_node("playAudioButton").texture_normal = load("res://levelEditor/programmerArtAssets/replayTrack.png")
 		isPlaying = true
 	else:
 		isPlaying = false
 		get_node("UI").get_node("objectSelector").get_node("playAudioButton").texture_normal = load("res://levelEditor/programmerArtAssets/playAudio.png")
-		objectList.get_node("audio").stop()
-		
-func placeObject(placedNode):
-	placedNode.position = Vector2(450, 450)
-	placedNode.setArea2D(placedNode.get_child(0).get_node("Area2D"))
-	placedNode.index = lEindex
-	lEindex+=1
-	currentBlock = placedNode
+		camera.get_node("audio").stop()
 	
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null): return
@@ -193,17 +238,17 @@ func _on_up_button_button_down() -> void:
 	
 func save_scene_to_file():
 	if player1List.get_child_count() == 1 and player2List.get_child_count() == 1:
-		var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
-		for itemList in objectList.get_children():
-			print("Item list: ", itemList.name)
-			newFile.store_string(itemList.name + "\n")
-			for item in itemList.get_children():
-				#newFile.store_string(item.name + "\n")
-				newFile.store_string(str(item.position.x) + ", " + str(item.position.y) + "\n")
-				print("Storing: ", item.name)
-				print("Storing pos: ", str(item.position.x) + ", " + str(item.position.y))
+		if FileAccess.file_exists(levelDataPath + saveFileName + ".dat") and overwrite == false:
+			status.show()
+			displayStatus(OVERWRITE_FILE, true)
+		else:
+			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
+			for itemList in objectList.get_children():
+				newFile.store_string(itemList.name + "\n")
+				for item in itemList.get_children():
+					newFile.store_string(str(item.position.x) + ", " + str(item.position.y) + "\n")
 	else:
-		print("Unable to save. Need 2 players.")
+		displayStatus(UNABLE_TO_SAVE, false)
 		
 # Recursive function to set owner for all children
 func _set_owner_recursive(node: Node, root: Node):
@@ -250,13 +295,12 @@ func round_to_step(value) -> int:
 	var intMultiplier = value / stepSize
 	return round(intMultiplier) * stepSize
 
-func place_block(instance, parent):
-	var placePos = camera.position
+func place_block(instance, parent, placePos):
 	if (timeHeld >= holdTime):
-		placePos = currentPosition
-	
+		placePos = instance.get_child(0).position
+
 	parent.add_child(instance)	
-	instance.setArea2D(instance.get_child(0).get_node("Area2D"))
+	instance.setArea2D()
 	instance.index = lEindex
 	lEindex+=1
 	instance.position = snap_position(placePos)
@@ -269,43 +313,7 @@ func reset_drag_tracking():
 	trackingPosition = false
 	currentPosition = camera.position
 	timeHeld = 0.0
-
-func _on_block_button_button_up() -> void:
-	var blockInstance = platformBlock.instantiate()
-	var blockParent = baseObject.instantiate()
-	blockParent.add_child(blockInstance)
-	blockParent.blockType = "normal"
-	place_block(blockParent, platformBlocksList)
-func _on_action_button_button_up() -> void:
-	var actionInstance = actionIndicator.instantiate()
-	var actionParent = baseObject.instantiate()
-	actionParent.add_child(actionInstance)
-	actionParent.blockType = "actionIndicator"
-	place_block(actionParent, actionIndicatorsList)
-func _on_goal_button_button_up() -> void:
-	var goalInstance = goalBlock.instantiate()
-	var goalParent = baseObject.instantiate()
-	goalParent.add_child(goalInstance)
-	goalParent.blockType = "goalBlock"
-	place_block(goalParent, goalBlocksList)
-func _on_enemy_button_button_up() -> void:
-	var enemyInstance = enemyCharacter.instantiate()
-	var enemyParent = baseObject.instantiate()
-	enemyParent.add_child(enemyInstance)
-	enemyParent.blockType = "enemy"
-	place_block(enemyParent, enemyList)
 	
-func _on_kill_floor_button_button_up() -> void:
-	var kfInstance = killFloor.instantiate()
-	var kfParent = baseObject.instantiate()
-	kfParent.add_child(kfInstance)
-	print("button works")
-	kfParent.blockType = "killFloor"
-	kfParent.temp()
-	place_block(kfParent, killFloorsList)
-
-
-			
 func _onObjectClicked(index : int, blockType: String):
 	print("Block type: ", blockType)
 	var list = getList(blockType).get_children()
@@ -333,6 +341,33 @@ func getList(blockType : String) -> Node:
 	if blockType == "killFloor":
 		return get_node("objectList/killFloors")
 	return null
-		
-	
-		
+
+
+func _on_yes_pressed() -> void:
+	if isLoad:
+		# load level message
+		loadLevel()
+		isLoad = false
+	else:
+		# overwrite message
+		overwrite = true
+		save_scene_to_file()
+	status.hide()
+
+
+func _on_no_pressed() -> void:
+	status.hide()
+	isLoad = false
+
+func displayStatus(message, display):
+	status.show()
+	status.get_node("StatusMessage").text = message
+	if display:
+		# regular confirmation
+		status.get_node("Buttons/No").text = "No"
+		status.get_node("Buttons/Yes").show()
+		status.get_node("Buttons").show()
+	else:
+		# unable to save message
+		status.get_node("Buttons/Yes").hide()
+		status.get_node("Buttons/No").text = "Close"

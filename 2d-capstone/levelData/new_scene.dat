@@ -1,4 +1,3 @@
-audio
 platformBlocks
 750, 450
 1050, 450
@@ -9,6 +8,7 @@ platformBlocks
 1050, 900
 1200, 450
 600, 450
+900, 450
 actionIndicators
 checkpoints
 1050, 300

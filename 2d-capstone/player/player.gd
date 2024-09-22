@@ -100,6 +100,8 @@ func _physics_process(delta: float) -> void:
 				self.position.x = get_parent().get_node(otherPlayer).position.x
 			pass
 		move_and_slide()
+	else:
+		invuln = true
 
 func _onTakeDamage(amount):
 	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
