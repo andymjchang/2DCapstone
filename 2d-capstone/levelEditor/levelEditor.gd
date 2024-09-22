@@ -108,7 +108,8 @@ func _on_exit_button_pressed() -> void:
 func _on_rac_button_button_up() -> void:
 	if !playerList.has_node("Player1"):
 		var player1Instance = player1.instantiate()
-		player1Instance.editing = true
+		#got rid of this beacuse it was causing a bug - if needed we can work it back in
+		#player1Instance.editing = true
 		player1Instance.add_to_group("Players")
 		var playerParent = baseObject.instantiate()
 		playerParent.add_child(player1Instance)
@@ -122,7 +123,8 @@ func _on_rac_button_button_up() -> void:
 func _on_mouse_button_button_up() -> void:
 	if !playerList.has_node("Player2"):
 		var player2Instance = player2.instantiate()
-		player2Instance.editing = true
+		#same deal as with raccoon 
+		#player2Instance.editing = true
 		player2Instance.add_to_group("Players")
 		var playerParent = baseObject.instantiate()
 		playerParent.add_child(player2Instance)

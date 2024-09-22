@@ -10,6 +10,7 @@ var size: Vector2
 func _ready() -> void:
 	set_process_input(true)
 	sprite = self.get_child(0).get_node("Sprite2D").duplicate()
+	print("sprite: ", sprite)
 	sprite.modulate.a = 0.5
 	self.add_child(sprite)
 	sprite.visible = false
@@ -19,6 +20,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if isDragging:
+		print("is dragging")
 		sprite.visible = true
 		sprite.global_position = get_global_mouse_position()
 	else:

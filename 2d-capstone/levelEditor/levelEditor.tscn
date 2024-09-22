@@ -17,16 +17,16 @@
 [ext_resource type="PackedScene" uid="uid://c57gt1oqgpg2" path="res://levelEditorObjects/goalBlockScene.tscn" id="7_c0pjh"]
 [ext_resource type="Texture2D" uid="uid://bbiq7u5yvg7al" path="res://levelEditor/programmerArtAssets/mouse.png" id="7_dw7u5"]
 [ext_resource type="Texture2D" uid="uid://ctosvjaft7ggn" path="res://levelEditor/programmerArtAssets/exit.png" id="7_esiun"]
-[ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="7_h5cy3"]
 [ext_resource type="Texture2D" uid="uid://2hplcty35vpl" path="res://levelEditor/programmerArtAssets/down.png" id="7_u6v8f"]
-[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="8_d3hii"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="8_nimfa"]
 [ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/programmerArtAssets/rac.png" id="8_w245c"]
 [ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="9_6gh41"]
 [ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/programmerArtAssets/checkpoint.png" id="9_wpw0u"]
 [ext_resource type="Script" path="res://worldObjects/killFloor.gd" id="10_jxp0h"]
 [ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
+[ext_resource type="PackedScene" uid="uid://btjihhiq2yb5s" path="res://levelEditorObjects/playerScene.tscn" id="12_o6ydd"]
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="13_87vi8"]
+[ext_resource type="PackedScene" uid="uid://dr3t8111udl22" path="res://levelEditorObjects/player2Scene.tscn" id="13_i2xjp"]
 [ext_resource type="AudioStream" uid="uid://cmxsfbbfnb2j0" path="res://audioTracks/Sprint2_GminBmaj_156bpm.mp3" id="13_vpjxf"]
 [ext_resource type="PackedScene" uid="uid://bq7uuovqf0df7" path="res://levelEditorObjects/killFloorScene.tscn" id="14_26o8v"]
 [ext_resource type="PackedScene" uid="uid://bdfklxl1c8rjj" path="res://shadow/baseObject.tscn" id="15_mrsrj"]
@@ -53,8 +53,8 @@ cameraScript = ExtResource("8_nimfa")
 actionManager = ExtResource("9_6gh41")
 killFloorScript = ExtResource("10_jxp0h")
 levelUI = ExtResource("6_47xe5")
-player1 = ExtResource("7_h5cy3")
-player2 = ExtResource("8_d3hii")
+player1 = ExtResource("12_o6ydd")
+player2 = ExtResource("13_i2xjp")
 killFloor = ExtResource("14_26o8v")
 baseObject = ExtResource("15_mrsrj")
 

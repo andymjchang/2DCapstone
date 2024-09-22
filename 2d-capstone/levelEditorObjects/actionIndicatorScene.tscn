@@ -6,7 +6,6 @@
 size = Vector2(37, 37)
 
 [node name="ActionIndicatorScene" type="Node2D"]
-visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_lotbt")
