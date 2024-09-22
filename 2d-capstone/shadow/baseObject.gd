@@ -19,11 +19,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if isDragging:
-		print("")
 		sprite.visible = true
 		sprite.global_position = get_global_mouse_position()
 	else:
-		print()
 		sprite.visible = false
 	pass
 	
@@ -34,7 +32,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType)
 		self.get_parent().get_parent().get_parent().setTrackingPosition(true)
 		isDragging = true
-		
+
 		print("mouse pressed")
 	
 func _input(event: InputEvent) -> void:
@@ -47,11 +45,11 @@ func _input(event: InputEvent) -> void:
 		
 func setArea2D(newArea):
 	self.add_child(newArea)
-	#print(get_node("Area2D")s)
 	newArea.connect("input_event",  _on_area_2d_input_event)
+	print("object type: ",self)
+	print("its children: ", self.get_children())
 
 func temp () -> void:
-	print("shadow look here: ",self.get_child(0).get_node("Area2D"))
 	var newArea = self.get_child(0).get_node("Area2D").duplicate()
 	self.add_child(newArea)
 	

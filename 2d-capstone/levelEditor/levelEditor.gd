@@ -34,7 +34,6 @@ var isPlaying = false
 @export var baseObject : PackedScene
 
 @onready var objectList = $objectList
-@onready var testBlockList = $objectList/testBlocks
 @onready var platformBlockList = $objectList/platformBlocks
 @onready var goalBlockList = $objectList/goalBlocks
 @onready var enemyList = $objectList/enemies
@@ -58,6 +57,7 @@ func _ready():
 	measureLines.stepSize = stepSize
 	saveFileName = fileLabel.text
 	Globals.stepSize = stepSize
+	print("ready")
 	
 func _process(delta: float) -> void:
 	if (trackingPosition):
@@ -99,7 +99,6 @@ func _on_checkpoint_button_button_up() -> void:
 	var checkParent = baseObject.instantiate()
 	checkParent.add_child(checkpointInstance)
 	checkParent.blockType = "checkpoint"
-	checkpointList.add_child(checkParent)
 
 	place_block(checkParent, checkpointList)
 
@@ -267,11 +266,12 @@ func place_block(instance, parent):
 		placePos = currentPosition
 	
 	parent.add_child(instance)	
-	instance.setArea2D(instance.get_child(0).get_node("Area2D"))
+	instance.setArea2D(instance.get_child(0).get_node("Area2D").duplicate())
 	instance.index = lEindex
 	lEindex+=1
 	instance.position = snap_position(placePos)
 	currentBlock = instance
+	print("instatiated object children ", instance.get_child(0).get_children())
 
 	_on_text_edit_2_text_changed()
 	reset_drag_tracking()
@@ -346,4 +346,9 @@ func setTrackingPosition(setVal : bool) -> void:
 	trackingPosition = setVal
 		
 	
-		
+
+
+func _on_audio_progress_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and  event.pressed:
+		self.get_node("UI/objectSelector/audioProgress").isDragging=true
+		print("click") # Replace with function body.
