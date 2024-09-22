@@ -161,6 +161,7 @@ func _on_rac_button_button_up() -> void:
 		playerParent.add_child(player1Instance)
 		playerParent.blockType = blockTypes[0]
 		player1List.add_child(playerParent)
+		
 		place_block(playerParent, player1List, camera.position)
 	else:
 		currentBlock = player1List.get_node("baseObject").get_node("Player1")
@@ -303,12 +304,15 @@ func round_to_step(value) -> int:
 func place_block(instance, parent, placePos):
 	if (timeHeld >= holdTime):
 		placePos = instance.get_child(0).position
-
+		instance.position = snap_position(placePos)
+	if instance.blockType == blockTypes[0]: 
+		instance.position = Vector2(45,202)
+	if instance.blockType == blockTypes[1]: 
+		instance.position = Vector2(45,423)
 	parent.add_child(instance)	
 	instance.setArea2D()
 	instance.index = lEindex
 	lEindex+=1
-	instance.position = snap_position(placePos)
 	currentBlock = instance
 	print("instatiated object children ", instance.get_child(0).get_children())
 
@@ -357,7 +361,8 @@ func reset_drag_tracking():
 			
 func _onObjectClicked(index : int, blockType: String):
 	trackingPosition = true
-	timeHeld = 0.0
+	#timeHeld = 0.0
+	print("Block type: ", blockType)
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
@@ -365,14 +370,7 @@ func _onObjectClicked(index : int, blockType: String):
 			_on_text_edit_2_text_changed()
 			return
 	
-#func _onObjectClicked(index : int, blockType: String):
-	#print("Block type: ", blockType)
-	#var list = getList(blockType).get_children()
-	#for block in list:
-		#if block.index == index:
-			#currentBlock = block
-			#_on_text_edit_2_text_changed()
-			#return
+
 	
 func getList(blockType : String) -> Node:
 	if blockType == "actionIndicator":
