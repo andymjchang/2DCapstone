@@ -306,9 +306,11 @@ func place_block(instance, parent, placePos):
 		placePos = instance.get_child(0).position
 		instance.position = snap_position(placePos)
 	if instance.blockType == blockTypes[0]: 
-		instance.position = Vector2(45,202)
+		instance.position.x = 45
+		instance.position.y = placePos.y
 	if instance.blockType == blockTypes[1]: 
-		instance.position = Vector2(45,423)
+		instance.position.x = 45
+		instance.position.y = placePos.y
 	parent.add_child(instance)	
 	instance.setArea2D()
 	instance.index = lEindex
