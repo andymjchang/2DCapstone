@@ -23,7 +23,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if isDragging:
 		print("in isdragging")
-		#stop the audio
+		#stop the audio TODO
 		var clickPos = get_local_mouse_position()
 	
 		var barWidth = self.get_node("Area2D/CollisionShape2D").shape as RectangleShape2D

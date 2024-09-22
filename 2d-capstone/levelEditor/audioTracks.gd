@@ -22,12 +22,23 @@ func fillAudioScroll() -> void:
 	var dropDown = self.get_node("UI/objectSelector/audioTracks")
 	if(audioDir):
 		audioDir.list_dir_begin()
-		var file_name = audioDir.get_next()
-		while file_name != "":
+		var fileName = audioDir.get_next()
+		while fileName != "":
 			#add audio file to drop down
 			button = Button.new()
-			button.text = file_name
+			button.text = fileName
+			button.connect("pressed", _on_button_pressed.bind(fileName))
 			self.get_child(0).add_child(button)
-			file_name = audioDir.get_next()
+			
+			fileName = audioDir.get_next()
+			
+			
+func _on_button_pressed(fileName) -> void:
+	var audioPath = "res://audioTracks/" + fileName
+	var newAudio = load(audioPath) as AudioStream
+	print("audio path: ", audioPath)
+	print("new audio: ", newAudio)
+	self.get_parent().get_parent().get_parent().get_node("objectList/audio").stream = newAudio
+	print("stream: ", self.get_parent().get_parent().get_parent().get_node("objectList/audio").stream )
 			
 	
