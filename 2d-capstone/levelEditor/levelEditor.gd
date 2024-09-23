@@ -88,7 +88,7 @@ func _on_text_edit_2_text_changed() -> void:
 		var step = int(stepLabel.text)
 		if (step < 25):
 			step = 25
-		if currentBlock.blockType == "actionIndicator":
+		if currentBlock.blockType == "actionIndicator" or currentBlock.blockType == "enemy":
 			step = 50
 		stepSize = step
 		Globals.stepSize = stepSize

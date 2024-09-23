@@ -83,12 +83,10 @@ func _physics_process(delta: float) -> void:
 				if canAttack:
 					$Animation.play("Punch")
 					print("Punch!")
-					attack.disabled = false
 					attack.visible = true
 					canAttack = false
 					await get_tree().create_timer(0.2).timeout
 					canAttack = true
-					attack.disabled = true
 					attack.visible = false
 					$Animation.play("Run")
 		elif reachedCheckpoint:

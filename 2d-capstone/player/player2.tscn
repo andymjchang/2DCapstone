@@ -6,8 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
 size = Vector2(25.75, 20.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nopuc"]
-size = Vector2(32, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_via26"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
 size = Vector2(25.5, 20.5)
@@ -48,16 +47,18 @@ script = ExtResource("1_yl2m7")
 position = Vector2(-0.5, 11.75)
 shape = SubResource("RectangleShape2D_44r6d")
 
-[node name="AttackHitbox" type="CollisionShape2D" parent="."]
+[node name="AttackHitbox" type="Area2D" parent="."]
 visible = false
-shape = SubResource("RectangleShape2D_nopuc")
-disabled = true
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -12.25
+offset_top = 3.25
+offset_right = 11.75
+offset_bottom = 20.25
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+position = Vector2(-0.5, 11.25)
+shape = SubResource("RectangleShape2D_via26")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
 

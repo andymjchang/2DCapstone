@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b0oiqgrybgte5"]
+[gd_scene load_steps=17 format=3 uid="uid://b0oiqgrybgte5"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="3_6me16"]
 [ext_resource type="AudioStream" uid="uid://bi32k1rjy681g" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="3_avb0v"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_o6usx"]
+[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://shadow/goal_block.tscn" id="3_rhr5i"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="4_nttx1"]
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
@@ -13,13 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="7_po4yx"]
 [ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="13_euntf"]
-[ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
+[ext_resource type="PackedScene" uid="uid://dpkw4ciu8ss4c" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://checkpoint.gd" id="14_rbu47"]
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
 levelFile = "new_scene"
 platformBlockInstance = ExtResource("2_78xmt")
+goalBlockInstance = ExtResource("3_rhr5i")
 killFloorInstance = ExtResource("3_6me16")
 actionIndicatorInstance = ExtResource("3_o6usx")
 checkpointInstance = ExtResource("4_ph2wq")
