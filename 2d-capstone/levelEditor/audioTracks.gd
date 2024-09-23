@@ -5,7 +5,6 @@ var scrollBar
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	fillAudioScroll()
-	scrollBar = $VScrollBar
 	pass # Replace with function body.
 
 
@@ -17,7 +16,6 @@ func _process(delta: float) -> void:
 func fillAudioScroll() -> void:
 	var audioDirPath = "res://audioTracks"
 	var audioDir = DirAccess.open(audioDirPath)
-	var dropDown = self.get_node("UI/objectSelector/audioTracks")
 	if(audioDir):
 		audioDir.list_dir_begin()
 		var fileName = audioDir.get_next()

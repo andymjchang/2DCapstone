@@ -307,6 +307,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="StatusWindow" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect2" type="ColorRect" parent="StatusWindow"]
 modulate = Color(1, 1, 1, 0.458824)
