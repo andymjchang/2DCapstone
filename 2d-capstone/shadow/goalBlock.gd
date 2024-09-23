@@ -5,10 +5,6 @@ var curSprite
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group('goals')
-	curSprite = get_node("Area2D/Sprite2D").duplicate()
-	pass # Replace with function body.
-
-
 
 #when both players reach their goal block, the game is ended. 
 
@@ -21,4 +17,4 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 		print("hit goal block")
 		print("entered collsion zone for goal block")
 		reached = true
-		get_parent().get_parent().emit_signal("checkLevelCompleted")
+		get_parent().get_parent().get_parent().emit_signal("checkLevelCompleted")
