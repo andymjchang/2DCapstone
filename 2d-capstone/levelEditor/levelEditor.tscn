@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=39 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -31,11 +31,12 @@
 [ext_resource type="PackedScene" uid="uid://bdfklxl1c8rjj" path="res://shadow/baseObject.tscn" id="15_mrsrj"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
 [ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="19_jlcy1"]
-[ext_resource type="Texture2D" uid="uid://drnvhk52xrn80" path="res://levelEditor/programmerArtAssets/playAudio.png" id="20_n1qdn"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
+[ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
 [ext_resource type="Texture2D" uid="uid://bv8ou5u1pkb2k" path="res://shadow/R (1).jpg" id="34_wwivc"]
 [ext_resource type="Script" path="res://levelEditor/textureProgressBar.gd" id="35_lg51b"]
 [ext_resource type="Script" path="res://levelEditor/audioTracks.gd" id="36_wn18y"]
+[ext_resource type="Texture2D" uid="uid://1dfh5adfmstx" path="res://levelEditor/programmerArtAssets/play.png" id="37_5oir0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl84f"]
 size = Vector2(278, 43)
@@ -194,11 +195,11 @@ offset_bottom = 1055.0
 texture_normal = ExtResource("9_wpw0u")
 
 [node name="playAudioButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 759.0
-offset_top = 955.0
-offset_right = 859.0
-offset_bottom = 1055.0
-texture_normal = ExtResource("20_n1qdn")
+offset_left = 1206.0
+offset_top = 919.0
+offset_right = 1256.0
+offset_bottom = 969.0
+texture_normal = ExtResource("26_m4kik")
 
 [node name="goalButton" type="TextureButton" parent="UI/objectSelector"]
 offset_left = 552.0
@@ -249,16 +250,10 @@ offset_right = 1885.0
 offset_bottom = 1054.0
 texture_normal = ExtResource("7_u6v8f")
 
-[node name="CheckButton" type="CheckButton" parent="UI/objectSelector"]
-offset_left = 64.0
-offset_top = 924.0
-offset_right = 108.0
-offset_bottom = 948.0
-
 [node name="killFloorButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 863.0
+offset_left = 760.0
 offset_top = 955.0
-offset_right = 963.0
+offset_right = 860.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("34_wwivc")
 ignore_texture_size = true
@@ -298,6 +293,7 @@ offset_top = 1025.0
 offset_right = 1373.0
 offset_bottom = 1070.0
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 script = ExtResource("36_wn18y")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/objectSelector/audioTracks"]
@@ -305,6 +301,13 @@ layout_mode = 2
 
 [node name="VScrollBar" type="VScrollBar" parent="UI/objectSelector/audioTracks/VBoxContainer"]
 layout_mode = 2
+
+[node name="playLevelButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1565.0
+offset_top = 15.0
+offset_right = 1665.0
+offset_bottom = 115.0
+texture_normal = ExtResource("37_5oir0")
 
 [node name="StatusWindow" type="CanvasLayer" parent="."]
 visible = false
@@ -398,5 +401,6 @@ clip_text = true
 [connection signal="button_up" from="UI/objectSelector/killFloorButton" to="." method="_on_kill_floor_button_button_up"]
 [connection signal="gui_input" from="UI/objectSelector/audioProgress" to="." method="_on_audio_progress_gui_input"]
 [connection signal="input_event" from="UI/objectSelector/audioProgress/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="button_down" from="UI/objectSelector/playLevelButton" to="." method="_on_play_level_button_button_down"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]

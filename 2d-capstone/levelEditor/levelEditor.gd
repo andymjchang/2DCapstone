@@ -55,6 +55,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var measureLines = $measureLines
 @onready var camera = $Camera2D
 @onready var status = $StatusWindow
+@onready var levelTemplatePacked = preload("res://worlds/levelTemplate.tscn")
 
 var bpm : int = 4
 var stepSize : int = 150
@@ -222,11 +223,11 @@ func _on_kill_floor_button_button_up() -> void:
 func _on_play_audio_button_pressed() -> void:
 	if not isPlaying:
 		camera.get_node("audio").play()
-		get_node("UI").get_node("objectSelector").get_node("playAudioButton").texture_normal = load("res://levelEditor/programmerArtAssets/replayTrack.png")
+		get_node("UI").get_node("objectSelector").get_node("playAudioButton").texture_normal = load("res://levelEditor/programmerArtAssets/reset_audio.png")
 		isPlaying = true
 	else:
 		isPlaying = false
-		get_node("UI").get_node("objectSelector").get_node("playAudioButton").texture_normal = load("res://levelEditor/programmerArtAssets/playAudio.png")
+		get_node("UI").get_node("objectSelector").get_node("playAudioButton").texture_normal = load("res://levelEditor/programmerArtAssets/play_audio.png")
 		camera.get_node("audio").stop()
 	
 func _on_right_button_button_down() -> void:
@@ -439,3 +440,17 @@ func displayStatus(message, display):
 		# unable to save message
 		status.get_node("Buttons/Yes").hide()
 		status.get_node("Buttons/No").text = "Close"
+
+func _on_play_level_button_button_down() -> void:
+	save_scene_to_file()
+	var scene_instance = levelTemplatePacked.instantiate()
+	scene_instance.levelFile = saveFileName
+	
+	# Access the current scene and remove it from the scene tree
+	var current_scene = get_tree().current_scene
+	if current_scene != null:
+		current_scene.queue_free()  # Remove current scene
+
+	# Add the new scene to the scene tree and set it as the current scene
+	get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
+	get_tree().current_scene = scene_instance  # Set it as the new current scene
