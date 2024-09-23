@@ -16,5 +16,5 @@ player2
 enemies
 killFloors
 goalBlocks
-300, 600
-300, 750
+300, 550
+300, 700

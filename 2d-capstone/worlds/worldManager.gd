@@ -142,6 +142,7 @@ func showGameOver():
 	restartButton.visible = true
 	
 func showLevelCompleted():
+	music.stop()
 	statusMessage.text = "Level Completed!"
 	restartButton.visible = true
 	

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://8ka2tcx6hk3p" path="res://player/player2.png" id="2_1yk2g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(25.75, 20.5)
+size = Vector2(16, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nopuc"]
 size = Vector2(32, 32)
@@ -45,15 +45,15 @@ scale = Vector2(4, 4)
 script = ExtResource("1_yl2m7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 11.75)
+position = Vector2(-0.5, 10)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="AttackHitbox" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_nopuc")
 disabled = true
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
+visible = false
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0
