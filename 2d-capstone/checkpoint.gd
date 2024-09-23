@@ -3,7 +3,7 @@ extends Node2D
 var curSprite
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	curSprite = get_node("Sprite2D").duplicate()
+	#curSprite = get_node("Sprite2D").duplicate()
 	pass # Replace with function body.
 
 

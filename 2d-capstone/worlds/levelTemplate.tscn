@@ -44,12 +44,11 @@ text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
-zoom = Vector2(1.5, 1.5)
 script = ExtResource("4_nttx1")
 
 [node name="MenuBg" type="Sprite2D" parent="Camera2D"]
-position = Vector2(15.8338, 5.50021)
-scale = Vector2(0.219167, 0.219167)
+position = Vector2(3.74979, 45.2499)
+scale = Vector2(0.325417, 0.325417)
 texture = ExtResource("5_xy8kd")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
@@ -58,7 +57,7 @@ stream = ExtResource("3_avb0v")
 max_distance = 10000.0
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
-position = Vector2(-625, -481)
+position = Vector2(-958, -493)
 scale = Vector2(1.5, 1.5)
 
 [node name="objectList" type="Node2D" parent="."]

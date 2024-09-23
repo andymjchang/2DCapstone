@@ -9,8 +9,3 @@ func _ready():
 	var randIndex = randi_range(0, 1)
 	$sprite2D.get_children()[randIndex].visible = true
 	activeSprite = 	$sprite2D.get_children()[randIndex]
-	#doing this for ease of access
-	print("whuh: ",self.get_children())
-	print("whuh: ",self.get_parent().name)
-	self.get_parent().get_node("Sprite2D").texture = activeSprite
-	self.get_parent().get_node("Sprite2D").visible = true
