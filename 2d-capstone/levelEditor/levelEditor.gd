@@ -89,7 +89,7 @@ func _on_text_edit_2_text_changed() -> void:
 		var step = int(stepLabel.text)
 		if (step < 25):
 			step = 25
-		if currentBlock.blockType == "actionIndicator":
+		if currentBlock.blockType == "actionIndicator" or currentBlock.blockType == "enemy":
 			step = 50
 		stepSize = step
 		Globals.stepSize = stepSize
@@ -165,7 +165,7 @@ func _on_rac_button_button_up() -> void:
 		
 		place_block(playerParent, player1List, camera.position)
 	else:
-		currentBlock = player1List.get_node("baseObject").get_node("Player1")
+		currentBlock = player1List.get_node("baseObject")
 		reset_drag_tracking()
 
 func _on_mouse_button_button_up() -> void:
@@ -180,7 +180,7 @@ func _on_mouse_button_button_up() -> void:
 		player2List.add_child(playerParent)
 		place_block(playerParent, player2List, camera.position)
 	else:
-		currentBlock = player2List.get_node("baseObject").get_node("Player2")
+		currentBlock = player2List.get_node("baseObject")
 		reset_drag_tracking()
 
 func _on_block_button_button_up() -> void:
@@ -231,10 +231,10 @@ func _on_play_audio_button_pressed() -> void:
 		camera.get_node("audio").stop()
 	
 func _on_right_button_button_down() -> void:
-	if (currentBlock == null): return
+	if (currentBlock == null or "player" in currentBlock.blockType): return
 	currentBlock.position.x += stepSize
 func _on_left_button_button_down() -> void:
-	if (currentBlock == null): return
+	if (currentBlock == null or "player" in currentBlock.blockType): return
 	currentBlock.position.x -= stepSize
 func _on_down_button_button_down() -> void:
 	if (currentBlock == null): return

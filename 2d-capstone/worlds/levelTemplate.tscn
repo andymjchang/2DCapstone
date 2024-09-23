@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="7_po4yx"]
 [ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="13_euntf"]
-[ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
+[ext_resource type="PackedScene" uid="uid://dpkw4ciu8ss4c" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://checkpoint.gd" id="14_rbu47"]
 
 [node name="level" type="Node2D"]

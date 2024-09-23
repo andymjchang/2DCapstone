@@ -7,6 +7,9 @@ platformBlocks
 300, 750
 -150, 600
 actionIndicators
+950, 400
+900, 400
+850, 400
 checkpoints
 150, 450
 player1
@@ -14,6 +17,10 @@ player1
 player2
 45, 690
 enemies
+0, -100
+950, 400
+900, 400
+850, 400
 killFloors
 goalBlocks
 300, 550

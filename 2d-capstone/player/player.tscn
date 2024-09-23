@@ -7,8 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
 size = Vector2(32, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nopuc"]
-size = Vector2(32, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0k1s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
 size = Vector2(32, 32)
@@ -29,16 +28,17 @@ position = Vector2(-8.19933, -0.437501)
 scale = Vector2(0.153781, 0.143559)
 texture = ExtResource("3_f8qq2")
 
-[node name="AttackHitbox" type="CollisionShape2D" parent="."]
+[node name="AttackHitbox" type="Area2D" parent="."]
 visible = false
-shape = SubResource("RectangleShape2D_nopuc")
-disabled = true
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+shape = SubResource("RectangleShape2D_u0k1s")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
 
