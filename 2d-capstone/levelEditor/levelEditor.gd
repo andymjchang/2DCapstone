@@ -302,6 +302,7 @@ func round_to_step(value) -> int:
 	return round(intMultiplier) * stepSize
 
 func place_block(instance, parent, placePos):
+	instance.position = snap_position(placePos)
 	if (timeHeld >= holdTime):
 		placePos = instance.get_child(0).position
 		instance.position = snap_position(placePos)
