@@ -18,7 +18,6 @@ position = Vector2(5.5, 326)
 shape = SubResource("RectangleShape2D_43i5s")
 
 [node name="ColorRect" type="ColorRect" parent="Area2D/CollisionShape2D"]
-visible = false
 offset_left = -14.0
 offset_top = -331.0
 offset_right = 13.0

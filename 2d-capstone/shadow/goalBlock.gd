@@ -22,4 +22,3 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 		print("entered collsion zone for goal block")
 		reached = true
 		get_parent().get_parent().emit_signal("checkLevelCompleted")
-	pass # Replace with function Sbody.

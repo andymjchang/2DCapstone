@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b0oiqgrybgte5"]
+[gd_scene load_steps=17 format=3 uid="uid://b0oiqgrybgte5"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="3_6me16"]
 [ext_resource type="AudioStream" uid="uid://bi32k1rjy681g" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="3_avb0v"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_o6usx"]
+[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://shadow/goal_block.tscn" id="3_xm4bb"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="4_nttx1"]
-[ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
+[ext_resource type="PackedScene" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
 [ext_resource type="Texture2D" uid="uid://eaxiu3v8mgwp" path="res://worlds/menuBG.png" id="5_xy8kd"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
@@ -20,6 +21,7 @@
 script = ExtResource("1_fl71r")
 levelFile = "new_scene"
 platformBlockInstance = ExtResource("2_78xmt")
+goalBlockInstance = ExtResource("3_xm4bb")
 killFloorInstance = ExtResource("3_6me16")
 actionIndicatorInstance = ExtResource("3_o6usx")
 checkpointInstance = ExtResource("4_ph2wq")
@@ -57,7 +59,7 @@ stream = ExtResource("3_avb0v")
 max_distance = 10000.0
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
-position = Vector2(-958, -493)
+position = Vector2(-1070, -495)
 scale = Vector2(1.5, 1.5)
 
 [node name="objectList" type="Node2D" parent="."]

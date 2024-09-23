@@ -164,12 +164,12 @@ scale = Vector2(0.368884, 0.344364)
 texture = ExtResource("2_a5rf3")
 
 [node name="AttackHitbox" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-6.25, -19.875)
 shape = SubResource("RectangleShape2D_nopuc")
 disabled = true
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
+visible = false
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0

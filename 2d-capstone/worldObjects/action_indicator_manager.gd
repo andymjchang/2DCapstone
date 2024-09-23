@@ -13,7 +13,7 @@ func _ready():
 		indicator.connect("scored", on_scored)
 	
 	currentWorldScene = get_parent().get_parent()
-	print("current world scene: ", currentWorldScene)
+	#print("current world scene: ", currentWorldScene)
 
 func sortIndicators(a, b):
 	if a.get_target_time() < b.get_target_time():
