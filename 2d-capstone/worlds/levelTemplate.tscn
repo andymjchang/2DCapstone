@@ -57,7 +57,7 @@ stream = ExtResource("3_avb0v")
 max_distance = 10000.0
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
-position = Vector2(-958, -493)
+position = Vector2(-1019, -493)
 scale = Vector2(1.5, 1.5)
 
 [node name="objectList" type="Node2D" parent="."]
