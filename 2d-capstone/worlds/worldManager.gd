@@ -74,8 +74,8 @@ func _ready():
 	restartButton.visible = false
 	changeCountdown()
 	await get_tree().create_timer(3.0).timeout
-	#Globals.inLevel = true
-	#music.play(0.0)
+	Globals.inLevel = true
+	music.play(0.0)
 
 func loadLevel():
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()

@@ -103,6 +103,7 @@ func loadLevel():
 		"killFloors": [killFloor, killFloorsList, blockTypes[6]],
 		"actionIndicators": [actionIndicator, actionIndicatorsList, blockTypes[3]], 
 		"checkpoints": [checkpoint, checkpointsList, blockTypes[7]], 
+		"enemies": [enemyCharacter, enemyList, blockTypes[5]],
 		"player1": [player1, player1List, blockTypes[0]],
 		"player2": [player2, player2List, blockTypes[1]]}
 	var instance
@@ -129,7 +130,7 @@ func loadLevel():
 				posPoints.append(pos.to_float())
 			parent.add_child(instancedObj)
 			#instancedObj.position = Vector2(posPoints[0], posPoints[1])
-			place_block(parent, instanceParent, Vector2(posPoints[0], posPoints[1]))
+			place_block(parent, instanceParent, Vector2(posPoints[0], posPoints[1]), true)
 
 func _on_save_button_down() -> void:
 	save_scene_to_file()
@@ -146,7 +147,7 @@ func _on_checkpoint_button_button_up() -> void:
 	checkParent.add_child(checkpointInstance)
 	checkParent.blockType = blockTypes[7]
 	checkpointsList.add_child(checkParent)
-	place_block(checkParent, checkpointsList, camera.position)
+	place_block(checkParent, checkpointsList, camera.position, false)
 	
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
@@ -162,7 +163,7 @@ func _on_rac_button_button_up() -> void:
 		playerParent.blockType = blockTypes[0]
 		player1List.add_child(playerParent)
 		
-		place_block(playerParent, player1List, camera.position)
+		place_block(playerParent, player1List, camera.position, false)
 	else:
 		currentBlock = player1List.get_node("baseObject")
 		reset_drag_tracking()
@@ -177,7 +178,7 @@ func _on_mouse_button_button_up() -> void:
 		playerParent.add_child(player2Instance)
 		playerParent.blockType = blockTypes[1]
 		player2List.add_child(playerParent)
-		place_block(playerParent, player2List, camera.position)
+		place_block(playerParent, player2List, camera.position, false)
 	else:
 		currentBlock = player2List.get_node("baseObject")
 		reset_drag_tracking()
@@ -187,28 +188,28 @@ func _on_block_button_button_up() -> void:
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
-	place_block(blockParent, platformBlocksList, camera.position)
+	place_block(blockParent, platformBlocksList, camera.position, false)
 
 func _on_action_button_button_up() -> void:
 	var actionInstance = actionIndicator.instantiate()
 	var actionParent = baseObject.instantiate()
 	actionParent.add_child(actionInstance)
 	actionParent.blockType = blockTypes[3]
-	place_block(actionParent, actionIndicatorsList, camera.position)
+	place_block(actionParent, actionIndicatorsList, camera.position, false)
 
 func _on_goal_button_button_up() -> void:
 	var goalInstance = goalBlock.instantiate()
 	var goalParent = baseObject.instantiate()
 	goalParent.add_child(goalInstance)
 	goalParent.blockType = blockTypes[4]
-	place_block(goalParent, goalBlocksList, camera.position)
+	place_block(goalParent, goalBlocksList, camera.position, false)
 
 func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()
 	var enemyParent = baseObject.instantiate()
 	enemyParent.add_child(enemyInstance)
 	enemyParent.blockType = blockTypes[5]
-	place_block(enemyParent, enemyList, camera.position)
+	place_block(enemyParent, enemyList, camera.position, false)
 
 func _on_kill_floor_button_button_up() -> void:
 	var kfInstance = killFloor.instantiate()
@@ -217,7 +218,7 @@ func _on_kill_floor_button_button_up() -> void:
 	print("button works")
 	kfParent.blockType = blockTypes[6]
 	kfParent.temp()
-	place_block(kfParent, killFloorsList, camera.position)
+	place_block(kfParent, killFloorsList, camera.position, false)
 
 func _on_play_audio_button_pressed() -> void:
 	if not isPlaying:
@@ -301,8 +302,11 @@ func round_to_step(value) -> int:
 	var intMultiplier = value / stepSize
 	return round(intMultiplier) * stepSize
 
-func place_block(instance, parent, placePos):
-	instance.position = snap_position(placePos)
+func place_block(instance, parent, placePos, initial):
+	if initial:
+		instance.position = placePos
+	else:
+		instance.position = snap_position(placePos)
 	if (timeHeld >= holdTime):
 		placePos = instance.get_child(0).position
 		instance.position = snap_position(placePos)
@@ -317,7 +321,7 @@ func place_block(instance, parent, placePos):
 	instance.index = lEindex
 	lEindex+=1
 	currentBlock = instance
-	print("instatiated object children ", instance.get_child(0).get_children())
+	#print("instatiated object children ", instance.get_child(0).get_children())
 
 	_on_text_edit_2_text_changed()
 	reset_drag_tracking()
@@ -381,6 +385,7 @@ func getList(blockType : String) -> Node:
 	if blockType == "normal":
 		return get_node("objectList/platformBlocks")
 	if blockType == "enemy":
+		print("Getting enemy")
 		return get_node("objectList/enemies")
 	if blockType == "player1":
 		return get_node("objectList/player1")
