@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqwryhi02l72w"]
+
+[ext_resource type="Script" path="res://ui/healthManager.gd" id="1_gxkyf"]
+[ext_resource type="PackedScene" uid="uid://bcy8j7jujip35" path="res://ui/uiHeart.tscn" id="1_mv5t0"]
+
+[node name="HealthManager" type="CanvasLayer"]
+script = ExtResource("1_gxkyf")
+
+[node name="UiHeart" parent="." instance=ExtResource("1_mv5t0")]
+
+[node name="UiHeart2" parent="." instance=ExtResource("1_mv5t0")]
+position = Vector2(118, 0)
+
+[node name="UiHeart3" parent="." instance=ExtResource("1_mv5t0")]
+position = Vector2(58, 0)

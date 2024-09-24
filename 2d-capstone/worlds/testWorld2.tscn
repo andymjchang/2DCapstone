@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bgsv8433dgnnb"]
+[gd_scene load_steps=16 format=3 uid="uid://bgsv8433dgnnb"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_dt31b"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="2_dunhg"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="3_dkx8k"]
-[ext_resource type="AudioStream" uid="uid://cvi7eq2uyrmxc" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="4_dqnar"]
+[ext_resource type="AudioStream" uid="uid://bi32k1rjy681g" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="4_dqnar"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="5_xvost"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="6_at3p2"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="7_xes8y"]
@@ -12,7 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="10_scc0a"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="11_0fw46"]
 [ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://shadow/goal_block.tscn" id="12_2sfwp"]
-[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://wall/breakableWall.tscn" id="12_db08v"]
+[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://worldObjects/wall/breakableWall.tscn" id="12_db08v"]
+[ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="14_i5e6p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yxuh"]
 size = Vector2(45, 656)
@@ -439,7 +440,7 @@ position = Vector2(5634, -68)
 position = Vector2(6390, -108)
 
 [node name="goalBlock" parent="Player2Level" instance=ExtResource("12_2sfwp")]
-position = Vector2(321, -45)
+position = Vector2(329, -647)
 
 [node name="Player1Level" type="Node2D" parent="."]
 position = Vector2(0, -33)
@@ -792,7 +793,7 @@ position = Vector2(5850, 200)
 position = Vector2(5850, 191)
 
 [node name="goalBlock" parent="Player1Level" instance=ExtResource("12_2sfwp")]
-position = Vector2(316, 592)
+position = Vector2(545, -333)
 
 [node name="Block77" parent="." instance=ExtResource("7_xes8y")]
 position = Vector2(8916, 589)
@@ -829,5 +830,7 @@ position = Vector2(9228, 197)
 
 [node name="breakableWall" parent="." instance=ExtResource("12_db08v")]
 position = Vector2(239, 351)
+
+[node name="HealthManager" parent="." instance=ExtResource("14_i5e6p")]
 
 [connection signal="body_entered" from="EndGameBound" to="." method="_onEndGameBodyEntered"]

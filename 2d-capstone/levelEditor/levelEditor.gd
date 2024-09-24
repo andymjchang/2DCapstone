@@ -182,12 +182,20 @@ func _on_mouse_button_button_up() -> void:
 		currentBlock = player2List.get_node("baseObject")
 		reset_drag_tracking()
 
+#start here
 func _on_block_button_button_up() -> void:
 	var blockInstance = platformBlock.instantiate()
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
 	place_block(blockParent, platformBlocksList, camera.position)
+	
+func _on_goal_button_button_up() -> void:
+	var goalInstance = goalBlock.instantiate()
+	var goalParent = baseObject.instantiate()
+	goalParent.add_child(goalInstance)
+	goalParent.blockType = blockTypes[4]
+	place_block(goalParent, goalBlocksList, camera.position)
 
 func _on_action_button_button_up() -> void:
 	var actionInstance = actionIndicator.instantiate()
@@ -196,12 +204,7 @@ func _on_action_button_button_up() -> void:
 	actionParent.blockType = blockTypes[3]
 	place_block(actionParent, actionIndicatorsList, camera.position)
 
-func _on_goal_button_button_up() -> void:
-	var goalInstance = goalBlock.instantiate()
-	var goalParent = baseObject.instantiate()
-	goalParent.add_child(goalInstance)
-	goalParent.blockType = blockTypes[4]
-	place_block(goalParent, goalBlocksList, camera.position)
+
 
 func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()

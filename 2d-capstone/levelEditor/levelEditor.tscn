@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=40 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -36,6 +36,8 @@
 [ext_resource type="Texture2D" uid="uid://bv8ou5u1pkb2k" path="res://shadow/R (1).jpg" id="34_wwivc"]
 [ext_resource type="Script" path="res://levelEditor/textureProgressBar.gd" id="35_lg51b"]
 [ext_resource type="Script" path="res://levelEditor/audioTracks.gd" id="36_wn18y"]
+[ext_resource type="Script" path="res://levelEditor/blockScroller.gd" id="37_8xuat"]
+[ext_resource type="Script" path="res://levelEditor/objectScroller.gd" id="38_rob5g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl84f"]
 size = Vector2(278, 43)
@@ -159,59 +161,59 @@ offset_bottom = 115.0
 texture_normal = ExtResource("7_esiun")
 
 [node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 34.0
+offset_left = 16.0
 offset_top = 955.0
-offset_right = 134.0
+offset_right = 116.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("4_rduon")
 
 [node name="actionButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 139.0
-offset_top = 955.0
-offset_right = 239.0
-offset_bottom = 1055.0
+offset_left = 119.0
+offset_top = 957.0
+offset_right = 219.0
+offset_bottom = 1057.0
 texture_normal = ExtResource("3_kgvx7")
 
 [node name="mouseButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 242.0
-offset_top = 955.0
-offset_right = 342.0
-offset_bottom = 1055.0
+offset_left = 218.0
+offset_top = 954.0
+offset_right = 318.0
+offset_bottom = 1054.0
 texture_normal = ExtResource("7_dw7u5")
 
 [node name="racButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 345.0
+offset_left = 318.0
 offset_top = 955.0
-offset_right = 445.0
+offset_right = 418.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("8_w245c")
 
 [node name="checkpointButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 449.0
-offset_top = 955.0
-offset_right = 549.0
-offset_bottom = 1055.0
+offset_left = 422.0
+offset_top = 960.0
+offset_right = 522.0
+offset_bottom = 1060.0
 texture_normal = ExtResource("9_wpw0u")
 
 [node name="playAudioButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 759.0
-offset_top = 955.0
-offset_right = 859.0
-offset_bottom = 1055.0
+offset_left = 851.0
+offset_top = 951.0
+offset_right = 951.0
+offset_bottom = 1051.0
 texture_normal = ExtResource("20_n1qdn")
 
 [node name="goalButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 552.0
-offset_top = 955.0
-offset_right = 652.0
-offset_bottom = 1055.0
+offset_left = 520.0
+offset_top = 961.0
+offset_right = 620.0
+offset_bottom = 1061.0
 texture_normal = ExtResource("17_3udhx")
 
 [node name="enemyButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 655.0
-offset_top = 955.0
-offset_right = 755.0
-offset_bottom = 1055.0
+offset_left = 612.0
+offset_top = 956.0
+offset_right = 712.0
+offset_bottom = 1056.0
 texture_normal = ExtResource("20_rbssn")
 
 [node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
@@ -256,9 +258,9 @@ offset_right = 108.0
 offset_bottom = 948.0
 
 [node name="killFloorButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 863.0
+offset_left = 731.0
 offset_top = 955.0
-offset_right = 963.0
+offset_right = 831.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("34_wwivc")
 ignore_texture_size = true
@@ -304,6 +306,32 @@ script = ExtResource("36_wn18y")
 layout_mode = 2
 
 [node name="VScrollBar" type="VScrollBar" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+layout_mode = 2
+
+[node name="BlockScroller" type="ScrollContainer" parent="UI/objectSelector"]
+offset_left = 69.0
+offset_top = 1061.0
+offset_right = 282.0
+offset_bottom = 1156.0
+script = ExtResource("37_8xuat")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/objectSelector/BlockScroller"]
+layout_mode = 2
+
+[node name="VScrollBar" type="VScrollBar" parent="UI/objectSelector/BlockScroller/VBoxContainer"]
+layout_mode = 2
+
+[node name="ObjectScroller" type="ScrollContainer" parent="UI/objectSelector"]
+offset_left = 403.0
+offset_top = 1063.0
+offset_right = 616.0
+offset_bottom = 1158.0
+script = ExtResource("38_rob5g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/objectSelector/ObjectScroller"]
+layout_mode = 2
+
+[node name="VScrollBar" type="VScrollBar" parent="UI/objectSelector/ObjectScroller/VBoxContainer"]
 layout_mode = 2
 
 [node name="StatusWindow" type="CanvasLayer" parent="."]
