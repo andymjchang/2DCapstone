@@ -1,7 +1,7 @@
 extends CanvasLayer
 @onready var curHeart = $UiHeart3
 var curHeartIndex = 2
-signal decreaseHealth()
+signal decreaseHealth
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 	
 func _onDamageTaken() -> void:
 	#do damage on current heart
+	print("damage signal connected")
 	curHeart.takeDamage()
 	if curHeart.healthStatus == "zero" and curHeartIndex != 0:
 		#player has lost a heart
