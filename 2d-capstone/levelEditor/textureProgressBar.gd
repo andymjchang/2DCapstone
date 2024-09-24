@@ -10,7 +10,8 @@ var timeInto
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	audioPlayer = self.get_parent().get_parent().get_parent().get_node("Camera2D").get_node("audio")
+	print("audio: ", self.get_parent().get_parent())
+	audioPlayer = self.get_parent().get_parent().get_node("Camera2D/Music")
 	self.min_value = 0
 	self.max_value = audioPlayer.stream.get_length()
 	set_process(true)
@@ -20,21 +21,11 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if isDragging:
-		print("in isdragging")
-		#stop the audio TODO
-		var clickPos = get_local_mouse_position()
-	
-		var barWidth = self.get_node("Area2D/CollisionShape2D").shape as RectangleShape2D
-		var width = barWidth.extents.x*2
-		var percentage = abs(clickPos.x/width)
-		var clickVal = percentage * self.max_value
-		audioPlayer.seek(clickVal)
-			
+func _process(delta: float) -> void:			
 	self.value = audioPlayer.get_playback_position()
-	timeLeft.set_text(format_time(audioPlayer.stream.get_length() - self.value))
-	timeInto.set_text(format_time(self.value))
+	#add these in TODO
+	#timeLeft.set_text(format_time(audioPlayer.stream.get_length() - self.value))
+	#timeInto.set_text(format_time(self.value))
 
 
 #this is a little funky 
@@ -44,9 +35,3 @@ func format_time(seconds: float) -> String:
 	var secondsStr = int(seconds) % 60
 	return str(minutesStr) + ":" + str(secondsStr)
 	
-
-	
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and not event.pressed:
-		print("mouse released")
-		isDragging = false
