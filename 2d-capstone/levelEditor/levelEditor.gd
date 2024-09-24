@@ -446,10 +446,12 @@ func _on_play_level_button_button_down() -> void:
 	var scene_instance = levelTemplatePacked.instantiate()
 	scene_instance.levelFile = saveFileName
 	
+	#get_tree().paused = true
+	
 	# Access the current scene and remove it from the scene tree
 	var current_scene = get_tree().current_scene
-	if current_scene != null:
-		current_scene.queue_free()  # Remove current scene
+	Globals.editorNode = current_scene
+	#current_scene.visible = false
 
 	# Add the new scene to the scene tree and set it as the current scene
 	get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
