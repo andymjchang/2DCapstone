@@ -106,7 +106,7 @@ func _physics_process(delta: float) -> void:
 func _onTakeDamage(amount):
 	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
 		health -= amount
-		self.get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth")
+		self.get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
 		print("Got hit! Health now: ", self.health)
 		if health <= 0:
 			print("Player died!")

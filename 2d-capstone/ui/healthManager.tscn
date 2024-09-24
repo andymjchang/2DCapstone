@@ -6,11 +6,24 @@
 [node name="HealthManager" type="CanvasLayer"]
 script = ExtResource("1_gxkyf")
 
-[node name="UiHeart" parent="." instance=ExtResource("1_mv5t0")]
+[node name="player1" type="Node2D" parent="."]
+
+[node name="UiHeart" parent="player1" instance=ExtResource("1_mv5t0")]
 position = Vector2(29, 25)
 
-[node name="UiHeart2" parent="." instance=ExtResource("1_mv5t0")]
+[node name="UiHeart2" parent="player1" instance=ExtResource("1_mv5t0")]
 position = Vector2(82, 25)
 
-[node name="UiHeart3" parent="." instance=ExtResource("1_mv5t0")]
+[node name="UiHeart3" parent="player1" instance=ExtResource("1_mv5t0")]
 position = Vector2(134, 25)
+
+[node name="player2" type="Node2D" parent="."]
+
+[node name="UiHeart" parent="player2" instance=ExtResource("1_mv5t0")]
+position = Vector2(28, 70)
+
+[node name="UiHeart2" parent="player2" instance=ExtResource("1_mv5t0")]
+position = Vector2(81, 71)
+
+[node name="UiHeart3" parent="player2" instance=ExtResource("1_mv5t0")]
+position = Vector2(133, 71)
