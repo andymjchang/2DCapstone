@@ -90,7 +90,6 @@ func loadLevel():
 	var instance
 	var instanceParent
 	for line in content.split("\n"):
-		print("Current line: ", line)
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
@@ -103,6 +102,9 @@ func loadLevel():
 				posPoints.append(pos.to_float())
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
 			instanceParent.add_child(instancedObj)
+	
+	# load the actionArrays
+	$objectList/actionIndicators.load_array()
 
 func changeCountdown():
 	await get_tree().create_timer(1.0).timeout
@@ -153,7 +155,7 @@ func _onLevelCompleted():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#updateTime(delta)
+	updateTime(delta)
 	pass
 
 func updateTime(delta: float):
@@ -164,11 +166,11 @@ func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 	
 func updateScore(indicator_position):
-	var score_to_add = 100 - (indicator_position - player.position.x)
+	var score_to_add = 100 - (indicator_position - player1.position.x)
 	score += score_to_add
 	scoreText.text = str(int(score))
 	var textPopup = textPopupScene.instantiate()
-	textPopup.initText(score_to_add, player.position)
+	textPopup.initText(score_to_add, player1.position)
 	add_child(textPopup)
 
 # Helper function that grabs the target player's closest forward checkpoint

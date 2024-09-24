@@ -63,7 +63,6 @@ var stepSize : int = 150
 
 func _ready():
 	self.objectClicked.connect(_onObjectClicked)
-	print("camera ",camera)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
 	saveFileName = fileLabel.text
@@ -111,7 +110,6 @@ func loadLevel():
 	var instanceParent
 	var blockType = blockTypes[2]
 	for line in content.split("\n"):
-		#print("Current line: ", line)
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
@@ -216,7 +214,6 @@ func _on_kill_floor_button_button_up() -> void:
 	var kfInstance = killFloor.instantiate()
 	var kfParent = baseObject.instantiate()
 	kfParent.add_child(kfInstance)
-	print("button works")
 	kfParent.blockType = blockTypes[6]
 	kfParent.temp()
 	place_block(kfParent, killFloorsList, camera.position, false)
@@ -322,7 +319,6 @@ func place_block(instance, parent, placePos, initial):
 	instance.index = lEindex
 	lEindex+=1
 	currentBlock = instance
-	#print("instatiated object children ", instance.get_child(0).get_children())
 
 	_on_text_edit_2_text_changed()
 	reset_drag_tracking()
@@ -370,7 +366,6 @@ func reset_drag_tracking():
 func _onObjectClicked(index : int, blockType: String):
 	trackingPosition = true
 	#timeHeld = 0.0
-	print("Block type: ", blockType)
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
@@ -386,7 +381,6 @@ func getList(blockType : String) -> Node:
 	if blockType == "normal":
 		return get_node("objectList/platformBlocks")
 	if blockType == "enemy":
-		print("Getting enemy")
 		return get_node("objectList/enemies")
 	if blockType == "player1":
 		return get_node("objectList/player1")
@@ -397,7 +391,6 @@ func getList(blockType : String) -> Node:
 	if blockType == "checkpoint":
 		return get_node("objectList/checkpoints")
 	if blockType == "killFloor":
-		print("getting here!")
 		return get_node("objectList/killFloors")
 	return null
 	
@@ -410,11 +403,6 @@ func setTrackingPosition(setVal : bool) -> void:
 func _on_audio_progress_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and  event.pressed:
 		self.get_node("UI/objectSelector/audioProgress").isDragging=true
-		print("click") # Replace with function body.
-
-
-			
-	
 
 
 func _on_yes_pressed() -> void:
