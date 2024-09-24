@@ -11,8 +11,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#if Globals.inLevel:
-		#position.x += SPEED * delta
 	pass
 	
 func _onKillWallBodyEntered(body:Node2D):

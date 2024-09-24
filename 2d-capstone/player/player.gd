@@ -5,7 +5,7 @@ signal revive(who)
 signal relocate(nearestPoint)
 
 var curSprite
-const SPEED = 388.0
+const SPEED = 400.0
 const JUMP_VELOCITY = -400.0
 var health = 99999999 # 3 hits
 var blockType = "player"

@@ -19,7 +19,7 @@
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
-levelFile = "new_scene"
+levelFile = "Lvl1.1"
 platformBlockInstance = ExtResource("2_78xmt")
 goalBlockInstance = ExtResource("3_xm4bb")
 killFloorInstance = ExtResource("3_6me16")
@@ -59,7 +59,7 @@ stream = ExtResource("3_avb0v")
 max_distance = 10000.0
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
-position = Vector2(-1070, -495)
+position = Vector2(-1084, -493)
 scale = Vector2(1.5, 1.5)
 
 [node name="objectList" type="Node2D" parent="."]
