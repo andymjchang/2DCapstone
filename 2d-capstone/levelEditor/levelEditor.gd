@@ -88,7 +88,7 @@ func _on_text_edit_2_text_changed() -> void:
 		var step = int(stepLabel.text)
 		if (step < 25):
 			step = 25
-		if currentBlock.blockType == "actionIndicator" or currentBlock.blockType == "enemy":
+		if currentBlock and currentBlock.blockType == "actionIndicator" or currentBlock.blockType == "enemy":
 			step = 50
 		stepSize = step
 		Globals.stepSize = stepSize
@@ -381,7 +381,7 @@ func getList(blockType : String) -> Node:
 	if blockType == "normal":
 		return get_node("objectList/platformBlocks")
 	if blockType == "enemy":
-		return get_node("objectList/players")
+		return get_node("objectList/enemies")
 	if blockType == "player1":
 		return get_node("objectList/player1")
 	if blockType == "player2":

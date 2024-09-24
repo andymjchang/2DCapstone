@@ -139,7 +139,7 @@ offset_left = 93.0
 offset_top = 107.0
 offset_right = 208.0
 offset_bottom = 157.0
-text = "new_scene"
+text = "Lvl 1.1"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Node2D" parent="UI"]
