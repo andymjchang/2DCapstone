@@ -190,6 +190,8 @@ func getNearestCheckpoint(who):
 	
 # Basic checkpointing system
 func _onResetPosition(who):
+	if checkpointsList.get_child_count() == 0:
+		return
 	if who.name == "Player1":
 		var nearestPoint = getNearestCheckpoint(who)
 		who.emit_signal("relocate", nearestPoint)
