@@ -5,6 +5,7 @@ var inLevel = false
 var stepSize = 0
 
 var previewNode
+var currentEditorFileName
 @onready var editorNode = preload("res://levelEditor/levelEditor.tscn")
 
 func _process(delta: float) -> void:

@@ -452,6 +452,7 @@ func _on_play_level_button_button_down() -> void:
 	#var current_scene = get_tree().current_scene
 	#Globals.editorNode = current_scene
 	Globals.enablePreviewUI()
+	Globals.currentEditorFileName = saveFileName
 	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
 	#current_scene.visible = false
 
