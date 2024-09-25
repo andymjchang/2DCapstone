@@ -45,3 +45,8 @@ func _unhandled_input(event):
 func _process(_delta):
 	# Smoothly interpolate current zoom to target zoom
 	zoom = zoom.lerp(target_zoom, 0.1)
+	
+	if Input.is_action_just_pressed("moveCameraLeft"):
+		position.x -= 200
+	if Input.is_action_just_pressed("moveCameraRight"):	
+		position.x += 200
