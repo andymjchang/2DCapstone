@@ -54,7 +54,7 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 		#particleEffect.emitting = true
 		particleEffect = get_node("CPUParticles2D2")
 		var wallSprite = get_node("Area2D/Sprite2D")
-		wallSprite.visible = false
+		#wallSprite.visible = false
 		particleEffect.emitting = true
 		particleEffect.visible = true
 		getRandomVelocity()

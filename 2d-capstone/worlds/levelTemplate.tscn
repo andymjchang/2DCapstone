@@ -88,4 +88,4 @@ script = ExtResource("14_rbu47")
 [node name="ProgressBar" parent="." instance=ExtResource("18_s1i58")]
 
 [node name="breakableWallQ" parent="." instance=ExtResource("19_uunb4")]
-position = Vector2(669, 566)
+position = Vector2(541, 522)
