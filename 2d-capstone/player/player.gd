@@ -102,6 +102,7 @@ func _physics_process(delta: float) -> void:
 			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
 				print("My name: ", name)
 				print("Made it")
+				emit_signal("revive")
 				# Reset relocating player position and allow control
 				get_node("CollisionShape2D").call_deferred("set", "disabled", false)
 				relocating = false
@@ -118,7 +119,7 @@ func _onTakeDamage(amount):
 		health -= amount
 		#print("Got hit! Health now: ", self.health)
 		if health <= 0:
-			#print("Player died!")
+			print("Player died!")
 			#self.visible = false
 			$Animation.self_modulate.a = 0.5
 			dead = true
@@ -126,10 +127,10 @@ func _onTakeDamage(amount):
 			print("parent: ", get_parent().get_parent().get_parent())
 			
 			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
-			get_parent().emit_signal("checkGameOver")
-			if Globals.inLevel:
-				await get_tree().create_timer(3.0).timeout
-				emit_signal("revive", self)
+			get_parent().get_parent().get_parent().emit_signal("checkGameOver")
+			# if Globals.inLevel:
+			# 	await get_tree().create_timer(3.0).timeout
+			# 	emit_signal("revive", self)
 		else:
 			invuln = true
 			await get_tree().create_timer(1.0).timeout
