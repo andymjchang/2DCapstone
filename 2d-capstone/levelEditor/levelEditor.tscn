@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=42 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://dr3t8111udl22" path="res://levelEditorObjects/player2Scene.tscn" id="13_i2xjp"]
 [ext_resource type="PackedScene" uid="uid://bq7uuovqf0df7" path="res://levelEditorObjects/killFloorScene.tscn" id="14_26o8v"]
 [ext_resource type="PackedScene" uid="uid://bdfklxl1c8rjj" path="res://shadow/baseObject.tscn" id="15_mrsrj"]
+[ext_resource type="PackedScene" uid="uid://bhlcoymbyox5y" path="res://levelEditorObjects/breakableWallScene.tscn" id="16_rjnnj"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
 [ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="19_jlcy1"]
 [ext_resource type="Texture2D" uid="uid://drnvhk52xrn80" path="res://levelEditor/programmerArtAssets/playAudio.png" id="20_n1qdn"]
@@ -59,6 +60,7 @@ player1 = ExtResource("12_o6ydd")
 player2 = ExtResource("13_i2xjp")
 killFloor = ExtResource("14_26o8v")
 baseObject = ExtResource("15_mrsrj")
+breakableWall = ExtResource("16_rjnnj")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(932, 594)
@@ -93,6 +95,8 @@ stream = ExtResource("19_jlcy1")
 [node name="killFloors" type="Node2D" parent="objectList"]
 
 [node name="goalBlocks" type="Node2D" parent="objectList"]
+
+[node name="breakableWalls" type="Node2D" parent="objectList"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -163,9 +167,9 @@ texture_normal = ExtResource("7_esiun")
 
 [node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
 offset_left = 2.0
-offset_top = 955.0
+offset_top = 887.0
 offset_right = 102.0
-offset_bottom = 1055.0
+offset_bottom = 987.0
 texture_normal = ExtResource("4_rduon")
 
 [node name="actionButton" type="TextureButton" parent="UI/objectSelector"]
@@ -336,10 +340,10 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="breakableWallButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 7.0
-offset_top = 1078.0
-offset_right = 105.0
-offset_bottom = 1164.0
+offset_left = 1.0
+offset_top = 988.0
+offset_right = 99.0
+offset_bottom = 1074.0
 texture_normal = ExtResource("39_0usv5")
 ignore_texture_size = true
 stretch_mode = 0
@@ -436,5 +440,6 @@ clip_text = true
 [connection signal="button_up" from="UI/objectSelector/killFloorButton" to="." method="_on_kill_floor_button_button_up"]
 [connection signal="gui_input" from="UI/objectSelector/audioProgress" to="." method="_on_audio_progress_gui_input"]
 [connection signal="input_event" from="UI/objectSelector/audioProgress/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="button_up" from="UI/objectSelector/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]
