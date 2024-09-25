@@ -57,7 +57,7 @@ texture = ExtResource("1_h40a7")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="sprite2D"]
 position = Vector2(1, 0)
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.3, 0.3)
 tile_map_data = PackedByteArray("AADT//3/BAAAAAAAAADa//3/BAABAAAAAADh//3/BAABAAAAAADo//3/BAABAAAAAADv//3/BAABAAAAAAD2//3/BAABAAAAAAD9//3/BAABAAAAAAAEAP3/BAABAAAAAAALAP3/BAABAAAAAAASAP3/BAABAAAAAAAZAP3/BAABAAAAAAAgAP3/BAABAAAAAAAnAP3/BAACAAAAAAA=")
 tile_set = SubResource("TileSet_8wd15")
 

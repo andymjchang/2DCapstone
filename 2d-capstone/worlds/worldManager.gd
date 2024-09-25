@@ -90,7 +90,7 @@ func loadLevel():
 	var instance
 	var instanceParent
 	for line in content.split("\n"):
-		print("Current line: ", line)
+		#print("Current line: ", line)
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]

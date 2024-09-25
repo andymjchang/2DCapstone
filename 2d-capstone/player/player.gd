@@ -25,6 +25,10 @@ var otherPlayer
 var editing = false
 var index = 0
 
+var jumpInProgress = false
+var punchInProgress = false
+var runInProgress = false
+
 func _ready():
 	print("my name is: ",self.name)
 	curSprite = get_node("Animation").duplicate()
@@ -48,6 +52,7 @@ func _ready():
 	self.takeDamage.connect(_onTakeDamage)
 	self.revive.connect(_onRevive)
 	self.relocate.connect(_onRelocate)
+	$Animation.animation_finished.connect(_onAnimationFinished)
 
 
 func _physics_process(delta: float) -> void:
@@ -62,7 +67,9 @@ func _physics_process(delta: float) -> void:
 			# If not currently in a song, allow regular movement, otherwise begin autoscroll
 			if Globals.inLevel:
 				velocity.x = SPEED
-				$Animation.play("Run")
+				if not jumpInProgress and not punchInProgress:
+					print("Running")
+					$Animation.play("Run")
 				#position.x += 2.0
 			else:
 				#pass # Right now just don't give regular controls
@@ -75,20 +82,20 @@ func _physics_process(delta: float) -> void:
 			# Other player mechanics
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
+				jumpInProgress = true
 				velocity.y = JUMP_VELOCITY
 				await get_tree().create_timer(0.2).timeout
-				$Animation.play("Run")
 			
 			if Input.is_action_just_pressed(punch):
 				if canAttack:
 					$Animation.play("Punch")
+					punchInProgress = true
 					print("Punch!")
 					attack.visible = true
 					canAttack = false
 					await get_tree().create_timer(0.2).timeout
 					canAttack = true
 					attack.visible = false
-					$Animation.play("Run")
 		elif reachedCheckpoint:
 			# Wait to respawn relocating player when teammate has aligned
 			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
@@ -142,3 +149,13 @@ func _onRelocate(nearestPoint):
 	# Set destination, begin move to point
 	checkpoint = nearestPoint
 	velocity = newVelocity
+
+
+func _onAnimationFinished():
+	print("Finished, ", $Animation.animation)
+	if $Animation.animation == "Jump":
+		print("Changing animation to: ")
+		jumpInProgress = false
+	elif $Animation.animation == "Punch":
+		punchInProgress = false
+	pass

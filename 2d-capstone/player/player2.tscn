@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dakwrycm2d4ei"]
+[gd_scene load_steps=16 format=3 uid="uid://dakwrycm2d4ei"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yl2m7"]
 [ext_resource type="Texture2D" uid="uid://8ka2tcx6hk3p" path="res://player/player2.png" id="2_1yk2g"]
+[ext_resource type="Texture2D" uid="uid://btpvi1n88pcgy" path="res://animations/mouseAnims/Mouse_sprite_sheet_v03.png" id="2_mn2ky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
 size = Vector2(25.75, 20.5)
@@ -11,27 +12,80 @@ size = Vector2(25.75, 20.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
 size = Vector2(25.5, 20.5)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8275c"]
+atlas = ExtResource("2_mn2ky")
+region = Rect2(0, 0, 700, 700)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fh4c4"]
+atlas = ExtResource("2_mn2ky")
+region = Rect2(700, 0, 700, 700)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtr4t"]
+atlas = ExtResource("2_mn2ky")
+region = Rect2(1400, 0, 700, 700)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf768"]
+atlas = ExtResource("2_mn2ky")
+region = Rect2(2100, 0, 700, 700)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sdeh"]
+atlas = ExtResource("2_mn2ky")
+region = Rect2(0, 700, 700, 700)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvbxf"]
+atlas = ExtResource("2_mn2ky")
+region = Rect2(700, 700, 700, 700)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta2nn"]
+atlas = ExtResource("2_mn2ky")
+region = Rect2(1400, 700, 700, 700)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjx7f"]
+atlas = ExtResource("2_mn2ky")
+region = Rect2(2100, 700, 700, 700)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_2tkvf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_1yk2g")
 }],
-"loop": true,
-"name": &"Jump",
+"loop": false,
+"name": &"Jump1",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_1yk2g")
 }],
-"loop": true,
+"loop": false,
 "name": &"Punch",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_1yk2g")
+"texture": SubResource("AtlasTexture_8275c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fh4c4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtr4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf768")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sdeh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvbxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta2nn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjx7f")
 }],
 "loop": true,
 "name": &"Run",
@@ -51,6 +105,7 @@ shape = SubResource("RectangleShape2D_44r6d")
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
+visible = false
 offset_left = -12.25
 offset_top = 3.25
 offset_right = 11.75
@@ -67,8 +122,8 @@ position = Vector2(-0.5, 12)
 shape = SubResource("RectangleShape2D_s4g51")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-0.75, 11.375)
-scale = Vector2(0.225, 0.1925)
+position = Vector2(-4.75, 1.75)
+scale = Vector2(0.0892857, 0.0763889)
 sprite_frames = SubResource("SpriteFrames_2tkvf")
 animation = &"Run"
 
