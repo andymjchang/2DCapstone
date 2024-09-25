@@ -123,6 +123,9 @@ func _onTakeDamage(amount):
 			$Animation.self_modulate.a = 0.5
 			dead = true
 			invuln = false
+			print("parent: ", get_parent().get_parent().get_parent())
+			
+			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
 			get_parent().emit_signal("checkGameOver")
 			if Globals.inLevel:
 				await get_tree().create_timer(3.0).timeout

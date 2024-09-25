@@ -15,13 +15,14 @@ platformBlocks
 750, 300
 900, 300
 900, 600
-actionIndicators
-checkpoints
+1200, 600
+1350, 600
+1200, 300
+1350, 300
 player1
 45, 540
 player2
 45, 240
-enemies
 killFloors
-goalBlocks
-breakableWalls
+1350, 600
+1350, 300

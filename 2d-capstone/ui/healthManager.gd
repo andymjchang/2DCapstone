@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 	
 func _onDamageTaken(who) -> void:
 	#do damage on current heart
+	print("ui damage signal connectd")
 	if who == "Player1":
 		if curP1Heart:
 			curP1Heart.takeDamage()
