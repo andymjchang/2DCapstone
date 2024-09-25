@@ -21,6 +21,8 @@ var overwrite = false
 var isLoad = true
 var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint"]
 
+var MIN_STEP : int = 25
+
 var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
 var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
@@ -86,10 +88,10 @@ func _on_text_edit_text_changed() -> void:
 func _on_text_edit_2_text_changed() -> void:
 	if stepLabel.text.is_valid_int():
 		var step = int(stepLabel.text)
-		if (step < 25):
-			step = 25
+		if (step < MIN_STEP):
+			step = MIN_STEP
 		if currentBlock and currentBlock.blockType == "actionIndicator" or currentBlock.blockType == "enemy":
-			step = 50
+			step = MIN_STEP
 		stepSize = step
 		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
