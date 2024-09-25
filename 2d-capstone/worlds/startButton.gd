@@ -11,6 +11,6 @@ func _process(delta):
 
 
 func _onPressed():
-	get_tree().change_scene_to_file("res://worlds/testWorldA.tscn")
+	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
 	pass # Replace with function body.
 	

@@ -128,6 +128,6 @@ bbcode_enabled = true
 text = "
 [center][u][b]Player 2 Controls[/b][/u]
 Up: Jump
-Shift: Punch[/center]"
+Space: Punch[/center]"
 
 [connection signal="pressed" from="StartButton" to="StartButton" method="_onPressed"]
