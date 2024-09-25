@@ -5,9 +5,9 @@ signal revive(who)
 signal relocate(nearestPoint)
 
 var curSprite
-const SPEED = 400.0
-const JUMP_VELOCITY = -400.0
-var health = 99999999 # 3 hits
+var SPEED = 400.0
+var JUMP_VELOCITY = -550.0
+var health = 3 # 3 hits
 var blockType = "player"
 var invuln = false
 var dead = false
@@ -98,6 +98,7 @@ func _physics_process(delta: float) -> void:
 		elif reachedCheckpoint:
 			# Wait to respawn relocating player when teammate has aligned
 			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
+				print("Made it")
 				# Reset relocating player position and allow control
 				get_node("CollisionShape2D").call_deferred("set", "disabled", false)
 				relocating = false

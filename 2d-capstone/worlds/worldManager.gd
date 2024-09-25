@@ -172,9 +172,9 @@ func updateScore(indicator_position):
 
 # Helper function that grabs the target player's closest forward checkpoint
 func getNearestCheckpoint(who):
-	var nearestPoint = checkpointsList.get_child(0)
+	var nearestPoint = objectList.get_node(who.name + "checkpoints").get_child(0)
 	var shortestDistance = who.position.distance_to(nearestPoint.position)
-	for i in checkpointsList.get_children():
+	for i in objectList.get_node(who.name + "checkpoints").get_children():
 		#print("Checking: ", i)
 		var distance = who.position.distance_to(i.position)
 		# Check if checkpoint in front of player
@@ -185,6 +185,7 @@ func getNearestCheckpoint(who):
 				#print("foClosest node: ", i)
 				nearestPoint = i
 				shortestDistance = distance
+	print("Relocating to: ", nearestPoint.position)
 	return nearestPoint
 	
 # Basic checkpointing system

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b0oiqgrybgte5"]
+[gd_scene load_steps=18 format=3 uid="uid://b0oiqgrybgte5"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -16,10 +16,11 @@
 [ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="13_euntf"]
 [ext_resource type="PackedScene" uid="uid://dpkw4ciu8ss4c" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://checkpoint.gd" id="14_rbu47"]
+[ext_resource type="PackedScene" uid="uid://m7qqiokd3152" path="res://levelEditorObjects/checkpointScene.tscn" id="17_macno"]
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
-levelFile = "Lvl1.1"
+levelFile = "Lvl1.2"
 platformBlockInstance = ExtResource("2_78xmt")
 goalBlockInstance = ExtResource("3_rhr5i")
 killFloorInstance = ExtResource("3_6me16")
@@ -45,7 +46,7 @@ offset_bottom = 64.0
 text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(478, 543)
+position = Vector2(478, 491)
 zoom = Vector2(2, 2)
 script = ExtResource("4_nttx1")
 
@@ -76,7 +77,46 @@ scale = Vector2(1.5, 1.5)
 [node name="actionIndicators" type="Node2D" parent="objectList"]
 script = ExtResource("13_euntf")
 
-[node name="checkpoints" type="Node2D" parent="objectList"]
+[node name="Player2checkpoints" type="Node2D" parent="objectList"]
 script = ExtResource("14_rbu47")
+
+[node name="CheckpointScene" parent="objectList/Player2checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(4800, 375)
+
+[node name="CheckpointScene2" parent="objectList/Player2checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(9000, 325)
+
+[node name="CheckpointScene3" parent="objectList/Player2checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(13800, 350)
+
+[node name="CheckpointScene4" parent="objectList/Player2checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(19200, 350)
+
+[node name="CheckpointScene5" parent="objectList/Player2checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(24600, 350)
+
+[node name="CheckpointScene6" parent="objectList/Player2checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(30000, 400)
+
+[node name="Player1checkpoints" type="Node2D" parent="objectList"]
+script = ExtResource("14_rbu47")
+
+[node name="CheckpointScene" parent="objectList/Player1checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(4800, 675)
+
+[node name="CheckpointScene2" parent="objectList/Player1checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(9000, 675)
+
+[node name="CheckpointScene3" parent="objectList/Player1checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(13800, 700)
+
+[node name="CheckpointScene4" parent="objectList/Player1checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(19200, 675)
+
+[node name="CheckpointScene5" parent="objectList/Player1checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(24600, 675)
+
+[node name="CheckpointScene6" parent="objectList/Player1checkpoints" instance=ExtResource("17_macno")]
+position = Vector2(30025, 700)
 
 [node name="players" type="Node2D" parent="objectList"]
