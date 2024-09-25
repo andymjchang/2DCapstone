@@ -39,7 +39,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			print("mouse pressed")
 	
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and not event.pressed and self.index == self.get_parent().get_parent().get_parent().currentBlock.index and isDragging:
+	if event is InputEventMouseButton and not event.pressed and self.get_parent().get_parent().get_parent().currentBlock and self.index == self.get_parent().get_parent().get_parent().currentBlock.index and isDragging:
 		print("mouse released")
 		var endPosition = self.get_parent().get_parent().get_parent().currentPosition
 		self.position = self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())

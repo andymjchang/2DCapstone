@@ -19,8 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint", "breakableWall"]
-var delete = "deleteBlock"
+var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint"]
 
 var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
@@ -40,7 +39,6 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @export var player2 : PackedScene
 @export var killFloor : PackedScene
 @export var baseObject : PackedScene
-@export var breakableWall : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -48,7 +46,6 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var enemyList = $objectList/enemies
 @onready var actionIndicatorsList = $objectList/actionIndicators
 @onready var checkpointsList = $objectList/checkpoints
-@onready var bWallsList = $objectList/breakableWalls
 @onready var player1List = $objectList/player1
 @onready var player2List = $objectList/player2
 @onready var killFloorsList = $objectList/killFloors
@@ -80,18 +77,6 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("click"):
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
-	if Input.is_action_just_pressed(delete) and currentBlock:
-		print("detecting delete key press")
-		#get current click on block and delete it 
-		var blockList = getList(currentBlock.blockType)
-		for block in blockList.get_children():
-			if block.index == currentBlock.index:
-				#we have found our block, delete
-				#blockList.erase(block)
-				currentBlock.queue_free()
-				currentBlock = null
-				break
-			
 
 func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():
@@ -213,13 +198,6 @@ func _on_action_button_button_up() -> void:
 	actionParent.blockType = blockTypes[3]
 	place_block(actionParent, actionIndicatorsList, camera.position, false)
 
-
-func _on_breakable_wall_button_button_up() -> void:
-	var bWallInstance = breakableWall.instantiate()
-	var bWallParent = baseObject.instantiate()
-	bWallParent.add_child(bWallInstance)
-	bWallParent.blockType = blockTypes[8]
-	place_block(bWallParent, bWallsList, camera.position, false)
 
 func _on_goal_button_button_up() -> void:
 	var goalInstance = goalBlock.instantiate()
@@ -420,9 +398,8 @@ func getList(blockType : String) -> Node:
 	if blockType == "checkpoint":
 		return get_node("objectList/checkpoints")
 	if blockType == "killFloor":
+		print("getting here!")
 		return get_node("objectList/killFloors")
-	if blockType == "breakableWall":
-		return get_node("objectList/breakableWalls")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:

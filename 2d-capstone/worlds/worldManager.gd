@@ -77,6 +77,7 @@ func _ready():
 	Globals.inLevel = true
 	music.play(0.0)
 
+
 func loadLevel():
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 

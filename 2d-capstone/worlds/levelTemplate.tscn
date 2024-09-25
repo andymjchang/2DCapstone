@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b0oiqgrybgte5"]
+[gd_scene load_steps=19 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -16,6 +16,8 @@
 [ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="13_euntf"]
 [ext_resource type="PackedScene" uid="uid://dpkw4ciu8ss4c" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://checkpoint.gd" id="14_rbu47"]
+[ext_resource type="PackedScene" path="res://ui/healthManager.tscn" id="17_bwxam"]
+[ext_resource type="PackedScene" path="res://ui/progressBar.tscn" id="18_s1i58"]
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
@@ -119,3 +121,7 @@ position = Vector2(24600, 675)
 position = Vector2(30025, 700)
 
 [node name="players" type="Node2D" parent="objectList"]
+
+[node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
+
+[node name="ProgressBar" parent="." instance=ExtResource("18_s1i58")]

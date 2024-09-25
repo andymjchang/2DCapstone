@@ -94,7 +94,7 @@ func _physics_process(delta: float) -> void:
 					#print("Punch!")
 					attack.visible = true
 					canAttack = false
-					await get_tree().create_timer(0.1).timeout
+					await get_tree().create_timer(0.2).timeout
 					canAttack = true
 					attack.visible = false
 		elif reachedCheckpoint:

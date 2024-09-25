@@ -1,0 +1,151 @@
+[gd_scene load_steps=10 format=3 uid="uid://csh1k6wpxxqre"]
+
+[ext_resource type="Texture2D" uid="uid://v6w028pdwdn8" path="res://worldObjects/breakableWall.png" id="1_1xpll"]
+[ext_resource type="Texture2D" uid="uid://dm870min7d5ri" path="res://worldObjects/wall/wallPieces/wallPart1.png" id="3_w7cmg"]
+[ext_resource type="Texture2D" uid="uid://dhx4rbog36o68" path="res://worldObjects/wall/wallPieces/wallPart2.png" id="4_jt6d4"]
+[ext_resource type="Texture2D" uid="uid://dxho2jlo3s1gm" path="res://worldObjects/wall/wallPieces/wallPart3.png" id="5_jrjva"]
+[ext_resource type="Texture2D" uid="uid://d4hklyskg71ms" path="res://worldObjects/wall/wallPieces/wallPart4.png" id="6_tgwff"]
+[ext_resource type="Texture2D" uid="uid://cnw1oymwgvwqb" path="res://worldObjects/wall/wallPieces/wallPart5.png" id="7_3wcov"]
+[ext_resource type="Texture2D" uid="uid://dsio6nf1e2a10" path="res://worldObjects/wall/wallPieces/wallPart6.png" id="8_fcfbu"]
+
+[sub_resource type="GDScript" id="GDScript_kpawh"]
+script/source = "extends Node2D
+
+var particleEffect 
+var velocities = [Vector2.ZERO,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO]
+var wallBroken = false
+const FRICTION: float = 0.98
+const explosionForce = 600.0
+const GRAVITY = 575
+var wall1
+var wall2
+var wall3
+var wall4
+var wall5
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	wall1 = get_node(\"Area2D/wallPart1\")
+	wall2 = get_node(\"Area2D/wallPart2\")
+	wall3 = get_node(\"Area2D/wallPart3\")
+	wall4 = get_node(\"Area2D/wallPart4\")
+	wall5 = get_node(\"Area2D/wallPart5\")
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if wallBroken:
+		#velocity.y += GRAVITY * delta 
+		changeVelocityY(GRAVITY * delta)
+		wall1.position += velocities[0] * delta
+		wall2.position += velocities[1] * delta
+		wall3.position += velocities[2] * delta
+		wall4.position += velocities[3] * delta
+		wall5.position +=velocities[4]* delta
+		addFriction()
+		#TODO get rid of the wall at some point after the explosion
+	
+	if Input.is_action_just_pressed(\"click\"):
+		
+		particleEffect = get_node(\"CPUParticles2D\")
+		var wallSprite = get_node(\"Area2D/Sprite2D\")
+		wallSprite.visible = false
+		particleEffect.emitting = true
+		particleEffect.visible = true
+		getRandomVelocity()
+		wallBroken = true
+		
+#func _on_Timer_timeout():
+	#queue_free()
+	
+
+
+func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	
+	var all_players = get_tree().get_nodes_in_group(\"players\")
+	var bothPunching = true
+	print(\"players: \", body.is_in_group(\"players\") )
+	for player in all_players:
+		print(\"player vsiibility: \",player.attack.visible )
+		if !player.attack.visible:
+			bothPunching = false
+			
+	if bothPunching:
+		print(\"both punching\")
+		#particleEffect.emitting = true
+		particleEffect = get_node(\"CPUParticles2D\")
+		var wallSprite = get_node(\"Area2D/Sprite2D\")
+		wallSprite.visible = false
+		#particleEffect.emitting = true
+		#particleEffect.visible = true
+		getRandomVelocity()
+		wallBroken = true
+	
+func getRandomVelocity():
+	for i in range(velocities.size()):
+		velocities[i] = Vector2(randf_range(-1.0,1.0), randf_range(-1.0,1.0)).normalized() * explosionForce
+		
+func changeVelocityY(delta: float):
+	for i in range(velocities.size()):
+		velocities[i].y += delta
+		
+func addFriction():
+	for i in range(velocities.size()):
+		velocities[i] = velocities[i]*FRICTION
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1mny3"]
+size = Vector2(238.5, 671)
+
+[node name="breakableWallQ" type="Node2D"]
+script = SubResource("GDScript_kpawh")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-11.75, 3)
+shape = SubResource("RectangleShape2D_1mny3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(-2.99988, 5)
+scale = Vector2(0.24, 0.217333)
+texture = ExtResource("1_1xpll")
+
+[node name="wallPart2" type="Sprite2D" parent="Area2D"]
+position = Vector2(6, 2.5)
+scale = Vector2(0.22, 0.226333)
+texture = ExtResource("4_jt6d4")
+
+[node name="wallPart3" type="Sprite2D" parent="Area2D"]
+position = Vector2(-4.50001, 8.00001)
+scale = Vector2(0.23375, 0.224667)
+texture = ExtResource("5_jrjva")
+
+[node name="wallPart4" type="Sprite2D" parent="Area2D"]
+position = Vector2(0.5, 5.00007)
+scale = Vector2(0.24625, 0.227333)
+texture = ExtResource("6_tgwff")
+
+[node name="wallPart5" type="Sprite2D" parent="Area2D"]
+position = Vector2(-4, 6.49999)
+scale = Vector2(0.21, 0.228333)
+texture = ExtResource("7_3wcov")
+
+[node name="wallPart6" type="Sprite2D" parent="Area2D"]
+visible = false
+position = Vector2(0.999985, 9)
+scale = Vector2(0.2275, 0.228)
+texture = ExtResource("8_fcfbu")
+
+[node name="wallPart1" type="Sprite2D" parent="Area2D"]
+position = Vector2(-2.5, 7.49998)
+scale = Vector2(0.22875, 0.224333)
+texture = ExtResource("3_w7cmg")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+emitting = false
+amount = 4
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
