@@ -54,7 +54,7 @@ func _ready():
 	self.takeDamage.connect(_onTakeDamage)
 	self.revive.connect(_onRevive)
 	self.relocate.connect(_onRelocate)
-	#self.attack.visible = false
+	self.attack.visible = false
 	$Animation.animation_finished.connect(_onAnimationFinished)
 
 
@@ -119,6 +119,7 @@ func _onTakeDamage(amount):
 	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
 		health -= amount
 		#print("Got hit! Health now: ", self.health)
+		get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
 		if health <= 0:
 			print("Player died!")
 			#self.visible = false
@@ -126,7 +127,7 @@ func _onTakeDamage(amount):
 			dead = true
 			invuln = false
 
-			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
+			
 			get_parent().get_parent().get_parent().emit_signal("checkGameOver")
 			# if Globals.inLevel:
 			# 	await get_tree().create_timer(3.0).timeout
