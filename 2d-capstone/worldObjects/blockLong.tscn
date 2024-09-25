@@ -1,17 +1,45 @@
-[gd_scene load_steps=6 format=3 uid="uid://durvh6v8u5exu"]
+[gd_scene load_steps=9 format=4 uid="uid://durvh6v8u5exu"]
 
 [ext_resource type="Texture2D" uid="uid://ljo48af3c257" path="res://worldObjects/Platform.png" id="1_h40a7"]
 [ext_resource type="Script" path="res://worldObjects/blockLong.gd" id="1_kddth"]
 [ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/Platform_2.png" id="3_85d55"]
+[ext_resource type="Texture2D" uid="uid://71f5kajh7j21" path="res://backgrounds/tilemaps/level1tilemap.png" id="4_m2jcf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]
 size = Vector2(150, 50)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aktmx"]
+texture = ExtResource("4_m2jcf")
+separation = Vector2i(70, 63)
+texture_region_size = Vector2i(120, 125)
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+2:0/0 = 0
+2:3/0 = 0
+1:3/0 = 0
+0:3/0 = 0
+0:0/0 = 0
+2:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8wd15"]
+sources/4 = SubResource("TileSetAtlasSource_aktmx")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_albr6"]
 size = Vector2(150, 51)
 
 [node name="Block" type="StaticBody2D" groups=["blocks"]]
 script = ExtResource("1_kddth")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_tpulb")
 
 [node name="sprite2D" type="Node2D" parent="."]
 
@@ -27,18 +55,19 @@ position = Vector2(-1, 9)
 scale = Vector2(0.121745, 0.0941406)
 texture = ExtResource("1_h40a7")
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, 8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 8)
-shape = SubResource("RectangleShape2D_tpulb")
+[node name="TileMapLayer" type="TileMapLayer" parent="sprite2D"]
+position = Vector2(1, 0)
+scale = Vector2(0.1, 0.1)
+tile_map_data = PackedByteArray("AADT//3/BAAAAAAAAADa//3/BAABAAAAAADh//3/BAABAAAAAADo//3/BAABAAAAAADv//3/BAABAAAAAAD2//3/BAABAAAAAAD9//3/BAABAAAAAAAEAP3/BAABAAAAAAALAP3/BAABAAAAAAASAP3/BAABAAAAAAAZAP3/BAABAAAAAAAgAP3/BAABAAAAAAAnAP3/BAACAAAAAAA=")
+tile_set = SubResource("TileSet_8wd15")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_tpulb")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_albr6")
 

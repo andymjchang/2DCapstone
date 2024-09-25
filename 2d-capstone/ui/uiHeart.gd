@@ -35,8 +35,6 @@ func _process(delta: float) -> void:
 		halfHealth = $halfP2Health
 		fullHealth = $fullP2Health
 		
-	
-	
 #is this redundant?	
 func takeDamage() -> void:
 	match healthStatus:
