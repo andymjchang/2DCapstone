@@ -314,6 +314,7 @@ offset_bottom = 115.0
 texture_normal = ExtResource("37_5oir0")
 
 [node name="StatusWindow" type="CanvasLayer" parent="."]
+process_mode = 2
 visible = false
 
 [node name="ColorRect2" type="ColorRect" parent="StatusWindow"]
