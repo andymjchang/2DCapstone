@@ -2,8 +2,10 @@ extends Node2D
 #signal decreaseHealth()
 
 var healthStatus= "full"
-@onready var fullHealth = $fullHealth
-@onready var halfHealth = $halfHealth
+var player : String 
+@onready var fullHealth = $fullP1Health
+@onready var halfHealth = $halfP1Health
+var changed = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,13 +13,28 @@ var healthStatus= "full"
 func _ready() -> void:
 	#connect signal for when player takes damage
 	#self.decreaseHealth.connect(_onDamageTaken)
-	pass
+	if player == "player1":
+		self.get_node("fullP1Health").visible = true
+		self.get_node("halfP1Health").visible = false
+		fullHealth = $fullP1Health
+	if player == "player2":
+		self.get_node("fullP2Health").visible = true
+		self.get_node("halfP2Health").visible = false
+		halfHealth = $halfP2Health
 	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if player == "player2" and changed:
+		self.get_node("fullP2Health").visible = true
+		self.get_node("halfP2Health").visible = false
+		self.get_node("fullP1Health").visible = false
+		self.get_node("halfP1Health").visible = false
+		changed = false
+		halfHealth = $halfP2Health
+		fullHealth = $fullP2Health
+		
 	
 	
 #is this redundant?	

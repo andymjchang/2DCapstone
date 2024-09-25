@@ -1,18 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcy8j7jujip35"]
+[gd_scene load_steps=4 format=3 uid="uid://bcy8j7jujip35"]
 
 [ext_resource type="Script" path="res://ui/uiHeart.gd" id="1_n0dm8"]
 [ext_resource type="Texture2D" uid="uid://cxpyh4hstkkni" path="res://ui/fullHealth.png" id="2_40u54"]
+[ext_resource type="Texture2D" uid="uid://cpvil4blpom7p" path="res://ui/fullP2Health.png" id="3_bpwxk"]
 
 [node name="uiHeart" type="Node2D"]
 script = ExtResource("1_n0dm8")
 
-[node name="fullHealth" type="Sprite2D" parent="."]
+[node name="fullP1Health" type="Sprite2D" parent="."]
 position = Vector2(-2.38419e-07, 0)
 scale = Vector2(0.0892857, 0.0894231)
 texture = ExtResource("2_40u54")
 
-[node name="halfHealth" type="Sprite2D" parent="."]
+[node name="halfP1Health" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-12.5, 0)
 scale = Vector2(0.0428571, 0.0894231)
 texture = ExtResource("2_40u54")
+
+[node name="fullP2Health" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1.19209e-07, 0)
+scale = Vector2(0.02125, 0.0204167)
+texture = ExtResource("3_bpwxk")
+
+[node name="halfP2Health" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-11.75, 0)
+scale = Vector2(0.0114583, 0.0204167)
+texture = ExtResource("3_bpwxk")

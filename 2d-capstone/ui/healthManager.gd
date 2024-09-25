@@ -8,7 +8,12 @@ signal decreaseHealth(who)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.decreaseHealth.connect(_onDamageTaken)
-
+	#set the individual ui hearts for each player
+	for heart in self.get_node("player1").get_children():
+		heart.player = "player1"
+	for heart in self.get_node("player2").get_children():
+		heart.player = "player2"
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
