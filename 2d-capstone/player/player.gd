@@ -68,16 +68,15 @@ func _physics_process(delta: float) -> void:
 			if Globals.inLevel:
 				velocity.x = SPEED
 				if not jumpInProgress and not punchInProgress:
-					print("Running")
 					$Animation.play("Run")
 				#position.x += 2.0
 			else:
-				#pass # Right now just don't give regular controls
-				var direction = Input.get_axis(left, right)
-				if direction:
-					velocity.x = direction * SPEED
-				else:
-					velocity.x = move_toward(velocity.x, 0, SPEED)
+				pass # Right now just don't give regular controls
+				# var direction = Input.get_axis(left, right)
+				# if direction:
+				# 	velocity.x = direction * SPEED
+				# else:
+				# 	velocity.x = move_toward(velocity.x, 0, SPEED)
 
 			# Other player mechanics
 			if Input.is_action_just_pressed(jump) and is_on_floor():

@@ -10,9 +10,9 @@
 [ext_resource type="Script" path="res://worlds/camera.gd" id="4_nttx1"]
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
-[ext_resource type="Texture2D" uid="uid://eaxiu3v8mgwp" path="res://worlds/menuBG.png" id="5_xy8kd"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="7_po4yx"]
+[ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="12_ngrii"]
 [ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="13_euntf"]
 [ext_resource type="PackedScene" uid="uid://dpkw4ciu8ss4c" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://checkpoint.gd" id="14_rbu47"]
@@ -45,13 +45,14 @@ offset_bottom = 64.0
 text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(960, 540)
+position = Vector2(478, 543)
+zoom = Vector2(2, 2)
 script = ExtResource("4_nttx1")
 
 [node name="MenuBg" type="Sprite2D" parent="Camera2D"]
 position = Vector2(3.74979, 45.2499)
 scale = Vector2(0.325417, 0.325417)
-texture = ExtResource("5_xy8kd")
+texture = ExtResource("12_ngrii")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
 position = Vector2(-960, -540)
@@ -59,7 +60,7 @@ stream = ExtResource("3_avb0v")
 max_distance = 10000.0
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
-position = Vector2(-1084, -493)
+position = Vector2(-544, -502)
 scale = Vector2(1.5, 1.5)
 
 [node name="objectList" type="Node2D" parent="."]
