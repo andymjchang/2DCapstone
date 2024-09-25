@@ -129,9 +129,9 @@ func _onTakeDamage(amount):
 
 			
 			get_parent().get_parent().get_parent().emit_signal("checkGameOver")
-			# if Globals.inLevel:
-			# 	await get_tree().create_timer(3.0).timeout
-			# 	emit_signal("revive", self)
+			if Globals.inLevel:
+				await get_tree().create_timer(3.0).timeout
+				emit_signal("revive", self)
 		else:
 			invuln = true
 			await get_tree().create_timer(1.0).timeout
@@ -141,6 +141,8 @@ func _onTakeDamage(amount):
 func _onRevive(who):
 	who.get_node("Animation").self_modulate.a = 1
 	who.health = 3
+	get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("reviveUI", self.name)
+	#reset ui Indicator
 	who.dead = false
 
 func _onRelocate(nearestPoint):

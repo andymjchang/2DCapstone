@@ -4,10 +4,12 @@ extends CanvasLayer
 var curP1HeartIndex = 2
 var curP2HeartIndex = 2
 signal decreaseHealth(who)
+signal reviveUI
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.decreaseHealth.connect(_onDamageTaken)
+	self.reviveUI.connect(_onUIRevive)
 	#set the individual ui hearts for each player
 	for heart in self.get_node("player1").get_children():
 		heart.player = "player1"
@@ -37,6 +39,22 @@ func _onDamageTaken(who) -> void:
 				#player has lost a heart
 				curP2HeartIndex -= 1
 				curP2Heart = self.get_node("player2").get_child(curP2HeartIndex)
+				
+func _onUIRevive(who):
+	print("made it to ui revive")
+	if who == "Player1":
+		curP1Heart =  $player1/UiHeart3
+		curP1HeartIndex = 2
+		for heart in get_node("player1").get_children():
+			heart.healthStatus = "full"
+			heart.fullHealth.visible = true
+	if who == "Player2":
+		curP2Heart =  $player2/UiHeart3
+		curP2HeartIndex = 2
+		for heart in get_node("player2").get_children():
+			heart.healthStatus = "full"
+			heart.fullHealth.visible = true
+		
 		
 	
 	
