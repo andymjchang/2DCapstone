@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cdb5n44jar0hf"]
 
-[ext_resource type="Script" path="res://levelEditor/textureProgressBar.gd" id="1_hnwwr"]
+[ext_resource type="Script" path="res://ui/audioProgress.gd" id="1_6veau"]
 
 [node name="ProgressBar" type="CanvasLayer"]
 
@@ -9,4 +9,4 @@ offset_left = 795.0
 offset_top = 939.0
 offset_right = 1069.0
 offset_bottom = 975.0
-script = ExtResource("1_hnwwr")
+script = ExtResource("1_6veau")
