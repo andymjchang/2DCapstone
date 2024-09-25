@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="10_scc0a"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="11_0fw46"]
 [ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://shadow/goal_block.tscn" id="12_2sfwp"]
-[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://worldObjects/wall/breakableWall.tscn" id="12_db08v"]
+[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://worldObjects/wall/breakableWallQ.tscn" id="12_db08v"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="14_i5e6p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yxuh"]
@@ -829,7 +829,7 @@ position = Vector2(9128, 197)
 position = Vector2(9228, 197)
 
 [node name="breakableWall" parent="." instance=ExtResource("12_db08v")]
-position = Vector2(239, 351)
+position = Vector2(-1044, -34)
 
 [node name="HealthManager" parent="." instance=ExtResource("14_i5e6p")]
 

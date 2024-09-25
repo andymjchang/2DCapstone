@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_6cp3f"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="2_rs55h"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="3_dju4x"]
-[ext_resource type="AudioStream" uid="uid://cvi7eq2uyrmxc" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="4_brh1x"]
+[ext_resource type="AudioStream" uid="uid://bi32k1rjy681g" path="res://audioTracks/Cut+Fade-JamdayDemo_Techno_155bpm_EMin.wav" id="4_brh1x"]
 [ext_resource type="Script" path="res://worlds/camera.gd" id="5_3w36y"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="6_o8ug4"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="7_cqabj"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b06gkr46rf8gm" path="res://worldObjects/action_indicator_manager.tscn" id="9_311j2"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="10_i3p2c"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="11_w5dyt"]
-[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://wall/breakableWall.tscn" id="12_sm7pi"]
+[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://worldObjects/wall/breakableWallQ.tscn" id="12_sm7pi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yxuh"]
 size = Vector2(45, 656)

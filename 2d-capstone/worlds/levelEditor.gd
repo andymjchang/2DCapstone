@@ -20,7 +20,6 @@ var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
 var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint"]
-var delete = "deleteBlock"
 
 var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
@@ -78,18 +77,6 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("click"):
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
-	if Input.is_action_just_pressed(delete) and currentBlock:
-		print("detecting delete key press")
-		#get current click on block and delete it 
-		var blockList = getList(currentBlock.blockType)
-		for block in blockList.get_children():
-			if block.index == currentBlock.index:
-				#we have found our block, delete
-				#blockList.erase(block)
-				currentBlock.queue_free()
-				currentBlock = null
-				break
-			
 
 func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():

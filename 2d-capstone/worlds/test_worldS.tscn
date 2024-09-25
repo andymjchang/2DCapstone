@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://e77840gwbhm2" path="res://worldObjects/block.tscn" id="5_gcg53"]
 [ext_resource type="Texture2D" uid="uid://d21eovw46dvd8" path="res://worldObjects/enemy.png" id="6_gehfc"]
 [ext_resource type="Texture2D" uid="uid://bsadp0sxt2eo8" path="res://worldObjects/circlePlaceholder.png" id="7_tihh4"]
-[ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="8_mp701"]
+[ext_resource type="PackedScene" uid="uid://dpkw4ciu8ss4c" path="res://worldObjects/killWall.tscn" id="8_mp701"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="9_ah3d1"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="10_mgvrl"]
-[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://wall/breakableWall.tscn" id="11_23yss"]
+[ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://worldObjects/wall/breakableWallQ.tscn" id="11_23yss"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34wdf"]
 texture = ExtResource("4_kovi1")

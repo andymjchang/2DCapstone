@@ -41,14 +41,7 @@ func takeDamage() -> void:
 		"full":
 			#decrease to half
 			self.fullHealth.visible = false
-			self.halfHealth.visible = true
-			healthStatus = "half"
-		"half":
-			#no more heart :(
-			self.halfHealth.visible = false
 			healthStatus = "zero"
 		"zero":
 			#should not be getting here
 			print("should not be checking heart still")
-	
-	
