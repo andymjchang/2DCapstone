@@ -1,31 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://c57gt1oqgpg2"]
+[gd_scene load_steps=3 format=3 uid="uid://c57gt1oqgpg2"]
 
-[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="1_8cph0"]
 [ext_resource type="Texture2D" uid="uid://cheyr4ahq0rl7" path="res://shadow/OIP.jpg" id="2_11mjr"]
-[ext_resource type="Texture2D" uid="uid://ljo48af3c257" path="res://worldObjects/Platform.png" id="3_fjudg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkiii"]
-size = Vector2(150, 58)
+size = Vector2(80, 37)
 
 [node name="GoalBlockScene" type="Node2D"]
 
-[node name="Block" parent="." instance=ExtResource("1_8cph0")]
-script = null
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.527864, 0.196212, 0.308652, 1)
+scale = Vector2(0.170886, 0.0780591)
+texture = ExtResource("2_11mjr")
 
 [node name="Area2D" type="Area2D" parent="." groups=["goals"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color(0.935511, 0.479721, 0.526804, 1)
-position = Vector2(1, 12)
 shape = SubResource("RectangleShape2D_hkiii")
-
-[node name="star" type="Sprite2D" parent="Area2D"]
-modulate = Color(0.527864, 0.196212, 0.308652, 1)
-position = Vector2(22, -32)
-scale = Vector2(0.170886, 0.0780591)
-texture = ExtResource("2_11mjr")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(4.76837e-07, 10.75)
-scale = Vector2(0.125333, 0.086875)
-texture = ExtResource("3_fjudg")

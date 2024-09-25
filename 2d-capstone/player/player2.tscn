@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://detjo7nluj3oo" path="res://animations/mouseAnims/Piper_punch.png" id="3_gsota"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(25.75, 20.5)
+size = Vector2(16, 17.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_via26"]
 size = Vector2(28.75, 24)
@@ -108,7 +108,7 @@ scale = Vector2(4, 4)
 script = ExtResource("1_yl2m7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 11.75)
+position = Vector2(-0.5, 12.75)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
@@ -131,10 +131,10 @@ position = Vector2(-0.5, 12)
 shape = SubResource("RectangleShape2D_s4g51")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-5, 3.25)
+position = Vector2(-5, 1.5)
 scale = Vector2(0.0892857, 0.0763889)
 sprite_frames = SubResource("SpriteFrames_2tkvf")
-animation = &"Jump"
+animation = &"Run"
 
 [node name="Area2D" type="Area2D" parent="."]
 

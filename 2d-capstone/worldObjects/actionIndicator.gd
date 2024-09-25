@@ -26,7 +26,6 @@ func _ready() -> void:
 	outer_circle.modulate.a = 0.0 # Starting opacity (fully transparent)
 	
 	# decide target_time based on world position
-	# currently camera moves at 300 pixels / second
 	var time = position.x / 388
 	set_target_time(time)
 
