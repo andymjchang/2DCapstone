@@ -6,13 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://bvvcm7r3cp3x7" path="res://animations/raccoonAnims/Raccoon_spriteSheet_v05.png" id="2_icjbr"]
 [ext_resource type="Texture2D" uid="uid://nchurhplqcb3" path="res://animations/raccoonAnims/Raccoon_punch.png" id="3_sudcy"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ntx1b"]
-atlas = ExtResource("2_amwal")
-region = Rect2(700, 0, 700, 700)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_fb3mh"]
 atlas = ExtResource("2_amwal")
 region = Rect2(1400, 0, 700, 700)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntx1b"]
+atlas = ExtResource("2_amwal")
+region = Rect2(700, 0, 700, 700)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k12uq"]
 atlas = ExtResource("3_sudcy")
@@ -54,10 +54,10 @@ region = Rect2(2100, 700, 700, 700)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ntx1b")
+"texture": SubResource("AtlasTexture_fb3mh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fb3mh")
+"texture": SubResource("AtlasTexture_ntx1b")
 }],
 "loop": false,
 "name": &"Jump",
@@ -105,6 +105,7 @@ animations = [{
 size = Vector2(28.75, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
+size = Vector2(29.2491, 30.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(28.75, 25.375)
@@ -121,7 +122,7 @@ script = ExtResource("1_qyaa7")
 position = Vector2(-2.5, -11.75)
 scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Punch"
+animation = &"Run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.875, -11.25)
@@ -134,8 +135,8 @@ scale = Vector2(0.368884, 0.344364)
 texture = ExtResource("2_a5rf3")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
-visible = false
 position = Vector2(-6.25, -19.875)
+rotation = 0.000143446
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
 visible = false
@@ -145,7 +146,8 @@ offset_right = 19.0
 offset_bottom = 19.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(4.25, 8.125)
+position = Vector2(8.87454, 8.87165)
+rotation = 0.00184914
 shape = SubResource("RectangleShape2D_efrg4")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]

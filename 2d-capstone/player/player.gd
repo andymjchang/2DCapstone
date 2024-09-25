@@ -29,6 +29,8 @@ var jumpInProgress = false
 var punchInProgress = false
 var runInProgress = false
 
+var otherPlayerList
+
 func _ready():
 	print("my name is: ",self.name)
 	curSprite = get_node("Animation").duplicate()
@@ -89,23 +91,24 @@ func _physics_process(delta: float) -> void:
 				if canAttack:
 					$Animation.play("Punch")
 					punchInProgress = true
-					print("Punch!")
+					#print("Punch!")
 					attack.visible = true
 					canAttack = false
-					await get_tree().create_timer(0.2).timeout
+					await get_tree().create_timer(0.1).timeout
 					canAttack = true
 					attack.visible = false
 		elif reachedCheckpoint:
 			# Wait to respawn relocating player when teammate has aligned
 			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
+				print("My name: ", name)
 				print("Made it")
 				# Reset relocating player position and allow control
 				get_node("CollisionShape2D").call_deferred("set", "disabled", false)
 				relocating = false
-				reachedCheckpoint = true
+				reachedCheckpoint = false
+				invuln = false
 				#self.position.y = checkpoint.get_node("Point").position.y
 				self.position.x = get_parent().get_node(otherPlayer).position.x
-			pass
 		move_and_slide()
 	else:
 		invuln = true
@@ -113,27 +116,25 @@ func _physics_process(delta: float) -> void:
 func _onTakeDamage(amount):
 	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
 		health -= amount
-		print("Got hit! Health now: ", self.health)
+		#print("Got hit! Health now: ", self.health)
 		if health <= 0:
-			print("Player died!")
+			#print("Player died!")
 			#self.visible = false
-			get_node("ProtoMc").self_modulate.a = 0.5
+			$Animation.self_modulate.a = 0.5
 			dead = true
 			invuln = false
 			get_parent().emit_signal("checkGameOver")
 			if Globals.inLevel:
 				await get_tree().create_timer(3.0).timeout
 				emit_signal("revive", self)
-
 		else:
 			invuln = true
 			await get_tree().create_timer(1.0).timeout
-			print("invuln over")
+			#print("invuln over")
 			invuln = false
 
-
 func _onRevive(who):
-	who.get_node("ProtoMc").self_modulate.a = 1
+	who.get_node("Animation").self_modulate.a = 1
 	who.health = 3
 	who.dead = false
 
@@ -142,19 +143,22 @@ func _onRelocate(nearestPoint):
 	#self.get_node("CollisionShape2D").call_deferred("set", "disabled", true)
 	velocity = Vector2(0, 0)
 	relocating = true
+	invuln = true
 	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
 	reachedCheckpoint = false
-	var newVelocity = Vector2((nearestPoint.position - self.position) * (SPEED / 2 * get_process_delta_time()))
+	#var newVelocity = Vector2((nearestPoint.position - self.position) * (SPEED / 10 * get_process_delta_time()))
 	await get_tree().create_timer(0.0001).timeout
 	# Set destination, begin move to point
 	checkpoint = nearestPoint
-	velocity = newVelocity
+	velocity = Vector2(0,0)
+	position = nearestPoint.position
+	print("Position now: ", position)
+	#velocity = newVelocity
 
 
 func _onAnimationFinished():
-	print("Finished, ", $Animation.animation)
+	#print("Finished, ", $Animation.animation)
 	if $Animation.animation == "Jump":
-		print("Changing animation to: ")
 		jumpInProgress = false
 	elif $Animation.animation == "Punch":
 		punchInProgress = false
