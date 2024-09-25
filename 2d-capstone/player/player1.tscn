@@ -105,7 +105,7 @@ animations = [{
 size = Vector2(28.75, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
-size = Vector2(29.2491, 30.5)
+size = Vector2(44.9972, 33.4873)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(28.75, 25.375)
@@ -146,7 +146,7 @@ offset_right = 19.0
 offset_bottom = 19.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(8.87454, 8.87165)
+position = Vector2(16.7458, 10.3799)
 rotation = 0.00184914
 shape = SubResource("RectangleShape2D_efrg4")
 

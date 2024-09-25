@@ -7,7 +7,7 @@ signal relocate(nearestPoint)
 var curSprite
 var SPEED = 400.0
 var JUMP_VELOCITY = -550.0
-var health = 3 # 3 hits
+var health = 27 # 3 hits
 var blockType = "player"
 var invuln = false
 var dead = false
@@ -119,15 +119,14 @@ func _onTakeDamage(amount):
 	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
 		health -= amount
 		#print("Got hit! Health now: ", self.health)
-		get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
+		if health % 9 == 0:
+			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
 		if health <= 0:
 			print("Player died!")
 			#self.visible = false
 			$Animation.self_modulate.a = 0.5
 			dead = true
 			invuln = false
-
-			
 			get_parent().get_parent().get_parent().emit_signal("checkGameOver")
 			if Globals.inLevel:
 				await get_tree().create_timer(3.0).timeout
@@ -140,7 +139,7 @@ func _onTakeDamage(amount):
 
 func _onRevive(who):
 	who.get_node("Animation").self_modulate.a = 1
-	who.health = 3
+	who.health = 27
 	get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("reviveUI", self.name)
 	#reset ui Indicator
 	who.dead = false

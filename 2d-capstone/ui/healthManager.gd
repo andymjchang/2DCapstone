@@ -24,14 +24,14 @@ func _process(delta: float) -> void:
 func _onDamageTaken(who) -> void:
 	#do damage on current heart
 	print("ui health damage!")
-	if who == "Player1":
+	if who == "Player2":
 		if curP1Heart:
 			curP1Heart.takeDamage()
 			if curP1Heart.healthStatus == "zero" and curP1HeartIndex != 0:
 				#player has lost a heart
 				curP1HeartIndex -= 1
 				curP1Heart = self.get_node("player1").get_child(curP1HeartIndex)
-	if who == "Player2":
+	if who == "Player1":
 		#need to check to make sure not dead
 		if curP2Heart:
 			curP2Heart.takeDamage()
@@ -42,13 +42,13 @@ func _onDamageTaken(who) -> void:
 				
 func _onUIRevive(who):
 	print("made it to ui revive")
-	if who == "Player1":
+	if who == "Player2":
 		curP1Heart =  $player1/UiHeart3
 		curP1HeartIndex = 2
 		for heart in get_node("player1").get_children():
 			heart.healthStatus = "full"
 			heart.fullHealth.visible = true
-	if who == "Player2":
+	if who == "Player1":
 		curP2Heart =  $player2/UiHeart3
 		curP2HeartIndex = 2
 		for heart in get_node("player2").get_children():

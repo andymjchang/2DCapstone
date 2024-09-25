@@ -9,7 +9,7 @@
 size = Vector2(16, 17.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_via26"]
-size = Vector2(28.75, 24)
+size = Vector2(52.5, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
 size = Vector2(25.5, 20.5)
@@ -121,7 +121,7 @@ offset_right = 11.75
 offset_bottom = 20.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(-0.875, 11.75)
+position = Vector2(11, 11.75)
 shape = SubResource("RectangleShape2D_via26")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
