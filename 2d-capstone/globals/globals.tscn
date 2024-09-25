@@ -4,3 +4,9 @@
 
 [node name="Globals" type="Node2D"]
 script = ExtResource("1_nrp7m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
