@@ -54,6 +54,7 @@ func _ready():
 	self.takeDamage.connect(_onTakeDamage)
 	self.revive.connect(_onRevive)
 	self.relocate.connect(_onRelocate)
+	#self.attack.visible = false
 	$Animation.animation_finished.connect(_onAnimationFinished)
 
 
@@ -124,8 +125,7 @@ func _onTakeDamage(amount):
 			$Animation.self_modulate.a = 0.5
 			dead = true
 			invuln = false
-			print("parent: ", get_parent().get_parent().get_parent())
-			
+
 			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
 			get_parent().get_parent().get_parent().emit_signal("checkGameOver")
 			# if Globals.inLevel:
