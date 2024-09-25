@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dakwrycm2d4ei"]
+[gd_scene load_steps=19 format=3 uid="uid://dakwrycm2d4ei"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yl2m7"]
 [ext_resource type="Texture2D" uid="uid://btpvi1n88pcgy" path="res://animations/mouseAnims/Mouse_sprite_sheet_v03.png" id="2_mn2ky"]
@@ -17,14 +17,6 @@ size = Vector2(25.5, 20.5)
 [sub_resource type="AtlasTexture" id="AtlasTexture_q2tqb"]
 atlas = ExtResource("2_y37go")
 region = Rect2(1400, 0, 700, 700)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gijtw"]
-atlas = ExtResource("2_y37go")
-region = Rect2(2100, 0, 700, 700)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6slqn"]
-atlas = ExtResource("2_y37go")
-region = Rect2(2800, 0, 700, 700)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jbh7w"]
 atlas = ExtResource("3_gsota")
@@ -67,12 +59,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q2tqb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gijtw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6slqn")
 }],
 "loop": false,
 "name": &"Jump",
@@ -148,7 +134,7 @@ shape = SubResource("RectangleShape2D_s4g51")
 position = Vector2(-5, 3.25)
 scale = Vector2(0.0892857, 0.0763889)
 sprite_frames = SubResource("SpriteFrames_2tkvf")
-animation = &"Run"
+animation = &"Jump"
 
 [node name="Area2D" type="Area2D" parent="."]
 
