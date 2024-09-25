@@ -61,6 +61,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 
 var bpm : int = 4
 var stepSize : int = 150
+var levelSaved = false
 
 
 func _ready():
@@ -249,6 +250,7 @@ func save_scene_to_file():
 			status.show()
 			displayStatus(OVERWRITE_FILE, true)
 		else:
+			# successful save
 			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
@@ -408,6 +410,7 @@ func _on_audio_progress_gui_input(event: InputEvent) -> void:
 
 
 func _on_yes_pressed() -> void:
+	get_tree().paused = false
 	if isLoad:
 		# load level message
 		loadLevel()
@@ -420,10 +423,12 @@ func _on_yes_pressed() -> void:
 
 
 func _on_no_pressed() -> void:
+	get_tree().paused = false
 	status.hide()
 	isLoad = false
 
 func displayStatus(message, display):
+	get_tree().paused = true
 	status.show()
 	status.get_node("StatusMessage").text = message
 	if display:
@@ -441,13 +446,15 @@ func _on_play_level_button_button_down() -> void:
 	var scene_instance = levelTemplatePacked.instantiate()
 	scene_instance.levelFile = saveFileName
 	
-	#get_tree().paused = true
+	get_tree().paused = false
 	
 	# Access the current scene and remove it from the scene tree
-	var current_scene = get_tree().current_scene
-	Globals.editorNode = current_scene
+	#var current_scene = get_tree().current_scene
+	#Globals.editorNode = current_scene
+	Globals.enablePreviewUI()
+	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
 	#current_scene.visible = false
 
 	# Add the new scene to the scene tree and set it as the current scene
-	get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
-	get_tree().current_scene = scene_instance  # Set it as the new current scene
+	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
+	#get_tree().current_scene = scene_instance  # Set it as the new current scene
