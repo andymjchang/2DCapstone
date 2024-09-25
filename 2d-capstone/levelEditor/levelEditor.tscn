@@ -144,7 +144,7 @@ offset_left = 93.0
 offset_top = 107.0
 offset_right = 208.0
 offset_bottom = 157.0
-text = "shadow"
+text = "Lvl1.2"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Node2D" parent="UI"]
