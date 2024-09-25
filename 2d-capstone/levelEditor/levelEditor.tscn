@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=41 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -38,6 +38,7 @@
 [ext_resource type="Script" path="res://levelEditor/audioTracks.gd" id="36_wn18y"]
 [ext_resource type="Script" path="res://levelEditor/blockScroller.gd" id="37_8xuat"]
 [ext_resource type="Script" path="res://levelEditor/objectScroller.gd" id="38_rob5g"]
+[ext_resource type="Texture2D" uid="uid://pbxrq067grxi" path="res://levelEditor/programmerArtAssets/breakableWall.jpg" id="39_0usv5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl84f"]
 size = Vector2(278, 43)
@@ -161,59 +162,59 @@ offset_bottom = 115.0
 texture_normal = ExtResource("7_esiun")
 
 [node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 16.0
+offset_left = 2.0
 offset_top = 955.0
-offset_right = 116.0
+offset_right = 102.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("4_rduon")
 
 [node name="actionButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 119.0
-offset_top = 957.0
-offset_right = 219.0
-offset_bottom = 1057.0
+offset_left = 103.0
+offset_top = 955.0
+offset_right = 203.0
+offset_bottom = 1055.0
 texture_normal = ExtResource("3_kgvx7")
 
 [node name="mouseButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 218.0
-offset_top = 954.0
-offset_right = 318.0
-offset_bottom = 1054.0
+offset_left = 204.0
+offset_top = 955.0
+offset_right = 304.0
+offset_bottom = 1055.0
 texture_normal = ExtResource("7_dw7u5")
 
 [node name="racButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 318.0
+offset_left = 305.0
 offset_top = 955.0
-offset_right = 418.0
+offset_right = 405.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("8_w245c")
 
 [node name="checkpointButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 422.0
-offset_top = 960.0
-offset_right = 522.0
-offset_bottom = 1060.0
+offset_left = 407.0
+offset_top = 955.0
+offset_right = 507.0
+offset_bottom = 1055.0
 texture_normal = ExtResource("9_wpw0u")
 
 [node name="playAudioButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 851.0
-offset_top = 951.0
-offset_right = 951.0
-offset_bottom = 1051.0
+offset_left = 816.0
+offset_top = 955.0
+offset_right = 916.0
+offset_bottom = 1055.0
 texture_normal = ExtResource("20_n1qdn")
 
 [node name="goalButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 520.0
-offset_top = 961.0
-offset_right = 620.0
-offset_bottom = 1061.0
+offset_left = 508.0
+offset_top = 955.0
+offset_right = 608.0
+offset_bottom = 1055.0
 texture_normal = ExtResource("17_3udhx")
 
 [node name="enemyButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 612.0
-offset_top = 956.0
-offset_right = 712.0
-offset_bottom = 1056.0
+offset_left = 609.0
+offset_top = 955.0
+offset_right = 709.0
+offset_bottom = 1055.0
 texture_normal = ExtResource("20_rbssn")
 
 [node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
@@ -258,9 +259,9 @@ offset_right = 108.0
 offset_bottom = 948.0
 
 [node name="killFloorButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 731.0
+offset_left = 713.0
 offset_top = 955.0
-offset_right = 831.0
+offset_right = 813.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("34_wwivc")
 ignore_texture_size = true
@@ -333,6 +334,15 @@ layout_mode = 2
 
 [node name="VScrollBar" type="VScrollBar" parent="UI/objectSelector/ObjectScroller/VBoxContainer"]
 layout_mode = 2
+
+[node name="breakableWallButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 7.0
+offset_top = 1078.0
+offset_right = 105.0
+offset_bottom = 1164.0
+texture_normal = ExtResource("39_0usv5")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="StatusWindow" type="CanvasLayer" parent="."]
 visible = false
