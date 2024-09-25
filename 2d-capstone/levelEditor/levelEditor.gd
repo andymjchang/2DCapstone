@@ -422,7 +422,6 @@ func getList(blockType : String) -> Node:
 	if blockType == "killFloor":
 		return get_node("objectList/killFloors")
 	if blockType == "breakableWall":
-		print("getting here!!!:P")
 		return get_node("objectList/breakableWalls")
 	return null
 	

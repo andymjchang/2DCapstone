@@ -3,17 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://v6w028pdwdn8" path="res://worldObjects/breakableWall.png" id="1_44fdd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lowct"]
-size = Vector2(806, 3010)
+size = Vector2(218, 754)
 
 [node name="BreakableWallScene" type="Node2D"]
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-46, 16)
+position = Vector2(-7, -29)
 shape = SubResource("RectangleShape2D_lowct")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-8, -16)
-scale = Vector2(0.98, 0.989333)
+position = Vector2(-3, 3)
+scale = Vector2(0.298125, 0.201833)
 texture = ExtResource("1_44fdd")
