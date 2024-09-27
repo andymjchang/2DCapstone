@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="2D Capstone"
-run/main_scene="res://worlds/menu.tscn"
+run/main_scene="res://worlds/levelTemplate.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
@@ -24,8 +25,6 @@ Globals="*res://globals/globals.tscn"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
-window/size/window_width_override=1600
-window/size/window_height_override=900
 window/stretch/mode="viewport"
 
 [dotnet]
