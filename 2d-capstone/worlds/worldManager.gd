@@ -72,10 +72,10 @@ func _ready():
 
 	# Start game
 	restartButton.visible = false
-	changeCountdown()
-	await get_tree().create_timer(3.0).timeout
-	Globals.inLevel = true
-	music.play(0.0)
+	#changeCountdown()
+	#await get_tree().create_timer(3.0).timeout
+	#Globals.inLevel = true
+	#music.play(0.0)
 
 
 func loadLevel():

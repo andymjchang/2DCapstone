@@ -1,0 +1,139 @@
+[gd_scene load_steps=21 format=3 uid="uid://bo4tu6ogem3aj"]
+
+[ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_jnx1w"]
+[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_14qfq"]
+[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://shadow/goal_block.tscn" id="3_tsvm3"]
+[ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="4_o4w26"]
+[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="5_x8wut"]
+[ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="6_oeo2q"]
+[ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="7_0hsj5"]
+[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="8_ssa0s"]
+[ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://enemy/enemy.tscn" id="9_hkc0n"]
+[ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="10_6f720"]
+[ext_resource type="Script" path="res://worlds/camera.gd" id="11_wbkas"]
+[ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="12_lah8m"]
+[ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="13_kr4pj"]
+[ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="14_38rn5"]
+[ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="15_kmoyh"]
+[ext_resource type="Script" path="res://checkpoint.gd" id="16_dayq1"]
+[ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_6vnjj"]
+[ext_resource type="PackedScene" uid="uid://bam8jg1naascf" path="res://worldObjects/zipline/ziplineStart.tscn" id="17_ff1bj"]
+[ext_resource type="PackedScene" uid="uid://cql6hrj5lhevf" path="res://worldObjects/zipline/ziplineEnd.tscn" id="18_53os7"]
+[ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="18_sbvoc"]
+
+[node name="level" type="Node2D"]
+script = ExtResource("1_jnx1w")
+levelFile = "Lvl1.2"
+platformBlockInstance = ExtResource("2_14qfq")
+goalBlockInstance = ExtResource("3_tsvm3")
+killFloorInstance = ExtResource("4_o4w26")
+actionIndicatorInstance = ExtResource("5_x8wut")
+checkpointInstance = ExtResource("6_oeo2q")
+player1Instance = ExtResource("7_0hsj5")
+player2Instance = ExtResource("8_ssa0s")
+enemyInstance = ExtResource("9_hkc0n")
+
+[node name="LevelUI" parent="." instance=ExtResource("10_6f720")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Timer" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1104.0
+offset_right = 1152.0
+offset_bottom = 64.0
+
+[node name="Score" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1056.0
+offset_right = 1104.0
+offset_bottom = 64.0
+text = "0"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(642, 491)
+zoom = Vector2(1.5, 1.5)
+script = ExtResource("11_wbkas")
+
+[node name="MenuBg" type="Sprite2D" parent="Camera2D"]
+position = Vector2(3.74979, 45.2499)
+scale = Vector2(0.325417, 0.325417)
+texture = ExtResource("12_lah8m")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
+position = Vector2(-960, -540)
+stream = ExtResource("13_kr4pj")
+max_distance = 10000.0
+
+[node name="KillWall" parent="Camera2D" instance=ExtResource("14_38rn5")]
+position = Vector2(-720, -502)
+scale = Vector2(1.5, 1.5)
+
+[node name="objectList" type="Node2D" parent="."]
+
+[node name="platformBlocks" type="Node2D" parent="objectList"]
+
+[node name="goalBlocks" type="Node2D" parent="objectList"]
+
+[node name="killFloors" type="Node2D" parent="objectList"]
+
+[node name="enemies" type="Node2D" parent="objectList"]
+
+[node name="actionIndicators" type="Node2D" parent="objectList"]
+script = ExtResource("15_kmoyh")
+
+[node name="Player2checkpoints" type="Node2D" parent="objectList"]
+script = ExtResource("16_dayq1")
+
+[node name="Checkpoint" parent="objectList/Player2checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(4800, 375)
+
+[node name="Checkpoint2" parent="objectList/Player2checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(9000, 325)
+
+[node name="Checkpoint3" parent="objectList/Player2checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(13800, 350)
+
+[node name="Checkpoint4" parent="objectList/Player2checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(19200, 350)
+
+[node name="Checkpoint5" parent="objectList/Player2checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(24600, 350)
+
+[node name="Checkpoint6" parent="objectList/Player2checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(30000, 400)
+
+[node name="Player1checkpoints" type="Node2D" parent="objectList"]
+script = ExtResource("16_dayq1")
+
+[node name="Checkpoint" parent="objectList/Player1checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(4800, 675)
+
+[node name="Checkpoint2" parent="objectList/Player1checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(9000, 675)
+
+[node name="Checkpoint3" parent="objectList/Player1checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(13800, 700)
+
+[node name="Checkpoint4" parent="objectList/Player1checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(19200, 675)
+
+[node name="Checkpoint5" parent="objectList/Player1checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(24600, 675)
+
+[node name="Checkpoint6" parent="objectList/Player1checkpoints" instance=ExtResource("6_oeo2q")]
+position = Vector2(30025, 700)
+
+[node name="players" type="Node2D" parent="objectList"]
+
+[node name="ziplines" type="Node2D" parent="objectList"]
+
+[node name="zipline" type="Node2D" parent="objectList/ziplines"]
+
+[node name="ziplineStart" parent="objectList/ziplines/zipline" instance=ExtResource("17_ff1bj")]
+position = Vector2(387, 704)
+
+[node name="ziplineEnd" parent="objectList/ziplines/zipline" instance=ExtResource("18_53os7")]
+position = Vector2(769, 576)
+
+[node name="HealthManager" parent="." instance=ExtResource("17_6vnjj")]
+
+[node name="ProgressBar" parent="." instance=ExtResource("18_sbvoc")]
