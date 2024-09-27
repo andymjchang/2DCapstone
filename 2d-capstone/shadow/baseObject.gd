@@ -2,7 +2,8 @@ class_name BaseObject
 extends Node2D
 var blockType = ""
 var index = 0
-var sprite
+#should turn this into an array
+var sprite 
 var isDragging = false
 
 
@@ -11,12 +12,23 @@ var size: Vector2
 func _ready() -> void:
 	set_process_input(true)
 	#cant do this for zipline
-	
-	sprite = self.get_child(0).get_node("Sprite2D").duplicate()
-	#print("sprite: ", sprite)
-	sprite.modulate.a = 0.5
-	self.add_child(sprite)
-	sprite.visible = false
+	var spriteList = Node2D.new()
+	spriteList.name = "spriteList"
+	self.add_child(spriteList)
+	if blockType == "zipline":
+		sprite = self.get_child(0).get_node("Start/Sprite2D").duplicate()
+		sprite.modulate.a = 0.5
+		sprite.visible = false
+		get_node("spriteList").add_child(sprite)
+		sprite = self.get_child(0).get_node("End/Sprite2D").duplicate()
+		sprite.modulate.a = 0.5
+		sprite.visible = false
+		self.get_node("spriteList").add_child(sprite)
+	else:
+		sprite = self.get_child(0).get_node("Sprite2D").duplicate()
+		sprite.modulate.a = 0.5
+		self.get_node("spriteList").add_child(sprite)
+		sprite.visible = false
 	pass # Replace with function body.
 
 
@@ -24,6 +36,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if isDragging:
 		#print("is dragging")
+		#need to aceess 
 		sprite.visible = true
 		sprite.global_position = get_global_mouse_position()
 	else:
@@ -38,7 +51,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType)
 			self.get_parent().get_parent().get_parent().setTrackingPosition(true)
 			isDragging = true
-
+			
 			print("mouse pressed")
 	
 func _input(event: InputEvent) -> void:
@@ -54,12 +67,12 @@ func setArea2D():
 	if self.blockType == "zipline":
 		# add signals for start
 		print("clicked zipline: ", self.get_children())
-		var newArea = self.get_node("Start/Area2D")
+		var newArea = self.get_child(0).get_node("Start/Area2D")
 		newArea.name = "EditorArea"
 		self.add_child(newArea)
 		newArea.connect("input_event",  _on_area_2d_input_event)
 		#add signals for end
-		newArea = self.get_node("End/Area2D")
+		newArea = self.get_child(0).get_node("End/Area2D")
 		newArea.name = "EditorArea"
 		self.add_child(newArea)
 		newArea.connect("input_event",  _on_area_2d_input_event)
