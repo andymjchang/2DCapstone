@@ -44,8 +44,8 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @export var killFloor : PackedScene
 @export var baseObject : PackedScene
 @export var breakableWall : PackedScene
-@export var ziplineStart : PackedScene
-@export var ziplineEnd : PackedScene
+@export var zipline : PackedScene
+
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -169,6 +169,14 @@ func _on_checkpoint_button_button_up() -> void:
 	checkParent.blockType = blockTypes[7]
 	checkpointsList.add_child(checkParent)
 	place_block(checkParent, checkpointsList, camera.position, false)
+	
+func _onZiplineButtonPressed() -> void:
+	var ziplineStartInstance = zipline.instantiate()
+	var zipParent = baseObject.instantiate()
+	zipParent.add_child(ziplineStartInstance)
+	zipParent.blockType = blockTypes[9]
+	ziplineList.add_child(zipParent)
+	place_block(zipParent, ziplineList, camera.position, false)
 	
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
@@ -453,11 +461,5 @@ func _on_play_level_button_button_down() -> void:
 	#get_tree().current_scene = scene_instance  # Set it as the new current scene
 
 
-func _onZiplineButtonPressed() -> void:
-	var ziplineStartInstance = ziplineStart.instantiate()
-	var checkParent = baseObject.instantiate()
-	checkParent.add_child(ziplineStartInstance)
-	checkParent.blockType = blockTypes[9]
-	checkpointsList.add_child(checkParent)
-	var ziplineArray = [checkParent]
+
 	

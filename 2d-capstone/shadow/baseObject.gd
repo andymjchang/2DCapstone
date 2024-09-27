@@ -5,10 +5,13 @@ var index = 0
 var sprite
 var isDragging = false
 
+
 var size: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_process_input(true)
+	#cant do this for zipline
+	
 	sprite = self.get_child(0).get_node("Sprite2D").duplicate()
 	#print("sprite: ", sprite)
 	sprite.modulate.a = 0.5
@@ -47,12 +50,26 @@ func _input(event: InputEvent) -> void:
 		isDragging = false
 		
 func setArea2D():
-	var newArea = self.get_child(0).get_node("Area2D").duplicate()
-	newArea.name = "EditorArea"
-	self.add_child(newArea)
-	newArea.connect("input_event",  _on_area_2d_input_event)
-	#print("object type: ",self)
-	#print("its children: ", self.get_children())
+	#for zipline do a more specific node traversal for zipline
+	if self.blockType == "zipline":
+		# add signals for start
+		print("clicked zipline: ", self.get_children())
+		var newArea = self.get_node("Start/Area2D")
+		newArea.name = "EditorArea"
+		self.add_child(newArea)
+		newArea.connect("input_event",  _on_area_2d_input_event)
+		#add signals for end
+		newArea = self.get_node("End/Area2D")
+		newArea.name = "EditorArea"
+		self.add_child(newArea)
+		newArea.connect("input_event",  _on_area_2d_input_event)
+	else:
+		var newArea = self.get_child(0).get_node("Area2D").duplicate()
+		newArea.name = "EditorArea"
+		self.add_child(newArea)
+		newArea.connect("input_event",  _on_area_2d_input_event)
+		#print("object type: ",self)
+		#print("its children: ", self.get_children())
 
 
 func temp () -> void:
