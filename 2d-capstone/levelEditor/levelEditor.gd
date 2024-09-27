@@ -19,7 +19,8 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint", "breakableWall"]
+var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint", "breakableWall", "zipline"]
+enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE}
 var delete = "deleteBlock"
 
 var MIN_STEP : int = 25
@@ -43,6 +44,8 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @export var killFloor : PackedScene
 @export var baseObject : PackedScene
 @export var breakableWall : PackedScene
+@export var ziplineStart : PackedScene
+@export var ziplineEnd : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -54,6 +57,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var player1List = $objectList/player1
 @onready var player2List = $objectList/player2
 @onready var killFloorsList = $objectList/killFloors
+@onready var ziplineList = $objectList/ziplines
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -357,40 +361,6 @@ func reset_drag_tracking():
 	currentPosition = camera.position
 	timeHeld = 0.0	
 
-#func _on_block_button_button_up() -> void:
-	#var blockInstance = platformBlock.instantiate()
-	#var blockParent = baseObject.instantiate()
-	#blockParent.add_child(blockInstance)
-	#blockParent.blockType = "normal"
-	#place_block(blockParent, platformBlockList)
-#func _on_action_button_button_up() -> void:
-	#var actionInstance = actionIndicator.instantiate()
-	#var actionParent = baseObject.instantiate()
-	#actionParent.add_child(actionInstance)
-	#actionParent.blockType = "actionIndicator"
-	#place_block(actionParent, actionIndicatorList)
-#func _on_goal_button_button_up() -> void:
-	#var goalInstance = goalBlock.instantiate()
-	#var goalParent = baseObject.instantiate()
-	#goalParent.add_child(goalInstance)
-	#goalParent.blockType = "goalBlock"
-	#place_block(goalParent, goalBlockList)
-#func _on_enemy_button_button_up() -> void:
-	#var enemyInstance = enemyCharacter.instantiate()
-	#var enemyParent = baseObject.instantiate()
-	#enemyParent.add_child(enemyInstance)
-	#enemyParent.blockType = "enemy"
-	#place_block(enemyParent, enemyList)
-	#
-#func _on_kill_floor_button_button_up() -> void:
-	#var kfInstance = killFloor.instantiate()
-	#var kfParent = baseObject.instantiate()
-	#kfParent.add_child(kfInstance)
-	#kfParent.blockType = "killFloor"
-	##kfParent.temp()	
-	#place_block(kfParent, killFloorList)
-
-			
 func _onObjectClicked(index : int, blockType: String):
 	trackingPosition = true
 	#timeHeld = 0.0
@@ -400,8 +370,6 @@ func _onObjectClicked(index : int, blockType: String):
 			currentBlock = block
 			_on_text_edit_2_text_changed()
 			return
-	
-
 	
 func getList(blockType : String) -> Node:
 	if blockType == "actionIndicator":
@@ -426,8 +394,6 @@ func getList(blockType : String) -> Node:
 	
 func setTrackingPosition(setVal : bool) -> void:
 	trackingPosition = setVal
-		
-	
 
 
 func _on_audio_progress_gui_input(event: InputEvent) -> void:
@@ -485,3 +451,13 @@ func _on_play_level_button_button_down() -> void:
 	# Add the new scene to the scene tree and set it as the current scene
 	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
 	#get_tree().current_scene = scene_instance  # Set it as the new current scene
+
+
+func _onZiplineButtonPressed() -> void:
+	var ziplineStartInstance = ziplineStart.instantiate()
+	var checkParent = baseObject.instantiate()
+	checkParent.add_child(ziplineStartInstance)
+	checkParent.blockType = blockTypes[9]
+	checkpointsList.add_child(checkParent)
+	var ziplineArray = [checkParent]
+	

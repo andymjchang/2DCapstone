@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=43 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -31,9 +31,12 @@
 [ext_resource type="PackedScene" uid="uid://bdfklxl1c8rjj" path="res://shadow/baseObject.tscn" id="15_mrsrj"]
 [ext_resource type="PackedScene" uid="uid://bhlcoymbyox5y" path="res://levelEditorObjects/breakableWallScene.tscn" id="16_rjnnj"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
+[ext_resource type="PackedScene" uid="uid://bam8jg1naascf" path="res://worldObjects/zipline/ziplineStart.tscn" id="17_xrcqv"]
+[ext_resource type="PackedScene" uid="uid://cql6hrj5lhevf" path="res://worldObjects/zipline/ziplineEnd.tscn" id="18_4vx5f"]
 [ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="19_jlcy1"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
 [ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
+[ext_resource type="Texture2D" uid="uid://dd5m0kwji44w1" path="res://levelEditor/programmerArtAssets/zipline.png" id="30_pq2h6"]
 [ext_resource type="Texture2D" uid="uid://bv8ou5u1pkb2k" path="res://shadow/R (1).jpg" id="34_wwivc"]
 [ext_resource type="Script" path="res://levelEditor/textureProgressBar.gd" id="35_lg51b"]
 [ext_resource type="Script" path="res://levelEditor/audioTracks.gd" id="36_wn18y"]
@@ -59,6 +62,8 @@ player2 = ExtResource("13_i2xjp")
 killFloor = ExtResource("14_26o8v")
 baseObject = ExtResource("15_mrsrj")
 breakableWall = ExtResource("16_rjnnj")
+ziplineStart = ExtResource("17_xrcqv")
+ziplineEnd = ExtResource("18_4vx5f")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(932, 594)
@@ -95,6 +100,8 @@ stream = ExtResource("19_jlcy1")
 [node name="goalBlocks" type="Node2D" parent="objectList"]
 
 [node name="breakableWalls" type="Node2D" parent="objectList"]
+
+[node name="ziplines" type="Node2D" parent="objectList"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -156,6 +163,46 @@ offset_right = 1922.0
 offset_bottom = 1107.0
 color = Color(0.259294, 0.259294, 0.259294, 1)
 
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/objectSelector"]
+offset_left = 104.0
+offset_top = 951.0
+offset_right = 728.0
+offset_bottom = 1051.0
+
+[node name="actionButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_kgvx7")
+
+[node name="mouseButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_dw7u5")
+
+[node name="racButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_w245c")
+
+[node name="checkpointButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("9_wpw0u")
+
+[node name="goalButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("17_3udhx")
+
+[node name="enemyButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("20_rbssn")
+
+[node name="killFloorButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("34_wwivc")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ziplineButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("30_pq2h6")
+
 [node name="exitButton" type="TextureButton" parent="UI/objectSelector"]
 offset_left = 1795.0
 offset_top = 15.0
@@ -170,54 +217,12 @@ offset_right = 102.0
 offset_bottom = 987.0
 texture_normal = ExtResource("4_rduon")
 
-[node name="actionButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 103.0
-offset_top = 955.0
-offset_right = 203.0
-offset_bottom = 1055.0
-texture_normal = ExtResource("3_kgvx7")
-
-[node name="mouseButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 204.0
-offset_top = 955.0
-offset_right = 304.0
-offset_bottom = 1055.0
-texture_normal = ExtResource("7_dw7u5")
-
-[node name="racButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 305.0
-offset_top = 955.0
-offset_right = 405.0
-offset_bottom = 1055.0
-texture_normal = ExtResource("8_w245c")
-
-[node name="checkpointButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 407.0
-offset_top = 955.0
-offset_right = 507.0
-offset_bottom = 1055.0
-texture_normal = ExtResource("9_wpw0u")
-
 [node name="playAudioButton" type="TextureButton" parent="UI/objectSelector"]
 offset_left = 1206.0
 offset_top = 919.0
 offset_right = 1256.0
 offset_bottom = 969.0
 texture_normal = ExtResource("26_m4kik")
-
-[node name="goalButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 508.0
-offset_top = 955.0
-offset_right = 608.0
-offset_bottom = 1055.0
-texture_normal = ExtResource("17_3udhx")
-
-[node name="enemyButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 609.0
-offset_top = 955.0
-offset_right = 709.0
-offset_bottom = 1055.0
-texture_normal = ExtResource("20_rbssn")
 
 [node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
 offset_left = 1680.0
@@ -253,15 +258,6 @@ offset_top = 954.0
 offset_right = 1885.0
 offset_bottom = 1054.0
 texture_normal = ExtResource("7_u6v8f")
-
-[node name="killFloorButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 760.0
-offset_top = 955.0
-offset_right = 860.0
-offset_bottom = 1055.0
-texture_normal = ExtResource("34_wwivc")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="audioProgress" type="ProgressBar" parent="UI/objectSelector"]
 offset_left = 1095.0
@@ -382,28 +378,29 @@ clip_text = true
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit3" to="." method="_on_text_edit_3_text_changed"]
+[connection signal="button_down" from="UI/objectSelector/HBoxContainer/actionButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/HBoxContainer/actionButton" to="." method="_on_action_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/HBoxContainer/mouseButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/HBoxContainer/mouseButton" to="." method="_on_mouse_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/HBoxContainer/racButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/HBoxContainer/racButton" to="." method="_on_rac_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/HBoxContainer/checkpointButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/HBoxContainer/checkpointButton" to="." method="_on_checkpoint_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/HBoxContainer/goalButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/HBoxContainer/goalButton" to="." method="_on_goal_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/HBoxContainer/enemyButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/HBoxContainer/enemyButton" to="." method="_on_enemy_button_button_up"]
+[connection signal="button_up" from="UI/objectSelector/HBoxContainer/killFloorButton" to="." method="_on_kill_floor_button_button_up"]
+[connection signal="pressed" from="UI/objectSelector/HBoxContainer/ziplineButton" to="." method="_onZiplineButtonPressed"]
 [connection signal="pressed" from="UI/objectSelector/exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="button_down" from="UI/objectSelector/blockButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/blockButton" to="." method="_on_block_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/actionButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/actionButton" to="." method="_on_action_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/mouseButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/mouseButton" to="." method="_on_mouse_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/racButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/racButton" to="." method="_on_rac_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/checkpointButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/checkpointButton" to="." method="_on_checkpoint_button_button_up"]
 [connection signal="pressed" from="UI/objectSelector/playAudioButton" to="." method="_on_play_audio_button_pressed"]
-[connection signal="button_down" from="UI/objectSelector/goalButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/goalButton" to="." method="_on_goal_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/enemyButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/enemyButton" to="." method="_on_enemy_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/saveButton" to="." method="_on_save_button_down"]
 [connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/leftButton" to="." method="_on_left_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/downButton" to="." method="_on_down_button_button_down"]
-[connection signal="button_up" from="UI/objectSelector/killFloorButton" to="." method="_on_kill_floor_button_button_up"]
 [connection signal="gui_input" from="UI/objectSelector/audioProgress" to="." method="_on_audio_progress_gui_input"]
 [connection signal="input_event" from="UI/objectSelector/audioProgress/Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="button_down" from="UI/objectSelector/playLevelButton" to="." method="_on_play_level_button_button_down"]

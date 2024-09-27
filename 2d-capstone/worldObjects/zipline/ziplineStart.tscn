@@ -4,7 +4,6 @@
 [ext_resource type="Script" path="res://worldObjects/zipline/zipline.gd" id="1_oaf1g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5w3a6"]
-size = Vector2(507, 502)
 
 [node name="ziplineStart" type="Node2D"]
 script = ExtResource("1_oaf1g")
@@ -12,8 +11,6 @@ script = ExtResource("1_oaf1g")
 [node name="ziplineArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ziplineArea"]
-position = Vector2(0, -2)
-scale = Vector2(0.25, 0.25)
 shape = SubResource("RectangleShape2D_5w3a6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
