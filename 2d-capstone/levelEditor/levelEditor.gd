@@ -355,6 +355,8 @@ func place_block(instance, parent, placePos, initial):
 		instance.position.x = 45
 		instance.position.y = placePos.y
 	parent.add_child(instance)	
+	
+		
 	instance.setArea2D()
 	instance.index = lEindex
 	lEindex+=1
@@ -398,6 +400,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/killFloors")
 	if blockType == "breakableWall":
 		return get_node("objectList/breakableWalls")
+	if blockType == "zipline":
+		return get_node("objectList/ziplines")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:
