@@ -27,11 +27,11 @@ shape = SubResource("RectangleShape2D_3yw7x")
 [node name="End" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="End"]
-position = Vector2(1154, -653)
+position = Vector2(-11, -1)
 texture = ExtResource("3_0rqeo")
 
 [node name="Area2D" type="Area2D" parent="End"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="End/Area2D"]
-position = Vector2(1150, -653.5)
+position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_fjgvp")

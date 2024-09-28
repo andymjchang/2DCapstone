@@ -5,32 +5,21 @@ var index = 0
 #should turn this into an array
 var sprite 
 var isDragging = false
-var spriteIndex = -1
+var spriteNode = null
+var spriteParent = null
+var curAreaDragging = null
+var curAreaDraggingParent = null
+var temp = null
+var index1 = 0
 
 
 var size: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_process_input(true)
-	#cant do this for zipline
-	var spriteList = Node2D.new()
-	spriteList.name = "spriteList"
-	self.add_child(spriteList)
-	if blockType == "zipline":
-		sprite = self.get_child(0).get_node("Start/Sprite2D").duplicate()
-		sprite.modulate.a = 0.5
-		sprite.visible = false
-		get_node("spriteList").add_child(sprite)
-		sprite = self.get_child(0).get_node("End/Sprite2D").duplicate()
-		sprite.modulate.a = 0.5
-		sprite.visible = false
-		self.get_node("spriteList").add_child(sprite)
-	else:
-		sprite = self.get_child(0).get_node("Sprite2D").duplicate()
-		sprite.modulate.a = 0.5
-		self.get_node("spriteList").add_child(sprite)
-		sprite.visible = false
-	
+	var spriteNode = Sprite2D.new()
+	spriteNode.visible = false
+	spriteNode.modulate.a = 0.5
 	#loop through teh scenen 
 	pass # Replace with function body.
 
@@ -40,25 +29,26 @@ func _process(delta: float) -> void:
 	if isDragging:
 		#print("is dragging")
 		#need to aceess which sprite we want to do 
-		sprite.visible = true
-		sprite.global_position = get_global_mouse_position()
-	else:
-		sprite.visible = false
+		spriteNode.visible = true
+		spriteNode.global_position = get_global_mouse_position()
+	elif spriteNode:
+		spriteNode.visible = false
 	pass
 	
-func _setName(areaName) -> void:
-	print("area name ", areaName)
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, areaName) -> void:
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, areaName, areaParent) -> void:
 	if "player" not in blockType:
 		if event.is_action_pressed("click"):
-			#do this for zipline change later
-			#have to loop through the area2ds
-			print("clicking")
-			print("area name, ",areaName)
-			spriteIndex = self.get_index()	
 			
-	
-			get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType)
+			print("click!")
+			curAreaDragging = str(areaParent.name)+"/"+str(areaName)
+			temp = str(areaName)
+			spriteNode = self.get_child(0).get_node(str(areaParent.name)+"/Sprite2D").duplicate()
+			spriteNode.name = str(index1)
+			index1+=1
+			#TODO i dont want to add this everytime
+			self.add_child(spriteNode)
+			print("Sprite Node!! ", spriteNode)
+			get_parent().get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType,curAreaDragging)
 			self.get_parent().get_parent().get_parent().setTrackingPosition(true)
 			isDragging = true
 			
@@ -68,9 +58,19 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.pressed and self.get_parent().get_parent().get_parent().currentBlock and self.index == self.get_parent().get_parent().get_parent().currentBlock.index and isDragging:
 		print("mouse released")
 		#for objects with multiple area2ds 
-		var endPosition = self.get_parent().get_parent().get_parent().currentPosition
-		self.position = self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
-		self.get_parent().get_parent().get_parent().reset_drag_tracking()
+		#have to rework this ugh
+		print("before zip placed: ", self.get_child(0).get_node(curAreaDragging).get_parent().global_position )
+		print("cur area draggin1: ", self.get_child(0).get_node(curAreaDragging).get_parent())
+		print("mouse pos: ",  get_global_mouse_position())
+		print("sprite pos: ", self.get_child(0).get_node(curAreaDragging).get_parent().get_node("Sprite2D").global_position)
+		self.get_child(0).get_node(curAreaDragging).get_parent().global_position= get_global_mouse_position()
+		self.get_child(0).get_node(curAreaDragging).get_parent().global_position= get_global_mouse_position()
+		#self.get_child(0).get_node(curAreaDragging).get_parent().global_position= self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
+		print("self children: ", self.get_node(temp)) 
+		self.get_node(temp).global_position =  self.get_child(0).get_node(curAreaDragging).get_parent().global_position
+		print("after zip placed: ", self.get_child(0).get_node(curAreaDragging).get_parent().global_position )
+		#self.get_parent().get_parent().get_parent().reset_drag_tracking()
+		print("cur area draggin: ", curAreaDragging)
 		isDragging = false
 		
 func setArea2D():
@@ -79,26 +79,19 @@ func setArea2D():
 		# add signals for start
 		#elf.get_child(0).get_node("Start/Area2D").connect("input_event",  _on_area_2d_input_event.bind(self.get_child(0).get_node("Start/Area2D").name))
 		var newArea = self.get_child(0).get_node("Start/Area2D").duplicate()
+		self.get_child(0).get_node("Start/Area2D").name = "EditorArea1"
 		newArea.name = "EditorArea1"
 		self.add_child(newArea)
-		newArea.connect("input_event",  _on_area_2d_input_event.bind(newArea.name))
+		newArea.connect("input_event",  _on_area_2d_input_event.bind(newArea.name, self.get_child(0).get_node("Start")))
 		#add signals for end
 		var newArea2 = self.get_child(0).get_node("End/Area2D").duplicate()
+		self.get_child(0).get_node("End/Area2D").name = "EditorArea2"
 		newArea2.name = "EditorArea2"
 		self.add_child(newArea2)
-		newArea2.connect("input_event",  _on_area_2d_input_event.bind(newArea2.name))
-		print("after zipline set area 2d has been called", self.get_children())
+		newArea2.connect("input_event",  _on_area_2d_input_event.bind(newArea2.name, self.get_child(0).get_node("End")))
 	else:
+		print("should not be making it here")
 		var newArea = self.get_child(0).get_node("Area2D").duplicate()
 		newArea.name = "EditorArea"
 		self.add_child(newArea)
 		newArea.connect("input_event",  _on_area_2d_input_event)
-		#print("object type: ",self)
-		#print("its children: ", self.get_children())
-
-
-func temp () -> void:
-	var newArea = self.get_child(0).get_node("Area2D").duplicate()
-	self.add_child(newArea)
-	
-	newArea.connect("input_event",  _on_area_2d_input_event)

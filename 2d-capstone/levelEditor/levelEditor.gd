@@ -371,13 +371,14 @@ func reset_drag_tracking():
 	currentPosition = camera.position
 	timeHeld = 0.0	
 
-func _onObjectClicked(index : int, blockType: String):
+func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 	trackingPosition = true
 	#timeHeld = 0.0
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
-			currentBlock = block
+			currentBlock = block.get_node(curAreaDragging)
+			print("current blcok: ", currentBlock)
 			_on_text_edit_2_text_changed()
 			return
 	
