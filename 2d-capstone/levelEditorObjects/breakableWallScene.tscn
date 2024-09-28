@@ -7,13 +7,15 @@ size = Vector2(218, 754)
 
 [node name="BreakableWallScene" type="Node2D"]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="Area2D" type="Area2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
 position = Vector2(-7, -29)
 shape = SubResource("RectangleShape2D_lowct")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 position = Vector2(-3, 3)
 scale = Vector2(0.298125, 0.201833)
 texture = ExtResource("1_44fdd")

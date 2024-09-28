@@ -254,7 +254,6 @@ func _on_kill_floor_button_button_up() -> void:
 	var kfParent = baseObject.instantiate()
 	kfParent.add_child(kfInstance)
 	kfParent.blockType = blockTypes[6]
-	kfParent.temp()
 	place_block(kfParent, killFloorsList, camera.position, false)
 
 func _on_play_audio_button_pressed() -> void:

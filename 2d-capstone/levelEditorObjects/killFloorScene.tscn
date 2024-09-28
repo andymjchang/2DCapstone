@@ -7,13 +7,15 @@ size = Vector2(901, 30)
 
 [node name="KillFloorScene" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 position = Vector2(3.00004, 6)
 scale = Vector2(1.91139, 0.101351)
 texture = ExtResource("1_4ixj5")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Node2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
 position = Vector2(2.5, 5)
 shape = SubResource("RectangleShape2D_jc14u")

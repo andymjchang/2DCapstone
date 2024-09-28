@@ -7,13 +7,15 @@ size = Vector2(36, 59)
 
 [node name="EnemyScene" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 position = Vector2(-3, -2)
 scale = Vector2(0.1, 0.0838816)
 texture = ExtResource("1_bja54")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Node2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_ud4en")
