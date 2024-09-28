@@ -79,6 +79,7 @@ func _ready():
 
 
 func loadLevel():
+	levelFile = Globals.currentEditorFileName
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],

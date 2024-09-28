@@ -470,7 +470,6 @@ func displayStatus(message, display):
 func _on_play_level_button_button_down() -> void:
 	save_scene_to_file()
 	var scene_instance = levelTemplatePacked.instantiate()
-	scene_instance.levelFile = saveFileName
 	
 	get_tree().paused = false
 	
