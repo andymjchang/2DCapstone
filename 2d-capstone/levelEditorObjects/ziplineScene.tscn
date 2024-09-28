@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://vwn054kwmv7u"]
+[gd_scene load_steps=8 format=3 uid="uid://vwn054kwmv7u"]
 
 [ext_resource type="Script" path="res://levelEditorObjects/ziplineScene.gd" id="1_poymt"]
 [ext_resource type="Texture2D" uid="uid://cd3rk1jmye0pd" path="res://worldObjects/zipline/start.png" id="2_6wh4t"]
+[ext_resource type="Script" path="res://levelEditorObjects/start.gd" id="2_mot3a"]
 [ext_resource type="Texture2D" uid="uid://chg421ok8benp" path="res://worldObjects/zipline/end.png" id="3_0rqeo"]
+[ext_resource type="Script" path="res://levelEditorObjects/end.gd" id="4_oixjn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3yw7x"]
 size = Vector2(502, 503)
@@ -14,6 +16,7 @@ size = Vector2(504, 501)
 script = ExtResource("1_poymt")
 
 [node name="Start" type="Node2D" parent="."]
+script = ExtResource("2_mot3a")
 
 [node name="Sprite2D" type="Sprite2D" parent="Start"]
 texture = ExtResource("2_6wh4t")
@@ -25,13 +28,14 @@ position = Vector2(-1, 0.5)
 shape = SubResource("RectangleShape2D_3yw7x")
 
 [node name="End" type="Node2D" parent="."]
+script = ExtResource("4_oixjn")
 
 [node name="Sprite2D" type="Sprite2D" parent="End"]
-position = Vector2(-11, -1)
+position = Vector2(700, 0)
 texture = ExtResource("3_0rqeo")
 
 [node name="Area2D" type="Area2D" parent="End"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="End/Area2D"]
-position = Vector2(2, 0)
+position = Vector2(700, 0)
 shape = SubResource("RectangleShape2D_fjgvp")

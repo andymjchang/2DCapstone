@@ -30,6 +30,7 @@ func _process(delta: float) -> void:
 		#print("is dragging")
 		#need to aceess which sprite we want to do 
 		spriteNode.visible = true
+		spriteNode.modulate.a = 0.5
 		spriteNode.global_position = get_global_mouse_position()
 	elif spriteNode:
 		spriteNode.visible = false
@@ -43,8 +44,6 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, 
 			curAreaDragging = str(areaParent.name)+"/"+str(areaName)
 			temp = str(areaName)
 			spriteNode = self.get_child(0).get_node(str(areaParent.name)+"/Sprite2D").duplicate()
-			spriteNode.name = str(index1)
-			index1+=1
 			#TODO i dont want to add this everytime
 			self.add_child(spriteNode)
 			print("Sprite Node!! ", spriteNode)
@@ -59,18 +58,11 @@ func _input(event: InputEvent) -> void:
 		print("mouse released")
 		#for objects with multiple area2ds 
 		#have to rework this ugh
-		print("before zip placed: ", self.get_child(0).get_node(curAreaDragging).get_parent().global_position )
-		print("cur area draggin1: ", self.get_child(0).get_node(curAreaDragging).get_parent())
-		print("mouse pos: ",  get_global_mouse_position())
-		print("sprite pos: ", self.get_child(0).get_node(curAreaDragging).get_parent().get_node("Sprite2D").global_position)
-		self.get_child(0).get_node(curAreaDragging).get_parent().global_position= get_global_mouse_position()
-		self.get_child(0).get_node(curAreaDragging).get_parent().global_position= get_global_mouse_position()
-		#self.get_child(0).get_node(curAreaDragging).get_parent().global_position= self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
-		print("self children: ", self.get_node(temp)) 
+		self.get_child(0).get_node(curAreaDragging).get_parent().global_position= self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
+		self.get_child(0).get_node(curAreaDragging).get_parent().global_position.x -= self.get_child(0).get_node(curAreaDragging).get_parent().offset
 		self.get_node(temp).global_position =  self.get_child(0).get_node(curAreaDragging).get_parent().global_position
 		print("after zip placed: ", self.get_child(0).get_node(curAreaDragging).get_parent().global_position )
 		#self.get_parent().get_parent().get_parent().reset_drag_tracking()
-		print("cur area draggin: ", curAreaDragging)
 		isDragging = false
 		
 func setArea2D():
