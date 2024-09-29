@@ -6,6 +6,7 @@ signal relocate(nearestPoint)
 
 var curSprite
 var JUMP_VELOCITY = -550.0
+var SPEED = 400.0
 var health = 27 # 3 hits
 var blockType = "player"
 var invuln = false
@@ -18,7 +19,6 @@ var jump
 var punch
 var reachedCheckpoint = true
 var relocating = false
-var enemyscene = preload("res://enemy/enemy.tscn")
 var checkpoint
 var otherPlayer
 var editing = false

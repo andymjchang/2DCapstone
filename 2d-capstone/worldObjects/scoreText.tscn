@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cvljdgtwhans5"]
 
-[ext_resource type="Script" path="res://worldObjects/score_text.gd" id="1_lntgf"]
+[ext_resource type="Script" path="res://worldObjects/scripts/score_text.gd" id="1_lntgf"]
 
 [node name="ScoreText" type="Node2D"]
 script = ExtResource("1_lntgf")

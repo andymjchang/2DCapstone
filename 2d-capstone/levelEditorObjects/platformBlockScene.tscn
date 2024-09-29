@@ -1,24 +1,26 @@
 [gd_scene load_steps=4 format=3 uid="uid://yau5rmr187fi"]
 
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="1_digyc"]
-[ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/Platform_2.png" id="2_gep2g"]
+[ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="2_gep2g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s67gh"]
 size = Vector2(152, 57)
 
 [node name="PlatformBlockScene" type="Node2D"]
 
-[node name="Block" parent="." instance=ExtResource("1_digyc")]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Block" parent="Node2D" instance=ExtResource("1_digyc")]
 script = null
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 position = Vector2(0, 9)
 scale = Vector2(0.119609, 0.119609)
 texture = ExtResource("2_gep2g")
 
-[node name="Area2D" type="Area2D" parent="." groups=["goals"]]
+[node name="Area2D" type="Area2D" parent="Node2D" groups=["goals"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
 modulate = Color(0.935511, 0.479721, 0.526804, 1)
 position = Vector2(0, 12.5)
 shape = SubResource("RectangleShape2D_s67gh")

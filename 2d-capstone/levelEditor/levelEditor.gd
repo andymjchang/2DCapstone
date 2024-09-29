@@ -1,7 +1,7 @@
 extends Node2D
 
 
-signal objectClicked(instance)
+signal objectClicked(index : int, blockType: String, curAreaDragging)
 # const values
 const measurePixels = 600
 const holdTime = 0.15
@@ -19,7 +19,8 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint", "breakableWall"]
+var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint", "breakableWall", "zipline"]
+enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE}
 var delete = "deleteBlock"
 
 var MIN_STEP : int = 25
@@ -43,6 +44,8 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @export var killFloor : PackedScene
 @export var baseObject : PackedScene
 @export var breakableWall : PackedScene
+@export var zipline : PackedScene
+
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -55,6 +58,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var player2List = $objectList/player2
 @onready var killFloorsList = $objectList/killFloors
 @onready var beatsMinLabel = $UI/bpmLabel0
+@onready var ziplineList = $objectList/ziplines
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -105,6 +109,8 @@ func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():
 		bpm = int(bpmLabel.text)
 		measureLines.beatsPerMeasure = bpm
+		measureLines.queue_redraw()
+
 func _on_text_edit_2_text_changed() -> void:
 	if stepLabel.text.is_valid_int():
 		var step = int(stepLabel.text)
@@ -128,29 +134,24 @@ func loadLevel():
 		"player1": [player1, player1List, blockTypes[0]],
 		"player2": [player2, player2List, blockTypes[1]]}
 	var instance
-	var instanceParent
+	var objectList
 	var blockType = blockTypes[2]
 	for line in content.split("\n"):
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
-			instanceParent = instanceList.get(line)[1]
+			objectList = instanceList.get(line)[1]
 			blockType = instanceList.get(line)[2]
 		# Position
 		if line.contains(", "):
-			var parent = baseObject.instantiate()
+			var objectParent = baseObject.instantiate()
 			var instancedObj = instance.instantiate()
-			if "player" in blockType:
-				#I dont think we need this as the  player object in the scene is diff
-				#from the one in play
-				#instancedObj.editing = true
-				instancedObj.add_to_group("Players")
-			parent.blockType = blockType
 			var posPoints = []
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
-			parent.add_child(instancedObj)
-			#instancedObj.position = Vector2(posPoints[0], posPoints[1])
-			place_block(parent, instanceParent, Vector2(posPoints[0], posPoints[1]), true)
+
+			objectParent.add_child(instancedObj)
+			objectParent.blockType = blockType
+			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
 
 func _on_save_button_down() -> void:
 	save_scene_to_file()
@@ -169,6 +170,14 @@ func _on_checkpoint_button_button_up() -> void:
 	checkpointsList.add_child(checkParent)
 	place_block(checkParent, checkpointsList, camera.position, false)
 	
+func _onZiplineButtonPressed() -> void:
+	var ziplineStartInstance = zipline.instantiate()
+	var zipParent = baseObject.instantiate()
+	zipParent.add_child(ziplineStartInstance)
+	zipParent.blockType = blockTypes[9]
+	ziplineList.add_child(zipParent)
+	place_block(zipParent, ziplineList, camera.position, false)
+	
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
 	
@@ -181,8 +190,6 @@ func _on_rac_button_button_up() -> void:
 		var playerParent = baseObject.instantiate()
 		playerParent.add_child(player1Instance)
 		playerParent.blockType = blockTypes[0]
-		player1List.add_child(playerParent)
-		
 		place_block(playerParent, player1List, camera.position, false)
 	else:
 		currentBlock = player1List.get_node("baseObject")
@@ -197,7 +204,6 @@ func _on_mouse_button_button_up() -> void:
 		var playerParent = baseObject.instantiate()
 		playerParent.add_child(player2Instance)
 		playerParent.blockType = blockTypes[1]
-		player2List.add_child(playerParent)
 		place_block(playerParent, player2List, camera.position, false)
 	else:
 		currentBlock = player2List.get_node("baseObject")
@@ -245,7 +251,6 @@ func _on_kill_floor_button_button_up() -> void:
 	var kfParent = baseObject.instantiate()
 	kfParent.add_child(kfInstance)
 	kfParent.blockType = blockTypes[6]
-	kfParent.temp()
 	place_block(kfParent, killFloorsList, camera.position, false)
 
 func _on_play_audio_button_pressed() -> void:
@@ -332,20 +337,25 @@ func round_to_step(value) -> int:
 	return round(intMultiplier) * stepSize
 
 func place_block(instance, parent, placePos, initial):
+	#print("I'm being placed")
 	if initial:
 		instance.position = placePos
+	# ? Assume dragging
+	# elif (timeHeld >= holdTime):
+	# 	placePos = instance.get_child(0).position
+	# 	instance.position = snap_position(placePos)
+	# Snap default player position
+	elif instance.blockType == blockTypes[0]: 
+		instance.position.x = 45
+		instance.position.y = placePos.y
+	elif instance.blockType == blockTypes[1]: 
+		instance.position.x = 45
+		instance.position.y = placePos.y
 	else:
+		print("In this one")
 		instance.position = snap_position(placePos)
-	if (timeHeld >= holdTime):
-		placePos = instance.get_child(0).position
-		instance.position = snap_position(placePos)
-	if instance.blockType == blockTypes[0]: 
-		instance.position.x = 45
-		instance.position.y = placePos.y
-	if instance.blockType == blockTypes[1]: 
-		instance.position.x = 45
-		instance.position.y = placePos.y
 	parent.add_child(instance)	
+	
 	instance.setArea2D()
 	instance.index = lEindex
 	lEindex+=1
@@ -360,51 +370,18 @@ func reset_drag_tracking():
 	currentPosition = camera.position
 	timeHeld = 0.0	
 
-#func _on_block_button_button_up() -> void:
-	#var blockInstance = platformBlock.instantiate()
-	#var blockParent = baseObject.instantiate()
-	#blockParent.add_child(blockInstance)
-	#blockParent.blockType = "normal"
-	#place_block(blockParent, platformBlockList)
-#func _on_action_button_button_up() -> void:
-	#var actionInstance = actionIndicator.instantiate()
-	#var actionParent = baseObject.instantiate()
-	#actionParent.add_child(actionInstance)
-	#actionParent.blockType = "actionIndicator"
-	#place_block(actionParent, actionIndicatorList)
-#func _on_goal_button_button_up() -> void:
-	#var goalInstance = goalBlock.instantiate()
-	#var goalParent = baseObject.instantiate()
-	#goalParent.add_child(goalInstance)
-	#goalParent.blockType = "goalBlock"
-	#place_block(goalParent, goalBlockList)
-#func _on_enemy_button_button_up() -> void:
-	#var enemyInstance = enemyCharacter.instantiate()
-	#var enemyParent = baseObject.instantiate()
-	#enemyParent.add_child(enemyInstance)
-	#enemyParent.blockType = "enemy"
-	#place_block(enemyParent, enemyList)
-	#
-#func _on_kill_floor_button_button_up() -> void:
-	#var kfInstance = killFloor.instantiate()
-	#var kfParent = baseObject.instantiate()
-	#kfParent.add_child(kfInstance)
-	#kfParent.blockType = "killFloor"
-	##kfParent.temp()	
-	#place_block(kfParent, killFloorList)
-
-			
-func _onObjectClicked(index : int, blockType: String):
+func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 	trackingPosition = true
 	#timeHeld = 0.0
+	print("Reaching signal")
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
+			print("Found area: ", curAreaDragging)
 			currentBlock = block
-			_on_text_edit_2_text_changed()
+			print("current block: ", currentBlock)
+			#_on_text_edit_2_text_changed()
 			return
-	
-
 	
 func getList(blockType : String) -> Node:
 	if blockType == "actionIndicator":
@@ -425,12 +402,12 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/killFloors")
 	if blockType == "breakableWall":
 		return get_node("objectList/breakableWalls")
+	if blockType == "zipline":
+		return get_node("objectList/ziplines")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:
 	trackingPosition = setVal
-		
-	
 
 
 func _on_audio_progress_gui_input(event: InputEvent) -> void:
@@ -487,3 +464,7 @@ func _on_play_level_button_button_down() -> void:
 	# Add the new scene to the scene tree and set it as the current scene
 	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
 	#get_tree().current_scene = scene_instance  # Set it as the new current scene
+
+
+
+	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cdb5n44jar0hf"]
 
-[ext_resource type="Script" path="res://ui/audioProgress.gd" id="1_6veau"]
+[ext_resource type="Script" path="res://ui/scripts/audioProgress.gd" id="1_6veau"]
 
 [node name="ProgressBar" type="CanvasLayer"]
 

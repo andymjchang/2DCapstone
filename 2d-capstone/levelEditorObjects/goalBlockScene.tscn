@@ -1,19 +1,21 @@
 [gd_scene load_steps=3 format=3 uid="uid://c57gt1oqgpg2"]
 
-[ext_resource type="Texture2D" uid="uid://cheyr4ahq0rl7" path="res://shadow/OIP.jpg" id="2_11mjr"]
+[ext_resource type="Texture2D" uid="uid://cheyr4ahq0rl7" path="res://levelEditor/programmerArtAssets/OIP.jpg" id="2_11mjr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkiii"]
 size = Vector2(80, 37)
 
 [node name="GoalBlockScene" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Node2D" groups=["goals"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+modulate = Color(0.935511, 0.479721, 0.526804, 1)
+shape = SubResource("RectangleShape2D_hkiii")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 modulate = Color(0.527864, 0.196212, 0.308652, 1)
 scale = Vector2(0.170886, 0.0780591)
 texture = ExtResource("2_11mjr")
-
-[node name="Area2D" type="Area2D" parent="." groups=["goals"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-modulate = Color(0.935511, 0.479721, 0.526804, 1)
-shape = SubResource("RectangleShape2D_hkiii")

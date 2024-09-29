@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bam8jg1naascf"]
+
+[ext_resource type="Texture2D" uid="uid://cd3rk1jmye0pd" path="res://worldObjects/zipline/start.png" id="1_7lmlu"]
+[ext_resource type="Script" path="res://worldObjects/zipline/zipline.gd" id="1_oaf1g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5w3a6"]
+
+[node name="ziplineStart" type="Node2D"]
+script = ExtResource("1_oaf1g")
+
+[node name="ziplineArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ziplineArea"]
+shape = SubResource("RectangleShape2D_5w3a6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_7lmlu")

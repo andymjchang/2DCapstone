@@ -1,15 +1,15 @@
 [gd_scene load_steps=33 format=3 uid="uid://c52neshmdvjuu"]
 
-[ext_resource type="Script" path="res://worlds/worldManager.gd" id="1_ovb1y"]
+[ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_ovb1y"]
 [ext_resource type="AudioStream" uid="uid://cmxsfbbfnb2j0" path="res://audioTracks/Sprint2_GminBmaj_156bpm.mp3" id="2_nb7ua"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="3_4nl86"]
-[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://shadow/goal_block.tscn" id="7_4odg5"]
+[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://levelEditor/goal_block.tscn" id="7_4odg5"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="10_kukf6"]
 [ext_resource type="Texture2D" uid="uid://ntx80j28m6cv" path="res://animations/raccoonAnims/raccoon.png" id="12_hj5ot"]
 [ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="13_mxvl5"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="14_66ucl"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="16_e8wom"]
-[ext_resource type="Script" path="res://worlds/camera.gd" id="18_3tbha"]
+[ext_resource type="Script" path="res://worldObjects/scripts/camera.gd" id="18_3tbha"]
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="19_hirbr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]
