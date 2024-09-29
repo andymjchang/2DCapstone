@@ -16,7 +16,6 @@ var size: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_process_input(true)
-	self.add_child(spriteNode)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,7 +42,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, 
 			self.add_child(spriteNode)
 			#TODO i dont want to add everytime
 			#object has been clicked, so need to tell the level-edito to switch its current block
-			self.get_parent().get_parent().get_parent().emit_signal("objectClicked")
+			#self.get_parent().get_parent().get_parent().emit_signal("objectClicked")
 			self.get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType,curAreaDragging)
 			self.get_parent().get_parent().get_parent().setTrackingPosition(true)
 			isDragging = true
