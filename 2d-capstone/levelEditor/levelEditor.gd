@@ -22,6 +22,8 @@ var isLoad = true
 var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint", "breakableWall", "zipline"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE}
 var delete = "deleteBlock"
+var bindedBlocks = []
+var isBinding = false
 
 var MIN_STEP : int = 25
 
@@ -101,28 +103,8 @@ func _process(delta: float) -> void:
 				currentBlock = null
 				break
 	if Input.is_action_just_pressed("lenthenBlock") and currentBlock.blockType == "normal":
+		lengthenPlatform()
 		#get the extents of the currently selected block and add another block to the end of it
-		
-		#this isnt modular but it will work for now
-		#TODO turn this into a function
-		var blockArea = currentBlock.get_child(0).get_child(0).get_node("EditorArea0")
-		var blockShape = blockArea.get_node("CollisionShape2D").shape as RectangleShape2D
-		var blockExtents = blockShape.extents
-		#get the lower left and upp right coords of the current block
-		var upperLeft = currentBlock.global_position + blockExtents
-		var lowerRight = currentBlock.global_position - blockExtents
-		var width = abs(upperLeft.x - lowerRight.x)
-		var newPos = currentBlock.global_position.x + width
-		
-		var blockInstance = platformBlock.instantiate()
-		var blockParent = baseObject.instantiate()
-		blockParent.add_child(blockInstance)
-		blockParent.blockType = blockTypes[2]
-		print("block type: ", blockParent.blockType)
-		place_block(blockParent, platformBlocksList, Vector2(newPos, currentBlock.global_position.y), false)
-		
-		
-		print("block extents ", blockExtents)
 			
 func _on_text_edit_0_text_changed() -> void:
 	if beatsMinLabel.text.is_valid_int():
@@ -488,6 +470,25 @@ func _on_play_level_button_button_down() -> void:
 	# Add the new scene to the scene tree and set it as the current scene
 	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
 	#get_tree().current_scene = scene_instance  # Set it as the new current scene
+func lengthenPlatform() -> void:
+	#this isnt modular but it will work for now
+	var blockArea = currentBlock.get_child(0).get_child(0).get_node("EditorArea0")
+	var blockShape = blockArea.get_node("CollisionShape2D").shape as RectangleShape2D
+	var blockExtents = blockShape.extents
+	#get the lower left and upp right coords of the current block
+	var upperLeft = currentBlock.global_position + blockExtents
+	var lowerRight = currentBlock.global_position - blockExtents
+	var width = abs(upperLeft.x - lowerRight.x)
+	var newPos = currentBlock.global_position.x + width
+		
+	var blockInstance = platformBlock.instantiate()
+	var blockParent = baseObject.instantiate()
+	blockParent.add_child(blockInstance)
+	blockParent.blockType = blockTypes[2]
+	print("block type: ", blockParent.blockType)
+	place_block(blockParent, platformBlocksList, Vector2(newPos, currentBlock.global_position.y), false)
+		
+	
 
 
 
