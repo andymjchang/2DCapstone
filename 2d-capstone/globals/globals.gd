@@ -3,9 +3,14 @@ extends Node
 var time = 0;
 var inLevel = false
 var stepSize = 0
+var beatsMin = 120
 
-var previewNode
+# File Names
 var currentEditorFileName
+var currentSongFileName
+
+# Nodes
+var previewNode
 @onready var editorNode = preload("res://levelEditor/levelEditor.tscn")
 
 func _process(delta: float) -> void:

@@ -5,7 +5,6 @@ signal revive(who)
 signal relocate(nearestPoint)
 
 var curSprite
-var SPEED = 400.0
 var JUMP_VELOCITY = -550.0
 var health = 27 # 3 hits
 var blockType = "player"
@@ -69,7 +68,7 @@ func _physics_process(delta: float) -> void:
 
 			# If not currently in a song, allow regular movement, otherwise begin autoscroll
 			if Globals.inLevel:
-				velocity.x = SPEED
+				velocity.x = Globals.beatsMin
 				if not jumpInProgress and not punchInProgress:
 					$Animation.play("Run")
 				#position.x += 2.0

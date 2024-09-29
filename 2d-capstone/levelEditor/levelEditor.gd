@@ -54,6 +54,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var player1List = $objectList/player1
 @onready var player2List = $objectList/player2
 @onready var killFloorsList = $objectList/killFloors
+@onready var beatsMinLabel = $UI/bpmLabel0
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -63,6 +64,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var levelTemplatePacked = preload("res://worlds/levelTemplate.tscn")
 
 var bpm : int = 4
+var beatsMin : int = 120
 var stepSize : int = 150
 var levelSaved = false
 
@@ -95,12 +97,14 @@ func _process(delta: float) -> void:
 				currentBlock = null
 				break
 			
-
+func _on_text_edit_0_text_changed() -> void:
+	if beatsMinLabel.text.is_valid_int():
+		beatsMin = int(beatsMinLabel.text)
+		Globals.beatsMin = beatsMin
 func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():
 		bpm = int(bpmLabel.text)
 		measureLines.beatsPerMeasure = bpm
-		measureLines.queue_redraw()
 func _on_text_edit_2_text_changed() -> void:
 	if stepLabel.text.is_valid_int():
 		var step = int(stepLabel.text)
@@ -111,7 +115,6 @@ func _on_text_edit_2_text_changed() -> void:
 		stepSize = step
 		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
-		measureLines.queue_redraw()
 		
 
 func loadLevel():

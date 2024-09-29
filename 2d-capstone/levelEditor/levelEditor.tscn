@@ -98,52 +98,63 @@ stream = ExtResource("19_jlcy1")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="bpmLabel0" type="RichTextLabel" parent="UI"]
+offset_left = 6.0
+offset_top = 4.0
+offset_right = 144.0
+offset_bottom = 52.0
+text = "BPM"
+
 [node name="bpmLabel" type="RichTextLabel" parent="UI"]
 offset_left = 5.0
-offset_top = 3.0
+offset_top = 55.0
 offset_right = 143.0
-offset_bottom = 51.0
+offset_bottom = 103.0
 text = "Beats per measure"
-metadata/_edit_use_anchors_ = true
 
 [node name="bpmLabel2" type="RichTextLabel" parent="UI"]
 offset_left = 5.0
-offset_top = 56.0
+offset_top = 108.0
 offset_right = 143.0
-offset_bottom = 104.0
+offset_bottom = 156.0
 text = "Step size"
-metadata/_edit_use_anchors_ = true
 
 [node name="bpmLabel3" type="RichTextLabel" parent="UI"]
 offset_left = 5.0
-offset_top = 107.0
+offset_top = 159.0
 offset_right = 143.0
-offset_bottom = 155.0
+offset_bottom = 207.0
 text = "File name"
 
-[node name="TextEdit" type="TextEdit" parent="UI"]
+[node name="TextEdit0" type="TextEdit" parent="UI"]
 offset_left = 93.0
 offset_top = 3.0
 offset_right = 208.0
 offset_bottom = 53.0
-text = "4"
+text = "120"
 placeholder_text = "BPM: "
-metadata/_edit_use_anchors_ = true
 
-[node name="TextEdit2" type="TextEdit" parent="UI"]
+[node name="TextEdit" type="TextEdit" parent="UI"]
 offset_left = 93.0
 offset_top = 55.0
 offset_right = 208.0
 offset_bottom = 105.0
-text = "150"
-placeholder_text = "Step Size:"
-metadata/_edit_use_anchors_ = true
+text = "4"
+placeholder_text = "BPM: "
 
-[node name="TextEdit3" type="TextEdit" parent="UI"]
+[node name="TextEdit2" type="TextEdit" parent="UI"]
 offset_left = 93.0
 offset_top = 107.0
 offset_right = 208.0
 offset_bottom = 157.0
+text = "150"
+placeholder_text = "Step Size:"
+
+[node name="TextEdit3" type="TextEdit" parent="UI"]
+offset_left = 93.0
+offset_top = 159.0
+offset_right = 208.0
+offset_bottom = 209.0
 text = "Lvl1.2"
 placeholder_text = "Step Size:"
 
@@ -164,10 +175,9 @@ offset_bottom = 115.0
 texture_normal = ExtResource("7_esiun")
 
 [node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 2.0
-offset_top = 887.0
-offset_right = 102.0
-offset_bottom = 987.0
+offset_top = 955.0
+offset_right = 100.0
+offset_bottom = 1055.0
 texture_normal = ExtResource("4_rduon")
 
 [node name="actionButton" type="TextureButton" parent="UI/objectSelector"]
@@ -379,6 +389,7 @@ Need 2 players."
 horizontal_alignment = 1
 clip_text = true
 
+[connection signal="text_changed" from="UI/TextEdit0" to="." method="_on_text_edit_0_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit3" to="." method="_on_text_edit_3_text_changed"]
