@@ -100,6 +100,29 @@ func _process(delta: float) -> void:
 				currentBlock.queue_free()
 				currentBlock = null
 				break
+	if Input.is_action_just_pressed("lenthenBlock") and currentBlock.blockType == "normal":
+		#get the extents of the currently selected block and add another block to the end of it
+		
+		#this isnt modular but it will work for now
+		#TODO turn this into a function
+		var blockArea = currentBlock.get_child(0).get_child(0).get_node("EditorArea0")
+		var blockShape = blockArea.get_node("CollisionShape2D").shape as RectangleShape2D
+		var blockExtents = blockShape.extents
+		#get the lower left and upp right coords of the current block
+		var upperLeft = currentBlock.global_position + blockExtents
+		var lowerRight = currentBlock.global_position - blockExtents
+		var width = abs(upperLeft.x - lowerRight.x)
+		var newPos = currentBlock.global_position.x + width
+		
+		var blockInstance = platformBlock.instantiate()
+		var blockParent = baseObject.instantiate()
+		blockParent.add_child(blockInstance)
+		blockParent.blockType = blockTypes[2]
+		print("block type: ", blockParent.blockType)
+		place_block(blockParent, platformBlocksList, Vector2(newPos, currentBlock.global_position.y), false)
+		
+		
+		print("block extents ", blockExtents)
 			
 func _on_text_edit_0_text_changed() -> void:
 	if beatsMinLabel.text.is_valid_int():
@@ -171,9 +194,9 @@ func _on_checkpoint_button_button_up() -> void:
 	place_block(checkParent, checkpointsList, camera.position, false)
 	
 func _onZiplineButtonPressed() -> void:
-	var ziplineStartInstance = zipline.instantiate()
+	var ziplineInstance = zipline.instantiate()
 	var zipParent = baseObject.instantiate()
-	zipParent.add_child(ziplineStartInstance)
+	zipParent.add_child(ziplineInstance)
 	zipParent.blockType = blockTypes[9]
 	ziplineList.add_child(zipParent)
 	place_block(zipParent, ziplineList, camera.position, false)
@@ -215,6 +238,7 @@ func _on_block_button_button_up() -> void:
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
+	print("block type: ", blockParent.blockType)
 	place_block(blockParent, platformBlocksList, camera.position, false)
 
 func _on_action_button_button_up() -> void:
