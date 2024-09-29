@@ -100,7 +100,7 @@ func _process(delta: float) -> void:
 func _on_text_edit_0_text_changed() -> void:
 	if beatsMinLabel.text.is_valid_int():
 		beatsMin = int(beatsMinLabel.text)
-		Globals.beatsMin = beatsMin
+		Globals.setBPM(beatsMin)
 func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():
 		bpm = int(bpmLabel.text)

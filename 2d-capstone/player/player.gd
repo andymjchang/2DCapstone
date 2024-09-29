@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 
 			# If not currently in a song, allow regular movement, otherwise begin autoscroll
 			if Globals.inLevel:
-				velocity.x = Globals.beatsMin
+				velocity.x = Globals.pixelsPerFrame
 				if not jumpInProgress and not punchInProgress:
 					$Animation.play("Run")
 				#position.x += 2.0

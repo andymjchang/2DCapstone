@@ -54,6 +54,7 @@ func _ready():
 	camera = $Camera2D
 	scoreText = $CanvasLayer/Score
 	music = camera.get_node("Music")
+	loadAudio()
 	
 	# Setting signals
 	self.resetPosition.connect(_onResetPosition)
@@ -77,9 +78,15 @@ func _ready():
 	Globals.inLevel = true
 	music.play(0.0)
 
+func loadAudio():
+	var audioPath = "res://audioTracks/" + Globals.currentSongFileName
+	var newAudio = load(audioPath) as AudioStream
+	music.stream = newAudio
 
 func loadLevel():
+	# set file/music to load
 	levelFile = Globals.currentEditorFileName
+	
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],

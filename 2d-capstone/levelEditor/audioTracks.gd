@@ -31,6 +31,7 @@ func fillAudioScroll() -> void:
 			
 			
 func _on_button_pressed(fileName) -> void:
+	Globals.currentSongFileName = fileName
 	var audioPath = "res://audioTracks/" + fileName
 	var newAudio = load(audioPath) as AudioStream
 	print("audio path: ", audioPath)
