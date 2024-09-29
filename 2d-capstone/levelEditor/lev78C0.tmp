@@ -1,0 +1,422 @@
+[gd_scene load_steps=40 format=3 uid="uid://b4c6vpxf6xmjv"]
+
+[ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
+[ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
+[ext_resource type="PackedScene" uid="uid://ddnsnvsdn3aet" path="res://levelEditorObjects/actionIndicatorScene.tscn" id="3_ayep8"]
+[ext_resource type="Texture2D" uid="uid://iocnhlyh4yw6" path="res://levelEditor/programmerArtAssets/action.png" id="3_kgvx7"]
+[ext_resource type="Texture2D" uid="uid://bamwfgoa14ig1" path="res://levelEditor/programmerArtAssets/right.png" id="4_7fuo1"]
+[ext_resource type="PackedScene" uid="uid://m7qqiokd3152" path="res://levelEditorObjects/checkpointScene.tscn" id="4_enory"]
+[ext_resource type="Texture2D" uid="uid://vwontoywjedu" path="res://levelEditor/programmerArtAssets/block.png" id="4_rduon"]
+[ext_resource type="PackedScene" uid="uid://yau5rmr187fi" path="res://levelEditorObjects/platformBlockScene.tscn" id="5_5etgx"]
+[ext_resource type="Texture2D" uid="uid://cnj8sgwkjxidi" path="res://levelEditor/programmerArtAssets/up.png" id="5_8qxnf"]
+[ext_resource type="Script" path="res://worlds/worldManager.gd" id="5_c8prk"]
+[ext_resource type="Texture2D" uid="uid://77x6f2ngvprm" path="res://levelEditor/programmerArtAssets/left.png" id="5_cuiw6"]
+[ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="6_47xe5"]
+[ext_resource type="PackedScene" uid="uid://jixi0wddqipj" path="res://levelEditorObjects/enemyScene.tscn" id="6_qlmlw"]
+[ext_resource type="Texture2D" uid="uid://44ffttq2jugp" path="res://levelEditor/programmerArtAssets/save.png" id="7_0wc3n"]
+[ext_resource type="PackedScene" uid="uid://c57gt1oqgpg2" path="res://levelEditorObjects/goalBlockScene.tscn" id="7_c0pjh"]
+[ext_resource type="Texture2D" uid="uid://bbiq7u5yvg7al" path="res://levelEditor/programmerArtAssets/mouse.png" id="7_dw7u5"]
+[ext_resource type="Texture2D" uid="uid://ctosvjaft7ggn" path="res://levelEditor/programmerArtAssets/exit.png" id="7_esiun"]
+[ext_resource type="Texture2D" uid="uid://2hplcty35vpl" path="res://levelEditor/programmerArtAssets/down.png" id="7_u6v8f"]
+[ext_resource type="Script" path="res://worlds/camera.gd" id="8_nimfa"]
+[ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/programmerArtAssets/rac.png" id="8_w245c"]
+[ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="9_6gh41"]
+[ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/programmerArtAssets/checkpoint.png" id="9_wpw0u"]
+[ext_resource type="Script" path="res://worldObjects/killFloor.gd" id="10_jxp0h"]
+[ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
+[ext_resource type="PackedScene" uid="uid://btjihhiq2yb5s" path="res://levelEditorObjects/playerScene.tscn" id="12_o6ydd"]
+[ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="13_87vi8"]
+[ext_resource type="PackedScene" uid="uid://dr3t8111udl22" path="res://levelEditorObjects/player2Scene.tscn" id="13_i2xjp"]
+[ext_resource type="PackedScene" uid="uid://bq7uuovqf0df7" path="res://levelEditorObjects/killFloorScene.tscn" id="14_26o8v"]
+[ext_resource type="PackedScene" uid="uid://bdfklxl1c8rjj" path="res://shadow/baseObject.tscn" id="15_mrsrj"]
+[ext_resource type="PackedScene" uid="uid://bhlcoymbyox5y" path="res://levelEditorObjects/breakableWallScene.tscn" id="16_rjnnj"]
+[ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
+[ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="19_jlcy1"]
+[ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
+[ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
+[ext_resource type="Texture2D" uid="uid://bv8ou5u1pkb2k" path="res://shadow/R (1).jpg" id="34_wwivc"]
+[ext_resource type="Script" path="res://levelEditor/textureProgressBar.gd" id="35_lg51b"]
+[ext_resource type="Script" path="res://levelEditor/audioTracks.gd" id="36_wn18y"]
+[ext_resource type="Texture2D" uid="uid://1dfh5adfmstx" path="res://levelEditor/programmerArtAssets/play.png" id="37_5oir0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl84f"]
+size = Vector2(278, 43)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_15vlh")
+actionIndicator = ExtResource("3_ayep8")
+checkpoint = ExtResource("4_enory")
+platformBlock = ExtResource("5_5etgx")
+enemyCharacter = ExtResource("6_qlmlw")
+goalBlock = ExtResource("7_c0pjh")
+worldManager = ExtResource("5_c8prk")
+cameraScript = ExtResource("8_nimfa")
+actionManager = ExtResource("9_6gh41")
+killFloorScript = ExtResource("10_jxp0h")
+levelUI = ExtResource("6_47xe5")
+player1 = ExtResource("12_o6ydd")
+player2 = ExtResource("13_i2xjp")
+killFloor = ExtResource("14_26o8v")
+baseObject = ExtResource("15_mrsrj")
+breakableWall = ExtResource("16_rjnnj")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(932, 594)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("13_87vi8")
+
+[node name="measureLines" type="Node2D" parent="."]
+script = ExtResource("2_mulbo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("10_seu87")
+
+[node name="audio" type="AudioStreamPlayer2D" parent="Camera2D"]
+position = Vector2(-960, -540)
+stream = ExtResource("19_jlcy1")
+
+[node name="objectList" type="Node2D" parent="."]
+
+[node name="platformBlocks" type="Node2D" parent="objectList"]
+
+[node name="actionIndicators" type="Node2D" parent="objectList"]
+
+[node name="checkpoints" type="Node2D" parent="objectList"]
+
+[node name="player1" type="Node2D" parent="objectList"]
+
+[node name="player2" type="Node2D" parent="objectList"]
+
+[node name="enemies" type="Node2D" parent="objectList"]
+
+[node name="killFloors" type="Node2D" parent="objectList"]
+
+[node name="goalBlocks" type="Node2D" parent="objectList"]
+
+[node name="breakableWalls" type="Node2D" parent="objectList"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="bpmLabel0" type="RichTextLabel" parent="UI"]
+offset_left = 6.0
+offset_top = 4.0
+offset_right = 144.0
+offset_bottom = 52.0
+text = "BPM"
+
+[node name="bpmLabel" type="RichTextLabel" parent="UI"]
+offset_left = 5.0
+offset_top = 55.0
+offset_right = 143.0
+offset_bottom = 103.0
+text = "Beats per measure"
+
+[node name="bpmLabel2" type="RichTextLabel" parent="UI"]
+offset_left = 5.0
+offset_top = 108.0
+offset_right = 143.0
+offset_bottom = 156.0
+text = "Step size"
+
+[node name="bpmLabel3" type="RichTextLabel" parent="UI"]
+offset_left = 5.0
+offset_top = 159.0
+offset_right = 143.0
+offset_bottom = 207.0
+text = "File name"
+
+[node name="TextEdit0" type="TextEdit" parent="UI"]
+offset_left = 93.0
+offset_top = 3.0
+offset_right = 208.0
+offset_bottom = 53.0
+text = "120"
+placeholder_text = "BPM: "
+
+[node name="TextEdit" type="TextEdit" parent="UI"]
+offset_left = 93.0
+offset_top = 55.0
+offset_right = 208.0
+offset_bottom = 105.0
+text = "4"
+placeholder_text = "BPM: "
+
+[node name="TextEdit2" type="TextEdit" parent="UI"]
+offset_left = 93.0
+offset_top = 107.0
+offset_right = 208.0
+offset_bottom = 157.0
+text = "150"
+placeholder_text = "Step Size:"
+
+[node name="TextEdit3" type="TextEdit" parent="UI"]
+offset_left = 93.0
+offset_top = 159.0
+offset_right = 208.0
+offset_bottom = 209.0
+text = "Lvl0.1"
+placeholder_text = "Step Size:"
+
+[node name="objectSelector" type="Node2D" parent="UI"]
+
+[node name="ColorRect" type="ColorRect" parent="UI/objectSelector"]
+offset_left = -1.0
+offset_top = 915.0
+offset_right = 1922.0
+offset_bottom = 1107.0
+color = Color(0.259294, 0.259294, 0.259294, 1)
+
+[node name="exitButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1795.0
+offset_top = 15.0
+offset_right = 1895.0
+offset_bottom = 115.0
+texture_normal = ExtResource("7_esiun")
+
+[node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
+offset_top = 955.0
+offset_right = 100.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("4_rduon")
+
+[node name="actionButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 103.0
+offset_top = 955.0
+offset_right = 203.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("3_kgvx7")
+
+[node name="mouseButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 204.0
+offset_top = 955.0
+offset_right = 304.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("7_dw7u5")
+
+[node name="racButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 305.0
+offset_top = 955.0
+offset_right = 405.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("8_w245c")
+
+[node name="checkpointButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 407.0
+offset_top = 955.0
+offset_right = 507.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("9_wpw0u")
+
+[node name="playAudioButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1206.0
+offset_top = 919.0
+offset_right = 1256.0
+offset_bottom = 969.0
+texture_normal = ExtResource("26_m4kik")
+
+[node name="goalButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 508.0
+offset_top = 955.0
+offset_right = 608.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("17_3udhx")
+
+[node name="enemyButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 609.0
+offset_top = 955.0
+offset_right = 709.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("20_rbssn")
+
+[node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1680.0
+offset_top = 16.0
+offset_right = 1780.0
+offset_bottom = 116.0
+texture_normal = ExtResource("7_0wc3n")
+
+[node name="rightButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1579.0
+offset_top = 954.0
+offset_right = 1679.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("4_7fuo1")
+
+[node name="upButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1682.0
+offset_top = 954.0
+offset_right = 1782.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("5_8qxnf")
+
+[node name="leftButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1476.0
+offset_top = 954.0
+offset_right = 1576.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("5_cuiw6")
+
+[node name="downButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1785.0
+offset_top = 954.0
+offset_right = 1885.0
+offset_bottom = 1054.0
+texture_normal = ExtResource("7_u6v8f")
+
+[node name="killFloorButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 760.0
+offset_top = 955.0
+offset_right = 860.0
+offset_bottom = 1055.0
+texture_normal = ExtResource("34_wwivc")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="audioProgress" type="ProgressBar" parent="UI/objectSelector"]
+offset_left = 1095.0
+offset_top = 971.0
+offset_right = 1369.0
+offset_bottom = 1007.0
+script = ExtResource("35_lg51b")
+
+[node name="Area2D" type="Area2D" parent="UI/objectSelector/audioProgress"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/objectSelector/audioProgress/Area2D"]
+position = Vector2(135, 23)
+shape = SubResource("RectangleShape2D_jl84f")
+
+[node name="timeInto" type="RichTextLabel" parent="UI/objectSelector"]
+offset_left = 970.0
+offset_top = 969.0
+offset_right = 1094.0
+offset_bottom = 1011.0
+text = "Time Into Song:
+"
+
+[node name="timeLeft" type="RichTextLabel" parent="UI/objectSelector"]
+offset_left = 1371.0
+offset_top = 971.0
+offset_right = 1465.0
+offset_bottom = 1009.0
+text = "Time Left:"
+
+[node name="audioTracks" type="ScrollContainer" parent="UI/objectSelector"]
+offset_left = 1097.0
+offset_top = 1025.0
+offset_right = 1373.0
+offset_bottom = 1070.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+script = ExtResource("36_wn18y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/objectSelector/audioTracks"]
+layout_mode = 2
+
+[node name="VScrollBar" type="VScrollBar" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+layout_mode = 2
+
+[node name="playLevelButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 1565.0
+offset_top = 15.0
+offset_right = 1665.0
+offset_bottom = 115.0
+texture_normal = ExtResource("37_5oir0")
+
+[node name="StatusWindow" type="CanvasLayer" parent="."]
+process_mode = 2
+visible = false
+
+[node name="ColorRect2" type="ColorRect" parent="StatusWindow"]
+modulate = Color(1, 1, 1, 0.458824)
+offset_right = 1927.0
+offset_bottom = 1079.0
+
+[node name="ColorRect" type="ColorRect" parent="StatusWindow"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -508.0
+offset_top = -324.0
+offset_right = 508.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="HBoxContainer" parent="StatusWindow"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.5
+offset_top = 104.5
+offset_right = 260.5
+offset_bottom = 249.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 200
+
+[node name="Yes" type="Button" parent="StatusWindow/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Yes"
+
+[node name="No" type="Button" parent="StatusWindow/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "No
+"
+
+[node name="StatusMessage" type="Label" parent="StatusWindow"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -498.5
+offset_top = -277.5
+offset_right = 498.5
+offset_bottom = -0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Unable to save.
+Need 2 players."
+horizontal_alignment = 1
+clip_text = true
+
+[connection signal="text_changed" from="UI/TextEdit0" to="." method="_on_text_edit_0_text_changed"]
+[connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
+[connection signal="text_changed" from="UI/TextEdit3" to="." method="_on_text_edit_3_text_changed"]
+[connection signal="pressed" from="UI/objectSelector/exitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="button_down" from="UI/objectSelector/blockButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/blockButton" to="." method="_on_block_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/actionButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/actionButton" to="." method="_on_action_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/mouseButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/mouseButton" to="." method="_on_mouse_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/racButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/racButton" to="." method="_on_rac_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/checkpointButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/checkpointButton" to="." method="_on_checkpoint_button_button_up"]
+[connection signal="pressed" from="UI/objectSelector/playAudioButton" to="." method="_on_play_audio_button_pressed"]
+[connection signal="button_down" from="UI/objectSelector/goalButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/goalButton" to="." method="_on_goal_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/enemyButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/enemyButton" to="." method="_on_enemy_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/saveButton" to="." method="_on_save_button_down"]
+[connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/leftButton" to="." method="_on_left_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/downButton" to="." method="_on_down_button_button_down"]
+[connection signal="button_up" from="UI/objectSelector/killFloorButton" to="." method="_on_kill_floor_button_button_up"]
+[connection signal="gui_input" from="UI/objectSelector/audioProgress" to="." method="_on_audio_progress_gui_input"]
+[connection signal="input_event" from="UI/objectSelector/audioProgress/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="button_down" from="UI/objectSelector/playLevelButton" to="." method="_on_play_level_button_button_down"]
+[connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]
