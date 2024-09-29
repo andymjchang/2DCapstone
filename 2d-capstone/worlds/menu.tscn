@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://kr3xmev8c2by"]
 
-[ext_resource type="Script" path="res://worlds/startButton.gd" id="1_h7wu1"]
+[ext_resource type="Script" path="res://worlds/scripts/startButton.gd" id="1_h7wu1"]
 [ext_resource type="Texture2D" uid="uid://eaxiu3v8mgwp" path="res://worlds/menuBG.png" id="1_u1fvf"]
-[ext_resource type="Texture2D" uid="uid://bsadp0sxt2eo8" path="res://worldObjects/circlePlaceholder.png" id="1_wpqf4"]
+[ext_resource type="Texture2D" uid="uid://bsadp0sxt2eo8" path="res://worldObjects/assets/circlePlaceholder.png" id="1_wpqf4"]
 [ext_resource type="Texture2D" uid="uid://dv3e0mgecpbqc" path="res://player/protoMC.png" id="2_hjywm"]
-[ext_resource type="Texture2D" uid="uid://bc5u63xl3n7e" path="res://worldObjects/circlePlaceholder2.png" id="4_k7ioe"]
+[ext_resource type="Texture2D" uid="uid://bc5u63xl3n7e" path="res://worldObjects/assets/circlePlaceholder2.png" id="4_k7ioe"]
 
 [node name="Menu" type="CanvasLayer"]
 

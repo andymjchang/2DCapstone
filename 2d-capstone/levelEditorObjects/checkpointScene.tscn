@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://m7qqiokd3152"]
 
-[ext_resource type="Texture2D" uid="uid://bhq62ks818th3" path="res://worldObjects/checkpoint.png" id="1_w7ii2"]
+[ext_resource type="Texture2D" uid="uid://bhq62ks818th3" path="res://worldObjects/assets/checkpoint.png" id="1_w7ii2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfubh"]
 size = Vector2(87, 81)

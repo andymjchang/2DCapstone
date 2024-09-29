@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://csh1k6wpxxqre"]
 
-[ext_resource type="Texture2D" uid="uid://v6w028pdwdn8" path="res://worldObjects/breakableWall.png" id="1_1xpll"]
+[ext_resource type="Texture2D" uid="uid://v6w028pdwdn8" path="res://worldObjects/assets/breakableWall.png" id="1_1xpll"]
 [ext_resource type="Texture2D" uid="uid://dm870min7d5ri" path="res://worldObjects/wall/wallPieces/wallPart1.png" id="3_w7cmg"]
 [ext_resource type="Texture2D" uid="uid://dhx4rbog36o68" path="res://worldObjects/wall/wallPieces/wallPart2.png" id="4_jt6d4"]
 [ext_resource type="Texture2D" uid="uid://dxho2jlo3s1gm" path="res://worldObjects/wall/wallPieces/wallPart3.png" id="5_jrjva"]

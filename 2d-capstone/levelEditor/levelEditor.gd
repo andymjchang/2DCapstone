@@ -1,7 +1,7 @@
 extends Node2D
 
 
-signal objectClicked(instance)
+signal objectClicked(index : int, blockType: String, curAreaDragging)
 # const values
 const measurePixels = 600
 const holdTime = 0.15
@@ -105,6 +105,7 @@ func _on_text_edit_text_changed() -> void:
 		bpm = int(bpmLabel.text)
 		measureLines.beatsPerMeasure = bpm
 		measureLines.queue_redraw()
+
 func _on_text_edit_2_text_changed() -> void:
 	if stepLabel.text.is_valid_int():
 		var step = int(stepLabel.text)
@@ -129,29 +130,24 @@ func loadLevel():
 		"player1": [player1, player1List, blockTypes[0]],
 		"player2": [player2, player2List, blockTypes[1]]}
 	var instance
-	var instanceParent
+	var objectList
 	var blockType = blockTypes[2]
 	for line in content.split("\n"):
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
-			instanceParent = instanceList.get(line)[1]
+			objectList = instanceList.get(line)[1]
 			blockType = instanceList.get(line)[2]
 		# Position
 		if line.contains(", "):
-			var parent = baseObject.instantiate()
+			var objectParent = baseObject.instantiate()
 			var instancedObj = instance.instantiate()
-			if "player" in blockType:
-				#I dont think we need this as the  player object in the scene is diff
-				#from the one in play
-				#instancedObj.editing = true
-				instancedObj.add_to_group("Players")
-			parent.blockType = blockType
 			var posPoints = []
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
-			parent.add_child(instancedObj)
-			#instancedObj.position = Vector2(posPoints[0], posPoints[1])
-			place_block(parent, instanceParent, Vector2(posPoints[0], posPoints[1]), true)
+
+			objectParent.add_child(instancedObj)
+			objectParent.blockType = blockType
+			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
 
 func _on_save_button_down() -> void:
 	save_scene_to_file()
@@ -190,8 +186,6 @@ func _on_rac_button_button_up() -> void:
 		var playerParent = baseObject.instantiate()
 		playerParent.add_child(player1Instance)
 		playerParent.blockType = blockTypes[0]
-		player1List.add_child(playerParent)
-		
 		place_block(playerParent, player1List, camera.position, false)
 	else:
 		currentBlock = player1List.get_node("baseObject")
@@ -206,7 +200,6 @@ func _on_mouse_button_button_up() -> void:
 		var playerParent = baseObject.instantiate()
 		playerParent.add_child(player2Instance)
 		playerParent.blockType = blockTypes[1]
-		player2List.add_child(playerParent)
 		place_block(playerParent, player2List, camera.position, false)
 	else:
 		currentBlock = player2List.get_node("baseObject")
@@ -340,22 +333,25 @@ func round_to_step(value) -> int:
 	return round(intMultiplier) * stepSize
 
 func place_block(instance, parent, placePos, initial):
+	print("I'm being placed")
 	if initial:
 		instance.position = placePos
+	# ? Assume dragging
+	# elif (timeHeld >= holdTime):
+	# 	placePos = instance.get_child(0).position
+	# 	instance.position = snap_position(placePos)
+	# Snap default player position
+	elif instance.blockType == blockTypes[0]: 
+		instance.position.x = 45
+		instance.position.y = placePos.y
+	elif instance.blockType == blockTypes[1]: 
+		instance.position.x = 45
+		instance.position.y = placePos.y
 	else:
+		print("In this one")
 		instance.position = snap_position(placePos)
-	if (timeHeld >= holdTime):
-		placePos = instance.get_child(0).position
-		instance.position = snap_position(placePos)
-	if instance.blockType == blockTypes[0]: 
-		instance.position.x = 45
-		instance.position.y = placePos.y
-	if instance.blockType == blockTypes[1]: 
-		instance.position.x = 45
-		instance.position.y = placePos.y
 	parent.add_child(instance)	
 	
-		
 	instance.setArea2D()
 	instance.index = lEindex
 	lEindex+=1
@@ -373,12 +369,14 @@ func reset_drag_tracking():
 func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 	trackingPosition = true
 	#timeHeld = 0.0
+	print("Reaching signal")
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
-			currentBlock = block.get_node(curAreaDragging)
-			print("current blcok: ", currentBlock)
-			_on_text_edit_2_text_changed()
+			print("Found area: ", curAreaDragging)
+			currentBlock = block
+			print("current block: ", currentBlock)
+			#_on_text_edit_2_text_changed()
 			return
 	
 func getList(blockType : String) -> Node:

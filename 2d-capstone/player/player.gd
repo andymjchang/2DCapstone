@@ -19,7 +19,6 @@ var jump
 var punch
 var reachedCheckpoint = true
 var relocating = false
-var enemyscene = preload("res://enemy/enemy.tscn")
 var checkpoint
 var otherPlayer
 var editing = false

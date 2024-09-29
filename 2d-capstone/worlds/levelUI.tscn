@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ddeqbtwpcjgkc"]
 
-[ext_resource type="Script" path="res://worlds/restartButton.gd" id="1_sir47"]
+[ext_resource type="Script" path="res://worlds/scripts/restartButton.gd" id="1_sir47"]
 
 [node name="LevelUI" type="CanvasLayer"]
 script = ExtResource("1_sir47")

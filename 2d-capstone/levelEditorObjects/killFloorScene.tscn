@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bq7uuovqf0df7"]
 
-[ext_resource type="Texture2D" uid="uid://bs1s50jix0x8g" path="res://shadow/killfloorImage.jpg" id="1_4ixj5"]
+[ext_resource type="Texture2D" uid="uid://bs1s50jix0x8g" path="res://levelEditor/programmerArtAssets/killfloorImage.jpg" id="1_4ixj5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jc14u"]
 size = Vector2(901, 30)

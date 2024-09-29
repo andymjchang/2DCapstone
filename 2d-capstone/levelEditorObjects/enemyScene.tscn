@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://jixi0wddqipj"]
 
-[ext_resource type="Texture2D" uid="uid://cxdhrplc2qstb" path="res://worldObjects/singleBot.png" id="1_bja54"]
+[ext_resource type="Texture2D" uid="uid://cxdhrplc2qstb" path="res://worldObjects/assets/singleBot.png" id="1_bja54"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ud4en"]
 size = Vector2(36, 59)

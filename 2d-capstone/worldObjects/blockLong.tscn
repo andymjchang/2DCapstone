@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=4 uid="uid://durvh6v8u5exu"]
 
-[ext_resource type="Texture2D" uid="uid://ljo48af3c257" path="res://worldObjects/Platform.png" id="1_h40a7"]
-[ext_resource type="Script" path="res://worldObjects/blockLong.gd" id="1_kddth"]
-[ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/Platform_2.png" id="3_85d55"]
+[ext_resource type="Texture2D" uid="uid://ljo48af3c257" path="res://worldObjects/assets/Platform.png" id="1_h40a7"]
+[ext_resource type="Script" path="res://worldObjects/scripts/blockLong.gd" id="1_kddth"]
+[ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="3_85d55"]
 [ext_resource type="Texture2D" uid="uid://71f5kajh7j21" path="res://backgrounds/tilemaps/level1tilemap.png" id="4_m2jcf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]

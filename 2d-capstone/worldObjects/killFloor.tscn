@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bsbq6v7ueradk"]
 
-[ext_resource type="Script" path="res://worldObjects/killFloor.gd" id="1_mw5fv"]
+[ext_resource type="Script" path="res://worldObjects/scripts/killFloor.gd" id="1_mw5fv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0f686"]
 size = Vector2(909, 29)

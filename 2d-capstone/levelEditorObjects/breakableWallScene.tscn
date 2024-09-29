@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bhlcoymbyox5y"]
 
-[ext_resource type="Texture2D" uid="uid://v6w028pdwdn8" path="res://worldObjects/breakableWall.png" id="1_44fdd"]
+[ext_resource type="Texture2D" uid="uid://v6w028pdwdn8" path="res://worldObjects/assets/breakableWall.png" id="1_44fdd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lowct"]
 size = Vector2(218, 754)

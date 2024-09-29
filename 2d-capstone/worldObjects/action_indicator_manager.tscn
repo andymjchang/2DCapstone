@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b06gkr46rf8gm"]
 
-[ext_resource type="Script" path="res://worldObjects/action_indicator_manager.gd" id="1_qbg64"]
+[ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="1_qbg64"]
 
 [node name="actionIndicatorManager" type="Node2D" groups=["indicatorManagers"]]
 script = ExtResource("1_qbg64")
