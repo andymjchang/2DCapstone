@@ -79,13 +79,16 @@ func _ready():
 	music.play(0.0)
 
 func loadAudio():
+	if !Globals.currentSongFileName:
+		return
 	var audioPath = "res://audioTracks/" + Globals.currentSongFileName
 	var newAudio = load(audioPath) as AudioStream
 	music.stream = newAudio
 
 func loadLevel():
 	# set file/music to load
-	levelFile = Globals.currentEditorFileName
+	if Globals.currentSongFileName:
+		levelFile = Globals.currentEditorFileName
 	
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
