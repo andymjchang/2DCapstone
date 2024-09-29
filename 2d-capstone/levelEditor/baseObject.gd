@@ -2,7 +2,6 @@ class_name BaseObject
 extends Node2D
 var blockType = ""
 var index = 0
-#should turn this into an array
 var sprite 
 var isDragging = false
 var spriteNode = null
@@ -10,7 +9,6 @@ var spriteParent = null
 var curAreaDragging = null
 var curAreaDraggingParent = null
 var curArea = null
-var index1 = 0
 @onready var childrenList = self.get_child(0).get_children()
 
 
@@ -18,15 +16,13 @@ var size: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_process_input(true)
-	var spriteNode = Sprite2D.new()
-	spriteNode.visible = false
-	spriteNode.modulate.a = 0.5
-	#loop through teh scenen 
-	pass # Replace with function body.
+	self.add_child(spriteNode)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	print("children in process,",self.get_children())
+	#if block is being dragged, have a transparent image of it follow the mouse around
 	if isDragging:
 		spriteNode.visible = true
 		spriteNode.modulate.a = 0.5
@@ -38,37 +34,42 @@ func _process(delta: float) -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, areaName, areaParent) -> void:
 	if "player" not in blockType:
 		if event.is_action_pressed("click"):
-			#print("click!")
-			curAreaDragging = str(areaName)
+			print("click!")
+			#this will be the path to area2d given that we have the scene object
+			curAreaDragging = str(areaParent.name)+"/"+str(areaName)
 			curArea = str(areaName)
+			
 			spriteNode = self.get_child(0).get_node(str(areaParent.name)+"/Sprite2D").duplicate()
-			#TODO i dont want to add this everytime
 			self.add_child(spriteNode)
-			get_tree().root.get_node("Node2D").emit_signal("objectClicked",index, blockType, curAreaDragging)
-			get_tree().root.get_node("Node2D").setTrackingPosition(true)
+			#TODO i dont want to add everytime
+			#object has been clicked, so need to tell the level-edito to switch its current block
+			self.get_parent().get_parent().get_parent().emit_signal("objectClicked")
+			self.get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType,curAreaDragging)
+			self.get_parent().get_parent().get_parent().setTrackingPosition(true)
 			isDragging = true
-			#print("my type: ", blockType)
+			print("mouse pressed")
 	
+	#when the player releases the mouse, set the scene object to that new position
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and not event.pressed and get_tree().root.get_node("Node2D").currentBlock and self.index == get_tree().root.get_node("Node2D").currentBlock.index and isDragging:
-		#print("mouse released")
+	if event is InputEventMouseButton and not event.pressed and self.get_parent().get_parent().get_parent().currentBlock and self.index == self.get_parent().get_parent().get_parent().currentBlock.index and isDragging:
+		print("mouse released")
+		self.get_child(0).get_node(curAreaDragging).get_parent().global_position= self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
+		#for scenes that have multiple components, and offset from the origin for subsqeuent components has to be accounted for
+		#if self.get_child(0).get_node(curAreaDragging).get_parent().offset:
+			#self.get_child(0).get_node(curAreaDragging).get_parent().global_position.x -= self.get_child(0).get_node(curAreaDragging).get_parent().offset
+		self.get_node(curArea).global_position =  self.get_child(0).get_node(curAreaDragging).get_parent().global_position
 		isDragging = false
-		#for objects with multiple area2ds 
-		#have to rework this ugh
-		#print("cur area dragging: ", curAreaDragging)
-		#print("nodes children ", self.get_child(0).get_child(0).get_children())
 		
-		self.get_child(0).global_position = self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
-
-		self.get_node(curAreaDragging).global_position =  self.get_child(0).global_position
-		#print("after zip placed: ", self.get_child(0).get_node(curAreaDragging).get_parent().global_position )
 		
+#attaches area2Ds to the base object as well as enables them to detect being clicked on
 func setArea2D():
-	#for zipline do a more specific node traversal for zipline
 	var nameIndex = 0
+	#given a scene object, go through all of its individual major components
 	for blockChild in childrenList:
+		#grab each compents area2d
 		var newArea = blockChild.get_node("Area2D").duplicate()
 		blockChild.get_node("Area2D").name = "EditorArea"+str(nameIndex)
+		#give them each a unique name
 		newArea.name = "EditorArea"+str(nameIndex)
 		nameIndex+=1
 		self.add_child(newArea)
