@@ -110,8 +110,8 @@ func _on_text_edit_2_text_changed() -> void:
 		var step = int(stepLabel.text)
 		if (step < MIN_STEP):
 			step = MIN_STEP
-		if currentBlock and currentBlock.blockType == "actionIndicator" or currentBlock.blockType == "enemy":
-			step = MIN_STEP
+		#if currentBlock and currentBlock.blockType == "actionIndicator" or currentBlock.blockType == "enemy":
+			#step = MIN_STEP
 		stepSize = step
 		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
