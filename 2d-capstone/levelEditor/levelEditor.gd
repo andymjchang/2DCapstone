@@ -103,8 +103,14 @@ func _process(delta: float) -> void:
 				currentBlock = null
 				break
 	if Input.is_action_just_pressed("lenthenBlock") and currentBlock.blockType == "normal":
+		#extend platform block by one platform block
 		lengthenPlatform()
-		#get the extents of the currently selected block and add another block to the end of it
+	if Input.is_action_just_pressed("bindBlocks"):
+		if isBinding:
+			isBinding = false
+			bindedBlocks = []
+		else:
+			isBinding = true
 			
 func _on_text_edit_0_text_changed() -> void:
 	if beatsMinLabel.text.is_valid_int():
@@ -271,16 +277,33 @@ func _on_play_audio_button_pressed() -> void:
 	
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null or "player" in currentBlock.blockType): return
-	currentBlock.position.x += stepSize
+	if(isBinding):
+		for block in bindedBlocks:
+			block.position.x += stepSize
+	else:
+		currentBlock.position.x += stepSize
+	
 func _on_left_button_button_down() -> void:
-	if (currentBlock == null or "player" in currentBlock.blockType): return
-	currentBlock.position.x -= stepSize
+	if (currentBlock == null or "player" in currentBlock.blockType): return	
+	if(isBinding):
+		for block in bindedBlocks:
+			block.position.x -= stepSize
+	else:
+		currentBlock.position.x -= stepSize
 func _on_down_button_button_down() -> void:
 	if (currentBlock == null): return
-	currentBlock.position.y += stepSize
+	if(isBinding):
+		for block in bindedBlocks:
+			block.position.y += stepSize
+	else:
+		currentBlock.position.y += stepSize
 func _on_up_button_button_down() -> void:
 	if (currentBlock == null): return
-	currentBlock.position.y -= stepSize
+	if(isBinding):
+		for block in bindedBlocks:
+			block.position.y -= stepSize
+	else:
+		currentBlock.position.y -= stepSize
 	
 func save_scene_to_file():
 	if player1List.get_child_count() == 1 and player2List.get_child_count() == 1:
@@ -378,15 +401,15 @@ func reset_drag_tracking():
 
 func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 	trackingPosition = true
-	#timeHeld = 0.0
-	print("Reaching signal")
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
-			print("Found area: ", curAreaDragging)
-			currentBlock = block
-			print("current block: ", currentBlock)
-			#_on_text_edit_2_text_changed()
+			if(isBinding):
+				#add to the current list of binded blocks
+				bindedBlocks.append(block)
+			else:
+				#we only want to have one block selected
+				currentBlock = block
 			return
 	
 func getList(blockType : String) -> Node:
