@@ -31,3 +31,7 @@ func _on_texture_button_button_down() -> void:
 	get_tree().change_scene_to_packed(editorNode)
 	disablePreviewUI()
 	inLevel = false
+	
+func screenFlashEffect():
+	
+	return

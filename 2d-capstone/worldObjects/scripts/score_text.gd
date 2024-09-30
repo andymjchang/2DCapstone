@@ -18,7 +18,7 @@ func initText(text, player_position):
 	position = player_position
 
 func _process(_delta: float) -> void:
-	label.position.y -= 1
+	label.position.y -= 0
 	label.modulate.a -= 0.02
 	if label.position.y >= 45:
 		queue_free()

@@ -8,7 +8,6 @@ var starting_index = 0
 func load_array():
 	actionIndicatorArray = get_children()
 	actionIndicatorArray.sort_custom(sortIndicators)
-	print(actionIndicatorArray.size())
 	for indicator in actionIndicatorArray:
 		indicator.connect("scored", on_scored)
 	

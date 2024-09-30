@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=21 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -12,13 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="7_po4yx"]
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="12_ngrii"]
-[ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="13_4gv8e"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
+[ext_resource type="AudioStream" uid="uid://b335gnra8wcg" path="res://audioTracks/Tutorial_Demo_120bpm_CMaj_V2.mp3" id="13_sfia2"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="18_s1i58"]
+[ext_resource type="PackedScene" uid="uid://banpko7ousnfw" path="res://screenEffects/screenFlashEffect.tscn" id="20_iltqw"]
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
@@ -48,7 +49,7 @@ offset_bottom = 64.0
 text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(350, 450)
+position = Vector2(250, 450)
 zoom = Vector2(2, 2)
 script = ExtResource("4_nttx1")
 
@@ -59,7 +60,7 @@ texture = ExtResource("12_ngrii")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
 position = Vector2(-960, -540)
-stream = ExtResource("13_4gv8e")
+stream = ExtResource("13_sfia2")
 max_distance = 10000.0
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
@@ -67,7 +68,7 @@ position = Vector2(-720, -502)
 scale = Vector2(1.5, 1.5)
 
 [node name="ActionLine" type="Sprite2D" parent="Camera2D"]
-position = Vector2(-350, 0)
+position = Vector2(-250, 0)
 texture = ExtResource("15_gryhe")
 
 [node name="objectList" type="Node2D" parent="."]
@@ -130,3 +131,6 @@ position = Vector2(30025, 700)
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 
 [node name="ProgressBar" parent="." instance=ExtResource("18_s1i58")]
+
+[node name="Node2D" parent="." instance=ExtResource("20_iltqw")]
+position = Vector2(-635, 775)
