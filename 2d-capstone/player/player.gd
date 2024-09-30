@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 				$Animation.play("Jump")
 				jumpInProgress = true
 				velocity.y = JUMP_VELOCITY
-				await get_tree().create_timer(0.2).timeout
+				#await get_tree().create_timer(0.2).timeout
 			
 			if Input.is_action_just_pressed(punch):
 				if canAttack:
@@ -94,7 +94,7 @@ func _physics_process(delta: float) -> void:
 					#print("Punch!")
 					attack.visible = true
 					canAttack = false
-					await get_tree().create_timer(0.2).timeout
+					#await get_tree().create_timer(0.2).timeout
 					canAttack = true
 					attack.visible = false
 		elif reachedCheckpoint:

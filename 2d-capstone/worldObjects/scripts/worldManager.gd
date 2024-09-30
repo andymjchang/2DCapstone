@@ -34,7 +34,6 @@ var restartButton
 var music
 
 var time : float = 0
-var bpm: int = 100
 var score = 0
 
 @onready var timerText
@@ -76,6 +75,7 @@ func _ready():
 	changeCountdown()
 	await get_tree().create_timer(3.0).timeout
 	Globals.inLevel = true
+	print("time when inLevel = true" + str(time))
 	music.play(0.0)
 
 func loadAudio():

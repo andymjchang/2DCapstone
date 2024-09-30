@@ -20,7 +20,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print("children in process,",self.get_children())
+	#print("children in process,",self.get_children())
 	#if block is being dragged, have a transparent image of it follow the mouse around
 	if isDragging:
 		spriteNode.visible = true

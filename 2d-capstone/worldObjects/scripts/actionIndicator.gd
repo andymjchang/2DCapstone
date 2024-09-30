@@ -28,12 +28,13 @@ func _ready() -> void:
 	# decide target_time based on world position
 	var time = position.x / Globals.pixelsPerFrame
 	set_target_time(time)
+	print("target time:" + str(time))
 
 # Set the time over which the transition occurs
 func set_target_time(time: float) -> void:
 	target_time = time
 func get_target_time():
-	return target_time - animation_time + 3
+	return target_time - animation_time + 3.0
 
 # Activate the transition
 func start_transition():
