@@ -48,12 +48,14 @@ func _onUIRevive(who):
 		for heart in get_node("player1").get_children():
 			heart.healthStatus = "full"
 			heart.fullHealth.visible = true
+			heart.zeroHealth.visible = false
 	if who == "Player1":
 		curP2Heart =  $player2/UiHeart3
 		curP2HeartIndex = 2
 		for heart in get_node("player2").get_children():
 			heart.healthStatus = "full"
 			heart.fullHealth.visible = true
+			heart.zeroHealth.visible = false
 		
 		
 	
