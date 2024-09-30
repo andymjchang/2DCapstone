@@ -464,7 +464,4 @@ func _on_play_level_button_button_down() -> void:
 	# Add the new scene to the scene tree and set it as the current scene
 	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
 	#get_tree().current_scene = scene_instance  # Set it as the new current scene
-
-
-
 	
