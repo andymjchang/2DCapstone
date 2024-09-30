@@ -27,7 +27,7 @@ func _process(_delta: float) -> void:
 		var indicator = actionIndicatorArray[current_index]
 		current_index += 1
 		if currentWorldScene.time >= indicator.get_target_time():
-			print("current time" + str(currentWorldScene.time))
+			#print("current time" + str(currentWorldScene.time))
 			indicator.start_transition()
 			starting_index += 1 # don't search through here again
 		else:

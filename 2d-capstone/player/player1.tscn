@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=23 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="2_a5rf3"]
 [ext_resource type="Texture2D" uid="uid://eoiqyev7gvq4" path="res://animations/raccoonAnims/Raccoon_jump.png" id="2_amwal"]
 [ext_resource type="Texture2D" uid="uid://bvvcm7r3cp3x7" path="res://animations/raccoonAnims/Raccoon_spriteSheet_v05.png" id="2_icjbr"]
 [ext_resource type="Texture2D" uid="uid://nchurhplqcb3" path="res://animations/raccoonAnims/Raccoon_punch.png" id="3_sudcy"]
+[ext_resource type="Texture2D" uid="uid://bt5jsder0msfx" path="res://player/playerActionCircle.png" id="6_4xpfe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fb3mh"]
 atlas = ExtResource("2_amwal")
@@ -119,15 +120,13 @@ scale = Vector2(4, 4)
 script = ExtResource("1_qyaa7")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-2.5, -11.75)
+position = Vector2(-14.25, -12.25)
 scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Run"
-frame = 1
-frame_progress = 0.321922
+animation = &"Punch"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2.875, -11.25)
+position = Vector2(-14.625, -11.75)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="ProtoMc" type="Sprite2D" parent="."]
@@ -137,7 +136,7 @@ scale = Vector2(0.368884, 0.344364)
 texture = ExtResource("2_a5rf3")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
-position = Vector2(-6.25, -19.875)
+position = Vector2(-18, -20.375)
 rotation = 0.000143446
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
@@ -153,15 +152,22 @@ rotation = 0.00184914
 shape = SubResource("RectangleShape2D_efrg4")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
+position = Vector2(-11.75, -0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
 position = Vector2(-2.625, -11.5625)
 shape = SubResource("RectangleShape2D_rw1d5")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-11.75, -0.5)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-2.625, -11.5)
 shape = SubResource("RectangleShape2D_s4g51")
+
+[node name="actionLine" type="Sprite2D" parent="."]
+position = Vector2(0, -11.25)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_4xpfe")
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

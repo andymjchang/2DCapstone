@@ -75,7 +75,6 @@ func _ready():
 	changeCountdown()
 	await get_tree().create_timer(3.0).timeout
 	Globals.inLevel = true
-	print("time when inLevel = true" + str(time))
 	music.play(0.0)
 
 func loadAudio():
@@ -102,7 +101,7 @@ func loadLevel():
 	var instance
 	var instanceParent
 	for line in content.split("\n"):
-		print("Current line: ", line)
+		#print("Current line: ", line)
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
