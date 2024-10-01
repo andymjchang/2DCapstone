@@ -7,7 +7,7 @@ var initialZoom
 
 func _ready():
 	camera = get_viewport().get_camera_2d()
-	flash_rect.color = Color(1, 1, 1, 0.0) 
+	flash_rect.color = Color(1, 1, 1, 0.5) 
 	
 	#initialZoom = camera.zoom
 	#camera.zoom = initialZoom + Vector2(0.25, 0.25)
