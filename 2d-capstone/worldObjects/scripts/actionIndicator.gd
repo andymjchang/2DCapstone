@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
 	var t = clamp(elapsed_time / animation_time, 0.0, 1.0)
 	
 	# Lerp the scale from its current value to 1.0
-	outer_circle.scale = starting_scale.lerp(Vector2(1.0, 1.0), t)
+	outer_circle.scale = starting_scale.lerp(Vector2(0.1, 0.1), t)
 	
 	# Lerp the opacity from 0 to 1
 	var current_modulate = outer_circle.modulate
