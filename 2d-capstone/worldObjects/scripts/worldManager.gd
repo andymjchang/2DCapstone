@@ -91,6 +91,7 @@ func loadLevel():
 		levelFile = Globals.currentEditorFileName
 	
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()
+	print("content: ", content)
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],
 		"killFloors": [killFloorInstance, killFloorsList],
@@ -102,7 +103,7 @@ func loadLevel():
 	var instance
 	var instanceParent
 	for line in content.split("\n"):
-		print("Current line: ", line)
+		#print("Current line: ", line)
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]

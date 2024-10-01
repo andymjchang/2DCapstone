@@ -179,7 +179,12 @@ func _onZiplineButtonPressed() -> void:
 	place_block(zipParent, ziplineList, camera.position, false)
 	
 func _on_exit_button_pressed() -> void:
-	get_tree().quit()
+	# This will be the final functionality so players can navigate between menus
+	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+
+	# For debugging
+	# get_tree().quit()
+
 	
 func _on_rac_button_button_up() -> void:
 	if !player1List.has_node("baseObject"):

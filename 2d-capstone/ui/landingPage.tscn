@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpqay3flkobdk"]
+
+[ext_resource type="Script" path="res://ui/scripts/landingPage.gd" id="1_4duo3"]
+
+[node name="LandingPage" type="CanvasLayer"]
+script = ExtResource("1_4duo3")
+
+[node name="storyButton" type="Button" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -559.0
+offset_top = -72.5
+offset_bottom = 72.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Story Mode"
+
+[node name="editorButton" type="Button" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -72.5
+offset_right = 574.0
+offset_bottom = 72.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Level Editor"
+
+[node name="quitButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -108.5
+offset_top = -145.0
+offset_right = 108.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 100
+text = "Quit
+"
+
+[connection signal="pressed" from="storyButton" to="." method="_onStoryButtonPressed"]
+[connection signal="pressed" from="editorButton" to="." method="_onEditorButtonPressed"]
+[connection signal="pressed" from="quitButton" to="." method="_onQuitButtonPressed"]
