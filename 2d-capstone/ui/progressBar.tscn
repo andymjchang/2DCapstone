@@ -1,12 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdb5n44jar0hf"]
+[gd_scene load_steps=5 format=3 uid="uid://cdb5n44jar0hf"]
 
 [ext_resource type="Script" path="res://ui/scripts/audioProgress.gd" id="1_6veau"]
+[ext_resource type="Texture2D" uid="uid://251nb353dlsd" path="res://ui/assets/Level_Progress_Bar_Empty.png" id="1_nsiy8"]
+[ext_resource type="Texture2D" uid="uid://crlh8n44us5hn" path="res://ui/assets/Level_Progress_Bar_Full.png" id="2_un834"]
+[ext_resource type="Texture2D" uid="uid://d2s2e6urbusr0" path="res://ui/assets/Progress_Bar_Note_Icon.png" id="4_6vv17"]
 
 [node name="ProgressBar" type="CanvasLayer"]
 
-[node name="audioProgress" type="ProgressBar" parent="."]
-offset_left = 795.0
-offset_top = 939.0
-offset_right = 1069.0
-offset_bottom = 975.0
+[node name="audioProgress" type="TextureProgressBar" parent="."]
+offset_left = 150.0
+offset_top = 811.0
+offset_right = 1728.0
+offset_bottom = 1027.0
+texture_under = ExtResource("1_nsiy8")
+texture_progress = ExtResource("2_un834")
 script = ExtResource("1_6veau")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-870, 21)
+texture = ExtResource("4_6vv17")

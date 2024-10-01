@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6mwitsbob8o7"]
+
+[ext_resource type="Texture2D" uid="uid://k8u0v225ha1b" path="res://ui/assets/Guitar_Score_Empty.png" id="1_afyyv"]
+[ext_resource type="Texture2D" uid="uid://bdlrbq3yixn1q" path="res://ui/assets/Progress_Fill.png" id="2_p4imh"]
+
+[node name="ScoreBar" type="CanvasLayer"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 2000.0
+offset_bottom = 1000.0
+texture_under = ExtResource("1_afyyv")
+texture_progress = ExtResource("2_p4imh")
