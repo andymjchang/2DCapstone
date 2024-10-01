@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://vwn054kwmv7u"]
+[gd_scene load_steps=8 format=3 uid="uid://d14ty44q7tqru"]
 
 [ext_resource type="Script" path="res://levelEditorObjects/ziplineScene.gd" id="1_poymt"]
 [ext_resource type="Texture2D" uid="uid://cd3rk1jmye0pd" path="res://worldObjects/zipline/start.png" id="2_6wh4t"]
@@ -18,24 +18,24 @@ script = ExtResource("1_poymt")
 [node name="Start" type="Node2D" parent="."]
 script = ExtResource("2_mot3a")
 
-[node name="Sprite2D" type="Sprite2D" parent="Start"]
-texture = ExtResource("2_6wh4t")
-
 [node name="Area2D" type="Area2D" parent="Start"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Start/Area2D"]
 position = Vector2(-1, 0.5)
 shape = SubResource("RectangleShape2D_3yw7x")
 
+[node name="Sprite2D" type="Sprite2D" parent="Start"]
+texture = ExtResource("2_6wh4t")
+
 [node name="End" type="Node2D" parent="."]
 script = ExtResource("4_oixjn")
-
-[node name="Sprite2D" type="Sprite2D" parent="End"]
-position = Vector2(700, 0)
-texture = ExtResource("3_0rqeo")
 
 [node name="Area2D" type="Area2D" parent="End"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="End/Area2D"]
 position = Vector2(700, 0)
 shape = SubResource("RectangleShape2D_fjgvp")
+
+[node name="Sprite2D" type="Sprite2D" parent="End"]
+position = Vector2(700, 0)
+texture = ExtResource("3_0rqeo")

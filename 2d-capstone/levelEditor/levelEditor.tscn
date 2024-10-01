@@ -31,7 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://cy015hcaqhhta" path="res://levelEditor/baseObject.tscn" id="15_wsj3w"]
 [ext_resource type="PackedScene" uid="uid://bhlcoymbyox5y" path="res://levelEditorObjects/breakableWallScene.tscn" id="16_rjnnj"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
-[ext_resource type="PackedScene" path="res://levelEditorObjects/ziplineScene.tscn" id="17_x5g52"]
+[ext_resource type="PackedScene" uid="uid://d14ty44q7tqru" path="res://levelEditorObjects/ziplineScene.tscn" id="17_x5g52"]
 [ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="19_jlcy1"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
 [ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
@@ -160,7 +160,7 @@ offset_left = 93.0
 offset_top = 159.0
 offset_right = 208.0
 offset_bottom = 209.0
-text = "Lvl0.1"
+text = "shadow"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Node2D" parent="UI"]

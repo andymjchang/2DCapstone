@@ -143,7 +143,8 @@ func loadLevel():
 		"checkpoints": [checkpoint, checkpointsList, blockTypes[7]], 
 		"enemies": [enemyCharacter, enemyList, blockTypes[5]],
 		"player1": [player1, player1List, blockTypes[0]],
-		"player2": [player2, player2List, blockTypes[1]]}
+		"player2": [player2, player2List, blockTypes[1]],
+		"ziplines": [zipline, ziplineList, blockTypes[9]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -316,7 +317,14 @@ func save_scene_to_file():
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
 				for item in itemList.get_children():
-					newFile.store_string(str(item.position.x) + ", " + str(item.position.y) + "\n")
+					#go through each of the items children areas
+					var childrenList = item.get_child(0).get_children()
+					for blockChild in childrenList:
+						print("block child, ", blockChild)
+						print("block child child, ", blockChild.get_child(0))
+						newFile.store_string(str(blockChild.get_child(0).global_position.x) + ", " + str(blockChild.get_child(0).global_position.y) + "\n")
+					print("child list in save, ", childrenList)
+					
 	else:
 		displayStatus(UNABLE_TO_SAVE, false)
 		
