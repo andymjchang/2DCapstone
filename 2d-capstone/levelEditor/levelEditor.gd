@@ -320,8 +320,7 @@ func save_scene_to_file():
 					#go through each of the items children areas
 					var childrenList = item.get_child(0).get_children()
 					for blockChild in childrenList:
-						print("block child, ", blockChild)
-						print("block child child, ", blockChild.get_child(0))
+						#this is most likely where the zipline error/duplication is occuring
 						newFile.store_string(str(blockChild.get_child(0).global_position.x) + ", " + str(blockChild.get_child(0).global_position.y) + "\n")
 					print("child list in save, ", childrenList)
 					
@@ -418,6 +417,7 @@ func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 			else:
 				#we only want to have one block selected
 				currentBlock = block
+				print("new block clicke")
 			return
 	
 func getList(blockType : String) -> Node:
@@ -504,20 +504,21 @@ func _on_play_level_button_button_down() -> void:
 func lengthenPlatform() -> void:
 	#this isnt modular but it will work for now
 	var blockArea = currentBlock.get_child(0).get_child(0).get_node("EditorArea0")
+	print("haha block area ",blockArea)
 	var blockShape = blockArea.get_node("CollisionShape2D").shape as RectangleShape2D
 	var blockExtents = blockShape.extents
 	#get the lower left and upp right coords of the current block
 	var upperLeft = currentBlock.global_position + blockExtents
 	var lowerRight = currentBlock.global_position - blockExtents
 	var width = abs(upperLeft.x - lowerRight.x)
-	var newPos = currentBlock.global_position.x + width
+	var newPos = blockArea.global_position.x + width
 		
 	var blockInstance = platformBlock.instantiate()
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
 	print("block type: ", blockParent.blockType)
-	place_block(blockParent, platformBlocksList, Vector2(newPos, currentBlock.global_position.y), false)
+	place_block(blockParent, platformBlocksList, Vector2(newPos, blockArea.global_position.y), false)
 		
 	
 
