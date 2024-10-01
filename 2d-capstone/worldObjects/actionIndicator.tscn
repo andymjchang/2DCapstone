@@ -19,14 +19,10 @@ texture = ExtResource("1_55u4d")
 scale = Vector2(4, 4)
 texture = ExtResource("3_glxat")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-3, 2.5)
 shape = SubResource("RectangleShape2D_0jqk3")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

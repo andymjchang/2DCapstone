@@ -64,11 +64,12 @@ func _process(delta: float) -> void:
 	if t >= 1.0:
 		outer_circle.visible = true
 		scored.emit(position.x)
+		Globals.screenFlashEffect()
 		queue_free()
 
 
-func _on_timer_timeout() -> void:
-	queue_free()
+#func _on_timer_timeout() -> void:
+	#queue_free()
 	#
 #func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	#if event.is_action_pressed("click"):

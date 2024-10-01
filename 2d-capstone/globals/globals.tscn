@@ -8,6 +8,7 @@
 script = ExtResource("1_nrp7m")
 
 [node name="PreviewCanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
 visible = false
 
 [node name="TextureButton" type="TextureButton" parent="PreviewCanvasLayer"]

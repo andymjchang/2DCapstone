@@ -71,9 +71,11 @@ func _ready():
 	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
 
 	# Start game
+	Globals.inLevel = false
 	restartButton.visible = false
 	changeCountdown()
-	await get_tree().create_timer(3.0).timeout
+	
+func startGame():
 	Globals.inLevel = true
 	music.play(0.0)
 
@@ -166,9 +168,11 @@ func _onLevelCompleted():
 	Globals.inLevel = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	updateTime(delta)
-	pass
+	if time >= 3.0:
+		startGame()
+	
 
 func updateTime(delta: float):
 	time = time + delta

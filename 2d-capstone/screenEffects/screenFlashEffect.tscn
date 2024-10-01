@@ -6,7 +6,9 @@
 script = ExtResource("1_3f1g2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2

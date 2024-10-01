@@ -16,6 +16,7 @@ var currentSongFileName
 # Nodes
 var previewNode
 @onready var editorNode = preload("res://levelEditor/levelEditor.tscn")
+@onready var screenFlashNode = preload("res://screenEffects/screenFlashEffect.tscn")
 
 func _process(delta: float) -> void:
 	time += delta;
@@ -33,5 +34,6 @@ func _on_texture_button_button_down() -> void:
 	inLevel = false
 	
 func screenFlashEffect():
-	
-	return
+	var screenFlashInstance = screenFlashNode.instantiate()
+	add_child(screenFlashInstance)
+	print("screen flash")
