@@ -49,7 +49,7 @@ text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(250, 450)
-zoom = Vector2(1.75, 1.75)
+zoom = Vector2(2, 2)
 script = ExtResource("4_nttx1")
 
 [node name="MenuBg" type="Sprite2D" parent="Camera2D"]

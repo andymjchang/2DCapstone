@@ -53,7 +53,7 @@ func _ready():
 	camera = $Camera2D
 	scoreText = $CanvasLayer/Score
 	music = camera.get_node("Music")
-	#loadAudio()
+	loadAudio()
 	
 	# Setting signals
 	self.resetPosition.connect(_onResetPosition)
@@ -73,21 +73,17 @@ func _ready():
 	# Start game
 	Globals.inLevel = false
 	restartButton.visible = false
-	changeCountdown()
+	#changeCountdown()
+	#startGame()
 	
 func startGame():
-	Globals.inLevel = true
 	music.play(0.0)
-	music.stream_paused = false
+	Globals.inLevel = true
 
 func loadAudio():
 	if !Globals.currentSongFileName:
-		print("no audio to load")
-		print(music.stream)
-		music.play(0.0)
 		return
 	var audioPath = "res://audioTracks/" + Globals.currentSongFileName
-	print(audioPath)
 	var newAudio = load(audioPath) as AudioStream
 	music.stream = newAudio
 
@@ -177,7 +173,6 @@ func _physics_process(delta):
 	updateTime(delta)
 	if time >= 3.0:
 		startGame()
-	
 
 func updateTime(delta: float):
 	time = time + delta
