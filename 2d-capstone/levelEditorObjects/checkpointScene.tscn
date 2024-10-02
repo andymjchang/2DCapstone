@@ -9,13 +9,13 @@ size = Vector2(87, 81)
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
-position = Vector2(3.75509e-06, 3.8147e-06)
-scale = Vector2(0.91, 0.91)
-texture = ExtResource("1_w7ii2")
-
 [node name="Area2D" type="Area2D" parent="Node2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
 position = Vector2(-4.5, 4.5)
 shape = SubResource("RectangleShape2D_nfubh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(3.75509e-06, 3.8147e-06)
+scale = Vector2(0.91, 0.91)
+texture = ExtResource("1_w7ii2")

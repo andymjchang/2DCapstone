@@ -15,6 +15,7 @@ signal checkLevelCompleted()
 @export var player1Instance : PackedScene
 @export var player2Instance : PackedScene
 @export var enemyInstance : PackedScene
+@export var ziplineInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -22,8 +23,10 @@ signal checkLevelCompleted()
 @onready var killFloorsList = $objectList/killFloors
 @onready var enemiesList = $objectList/enemies
 @onready var actionIndicatorsList = $objectList/actionIndicators
-@onready var checkpointsList = $objectList/checkpoints
+@onready var p1checkpointsList = $objectList/player1checkpoints
+@onready var p2checkpointsList = $objectList/player2checkpoints
 @onready var playersList = $objectList/players
+@onready var ziplineList = $objectList/ziplines
 
 var player1 
 var player2
@@ -99,16 +102,21 @@ func loadLevel():
 	# set file to load
 	if Globals.currentSongFileName:
 		levelFile = Globals.currentEditorFileName
+	if Globals.curFile:
+		levelFile = Globals.curFile
 	
-	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()
+	print("level nameL ", levelFile)
+	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],
 		"killFloors": [killFloorInstance, killFloorsList],
 		"actionIndicators": [actionIndicatorInstance, actionIndicatorsList], 
-		"checkpoints": [checkpointInstance, checkpointsList], 
+		"player1checkpoints": [checkpointInstance, p1checkpointsList],
+		"player2checkpoints": [checkpointInstance, p2checkpointsList], 
 		"enemies": [enemyInstance, enemiesList],
 		"player1": [player1Instance, playersList],
-		"player2": [player2Instance, playersList]}
+		"player2": [player2Instance, playersList],
+		"ziplines": [ziplineInstance, ziplineList]}
 	var instance
 	var instanceParent
 	for line in content.split("\n"):
@@ -117,6 +125,7 @@ func loadLevel():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
 		# Position
+		#does not work with goal/checkpoints
 		if line.contains(", "):
 			#print("Object: ", instance)
 			var instancedObj = instance.instantiate()
@@ -124,6 +133,7 @@ func loadLevel():
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
+			#print("instance parent: ", instanceParent)
 			instanceParent.add_child(instancedObj)
 	
 	# load the actionArrays
@@ -197,20 +207,23 @@ func round_to_dec(num, digit):
 
 # Helper function that grabs the target player's closest forward checkpoint
 func getNearestCheckpoint(who):
-	var nearestPoint = objectList.get_node(who.name + "checkpoints").get_child(0)
-	var shortestDistance = who.position.distance_to(nearestPoint.position)
-	for i in objectList.get_node(who.name + "checkpoints").get_children():
+	var checkpointPath = who.name.to_lower() + "checkpoints"
+	var viableCheckpoints = []
+	for i in objectList.get_node(checkpointPath).get_children():
 		#print("Checking: ", i)
-		var distance = who.position.distance_to(i.position)
 		# Check if checkpoint in front of player
 		var direction = (i.position.x - who.position.x)
-		#print("dir: ", direction)
 		if (direction >= 0):
-			if distance < shortestDistance:
-				#print("foClosest node: ", i)
+			viableCheckpoints.append(i)
+	#print("Viable checkpoints: ", viableCheckpoints)
+	var nearestPoint = viableCheckpoints[0]
+	var shortestDistance = who.position.distance_to(viableCheckpoints[0].position)
+	for i in viableCheckpoints:
+		var distance = who.position.distance_to(i.position)
+		if distance < shortestDistance:
 				nearestPoint = i
 				shortestDistance = distance
-	print("Relocating to: ", nearestPoint.position)
+	#print("Relocating to: ", nearestPoint.position)
 	return nearestPoint
 	
 # Basic checkpointing system
@@ -230,6 +243,16 @@ func _onEndGameBodyEntered(body:Node2D):
 		print("Game over!")
 		self.emit_signal("gameOver")
 
+func _onRunBoundsBodyEntered(body: Node2D) -> void:
+	if (body.name.contains("Player")):
+		print("Entering max run bounds")
+		body.hitBounds = true
+
+
+func _onRunBoundsBodyExited(body: Node2D) -> void:
+	if (body.name.contains("Player")):
+		print("Leaving max run bounds")
+		body.hitBounds = false
 func _onScored(id, p_score):
 	var scoreToAdd = 100 - p_score
 	score += scoreToAdd

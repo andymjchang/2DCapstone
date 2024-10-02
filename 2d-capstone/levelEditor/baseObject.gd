@@ -20,7 +20,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#print("children in process,",self.get_children())
 	#if block is being dragged, have a transparent image of it follow the mouse around
 	if isDragging:
 		spriteNode.visible = true
@@ -56,6 +55,7 @@ func _input(event: InputEvent) -> void:
 		#for scenes that have multiple components, and offset from the origin for subsqeuent components has to be accounted for
 		#if self.get_child(0).get_node(curAreaDragging).get_parent().offset:
 			#self.get_child(0).get_node(curAreaDragging).get_parent().global_position.x -= self.get_child(0).get_node(curAreaDragging).get_parent().offset
+			#PROBLEM this is not setting the actual object within the scene
 		self.get_node(curArea).global_position =  self.get_child(0).get_node(curAreaDragging).get_parent().global_position
 		isDragging = false
 		

@@ -4,7 +4,7 @@ extends Node2D
 var healthStatus= "full"
 var player : String 
 @onready var fullHealth = $fullP1Health
-@onready var halfHealth = $halfP1Health
+@onready var zeroHealth = $zeroP1Health
 var changed = true
 
 
@@ -15,12 +15,13 @@ func _ready() -> void:
 	#self.decreaseHealth.connect(_onDamageTaken)
 	if player == "player1":
 		self.get_node("fullP1Health").visible = true
-		self.get_node("halfP1Health").visible = false
+		self.get_node("zeroP1Health").visible = false
 		fullHealth = $fullP1Health
 	if player == "player2":
 		self.get_node("fullP2Health").visible = true
-		self.get_node("halfP2Health").visible = false
-		halfHealth = $halfP2Health
+		self.get_node("zeroP2Health").visible = false
+		zeroHealth = $zeroP2Health
+		
 	
 
 
@@ -28,11 +29,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if player == "player2" and changed:
 		self.get_node("fullP2Health").visible = true
-		self.get_node("halfP2Health").visible = false
+		self.get_node("zeroP2Health").visible = false
 		self.get_node("fullP1Health").visible = false
-		self.get_node("halfP1Health").visible = false
+		self.get_node("zeroP1Health").visible = false
 		changed = false
-		halfHealth = $halfP2Health
+		zeroHealth = $zeroP2Health
 		fullHealth = $fullP2Health
 		
 #is this redundant?	
@@ -41,6 +42,7 @@ func takeDamage() -> void:
 		"full":
 			#decrease to half
 			self.fullHealth.visible = false
+			self.zeroHealth.visible = true
 			healthStatus = "zero"
 		"zero":
 			#should not be getting here

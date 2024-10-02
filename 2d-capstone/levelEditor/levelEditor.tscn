@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=43 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -21,7 +21,6 @@
 [ext_resource type="Script" path="res://worldObjects/scripts/camera.gd" id="8_nimfa"]
 [ext_resource type="Texture2D" uid="uid://dw8ug6v7ohq0i" path="res://levelEditor/programmerArtAssets/rac.png" id="8_w245c"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="9_6gh41"]
-[ext_resource type="Texture2D" uid="uid://baid4a4l5n6m5" path="res://levelEditor/programmerArtAssets/checkpoint.png" id="9_wpw0u"]
 [ext_resource type="Script" path="res://worldObjects/scripts/killFloor.gd" id="10_jxp0h"]
 [ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
 [ext_resource type="PackedScene" uid="uid://btjihhiq2yb5s" path="res://levelEditorObjects/playerScene.tscn" id="12_o6ydd"]
@@ -34,6 +33,8 @@
 [ext_resource type="PackedScene" uid="uid://vwn054kwmv7u" path="res://levelEditorObjects/ziplineScene.tscn" id="17_x5g52"]
 [ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="19_jlcy1"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
+[ext_resource type="Texture2D" uid="uid://l8vpo2u44l4p" path="res://levelEditor/programmerArtAssets/p1checkpoint.png" id="22_1mwd2"]
+[ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
 [ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
 [ext_resource type="Texture2D" uid="uid://dd5m0kwji44w1" path="res://levelEditor/programmerArtAssets/zipline.png" id="30_pq2h6"]
 [ext_resource type="Texture2D" uid="uid://bv8ou5u1pkb2k" path="res://levelEditor/programmerArtAssets/R (1).jpg" id="34_wwivc"]
@@ -85,11 +86,14 @@ stream = ExtResource("19_jlcy1")
 
 [node name="actionIndicators" type="Node2D" parent="objectList"]
 
-[node name="checkpoints" type="Node2D" parent="objectList"]
+[node name="player1checkpoints" type="Node2D" parent="objectList"]
+
+[node name="player2checkpoints" type="Node2D" parent="objectList"]
 
 [node name="player1" type="Node2D" parent="objectList"]
 
 [node name="player2" type="Node2D" parent="objectList"]
+visible = false
 
 [node name="enemies" type="Node2D" parent="objectList"]
 
@@ -172,6 +176,13 @@ offset_right = 1922.0
 offset_bottom = 1107.0
 color = Color(0.259294, 0.259294, 0.259294, 1)
 
+[node name="p2checkpointButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 416.0
+offset_top = 848.0
+offset_right = 516.0
+offset_bottom = 948.0
+texture_normal = ExtResource("26_3eu32")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/objectSelector"]
 offset_left = 104.0
 offset_top = 951.0
@@ -190,9 +201,9 @@ texture_normal = ExtResource("7_dw7u5")
 layout_mode = 2
 texture_normal = ExtResource("8_w245c")
 
-[node name="checkpointButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+[node name="p1checkpointButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("9_wpw0u")
+texture_normal = ExtResource("22_1mwd2")
 
 [node name="goalButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
 layout_mode = 2
@@ -390,14 +401,15 @@ clip_text = true
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit3" to="." method="_on_text_edit_3_text_changed"]
+[connection signal="button_down" from="UI/objectSelector/p2checkpointButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/p2checkpointButton" to="." method="_on_p2checkpoint_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/HBoxContainer/actionButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/HBoxContainer/actionButton" to="." method="_on_action_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/HBoxContainer/mouseButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/HBoxContainer/mouseButton" to="." method="_on_mouse_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/HBoxContainer/racButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/HBoxContainer/racButton" to="." method="_on_rac_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/HBoxContainer/checkpointButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/HBoxContainer/checkpointButton" to="." method="_on_checkpoint_button_button_up"]
+[connection signal="pressed" from="UI/objectSelector/HBoxContainer/p1checkpointButton" to="." method="_on_p1checkpoint_button_pressed"]
 [connection signal="button_down" from="UI/objectSelector/HBoxContainer/goalButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/HBoxContainer/goalButton" to="." method="_on_goal_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/HBoxContainer/enemyButton" to="." method="_on_test_placer_button_down"]

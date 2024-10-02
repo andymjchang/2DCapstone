@@ -7,7 +7,7 @@ signal scored(id, score)
 
 var curSprite
 var JUMP_VELOCITY = -550.0
-var SPEED = 400.0
+var SPEED = 50.0
 var health = 27 # 3 hits
 var blockType = "player"
 var invuln = false
@@ -24,6 +24,7 @@ var checkpoint
 var otherPlayer
 var editing = false
 var index = 0
+var hitBounds = false
 
 var jumpInProgress = false
 var punchInProgress = false
@@ -79,15 +80,17 @@ func _physics_process(delta: float) -> void:
 				velocity.x = Globals.pixelsPerFrame
 				if not jumpInProgress and not punchInProgress:
 					$Animation.play("Run")
-				#position.x += 2.0
-			else:
-				pass # Right now just don't give regular controls
+
+				# Pseudo-autoscroll prototype
 				# var direction = Input.get_axis(left, right)
-				# if direction:
-				# 	velocity.x = direction * SPEED
+				# if not hitBounds and direction > 0:
+				# 	velocity.x =  Globals.pixelsPerFrame + SPEED
+				# elif hitBounds and direction > 0:
+				# 	velocity.x = Globals.pixelsPerFrame
 				# else:
 				# 	velocity.x = move_toward(velocity.x, 0, SPEED)
-
+			else:
+				pass 
 			# Other player mechanics
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
@@ -108,9 +111,9 @@ func _physics_process(delta: float) -> void:
 		elif reachedCheckpoint:
 			# Wait to respawn relocating player when teammate has aligned
 			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
-				print("My name: ", name)
-				print("Made it")
-				emit_signal("revive")
+				#print("My name: ", name)
+				#print("Made it")
+				emit_signal("revive", self)
 				# Reset relocating player position and allow control
 				get_node("CollisionShape2D").call_deferred("set", "disabled", false)
 				relocating = false
@@ -129,7 +132,7 @@ func _onTakeDamage(amount):
 		if health % 9 == 0:
 			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
 		if health <= 0:
-			print("Player died!")
+			#print("Player died!")
 			#self.visible = false
 			$Animation.self_modulate.a = 0.5
 			dead = true
@@ -160,12 +163,12 @@ func _onRelocate(nearestPoint):
 	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
 	reachedCheckpoint = false
 	#var newVelocity = Vector2((nearestPoint.position - self.position) * (SPEED / 10 * get_process_delta_time()))
-	await get_tree().create_timer(0.0001).timeout
+	#await get_tree().create_timer(0.0001).timeout
 	# Set destination, begin move to point
 	checkpoint = nearestPoint
-	velocity = Vector2(0,0)
+	#velocity = newVelocity #Vector2(0,0)
 	position = nearestPoint.position
-	print("Position now: ", position)
+	#print("Position now: ", position)
 	#velocity = newVelocity
 
 

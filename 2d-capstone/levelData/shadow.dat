@@ -1,28 +1,29 @@
 platformBlocks
-0, 0
-0, 0
-0, 300
-150, 300
-300, 300
 0, 600
 150, 600
 300, 600
-450, 300
 450, 600
-600, 300
 600, 600
 750, 600
-750, 300
-900, 300
 900, 600
+1050, 600
 1200, 600
 1350, 600
-1200, 300
-1350, 300
+1500, 600
+1650, 600
+1800, 600
+1950, 600
+2100, 600
+-150, 600
+actionIndicators
+player1checkpoints
+player2checkpoints
 player1
 45, 540
 player2
-45, 240
+45.0000076293945, 540
+enemies
 killFloors
-1350, 600
-1350, 300
+goalBlocks
+breakableWalls
+ziplines

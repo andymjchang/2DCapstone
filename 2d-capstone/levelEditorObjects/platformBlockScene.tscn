@@ -10,17 +10,17 @@ size = Vector2(152, 57)
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="Block" parent="Node2D" instance=ExtResource("1_digyc")]
-script = null
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
-position = Vector2(0, 9)
-scale = Vector2(0.119609, 0.119609)
-texture = ExtResource("2_gep2g")
-
 [node name="Area2D" type="Area2D" parent="Node2D" groups=["goals"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
 modulate = Color(0.935511, 0.479721, 0.526804, 1)
 position = Vector2(0, 12.5)
 shape = SubResource("RectangleShape2D_s67gh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(0, 9)
+scale = Vector2(0.119609, 0.119609)
+texture = ExtResource("2_gep2g")
+
+[node name="Block" parent="Node2D" instance=ExtResource("1_digyc")]
+script = null

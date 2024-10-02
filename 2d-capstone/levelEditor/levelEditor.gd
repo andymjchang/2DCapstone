@@ -19,9 +19,11 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint", "breakableWall", "zipline"]
+var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE}
 var delete = "deleteBlock"
+var bindedBlocks = []
+var isBinding = false
 
 var MIN_STEP : int = 25
 
@@ -52,7 +54,8 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var goalBlocksList = $objectList/goalBlocks
 @onready var enemyList = $objectList/enemies
 @onready var actionIndicatorsList = $objectList/actionIndicators
-@onready var checkpointsList = $objectList/checkpoints
+@onready var p1checkpointsList = $objectList/player1checkpoints
+@onready var p2checkpointsList = $objectList/player2checkpoints
 @onready var bWallsList = $objectList/breakableWalls
 @onready var player1List = $objectList/player1
 @onready var player2List = $objectList/player2
@@ -77,7 +80,14 @@ func _ready():
 	self.objectClicked.connect(_onObjectClicked)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
-	saveFileName = fileLabel.text
+	if Globals.curFile == "":
+		saveFileName = fileLabel.text
+		Globals.curFile = saveFileName
+	else:
+		fileLabel.text = Globals.curFile
+		saveFileName = fileLabel.text
+	
+	
 	Globals.stepSize = stepSize
 	if FileAccess.file_exists(levelDataPath + saveFileName + ".dat"):
 		displayStatus(FILE_EXISTS_PATH, true)
@@ -100,6 +110,15 @@ func _process(delta: float) -> void:
 				currentBlock.queue_free()
 				currentBlock = null
 				break
+	if Input.is_action_just_pressed("lengthenBlock") and currentBlock.blockType == "normal":
+		#extend platform block by one platform block
+		lengthenPlatform()
+	if Input.is_action_just_pressed("bindBlocks"):
+		if isBinding:
+			isBinding = false
+			bindedBlocks = []
+		else:
+			isBinding = true
 			
 func _on_text_edit_0_text_changed() -> void:
 	if beatsMinLabel.text.is_valid_int():
@@ -124,15 +143,18 @@ func _on_text_edit_2_text_changed() -> void:
 		
 
 func loadLevel():
+	print("save file name, ", saveFileName)
 	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlock, platformBlocksList, blockTypes[2]], 
 		"goalBlocks": [goalBlock, goalBlocksList, blockTypes[4]],
 		"killFloors": [killFloor, killFloorsList, blockTypes[6]],
 		"actionIndicators": [actionIndicator, actionIndicatorsList, blockTypes[3]], 
-		"checkpoints": [checkpoint, checkpointsList, blockTypes[7]], 
+		"player1checkpoints": [checkpoint, p1checkpointsList, blockTypes[7]], 
+		"player2checkpoints": [checkpoint, p2checkpointsList, blockTypes[8]],
 		"enemies": [enemyCharacter, enemyList, blockTypes[5]],
 		"player1": [player1, player1List, blockTypes[0]],
-		"player2": [player2, player2List, blockTypes[1]]}
+		"player2": [player2, player2List, blockTypes[1]],
+		"ziplines": [zipline, ziplineList, blockTypes[10]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -140,6 +162,7 @@ func loadLevel():
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			objectList = instanceList.get(line)[1]
+			#print("List: ", objectList)
 			blockType = instanceList.get(line)[2]
 		# Position
 		if line.contains(", "):
@@ -158,28 +181,42 @@ func _on_save_button_down() -> void:
 	
 func _on_text_edit_3_text_changed() -> void:
 	saveFileName = fileLabel.text
+	Globals.curFile = saveFileName
 	
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
 	
-func _on_checkpoint_button_button_up() -> void:
+func _on_p1checkpoint_button_pressed() -> void:
 	var checkpointInstance = checkpoint.instantiate()
 	var checkParent = baseObject.instantiate()
 	checkParent.add_child(checkpointInstance)
 	checkParent.blockType = blockTypes[7]
-	checkpointsList.add_child(checkParent)
-	place_block(checkParent, checkpointsList, camera.position, false)
+	p1checkpointsList.add_child(checkParent)
+	place_block(checkParent, p1checkpointsList, camera.position, false)
+
+func _on_p2checkpoint_button_button_up() -> void:
+	var checkpointInstance = checkpoint.instantiate()
+	var checkParent = baseObject.instantiate()
+	checkParent.add_child(checkpointInstance)
+	checkParent.blockType = blockTypes[7]
+	p2checkpointsList.add_child(checkParent)
+	place_block(checkParent, p2checkpointsList, camera.position, false)
 	
 func _onZiplineButtonPressed() -> void:
-	var ziplineStartInstance = zipline.instantiate()
+	var ziplineInstance = zipline.instantiate()
 	var zipParent = baseObject.instantiate()
-	zipParent.add_child(ziplineStartInstance)
+	zipParent.add_child(ziplineInstance)
 	zipParent.blockType = blockTypes[9]
 	ziplineList.add_child(zipParent)
 	place_block(zipParent, ziplineList, camera.position, false)
 	
 func _on_exit_button_pressed() -> void:
-	get_tree().quit()
+	# This will be the final functionality so players can navigate between menus
+	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+
+	# For debugging
+	# get_tree().quit()
+
 	
 func _on_rac_button_button_up() -> void:
 	if !player1List.has_node("baseObject"):
@@ -215,6 +252,7 @@ func _on_block_button_button_up() -> void:
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
+	print("block type: ", blockParent.blockType)
 	place_block(blockParent, platformBlocksList, camera.position, false)
 
 func _on_action_button_button_up() -> void:
@@ -223,7 +261,6 @@ func _on_action_button_button_up() -> void:
 	actionParent.add_child(actionInstance)
 	actionParent.blockType = blockTypes[3]
 	place_block(actionParent, actionIndicatorsList, camera.position, false)
-
 
 func _on_breakable_wall_button_button_up() -> void:
 	var bWallInstance = breakableWall.instantiate()
@@ -265,16 +302,33 @@ func _on_play_audio_button_pressed() -> void:
 	
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null or "player" in currentBlock.blockType): return
-	currentBlock.position.x += stepSize
+	if(isBinding):
+		for block in bindedBlocks:
+			block.position.x += stepSize
+	else:
+		currentBlock.position.x += stepSize
+	
 func _on_left_button_button_down() -> void:
-	if (currentBlock == null or "player" in currentBlock.blockType): return
-	currentBlock.position.x -= stepSize
+	if (currentBlock == null or "player" in currentBlock.blockType): return	
+	if(isBinding):
+		for block in bindedBlocks:
+			block.position.x -= stepSize
+	else:
+		currentBlock.position.x -= stepSize
 func _on_down_button_button_down() -> void:
 	if (currentBlock == null): return
-	currentBlock.position.y += stepSize
+	if(isBinding):
+		for block in bindedBlocks:
+			block.position.y += stepSize
+	else:
+		currentBlock.position.y += stepSize
 func _on_up_button_button_down() -> void:
 	if (currentBlock == null): return
-	currentBlock.position.y -= stepSize
+	if(isBinding):
+		for block in bindedBlocks:
+			block.position.y -= stepSize
+	else:
+		currentBlock.position.y -= stepSize
 	
 func save_scene_to_file():
 	if player1List.get_child_count() == 1 and player2List.get_child_count() == 1:
@@ -282,12 +336,20 @@ func save_scene_to_file():
 			status.show()
 			displayStatus(OVERWRITE_FILE, true)
 		else:
+			overwrite = false
 			# successful save
 			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
 				for item in itemList.get_children():
-					newFile.store_string(str(item.position.x) + ", " + str(item.position.y) + "\n")
+					#go through each of the items children areas
+					var childrenList = item.get_child(0).get_children()
+					for blockChild in childrenList:
+						#this is most likely where the zipline error/duplication is occuring
+						print("block child being saved, ", blockChild.get_child(0))
+						newFile.store_string(str(blockChild.get_child(0).global_position.x) + ", " + str(blockChild.get_child(0).global_position.y) + "\n")
+					#print("child list in save, ", childrenList)
+					
 	else:
 		displayStatus(UNABLE_TO_SAVE, false)
 		
@@ -372,15 +434,16 @@ func reset_drag_tracking():
 
 func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 	trackingPosition = true
-	#timeHeld = 0.0
-	print("Reaching signal")
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
-			print("Found area: ", curAreaDragging)
-			currentBlock = block
-			print("current block: ", currentBlock)
-			#_on_text_edit_2_text_changed()
+			if(isBinding):
+				#add to the current list of binded blocks
+				bindedBlocks.append(block)
+			else:
+				#we only want to have one block selected
+				currentBlock = block
+				print("new block clicke")
 			return
 	
 func getList(blockType : String) -> Node:
@@ -396,8 +459,10 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/player2")
 	if blockType == "goalBlock":
 		return get_node("objectList/goalBlocks")
-	if blockType == "checkpoint":
-		return get_node("objectList/checkpoints")
+	if blockType == "p1checkpoint":
+		return get_node("objectList/player1checkpoints")
+	if blockType == "p2checkpoint":
+		return get_node("objectList/player2checkpoints")
 	if blockType == "killFloor":
 		return get_node("objectList/killFloors")
 	if blockType == "breakableWall":
@@ -464,6 +529,27 @@ func _on_play_level_button_button_down() -> void:
 	# Add the new scene to the scene tree and set it as the current scene
 	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
 	#get_tree().current_scene = scene_instance  # Set it as the new current scene
+
+func lengthenPlatform() -> void:
+	#this isnt modular but it will work for now
+	var blockArea = currentBlock.get_child(0).get_child(0).get_node("EditorArea0")
+	print("haha block area ",blockArea)
+	var blockShape = blockArea.get_node("CollisionShape2D").shape as RectangleShape2D
+	var blockExtents = blockShape.extents
+	#get the lower left and upp right coords of the current block
+	var upperLeft = currentBlock.global_position + blockExtents
+	var lowerRight = currentBlock.global_position - blockExtents
+	var width = abs(upperLeft.x - lowerRight.x)
+	var newPos = blockArea.global_position.x + width
+		
+	var blockInstance = platformBlock.instantiate()
+	var blockParent = baseObject.instantiate()
+	blockParent.add_child(blockInstance)
+	blockParent.blockType = blockTypes[2]
+	print("block type: ", blockParent.blockType)
+	place_block(blockParent, platformBlocksList, Vector2(newPos, blockArea.global_position.y), false)
+		
+	
 
 
 
