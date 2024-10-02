@@ -141,6 +141,7 @@ rotation = 0.000143446
 monitoring = false
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
+visible = false
 offset_left = 10.0
 offset_top = -3.0
 offset_right = 26.0
@@ -174,6 +175,8 @@ texture = ExtResource("6_4xpfe")
 [node name="attackTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
+
+[node name="sfxPlayer" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

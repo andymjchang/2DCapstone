@@ -1,14 +1,24 @@
 extends Node2D
 
+@export var greenTiming : Texture
+@export var yellowTiming : Texture
+@export var redTiming : Texture
+
 @onready var label
+@onready var clefSprite
 var fadeMode = false
 var trackedNode
 var min_rotation
 var max_rotation
+var clefDefaultPosition
 
 func _ready():
 	label = $RichTextLabel
+	clefSprite = $clefSprite
 	label.text = ""
+	clefDefaultPosition = clefSprite.position
+	
+	clefSprite.modulate.a = 0.0
 	
 	var min_rotation_degrees = 0
 	var max_rotation_degrees = 3
@@ -26,14 +36,21 @@ func initText(text, player_position):
 	var labelText = ""
 	if text > 90:
 		labelText = "Perfect!"
+		clefSprite.texture = greenTiming
 	elif text > 70:
 		labelText = "Good!"
+		clefSprite.texture = yellowTiming
 	else: 
 		labelText = "Missed!"
+		clefSprite.texture = redTiming
 	label.text = labelText
 	#position.y = player_position.y
 	fadeMode = true
 	label.modulate.a = 1.0
+	
+	clefSprite.modulate.a = 1.0
+	clefSprite.position = clefDefaultPosition
+	
 	rotation = randf_range(min_rotation, max_rotation)
 
 func _process(_delta: float) -> void:
@@ -43,5 +60,7 @@ func _process(_delta: float) -> void:
 	# fade
 	if fadeMode:
 		label.modulate.a -= 0.02
+		clefSprite.modulate.a -= 0.02
+		clefSprite.position.y -= 0.15
 	if label.modulate.a <= 0:
 		fadeMode = false

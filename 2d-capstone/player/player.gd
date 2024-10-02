@@ -29,8 +29,10 @@ var jumpInProgress = false
 var punchInProgress = false
 var runInProgress = false
 
+# Other nodes
 var otherPlayerList
 var worldNode
+var sfxPlayer
 
 func _ready():
 	print("my name is: ",self.name)
@@ -60,6 +62,8 @@ func _ready():
 	
 	worldNode = get_tree().get_root().get_node("level")
 	self.scored.connect(worldNode._onScored)
+	
+	sfxPlayer = $sfxPlayer
 
 func _physics_process(delta: float) -> void:
 	if not editing:

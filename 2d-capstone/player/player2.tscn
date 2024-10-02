@@ -123,6 +123,7 @@ position = Vector2(-20.4107, -10.1875)
 monitoring = false
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
+visible = false
 offset_left = 12.0
 offset_top = 2.0
 offset_right = 29.0
@@ -153,6 +154,8 @@ texture = ExtResource("5_u0jhh")
 [node name="attackTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
+
+[node name="sfxPlayer" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
