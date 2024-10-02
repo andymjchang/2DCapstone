@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpqay3flkobdk"]
+[gd_scene load_steps=8 format=3 uid="uid://bpqay3flkobdk"]
 
 [ext_resource type="Script" path="res://ui/scripts/landingPage.gd" id="1_4duo3"]
 [ext_resource type="Texture2D" uid="uid://uqstjyc7iyr2" path="res://ui/assets/Main_Menu.png" id="2_3x1ff"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://g15lptde2dlw" path="res://ui/assets/Start_button_pressed.png" id="3_htjxe"]
 [ext_resource type="Texture2D" uid="uid://bpr2jpqk4ugbf" path="res://ui/assets/Quit_button_unpressed.png" id="4_1m2j0"]
 [ext_resource type="Texture2D" uid="uid://cvl0lsfhi2474" path="res://ui/assets/Quit_button_pressed.png" id="5_bjqql"]
+[ext_resource type="Texture2D" uid="uid://2oimrp82wd5r" path="res://ui/assets/Level_Editor_Button_Unpressed.png" id="5_q0m6t"]
 
 [node name="LandingPage" type="CanvasLayer"]
 script = ExtResource("1_4duo3")
@@ -22,27 +23,29 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -951.0
-offset_top = -549.0
-offset_right = 131.0
-offset_bottom = 533.0
+offset_left = -842.0
+offset_top = -797.0
+offset_right = 102.0
+offset_bottom = 421.0
 grow_horizontal = 0
 grow_vertical = 2
 texture_normal = ExtResource("2_76o7c")
 texture_pressed = ExtResource("3_htjxe")
 ignore_texture_size = true
+stretch_mode = 0
 
-[node name="editorButton" type="Button" parent="."]
+[node name="editorButton" type="TextureButton" parent="."]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 53.0
-offset_top = -91.0
-offset_right = 627.0
-offset_bottom = 54.0
+offset_left = 32.0
+offset_top = -273.0
+offset_right = 644.0
+offset_bottom = -80.0
 grow_vertical = 2
-theme_override_font_sizes/font_size = 100
-text = "Level Editor"
+texture_normal = ExtResource("5_q0m6t")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="quitButton" type="TextureButton" parent="."]
 anchors_preset = 7
