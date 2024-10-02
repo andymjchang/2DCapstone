@@ -102,7 +102,7 @@ func _process(delta: float) -> void:
 				currentBlock.queue_free()
 				currentBlock = null
 				break
-	if Input.is_action_just_pressed("lenthenBlock") and currentBlock.blockType == "normal":
+	if Input.is_action_just_pressed("lengthenBlock") and currentBlock.blockType == "normal":
 		#extend platform block by one platform block
 		lengthenPlatform()
 	if Input.is_action_just_pressed("bindBlocks"):
