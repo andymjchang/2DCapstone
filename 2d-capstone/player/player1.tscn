@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://nchurhplqcb3" path="res://animations/raccoonAnims/Raccoon_punch.png" id="3_sudcy"]
 [ext_resource type="Texture2D" uid="uid://bt5jsder0msfx" path="res://player/playerActionCircle.png" id="6_4xpfe"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
-[ext_resource type="AudioStream" uid="uid://befgh78mkdgal" path="res://audioEffects/Damage.mp3" id="8_uiiji"]
+[ext_resource type="AudioStream" uid="uid://b67k06qom6hxa" path="res://audioEffects/SFX_Hit_4.mp3" id="8_k3kow"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fb3mh"]
 atlas = ExtResource("2_amwal")
@@ -172,7 +172,7 @@ one_shot = true
 stream = ExtResource("7_wy6uo")
 
 [node name="damagePlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_uiiji")
+stream = ExtResource("8_k3kow")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
