@@ -80,7 +80,14 @@ func _ready():
 	self.objectClicked.connect(_onObjectClicked)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
-	saveFileName = fileLabel.text
+	if Globals.curFile == "":
+		saveFileName = fileLabel.text
+		Globals.curFile = saveFileName
+	else:
+		fileLabel.text = Globals.curFile
+		saveFileName = fileLabel.text
+	
+	
 	Globals.stepSize = stepSize
 	if FileAccess.file_exists(levelDataPath + saveFileName + ".dat"):
 		displayStatus(FILE_EXISTS_PATH, true)
@@ -173,6 +180,7 @@ func _on_save_button_down() -> void:
 	
 func _on_text_edit_3_text_changed() -> void:
 	saveFileName = fileLabel.text
+	Globals.curFile = saveFileName
 	
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
