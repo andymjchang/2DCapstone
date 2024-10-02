@@ -35,5 +35,5 @@ func _on_texture_button_button_down() -> void:
 	
 func screenFlashEffect():
 	var screenFlashInstance = screenFlashNode.instantiate()
+	screenFlashInstance.screenFlash(0.25, 0.3)
 	add_child(screenFlashInstance)
-	print("screen flash")

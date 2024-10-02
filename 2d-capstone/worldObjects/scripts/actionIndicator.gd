@@ -11,7 +11,6 @@ var curSprite
 @onready var actionIndicatorManager
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
-@onready var timer = $Timer
 signal scored(indicator_position)
 
 var index = 0
