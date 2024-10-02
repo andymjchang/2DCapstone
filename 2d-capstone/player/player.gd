@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal takeDamage(amount)
 signal revive(who)
 signal relocate(nearestPoint)
+signal scored(id, score)
 
 var curSprite
 var JUMP_VELOCITY = -550.0
@@ -30,6 +31,7 @@ var punchInProgress = false
 var runInProgress = false
 
 var otherPlayerList
+var worldNode
 
 func _ready():
 	print("my name is: ",self.name)
@@ -56,7 +58,9 @@ func _ready():
 	self.relocate.connect(_onRelocate)
 	self.attack.visible = false
 	$Animation.animation_finished.connect(_onAnimationFinished)
-
+	
+	worldNode = get_tree().get_root().get_node("level")
+	self.scored.connect(worldNode._onScored)
 
 func _physics_process(delta: float) -> void:
 	if not editing:
@@ -88,7 +92,7 @@ func _physics_process(delta: float) -> void:
 				$Animation.play("Jump")
 				jumpInProgress = true
 				velocity.y = JUMP_VELOCITY
-				await get_tree().create_timer(0.2).timeout
+				#await get_tree().create_timer(0.2).timeout
 			
 			if Input.is_action_just_pressed(punch):
 				if canAttack:
@@ -96,10 +100,10 @@ func _physics_process(delta: float) -> void:
 					punchInProgress = true
 					#print("Punch!")
 					attack.visible = true
+					attack.monitoring = true
 					canAttack = false
-					await get_tree().create_timer(0.2).timeout
-					canAttack = true
-					attack.visible = false
+					$attackTimer.start()
+
 		elif reachedCheckpoint:
 			# Wait to respawn relocating player when teammate has aligned
 			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
@@ -171,3 +175,20 @@ func _onAnimationFinished():
 	elif $Animation.animation == "Punch":
 		punchInProgress = false
 	pass
+
+
+func _on_attack_hitbox_area_entered(area: Area2D) -> void:
+	var other = area.get_parent()
+	if other.is_in_group("actionIndicators"):
+		Globals.screenFlashEffect()
+		print("my position")
+		print(position.x)
+		print("their position")
+		print(other.position.x)
+		scored.emit(self.name, abs(other.position.x - position.x))
+
+
+func _on_attack_timer_timeout() -> void:
+	canAttack = true
+	attack.visible = false
+	attack.monitoring = false

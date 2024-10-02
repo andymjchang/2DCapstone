@@ -339,9 +339,9 @@ player2checkpoints
 13650, 275
 16050, 275
 player1
-45, 590
+0, 590
 player2
-45, 315
+0, 315
 enemies
 2250, 300
 2550, 300
@@ -398,4 +398,8 @@ goalBlocks
 20925, 575
 20925, 300
 breakableWalls
+<<<<<<< HEAD
 ziplines
+=======
+ziplines
+>>>>>>> origin/player-preview

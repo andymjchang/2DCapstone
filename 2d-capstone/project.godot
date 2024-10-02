@@ -36,6 +36,10 @@ project/assembly_name="2D Capstone"
 
 enabled=PackedStringArray()
 
+[global_group]
+
+actionIndicators=""
+
 [input]
 
 punch2={

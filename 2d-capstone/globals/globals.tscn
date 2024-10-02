@@ -8,13 +8,15 @@
 script = ExtResource("1_nrp7m")
 
 [node name="PreviewCanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
 visible = false
 
 [node name="TextureButton" type="TextureButton" parent="PreviewCanvasLayer"]
-offset_left = 1460.0
+offset_left = 1690.0
 offset_top = 5.0
-offset_right = 1911.0
-offset_bottom = 160.0
+offset_right = 2141.0
+offset_bottom = 156.0
+scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("2_h7na6")
 texture_pressed = ExtResource("3_le2si")
 

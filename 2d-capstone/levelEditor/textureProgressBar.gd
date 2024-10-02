@@ -22,7 +22,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if isDragging:
-		print("in isdragging")
+		#print("in isdragging")
 		#stop the audio TODO
 		var clickPos = get_local_mouse_position()
 	

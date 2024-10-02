@@ -1,42 +1,36 @@
-[gd_scene load_steps=21 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=20 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_78xmt"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="3_6me16"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_o6usx"]
-[ext_resource type="PackedScene" path="res://levelEditor/goal_block.tscn" id="3_oih58"]
+[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://levelEditor/goal_block.tscn" id="3_xm4bb"]
 [ext_resource type="Script" path="res://worldObjects/scripts/camera.gd" id="4_nttx1"]
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="7_po4yx"]
-[ext_resource type="PackedScene" uid="uid://bam8jg1naascf" path="res://worldObjects/zipline/ziplineStart.tscn" id="10_h5bd4"]
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="12_ngrii"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="AudioStream" uid="uid://b335gnra8wcg" path="res://audioTracks/Tutorial_Demo_120bpm_CMaj_V2.mp3" id="13_sfia2"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
-[ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
-[ext_resource type="PackedScene" uid="uid://c6mwitsbob8o7" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx12w"]
-size = Vector2(45.5, 1086)
+[ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="18_s1i58"]
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
 levelFile = "Lvl0.1"
 platformBlockInstance = ExtResource("2_78xmt")
-goalBlockInstance = ExtResource("3_oih58")
+goalBlockInstance = ExtResource("3_xm4bb")
 killFloorInstance = ExtResource("3_6me16")
 actionIndicatorInstance = ExtResource("3_o6usx")
 checkpointInstance = ExtResource("4_ph2wq")
 player1Instance = ExtResource("5_dfiyk")
 player2Instance = ExtResource("6_5q6wy")
 enemyInstance = ExtResource("7_po4yx")
-ziplineInstance = ExtResource("10_h5bd4")
 
 [node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
 
@@ -55,12 +49,12 @@ text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(250, 450)
-zoom = Vector2(2, 2)
+zoom = Vector2(1.75, 1.75)
 script = ExtResource("4_nttx1")
 
 [node name="MenuBg" type="Sprite2D" parent="Camera2D"]
-position = Vector2(19.208, -32.8751)
-scale = Vector2(0.223264, 0.223264)
+position = Vector2(3.74979, 45.2499)
+scale = Vector2(0.325417, 0.325417)
 texture = ExtResource("12_ngrii")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
@@ -72,27 +66,9 @@ max_distance = 10000.0
 position = Vector2(-720, -502)
 scale = Vector2(1.5, 1.5)
 
-[node name="RunBounds" type="Area2D" parent="Camera2D"]
-visible = false
-position = Vector2(-402, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RunBounds"]
-shape = SubResource("RectangleShape2D_jx12w")
-
-[node name="ColorRect" type="ColorRect" parent="Camera2D/RunBounds"]
-offset_left = -22.0
-offset_top = -448.0
-offset_right = 18.0
-offset_bottom = 374.0
 [node name="ActionLine" type="Sprite2D" parent="Camera2D"]
 position = Vector2(-250, 0)
 texture = ExtResource("15_gryhe")
-
-[node name="ScorePopup1" parent="Camera2D" instance=ExtResource("16_kbija")]
-position = Vector2(-250, -158)
-
-[node name="ScorePopup2" parent="Camera2D" instance=ExtResource("16_kbija")]
-position = Vector2(-250, 255)
 
 [node name="objectList" type="Node2D" parent="."]
 
@@ -107,19 +83,50 @@ position = Vector2(-250, 255)
 [node name="actionIndicators" type="Node2D" parent="objectList"]
 script = ExtResource("13_euntf")
 
-[node name="player2checkpoints" type="Node2D" parent="objectList"]
+[node name="Player2checkpoints" type="Node2D" parent="objectList"]
 script = ExtResource("14_rbu47")
 
-[node name="player1checkpoints" type="Node2D" parent="objectList"]
+[node name="Checkpoint" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(4800, 375)
+
+[node name="Checkpoint2" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(9000, 325)
+
+[node name="Checkpoint3" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(13800, 350)
+
+[node name="Checkpoint4" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(19200, 350)
+
+[node name="Checkpoint5" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(24600, 350)
+
+[node name="Checkpoint6" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(30000, 400)
+
+[node name="Player1checkpoints" type="Node2D" parent="objectList"]
 script = ExtResource("14_rbu47")
+
+[node name="Checkpoint" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(4800, 675)
+
+[node name="Checkpoint2" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(9000, 675)
+
+[node name="Checkpoint3" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(13800, 700)
+
+[node name="Checkpoint4" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(19200, 675)
+
+[node name="Checkpoint5" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(24600, 675)
+
+[node name="Checkpoint6" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
+position = Vector2(30025, 700)
 
 [node name="players" type="Node2D" parent="objectList"]
 
-[node name="ziplines" type="Node2D" parent="objectList"]
-
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 
-[node name="ScoreBar" parent="." instance=ExtResource("20_iu2pl")]
-
-[connection signal="body_entered" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyEntered"]
-[connection signal="body_exited" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyExited"]
+[node name="ProgressBar" parent="." instance=ExtResource("18_s1i58")]

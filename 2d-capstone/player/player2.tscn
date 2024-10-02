@@ -1,18 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://dakwrycm2d4ei"]
+[gd_scene load_steps=20 format=3 uid="uid://dakwrycm2d4ei"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yl2m7"]
 [ext_resource type="Texture2D" uid="uid://btpvi1n88pcgy" path="res://animations/mouseAnims/Mouse_sprite_sheet_v03.png" id="2_mn2ky"]
 [ext_resource type="Texture2D" uid="uid://660ldettifu3" path="res://animations/mouseAnims/Mouse_jump.png" id="2_y37go"]
 [ext_resource type="Texture2D" uid="uid://detjo7nluj3oo" path="res://animations/mouseAnims/Piper_punch.png" id="3_gsota"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(16, 17.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_via26"]
-size = Vector2(52.5, 24)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
-size = Vector2(25.5, 20.5)
+[ext_resource type="Texture2D" uid="uid://bt5jsder0msfx" path="res://player/playerActionCircle.png" id="5_u0jhh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q2tqb"]
 atlas = ExtResource("2_y37go")
@@ -102,42 +94,65 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
+size = Vector2(16, 17.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_via26"]
+size = Vector2(16.25, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
+size = Vector2(25.5, 20.5)
+
 [node name="Player2" type="CharacterBody2D" groups=["players"]]
-position = Vector2(2, -48)
+position = Vector2(0, -48)
 scale = Vector2(4, 4)
 script = ExtResource("1_yl2m7")
 
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(-25.4107, -8.68749)
+scale = Vector2(0.0892857, 0.0763889)
+sprite_frames = SubResource("SpriteFrames_2tkvf")
+animation = &"Punch"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 12.75)
+position = Vector2(-20.9107, 2.56251)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
+position = Vector2(-20.4107, -10.1875)
+monitoring = false
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
-visible = false
-offset_left = -12.25
-offset_top = 3.25
-offset_right = 11.75
-offset_bottom = 20.25
+offset_left = 12.0
+offset_top = 2.0
+offset_right = 29.0
+offset_bottom = 22.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(11, 11.75)
+position = Vector2(20.5357, 12.1875)
 shape = SubResource("RectangleShape2D_via26")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
+position = Vector2(-20.4107, -10.1875)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
 position = Vector2(-0.5, 12)
 shape = SubResource("RectangleShape2D_s4g51")
 
-[node name="Animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-5, 1.5)
-scale = Vector2(0.0892857, 0.0763889)
-sprite_frames = SubResource("SpriteFrames_2tkvf")
-animation = &"Run"
-
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-20.4107, -10.1875)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.5, 11.75)
 shape = SubResource("RectangleShape2D_44r6d")
+
+[node name="actionLine" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_u0jhh")
+
+[node name="attackTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
+[connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

@@ -37,7 +37,6 @@ var restartButton
 var music
 
 var time : float = 0
-var bpm: int = 100
 var score = 0
 
 @onready var timerText
@@ -45,7 +44,8 @@ var score = 0
 @onready var camera
 @onready var scoreText
 
-var textPopupScene = preload("res://worldObjects/scoreText.tscn")
+var textPopupScene1
+var textPopupScene2
 
 
 # Called when the node enters the scene tree for the first time.
@@ -56,6 +56,13 @@ func _ready():
 	player2 = playersList.get_node("Player2")
 	camera = $Camera2D
 	scoreText = $CanvasLayer/Score
+	
+	# intialize text popup node
+	textPopupScene1 = $Camera2D/ScorePopup1
+	textPopupScene2 = $Camera2D/ScorePopup2
+	textPopupScene1.initPosition(player1)
+	textPopupScene2.initPosition(player2)
+	
 	music = camera.get_node("Music")
 	loadAudio()
 	
@@ -75,11 +82,14 @@ func _ready():
 	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
 
 	# Start game
+	Globals.inLevel = false
 	restartButton.visible = false
 	changeCountdown()
-	await get_tree().create_timer(3.0).timeout
-	Globals.inLevel = true
+	#startGame()
+	
+func startGame():
 	music.play(0.0)
+	Globals.inLevel = true
 
 func loadAudio():
 	if !Globals.currentSongFileName:
@@ -89,7 +99,7 @@ func loadAudio():
 	music.stream = newAudio
 
 func loadLevel():
-	# set file/music to load
+	# set file to load
 	if Globals.currentSongFileName:
 		levelFile = Globals.currentEditorFileName
 	if Globals.curFile:
@@ -177,9 +187,10 @@ func _onLevelCompleted():
 	Globals.inLevel = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	updateTime(delta)
-	pass
+	if time >= 3.0 and !Globals.inLevel:
+		startGame()
 
 func updateTime(delta: float):
 	time = time + delta
@@ -188,13 +199,11 @@ func updateTime(delta: float):
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 	
-func updateScore(indicator_position):
-	var score_to_add = 100 - (indicator_position - player1.position.x)
-	score += score_to_add
-	scoreText.text = str(int(score))
-	var textPopup = textPopupScene.instantiate()
-	textPopup.initText(score_to_add, player1.position)
-	add_child(textPopup)
+#func updateScore(indicator_position):
+	#var score_to_add = 100 - (indicator_position - player1.position.x)
+	#score += score_to_add
+	#scoreText.text = str(int(score))
+	#textPopupScene1.initText(score, player1.position)
 
 # Helper function that grabs the target player's closest forward checkpoint
 func getNearestCheckpoint(who):
@@ -244,3 +253,11 @@ func _onRunBoundsBodyExited(body: Node2D) -> void:
 	if (body.name.contains("Player")):
 		print("Leaving max run bounds")
 		body.hitBounds = false
+func _onScored(id, p_score):
+	var scoreToAdd = 100 - p_score
+	score += scoreToAdd
+	scoreText.text = str(int(score))
+	if id == "Player1":
+		textPopupScene1.initText(scoreToAdd, player1.position)
+	if id == "Player2":
+		textPopupScene2.initText(scoreToAdd, player2.position)

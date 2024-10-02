@@ -100,7 +100,7 @@ func _process(delta: float) -> void:
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
 	if Input.is_action_just_pressed(delete) and currentBlock:
-		print("detecting delete key press")
+		#print("detecting delete key press")
 		#get current click on block and delete it 
 		var blockList = getList(currentBlock.blockType)
 		for block in blockList.get_children():
@@ -408,10 +408,10 @@ func place_block(instance, parent, placePos, initial):
 	# 	instance.position = snap_position(placePos)
 	# Snap default player position
 	elif instance.blockType == blockTypes[0]: 
-		instance.position.x = 45
+		instance.position.x = 0
 		instance.position.y = placePos.y
 	elif instance.blockType == blockTypes[1]: 
-		instance.position.x = 45
+		instance.position.x = 0
 		instance.position.y = placePos.y
 	else:
 		print("In this one")

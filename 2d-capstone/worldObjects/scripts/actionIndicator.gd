@@ -11,7 +11,6 @@ var curSprite
 @onready var actionIndicatorManager
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
-@onready var timer = $Timer
 signal scored(indicator_position)
 
 var index = 0
@@ -33,7 +32,7 @@ func _ready() -> void:
 func set_target_time(time: float) -> void:
 	target_time = time
 func get_target_time():
-	return target_time - animation_time + 3
+	return target_time - animation_time + 3.0
 
 # Activate the transition
 func start_transition():
@@ -53,7 +52,7 @@ func _process(delta: float) -> void:
 	var t = clamp(elapsed_time / animation_time, 0.0, 1.0)
 	
 	# Lerp the scale from its current value to 1.0
-	outer_circle.scale = starting_scale.lerp(Vector2(1.0, 1.0), t)
+	outer_circle.scale = starting_scale.lerp(Vector2(0.1, 0.1), t)
 	
 	# Lerp the opacity from 0 to 1
 	var current_modulate = outer_circle.modulate
@@ -63,15 +62,5 @@ func _process(delta: float) -> void:
 	# Stop the transition if the time has been reached
 	if t >= 1.0:
 		outer_circle.visible = true
-		scored.emit(position.x)
+		#scored.emit(position.x)
 		queue_free()
-
-
-func _on_timer_timeout() -> void:
-	queue_free()
-	#
-#func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	#if event.is_action_pressed("click"):
-		#print("click")
-		#get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType)
-	#pass # Replace with function body.
