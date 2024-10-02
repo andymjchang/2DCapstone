@@ -327,7 +327,7 @@ func save_scene_to_file():
 					for blockChild in childrenList:
 						#this is most likely where the zipline error/duplication is occuring
 						newFile.store_string(str(blockChild.get_child(0).global_position.x) + ", " + str(blockChild.get_child(0).global_position.y) + "\n")
-					print("child list in save, ", childrenList)
+					#print("child list in save, ", childrenList)
 					
 	else:
 		displayStatus(UNABLE_TO_SAVE, false)
@@ -506,7 +506,7 @@ func _on_play_level_button_button_down() -> void:
 	# Add the new scene to the scene tree and set it as the current scene
 	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
 	#get_tree().current_scene = scene_instance  # Set it as the new current scene
-	
+
 func lengthenPlatform() -> void:
 	#this isnt modular but it will work for now
 	var blockArea = currentBlock.get_child(0).get_child(0).get_node("EditorArea0")

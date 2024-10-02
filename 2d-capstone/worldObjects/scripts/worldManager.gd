@@ -23,7 +23,8 @@ signal checkLevelCompleted()
 @onready var killFloorsList = $objectList/killFloors
 @onready var enemiesList = $objectList/enemies
 @onready var actionIndicatorsList = $objectList/actionIndicators
-@onready var checkpointsList = $objectList/checkpoints
+@onready var p1checkpointsList = $objectList/Player1checkpoints
+@onready var p2checkpointsList = $objectList/Player2checkpoints
 @onready var playersList = $objectList/players
 @onready var ziplineList = $objectList/ziplines
 
@@ -92,13 +93,14 @@ func loadLevel():
 	if Globals.currentSongFileName:
 		levelFile = Globals.currentEditorFileName
 	
-	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", 1).get_as_text()
+	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
 	print("content: ", content)
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],
 		"killFloors": [killFloorInstance, killFloorsList],
 		"actionIndicators": [actionIndicatorInstance, actionIndicatorsList], 
-		"checkpoints": [checkpointInstance, checkpointsList], 
+		"p1checkpoints": [checkpointInstance, p1checkpointsList],
+		"p2checkpoints": [checkpointInstance, p2checkpointsList], 
 		"enemies": [enemyInstance, enemiesList],
 		"player1": [player1Instance, playersList],
 		"player2": [player2Instance, playersList],
@@ -194,9 +196,10 @@ func updateScore(indicator_position):
 
 # Helper function that grabs the target player's closest forward checkpoint
 func getNearestCheckpoint(who):
-	var nearestPoint = objectList.get_node(who.name + "checkpoints").get_child(0)
+	var checkpointPath = who.name.to_lower() + "checkpoints"
+	var nearestPoint = objectList.get_node(checkpointPath).get_child(0)
 	var shortestDistance = who.position.distance_to(nearestPoint.position)
-	for i in objectList.get_node(who.name + "checkpoints").get_children():
+	for i in objectList.get_node(checkpointPath).get_children():
 		#print("Checking: ", i)
 		var distance = who.position.distance_to(i.position)
 		# Check if checkpoint in front of player

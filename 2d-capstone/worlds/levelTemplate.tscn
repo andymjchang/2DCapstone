@@ -55,8 +55,8 @@ zoom = Vector2(1.5, 1.5)
 script = ExtResource("4_nttx1")
 
 [node name="MenuBg" type="Sprite2D" parent="Camera2D"]
-position = Vector2(3.74979, 45.2499)
-scale = Vector2(0.325417, 0.325417)
+position = Vector2(19.208, -32.8751)
+scale = Vector2(0.223264, 0.223264)
 texture = ExtResource("12_ngrii")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
@@ -84,44 +84,8 @@ script = ExtResource("13_euntf")
 [node name="Player2checkpoints" type="Node2D" parent="objectList"]
 script = ExtResource("14_rbu47")
 
-[node name="Checkpoint" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(4800, 375)
-
-[node name="Checkpoint2" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(9000, 325)
-
-[node name="Checkpoint3" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(13800, 350)
-
-[node name="Checkpoint4" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(19200, 350)
-
-[node name="Checkpoint5" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(24600, 350)
-
-[node name="Checkpoint6" parent="objectList/Player2checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(30000, 400)
-
 [node name="Player1checkpoints" type="Node2D" parent="objectList"]
 script = ExtResource("14_rbu47")
-
-[node name="Checkpoint" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(4800, 675)
-
-[node name="Checkpoint2" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(9000, 675)
-
-[node name="Checkpoint3" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(13800, 700)
-
-[node name="Checkpoint4" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(19200, 675)
-
-[node name="Checkpoint5" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(24600, 675)
-
-[node name="Checkpoint6" parent="objectList/Player1checkpoints" instance=ExtResource("4_ph2wq")]
-position = Vector2(30025, 700)
 
 [node name="players" type="Node2D" parent="objectList"]
 
