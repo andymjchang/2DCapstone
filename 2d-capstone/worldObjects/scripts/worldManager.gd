@@ -92,7 +92,7 @@ func loadLevel():
 	# set file/music to load
 	if Globals.currentSongFileName:
 		levelFile = Globals.currentEditorFileName
-	
+	levelFile = Globals.curFile
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],
