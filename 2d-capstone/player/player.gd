@@ -102,6 +102,7 @@ func _physics_process(delta: float) -> void:
 				if canAttack:
 					$Animation.play("Punch")
 					punchInProgress = true
+					sfxPlayer.play()
 					#print("Punch!")
 					attack.visible = true
 					attack.monitoring = true
@@ -126,6 +127,7 @@ func _physics_process(delta: float) -> void:
 		invuln = true
 
 func _onTakeDamage(amount):
+	$damagePlayer.play()
 	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
 		health -= amount
 		#print("Got hit! Health now: ", self.health)
@@ -185,10 +187,6 @@ func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 	var other = area.get_parent()
 	if other.is_in_group("actionIndicators"):
 		Globals.screenFlashEffect()
-		print("my position")
-		print(position.x)
-		print("their position")
-		print(other.position.x)
 		scored.emit(self.name, abs(other.position.x - position.x))
 
 

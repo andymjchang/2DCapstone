@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=24 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="2_a5rf3"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bvvcm7r3cp3x7" path="res://animations/raccoonAnims/Raccoon_spriteSheet_v05.png" id="2_icjbr"]
 [ext_resource type="Texture2D" uid="uid://nchurhplqcb3" path="res://animations/raccoonAnims/Raccoon_punch.png" id="3_sudcy"]
 [ext_resource type="Texture2D" uid="uid://bt5jsder0msfx" path="res://player/playerActionCircle.png" id="6_4xpfe"]
+[ext_resource type="AudioStream" uid="uid://dtja5fatjio46" path="res://audioEffects/TimingRing.mp3" id="7_rm46a"]
+[ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fb3mh"]
 atlas = ExtResource("2_amwal")
@@ -103,16 +105,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(28.75, 25)
+size = Vector2(21, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
 size = Vector2(16, 24.0079)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(28.75, 25.375)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
-size = Vector2(28.75, 25)
 
 [node name="Player1" type="CharacterBody2D" groups=["players"]]
 position = Vector2(0, -3)
@@ -126,7 +125,7 @@ sprite_frames = SubResource("SpriteFrames_h8xup")
 animation = &"Punch"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-14.625, -11.75)
+position = Vector2(-18.5, -11.75)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="ProtoMc" type="Sprite2D" parent="."]
@@ -160,13 +159,6 @@ position = Vector2(-11.75, -0.5)
 position = Vector2(-2.625, -11.5625)
 shape = SubResource("RectangleShape2D_rw1d5")
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-11.75, -0.5)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-2.625, -11.5)
-shape = SubResource("RectangleShape2D_s4g51")
-
 [node name="actionLine" type="Sprite2D" parent="."]
 position = Vector2(0, -11.25)
 scale = Vector2(0.25, 0.25)
@@ -177,7 +169,10 @@ wait_time = 0.25
 one_shot = true
 
 [node name="sfxPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_wy6uo")
+
+[node name="damagePlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_rm46a")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

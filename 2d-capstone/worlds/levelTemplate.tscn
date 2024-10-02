@@ -1,11 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=23 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_78xmt"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="3_6me16"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_o6usx"]
-[ext_resource type="PackedScene" path="res://levelEditor/goal_block.tscn" id="3_oih58"]
+[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://levelEditor/goal_block.tscn" id="3_oih58"]
 [ext_resource type="Script" path="res://worldObjects/scripts/camera.gd" id="4_nttx1"]
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
-[ext_resource type="PackedScene" uid="uid://c6mwitsbob8o7" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
+[ext_resource type="PackedScene" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx12w"]
 size = Vector2(45.5, 1086)
@@ -55,7 +55,7 @@ text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(250, 450)
-zoom = Vector2(2, 2)
+zoom = Vector2(1.5, 1.5)
 script = ExtResource("4_nttx1")
 
 [node name="MenuBg" type="Sprite2D" parent="Camera2D"]
@@ -84,6 +84,7 @@ offset_left = -22.0
 offset_top = -448.0
 offset_right = 18.0
 offset_bottom = 374.0
+
 [node name="ActionLine" type="Sprite2D" parent="Camera2D"]
 position = Vector2(-250, 0)
 texture = ExtResource("15_gryhe")

@@ -35,13 +35,13 @@ func initText(text, player_position):
 	label = $RichTextLabel
 	var labelText = ""
 	if text > 90:
-		labelText = "Perfect!"
+		labelText = "PERFECT!"
 		clefSprite.texture = greenTiming
 	elif text > 70:
-		labelText = "Good!"
+		labelText = "GOOD!"
 		clefSprite.texture = yellowTiming
 	else: 
-		labelText = "Missed!"
+		labelText = "BARELY!"
 		clefSprite.texture = redTiming
 	label.text = labelText
 	#position.y = player_position.y

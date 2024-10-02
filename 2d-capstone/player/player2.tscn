@@ -1,10 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://dakwrycm2d4ei"]
+[gd_scene load_steps=22 format=3 uid="uid://dakwrycm2d4ei"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yl2m7"]
 [ext_resource type="Texture2D" uid="uid://btpvi1n88pcgy" path="res://animations/mouseAnims/Mouse_sprite_sheet_v03.png" id="2_mn2ky"]
 [ext_resource type="Texture2D" uid="uid://660ldettifu3" path="res://animations/mouseAnims/Mouse_jump.png" id="2_y37go"]
 [ext_resource type="Texture2D" uid="uid://detjo7nluj3oo" path="res://animations/mouseAnims/Piper_punch.png" id="3_gsota"]
 [ext_resource type="Texture2D" uid="uid://bt5jsder0msfx" path="res://player/playerActionCircle.png" id="5_u0jhh"]
+[ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="6_cfs8m"]
+[ext_resource type="AudioStream" uid="uid://dtja5fatjio46" path="res://audioEffects/TimingRing.mp3" id="7_lc0pe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q2tqb"]
 atlas = ExtResource("2_y37go")
@@ -156,6 +158,10 @@ wait_time = 0.25
 one_shot = true
 
 [node name="sfxPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_cfs8m")
+
+[node name="damagePlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_lc0pe")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
