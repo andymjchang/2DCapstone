@@ -19,7 +19,6 @@ func _process(delta: float) -> void:
 		enemiesLoaded = true
 		self.min_value = 0
 		self.max_value = numEnemies
-		self.value = 0
 	
 	
 

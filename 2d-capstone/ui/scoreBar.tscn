@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6mwitsbob8o7"]
+[gd_scene load_steps=5 format=3 uid="uid://c6mwitsbob8o7"]
 
 [ext_resource type="Texture2D" uid="uid://d1em5aq73uubq" path="res://ui/assets/Guitar_Meter_No_Fill.png" id="1_mjrnw"]
 [ext_resource type="Texture2D" uid="uid://2qsydlecpwqu" path="res://ui/assets/Guitar_Meter_Fill.png" id="2_838in"]
+[ext_resource type="Texture2D" uid="uid://cayhsbosohd47" path="res://ui/assets/Guitar_Red.png" id="2_bmfs1"]
 [ext_resource type="Script" path="res://ui/scripts/textureScoreProgress_bar.gd" id="3_3u3ml"]
 
 [node name="ScoreBar" type="CanvasLayer"]
@@ -12,11 +13,12 @@ anchor_left = 0.631
 anchor_top = -0.151
 anchor_right = 0.631
 anchor_bottom = -0.151
-offset_left = -145.52
-offset_top = 19.08
-offset_right = 510.48
-offset_bottom = 456.08
+offset_left = 32.48
+offset_top = 164.08
+offset_right = 549.48
+offset_bottom = 378.08
 nine_patch_stretch = true
 texture_under = ExtResource("1_mjrnw")
+texture_over = ExtResource("2_bmfs1")
 texture_progress = ExtResource("2_838in")
 script = ExtResource("3_3u3ml")

@@ -337,6 +337,7 @@ func save_scene_to_file():
 					var childrenList = item.get_child(0).get_children()
 					for blockChild in childrenList:
 						#this is most likely where the zipline error/duplication is occuring
+						print("block child being saved, ", blockChild.get_child(0))
 						newFile.store_string(str(blockChild.get_child(0).global_position.x) + ", " + str(blockChild.get_child(0).global_position.y) + "\n")
 					#print("child list in save, ", childrenList)
 					

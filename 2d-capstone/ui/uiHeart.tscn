@@ -11,23 +11,23 @@ script = ExtResource("1_n0dm8")
 
 [node name="fullP1Health" type="Sprite2D" parent="."]
 position = Vector2(-2.38419e-07, 0)
-scale = Vector2(0.0892857, 0.0894231)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_hu6l6")
 
 [node name="zeroP1Health" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(1, 1)
-scale = Vector2(0.096, 0.08)
+scale = Vector2(0.2, 0.167)
 texture = ExtResource("3_kx8ye")
 
 [node name="fullP2Health" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-2.38419e-07, 0)
-scale = Vector2(0.0892857, 0.0894231)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_j5jnf")
 
 [node name="zeroP2Health" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-2.38419e-07, 0)
-scale = Vector2(0.0892857, 0.0894231)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_0yudt")
