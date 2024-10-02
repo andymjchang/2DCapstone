@@ -104,7 +104,7 @@ size = Vector2(16.25, 20)
 size = Vector2(25.5, 20.5)
 
 [node name="Player2" type="CharacterBody2D" groups=["players"]]
-position = Vector2(2, -48)
+position = Vector2(0, -48)
 scale = Vector2(4, 4)
 script = ExtResource("1_yl2m7")
 
@@ -120,6 +120,7 @@ shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
 position = Vector2(-20.4107, -10.1875)
+monitoring = false
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
 offset_left = 12.0
@@ -149,4 +150,9 @@ shape = SubResource("RectangleShape2D_44r6d")
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_u0jhh")
 
+[node name="attackTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
+[connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

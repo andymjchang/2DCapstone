@@ -230,10 +230,11 @@ func _onEndGameBodyEntered(body:Node2D):
 		print("Game over!")
 		self.emit_signal("gameOver")
 
-func _onScored(id, score):
-	score += score
+func _onScored(id, p_score):
+	var scoreToAdd = 100 - p_score
+	score += scoreToAdd
 	scoreText.text = str(int(score))
 	if id == "Player1":
-		textPopupScene1.initText(score, player1.position)
+		textPopupScene1.initText(scoreToAdd, player1.position)
 	if id == "Player2":
-		textPopupScene2.initText(score, player2.position)
+		textPopupScene2.initText(scoreToAdd, player2.position)

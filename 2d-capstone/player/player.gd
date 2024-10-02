@@ -97,10 +97,10 @@ func _physics_process(delta: float) -> void:
 					punchInProgress = true
 					#print("Punch!")
 					attack.visible = true
+					attack.monitoring = true
 					canAttack = false
-					#await get_tree().create_timer(0.2).timeout
-					canAttack = true
-					#attack.visible = false
+					$attackTimer.start()
+
 		elif reachedCheckpoint:
 			# Wait to respawn relocating player when teammate has aligned
 			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
@@ -176,7 +176,16 @@ func _onAnimationFinished():
 
 func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 	var other = area.get_parent()
-	if other.is_in_group("actionIndicators") and $Animation.animation == "Punch":
-		print("found")
+	if other.is_in_group("actionIndicators"):
 		Globals.screenFlashEffect()
-		scored.emit(self.name, other.position.x - position.x)
+		print("my position")
+		print(position.x)
+		print("their position")
+		print(other.position.x)
+		scored.emit(self.name, abs(other.position.x - position.x))
+
+
+func _on_attack_timer_timeout() -> void:
+	canAttack = true
+	attack.visible = false
+	attack.monitoring = false
