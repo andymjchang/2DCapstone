@@ -10,8 +10,8 @@ func _ready():
 	label = $RichTextLabel
 	label.text = ""
 	
-	var min_rotation_degrees = -5
-	var max_rotation_degrees = 5
+	var min_rotation_degrees = 0
+	var max_rotation_degrees = 3
 	# Convert degrees to radians for rotation
 	min_rotation = min_rotation_degrees * (PI / 180)
 	max_rotation = max_rotation_degrees * (PI / 180)
@@ -19,7 +19,7 @@ func _ready():
 func initPosition(node):
 	trackedNode = node
 	position = node.get_global_position() - get_parent().position
-	position.x += 100
+	position.x += 200
 
 func initText(text, player_position):
 	label = $RichTextLabel

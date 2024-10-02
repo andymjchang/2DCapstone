@@ -106,7 +106,7 @@ animations = [{
 size = Vector2(28.75, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
-size = Vector2(44.9972, 33.4873)
+size = Vector2(16, 24.0079)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(28.75, 25.375)
@@ -136,19 +136,17 @@ scale = Vector2(0.368884, 0.344364)
 texture = ExtResource("2_a5rf3")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
-visible = false
 position = Vector2(-18, -20.375)
 rotation = 0.000143446
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
-visible = false
-offset_left = -11.0
+offset_left = 10.0
 offset_top = -3.0
-offset_right = 19.0
-offset_bottom = 19.0
+offset_right = 26.0
+offset_bottom = 21.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(16.7458, 10.3799)
+position = Vector2(18.0013, 9.11843)
 rotation = 0.00184914
 shape = SubResource("RectangleShape2D_efrg4")
 

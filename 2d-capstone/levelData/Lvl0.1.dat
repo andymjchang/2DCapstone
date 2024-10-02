@@ -411,6 +411,8 @@ actionIndicators
 1200, 600
 1350, 600
 1500, 600
+900, 300
+1200, 300
 checkpoints
 player1
 0, 590

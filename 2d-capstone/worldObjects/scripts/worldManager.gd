@@ -189,11 +189,11 @@ func updateTime(delta: float):
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 	
-func updateScore(indicator_position):
-	var score_to_add = 100 - (indicator_position - player1.position.x)
-	score += score_to_add
-	scoreText.text = str(int(score))
-	textPopupScene2.initText(score, player2.position)
+#func updateScore(indicator_position):
+	#var score_to_add = 100 - (indicator_position - player1.position.x)
+	#score += score_to_add
+	#scoreText.text = str(int(score))
+	#textPopupScene1.initText(score, player1.position)
 
 # Helper function that grabs the target player's closest forward checkpoint
 func getNearestCheckpoint(who):
@@ -229,3 +229,11 @@ func _onEndGameBodyEntered(body:Node2D):
 	if (body.is_in_group("players")):
 		print("Game over!")
 		self.emit_signal("gameOver")
+
+func _onScored(id, score):
+	score += score
+	scoreText.text = str(int(score))
+	if id == "Player1":
+		textPopupScene1.initText(score, player1.position)
+	if id == "Player2":
+		textPopupScene2.initText(score, player2.position)

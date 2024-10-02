@@ -62,6 +62,5 @@ func _process(delta: float) -> void:
 	# Stop the transition if the time has been reached
 	if t >= 1.0:
 		outer_circle.visible = true
-		scored.emit(position.x)
-		Globals.screenFlashEffect()
+		#scored.emit(position.x)
 		queue_free()

@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal takeDamage(amount)
 signal revive(who)
 signal relocate(nearestPoint)
+signal scored(id, score)
 
 var curSprite
 var JUMP_VELOCITY = -550.0
@@ -29,6 +30,7 @@ var punchInProgress = false
 var runInProgress = false
 
 var otherPlayerList
+var worldNode
 
 func _ready():
 	print("my name is: ",self.name)
@@ -55,7 +57,9 @@ func _ready():
 	self.relocate.connect(_onRelocate)
 	self.attack.visible = false
 	$Animation.animation_finished.connect(_onAnimationFinished)
-
+	
+	worldNode = get_tree().get_root().get_node("level")
+	self.scored.connect(worldNode._onScored)
 
 func _physics_process(delta: float) -> void:
 	if not editing:
@@ -96,7 +100,7 @@ func _physics_process(delta: float) -> void:
 					canAttack = false
 					#await get_tree().create_timer(0.2).timeout
 					canAttack = true
-					attack.visible = false
+					#attack.visible = false
 		elif reachedCheckpoint:
 			# Wait to respawn relocating player when teammate has aligned
 			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
@@ -171,5 +175,8 @@ func _onAnimationFinished():
 
 
 func _on_attack_hitbox_area_entered(area: Area2D) -> void:
-	if area.get_parent().is_in_group("actionIndicators"):
+	var other = area.get_parent()
+	if other.is_in_group("actionIndicators") and $Animation.animation == "Punch":
 		print("found")
+		Globals.screenFlashEffect()
+		scored.emit(self.name, other.position.x - position.x)
