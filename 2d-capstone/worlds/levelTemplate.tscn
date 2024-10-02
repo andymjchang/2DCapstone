@@ -81,10 +81,10 @@ scale = Vector2(1.5, 1.5)
 [node name="actionIndicators" type="Node2D" parent="objectList"]
 script = ExtResource("13_euntf")
 
-[node name="Player2checkpoints" type="Node2D" parent="objectList"]
+[node name="player2checkpoints" type="Node2D" parent="objectList"]
 script = ExtResource("14_rbu47")
 
-[node name="Player1checkpoints" type="Node2D" parent="objectList"]
+[node name="player1checkpoints" type="Node2D" parent="objectList"]
 script = ExtResource("14_rbu47")
 
 [node name="players" type="Node2D" parent="objectList"]

@@ -54,7 +54,8 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var goalBlocksList = $objectList/goalBlocks
 @onready var enemyList = $objectList/enemies
 @onready var actionIndicatorsList = $objectList/actionIndicators
-@onready var checkpointsList = $objectList/checkpoints
+@onready var p1checkpointsList = $objectList/player1checkpoints
+@onready var p2checkpointsList = $objectList/player2checkpoints
 @onready var bWallsList = $objectList/breakableWalls
 @onready var player1List = $objectList/player1
 @onready var player2List = $objectList/player2
@@ -140,7 +141,8 @@ func loadLevel():
 		"goalBlocks": [goalBlock, goalBlocksList, blockTypes[4]],
 		"killFloors": [killFloor, killFloorsList, blockTypes[6]],
 		"actionIndicators": [actionIndicator, actionIndicatorsList, blockTypes[3]], 
-		"checkpoints": [checkpoint, checkpointsList, blockTypes[7]], 
+		"player1checkpoints": [checkpoint, p1checkpointsList, blockTypes[7]], 
+		"player2checkpoints": [checkpoint, p2checkpointsList, blockTypes[7]],
 		"enemies": [enemyCharacter, enemyList, blockTypes[5]],
 		"player1": [player1, player1List, blockTypes[0]],
 		"player2": [player2, player2List, blockTypes[1]],
@@ -152,6 +154,7 @@ func loadLevel():
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			objectList = instanceList.get(line)[1]
+			print("List: ", objectList)
 			blockType = instanceList.get(line)[2]
 		# Position
 		if line.contains(", "):
@@ -174,13 +177,21 @@ func _on_text_edit_3_text_changed() -> void:
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
 	
-func _on_checkpoint_button_button_up() -> void:
+func _on_p1checkpoint_button_button_up() -> void:
 	var checkpointInstance = checkpoint.instantiate()
 	var checkParent = baseObject.instantiate()
 	checkParent.add_child(checkpointInstance)
 	checkParent.blockType = blockTypes[7]
-	checkpointsList.add_child(checkParent)
-	place_block(checkParent, checkpointsList, camera.position, false)
+	p1checkpointsList.add_child(checkParent)
+	place_block(checkParent, p1checkpointsList, camera.position, false)
+
+func _on_p2checkpoint_button_button_up() -> void:
+	var checkpointInstance = checkpoint.instantiate()
+	var checkParent = baseObject.instantiate()
+	checkParent.add_child(checkpointInstance)
+	checkParent.blockType = blockTypes[7]
+	p2checkpointsList.add_child(checkParent)
+	place_block(checkParent, p2checkpointsList, camera.position, false)
 	
 func _onZiplineButtonPressed() -> void:
 	var ziplineInstance = zipline.instantiate()
@@ -241,7 +252,6 @@ func _on_action_button_button_up() -> void:
 	actionParent.add_child(actionInstance)
 	actionParent.blockType = blockTypes[3]
 	place_block(actionParent, actionIndicatorsList, camera.position, false)
-
 
 func _on_breakable_wall_button_button_up() -> void:
 	var bWallInstance = breakableWall.instantiate()
@@ -317,6 +327,7 @@ func save_scene_to_file():
 			status.show()
 			displayStatus(OVERWRITE_FILE, true)
 		else:
+			overwrite = false
 			# successful save
 			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
 			for itemList in objectList.get_children():

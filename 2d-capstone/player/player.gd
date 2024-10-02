@@ -100,8 +100,8 @@ func _physics_process(delta: float) -> void:
 		elif reachedCheckpoint:
 			# Wait to respawn relocating player when teammate has aligned
 			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
-				print("My name: ", name)
-				print("Made it")
+				#print("My name: ", name)
+				#print("Made it")
 				emit_signal("revive")
 				# Reset relocating player position and allow control
 				get_node("CollisionShape2D").call_deferred("set", "disabled", false)
@@ -121,7 +121,7 @@ func _onTakeDamage(amount):
 		if health % 9 == 0:
 			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
 		if health <= 0:
-			print("Player died!")
+			#print("Player died!")
 			#self.visible = false
 			$Animation.self_modulate.a = 0.5
 			dead = true
@@ -152,12 +152,12 @@ func _onRelocate(nearestPoint):
 	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
 	reachedCheckpoint = false
 	#var newVelocity = Vector2((nearestPoint.position - self.position) * (SPEED / 10 * get_process_delta_time()))
-	await get_tree().create_timer(0.0001).timeout
+	#await get_tree().create_timer(0.0001).timeout
 	# Set destination, begin move to point
 	checkpoint = nearestPoint
-	velocity = Vector2(0,0)
+	#velocity = newVelocity #Vector2(0,0)
 	position = nearestPoint.position
-	print("Position now: ", position)
+	#print("Position now: ", position)
 	#velocity = newVelocity
 
 
