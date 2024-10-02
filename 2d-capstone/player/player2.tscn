@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://detjo7nluj3oo" path="res://animations/mouseAnims/Piper_punch.png" id="3_gsota"]
 [ext_resource type="Texture2D" uid="uid://bt5jsder0msfx" path="res://player/playerActionCircle.png" id="5_u0jhh"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="6_cfs8m"]
-[ext_resource type="AudioStream" uid="uid://dtja5fatjio46" path="res://audioEffects/TimingRing.mp3" id="7_lc0pe"]
+[ext_resource type="AudioStream" uid="uid://befgh78mkdgal" path="res://audioEffects/Damage.mp3" id="7_m0fhd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q2tqb"]
 atlas = ExtResource("2_y37go")
@@ -161,7 +161,7 @@ one_shot = true
 stream = ExtResource("6_cfs8m")
 
 [node name="damagePlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_lc0pe")
+stream = ExtResource("7_m0fhd")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

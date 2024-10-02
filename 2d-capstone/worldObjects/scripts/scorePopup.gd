@@ -33,6 +33,7 @@ func initPosition(node):
 
 func initText(text, player_position):
 	label = $RichTextLabel
+	$sfxPlayer.play()
 	var labelText = ""
 	if text > 90:
 		labelText = "PERFECT!"
