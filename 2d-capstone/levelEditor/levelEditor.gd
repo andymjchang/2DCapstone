@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "checkpoint", "breakableWall", "zipline"]
+var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -142,11 +142,11 @@ func loadLevel():
 		"killFloors": [killFloor, killFloorsList, blockTypes[6]],
 		"actionIndicators": [actionIndicator, actionIndicatorsList, blockTypes[3]], 
 		"player1checkpoints": [checkpoint, p1checkpointsList, blockTypes[7]], 
-		"player2checkpoints": [checkpoint, p2checkpointsList, blockTypes[7]],
+		"player2checkpoints": [checkpoint, p2checkpointsList, blockTypes[8]],
 		"enemies": [enemyCharacter, enemyList, blockTypes[5]],
 		"player1": [player1, player1List, blockTypes[0]],
 		"player2": [player2, player2List, blockTypes[1]],
-		"ziplines": [zipline, ziplineList, blockTypes[9]]}
+		"ziplines": [zipline, ziplineList, blockTypes[10]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -154,7 +154,7 @@ func loadLevel():
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			objectList = instanceList.get(line)[1]
-			print("List: ", objectList)
+			#print("List: ", objectList)
 			blockType = instanceList.get(line)[2]
 		# Position
 		if line.contains(", "):
@@ -177,7 +177,7 @@ func _on_text_edit_3_text_changed() -> void:
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
 	
-func _on_p1checkpoint_button_button_up() -> void:
+func _on_p1checkpoint_button_pressed() -> void:
 	var checkpointInstance = checkpoint.instantiate()
 	var checkParent = baseObject.instantiate()
 	checkParent.add_child(checkpointInstance)
@@ -449,8 +449,10 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/player2")
 	if blockType == "goalBlock":
 		return get_node("objectList/goalBlocks")
-	if blockType == "checkpoint":
-		return get_node("objectList/checkpoints")
+	if blockType == "p1checkpoint":
+		return get_node("objectList/player1checkpoints")
+	if blockType == "p2checkpoint":
+		return get_node("objectList/player2checkpoints")
 	if blockType == "killFloor":
 		return get_node("objectList/killFloors")
 	if blockType == "breakableWall":
