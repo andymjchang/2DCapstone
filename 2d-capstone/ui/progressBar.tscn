@@ -11,10 +11,10 @@ size = Vector2(926.5, 67.5)
 [node name="ProgressBar" type="CanvasLayer"]
 
 [node name="audioProgress" type="TextureProgressBar" parent="."]
-offset_left = 787.0
-offset_top = 917.0
-offset_right = 1774.0
-offset_bottom = 1039.0
+offset_left = 929.0
+offset_top = 956.0
+offset_right = 1916.0
+offset_bottom = 1078.0
 nine_patch_stretch = true
 texture_under = ExtResource("1_nsiy8")
 texture_progress = ExtResource("2_un834")

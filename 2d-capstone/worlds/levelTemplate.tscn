@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=25 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="7_po4yx"]
 [ext_resource type="PackedScene" uid="uid://bam8jg1naascf" path="res://worldObjects/zipline/ziplineStart.tscn" id="10_h5bd4"]
+[ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="12_jtaw1"]
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="12_ngrii"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
@@ -20,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
-[ext_resource type="PackedScene" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
+[ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx12w"]
@@ -44,14 +45,18 @@ ziplineInstance = ExtResource("10_h5bd4")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Timer" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 1104.0
-offset_right = 1152.0
-offset_bottom = 64.0
+offset_left = 1853.0
+offset_top = 3.0
+offset_right = 1919.0
+offset_bottom = 67.0
+theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 
 [node name="Score" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 1056.0
-offset_right = 1104.0
-offset_bottom = 64.0
+offset_left = 1639.0
+offset_top = 137.0
+offset_right = 1784.0
+offset_bottom = 202.0
+theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
