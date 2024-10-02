@@ -62,6 +62,14 @@ grow_vertical = 0
 texture_normal = ExtResource("4_1m2j0")
 texture_pressed = ExtResource("5_bjqql")
 
+[node name="levelSelect" type="Button" parent="."]
+offset_left = 141.0
+offset_top = 590.0
+offset_right = 380.0
+offset_bottom = 673.0
+text = "Level select"
+
 [connection signal="pressed" from="storyButton" to="." method="_onStoryButtonPressed"]
 [connection signal="pressed" from="editorButton" to="." method="_onEditorButtonPressed"]
 [connection signal="pressed" from="quitButton" to="." method="_onQuitButtonPressed"]
+[connection signal="pressed" from="levelSelect" to="." method="_onLevelSelectPressed"]

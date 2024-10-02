@@ -143,6 +143,7 @@ func _on_text_edit_2_text_changed() -> void:
 		
 
 func loadLevel():
+	print("save file name, ", saveFileName)
 	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlock, platformBlocksList, blockTypes[2]], 
 		"goalBlocks": [goalBlock, goalBlocksList, blockTypes[4]],

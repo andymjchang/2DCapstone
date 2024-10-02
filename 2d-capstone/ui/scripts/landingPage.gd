@@ -20,3 +20,6 @@ func _onEditorButtonPressed():
 
 func _onQuitButtonPressed():
 	get_tree().quit()
+	
+func _onLevelSelectPressed() -> void:
+	get_tree().change_scene_to_file("res://ui/levelSelect.tscn")

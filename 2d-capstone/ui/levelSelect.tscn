@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk3n2nw7nyxid"]
+
+[ext_resource type="Texture2D" uid="uid://uqstjyc7iyr2" path="res://ui/assets/Main_Menu.png" id="1_u6n0r"]
+[ext_resource type="Script" path="res://ui/scripts/levels.gd" id="2_rglla"]
+
+[node name="LevelSelect" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1928.0
+offset_bottom = 1092.0
+texture = ExtResource("1_u6n0r")
+expand_mode = 1
+
+[node name="levels" type="ScrollContainer" parent="."]
+offset_left = 571.0
+offset_top = 526.0
+offset_right = 1363.0
+offset_bottom = 915.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+script = ExtResource("2_rglla")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="levels"]
+layout_mode = 2
+
+[node name="VScrollBar" type="VScrollBar" parent="levels/VBoxContainer"]
+layout_mode = 2
