@@ -26,12 +26,11 @@ shape = SubResource("RectangleShape2D_ruah7")
 debug_color = Color(0.244921, 0.575788, 0.737154, 0.42)
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -450.0
 offset_top = -9.0
 offset_right = 454.0
 offset_bottom = 22.0
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
 
