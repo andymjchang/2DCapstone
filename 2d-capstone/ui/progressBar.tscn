@@ -6,15 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://d2s2e6urbusr0" path="res://ui/assets/Progress_Bar_Note_Icon.png" id="4_6vv17"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52ly5"]
-size = Vector2(1283, 113)
+size = Vector2(926.5, 67.5)
 
 [node name="ProgressBar" type="CanvasLayer"]
 
 [node name="audioProgress" type="TextureProgressBar" parent="."]
-offset_left = 502.0
-offset_top = 852.0
-offset_right = 1890.0
-offset_bottom = 1057.0
+offset_left = 787.0
+offset_top = 917.0
+offset_right = 1774.0
+offset_bottom = 1039.0
 nine_patch_stretch = true
 texture_under = ExtResource("1_nsiy8")
 texture_progress = ExtResource("2_un834")
@@ -23,10 +23,11 @@ script = ExtResource("1_6veau")
 [node name="Area2D" type="Area2D" parent="audioProgress"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="audioProgress/Area2D"]
-position = Vector2(695.5, 105.5)
+position = Vector2(499.75, 62.25)
 shape = SubResource("RectangleShape2D_52ly5")
 
 [node name="Sprite2D" type="Sprite2D" parent="audioProgress"]
+visible = false
 position = Vector2(85, 133)
 scale = Vector2(0.527, 0.521667)
 texture = ExtResource("4_6vv17")
