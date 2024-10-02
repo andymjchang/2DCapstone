@@ -136,6 +136,7 @@ scale = Vector2(0.368884, 0.344364)
 texture = ExtResource("2_a5rf3")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(-18, -20.375)
 rotation = 0.000143446
 
@@ -170,4 +171,5 @@ position = Vector2(0, -11.25)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_4xpfe")
 
+[connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=21 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://b335gnra8wcg" path="res://audioTracks/Tutorial_Demo_120bpm_CMaj_V2.mp3" id="13_sfia2"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
+[ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="18_s1i58"]
 
@@ -69,6 +70,12 @@ scale = Vector2(1.5, 1.5)
 [node name="ActionLine" type="Sprite2D" parent="Camera2D"]
 position = Vector2(-250, 0)
 texture = ExtResource("15_gryhe")
+
+[node name="ScorePopup1" parent="Camera2D" instance=ExtResource("16_kbija")]
+position = Vector2(-250, -158)
+
+[node name="ScorePopup2" parent="Camera2D" instance=ExtResource("16_kbija")]
+position = Vector2(-250, 255)
 
 [node name="objectList" type="Node2D" parent="."]
 
@@ -130,3 +137,4 @@ position = Vector2(30025, 700)
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 
 [node name="ProgressBar" parent="." instance=ExtResource("18_s1i58")]
+visible = false

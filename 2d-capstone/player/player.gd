@@ -168,3 +168,8 @@ func _onAnimationFinished():
 	elif $Animation.animation == "Punch":
 		punchInProgress = false
 	pass
+
+
+func _on_attack_hitbox_area_entered(area: Area2D) -> void:
+	if area.get_parent().is_in_group("actionIndicators"):
+		print("found")

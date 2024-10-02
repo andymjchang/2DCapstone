@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://dhk8ib54ejgwa" path="res://worldObjects/assets/circle.png" id="2_roerp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0jqk3"]
-size = Vector2(106, 113)
+size = Vector2(50, 50)
 
-[node name="ActionIndicator" type="Node2D"]
+[node name="ActionIndicator" type="Node2D" groups=["actionIndicators"]]
 script = ExtResource("1_vgx8v")
 startingScale = 0.75
 animation_time = 0.5
@@ -21,7 +21,4 @@ texture = ExtResource("2_roerp")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-3, 2.5)
 shape = SubResource("RectangleShape2D_0jqk3")
-
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

@@ -41,7 +41,8 @@ var score = 0
 @onready var camera
 @onready var scoreText
 
-var textPopupScene = preload("res://worldObjects/scoreText.tscn")
+var textPopupScene1
+var textPopupScene2
 
 
 # Called when the node enters the scene tree for the first time.
@@ -52,6 +53,13 @@ func _ready():
 	player2 = playersList.get_node("Player2")
 	camera = $Camera2D
 	scoreText = $CanvasLayer/Score
+	
+	# intialize text popup node
+	textPopupScene1 = $Camera2D/ScorePopup1
+	textPopupScene2 = $Camera2D/ScorePopup2
+	textPopupScene1.initPosition(player1)
+	textPopupScene2.initPosition(player2)
+	
 	music = camera.get_node("Music")
 	loadAudio()
 	
@@ -73,7 +81,7 @@ func _ready():
 	# Start game
 	Globals.inLevel = false
 	restartButton.visible = false
-	#changeCountdown()
+	changeCountdown()
 	#startGame()
 	
 func startGame():
@@ -171,7 +179,7 @@ func _onLevelCompleted():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	updateTime(delta)
-	if time >= 3.0:
+	if time >= 3.0 and !Globals.inLevel:
 		startGame()
 
 func updateTime(delta: float):
@@ -185,9 +193,7 @@ func updateScore(indicator_position):
 	var score_to_add = 100 - (indicator_position - player1.position.x)
 	score += score_to_add
 	scoreText.text = str(int(score))
-	var textPopup = textPopupScene.instantiate()
-	textPopup.initText(score_to_add, player1.position)
-	add_child(textPopup)
+	textPopupScene2.initText(score, player2.position)
 
 # Helper function that grabs the target player's closest forward checkpoint
 func getNearestCheckpoint(who):
