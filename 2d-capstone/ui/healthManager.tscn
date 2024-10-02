@@ -9,21 +9,21 @@ script = ExtResource("1_gxkyf")
 [node name="player1" type="Node2D" parent="."]
 
 [node name="UiHeart" parent="player1" instance=ExtResource("1_mv5t0")]
-position = Vector2(29, 25)
+position = Vector2(70, 85)
 
 [node name="UiHeart2" parent="player1" instance=ExtResource("1_mv5t0")]
-position = Vector2(82, 25)
+position = Vector2(144, 85)
 
 [node name="UiHeart3" parent="player1" instance=ExtResource("1_mv5t0")]
-position = Vector2(134, 25)
+position = Vector2(220, 85)
 
 [node name="player2" type="Node2D" parent="."]
 
 [node name="UiHeart" parent="player2" instance=ExtResource("1_mv5t0")]
-position = Vector2(28, 70)
+position = Vector2(70, 958)
 
 [node name="UiHeart2" parent="player2" instance=ExtResource("1_mv5t0")]
-position = Vector2(81, 71)
+position = Vector2(144, 958)
 
 [node name="UiHeart3" parent="player2" instance=ExtResource("1_mv5t0")]
-position = Vector2(133, 71)
+position = Vector2(220, 958)

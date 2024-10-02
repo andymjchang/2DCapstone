@@ -105,14 +105,12 @@ func loadLevel():
 	var instance
 	var instanceParent
 	for line in content.split("\n"):
-		print("Current line: ", line)
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
 		# Position
 		#does not work with goal/checkpoints
 		if line.contains(", "):
-			print("Object: ", instance)
 			var instancedObj = instance.instantiate()
 			var posPoints = []
 			for pos in line.split(", "):
