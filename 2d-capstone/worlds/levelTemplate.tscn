@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
-[ext_resource type="PackedScene" uid="uid://c6mwitsbob8o7" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
+[ext_resource type="PackedScene" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx12w"]
