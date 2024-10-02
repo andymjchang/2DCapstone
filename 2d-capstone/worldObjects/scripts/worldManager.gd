@@ -15,6 +15,7 @@ signal checkLevelCompleted()
 @export var player1Instance : PackedScene
 @export var player2Instance : PackedScene
 @export var enemyInstance : PackedScene
+@export var ziplineInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -24,6 +25,7 @@ signal checkLevelCompleted()
 @onready var actionIndicatorsList = $objectList/actionIndicators
 @onready var checkpointsList = $objectList/checkpoints
 @onready var playersList = $objectList/players
+@onready var ziplineList = $objectList/ziplines
 
 var player1 
 var player2
@@ -99,7 +101,8 @@ func loadLevel():
 		"checkpoints": [checkpointInstance, checkpointsList], 
 		"enemies": [enemyInstance, enemiesList],
 		"player1": [player1Instance, playersList],
-		"player2": [player2Instance, playersList]}
+		"player2": [player2Instance, playersList],
+		"ziplines": [ziplineInstance, ziplineList]}
 	var instance
 	var instanceParent
 	for line in content.split("\n"):
@@ -108,6 +111,7 @@ func loadLevel():
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
 		# Position
+		#does not work with goal/checkpoints
 		if line.contains(", "):
 			#print("Object: ", instance)
 			var instancedObj = instance.instantiate()
@@ -115,6 +119,7 @@ func loadLevel():
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
+			#print("instance parent: ", instanceParent)
 			instanceParent.add_child(instancedObj)
 	
 	# load the actionArrays

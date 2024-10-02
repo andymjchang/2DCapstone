@@ -1,16 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=21 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_78xmt"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="3_6me16"]
+[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://levelEditor/goal_block.tscn" id="3_fhif6"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_o6usx"]
-[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://levelEditor/goal_block.tscn" id="3_xm4bb"]
 [ext_resource type="Script" path="res://worldObjects/scripts/camera.gd" id="4_nttx1"]
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="7_po4yx"]
+[ext_resource type="PackedScene" uid="uid://bam8jg1naascf" path="res://worldObjects/zipline/ziplineStart.tscn" id="10_h5bd4"]
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="12_ngrii"]
 [ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="13_4gv8e"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
@@ -18,18 +19,20 @@
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="18_s1i58"]
+[ext_resource type="PackedScene" uid="uid://c6mwitsbob8o7" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
-levelFile = "Lvl1.1"
+levelFile = "Lvl0.1"
 platformBlockInstance = ExtResource("2_78xmt")
-goalBlockInstance = ExtResource("3_xm4bb")
+goalBlockInstance = ExtResource("3_fhif6")
 killFloorInstance = ExtResource("3_6me16")
 actionIndicatorInstance = ExtResource("3_o6usx")
 checkpointInstance = ExtResource("4_ph2wq")
 player1Instance = ExtResource("5_dfiyk")
 player2Instance = ExtResource("6_5q6wy")
 enemyInstance = ExtResource("7_po4yx")
+ziplineInstance = ExtResource("10_h5bd4")
 
 [node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
 
@@ -122,6 +125,10 @@ position = Vector2(30025, 700)
 
 [node name="players" type="Node2D" parent="objectList"]
 
+[node name="ziplines" type="Node2D" parent="objectList"]
+
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 
 [node name="ProgressBar" parent="." instance=ExtResource("18_s1i58")]
+
+[node name="ScoreBar" parent="." instance=ExtResource("20_iu2pl")]
