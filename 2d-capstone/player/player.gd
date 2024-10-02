@@ -6,7 +6,7 @@ signal relocate(nearestPoint)
 
 var curSprite
 var JUMP_VELOCITY = -550.0
-var SPEED = 400.0
+var SPEED = 50.0
 var health = 27 # 3 hits
 var blockType = "player"
 var invuln = false
@@ -23,6 +23,7 @@ var checkpoint
 var otherPlayer
 var editing = false
 var index = 0
+var hitBounds = false
 
 var jumpInProgress = false
 var punchInProgress = false
@@ -71,15 +72,17 @@ func _physics_process(delta: float) -> void:
 				velocity.x = Globals.pixelsPerFrame
 				if not jumpInProgress and not punchInProgress:
 					$Animation.play("Run")
-				#position.x += 2.0
-			else:
-				pass # Right now just don't give regular controls
+
+				# Pseudo-autoscroll prototype
 				# var direction = Input.get_axis(left, right)
-				# if direction:
-				# 	velocity.x = direction * SPEED
+				# if not hitBounds and direction > 0:
+				# 	velocity.x =  Globals.pixelsPerFrame + SPEED
+				# elif hitBounds and direction > 0:
+				# 	velocity.x = Globals.pixelsPerFrame
 				# else:
 				# 	velocity.x = move_toward(velocity.x, 0, SPEED)
-
+			else:
+				pass 
 			# Other player mechanics
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
