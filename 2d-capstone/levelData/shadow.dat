@@ -16,10 +16,10 @@ checkpoints
 player1
 45, 540
 player2
-45.0000381469727, 540
+45.0000419616699, 540
 enemies
-297, 448
-447, 448
+297, 548
+447, 548
 killFloors
 1050, 600
 goalBlocks
