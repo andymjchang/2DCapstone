@@ -189,6 +189,9 @@ func _onLevelCompleted():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	updateTime(delta)
+	if Input.is_action_just_pressed("toMainMenu"):
+		get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+		
 	if time >= 3.0 and !Globals.inLevel:
 		startGame()
 
