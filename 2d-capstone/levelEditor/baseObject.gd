@@ -10,11 +10,13 @@ var curAreaDragging = null
 var curAreaDraggingParent = null
 var curArea = null
 @onready var childrenList = self.get_child(0).get_children()
+var spriteInScene = false
 
 
 var size: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	set_process_input(true)
 
 
@@ -22,10 +24,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#if block is being dragged, have a transparent image of it follow the mouse around
 	if isDragging:
+		if !spriteInScene:
+			#we need to add back the transparent sprite as a child
+			self.add_child(spriteNode)
+			spriteInScene = true
 		spriteNode.visible = true
 		spriteNode.modulate.a = 0.5
 		spriteNode.global_position = get_global_mouse_position()
-	elif spriteNode:
+	elif spriteNode and spriteNode.is_inside_tree():
+		self.remove_child(spriteNode)
+		spriteInScene = false
 		spriteNode.visible = false
 	pass
 	
@@ -38,7 +46,6 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, 
 			curArea = str(areaName)
 			
 			spriteNode = self.get_child(0).get_node(str(areaParent.name)+"/Sprite2D").duplicate()
-			self.add_child(spriteNode)
 			#TODO i dont want to add everytime
 			#object has been clicked, so need to tell the level-edito to switch its current block
 			#self.get_parent().get_parent().get_parent().emit_signal("objectClicked")
