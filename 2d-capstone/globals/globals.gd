@@ -9,6 +9,8 @@ var stepSize = 0
 var pixelsPerFrame = 300
 var curFile = ""
 
+var areaClicked = false
+
 
 # File Names
 var currentEditorFileName

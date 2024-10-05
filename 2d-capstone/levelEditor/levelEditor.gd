@@ -442,10 +442,13 @@ func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 				bindedBlocks.append(block)
 			else:
 				#we only want to have one block selected
+				#we need to sort through all of the blocks and insure that the areas do not overlap
+				#TODO sort object arrays by coords
 				currentBlock = block
 				print("new block clicke")
 			return
-	
+
+			
 func getList(blockType : String) -> Node:
 	if blockType == "actionIndicator":
 		return get_node("objectList/actionIndicators")
