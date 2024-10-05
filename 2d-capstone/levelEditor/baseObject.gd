@@ -17,11 +17,13 @@ signal clickSuccess()
 var clickResult = true
 
 var overlappingBlocks = []
+var timePlaced
 
 var size: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	clickSuccess.connect(_setClickResult)
+	timePlaced = Globals.time
 	set_process_input(true)
 
 
@@ -44,7 +46,7 @@ func _process(delta: float) -> void:
 	
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, areaName, areaParent) -> void:
 	if "player" not in blockType:
-		if event.is_action_pressed("click"):
+		if event.is_action_pressed("click") and checkOrder():
 			print("click! on base object - ", self)
 			self.get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType,curAreaDragging)
 			if clickResult:
@@ -66,6 +68,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.pressed and self.get_parent().get_parent().get_parent().currentBlock and self.index == self.get_parent().get_parent().get_parent().currentBlock.index and isDragging:
 		print("mouse released")
 		self.get_child(0).get_node(curAreaDragging).get_parent().global_position= self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
+		timePlaced = Globals.time
 		#for scenes that have multiple components, and offset from the origin for subsqeuent components has to be accounted for
 		#if self.get_child(0).get_node(curAreaDragging).get_parent().offset:
 			#self.get_child(0).get_node(curAreaDragging).get_parent().global_position.x -= self.get_child(0).get_node(curAreaDragging).get_parent().offset
@@ -105,9 +108,15 @@ func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_
 	#if block not overlapping anymore, remove from array
 	print("overlapping blocks before delete, ", overlappingBlocks)
 	#do I have to delete two things? 
-	print("area deleting: ", area)
+	print("area deleting: ", area.get_parent().get_parent().get_parent().timePlaced)
 	overlappingBlocks.erase(area)
 	
 	print("overlapping blocks after delete, ", overlappingBlocks)
 	
 		
+func checkOrder() -> bool:
+	for block in overlappingBlocks:
+		if block.get_parent().get_parent().get_parent().timePlaced < self.timePlaced:
+			#overlapping block was placed earlier, it is selected 
+			return false
+	return true

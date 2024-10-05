@@ -7,7 +7,8 @@ player1
 player2
 0.00000190735, 540
 enemies
-147, 598
+297, 448
+147, 448
 killFloors
 goalBlocks
 breakableWalls
