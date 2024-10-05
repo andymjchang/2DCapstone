@@ -108,7 +108,7 @@ func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_
 	#if block not overlapping anymore, remove from array
 	print("overlapping blocks before delete, ", overlappingBlocks)
 	#do I have to delete two things? 
-	print("area deleting: ", area.get_parent().get_parent().get_parent().timePlaced)
+	#print("area deleting: ", area.get_parent().get_parent().get_parent().timePlaced)
 	overlappingBlocks.erase(area)
 	
 	print("overlapping blocks after delete, ", overlappingBlocks)
@@ -116,7 +116,8 @@ func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_
 		
 func checkOrder() -> bool:
 	for block in overlappingBlocks:
+		print("block root, ", block.get_parent())
 		if block.get_parent().get_parent().get_parent().timePlaced < self.timePlaced:
-			#overlapping block was placed earlier, it is selected 
-			return false
+			##overlapping block was placed earlier, it is selected 
+			return true
 	return true
