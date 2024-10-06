@@ -16,8 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="12_ngrii"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
-[ext_resource type="AudioStream" uid="uid://b335gnra8wcg" path="res://audioTracks/Tutorial_Demo_120bpm_CMaj_V2.mp3" id="13_sfia2"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
+[ext_resource type="AudioStream" uid="uid://cov0f8d5ngso1" path="res://audioTracks/Level 2_Main_156bpm_V2.mp3" id="15_27j5g"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
@@ -71,7 +71,7 @@ texture = ExtResource("12_ngrii")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
 position = Vector2(-960, -540)
-stream = ExtResource("13_sfia2")
+stream = ExtResource("15_27j5g")
 max_distance = 10000.0
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
