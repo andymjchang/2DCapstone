@@ -87,6 +87,9 @@ func _ready():
 		fileLabel.text = Globals.curFile
 		saveFileName = fileLabel.text
 	
+	if beatsMinLabel.text.is_valid_int():
+		beatsMin = int(beatsMinLabel.text)
+		Globals.setBPM(beatsMin)
 	
 	Globals.stepSize = stepSize
 	if FileAccess.file_exists(levelDataPath + saveFileName + ".dat"):
@@ -121,7 +124,6 @@ func _process(delta: float) -> void:
 			isBinding = true
 			
 func _on_text_edit_0_text_changed() -> void:
-	print(beatsMinLabel.text)
 	if beatsMinLabel.text.is_valid_int():
 		beatsMin = int(beatsMinLabel.text)
 		Globals.setBPM(beatsMin)
