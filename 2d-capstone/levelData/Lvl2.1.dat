@@ -217,15 +217,17 @@ platformBlocks
 15825, 375
 15975, 375
 16125, 375
+-125, 675
+-125, 375
 actionIndicators
 player1checkpoints
 player2checkpoints
 11400, 300
 11400, 650
 player1
-45, 640
+0, 640
 player2
-45.0000953674316, 340
+0, 340
 enemies
 744, 321
 594, 321

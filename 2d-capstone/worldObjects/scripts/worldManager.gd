@@ -224,8 +224,8 @@ func getNearestCheckpoint(who):
 	for i in viableCheckpoints:
 		var distance = who.position.distance_to(i.position)
 		if distance < shortestDistance:
-				nearestPoint = i
-				shortestDistance = distance
+			nearestPoint = i
+			shortestDistance = distance
 	#print("Relocating to: ", nearestPoint.position)
 	return nearestPoint
 	
