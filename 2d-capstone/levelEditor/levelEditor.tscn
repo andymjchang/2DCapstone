@@ -30,7 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://cy015hcaqhhta" path="res://levelEditor/baseObject.tscn" id="15_wsj3w"]
 [ext_resource type="PackedScene" uid="uid://bhlcoymbyox5y" path="res://levelEditorObjects/breakableWallScene.tscn" id="16_rjnnj"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
-[ext_resource type="PackedScene" uid="uid://vwn054kwmv7u" path="res://levelEditorObjects/ziplineScene.tscn" id="17_x5g52"]
+[ext_resource type="PackedScene" uid="uid://d14ty44q7tqru" path="res://levelEditorObjects/ziplineScene.tscn" id="17_x5g52"]
 [ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="19_jlcy1"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
 [ext_resource type="Texture2D" uid="uid://l8vpo2u44l4p" path="res://levelEditor/programmerArtAssets/p1checkpoint.png" id="22_1mwd2"]
@@ -140,7 +140,7 @@ offset_left = 93.0
 offset_top = 3.0
 offset_right = 208.0
 offset_bottom = 53.0
-text = "120"
+text = "156"
 placeholder_text = "BPM: "
 
 [node name="TextEdit" type="TextEdit" parent="UI"]
@@ -156,7 +156,7 @@ offset_left = 93.0
 offset_top = 107.0
 offset_right = 208.0
 offset_bottom = 157.0
-text = "150"
+text = "1"
 placeholder_text = "Step Size:"
 
 [node name="TextEdit3" type="TextEdit" parent="UI"]
@@ -164,7 +164,7 @@ offset_left = 93.0
 offset_top = 159.0
 offset_right = 208.0
 offset_bottom = 209.0
-text = "Lvl0.1"
+text = "Lvl2.1"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Node2D" parent="UI"]
