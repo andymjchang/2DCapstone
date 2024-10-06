@@ -116,8 +116,12 @@ func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_
 		
 func checkOrder() -> bool:
 	for block in overlappingBlocks:
-		print("block root, ", block.get_parent())
-		if block.get_parent().get_parent().get_parent().timePlaced < self.timePlaced:
-			##overlapping block was placed earlier, it is selected 
-			return true
+		if block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced:
+			#verlapping block was placed earlier, it is selected 
+			#check how close the pos our to allow manuverbility
+			#TODO make this a seperate function
+			if block.get_parent().get_parent().get_parent().blockType == "normal" and abs(block.get_parent().get_parent().get_parent().global_position - self.global_position) > Vector2(10, 10):
+				print("do nothing haha")
+			else:
+				return false
 	return true
