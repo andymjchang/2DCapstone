@@ -60,7 +60,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var player1List = $objectList/player1
 @onready var player2List = $objectList/player2
 @onready var killFloorsList = $objectList/killFloors
-@onready var beatsMinLabel = $UI/bpmLabel0
+@onready var beatsMinLabel = $UI/TextEdit0
 @onready var ziplineList = $objectList/ziplines
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
@@ -121,6 +121,7 @@ func _process(delta: float) -> void:
 			isBinding = true
 			
 func _on_text_edit_0_text_changed() -> void:
+	print(beatsMinLabel.text)
 	if beatsMinLabel.text.is_valid_int():
 		beatsMin = int(beatsMinLabel.text)
 		Globals.setBPM(beatsMin)
