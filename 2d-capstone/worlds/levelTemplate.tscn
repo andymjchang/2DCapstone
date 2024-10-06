@@ -76,7 +76,7 @@ scale = Vector2(0.22, 0.22)
 texture = ExtResource("18_xtdbc")
 
 [node name="Layer1" type="Parallax2D" parent="Background"]
-scroll_scale = Vector2(0.2, 0.2)
+scroll_scale = Vector2(0.1, 0.1)
 repeat_size = Vector2(1320, 0)
 repeat_times = 3
 
@@ -100,6 +100,7 @@ repeat_size = Vector2(1320, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Layer3"]
+position = Vector2(0, 10)
 scale = Vector2(0.22, 0.22)
 texture = ExtResource("15_qudmc")
 
