@@ -79,7 +79,8 @@ position = Vector2(-720, -502)
 scale = Vector2(1.5, 1.5)
 
 [node name="RunBounds" type="Area2D" parent="Camera2D"]
-position = Vector2(-249, 1)
+visible = false
+position = Vector2(-402, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RunBounds"]
 shape = SubResource("RectangleShape2D_jx12w")
