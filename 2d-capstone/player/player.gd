@@ -7,7 +7,7 @@ signal scored(id, score)
 
 var curSprite
 var JUMP_VELOCITY = -550.0
-var SPEED = 50.0
+var SPEED = 150.0
 var health = 27 # 3 hits
 var blockType = "player"
 var invuln = false
@@ -77,18 +77,18 @@ func _physics_process(delta: float) -> void:
 
 			# If not currently in a song, allow regular movement, otherwise begin autoscroll
 			if Globals.inLevel:
-				velocity.x = Globals.pixelsPerFrame
+				# velocity.x = Globals.pixelsPerFrame
 				if not jumpInProgress and not punchInProgress:
 					$Animation.play("Run")
 
 				# Pseudo-autoscroll prototype
-				# var direction = Input.get_axis(left, right)
-				# if not hitBounds and direction > 0:
-				# 	velocity.x =  Globals.pixelsPerFrame + SPEED
-				# elif hitBounds and direction > 0:
-				# 	velocity.x = Globals.pixelsPerFrame
-				# else:
-				# 	velocity.x = move_toward(velocity.x, 0, SPEED)
+				var direction = Input.get_axis(left, right)
+				if not hitBounds and direction > 0:
+					velocity.x =  Globals.pixelsPerFrame + SPEED
+				elif hitBounds and direction > 0:
+					velocity.x = Globals.pixelsPerFrame
+				else:
+					velocity.x = move_toward(velocity.x, 0, SPEED)
 			else:
 				pass 
 			# Other player mechanics
