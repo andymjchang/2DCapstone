@@ -93,7 +93,6 @@ stream = ExtResource("19_jlcy1")
 [node name="player1" type="Node2D" parent="objectList"]
 
 [node name="player2" type="Node2D" parent="objectList"]
-visible = false
 
 [node name="enemies" type="Node2D" parent="objectList"]
 
