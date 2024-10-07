@@ -13,11 +13,14 @@ player2checkpoints
 player1
 0, 540
 player2
-0.00000381469999, 540
+0.00000572204999, 540
 enemies
-294, 446
-144, 446
+291, 444
+141, 444
 killFloors
 goalBlocks
 breakableWalls
 ziplines
+placers
+900, 450
+750, 300
