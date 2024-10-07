@@ -30,7 +30,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#if block is being dragged, have a transparent image of it follow the mouse around
-	if isDragging:
+	if isDragging and spriteNode:
 		if !spriteInScene:
 			#we need to add back the transparent sprite as a child
 			self.add_child(spriteNode)
@@ -54,7 +54,9 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, 
 				curAreaDragging = str(areaParent.name)+"/"+str(areaName)
 				curArea = str(areaName)
 				
-				spriteNode = self.get_child(0).get_node(str(areaParent.name)+"/Sprite2D").duplicate()
+				#check if there is a sprite node first 
+				if self.get_child(0).has_node(str(areaParent.name)+"/Sprite2D"):
+					spriteNode = self.get_child(0).get_node(str(areaParent.name)+"/Sprite2D").duplicate()
 				#TODO i dont want to add everytime
 				#object has been clicked, so need to tell the level-edito to switch its current block
 				#self.get_parent().get_parent().get_parent().emit_signal("objectClicked")
@@ -115,13 +117,13 @@ func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_
 	
 		
 func checkOrder() -> bool:
-	for block in overlappingBlocks:
-		if block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced:
-			#verlapping block was placed earlier, it is selected 
-			#check how close the pos our to allow manuverbility
-			#TODO make this a seperate function
-			if block.get_parent().get_parent().get_parent().blockType == "normal" and abs(block.get_parent().get_parent().get_parent().global_position - self.global_position) > Vector2(10, 10):
-				print("do nothing haha")
-			else:
-				return false
+	#for block in overlappingBlocks:
+		#if block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced:
+			##verlapping block was placed earlier, it is selected 
+			##check how close the pos our to allow manuverbility
+			##TODO make this a seperate function
+			#if block.get_parent().get_parent().get_parent().blockType == "normal" and abs(block.get_parent().get_parent().get_parent().global_position - self.global_position) > Vector2(10, 10):
+				#print("do nothing haha")
+			#else:
+				#return false
 	return true
