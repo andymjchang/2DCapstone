@@ -201,18 +201,21 @@ func _on_p_1_placer_button_button_up() -> void:
 	placerList.add_child(placerInstance)
 	place_block(placerParent, placerList, camera.position, false)
 	#might need to change this to the editor area
-	Globals.startP1Coords = placerParent.get_child(0).get_node("Player1").global_position
-	Globals.startP2Coords = placerParent.get_child(0).get_node("Player2").global_position
+	print("player 1 children: ", placerParent.get_child(0).get_node("Player1").get_children())
+	Globals.startP1Coords = placerParent.get_child(0).get_node("Player1/EditorArea1").global_position
+	Globals.startP2Coords = placerParent.get_child(0).get_node("Player2/EditorArea2").global_position
+	print("level editor custom start coords P1: ", placerParent.get_child(0).get_node("Player1/EditorArea1").global_position, " P2: ", placerParent.get_child(0).get_node("Player2/EditorArea2").global_position)
 
 func _on_p_2_placer_button_button_up() -> void:
-	Globals.customStart = true
-	var p2PlacerInstance = p2Placer.instantiate()
-	var p2PlacerParent = baseObject.instantiate()
-	p2PlacerParent.add_child(p2PlacerInstance)
-	p2PlacerParent.blockType = blockTypes[11]
-	placerList.add_child(p2PlacerInstance)
-	place_block(p2PlacerParent, placerList, camera.position, false)
-	Globals.startP2Coords = p2PlacerParent.global_position
+	#Globals.customStart = true
+	#var p2PlacerInstance = p2Placer.instantiate()
+	#var p2PlacerParent = baseObject.instantiate()
+	#p2PlacerParent.add_child(p2PlacerInstance)
+	#p2PlacerParent.blockType = blockTypes[11]
+	#placerList.add_child(p2PlacerInstance)
+	#place_block(p2PlacerParent, placerList, camera.position, false)
+	#Globals.startP2Coords = p2PlacerParent.global_position
+	pass
 
 	
 func _on_p1checkpoint_button_pressed() -> void:
