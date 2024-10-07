@@ -10,7 +10,8 @@ var pixelsPerFrame = 300
 var curFile = ""
 
 var areaClicked = false
-
+var startP1Coords
+var startP2Coords
 
 # File Names
 var currentEditorFileName

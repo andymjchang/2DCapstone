@@ -19,8 +19,8 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline"]
-enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE}
+var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer"]
+enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
 var isBinding = false
@@ -31,6 +31,8 @@ var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
 var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 
+@export var p1Placer : PackedScene
+@export var p2Placer : PackedScene
 @export var actionIndicator : PackedScene
 @export var checkpoint : PackedScene
 @export var platformBlock: PackedScene
@@ -62,6 +64,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var killFloorsList = $objectList/killFloors
 @onready var beatsMinLabel = $UI/bpmLabel0
 @onready var ziplineList = $objectList/ziplines
+@onready var placerList = $objectList/placers
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -119,6 +122,8 @@ func _process(delta: float) -> void:
 			bindedBlocks = []
 		else:
 			isBinding = true
+	if Input.is_action_just_pressed("startHere"):
+		startHere()
 			
 func _on_text_edit_0_text_changed() -> void:
 	if beatsMinLabel.text.is_valid_int():
@@ -185,6 +190,24 @@ func _on_text_edit_3_text_changed() -> void:
 	
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
+
+func _on_p_1_placer_button_button_up() -> void:
+	var p1PlacerInstance = p1Placer.instantiate()
+	var p1PlacerParent = baseObject.instantiate()
+	p1PlacerParent.add_child(p1PlacerInstance)
+	p1PlacerParent.blockType = blockTypes[10]
+	placerList.add_child(p1PlacerInstance)
+	place_block(p1PlacerParent, placerList, camera.position, false)
+
+
+func _on_p_2_placer_button_button_up() -> void:
+	var p2PlacerInstance = p2Placer.instantiate()
+	var p2PlacerParent = baseObject.instantiate()
+	p2PlacerParent.add_child(p2PlacerInstance)
+	p2PlacerParent.blockType = blockTypes[11]
+	placerList.add_child(p2PlacerInstance)
+	place_block(p2PlacerParent, placerList, camera.position, false)
+
 	
 func _on_p1checkpoint_button_pressed() -> void:
 	var checkpointInstance = checkpoint.instantiate()
@@ -472,6 +495,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/breakableWalls")
 	if blockType == "zipline":
 		return get_node("objectList/ziplines")
+	if blockType == "placer":
+		return get_node("objectList/placers")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:
@@ -553,7 +578,11 @@ func lengthenPlatform() -> void:
 	place_block(blockParent, platformBlocksList, Vector2(newPos, blockArea.global_position.y), false)
 		
 	
-
+func startHere() -> void:
+	#TODO change this to something that you can drag onto the screen
+	Globals.startCoords = get_global_mouse_position()
+	
+	#when level is selected they are gonna start here
 
 
 	
