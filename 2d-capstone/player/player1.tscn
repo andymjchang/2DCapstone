@@ -174,5 +174,23 @@ stream = ExtResource("7_wy6uo")
 [node name="damagePlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_k3kow")
 
+[node name="topMark" type="Marker2D" parent="."]
+position = Vector2(-11.75, -39)
+
+[node name="ColorRect" type="ColorRect" parent="topMark"]
+offset_left = -11.75
+offset_top = -5.0
+offset_right = 10.25
+offset_bottom = 7.0
+
+[node name="bottomMark" type="Marker2D" parent="."]
+position = Vector2(-11.75, 15.5)
+
+[node name="ColorRect" type="ColorRect" parent="bottomMark"]
+offset_left = -11.75
+offset_top = -5.0
+offset_right = 10.25
+offset_bottom = 7.0
+
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

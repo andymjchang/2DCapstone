@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=26 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -23,13 +23,14 @@
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
+[ext_resource type="PackedScene" uid="uid://cql6hrj5lhevf" path="res://worldObjects/zipline/ziplineEnd.tscn" id="24_ff25o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx12w"]
 size = Vector2(36, 1086)
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
-levelFile = "Lvl0.1"
+levelFile = "ziptest"
 platformBlockInstance = ExtResource("2_78xmt")
 goalBlockInstance = ExtResource("3_oih58")
 killFloorInstance = ExtResource("3_6me16")
@@ -60,11 +61,12 @@ theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(250, 450)
-zoom = Vector2(1.5, 1.5)
+position = Vector2(960, 536)
+zoom = Vector2(0.25, 0.25)
 script = ExtResource("4_nttx1")
 
 [node name="MenuBg" type="Sprite2D" parent="Camera2D"]
+visible = false
 position = Vector2(19.208, -32.8751)
 scale = Vector2(0.223264, 0.223264)
 texture = ExtResource("12_ngrii")
@@ -75,14 +77,14 @@ stream = ExtResource("15_27j5g")
 max_distance = 10000.0
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
-position = Vector2(-720, -502)
+position = Vector2(-1327, -526)
 scale = Vector2(1.5, 1.5)
 
 [node name="RunBounds" type="Area2D" parent="Camera2D"]
 position = Vector2(-252, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RunBounds"]
-position = Vector2(-15, 0)
+position = Vector2(-943, -20)
 shape = SubResource("RectangleShape2D_jx12w")
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D/RunBounds"]
@@ -124,6 +126,14 @@ script = ExtResource("14_rbu47")
 [node name="players" type="Node2D" parent="objectList"]
 
 [node name="ziplines" type="Node2D" parent="objectList"]
+
+[node name="zipline" type="Node2D" parent="objectList/ziplines"]
+
+[node name="ziplineStart" parent="objectList/ziplines/zipline" instance=ExtResource("10_h5bd4")]
+position = Vector2(802, 549)
+
+[node name="ziplineEnd" parent="objectList/ziplines/zipline" instance=ExtResource("24_ff25o")]
+position = Vector2(2120, 667)
 
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 

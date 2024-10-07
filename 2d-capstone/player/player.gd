@@ -21,17 +21,19 @@ var punch
 var reachedCheckpoint = true
 var relocating = false
 var checkpoint
-var otherPlayer
 var editing = false
 var index = 0
 var hitBounds = false
+var inZipline = false
+var onTop = false
+var originalPos
 
 var jumpInProgress = false
 var punchInProgress = false
 var runInProgress = false
 
 # Other nodes
-var otherPlayerList
+var otherPlayer
 var worldNode
 var sfxPlayer
 
@@ -98,16 +100,28 @@ func _physics_process(delta: float) -> void:
 				velocity.y = JUMP_VELOCITY
 				#await get_tree().create_timer(0.2).timeout
 			
-			if Input.is_action_just_pressed(punch):
-				if canAttack:
-					$Animation.play("Punch")
-					punchInProgress = true
-					sfxPlayer.play()
-					#print("Punch!")
-					attack.visible = true
-					attack.monitoring = true
-					canAttack = false
-					$attackTimer.start()
+		if Input.is_action_just_pressed(punch):
+			if inZipline and self.name == "Player1":
+				print("inputting")
+				var playerTouch = get_parent().get_node(otherPlayer)
+				print("I grabbed: ", playerTouch.name)
+				playerTouch.onTop = not playerTouch.onTop
+				print("On top?: ", playerTouch.onTop)
+				if (playerTouch.onTop):
+					playerTouch.position.y = get_node("bottomMark").global_position.y
+				else:
+					playerTouch.position.y = get_node("topMark").global_position.y
+				print("Position now: ", playerTouch.position.x)
+			elif canAttack:
+				$Animation.play("Punch")
+				punchInProgress = true
+				sfxPlayer.play()
+				#print("Punch!")
+				attack.visible = true
+				attack.monitoring = true
+				canAttack = false
+				$attackTimer.start()
+
 
 		elif reachedCheckpoint:
 			# Wait to respawn relocating player when teammate has aligned
