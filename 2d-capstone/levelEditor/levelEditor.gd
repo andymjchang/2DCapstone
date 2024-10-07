@@ -80,6 +80,7 @@ var levelSaved = false
 
 
 func _ready():
+	Globals.customStart = false
 	self.objectClicked.connect(_onObjectClicked)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
@@ -195,18 +196,20 @@ func _on_p_1_placer_button_button_up() -> void:
 	var p1PlacerInstance = p1Placer.instantiate()
 	var p1PlacerParent = baseObject.instantiate()
 	p1PlacerParent.add_child(p1PlacerInstance)
-	p1PlacerParent.blockType = blockTypes[10]
+	p1PlacerParent.blockType = blockTypes[11]
 	placerList.add_child(p1PlacerInstance)
 	place_block(p1PlacerParent, placerList, camera.position, false)
-
+	Globals.startP1Coords = p1PlacerParent.global_position
 
 func _on_p_2_placer_button_button_up() -> void:
+	Globals.customStart = true
 	var p2PlacerInstance = p2Placer.instantiate()
 	var p2PlacerParent = baseObject.instantiate()
 	p2PlacerParent.add_child(p2PlacerInstance)
 	p2PlacerParent.blockType = blockTypes[11]
 	placerList.add_child(p2PlacerInstance)
 	place_block(p2PlacerParent, placerList, camera.position, false)
+	Globals.startP2Coords = p2PlacerParent.global_position
 
 	
 func _on_p1checkpoint_button_pressed() -> void:

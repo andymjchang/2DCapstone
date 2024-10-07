@@ -12,6 +12,7 @@ var curFile = ""
 var areaClicked = false
 var startP1Coords
 var startP2Coords
+var customStart = false
 
 # File Names
 var currentEditorFileName

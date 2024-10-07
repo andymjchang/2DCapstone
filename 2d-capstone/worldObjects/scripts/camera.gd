@@ -8,3 +8,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Globals.inLevel:
 		position.x = position.x + Globals.pixelsPerFrame * delta
+		
+func moveCamera(newXPos) -> void:
+	#based on the x pos, shift the camera to where the characters are
+	position.x = newXPos

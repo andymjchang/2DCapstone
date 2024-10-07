@@ -76,6 +76,11 @@ func _ready():
 	# Prep players
 	player1.editing = false
 	player2.editing = false
+	if Globals.customStart:
+		#we are starting at a user picked place
+		player1.global_position = Globals.startP1Coords
+		player2.global_position = Globals.startP2Coords
+		get_node("Camera2D").moveCamera(player1.global_position.x)
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
