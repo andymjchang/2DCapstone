@@ -193,13 +193,16 @@ func _on_test_placer_button_down() -> void:
 	trackingPosition = true
 
 func _on_p_1_placer_button_button_up() -> void:
-	var p1PlacerInstance = p1Placer.instantiate()
-	var p1PlacerParent = baseObject.instantiate()
-	p1PlacerParent.add_child(p1PlacerInstance)
-	p1PlacerParent.blockType = blockTypes[11]
-	placerList.add_child(p1PlacerInstance)
-	place_block(p1PlacerParent, placerList, camera.position, false)
-	Globals.startP1Coords = p1PlacerParent.global_position
+	Globals.customStart = true
+	var placerInstance = p1Placer.instantiate()
+	var placerParent = baseObject.instantiate()
+	placerParent.add_child(placerInstance)
+	placerParent.blockType = blockTypes[11]
+	placerList.add_child(placerInstance)
+	place_block(placerParent, placerList, camera.position, false)
+	#might need to change this to the editor area
+	Globals.startP1Coords = placerParent.get_child(0).get_node("Player1").global_position
+	Globals.startP2Coords = placerParent.get_child(0).get_node("Player2").global_position
 
 func _on_p_2_placer_button_button_up() -> void:
 	Globals.customStart = true

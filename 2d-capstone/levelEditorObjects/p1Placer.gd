@@ -12,4 +12,3 @@ func _process(delta: float) -> void:
 	for placer in self.get_children():
 		if placer.name != "Line":
 			placer.global_position.x = lineNode.global_position.x
-	pass
