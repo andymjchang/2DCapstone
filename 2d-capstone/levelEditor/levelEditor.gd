@@ -60,7 +60,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var player1List = $objectList/player1
 @onready var player2List = $objectList/player2
 @onready var killFloorsList = $objectList/killFloors
-@onready var beatsMinLabel = $UI/bpmLabel0
+@onready var beatsMinLabel = $UI/TextEdit0
 @onready var ziplineList = $objectList/ziplines
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
@@ -87,6 +87,9 @@ func _ready():
 		fileLabel.text = Globals.curFile
 		saveFileName = fileLabel.text
 	
+	if beatsMinLabel.text.is_valid_int():
+		beatsMin = int(beatsMinLabel.text)
+		Globals.setBPM(beatsMin)
 	
 	Globals.stepSize = stepSize
 	if FileAccess.file_exists(levelDataPath + saveFileName + ".dat"):
@@ -346,8 +349,9 @@ func save_scene_to_file():
 					var childrenList = item.get_child(0).get_children()
 					for blockChild in childrenList:
 						#this is most likely where the zipline error/duplication is occuring
-						print("block child being saved, ", blockChild.get_child(0))
-						newFile.store_string(str(blockChild.get_child(0).global_position.x) + ", " + str(blockChild.get_child(0).global_position.y) + "\n")
+						var toSave = blockChild.get_node("EditorArea0")
+						print("Saving at: ", str(toSave.global_position.x) + ", " + str(toSave.global_position.y) + "\n")
+						newFile.store_string(str(toSave.global_position.x) + ", " + str(toSave.global_position.y) + "\n")
 					#print("child list in save, ", childrenList)
 					
 	else:
