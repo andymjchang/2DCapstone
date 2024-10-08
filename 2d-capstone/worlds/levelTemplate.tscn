@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=30 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://dpjglfoglrf2j" path="res://backgrounds/parallax/bkg_scroll_buildings.png" id="19_uiohy"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
+[ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx12w"]
 size = Vector2(45.5, 1086)
@@ -149,6 +150,8 @@ position = Vector2(-250, -158)
 
 [node name="ScorePopup2" parent="Camera2D" instance=ExtResource("16_kbija")]
 position = Vector2(-250, 255)
+
+[node name="Node2D" parent="Camera2D" instance=ExtResource("23_jq54w")]
 
 [node name="objectList" type="Node2D" parent="."]
 

@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 
 func FadeOut():
 	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.0, 0.5)
+	tween.tween_property(self, "modulate:a", 0.0, 1.0)
 	tween.tween_callback(queue_free)
 
 func _on_death_timer_timeout() -> void:
