@@ -63,7 +63,12 @@ func _process(delta: float) -> void:
 	
 	# Stop the transition if the time has been reached
 	if t >= 1.0:
-		$DeathTimer.start()
+		FadeOut()
+
+func FadeOut():
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 0.5)
+	tween.tween_callback(queue_free)
 
 func _on_death_timer_timeout() -> void:
 	queue_free()
