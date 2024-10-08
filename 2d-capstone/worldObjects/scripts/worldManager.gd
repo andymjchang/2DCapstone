@@ -38,6 +38,7 @@ var music
 
 var time : float = 0
 var score = 0
+var musicTime = 0.0
 
 @onready var timerText
 @onready var player
@@ -81,6 +82,11 @@ func _ready():
 		player1.global_position = Globals.startP1Coords
 		player2.global_position = Globals.startP2Coords
 		get_node("Camera2D").moveCamera(player1.global_position.x)
+		var distance = abs(0.0 - player1.global_position.x)
+		var playerSpeed = player1.SPEED
+		musicTime = distance / Globals.pixelsPerFrame
+		#self.get_node("Camera2D/Music").seek(timePassed)
+		print("time gone, ", musicTime)
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
@@ -93,7 +99,8 @@ func _ready():
 	#startGame()
 	
 func startGame():
-	music.play(0.0)
+	
+	music.play(musicTime)
 	Globals.inLevel = true
 
 func loadAudio():
