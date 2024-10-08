@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bi1t7ju171wyu"]
+[gd_scene load_steps=8 format=3 uid="uid://bi1t7ju171wyu"]
 
 [ext_resource type="Script" path="res://levelEditorObjects/p1Placer.gd" id="1_kanpy"]
 [ext_resource type="Texture2D" uid="uid://cxpyh4hstkkni" path="res://ui/assets/fullHealth.png" id="1_qgbxr"]
+[ext_resource type="Texture2D" uid="uid://6w21s3eo76lr" path="res://ui/assets/Placer_Line.png" id="2_4emwg"]
 [ext_resource type="Texture2D" uid="uid://cpvil4blpom7p" path="res://ui/assets/fullP2Health.png" id="2_g4ag4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hnd73"]
@@ -24,9 +25,10 @@ script = ExtResource("1_kanpy")
 position = Vector2(-0.5, 152)
 shape = SubResource("RectangleShape2D_hnd73")
 
-[node name="Line2D" type="Line2D" parent="Line"]
-points = PackedVector2Array(0, -437, 0, -165, 0, -53, 0, 72, 0, 352, 0, 576, 0, 1256, 0, 1259)
-default_color = Color(0.0562916, 0.0562916, 0.0562916, 1)
+[node name="ActionLine" type="Sprite2D" parent="Line"]
+position = Vector2(7, 146)
+scale = Vector2(0.221978, 1.1828)
+texture = ExtResource("2_4emwg")
 
 [node name="Player1" type="Node2D" parent="."]
 
@@ -44,10 +46,9 @@ texture = ExtResource("1_qgbxr")
 [node name="Area2D" type="Area2D" parent="Player2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D"]
-position = Vector2(0, -101)
 shape = SubResource("RectangleShape2D_u8hj0")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player2"]
-position = Vector2(-4.54747e-13, -101)
+position = Vector2(-4.54747e-13, 0)
 scale = Vector2(0.02425, 0.0213333)
 texture = ExtResource("2_g4ag4")

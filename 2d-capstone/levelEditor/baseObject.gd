@@ -71,6 +71,8 @@ func _input(event: InputEvent) -> void:
 		print("mouse released")
 		self.get_child(0).get_node(curAreaDragging).get_parent().global_position= self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
 		timePlaced = Globals.time
+		#need to check for offset, so basically its not 0,0 aligned 
+	
 		#for scenes that have multiple components, and offset from the origin for subsqeuent components has to be accounted for
 		#if self.get_child(0).get_node(curAreaDragging).get_parent().offset:
 			#self.get_child(0).get_node(curAreaDragging).get_parent().global_position.x -= self.get_child(0).get_node(curAreaDragging).get_parent().offset
@@ -118,7 +120,7 @@ func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_
 		
 func checkOrder() -> bool:
 	for block in overlappingBlocks:
-		if block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced:
+		if (block.is_class("CanvasLayer")  and block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced):
 			#verlapping block was placed earlier, it is selected 
 			#check how close the pos our to allow manuverbility
 			#TODO make this a seperate function
