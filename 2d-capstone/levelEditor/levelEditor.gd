@@ -64,6 +64,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var killFloorsList = $objectList/killFloors
 @onready var beatsMinLabel = $UI/bpmLabel0
 @onready var ziplineList = $objectList/ziplines
+@onready var breakableWallList = $objectList/breakableWalls
 @onready var placerList = $objectList/placers
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
@@ -158,6 +159,7 @@ func loadLevel():
 		"enemies": [enemyCharacter, enemyList, blockTypes[5]],
 		"player1": [player1, player1List, blockTypes[0]],
 		"player2": [player2, player2List, blockTypes[1]],
+		"breakableWalls": [breakableWall,breakableWallList,  blockTypes[9]],
 		"ziplines": [zipline, ziplineList, blockTypes[10]]}
 	var instance
 	var objectList

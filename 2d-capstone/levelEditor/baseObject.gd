@@ -71,13 +71,6 @@ func _input(event: InputEvent) -> void:
 		print("mouse released")
 		self.get_child(0).get_node(curAreaDragging).get_parent().global_position= self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
 		timePlaced = Globals.time
-		#need to check for offset, so basically its not 0,0 aligned 
-	
-		#for scenes that have multiple components, and offset from the origin for subsqeuent components has to be accounted for
-		#if self.get_child(0).get_node(curAreaDragging).get_parent().offset:
-			#self.get_child(0).get_node(curAreaDragging).get_parent().global_position.x -= self.get_child(0).get_node(curAreaDragging).get_parent().offset
-			#PROBLEM this is not setting the actual object within the scene
-		#self.get_node(curArea).global_position =  self.get_child(0).get_node(curAreaDragging).get_parent().global_position
 		isDragging = false
 		
 		
@@ -124,7 +117,7 @@ func checkOrder() -> bool:
 			#verlapping block was placed earlier, it is selected 
 			#check how close the pos our to allow manuverbility
 			#TODO make this a seperate function
-			if block.get_parent().get_parent().get_parent().blockType == "normal" and abs(block.get_parent().get_parent().get_parent().global_position.x - self.global_position.x) > 100:
+			if block.get_parent().get_parent().get_parent().blockType == "normal" and abs(block.get_parent().get_parent().get_parent().global_position.x - self.global_position.x) > 500:
 				print("overlapping blocks position: ", block.get_parent().get_parent().get_parent().global_position )
 				print("my position ", self.global_position)
 				print("position subtraction, ",  abs(block.get_parent().get_parent().get_parent().global_position - self.global_position))

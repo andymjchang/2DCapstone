@@ -15,6 +15,7 @@ signal checkLevelCompleted()
 @export var player1Instance : PackedScene
 @export var player2Instance : PackedScene
 @export var enemyInstance : PackedScene
+@export var breakableWallInstance : PackedScene
 @export var ziplineInstance : PackedScene
 
 @onready var objectList = $objectList
@@ -26,6 +27,7 @@ signal checkLevelCompleted()
 @onready var p1checkpointsList = $objectList/player1checkpoints
 @onready var p2checkpointsList = $objectList/player2checkpoints
 @onready var playersList = $objectList/players
+@onready var breakableWallList = $objectList/breakableWalls
 @onready var ziplineList = $objectList/ziplines
 
 var player1 
@@ -128,6 +130,7 @@ func loadLevel():
 		"enemies": [enemyInstance, enemiesList],
 		"player1": [player1Instance, playersList],
 		"player2": [player2Instance, playersList],
+		"breakableWalls" : [breakableWallInstance, breakableWallList],
 		"ziplines": [ziplineInstance, ziplineList]}
 	var instance
 	var instanceParent
