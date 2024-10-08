@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://chg421ok8benp" path="res://worldObjects/zipline/end.png" id="1_qovlm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65do7"]
-size = Vector2(508, 507)
+size = Vector2(500, 2836)
 
 [node name="ziplineEnd" type="Node2D"]
 script = ExtResource("1_e1xa0")
@@ -13,7 +13,7 @@ script = ExtResource("1_e1xa0")
 scale = Vector2(0.25, 0.25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ziplineArea"]
-position = Vector2(-2, -0.5)
+position = Vector2(-2, 6)
 shape = SubResource("RectangleShape2D_65do7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

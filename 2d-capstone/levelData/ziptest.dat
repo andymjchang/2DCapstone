@@ -21,10 +21,10 @@ platformBlocks
 2475, 925
 2625, 925
 2775, 925
-275, 325
-425, 325
-275, 525
-400, 525
+2825, 575
+2925, 925
+3075, 925
+2975, 575
 actionIndicators
 player1checkpoints
 player2checkpoints
@@ -35,7 +35,7 @@ player2
 enemies
 killFloors
 goalBlocks
-1725, 525
-1800, 925
+3000, 525
+3050, 875
 breakableWalls
 ziplines

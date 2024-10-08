@@ -178,7 +178,7 @@ stream = ExtResource("7_wy6uo")
 stream = ExtResource("8_k3kow")
 
 [node name="topMark" type="Marker2D" parent="."]
-position = Vector2(-11.75, -39)
+position = Vector2(-11.75, -52.5)
 
 [node name="ColorRect" type="ColorRect" parent="topMark"]
 visible = false
@@ -188,7 +188,7 @@ offset_right = 10.25
 offset_bottom = 7.0
 
 [node name="bottomMark" type="Marker2D" parent="."]
-position = Vector2(-11.75, 15.5)
+position = Vector2(-11.75, 28.25)
 
 [node name="ColorRect" type="ColorRect" parent="bottomMark"]
 visible = false

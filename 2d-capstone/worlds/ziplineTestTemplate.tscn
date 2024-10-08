@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=25 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="3_6me16"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_o6usx"]
 [ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://levelEditor/goal_block.tscn" id="3_oih58"]
-[ext_resource type="Script" path="res://worldObjects/scripts/camera.gd" id="4_nttx1"]
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
 [ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
@@ -63,7 +62,6 @@ text = "0"
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 536)
 zoom = Vector2(0.25, 0.25)
-script = ExtResource("4_nttx1")
 
 [node name="MenuBg" type="Sprite2D" parent="Camera2D"]
 visible = false
@@ -133,7 +131,7 @@ script = ExtResource("14_rbu47")
 position = Vector2(802, 549)
 
 [node name="ziplineEnd" parent="objectList/ziplines/zipline" instance=ExtResource("24_ff25o")]
-position = Vector2(2120, 667)
+position = Vector2(2544, 782)
 
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 

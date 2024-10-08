@@ -83,8 +83,6 @@ func _physics_process(delta: float) -> void:
 			# If not currently in a song, allow regular movement, otherwise begin autoscroll
 			if Globals.inLevel:
 				# velocity.x = Globals.pixelsPerFrame
-				if not jumpInProgress and not punchInProgress:
-					$Animation.play("Run")
 				# Pseudo-autoscroll prototype
 				var direction = Input.get_axis(left, right)
 				if not hitBounds and direction > 0:
@@ -115,39 +113,31 @@ func _physics_process(delta: float) -> void:
 			
 		if Input.is_action_just_pressed(punch):
 			if inZipline and self.name == "Player1":
-				print("inputting")
 				var playerTouch = get_parent().get_node(otherPlayer)
-				print("I grabbed: ", playerTouch.name)
 				playerTouch.onTop = not playerTouch.onTop
-				print("On top?: ", playerTouch.onTop)
 				if (playerTouch.onTop):
 					playerTouch.position.y = get_node("bottomMark").global_position.y
 				else:
 					playerTouch.position.y = get_node("topMark").global_position.y
-				print("Position now: ", playerTouch.position.x)
 			elif canAttack:
+				print("Punching")
 				$Animation.play("Punch")
 				punchInProgress = true
 				sfxPlayer.play()
-				#print("Punch!")
 				attack.visible = true
 				attack.monitoring = true
 				canAttack = false
 				$attackTimer.start()
 
-
 		elif reachedCheckpoint:
 			# Wait to respawn relocating player when teammate has aligned
 			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
-				#print("My name: ", name)
-				#print("Made it")
 				emit_signal("revive", self)
 				# Reset relocating player position and allow control
 				get_node("Hitbox").call_deferred("set", "disabled", false)
 				relocating = false
 				reachedCheckpoint = false
 				invuln = false
-				#self.position.y = checkpoint.get_node("Point").position.y
 				self.position.x = get_parent().get_node(otherPlayer).position.x
 		move_and_slide()
 	else:
@@ -192,22 +182,16 @@ func _onRelocate(nearestPoint):
 		invuln = true
 		get_node("Hitbox").call_deferred("set", "disabled", true)
 		reachedCheckpoint = false
-		#var newVelocity = Vector2((nearestPoint.position - self.position) * (SPEED / 10 * get_process_delta_time()))
-		#await get_tree().create_timer(0.0001).timeout
 		# Set destination, begin move to point
 		checkpoint = nearestPoint
-		#velocity = newVelocity #Vector2(0,0)
 		position = nearestPoint.position
-		#print("Position now: ", position)
-		#velocity = newVelocity
-
 
 func _onAnimationFinished():
 	#print("Finished, ", $Animation.animation)
 	if $Animation.animation == "Jump":
-		jumpInProgress = false
+		$Animation.play("Run")
 	elif $Animation.animation == "Punch":
-		punchInProgress = false
+		$Animation.play("Run")
 	pass
 
 

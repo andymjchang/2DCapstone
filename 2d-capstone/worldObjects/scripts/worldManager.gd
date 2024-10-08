@@ -251,13 +251,13 @@ func _onEndGameBodyEntered(body:Node2D):
 
 func _onRunBoundsBodyEntered(body: Node2D) -> void:
 	if (body.name.contains("Player")):
-		print("Entering max run bounds")
+		#print("Entering max run bounds")
 		body.hitBounds = true
 
 
 func _onRunBoundsBodyExited(body: Node2D) -> void:
 	if (body.name.contains("Player")):
-		print("Leaving max run bounds")
+		#print("Leaving max run bounds")
 		body.hitBounds = false
 
 
