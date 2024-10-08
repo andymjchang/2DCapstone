@@ -212,21 +212,23 @@ func round_to_dec(num, digit):
 func getNearestCheckpoint(who):
 	var checkpointPath = who.name.to_lower() + "checkpoints"
 	var viableCheckpoints = []
-	for i in objectList.get_node(checkpointPath).get_children():
-		#print("Checking: ", i)
-		# Check if checkpoint in front of player
-		var direction = (i.position.x - who.position.x)
-		if (direction >= 0):
-			viableCheckpoints.append(i)
-	#print("Viable checkpoints: ", viableCheckpoints)
-	var nearestPoint = viableCheckpoints[0]
-	var shortestDistance = who.position.distance_to(viableCheckpoints[0].position)
-	for i in viableCheckpoints:
-		var distance = who.position.distance_to(i.position)
-		if distance < shortestDistance:
-			nearestPoint = i
-			shortestDistance = distance
-	#print("Relocating to: ", nearestPoint.position)
+	var nearestPoint = null
+	if len(objectList.get_node(checkpointPath).get_children()) > 0:
+		for i in objectList.get_node(checkpointPath).get_children():
+			#print("Checking: ", i)
+			# Check if checkpoint in front of player
+			var direction = (i.position.x - who.position.x)
+			if (direction >= 0):
+				viableCheckpoints.append(i)
+		#print("Viable checkpoints: ", viableCheckpoints)
+		nearestPoint = viableCheckpoints[0]
+		var shortestDistance = who.position.distance_to(viableCheckpoints[0].position)
+		for i in viableCheckpoints:
+			var distance = who.position.distance_to(i.position)
+			if distance < shortestDistance:
+					nearestPoint = i
+					shortestDistance = distance
+		#print("Relocating to: ", nearestPoint.position)
 	return nearestPoint
 	
 # Basic checkpointing system
@@ -256,6 +258,8 @@ func _onRunBoundsBodyExited(body: Node2D) -> void:
 	if (body.name.contains("Player")):
 		print("Leaving max run bounds")
 		body.hitBounds = false
+
+
 func _onScored(id, p_score):
 	var scoreToAdd = 100 - p_score
 	score += scoreToAdd

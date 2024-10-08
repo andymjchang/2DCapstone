@@ -18,6 +18,7 @@ var left
 var right
 var jump
 var punch
+var slide
 var reachedCheckpoint = true
 var relocating = false
 var checkpoint
@@ -47,12 +48,14 @@ func _ready():
 		right = "right1"
 		jump = "jump1"
 		punch = "punch1"
+		slide = "slide1"
 		otherPlayer = "Player2"
 	elif self.name == "Player2":
 		left = "left2"
 		right = "right2"
 		jump = "jump2"
 		punch = "punch2"
+		slide = "slide2"
 		otherPlayer = "Player1"
 
 	attack = get_node("AttackHitbox")
@@ -82,7 +85,6 @@ func _physics_process(delta: float) -> void:
 				# velocity.x = Globals.pixelsPerFrame
 				if not jumpInProgress and not punchInProgress:
 					$Animation.play("Run")
-
 				# Pseudo-autoscroll prototype
 				var direction = Input.get_axis(left, right)
 				if not hitBounds and direction > 0:
@@ -93,12 +95,21 @@ func _physics_process(delta: float) -> void:
 					velocity.x = move_toward(velocity.x, 0, SPEED)
 			else:
 				pass 
-			# Other player mechanics
+
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
 				jumpInProgress = true
 				velocity.y = JUMP_VELOCITY
 				#await get_tree().create_timer(0.2).timeout
+
+			if Input.is_action_just_pressed(slide):
+				print("Sliding")
+				get_node("Hitbox").scale *= Vector2(0.5, 0.5);
+	
+
+			if Input.is_action_just_released(slide):
+				print("Release sliding")
+				get_node("Hitbox").scale *= Vector2(2, 2);
 			
 		if Input.is_action_just_pressed(punch):
 			if inZipline and self.name == "Player1":
@@ -130,7 +141,7 @@ func _physics_process(delta: float) -> void:
 				#print("Made it")
 				emit_signal("revive", self)
 				# Reset relocating player position and allow control
-				get_node("CollisionShape2D").call_deferred("set", "disabled", false)
+				get_node("Hitbox").call_deferred("set", "disabled", false)
 				relocating = false
 				reachedCheckpoint = false
 				invuln = false
@@ -173,19 +184,20 @@ func _onRevive(who):
 func _onRelocate(nearestPoint):
 	# Disable collisions, change flags for relocation
 	#self.get_node("CollisionShape2D").call_deferred("set", "disabled", true)
-	velocity = Vector2(0, 0)
-	relocating = true
-	invuln = true
-	get_node("CollisionShape2D").call_deferred("set", "disabled", true)
-	reachedCheckpoint = false
-	#var newVelocity = Vector2((nearestPoint.position - self.position) * (SPEED / 10 * get_process_delta_time()))
-	#await get_tree().create_timer(0.0001).timeout
-	# Set destination, begin move to point
-	checkpoint = nearestPoint
-	#velocity = newVelocity #Vector2(0,0)
-	position = nearestPoint.position
-	#print("Position now: ", position)
-	#velocity = newVelocity
+	if nearestPoint != null:
+		velocity = Vector2(0, 0)
+		relocating = true
+		invuln = true
+		get_node("CollisionShape2D").call_deferred("set", "disabled", true)
+		reachedCheckpoint = false
+		#var newVelocity = Vector2((nearestPoint.position - self.position) * (SPEED / 10 * get_process_delta_time()))
+		#await get_tree().create_timer(0.0001).timeout
+		# Set destination, begin move to point
+		checkpoint = nearestPoint
+		#velocity = newVelocity #Vector2(0,0)
+		position = nearestPoint.position
+		#print("Position now: ", position)
+		#velocity = newVelocity
 
 
 func _onAnimationFinished():
@@ -206,5 +218,6 @@ func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 
 func _on_attack_timer_timeout() -> void:
 	canAttack = true
+	punchInProgress = false
 	attack.visible = false
 	attack.monitoring = false

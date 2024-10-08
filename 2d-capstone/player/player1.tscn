@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=25 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="2_a5rf3"]
@@ -113,6 +113,9 @@ size = Vector2(16, 24.0079)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(28.75, 25.375)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5pw0"]
+size = Vector2(28.25, 4.25)
+
 [node name="Player1" type="CharacterBody2D" groups=["players"]]
 position = Vector2(0, -3)
 scale = Vector2(4, 4)
@@ -124,7 +127,7 @@ scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
 animation = &"Punch"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-18.5, -11.75)
 shape = SubResource("RectangleShape2D_44r6d")
 
@@ -178,6 +181,7 @@ stream = ExtResource("8_k3kow")
 position = Vector2(-11.75, -39)
 
 [node name="ColorRect" type="ColorRect" parent="topMark"]
+visible = false
 offset_left = -11.75
 offset_top = -5.0
 offset_right = 10.25
@@ -187,10 +191,15 @@ offset_bottom = 7.0
 position = Vector2(-11.75, 15.5)
 
 [node name="ColorRect" type="ColorRect" parent="bottomMark"]
+visible = false
 offset_left = -11.75
 offset_top = -5.0
 offset_right = 10.25
 offset_bottom = 7.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-14.875, -2.125)
+shape = SubResource("RectangleShape2D_l5pw0")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

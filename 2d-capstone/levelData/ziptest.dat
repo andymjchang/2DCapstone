@@ -21,17 +21,21 @@ platformBlocks
 2475, 925
 2625, 925
 2775, 925
+275, 325
+425, 325
+275, 525
+400, 525
 actionIndicators
 player1checkpoints
 player2checkpoints
 player1
 0, 594.826110839844
 player2
-0, 191.822082519531
+0, 416.822082519531
 enemies
 killFloors
 goalBlocks
 1725, 525
-1800, 875
+1800, 925
 breakableWalls
 ziplines

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dakwrycm2d4ei"]
+[gd_scene load_steps=23 format=3 uid="uid://dakwrycm2d4ei"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yl2m7"]
 [ext_resource type="Texture2D" uid="uid://btpvi1n88pcgy" path="res://animations/mouseAnims/Mouse_sprite_sheet_v03.png" id="2_mn2ky"]
@@ -105,6 +105,9 @@ size = Vector2(16.25, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
 size = Vector2(25.5, 20.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d60le"]
+size = Vector2(25.75, 3.5)
+
 [node name="Player2" type="CharacterBody2D" groups=["players"]]
 position = Vector2(0, -48)
 scale = Vector2(4, 4)
@@ -116,7 +119,7 @@ scale = Vector2(0.0892857, 0.0763889)
 sprite_frames = SubResource("SpriteFrames_2tkvf")
 animation = &"Punch"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-20.9107, 2.56251)
 shape = SubResource("RectangleShape2D_44r6d")
 
@@ -162,6 +165,10 @@ stream = ExtResource("6_cfs8m")
 
 [node name="damagePlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_ypay4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-20.875, 10.25)
+shape = SubResource("RectangleShape2D_d60le")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
