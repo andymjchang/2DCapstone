@@ -104,12 +104,14 @@ func _physics_process(delta: float) -> void:
 
 			if Input.is_action_just_pressed(slide):
 				print("Sliding")
-				get_node("Hitbox").scale *= Vector2(0.5, 0.5);
+				get_node("Hitbox").scale *= Vector2(0.2, 0.2);
+				#get_node("Floor").disabled = false
 	
 
 			if Input.is_action_just_released(slide):
 				print("Release sliding")
-				get_node("Hitbox").scale *= Vector2(2, 2);
+				get_node("Hitbox").scale *= Vector2(5, 5);
+				#get_node("Floor").disabled = true
 			
 		if Input.is_action_just_pressed(punch):
 			if inZipline and self.name == "Player1":
@@ -188,7 +190,7 @@ func _onRelocate(nearestPoint):
 		velocity = Vector2(0, 0)
 		relocating = true
 		invuln = true
-		get_node("CollisionShape2D").call_deferred("set", "disabled", true)
+		get_node("Hitbox").call_deferred("set", "disabled", true)
 		reachedCheckpoint = false
 		#var newVelocity = Vector2((nearestPoint.position - self.position) * (SPEED / 10 * get_process_delta_time()))
 		#await get_tree().create_timer(0.0001).timeout

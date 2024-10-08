@@ -221,14 +221,15 @@ func getNearestCheckpoint(who):
 			if (direction >= 0):
 				viableCheckpoints.append(i)
 		#print("Viable checkpoints: ", viableCheckpoints)
-		nearestPoint = viableCheckpoints[0]
-		var shortestDistance = who.position.distance_to(viableCheckpoints[0].position)
-		for i in viableCheckpoints:
-			var distance = who.position.distance_to(i.position)
-			if distance < shortestDistance:
-					nearestPoint = i
-					shortestDistance = distance
-		#print("Relocating to: ", nearestPoint.position)
+		if len(viableCheckpoints) > 0:
+			nearestPoint = viableCheckpoints[0]
+			var shortestDistance = who.position.distance_to(viableCheckpoints[0].position)
+			for i in viableCheckpoints:
+				var distance = who.position.distance_to(i.position)
+				if distance < shortestDistance:
+						nearestPoint = i
+						shortestDistance = distance
+			#print("Relocating to: ", nearestPoint.position)
 	return nearestPoint
 	
 # Basic checkpointing system

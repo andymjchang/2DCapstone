@@ -60,7 +60,7 @@ theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 text = "0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(250, 450)
+position = Vector2(250, 432)
 zoom = Vector2(1.5, 1.5)
 script = ExtResource("4_nttx1")
 
