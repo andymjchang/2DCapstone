@@ -80,7 +80,6 @@ func _ready():
 		#we are starting at a user picked place
 		player1.global_position = Globals.startP1Coords
 		player2.global_position = Globals.startP2Coords
-		print("custom start coords P1: ", player1.global_position, " P2: ", player2.global_position)
 		get_node("Camera2D").moveCamera(player1.global_position.x)
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
@@ -230,8 +229,8 @@ func getNearestCheckpoint(who):
 	for i in viableCheckpoints:
 		var distance = who.position.distance_to(i.position)
 		if distance < shortestDistance:
-				nearestPoint = i
-				shortestDistance = distance
+			nearestPoint = i
+			shortestDistance = distance
 	#print("Relocating to: ", nearestPoint.position)
 	return nearestPoint
 	
