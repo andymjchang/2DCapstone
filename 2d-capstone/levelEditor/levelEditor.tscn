@@ -44,7 +44,7 @@
 [ext_resource type="Script" path="res://levelEditor/audioTracks.gd" id="36_wn18y"]
 [ext_resource type="Texture2D" uid="uid://1dfh5adfmstx" path="res://levelEditor/programmerArtAssets/play.png" id="37_5oir0"]
 [ext_resource type="Texture2D" uid="uid://cxpyh4hstkkni" path="res://ui/assets/fullHealth.png" id="42_k3b5l"]
-[ext_resource type="Texture2D" uid="uid://cpvil4blpom7p" path="res://ui/assets/fullP2Health.png" id="43_c7hys"]
+[ext_resource type="Texture2D" uid="uid://pbxrq067grxi" path="res://levelEditor/programmerArtAssets/breakableWall.jpg" id="45_iuf20"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl84f"]
 size = Vector2(278, 43)
@@ -71,7 +71,7 @@ breakableWall = ExtResource("16_rjnnj")
 zipline = ExtResource("17_x5g52")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(932, 594)
+position = Vector2(939, 601)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("13_87vi8")
 
@@ -348,12 +348,12 @@ texture_normal = ExtResource("42_k3b5l")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="p2PlacerButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 108.0
-offset_top = 874.0
-offset_right = 182.0
-offset_bottom = 942.0
-texture_normal = ExtResource("43_c7hys")
+[node name="breakableWallButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 113.0
+offset_top = 880.0
+offset_right = 180.0
+offset_bottom = 938.0
+texture_normal = ExtResource("45_iuf20")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -455,6 +455,6 @@ clip_text = true
 [connection signal="input_event" from="UI/objectSelector/audioProgress/Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="button_down" from="UI/objectSelector/playLevelButton" to="." method="_on_play_level_button_button_down"]
 [connection signal="button_up" from="UI/objectSelector/p1PlacerButton" to="." method="_on_p_1_placer_button_button_up"]
-[connection signal="button_up" from="UI/objectSelector/p2PlacerButton" to="." method="_on_p_2_placer_button_button_up"]
+[connection signal="button_up" from="UI/objectSelector/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]

@@ -123,8 +123,6 @@ func _process(delta: float) -> void:
 			bindedBlocks = []
 		else:
 			isBinding = true
-	if Input.is_action_just_pressed("startHere"):
-		startHere()
 			
 func _on_text_edit_0_text_changed() -> void:
 	if beatsMinLabel.text.is_valid_int():
@@ -589,11 +587,5 @@ func lengthenPlatform() -> void:
 	place_block(blockParent, platformBlocksList, Vector2(newPos, blockArea.global_position.y), false)
 		
 	
-func startHere() -> void:
-	#TODO change this to something that you can drag onto the screen
-	Globals.startCoords = get_global_mouse_position()
-	
-	#when level is selected they are gonna start here
-
 
 	
