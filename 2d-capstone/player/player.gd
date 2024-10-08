@@ -187,6 +187,7 @@ func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 	var other = area.get_parent()
 	if other.is_in_group("actionIndicators"):
 		Globals.screenFlashEffect()
+		other.active = false
 		scored.emit(self.name, abs(other.position.x - position.x))
 
 

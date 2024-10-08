@@ -100,7 +100,7 @@ animations = [{
 size = Vector2(16, 17.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_via26"]
-size = Vector2(16.25, 20)
+size = Vector2(10, 11.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
 size = Vector2(25.5, 20.5)
@@ -132,7 +132,7 @@ offset_right = 29.0
 offset_bottom = 22.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(20.5357, 12.1875)
+position = Vector2(20.4107, 10.3125)
 shape = SubResource("RectangleShape2D_via26")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
