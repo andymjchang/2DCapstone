@@ -140,7 +140,7 @@ offset_left = 93.0
 offset_top = 3.0
 offset_right = 208.0
 offset_bottom = 53.0
-text = "120"
+text = "156"
 placeholder_text = "BPM: "
 
 [node name="TextEdit" type="TextEdit" parent="UI"]
@@ -164,7 +164,7 @@ offset_left = 93.0
 offset_top = 159.0
 offset_right = 208.0
 offset_bottom = 209.0
-text = "Lvl0.1"
+text = "Lvl2.1"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Node2D" parent="UI"]
