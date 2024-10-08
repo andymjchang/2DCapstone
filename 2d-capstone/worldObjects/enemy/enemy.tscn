@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://lc6sx7h55k1p"]
+[gd_scene load_steps=11 format=3 uid="uid://lc6sx7h55k1p"]
 
 [ext_resource type="Script" path="res://worldObjects/enemy/enemy.gd" id="1_fjqgg"]
 [ext_resource type="Texture2D" uid="uid://cxdhrplc2qstb" path="res://worldObjects/assets/singleBot.png" id="2_fvj88"]
 [ext_resource type="Texture2D" uid="uid://fkay4q6vfugt" path="res://worldObjects/enemy/single_enemy_Rusted_anim_1-sheet.png" id="3_6xp7w"]
+[ext_resource type="Texture2D" uid="uid://dhk8ib54ejgwa" path="res://worldObjects/assets/circle.png" id="4_h4ccn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gswvj"]
 size = Vector2(41, 61)
@@ -58,9 +59,13 @@ position = Vector2(-3, -2)
 scale = Vector2(0.1, 0.0838816)
 texture = ExtResource("2_fvj88")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(3, -12)
+[node name="innerCircle" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_h4ccn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, -18)
+scale = Vector2(0.16, 0.16)
 sprite_frames = SubResource("SpriteFrames_l3chy")
 autoplay = "default"
 

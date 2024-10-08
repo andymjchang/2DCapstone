@@ -23,6 +23,7 @@ func _ready() -> void:
 	starting_scale = Vector2(startingScale, startingScale)
 	outer_circle.scale = starting_scale
 	outer_circle.modulate.a = 0.0 # Starting opacity (fully transparent)
+	inner_circle.modulate.a = 0.0
 	
 	# decide target_time based on world position
 	var time = position.x / Globals.pixelsPerFrame
@@ -58,6 +59,7 @@ func _process(delta: float) -> void:
 	var current_modulate = outer_circle.modulate
 	current_modulate.a = lerp(0.0, 1.0, t)
 	outer_circle.modulate = current_modulate
+	inner_circle.modulate = current_modulate
 	
 	# Stop the transition if the time has been reached
 	if t >= 1.0:
