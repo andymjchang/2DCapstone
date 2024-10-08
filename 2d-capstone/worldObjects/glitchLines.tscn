@@ -60,7 +60,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[node name="glitchLines" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.654902)
@@ -72,4 +72,4 @@ position = Vector2(0, -5)
 scale = Vector2(20, 0.5)
 sprite_frames = SubResource("SpriteFrames_r6a54")
 autoplay = "default"
-frame_progress = 0.4872
+frame_progress = 0.901814
