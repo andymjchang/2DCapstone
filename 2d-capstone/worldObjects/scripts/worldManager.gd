@@ -55,7 +55,13 @@ var textPopupScene2
 func _ready():
 	loadLevel()
 	
-	print("cur file, ", levelFile)
+	# FIXME: temporary bpm setting
+	if levelFile == "Lvl0.1":
+		Globals.setBPM(120)
+	if levelFile == "Lvl1.2":
+		Globals.setBPM(155)
+	if levelFile == "Lvl2.1":
+		Globals.setBPM(156)
 	
 	# Load background
 	var backgroundScene = load("res://backgrounds/" + levelFile + "Background.tscn")
