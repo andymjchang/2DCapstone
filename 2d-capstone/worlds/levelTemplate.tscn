@@ -122,6 +122,9 @@ script = ExtResource("4_nttx1")
 [node name="glitchLines" parent="Camera2D" instance=ExtResource("23_jq54w")]
 position = Vector2(0, 120)
 
+[node name="glitchLines2" parent="Camera2D" instance=ExtResource("23_jq54w")]
+position = Vector2(0, -155)
+
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
 position = Vector2(-960, -540)
 stream = ExtResource("15_27j5g")

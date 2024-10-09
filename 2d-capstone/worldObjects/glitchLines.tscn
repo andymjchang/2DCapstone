@@ -61,9 +61,9 @@ animations = [{
 }]
 
 [node name="glitchLines" type="Node2D"]
+modulate = Color(1, 1, 1, 0.784314)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.654902)
 scale = Vector2(20, 1)
 texture = ExtResource("1_2tjmi")
 
