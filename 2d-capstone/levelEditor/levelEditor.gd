@@ -19,8 +19,8 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline"]
-enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE}
+var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer"]
+enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
 var isBinding = false
@@ -31,6 +31,8 @@ var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
 var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 
+@export var p1Placer : PackedScene
+@export var p2Placer : PackedScene
 @export var actionIndicator : PackedScene
 @export var checkpoint : PackedScene
 @export var platformBlock: PackedScene
@@ -62,6 +64,8 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
 @onready var killFloorsList = $objectList/killFloors
 @onready var beatsMinLabel = $UI/TextEdit0
 @onready var ziplineList = $objectList/ziplines
+@onready var breakableWallList = $objectList/breakableWalls
+@onready var placerList = $objectList/placers
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -77,6 +81,7 @@ var levelSaved = false
 
 
 func _ready():
+	Globals.customStart = false
 	self.objectClicked.connect(_onObjectClicked)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
@@ -103,13 +108,12 @@ func _process(delta: float) -> void:
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
 	if Input.is_action_just_pressed(delete) and currentBlock:
-		#print("detecting delete key press")
 		#get current click on block and delete it 
 		var blockList = getList(currentBlock.blockType)
 		for block in blockList.get_children():
+			
 			if block.index == currentBlock.index:
 				#we have found our block, delete
-				#blockList.erase(block)
 				currentBlock.queue_free()
 				currentBlock = null
 				break
@@ -157,6 +161,7 @@ func loadLevel():
 		"enemies": [enemyCharacter, enemyList, blockTypes[5]],
 		"player1": [player1, player1List, blockTypes[0]],
 		"player2": [player2, player2List, blockTypes[1]],
+		"breakableWalls": [breakableWall,breakableWallList,  blockTypes[9]],
 		"ziplines": [zipline, ziplineList, blockTypes[10]]}
 	var instance
 	var objectList
@@ -188,6 +193,30 @@ func _on_text_edit_3_text_changed() -> void:
 	
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
+
+func _on_p_1_placer_button_button_up() -> void:
+	Globals.customStart = true
+	var placerInstance = p1Placer.instantiate()
+	var placerParent = baseObject.instantiate()
+	placerParent.add_child(placerInstance)
+	placerParent.blockType = blockTypes[11]
+	placerList.add_child(placerInstance)
+	place_block(placerParent, placerList, camera.position, false)
+	#might need to change this to the editor area
+	Globals.startP1Coords = placerParent.get_child(0).get_node("Player1/EditorArea1").global_position
+	Globals.startP2Coords = placerParent.get_child(0).get_node("Player2/EditorArea2").global_position
+	
+func _on_p_2_placer_button_button_up() -> void:
+	#Globals.customStart = true
+	#var p2PlacerInstance = p2Placer.instantiate()
+	#var p2PlacerParent = baseObject.instantiate()
+	#p2PlacerParent.add_child(p2PlacerInstance)
+	#p2PlacerParent.blockType = blockTypes[11]
+	#placerList.add_child(p2PlacerInstance)
+	#place_block(p2PlacerParent, placerList, camera.position, false)
+	#Globals.startP2Coords = p2PlacerParent.global_position
+	pass
+
 	
 func _on_p1checkpoint_button_pressed() -> void:
 	var checkpointInstance = checkpoint.instantiate()
@@ -255,7 +284,6 @@ func _on_block_button_button_up() -> void:
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
-	print("block type: ", blockParent.blockType)
 	place_block(blockParent, platformBlocksList, camera.position, false)
 
 func _on_action_button_button_up() -> void:
@@ -269,7 +297,7 @@ func _on_breakable_wall_button_button_up() -> void:
 	var bWallInstance = breakableWall.instantiate()
 	var bWallParent = baseObject.instantiate()
 	bWallParent.add_child(bWallInstance)
-	bWallParent.blockType = blockTypes[8]
+	bWallParent.blockType = blockTypes[9]
 	place_block(bWallParent, bWallsList, camera.position, false)
 
 func _on_goal_button_button_up() -> void:
@@ -344,15 +372,18 @@ func save_scene_to_file():
 			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
-				for item in itemList.get_children():
-					#go through each of the items children areas
-					var childrenList = item.get_child(0).get_children()
-					for blockChild in childrenList:
-						#this is most likely where the zipline error/duplication is occuring
-						var toSave = blockChild.get_node("EditorArea0")
-						print("Saving at: ", str(toSave.global_position.x) + ", " + str(toSave.global_position.y) + "\n")
-						newFile.store_string(str(toSave.global_position.x) + ", " + str(toSave.global_position.y) + "\n")
-					#print("child list in save, ", childrenList)
+				if itemList.name !=  "placers":
+					for item in itemList.get_children():
+						#go through each of the items children areas
+						var childrenList = item.get_child(0).get_children()
+						var index = 0
+						var editorName = "EditorArea"+str(index)
+						for blockChild in childrenList:
+							#this is most likely where the zipline error/duplication is occuring
+							newFile.store_string(str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + "\n")
+							index+=1
+							editorName = "EditorArea"+str(index)
+						#print("child list in save, ", childrenList)
 					
 	else:
 		displayStatus(UNABLE_TO_SAVE, false)
@@ -418,7 +449,6 @@ func place_block(instance, parent, placePos, initial):
 		instance.position.x = 0
 		instance.position.y = placePos.y
 	else:
-		print("In this one")
 		instance.position = snap_position(placePos)
 	parent.add_child(instance)	
 	
@@ -445,11 +475,10 @@ func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 				#add to the current list of binded blocks
 				bindedBlocks.append(block)
 			else:
-				#we only want to have one block selected
 				currentBlock = block
-				print("new block clicke")
 			return
-	
+
+			
 func getList(blockType : String) -> Node:
 	if blockType == "actionIndicator":
 		return get_node("objectList/actionIndicators")
@@ -473,6 +502,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/breakableWalls")
 	if blockType == "zipline":
 		return get_node("objectList/ziplines")
+	if blockType == "placer":
+		return get_node("objectList/placers")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:
@@ -535,9 +566,8 @@ func _on_play_level_button_button_down() -> void:
 	#get_tree().current_scene = scene_instance  # Set it as the new current scene
 
 func lengthenPlatform() -> void:
-	#this isnt modular but it will work for now
+	#this isnt modular but it will work for now TODO
 	var blockArea = currentBlock.get_child(0).get_child(0).get_node("EditorArea0")
-	print("haha block area ",blockArea)
 	var blockShape = blockArea.get_node("CollisionShape2D").shape as RectangleShape2D
 	var blockExtents = blockShape.extents
 	#get the lower left and upp right coords of the current block
@@ -550,11 +580,8 @@ func lengthenPlatform() -> void:
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
-	print("block type: ", blockParent.blockType)
 	place_block(blockParent, platformBlocksList, Vector2(newPos, blockArea.global_position.y), false)
 		
 	
-
-
 
 	

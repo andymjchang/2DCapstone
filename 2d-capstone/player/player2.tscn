@@ -120,7 +120,7 @@ sprite_frames = SubResource("SpriteFrames_2tkvf")
 animation = &"Run"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-12.25, 2.5315)
+position = Vector2(-12, 2.5315)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
@@ -167,7 +167,7 @@ stream = ExtResource("6_cfs8m")
 stream = ExtResource("7_ypay4")
 
 [node name="Floor" type="CollisionShape2D" parent="."]
-position = Vector2(-12.25, 10.25)
+position = Vector2(-12, 10.25)
 shape = SubResource("RectangleShape2D_d60le")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]

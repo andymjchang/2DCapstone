@@ -1,10 +1,8 @@
-[gd_scene load_steps=47 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=45 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
-[ext_resource type="PackedScene" path="res://levelEditorObjects/p1Placer.tscn" id="2_rd1yt"]
 [ext_resource type="PackedScene" uid="uid://ddnsnvsdn3aet" path="res://levelEditorObjects/actionIndicatorScene.tscn" id="3_ayep8"]
-[ext_resource type="PackedScene" path="res://levelEditorObjects/p2Placer.tscn" id="3_gp2uf"]
 [ext_resource type="Texture2D" uid="uid://iocnhlyh4yw6" path="res://levelEditor/programmerArtAssets/action.png" id="3_kgvx7"]
 [ext_resource type="Texture2D" uid="uid://bamwfgoa14ig1" path="res://levelEditor/programmerArtAssets/right.png" id="4_7fuo1"]
 [ext_resource type="PackedScene" uid="uid://m7qqiokd3152" path="res://levelEditorObjects/checkpointScene.tscn" id="4_enory"]
@@ -44,15 +42,13 @@
 [ext_resource type="Script" path="res://levelEditor/audioTracks.gd" id="36_wn18y"]
 [ext_resource type="Texture2D" uid="uid://1dfh5adfmstx" path="res://levelEditor/programmerArtAssets/play.png" id="37_5oir0"]
 [ext_resource type="Texture2D" uid="uid://cxpyh4hstkkni" path="res://ui/assets/fullHealth.png" id="42_k3b5l"]
-[ext_resource type="Texture2D" uid="uid://pbxrq067grxi" path="res://levelEditor/programmerArtAssets/breakableWall.jpg" id="45_iuf20"]
+[ext_resource type="Texture2D" uid="uid://cpvil4blpom7p" path="res://ui/assets/fullP2Health.png" id="43_c7hys"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl84f"]
 size = Vector2(278, 43)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_15vlh")
-p1Placer = ExtResource("2_rd1yt")
-p2Placer = ExtResource("3_gp2uf")
 actionIndicator = ExtResource("3_ayep8")
 checkpoint = ExtResource("4_enory")
 platformBlock = ExtResource("5_5etgx")
@@ -71,7 +67,7 @@ breakableWall = ExtResource("16_rjnnj")
 zipline = ExtResource("17_x5g52")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(939, 601)
+position = Vector2(932, 594)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("13_87vi8")
 
@@ -99,6 +95,7 @@ stream = ExtResource("19_jlcy1")
 [node name="player1" type="Node2D" parent="objectList"]
 
 [node name="player2" type="Node2D" parent="objectList"]
+visible = false
 
 [node name="enemies" type="Node2D" parent="objectList"]
 
@@ -109,8 +106,6 @@ stream = ExtResource("19_jlcy1")
 [node name="breakableWalls" type="Node2D" parent="objectList"]
 
 [node name="ziplines" type="Node2D" parent="objectList"]
-
-[node name="placers" type="Node" parent="objectList"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -147,7 +142,7 @@ offset_left = 93.0
 offset_top = 3.0
 offset_right = 208.0
 offset_bottom = 53.0
-text = "156"
+text = "120"
 placeholder_text = "BPM: "
 
 [node name="TextEdit" type="TextEdit" parent="UI"]
@@ -163,7 +158,7 @@ offset_left = 93.0
 offset_top = 107.0
 offset_right = 208.0
 offset_bottom = 157.0
-text = "1"
+text = "150"
 placeholder_text = "Step Size:"
 
 [node name="TextEdit3" type="TextEdit" parent="UI"]
@@ -171,7 +166,7 @@ offset_left = 93.0
 offset_top = 159.0
 offset_right = 208.0
 offset_bottom = 209.0
-text = "ziptest"
+text = "Lvl0.1"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Node2D" parent="UI"]
@@ -347,12 +342,12 @@ texture_normal = ExtResource("42_k3b5l")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="breakableWallButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 113.0
-offset_top = 880.0
-offset_right = 180.0
-offset_bottom = 938.0
-texture_normal = ExtResource("45_iuf20")
+[node name="p2PlacerButton" type="TextureButton" parent="UI/objectSelector"]
+offset_left = 108.0
+offset_top = 874.0
+offset_right = 182.0
+offset_bottom = 942.0
+texture_normal = ExtResource("43_c7hys")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -454,6 +449,6 @@ clip_text = true
 [connection signal="input_event" from="UI/objectSelector/audioProgress/Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="button_down" from="UI/objectSelector/playLevelButton" to="." method="_on_play_level_button_button_down"]
 [connection signal="button_up" from="UI/objectSelector/p1PlacerButton" to="." method="_on_p_1_placer_button_button_up"]
-[connection signal="button_up" from="UI/objectSelector/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]
+[connection signal="button_up" from="UI/objectSelector/p2PlacerButton" to="." method="_on_p_2_placer_button_button_up"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]

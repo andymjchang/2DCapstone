@@ -9,3 +9,10 @@ func _process(delta: float) -> void:
 	if Globals.inLevel:
 		#pass
 		position.x = position.x + Globals.pixelsPerFrame * delta
+		
+func moveCamera(newXPos) -> void:
+	#based on the x pos, shift the camera to where the characters are
+	#I have to calulate how many seconds I would have ran, and then use that as my delta UGHHHH
+	#given the characters start x and thier speed of x. how many seconds would they have run
+	#we start at x - new pos
+	position.x += newXPos

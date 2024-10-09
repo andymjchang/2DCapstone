@@ -65,7 +65,7 @@ func _ready():
 	self.revive.connect(_onRevive)
 	self.relocate.connect(_onRelocate)
 	$Animation.animation_finished.connect(_onAnimationFinished)
-	
+	$Animation.play("Run")
 	worldNode = get_tree().get_root().get_node("level")
 	self.scored.connect(worldNode._onScored)
 	
@@ -104,8 +104,7 @@ func _physics_process(delta: float) -> void:
 				print("Sliding")
 				get_node("Hitbox").scale *= Vector2(0.2, 0.2);
 				#get_node("Floor").disabled = false
-	
-
+				
 			if Input.is_action_just_released(slide):
 				print("Release sliding")
 				get_node("Hitbox").scale *= Vector2(5, 5);

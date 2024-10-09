@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8x2mvqv8gti8"]
+
+[ext_resource type="Texture2D" uid="uid://cpvil4blpom7p" path="res://ui/assets/fullP2Health.png" id="1_q0hom"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1hf1"]
+size = Vector2(48, 42)
+
+[node name="P2Placer" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+shape = SubResource("RectangleShape2D_f1hf1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(-3.69549e-06, 0)
+scale = Vector2(0.02425, 0.0213333)
+texture = ExtResource("1_q0hom")

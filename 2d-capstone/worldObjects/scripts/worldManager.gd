@@ -15,6 +15,7 @@ signal checkLevelCompleted()
 @export var player1Instance : PackedScene
 @export var player2Instance : PackedScene
 @export var enemyInstance : PackedScene
+@export var breakableWallInstance : PackedScene
 @export var ziplineInstance : PackedScene
 
 @onready var objectList = $objectList
@@ -26,6 +27,7 @@ signal checkLevelCompleted()
 @onready var p1checkpointsList = $objectList/player1checkpoints
 @onready var p2checkpointsList = $objectList/player2checkpoints
 @onready var playersList = $objectList/players
+@onready var breakableWallList = $objectList/breakableWalls
 @onready var ziplineList = $objectList/ziplines
 
 var player1 
@@ -38,6 +40,7 @@ var music
 
 var time : float = 0
 var score = 0
+var musicTime = 0.0
 
 @onready var timerText
 @onready var player
@@ -76,6 +79,15 @@ func _ready():
 	# Prep players
 	player1.editing = false
 	player2.editing = false
+	if Globals.customStart:
+		#we are starting at a user picked place
+		player1.global_position = Globals.startP1Coords
+		player2.global_position = Globals.startP2Coords
+		get_node("Camera2D").moveCamera(player1.global_position.x)
+		var distance = abs(0.0 - player1.global_position.x)
+		var playerSpeed = player1.SPEED
+		musicTime = distance / Globals.pixelsPerFrame
+		print("time gone, ", musicTime)
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
@@ -88,7 +100,8 @@ func _ready():
 	#startGame()
 	
 func startGame():
-	music.play(0.0)
+	
+	music.play(musicTime)
 	Globals.inLevel = true
 
 func loadAudio():
@@ -100,8 +113,8 @@ func loadAudio():
 
 func loadLevel():
 	# set file to load
-	if Globals.currentSongFileName:
-		levelFile = Globals.currentEditorFileName
+	#if Globals.currentSongFileName:
+		#levelFile = Globals.currentEditorFileName
 	if Globals.curFile:
 		levelFile = Globals.curFile
 	
@@ -116,6 +129,7 @@ func loadLevel():
 		"enemies": [enemyInstance, enemiesList],
 		"player1": [player1Instance, playersList],
 		"player2": [player2Instance, playersList],
+		"breakableWalls" : [breakableWallInstance, breakableWallList],
 		"ziplines": [ziplineInstance, ziplineList]}
 	var instance
 	var instanceParent
@@ -126,7 +140,7 @@ func loadLevel():
 			instanceParent = instanceList.get(line)[1]
 		# Position
 		#does not work with goal/checkpoints
-		if line.contains(", "):
+		elif line.contains(", "):
 			#print("Object: ", instance)
 			var instancedObj = instance.instantiate()
 			var posPoints = []
@@ -135,6 +149,11 @@ func loadLevel():
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
 			#print("instance parent: ", instanceParent)
 			instanceParent.add_child(instancedObj)
+			
+		elif ".mp3" in line:
+			# audio file
+			print("Changing audio to: ", line)
+			Globals.currentSongFileName = line
 	
 	# load the actionArrays
 	$objectList/actionIndicators.load_array()
