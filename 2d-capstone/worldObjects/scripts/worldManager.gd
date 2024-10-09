@@ -179,13 +179,10 @@ func loadLevel():
 	
 	# load the actionArrays
 	$objectList/actionIndicators.load_array()
-	for platform in platformBlocksList.get_children():
-		if Globals.curFile == "Lvl2.1" or levelFile == "Lvl2.1":
+	if Globals.curFile == "Lvl2.1" or levelFile == "Lvl2.1":
+		for platform in platformBlocksList.get_children():
 			platform.get_node("sprite2D/TileMapLayer").visible = false
 			platform.get_node("sprite2D/TileMapLayer2").visible = true
-		else:
-			platform.get_node("sprite2D/TileMapLayer").visible = true
-			platform.get_node("sprite2D/TileMapLayer2").visible = false
 
 func changeCountdown():
 	await get_tree().create_timer(1.0).timeout
