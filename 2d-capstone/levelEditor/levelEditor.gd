@@ -108,10 +108,13 @@ func _process(delta: float) -> void:
 		#print("detecting delete key press")
 		#get current click on block and delete it 
 		var blockList = getList(currentBlock.blockType)
+		print("current block type: ",currentBlock.blockType)
 		for block in blockList.get_children():
+			
 			if block.index == currentBlock.index:
 				#we have found our block, delete
 				#blockList.erase(block)
+				print("making it in delete")
 				currentBlock.queue_free()
 				currentBlock = null
 				break
@@ -298,7 +301,7 @@ func _on_breakable_wall_button_button_up() -> void:
 	var bWallInstance = breakableWall.instantiate()
 	var bWallParent = baseObject.instantiate()
 	bWallParent.add_child(bWallInstance)
-	bWallParent.blockType = blockTypes[8]
+	bWallParent.blockType = blockTypes[9]
 	place_block(bWallParent, bWallsList, camera.position, false)
 
 func _on_goal_button_button_up() -> void:
