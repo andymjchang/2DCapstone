@@ -1,5 +1,4 @@
 extends Node2D
-signal playerspotted
 signal takeDamage
 
 var count = 0
@@ -13,7 +12,13 @@ var left
 var right
 var index = 0
 
+# Death animation
+var velocity = Vector2(0, 0)
+var move_speed = 400
+var gravity = 400
+
 var soundPlayer := AudioStreamPlayer.new()
+@onready var sprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,15 +30,21 @@ func _ready() -> void:
 	right = "right"
 	
 	# vary animation
-	$AnimatedSprite2D.speed_scale = randf_range(0.9, 1.1)
+	sprite = $AnimatedSprite2D
+	sprite.speed_scale = randf_range(0.9, 1.1)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if ifDead:
-		$Sprite2D.position.y += 4
-		$Sprite2D.rotation = 0.8
-		
-	
+		#sprite.position.y += 4
+		#sprite.rotation = 0.8
+		DeathAnimation(delta)
+# Ensure that this func can be run after the hit detection on the same frame
+func DeathAnimation(delta: float) -> void:
+	velocity.y += gravity * delta
+	velocity.x = move_speed
+	position += velocity * delta
+
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.is_in_group("players") and body.attack.visible:
 		self.ifDead = true
@@ -46,10 +57,6 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 		body.emit_signal("takeDamage",1)
 	pass # Replace with function body.
 
-func snapToNextBeat():
-	var stepSize = Globals.stepSize
-	self.position.x += stepSize
 	
-		
 	
 	
