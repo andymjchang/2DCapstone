@@ -8,7 +8,7 @@ var active: bool = false
 var starting_scale
 var blockType = "actionIndicator"
 var curSprite
-@onready var actionIndicatorManager
+var actionIndicatorManager
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
 signal scored(indicator_position)
@@ -16,7 +16,7 @@ signal scored(indicator_position)
 var index = 0
 
 # Start with higher scale and 0 opacity
-func _ready() -> void:
+func initialize():
 	actionIndicatorManager = get_parent()
 	
 	curSprite = get_node("innerCircle").duplicate()

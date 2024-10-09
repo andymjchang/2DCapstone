@@ -122,7 +122,7 @@ size = Vector2(9.99802, 10.992)
 size = Vector2(28.75, 25.375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5pw0"]
-size = Vector2(20, 4.25)
+size = Vector2(20.75, 4.25)
 
 [node name="Player1" type="CharacterBody2D" groups=["players"]]
 position = Vector2(0, -3)
@@ -206,7 +206,7 @@ offset_right = 10.25
 offset_bottom = 7.0
 
 [node name="Floor" type="CollisionShape2D" parent="."]
-position = Vector2(-10.75, -1.375)
+position = Vector2(-10.375, -1.375)
 shape = SubResource("RectangleShape2D_l5pw0")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]

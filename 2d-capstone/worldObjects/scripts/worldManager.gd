@@ -62,7 +62,9 @@ func _ready():
 		Globals.setBPM(155)
 	if levelFile == "Lvl2.1":
 		Globals.setBPM(156)
-	
+		
+	# load the actionArrays (This must happen after bpm is set)
+	$objectList/actionIndicators.load_array()
 	# Load background
 	var backgroundScene = load("res://backgrounds/" + levelFile + "Background.tscn")
 	if backgroundScene:
@@ -174,9 +176,6 @@ func loadLevel():
 			# audio file
 			print("Changing audio to: ", line)
 			Globals.currentSongFileName = line
-	
-	# load the actionArrays
-	$objectList/actionIndicators.load_array()
 
 func changeCountdown():
 	await get_tree().create_timer(1.0).timeout
