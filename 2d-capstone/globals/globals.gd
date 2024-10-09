@@ -24,6 +24,9 @@ var previewNode
 @onready var editorNode = preload("res://levelEditor/levelEditor.tscn")
 @onready var screenFlashNode = preload("res://screenEffects/screenFlashEffect.tscn")
 
+func _ready():
+	randomize()
+
 func _process(delta: float) -> void:
 	time += delta;
 
