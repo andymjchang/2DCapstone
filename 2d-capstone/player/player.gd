@@ -103,11 +103,13 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed(slide):
 				print("Sliding")
 				get_node("Hitbox").scale *= Vector2(0.2, 0.2);
+				$Animation.play("Slide");
 				#get_node("Floor").disabled = false
 				
 			if Input.is_action_just_released(slide):
 				print("Release sliding")
 				get_node("Hitbox").scale *= Vector2(5, 5);
+				$Animation.play("Run");
 				#get_node("Floor").disabled = true
 			
 		if Input.is_action_just_pressed(punch):
