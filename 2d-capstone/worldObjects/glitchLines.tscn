@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cng0uyugakene"]
+[gd_scene load_steps=12 format=3 uid="uid://cng0uyugakene"]
 
 [ext_resource type="Texture2D" uid="uid://bfaipm4sbpaac" path="res://worldObjects/assets/glitchLinesBg.png" id="1_2tjmi"]
+[ext_resource type="Script" path="res://worldObjects/glitchLines.gd" id="1_qsm2t"]
 [ext_resource type="Texture2D" uid="uid://tqbfpcyt5k5t" path="res://worldObjects/assets/glitchLines.png" id="1_y4hyv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vrrgp"]
@@ -62,6 +63,7 @@ animations = [{
 
 [node name="glitchLines" type="Node2D"]
 modulate = Color(1, 1, 1, 0.784314)
+script = ExtResource("1_qsm2t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(20, 1)
@@ -72,4 +74,3 @@ position = Vector2(0, -5)
 scale = Vector2(20, 0.5)
 sprite_frames = SubResource("SpriteFrames_r6a54")
 autoplay = "default"
-frame_progress = 0.901814

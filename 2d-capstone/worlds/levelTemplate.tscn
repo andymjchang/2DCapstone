@@ -65,6 +65,7 @@ theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 text = "0"
 
 [node name="Background" type="Node2D" parent="."]
+modulate = Color(0.886262, 0.886261, 0.886262, 1)
 position = Vector2(250, 450)
 
 [node name="Layer0" type="Parallax2D" parent="Background"]
