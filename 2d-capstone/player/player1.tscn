@@ -102,6 +102,14 @@ animations = [{
 "loop": true,
 "name": &"Run",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntx1b")
+}],
+"loop": true,
+"name": &"Slide",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
@@ -125,7 +133,7 @@ script = ExtResource("1_qyaa7")
 position = Vector2(-14.25, -12.25)
 scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Run"
+animation = &"Slide"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-12.25, -10.125)

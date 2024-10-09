@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dakwrycm2d4ei"]
+[gd_scene load_steps=24 format=3 uid="uid://dakwrycm2d4ei"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yl2m7"]
 [ext_resource type="Texture2D" uid="uid://btpvi1n88pcgy" path="res://animations/mouseAnims/Mouse_sprite_sheet_v03.png" id="2_mn2ky"]
@@ -48,6 +48,10 @@ region = Rect2(1400, 700, 700, 700)
 atlas = ExtResource("2_mn2ky")
 region = Rect2(2100, 700, 700, 700)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_newvl"]
+atlas = ExtResource("2_y37go")
+region = Rect2(2100, 0, 700, 700)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_2tkvf"]
 animations = [{
 "frames": [{
@@ -94,6 +98,14 @@ animations = [{
 "loop": true,
 "name": &"Run",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_newvl")
+}],
+"loop": true,
+"name": &"Slide",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
@@ -117,7 +129,7 @@ script = ExtResource("1_yl2m7")
 position = Vector2(-25.4107, -8.68749)
 scale = Vector2(0.0892857, 0.0763889)
 sprite_frames = SubResource("SpriteFrames_2tkvf")
-animation = &"Run"
+animation = &"Slide"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-12, 2.5315)
