@@ -32,6 +32,7 @@ var originalPos
 var jumpInProgress = false
 var punchInProgress = false
 var runInProgress = false
+var punchConnected = false
 
 # Other nodes
 var otherPlayer
@@ -63,7 +64,6 @@ func _ready():
 	self.takeDamage.connect(_onTakeDamage)
 	self.revive.connect(_onRevive)
 	self.relocate.connect(_onRelocate)
-	self.attack.visible = false
 	$Animation.animation_finished.connect(_onAnimationFinished)
 	
 	worldNode = get_tree().get_root().get_node("level")
@@ -120,15 +120,15 @@ func _physics_process(delta: float) -> void:
 				else:
 					playerTouch.position.y = get_node("topMark").global_position.y
 			elif canAttack:
-				print("Punching")
+				# Artistic
 				$Animation.play("Punch")
-				punchInProgress = true
 				sfxPlayer.play()
-				attack.visible = true
+				# Technical
+				punchInProgress = true
 				attack.monitoring = true
 				canAttack = false
 				$attackTimer.start()
-
+				punchConnected = false
 		elif reachedCheckpoint:
 			# Wait to respawn relocating player when teammate has aligned
 			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
@@ -197,13 +197,14 @@ func _onAnimationFinished():
 
 func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 	var other = area.get_parent()
-	if other.is_in_group("actionIndicators"):
+	if other.is_in_group("actionIndicators") and other.active and !punchConnected:
+		punchConnected = true
 		Globals.screenFlashEffect()
+		other.active = false
+		other.FadeOut()
 		scored.emit(self.name, abs(other.position.x - position.x))
 
 
 func _on_attack_timer_timeout() -> void:
 	canAttack = true
-	punchInProgress = false
-	attack.visible = false
 	attack.monitoring = false

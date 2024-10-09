@@ -100,7 +100,7 @@ animations = [{
 size = Vector2(23, 17.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_via26"]
-size = Vector2(16.25, 20)
+size = Vector2(10, 11.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4g51"]
 size = Vector2(25.5, 20.5)
@@ -117,7 +117,7 @@ script = ExtResource("1_yl2m7")
 position = Vector2(-25.4107, -8.68749)
 scale = Vector2(0.0892857, 0.0763889)
 sprite_frames = SubResource("SpriteFrames_2tkvf")
-animation = &"Punch"
+animation = &"Run"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-12.25, 2.5315)
@@ -135,7 +135,7 @@ offset_right = 29.0
 offset_bottom = 22.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(20.5357, 12.1875)
+position = Vector2(20.4107, 10.3125)
 shape = SubResource("RectangleShape2D_via26")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]

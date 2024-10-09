@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://cng0uyugakene"]
+
+[ext_resource type="Texture2D" uid="uid://bfaipm4sbpaac" path="res://worldObjects/assets/glitchLinesBg.png" id="1_2tjmi"]
+[ext_resource type="Script" path="res://worldObjects/glitchLines.gd" id="1_qsm2t"]
+[ext_resource type="Texture2D" uid="uid://tqbfpcyt5k5t" path="res://worldObjects/assets/glitchLines.png" id="1_y4hyv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrrgp"]
+atlas = ExtResource("1_y4hyv")
+region = Rect2(0, 0, 96, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtnyh"]
+atlas = ExtResource("1_y4hyv")
+region = Rect2(96, 0, 96, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdg6j"]
+atlas = ExtResource("1_y4hyv")
+region = Rect2(192, 0, 96, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfm7m"]
+atlas = ExtResource("1_y4hyv")
+region = Rect2(288, 0, 96, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okixu"]
+atlas = ExtResource("1_y4hyv")
+region = Rect2(384, 0, 96, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qeich"]
+atlas = ExtResource("1_y4hyv")
+region = Rect2(480, 0, 96, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw2vp"]
+atlas = ExtResource("1_y4hyv")
+region = Rect2(576, 0, 96, 54)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r6a54"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrrgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtnyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdg6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfm7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okixu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qeich")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw2vp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="glitchLines" type="Node2D"]
+modulate = Color(1, 1, 1, 0.784314)
+script = ExtResource("1_qsm2t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(20, 1)
+texture = ExtResource("1_2tjmi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5)
+scale = Vector2(20, 0.5)
+sprite_frames = SubResource("SpriteFrames_r6a54")
+autoplay = "default"
