@@ -57,10 +57,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, 
 				#check if there is a sprite node first 
 				if self.get_child(0).has_node(str(areaParent.name)+"/Sprite2D"):
 					spriteNode = self.get_child(0).get_node(str(areaParent.name)+"/Sprite2D").duplicate()
-				#TODO i dont want to add everytime
-				#object has been clicked, so need to tell the level-edito to switch its current block
-				#self.get_parent().get_parent().get_parent().emit_signal("objectClicked")
-				
+					
 				self.get_parent().get_parent().get_parent().setTrackingPosition(true)
 				isDragging = true
 			print("mouse pressed")
@@ -113,18 +110,18 @@ func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_
 		
 func checkOrder() -> bool:
 	for block in overlappingBlocks:
-		if (!block.is_class("CanvasLayer") and !self.is_class("CanvasLayer") and block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced):
+		if (!block.is_class("CanvasLayer") and !self.is_class("CanvasLayer") and block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced and !(self.blockType == "normal" and block.get_parent().get_parent().get_parent().blockType == "normal")):
 			#verlapping block was placed earlier, it is selected 
 			#check how close the pos our to allow manuverbility
-			#TODO make this a seperate function
 			return false
-			if block.get_parent().get_parent().get_parent().blockType == "normal" and abs(block.get_parent().get_parent().get_parent().global_position.x - self.global_position.x) > 500:
-				print("overlapping blocks position: ", block.get_parent().get_parent().get_parent().global_position )
-				print("my position ", self.global_position)
-				print("position subtraction, ",  abs(block.get_parent().get_parent().get_parent().global_position - self.global_position))
-				print("do nothing haha", block.get_children())
-				
-				print("block width -> ")
-			else:
-				return false
+			#TODO revist this, reverse the logic
+			#if block.get_parent().get_parent().get_parent().blockType == "normal" and abs(block.get_parent().get_parent().get_parent().global_position.x - self.global_position.x) > 500:
+				#print("overlapping blocks position: ", block.get_parent().get_parent().get_parent().global_position )
+				#print("my position ", self.global_position)
+				#print("position subtraction, ",  abs(block.get_parent().get_parent().get_parent().global_position - self.global_position))
+				#print("do nothing haha", block.get_children())
+				#
+				#print("block width -> ")
+			#else:
+				#return false
 	return true

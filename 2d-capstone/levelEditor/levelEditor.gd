@@ -105,16 +105,12 @@ func _process(delta: float) -> void:
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
 	if Input.is_action_just_pressed(delete) and currentBlock:
-		#print("detecting delete key press")
 		#get current click on block and delete it 
 		var blockList = getList(currentBlock.blockType)
-		print("current block type: ",currentBlock.blockType)
 		for block in blockList.get_children():
 			
 			if block.index == currentBlock.index:
 				#we have found our block, delete
-				#blockList.erase(block)
-				print("making it in delete")
 				currentBlock.queue_free()
 				currentBlock = null
 				break
@@ -204,11 +200,9 @@ func _on_p_1_placer_button_button_up() -> void:
 	placerList.add_child(placerInstance)
 	place_block(placerParent, placerList, camera.position, false)
 	#might need to change this to the editor area
-	print("player 1 children: ", placerParent.get_child(0).get_node("Player1").get_children())
 	Globals.startP1Coords = placerParent.get_child(0).get_node("Player1/EditorArea1").global_position
 	Globals.startP2Coords = placerParent.get_child(0).get_node("Player2/EditorArea2").global_position
-	print("level editor custom start coords P1: ", placerParent.get_child(0).get_node("Player1/EditorArea1").global_position, " P2: ", placerParent.get_child(0).get_node("Player2/EditorArea2").global_position)
-
+	
 func _on_p_2_placer_button_button_up() -> void:
 	#Globals.customStart = true
 	#var p2PlacerInstance = p2Placer.instantiate()
@@ -287,7 +281,6 @@ func _on_block_button_button_up() -> void:
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
-	print("block type: ", blockParent.blockType)
 	place_block(blockParent, platformBlocksList, camera.position, false)
 
 func _on_action_button_button_up() -> void:
@@ -377,7 +370,6 @@ func save_scene_to_file():
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
 				if itemList.name !=  "placers":
-					print("item name: ", itemList.name, " ", blockTypes[11])
 					for item in itemList.get_children():
 						#go through each of the items children areas
 						var childrenList = item.get_child(0).get_children()
@@ -385,7 +377,6 @@ func save_scene_to_file():
 						var editorName = "EditorArea"+str(index)
 						for blockChild in childrenList:
 							#this is most likely where the zipline error/duplication is occuring
-							print("block child being saved, ", blockChild.get_child(0))
 							newFile.store_string(str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + "\n")
 							index+=1
 							editorName = "EditorArea"+str(index)
@@ -455,7 +446,6 @@ func place_block(instance, parent, placePos, initial):
 		instance.position.x = 0
 		instance.position.y = placePos.y
 	else:
-		print("In this one")
 		instance.position = snap_position(placePos)
 	parent.add_child(instance)	
 	
@@ -482,11 +472,7 @@ func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 				#add to the current list of binded blocks
 				bindedBlocks.append(block)
 			else:
-				#we only want to have one block selected
-				#we need to sort through all of the blocks and insure that the areas do not overlap
-				#TODO sort object arrays by coords
 				currentBlock = block
-				print("new block clicke")
 			return
 
 			
@@ -577,9 +563,8 @@ func _on_play_level_button_button_down() -> void:
 	#get_tree().current_scene = scene_instance  # Set it as the new current scene
 
 func lengthenPlatform() -> void:
-	#this isnt modular but it will work for now
+	#this isnt modular but it will work for now TODO
 	var blockArea = currentBlock.get_child(0).get_child(0).get_node("EditorArea0")
-	print("haha block area ",blockArea)
 	var blockShape = blockArea.get_node("CollisionShape2D").shape as RectangleShape2D
 	var blockExtents = blockShape.extents
 	#get the lower left and upp right coords of the current block
@@ -592,7 +577,6 @@ func lengthenPlatform() -> void:
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
-	print("block type: ", blockParent.blockType)
 	place_block(blockParent, platformBlocksList, Vector2(newPos, blockArea.global_position.y), false)
 		
 	
