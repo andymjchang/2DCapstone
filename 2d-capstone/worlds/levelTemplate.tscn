@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=26 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -18,18 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
-[ext_resource type="Texture2D" uid="uid://b2kqkpfp7dmjj" path="res://backgrounds/parallax/bkg_scroll_ground.png" id="15_qudmc"]
-[ext_resource type="PackedScene" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
-[ext_resource type="Texture2D" uid="uid://dxewy3csfhdr0" path="res://backgrounds/parallax/bkg_scroll_Fence.png" id="16_thtws"]
+[ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
-[ext_resource type="Texture2D" uid="uid://cduyai7iq1ymo" path="res://backgrounds/parallax/bkg_scroll_trash.png" id="17_t6vb6"]
-[ext_resource type="Texture2D" uid="uid://c56dlhyt3lpxe" path="res://backgrounds/parallax/bkg_scroll_sky.png" id="18_xtdbc"]
-[ext_resource type="Texture2D" uid="uid://bi5104tqf8q03" path="res://backgrounds/Level_2_Background.png" id="19_dfxjl"]
-[ext_resource type="Texture2D" uid="uid://dpjglfoglrf2j" path="res://backgrounds/parallax/bkg_scroll_buildings.png" id="19_uiohy"]
-[ext_resource type="PackedScene" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
+[ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="AudioStream" uid="uid://c0r4i7rsnwlm7" path="res://audioTracks/Level2_Main_156bpm.mp3" id="21_i4u15"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
-[ext_resource type="PackedScene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
+[ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rypfk"]
 size = Vector2(36, 1086)
@@ -68,64 +62,6 @@ theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 text = "0"
 
 [node name="Background" type="Node2D" parent="."]
-modulate = Color(0.886262, 0.886261, 0.886262, 1)
-position = Vector2(250, 450)
-
-[node name="Layer0" type="Parallax2D" parent="Background"]
-scroll_scale = Vector2(0.05, 0.05)
-repeat_size = Vector2(1320, 0)
-repeat_times = 3
-
-[node name="Sprite2D" type="Sprite2D" parent="Background/Layer0"]
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("18_xtdbc")
-
-[node name="Layer1" type="Parallax2D" parent="Background"]
-scroll_scale = Vector2(0.1, 0.1)
-repeat_size = Vector2(1320, 0)
-repeat_times = 3
-
-[node name="Sprite2D" type="Sprite2D" parent="Background/Layer1"]
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("19_uiohy")
-
-[node name="Layer2" type="Parallax2D" parent="Background"]
-scroll_scale = Vector2(0.5, 0.5)
-repeat_size = Vector2(1320, 0)
-repeat_times = 3
-
-[node name="Sprite2D" type="Sprite2D" parent="Background/Layer2"]
-position = Vector2(0, 50)
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("16_thtws")
-
-[node name="Layer3" type="Parallax2D" parent="Background"]
-scroll_scale = Vector2(0.5, 0.5)
-repeat_size = Vector2(1320, 0)
-repeat_times = 3
-
-[node name="Sprite2D" type="Sprite2D" parent="Background/Layer3"]
-position = Vector2(0, 10)
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("15_qudmc")
-
-[node name="Layer4" type="Parallax2D" parent="Background"]
-scroll_scale = Vector2(0.6, 0.6)
-repeat_size = Vector2(1320, 0)
-repeat_times = 3
-
-[node name="Sprite2D" type="Sprite2D" parent="Background/Layer4"]
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("17_t6vb6")
-
-[node name="Level2" type="ParallaxBackground" parent="Background"]
-visible = false
-
-[node name="Level2" type="Sprite2D" parent="Background/Level2"]
-texture_repeat = 2
-position = Vector2(745.5, 529)
-scale = Vector2(1.21406, 1.00556)
-texture = ExtResource("19_dfxjl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(250, 432)

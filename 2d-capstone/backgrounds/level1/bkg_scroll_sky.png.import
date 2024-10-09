@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cduyai7iq1ymo"
-path="res://.godot/imported/bkg_scroll_trash.png-17f49a26942739da83061fc9a47612de.ctex"
+uid="uid://c56dlhyt3lpxe"
+path="res://.godot/imported/bkg_scroll_sky.png-e51f3b85ab7774583701491a48692c18.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://backgrounds/parallax/bkg_scroll_trash.png"
-dest_files=["res://.godot/imported/bkg_scroll_trash.png-17f49a26942739da83061fc9a47612de.ctex"]
+source_file="res://backgrounds/level1/bkg_scroll_sky.png"
+dest_files=["res://.godot/imported/bkg_scroll_sky.png-e51f3b85ab7774583701491a48692c18.ctex"]
 
 [params]
 

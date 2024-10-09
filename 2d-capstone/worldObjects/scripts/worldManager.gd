@@ -56,10 +56,18 @@ func _ready():
 	loadLevel()
 	
 	print("cur file, ", Globals.curFile)
-	if Globals.curFile == "Lvl2.1" or levelFile == "Lvl2.1":
-		for layer in self.get_node("Background").get_children():
-			layer.visible = false
-		self.get_node("Background/Level2").visible = true
+	
+	# Load background
+	var backgroundScene = load("res://backgrounds/" + Globals.curFile + "Background")
+	if backgroundScene:
+		var backgroundInstance = backgroundScene.instantiate()
+		$Background.add_child(backgroundInstance)
+	# Failsafe: load Lvl1.2
+	else:
+		backgroundScene = load("res://backgrounds/Lvl1.2Background.tscn")
+		var backgroundInstance = backgroundScene.instantiate()
+		$Background.add_child(backgroundInstance)
+	
 	timerText = $CanvasLayer/Timer
 	player1 = playersList.get_node("Player1")
 	player2 = playersList.get_node("Player2")
