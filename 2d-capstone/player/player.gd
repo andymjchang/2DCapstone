@@ -38,6 +38,7 @@ var punchConnected = false
 var otherPlayer
 var worldNode
 var sfxPlayer
+var glitchLines
 
 func _ready():
 	print("my name is: ",self.name)
@@ -70,10 +71,20 @@ func _ready():
 	self.scored.connect(worldNode._onScored)
 	
 	sfxPlayer = $sfxPlayer
+	
+	# Attach to glitch line
+	if self.name == "Player1":
+		glitchLines = worldNode.get_node("Camera2D").get_node("glitchLines")
+	elif self.name == "Player2":
+		glitchLines = worldNode.get_node("Camera2D").get_node("glitchLines2")
 
 func _physics_process(delta: float) -> void:
 	if not editing:
 		if not relocating:
+			# Lines
+			if is_on_floor():
+				glitchLines.global_position.y = self.global_position.y
+			
 			# Add the gravity.
 			if not is_on_floor():
 				velocity += get_gravity() * delta * 2

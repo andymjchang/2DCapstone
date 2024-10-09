@@ -12,7 +12,7 @@ startingScale = 0.75
 animation_time = 0.5
 
 [node name="innerCircle" type="Sprite2D" parent="."]
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_roerp")
 
 [node name="outerCircle" type="Sprite2D" parent="."]

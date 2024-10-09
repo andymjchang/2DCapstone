@@ -119,24 +119,24 @@ size = Vector2(18.75, 17.5)
 size = Vector2(9.99802, 10.992)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
-size = Vector2(28.75, 25.375)
+size = Vector2(23.75, 25.375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5pw0"]
-size = Vector2(20.75, 4.25)
+size = Vector2(20.75, 1.25)
 
 [node name="Player1" type="CharacterBody2D" groups=["players"]]
-position = Vector2(0, -3)
+position = Vector2(0, -48)
 scale = Vector2(4, 4)
 script = ExtResource("1_qyaa7")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-14.25, -12.25)
+position = Vector2(-14.25, -1.25)
 scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
 animation = &"Slide"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-14.375, -10.125)
+position = Vector2(-14.375, 0.875)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="ProtoMc" type="Sprite2D" parent="."]
@@ -146,7 +146,7 @@ scale = Vector2(0.368884, 0.344364)
 texture = ExtResource("2_a5rf3")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
-position = Vector2(-18, -20.375)
+position = Vector2(-18, -9.375)
 rotation = 0.000143446
 monitoring = false
 
@@ -164,14 +164,14 @@ rotation = 0.00184914
 shape = SubResource("RectangleShape2D_efrg4")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
-position = Vector2(-11.75, -0.5)
+position = Vector2(-11.75, 10.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
-position = Vector2(-2.625, -11.5625)
+position = Vector2(0.5, -11.25)
 shape = SubResource("RectangleShape2D_rw1d5")
 
 [node name="actionLine" type="Sprite2D" parent="."]
-position = Vector2(0, -11.25)
+position = Vector2(0, -0.25)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_4xpfe")
 
@@ -180,13 +180,15 @@ wait_time = 0.25
 one_shot = true
 
 [node name="sfxPlayer" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, 11)
 stream = ExtResource("7_wy6uo")
 
 [node name="damagePlayer" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, 11)
 stream = ExtResource("8_k3kow")
 
 [node name="topMark" type="Marker2D" parent="."]
-position = Vector2(-11.75, -52.5)
+position = Vector2(-11.75, -41.5)
 
 [node name="ColorRect" type="ColorRect" parent="topMark"]
 visible = false
@@ -196,7 +198,7 @@ offset_right = 10.25
 offset_bottom = 7.0
 
 [node name="bottomMark" type="Marker2D" parent="."]
-position = Vector2(-11.75, 28.25)
+position = Vector2(-11.75, 39.25)
 
 [node name="ColorRect" type="ColorRect" parent="bottomMark"]
 visible = false
@@ -206,7 +208,7 @@ offset_right = 10.25
 offset_bottom = 7.0
 
 [node name="Floor" type="CollisionShape2D" parent="."]
-position = Vector2(-10.375, -1.375)
+position = Vector2(-10.375, 11.125)
 shape = SubResource("RectangleShape2D_l5pw0")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
