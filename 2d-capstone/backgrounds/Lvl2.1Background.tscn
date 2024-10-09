@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://clwdql22b4rbr"]
+
+[ext_resource type="Texture2D" uid="uid://bi5104tqf8q03" path="res://backgrounds/Level_2_Background.png" id="1_uehd7"]
+[ext_resource type="Texture2D" uid="uid://dpjglfoglrf2j" path="res://backgrounds/level1/bkg_scroll_buildings.png" id="2_5y4eu"]
+[ext_resource type="Texture2D" uid="uid://dxewy3csfhdr0" path="res://backgrounds/level1/bkg_scroll_Fence.png" id="3_stmxu"]
+[ext_resource type="Texture2D" uid="uid://b2kqkpfp7dmjj" path="res://backgrounds/level1/bkg_scroll_ground.png" id="4_4fap0"]
+[ext_resource type="Texture2D" uid="uid://cduyai7iq1ymo" path="res://backgrounds/level1/bkg_scroll_trash.png" id="5_0wsko"]
+
+[node name="Background" type="Node2D"]
+modulate = Color(0.886262, 0.886261, 0.886262, 1)
+position = Vector2(250, 450)
+
+[node name="Layer0" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.05, 0.05)
+repeat_size = Vector2(1280, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Layer0"]
+position = Vector2(0, 100)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_uehd7")
+
+[node name="Layer1" type="Parallax2D" parent="."]
+visible = false
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Layer1"]
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_5y4eu")
+
+[node name="Layer2" type="Parallax2D" parent="."]
+visible = false
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(1320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Layer2"]
+position = Vector2(0, 50)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("3_stmxu")
+
+[node name="Layer3" type="Parallax2D" parent="."]
+visible = false
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(1320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Layer3"]
+position = Vector2(0, 10)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("4_4fap0")
+
+[node name="Layer4" type="Parallax2D" parent="."]
+visible = false
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(1320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Layer4"]
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("5_0wsko")

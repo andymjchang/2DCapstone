@@ -7,10 +7,10 @@ var starting_index = 0
 
 func load_array():
 	actionIndicatorArray = get_children()
-	actionIndicatorArray.sort_custom(sortIndicators)
 	for indicator in actionIndicatorArray:
 		indicator.connect("scored", on_scored)
-	
+		indicator.initialize()
+	actionIndicatorArray.sort_custom(sortIndicators)
 	currentWorldScene = get_parent().get_parent()
 	
 

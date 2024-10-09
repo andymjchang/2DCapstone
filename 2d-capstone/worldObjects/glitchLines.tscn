@@ -62,7 +62,7 @@ animations = [{
 }]
 
 [node name="glitchLines" type="Node2D"]
-modulate = Color(1, 1, 1, 0.784314)
+modulate = Color(1, 1, 1, 0.588235)
 script = ExtResource("1_qsm2t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

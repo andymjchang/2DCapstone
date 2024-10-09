@@ -109,7 +109,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(23, 17.5)
+size = Vector2(11, 17.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_via26"]
 size = Vector2(10, 11.25)
@@ -118,7 +118,7 @@ size = Vector2(10, 11.25)
 size = Vector2(25.5, 20.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d60le"]
-size = Vector2(23, 3.5)
+size = Vector2(26.25, 1.25)
 
 [node name="Player2" type="CharacterBody2D" groups=["players"]]
 position = Vector2(0, -48)
@@ -132,7 +132,7 @@ sprite_frames = SubResource("SpriteFrames_2tkvf")
 animation = &"Slide"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-12, 2.5315)
+position = Vector2(-18, 2.5315)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
@@ -179,7 +179,7 @@ stream = ExtResource("6_cfs8m")
 stream = ExtResource("7_ypay4")
 
 [node name="Floor" type="CollisionShape2D" parent="."]
-position = Vector2(-12, 10.25)
+position = Vector2(-13.125, 11.375)
 shape = SubResource("RectangleShape2D_d60le")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]

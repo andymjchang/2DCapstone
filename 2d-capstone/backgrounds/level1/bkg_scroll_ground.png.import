@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b2kqkpfp7dmjj"
-path="res://.godot/imported/bkg_scroll_ground.png-746cb4d47b43542915a8157387b5c223.ctex"
+path="res://.godot/imported/bkg_scroll_ground.png-92ca1c6f74d1f27a20695c13a9e36239.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://backgrounds/parallax/bkg_scroll_ground.png"
-dest_files=["res://.godot/imported/bkg_scroll_ground.png-746cb4d47b43542915a8157387b5c223.ctex"]
+source_file="res://backgrounds/level1/bkg_scroll_ground.png"
+dest_files=["res://.godot/imported/bkg_scroll_ground.png-92ca1c6f74d1f27a20695c13a9e36239.ctex"]
 
 [params]
 

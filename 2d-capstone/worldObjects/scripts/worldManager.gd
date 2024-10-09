@@ -55,11 +55,27 @@ var textPopupScene2
 func _ready():
 	loadLevel()
 	
-	print("cur file, ", Globals.curFile)
-	if Globals.curFile == "Lvl2.1" or levelFile == "Lvl2.1":
-		for layer in self.get_node("Background").get_children():
-			layer.visible = false
-		self.get_node("Background/Level2").visible = true
+	# FIXME: temporary bpm setting
+	if levelFile == "Lvl0.1":
+		Globals.setBPM(120)
+	if levelFile == "Lvl1.2":
+		Globals.setBPM(155)
+	if levelFile == "Lvl2.1":
+		Globals.setBPM(156)
+		
+	# load the actionArrays (This must happen after bpm is set)
+	$objectList/actionIndicators.load_array()
+	# Load background
+	var backgroundScene = load("res://backgrounds/" + levelFile + "Background.tscn")
+	if backgroundScene:
+		var backgroundInstance = backgroundScene.instantiate()
+		$Background.add_child(backgroundInstance)
+	# Failsafe: load Lvl1.2
+	else:
+		backgroundScene = load("res://backgrounds/Lvl1.2Background.tscn")
+		var backgroundInstance = backgroundScene.instantiate()
+		$Background.add_child(backgroundInstance)
+	
 	timerText = $CanvasLayer/Timer
 	player1 = playersList.get_node("Player1")
 	player2 = playersList.get_node("Player2")

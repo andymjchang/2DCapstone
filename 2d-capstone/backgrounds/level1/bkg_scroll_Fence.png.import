@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpjglfoglrf2j"
-path="res://.godot/imported/bkg_scroll_buildings.png-2a08803ba0606d3c216d173dafe46805.ctex"
+uid="uid://dxewy3csfhdr0"
+path="res://.godot/imported/bkg_scroll_Fence.png-07d9025f9b481f44dad8cb23ca725f8f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://backgrounds/parallax/bkg_scroll_buildings.png"
-dest_files=["res://.godot/imported/bkg_scroll_buildings.png-2a08803ba0606d3c216d173dafe46805.ctex"]
+source_file="res://backgrounds/level1/bkg_scroll_Fence.png"
+dest_files=["res://.godot/imported/bkg_scroll_Fence.png-07d9025f9b481f44dad8cb23ca725f8f.ctex"]
 
 [params]
 
