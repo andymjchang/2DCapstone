@@ -55,10 +55,10 @@ var textPopupScene2
 func _ready():
 	loadLevel()
 	
-	print("cur file, ", Globals.curFile)
+	print("cur file, ", levelFile)
 	
 	# Load background
-	var backgroundScene = load("res://backgrounds/" + Globals.curFile + "Background")
+	var backgroundScene = load("res://backgrounds/" + levelFile + "Background.tscn")
 	if backgroundScene:
 		var backgroundInstance = backgroundScene.instantiate()
 		$Background.add_child(backgroundInstance)

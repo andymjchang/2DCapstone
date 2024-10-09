@@ -113,7 +113,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(21.25, 17.5)
+size = Vector2(18.75, 17.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
 size = Vector2(9.99802, 10.992)
@@ -136,7 +136,7 @@ sprite_frames = SubResource("SpriteFrames_h8xup")
 animation = &"Slide"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-13.125, -10.125)
+position = Vector2(-14.375, -10.125)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="ProtoMc" type="Sprite2D" parent="."]
