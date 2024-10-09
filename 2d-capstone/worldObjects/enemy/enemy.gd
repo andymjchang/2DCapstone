@@ -14,8 +14,10 @@ var index = 0
 
 # Death animation
 var velocity = Vector2(0, 0)
-var move_speed = 400
-var gravity = 400
+var move_speed = 600
+var gravity = 2000
+var min_rotation = -45 * (PI / 180)
+var max_rotation = 45 * (PI / 180)
 
 var soundPlayer := AudioStreamPlayer.new()
 @onready var sprite
@@ -31,10 +33,11 @@ func _ready() -> void:
 	
 	# vary animation
 	sprite = $AnimatedSprite2D
-	sprite.speed_scale = randf_range(0.9, 1.1)
+	sprite.speed_scale = randf_range(0.8, 1.2)
+	sprite.frame = randi() % 4
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if ifDead:
 		#sprite.position.y += 4
 		#sprite.rotation = 0.8
@@ -48,6 +51,8 @@ func DeathAnimation(delta: float) -> void:
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body.is_in_group("players") and body.attack.monitoring:
 		self.ifDead = true
+		velocity.y = randi_range(-900, -400)
+		sprite.rotation = randf_range(min_rotation, max_rotation)
 		get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
 	elif body.is_in_group("players"):
 		#here if we want it lol, doesnt work as of now
