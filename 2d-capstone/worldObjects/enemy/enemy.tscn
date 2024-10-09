@@ -60,13 +60,12 @@ scale = Vector2(0.1, 0.0838816)
 texture = ExtResource("2_fvj88")
 
 [node name="innerCircle" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_h4ccn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(3, -18)
-scale = Vector2(0.16, 0.16)
+position = Vector2(2, -14)
+scale = Vector2(0.12, 0.12)
 sprite_frames = SubResource("SpriteFrames_l3chy")
 autoplay = "default"
 
