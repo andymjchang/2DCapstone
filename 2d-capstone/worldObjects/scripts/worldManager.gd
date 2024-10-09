@@ -54,6 +54,12 @@ var textPopupScene2
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	loadLevel()
+	
+	print("cur file, ", Globals.curFile)
+	if Globals.curFile == "Lvl2.1" or levelFile == "Lvl2.1":
+		for layer in self.get_node("Background").get_children():
+			layer.visible = false
+		self.get_node("Background/Level2").visible = true
 	timerText = $CanvasLayer/Timer
 	player1 = playersList.get_node("Player1")
 	player2 = playersList.get_node("Player2")

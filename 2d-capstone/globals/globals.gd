@@ -14,6 +14,10 @@ var startP1Coords
 var startP2Coords
 var customStart = false
 
+#background
+var levelBackgrounds = ["res://backgrounds/bkg_scroll.png", "res://backgrounds/Level_2_Background.png"]
+var curBackground = levelBackgrounds[0]
+
 # File Names
 var currentEditorFileName
 var currentSongFileName

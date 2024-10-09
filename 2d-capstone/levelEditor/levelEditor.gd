@@ -126,7 +126,19 @@ func _process(delta: float) -> void:
 			bindedBlocks = []
 		else:
 			isBinding = true
-			
+	#if Input.is_action_just_pressed("changeBackground"):
+		#var curIndex = Globals.levelBackgrounds.find(Globals.curBackground)
+		#print("curIndex ", curIndex)
+		#if curIndex == Globals.levelBackgrounds.size() - 1:
+			#Globals.curBackground = Globals.levelBackgrounds[0]
+			#self.get_node("Background2").visible = false
+			#self.get_node("Background").visible = true
+		#else:
+			#curIndex+=1
+			#Globals.curBackground = Globals.levelBackgrounds[curIndex]
+			#self.get_node("Background2").visible = true
+			#self.get_node("Background").visible = false
+		#self.get_node("Background").texture = load(Globals.curBackground)
 func _on_text_edit_0_text_changed() -> void:
 	if beatsMinLabel.text.is_valid_int():
 		beatsMin = int(beatsMinLabel.text)

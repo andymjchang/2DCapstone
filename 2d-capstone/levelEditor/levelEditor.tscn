@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
-[ext_resource type="PackedScene" path="res://levelEditorObjects/p1Placer.tscn" id="2_rd1yt"]
+[ext_resource type="PackedScene" uid="uid://bi1t7ju171wyu" path="res://levelEditorObjects/p1Placer.tscn" id="2_rd1yt"]
 [ext_resource type="PackedScene" uid="uid://ddnsnvsdn3aet" path="res://levelEditorObjects/actionIndicatorScene.tscn" id="3_ayep8"]
-[ext_resource type="PackedScene" path="res://levelEditorObjects/p2Placer.tscn" id="3_gp2uf"]
+[ext_resource type="PackedScene" uid="uid://b8x2mvqv8gti8" path="res://levelEditorObjects/p2Placer.tscn" id="3_gp2uf"]
 [ext_resource type="Texture2D" uid="uid://iocnhlyh4yw6" path="res://levelEditor/programmerArtAssets/action.png" id="3_kgvx7"]
 [ext_resource type="Texture2D" uid="uid://bamwfgoa14ig1" path="res://levelEditor/programmerArtAssets/right.png" id="4_7fuo1"]
 [ext_resource type="PackedScene" uid="uid://m7qqiokd3152" path="res://levelEditorObjects/checkpointScene.tscn" id="4_enory"]
