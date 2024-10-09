@@ -17,7 +17,6 @@
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
-[ext_resource type="AudioStream" uid="uid://cov0f8d5ngso1" path="res://audioTracks/Level 2_Main_156bpm_V2.mp3" id="15_27j5g"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="Texture2D" uid="uid://b2kqkpfp7dmjj" path="res://backgrounds/parallax/bkg_scroll_ground.png" id="15_qudmc"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
@@ -27,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://c56dlhyt3lpxe" path="res://backgrounds/parallax/bkg_scroll_sky.png" id="18_xtdbc"]
 [ext_resource type="Texture2D" uid="uid://dpjglfoglrf2j" path="res://backgrounds/parallax/bkg_scroll_buildings.png" id="19_uiohy"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
+[ext_resource type="AudioStream" uid="uid://c0r4i7rsnwlm7" path="res://audioTracks/Level2_Main_156bpm.mp3" id="21_i4u15"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
 [ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
 
@@ -130,7 +130,7 @@ position = Vector2(0, -155)
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
 position = Vector2(-960, -540)
-stream = ExtResource("15_27j5g")
+stream = ExtResource("21_i4u15")
 max_distance = 10000.0
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
