@@ -111,12 +111,13 @@ func _process(delta: float) -> void:
 		#get current click on block and delete it 
 		var blockList = getList(currentBlock.blockType)
 		for block in blockList.get_children():
-			
 			if block.index == currentBlock.index:
 				#we have found our block, delete
 				currentBlock.queue_free()
 				currentBlock = null
 				break
+		for block in bindedBlocks:
+			block.queue_free()
 	if Input.is_action_just_pressed("lengthenBlock") and currentBlock.blockType == "normal":
 		#extend platform block by one platform block
 		lengthenPlatform()
