@@ -178,8 +178,8 @@ func loadLevel():
 				print("pos points, ", posPoints)
 				var startPos = Vector2(posPoints[0], posPoints[1])
 				var endPos = Vector2(posPoints[2], posPoints[3])
-				instancedObj.get_node("ZiplineStart").global_position = startPos
-				instancedObj.get_node("ZiplineEnd").global_position = endPos
+				instancedObj.get_node("ziplineStart").global_position = startPos
+				instancedObj.get_node("ziplineEnd").global_position = endPos
 				
 			print("instance!: ", name)
 			

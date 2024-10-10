@@ -5,6 +5,6 @@
 
 [node name="ZiplineManager" type="Node2D"]
 
-[node name="ZiplineStart" parent="." instance=ExtResource("1_xhd8r")]
+[node name="ziplineStart" parent="." instance=ExtResource("1_xhd8r")]
 
-[node name="ZiplineEnd" parent="." instance=ExtResource("2_lgjnh")]
+[node name="ziplineEnd" parent="." instance=ExtResource("2_lgjnh")]
