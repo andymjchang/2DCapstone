@@ -155,9 +155,11 @@ func loadLevel():
 		"ziplines": [ziplineInstance, ziplineList]}
 	var instance
 	var instanceParent
+	var name = ""
 	for line in content.split("\n"):
 		#print("Current line: ", line)
 		if line in instanceList.keys():
+			name = line
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
 		# Position
@@ -171,6 +173,15 @@ func loadLevel():
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
 			#print("instance parent: ", instanceParent)
 			instanceParent.add_child(instancedObj)
+			#check if zipline, TODO make this more 
+			if name == "ziplines":
+				print("pos points, ", posPoints)
+				var startPos = Vector2(posPoints[0], posPoints[1])
+				var endPos = Vector2(posPoints[2], posPoints[3])
+				instancedObj.get_node("ZiplineStart").global_position = startPos
+				instancedObj.get_node("ZiplineEnd").global_position = endPos
+				
+			print("instance!: ", name)
 			
 		elif ".mp3" in line:
 			# audio file
