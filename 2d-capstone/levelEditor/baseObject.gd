@@ -110,7 +110,7 @@ func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_
 		
 func checkOrder() -> bool:
 	for block in overlappingBlocks:
-		if (!block.is_class("CanvasLayer") and !self.is_class("CanvasLayer") and block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced and !(self.blockType == "normal" and block.get_parent().get_parent().get_parent().blockType == "normal")):
+		if (!block.get_parent().get_parent().get_parent().is_class("CanvasLayer") and !self.is_class("CanvasLayer") and block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced and !(self.blockType == "normal" and block.get_parent().get_parent().get_parent().blockType == "normal")):
 			#verlapping block was placed earlier, it is selected 
 			#check how close the pos our to allow manuverbility
 			return false
