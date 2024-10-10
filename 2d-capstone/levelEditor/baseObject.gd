@@ -95,8 +95,8 @@ func _onBodyEntered(area_rid:RID, area:Area2D, area_shape_index:int, local_shape
 	#on default theres two overlaps - discount these for now
 	#each block collision starts with editorarea0 and is a twofer
 	overlappingBlocks.append(area)
-	print("me -> ", self.get_child(0).name)
-	print("my overlapping blocks! -> ", overlappingBlocks)
+	#print("me -> ", self.get_child(0).name)
+	#print("my overlapping blocks! -> ", overlappingBlocks)
 	
 func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_index:int) -> void:
 	#if block not overlapping anymore, remove from array
@@ -125,3 +125,14 @@ func checkOrder() -> bool:
 			#else:
 				#return false
 	return true
+	
+func setComponents(posArray : Array) -> void : 
+	#given an array of Vector2, 
+	#TODO have a safety check so that we dont have a bad access of the array 
+	var index = 0
+	for block in self.get_child(0).get_children():
+		block.global_position.x = posArray[index]
+		index+=1
+		block.global_position.y = posArray[index]
+		index+=1
+	

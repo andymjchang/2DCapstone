@@ -1,9 +1,4 @@
 platformBlocks
-25, 575,
-175, 575,
-325, 575,
-475, 575,
-625, 575,
 actionIndicators
 player1checkpoints
 player2checkpoints
@@ -16,5 +11,4 @@ killFloors
 goalBlocks
 breakableWalls
 ziplines
-200, 300, 525, 200,
 placers

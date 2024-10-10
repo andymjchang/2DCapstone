@@ -179,10 +179,12 @@ func loadLevel():
 			var posPoints = []
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
-
+			print("pos points in load: ", posPoints)
 			objectParent.add_child(instancedObj)
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
+			objectParent.setComponents(posPoints)
+			#do this if object has more than one component
 
 func _on_save_button_down() -> void:
 	save_scene_to_file()
@@ -378,13 +380,18 @@ func save_scene_to_file():
 						var childrenList = item.get_child(0).get_children()
 						var index = 0
 						var editorName = "EditorArea"+str(index)
+						var posChain = ""
 						for blockChild in childrenList:
 							#this is most likely where the zipline error/duplication is occuring
-							newFile.store_string(str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + "\n")
+							posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
+							#newFile.store_string(str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + "\n")
 							index+=1
 							editorName = "EditorArea"+str(index)
 						#print("child list in save, ", childrenList)
-					
+						posChain = posChain.substr(0, posChain.length()-1)
+						posChain+="\n"
+						newFile.store_string(posChain)
+						print("pos chain: ", posChain)
 	else:
 		displayStatus(UNABLE_TO_SAVE, false)
 		
