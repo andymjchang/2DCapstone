@@ -29,7 +29,7 @@ var MIN_STEP : int = 25
 
 var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
-var UNABLE_TO_SAVE = "Unable to save.\nNeed 2 players."
+var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 
 @export var actionIndicator : PackedScene
 @export var checkpoint : PackedScene
@@ -334,7 +334,7 @@ func _on_up_button_button_down() -> void:
 		currentBlock.position.y -= stepSize
 	
 func save_scene_to_file():
-	if player1List.get_child_count() == 1 and player2List.get_child_count() == 1:
+	if player1List.get_child_count() == 1 or player2List.get_child_count() == 1:
 		if FileAccess.file_exists(levelDataPath + saveFileName + ".dat") and overwrite == false:
 			status.show()
 			displayStatus(OVERWRITE_FILE, true)
