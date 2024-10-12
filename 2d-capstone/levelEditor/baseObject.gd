@@ -82,7 +82,7 @@ func setArea2D():
 		#give them each a unique name
 		newArea.name = "EditorArea"+str(nameIndex)
 		nameIndex+=1
-		self.add_child(newArea)
+		#self.add_child(newArea)
 		newArea.connect("input_event",  _on_area_2d_input_event.bind(newArea.name, blockChild))
 		newArea.connect("area_shape_entered", _onBodyEntered)
 		newArea.connect("area_shape_exited", _onBodyExited)
