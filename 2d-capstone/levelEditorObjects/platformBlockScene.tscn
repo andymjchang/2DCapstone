@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://yau5rmr187fi"]
+[gd_scene load_steps=7 format=4 uid="uid://yau5rmr187fi"]
 
+[ext_resource type="Script" path="res://levelEditorObjects/platformBlockScene.gd" id="1_1wl40"]
 [ext_resource type="Texture2D" uid="uid://71f5kajh7j21" path="res://backgrounds/tilemaps/level1tilemap.png" id="2_0mt0e"]
 [ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="2_gep2g"]
 
@@ -28,6 +29,7 @@ tile_size = Vector2i(500, 500)
 sources/1 = SubResource("TileSetAtlasSource_p0baj")
 
 [node name="PlatformBlockScene" type="Node2D"]
+script = ExtResource("1_1wl40")
 
 [node name="Node2D" type="Node2D" parent="."]
 
