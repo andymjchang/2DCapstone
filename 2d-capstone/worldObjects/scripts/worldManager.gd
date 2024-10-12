@@ -247,9 +247,13 @@ func _onLevelCompleted():
 func _physics_process(delta):
 	updateTime(delta)
 	if Input.is_action_just_pressed("toMainMenu"):
-		get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+		#do go to pause instead
+		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+		$Camera2D/Music.stop()
+		Globals.paused = true
+		$LevelUI/Box/PauseScreen.visible = true
 		
-	if time >= 3.0 and !Globals.inLevel:
+	if time >= 3.0 and !Globals.inLevel and !Globals.paused:
 		startGame()
 
 func updateTime(delta: float):
