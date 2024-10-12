@@ -249,9 +249,10 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("toMainMenu"):
 		#do go to pause instead
 		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
-		$Camera2D/Music.stop()
+		$Camera2D/Music.stream_paused = true
 		Globals.paused = true
 		$LevelUI/Box/PauseScreen.visible = true
+		Engine.time_scale = 0.0
 		
 	if time >= 3.0 and !Globals.inLevel and !Globals.paused:
 		startGame()
