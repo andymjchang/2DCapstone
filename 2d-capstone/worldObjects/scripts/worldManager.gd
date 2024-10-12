@@ -210,6 +210,7 @@ func _onCheckGameOver():
 	if player1.dead and player2.dead:
 		print("Both dead")
 		self.emit_signal("gameOver")
+		$LevelUI/GameOverScreen.visible = true
 
 func _onCheckLevelCompleted():
 	print("checking if level completed!")

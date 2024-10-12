@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddeqbtwpcjgkc"]
+[gd_scene load_steps=3 format=3 uid="uid://ddeqbtwpcjgkc"]
 
 [ext_resource type="Script" path="res://worlds/scripts/restartButton.gd" id="1_sir47"]
+[ext_resource type="PackedScene" uid="uid://u5byse278f80" path="res://ui/gameOverScreen.tscn" id="2_nogfw"]
 
 [node name="LevelUI" type="CanvasLayer"]
 script = ExtResource("1_sir47")
@@ -27,9 +28,13 @@ text = "3"
 horizontal_alignment = 1
 
 [node name="RestartButton" type="Button" parent="Box"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Try again?"
+
+[node name="GameOverScreen" parent="Box" instance=ExtResource("2_nogfw")]
+visible = false
 
 [node name="TimerScore" type="CanvasLayer" parent="."]
 visible = false
