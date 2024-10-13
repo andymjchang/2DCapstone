@@ -92,9 +92,7 @@ stream = ExtResource("19_jlcy1")
 
 [node name="playerCheckpoints" type="Node2D" parent="objectList"]
 
-[node name="player1" type="Node2D" parent="objectList"]
-
-[node name="player2" type="Node2D" parent="objectList"]
+[node name="player" type="Node2D" parent="objectList"]
 
 [node name="enemies" type="Node2D" parent="objectList"]
 
