@@ -2,15 +2,20 @@ extends Node2D
 
 #(1,0) (1,1) (1,3)
 #2.0 2,1 2,3
+#6 layers default
 @onready var tileMap = self.get("Node2D/TileMapLayer")
+var numCols = 6
+var extents
 var fillerTiles = [Vector2(1,0),Vector2(1,1), Vector2(1,3)]
 var endTiles = [Vector2(2,0),Vector2(2,1), Vector2(2,3)]
+var tileWidth
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("tile m ap, ", self.get_node("Node2D/TileMapLayer"))
 	tileMap =  self.get_node("Node2D/TileMapLayer")
-	pass # Replace with function body.
-
+	tileWidth = 15
+	extents = self.get_node("Node2D/Area2D/CollisionShape2D").shape as RectangleShape2D
+	extents = extents.extents
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -38,6 +43,9 @@ func extendByOneTile() -> void :
 	for i in range(0,3):
 		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
 		startY+=1
+	print("node, ",self.get_node("Node2D/EditorArea0/CollisionShape2D").get_children())
+	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x += tileWidth
+	self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x += tileWidth
 	
 func decreaseByOneTile() -> void: 
 	var usedCells = tileMap.get_used_cells()
