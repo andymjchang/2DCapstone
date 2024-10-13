@@ -22,8 +22,7 @@ func extendByOneTile() -> void :
 	var newX = minMax[1].x + 1
 	var newY = minMax[0].y
 	print("new coords, ", Vector2i(4, 4))
-	tileMap.set_cell(Vector2i(newX, newY), 0,Vector2i(-3,0))
-
+	tileMap.set_cell(Vector2i(newX, newY), 1,Vector2i(2,2))
 	
 func decreaseByOneTile() -> void: 
 	pass
@@ -43,7 +42,7 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 			maxCoords.y = cell.y
 		if cell.y < minCoords.y:
 			minCoords.y = cell.y
-		tileMap.set_cell(cell, -1)
+		#tileMap.set_cell(cell, -1)
 			
 			
 	return [minCoords, maxCoords]
