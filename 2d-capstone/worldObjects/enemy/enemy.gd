@@ -49,12 +49,12 @@ func DeathAnimation(delta: float) -> void:
 	position += velocity * delta
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	if body.is_in_group("players") and body.attack.monitoring:
+	if body.is_in_group("playerHitbox") and body.monitoring:
 		self.ifDead = true
 		velocity.y = randi_range(-600, -300)
 		sprite.rotation = randf_range(min_rotation, max_rotation)
 		get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
-	elif body.is_in_group("players"):
+	#elif body.is_in_group("players"):
 		#here if we want it lol, doesnt work as of now
 		#var soundEffect = load("res://audioTracks/record-scratches-31350.mp3")
 		#soundPlayer.stream = soundEffect

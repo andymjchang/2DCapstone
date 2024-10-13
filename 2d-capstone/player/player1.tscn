@@ -119,7 +119,7 @@ size = Vector2(18.75, 17.5)
 size = Vector2(9.99802, 10.992)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
-size = Vector2(23.75, 25.375)
+size = Vector2(18.125, 21.1875)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5pw0"]
 size = Vector2(20.75, 1.25)
@@ -145,7 +145,7 @@ position = Vector2(-2.5, -11.75)
 scale = Vector2(0.368884, 0.344364)
 texture = ExtResource("2_a5rf3")
 
-[node name="AttackHitbox" type="Area2D" parent="."]
+[node name="AttackHitbox" type="Area2D" parent="." groups=["playerHitbox"]]
 position = Vector2(-18, -9.375)
 rotation = 0.000143446
 monitoring = false
@@ -167,7 +167,7 @@ shape = SubResource("RectangleShape2D_efrg4")
 position = Vector2(-11.75, 10.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
-position = Vector2(0.5, -11.25)
+position = Vector2(-2.3125, -9.15625)
 shape = SubResource("RectangleShape2D_rw1d5")
 
 [node name="actionLine" type="Sprite2D" parent="."]
