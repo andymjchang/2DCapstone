@@ -1,0 +1,32 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bvg1g8gls3atk"]
+
+[ext_resource type="Texture2D" uid="uid://71f5kajh7j21" path="res://backgrounds/tilemaps/level1tilemap.png" id="1_toqy2"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jpmkc"]
+texture = ExtResource("1_toqy2")
+separation = Vector2i(125, 125)
+texture_region_size = Vector2i(250, 250)
+2:3/0 = 0
+1:3/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+2:1/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+1:0/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+1:5/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+3:5/0 = 0
+4:4/0 = 0
+3:3/0 = 0
+3:2/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+3:0/0 = 0
+
+[resource]
+tile_size = Vector2i(250, 250)
+sources/1 = SubResource("TileSetAtlasSource_jpmkc")

@@ -1,0 +1,14 @@
+platformBlocks
+1050, 450
+0, 0
+600, 450
+900, 600
+actionIndicators
+checkpoints
+player1
+45, 540
+player2
+45, 540
+enemies
+killFloors
+goalBlocks

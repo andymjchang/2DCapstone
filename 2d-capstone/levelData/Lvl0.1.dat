@@ -333,20 +333,13 @@ actionIndicators
 20025, 225
 14325, 575
 15375, 575
-player1checkpoints
+playerCheckpoints
 7650, 550
 11250, 550
 13650, 550
 16050, 550
-player2checkpoints
-7650, 275
-11250, 275
-13650, 275
-16050, 275
 player1
 0, 590
-player2
-0.00000190735, 315
 enemies
 2247, 298
 2547, 298

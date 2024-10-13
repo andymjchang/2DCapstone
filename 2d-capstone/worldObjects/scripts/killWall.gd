@@ -15,6 +15,6 @@ func _process(delta):
 	
 func _onKillWallBodyEntered(body:Node2D):
 	if "players" in body.get_groups(): #and Globals.inLevel:	
-		body.emit_signal("takeDamage", 10)
+		body.emit_signal("takeDamage", 9)
 		#body.position.x += self.position.x + 45
 		get_parent().get_parent().emit_signal("resetPosition", body)

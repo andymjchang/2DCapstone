@@ -13,7 +13,6 @@ signal checkLevelCompleted()
 @export var actionIndicatorInstance : PackedScene
 @export var checkpointInstance : PackedScene
 @export var player1Instance : PackedScene
-@export var player2Instance : PackedScene
 @export var enemyInstance : PackedScene
 @export var breakableWallInstance : PackedScene
 @export var ziplineInstance : PackedScene
@@ -24,14 +23,12 @@ signal checkLevelCompleted()
 @onready var killFloorsList = $objectList/killFloors
 @onready var enemiesList = $objectList/enemies
 @onready var actionIndicatorsList = $objectList/actionIndicators
-@onready var p1checkpointsList = $objectList/player1checkpoints
-@onready var p2checkpointsList = $objectList/player2checkpoints
+@onready var p1checkpointsList = $objectList/playerCheckpoints
 @onready var playersList = $objectList/players
 @onready var breakableWallList = $objectList/breakableWalls
 @onready var ziplineList = $objectList/ziplines
 
 var player1 
-var player2
 var killWall
 var countdownUI
 var statusMessage
@@ -48,8 +45,6 @@ var musicTime = 0.0
 @onready var scoreText
 
 var textPopupScene1
-var textPopupScene2
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -78,16 +73,13 @@ func _ready():
 	
 	timerText = $CanvasLayer/Timer
 	player1 = playersList.get_node("Player1")
-	player2 = playersList.get_node("Player2")
 	camera = $Camera2D
 	scoreText = $CanvasLayer/Score
 	
 	# intialize text popup node
 	textPopupScene1 = $Camera2D/ScorePopup1
-	textPopupScene2 = $Camera2D/ScorePopup2
 	textPopupScene1.initPosition(player1)
-	textPopupScene2.initPosition(player2)
-	
+
 	music = camera.get_node("Music")
 	loadAudio()
 	
@@ -100,11 +92,9 @@ func _ready():
 
 	# Prep players
 	player1.editing = false
-	player2.editing = false
 	if Globals.customStart:
 		#we are starting at a user picked place
 		player1.global_position = Globals.startP1Coords
-		player2.global_position = Globals.startP2Coords
 		get_node("Camera2D").moveCamera(player1.global_position.x)
 		var distance = abs(0.0 - player1.global_position.x)
 		var playerSpeed = player1.SPEED
@@ -122,7 +112,6 @@ func _ready():
 	#startGame()
 	
 func startGame():
-	
 	music.play(musicTime)
 	Globals.inLevel = true
 
@@ -146,11 +135,9 @@ func loadLevel():
 		"goalBlocks": [goalBlockInstance, goalBlocksList],
 		"killFloors": [killFloorInstance, killFloorsList],
 		"actionIndicators": [actionIndicatorInstance, actionIndicatorsList], 
-		"player1checkpoints": [checkpointInstance, p1checkpointsList],
-		"player2checkpoints": [checkpointInstance, p2checkpointsList], 
+		"playerCheckpoints": [checkpointInstance, p1checkpointsList],
 		"enemies": [enemyInstance, enemiesList],
-		"player1": [player1Instance, playersList],
-		"player2": [player2Instance, playersList],
+		"player": [player1Instance, playersList],
 		"breakableWalls" : [breakableWallInstance, breakableWallList],
 		"ziplines": [ziplineInstance, ziplineList]}
 	var instance
@@ -191,13 +178,13 @@ func changeCountdown():
 	statusMessage.text = "1"
 	await get_tree().create_timer(1.0).timeout
 	statusMessage.text = "Go!"
+	startGame()
 	await get_tree().create_timer(1.0).timeout
 	statusMessage.text = ""
 
 func _onCheckGameOver():
 	print("Checking if both dead")
-	if player1.dead and player2.dead:
-		print("Both dead")
+	if player1.dead:
 		self.emit_signal("gameOver")
 
 func _onCheckLevelCompleted():
@@ -220,6 +207,7 @@ func _onGameOver():
 
 func showGameOver():
 	statusMessage.text = "Game over!"
+	statusMessage.visible = true
 	restartButton.visible = true
 	
 func showLevelCompleted():
@@ -236,9 +224,7 @@ func _physics_process(delta):
 	updateTime(delta)
 	if Input.is_action_just_pressed("toMainMenu"):
 		get_tree().change_scene_to_file("res://ui/landingPage.tscn")
-		
-	if time >= 3.0 and !Globals.inLevel:
-		startGame()
+	
 
 func updateTime(delta: float):
 	time = time + delta
@@ -283,10 +269,6 @@ func _onResetPosition(who):
 		var nearestPoint = getNearestCheckpoint(who)
 		who.emit_signal("relocate", nearestPoint)
 		pass
-	elif who.name == "Player2":
-		var nearestPoint = getNearestCheckpoint(who)
-		who.emit_signal("relocate", nearestPoint)
-		pass
 
 
 func _onEndGameBodyEntered(body:Node2D):
@@ -312,5 +294,3 @@ func _onScored(id, p_score):
 	scoreText.text = str(int(score))
 	if id == "Player1":
 		textPopupScene1.initText(scoreToAdd, player1.position)
-	if id == "Player2":
-		textPopupScene2.initText(scoreToAdd, player2.position)

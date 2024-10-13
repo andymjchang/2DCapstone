@@ -44,21 +44,12 @@ func _ready():
 	print("my name is: ",self.name)
 	curSprite = get_node("Animation").duplicate()
 	add_to_group("players")
-	# Controls for player1
-	if self.name == "Player1":
-		left = "left1"
-		right = "right1"
-		jump = "jump1"
-		punch = "punch1"
-		slide = "slide1"
-		otherPlayer = "Player2"
-	elif self.name == "Player2":
-		left = "left2"
-		right = "right2"
-		jump = "jump2"
-		punch = "punch2"
-		slide = "slide2"
-		otherPlayer = "Player1"
+	# Controls for player
+	left = "leftPlayer"
+	right = "rightPlayer"
+	jump = "jump"
+	punch = "punch"
+	slide = "slide"
 
 	attack = get_node("AttackHitbox")
 
@@ -73,10 +64,7 @@ func _ready():
 	sfxPlayer = $sfxPlayer
 	
 	# Attach to glitch line
-	if self.name == "Player1":
-		glitchLines = worldNode.get_node("Camera2D").get_node("glitchLines")
-	elif self.name == "Player2":
-		glitchLines = worldNode.get_node("Camera2D").get_node("glitchLines2")
+	glitchLines = worldNode.get_node("Camera2D").get_node("glitchLines")
 
 func _physics_process(delta: float) -> void:
 	if not editing:
@@ -124,14 +112,7 @@ func _physics_process(delta: float) -> void:
 				#get_node("Floor").disabled = true
 			
 		if Input.is_action_just_pressed(punch):
-			if inZipline and self.name == "Player1":
-				var playerTouch = get_parent().get_node(otherPlayer)
-				playerTouch.onTop = not playerTouch.onTop
-				if (playerTouch.onTop):
-					playerTouch.position.y = get_node("bottomMark").global_position.y
-				else:
-					playerTouch.position.y = get_node("topMark").global_position.y
-			elif canAttack:
+			if canAttack:
 				# Artistic
 				$Animation.play("Punch")
 				sfxPlayer.play()
@@ -142,15 +123,7 @@ func _physics_process(delta: float) -> void:
 				$attackTimer.start()
 				punchConnected = false
 		elif reachedCheckpoint:
-			# Wait to respawn relocating player when teammate has aligned
-			if get_parent().get_node(otherPlayer).position.x >= self.position.x:
-				emit_signal("revive", self)
-				# Reset relocating player position and allow control
-				get_node("Hitbox").call_deferred("set", "disabled", false)
-				relocating = false
-				reachedCheckpoint = false
-				invuln = false
-				self.position.x = get_parent().get_node(otherPlayer).position.x
+			pass
 		move_and_slide()
 	else:
 		invuln = true
@@ -158,6 +131,8 @@ func _physics_process(delta: float) -> void:
 func _onTakeDamage(amount):
 	$damagePlayer.play()
 	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
+		if amount == 10:
+			amount = health
 		health -= amount
 		#print("Got hit! Health now: ", self.health)
 		if health % 9 == 0:
@@ -172,11 +147,6 @@ func _onTakeDamage(amount):
 			if Globals.inLevel:
 				await get_tree().create_timer(3.0).timeout
 				emit_signal("revive", self)
-		else:
-			invuln = true
-			await get_tree().create_timer(1.0).timeout
-			#print("invuln over")
-			invuln = false
 
 func _onRevive(who):
 	who.get_node("Animation").self_modulate.a = 1

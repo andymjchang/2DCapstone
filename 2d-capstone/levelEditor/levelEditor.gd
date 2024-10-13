@@ -44,7 +44,6 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var killFloorScript : Script
 @export var levelUI : PackedScene
 @export var player1 : PackedScene
-@export var player2 : PackedScene
 @export var killFloor : PackedScene
 @export var baseObject : PackedScene
 @export var breakableWall : PackedScene
@@ -56,11 +55,9 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var goalBlocksList = $objectList/goalBlocks
 @onready var enemyList = $objectList/enemies
 @onready var actionIndicatorsList = $objectList/actionIndicators
-@onready var p1checkpointsList = $objectList/player1checkpoints
-@onready var p2checkpointsList = $objectList/player2checkpoints
+@onready var p1checkpointsList = $objectList/playerCheckpoints
 @onready var bWallsList = $objectList/breakableWalls
-@onready var player1List = $objectList/player1
-@onready var player2List = $objectList/player2
+@onready var player1List = $objectList/player
 @onready var killFloorsList = $objectList/killFloors
 @onready var beatsMinLabel = $UI/TextEdit0
 @onready var ziplineList = $objectList/ziplines
@@ -155,11 +152,9 @@ func loadLevel():
 		"goalBlocks": [goalBlock, goalBlocksList, blockTypes[4]],
 		"killFloors": [killFloor, killFloorsList, blockTypes[6]],
 		"actionIndicators": [actionIndicator, actionIndicatorsList, blockTypes[3]], 
-		"player1checkpoints": [checkpoint, p1checkpointsList, blockTypes[7]], 
-		"player2checkpoints": [checkpoint, p2checkpointsList, blockTypes[8]],
+		"playerCheckpoints": [checkpoint, p1checkpointsList, blockTypes[7]], 
 		"enemies": [enemyCharacter, enemyList, blockTypes[5]],
-		"player1": [player1, player1List, blockTypes[0]],
-		"player2": [player2, player2List, blockTypes[1]],
+		"player": [player1, player1List, blockTypes[0]],
 		"breakableWalls": [breakableWall,breakableWallList,  blockTypes[9]],
 		"ziplines": [zipline, ziplineList, blockTypes[10]]}
 	var instance
@@ -203,20 +198,7 @@ func _on_p_1_placer_button_button_up() -> void:
 	place_block(placerParent, placerList, camera.position, false)
 	#might need to change this to the editor area
 	Globals.startP1Coords = placerParent.get_child(0).get_node("Player1/EditorArea1").global_position
-	Globals.startP2Coords = placerParent.get_child(0).get_node("Player2/EditorArea2").global_position
-	
-func _on_p_2_placer_button_button_up() -> void:
-	#Globals.customStart = true
-	#var p2PlacerInstance = p2Placer.instantiate()
-	#var p2PlacerParent = baseObject.instantiate()
-	#p2PlacerParent.add_child(p2PlacerInstance)
-	#p2PlacerParent.blockType = blockTypes[11]
-	#placerList.add_child(p2PlacerInstance)
-	#place_block(p2PlacerParent, placerList, camera.position, false)
-	#Globals.startP2Coords = p2PlacerParent.global_position
-	pass
 
-	
 func _on_p1checkpoint_button_pressed() -> void:
 	var checkpointInstance = checkpoint.instantiate()
 	var checkParent = baseObject.instantiate()
@@ -225,13 +207,6 @@ func _on_p1checkpoint_button_pressed() -> void:
 	p1checkpointsList.add_child(checkParent)
 	place_block(checkParent, p1checkpointsList, camera.position, false)
 
-func _on_p2checkpoint_button_button_up() -> void:
-	var checkpointInstance = checkpoint.instantiate()
-	var checkParent = baseObject.instantiate()
-	checkParent.add_child(checkpointInstance)
-	checkParent.blockType = blockTypes[7]
-	p2checkpointsList.add_child(checkParent)
-	place_block(checkParent, p2checkpointsList, camera.position, false)
 	
 func _onZiplineButtonPressed() -> void:
 	var ziplineInstance = zipline.instantiate()
@@ -261,20 +236,6 @@ func _on_rac_button_button_up() -> void:
 		place_block(playerParent, player1List, camera.position, false)
 	else:
 		currentBlock = player1List.get_node("baseObject")
-		reset_drag_tracking()
-
-func _on_mouse_button_button_up() -> void:
-	if !player2List.has_node("baseObject"):
-		var player2Instance = player2.instantiate()
-		#same deal as with raccoon 
-		#player2Instance.editing = true
-		player2Instance.add_to_group("Players")
-		var playerParent = baseObject.instantiate()
-		playerParent.add_child(player2Instance)
-		playerParent.blockType = blockTypes[1]
-		place_block(playerParent, player2List, camera.position, false)
-	else:
-		currentBlock = player2List.get_node("baseObject")
 		reset_drag_tracking()
 
 #start here
@@ -361,7 +322,7 @@ func _on_up_button_button_down() -> void:
 		currentBlock.position.y -= stepSize
 	
 func save_scene_to_file():
-	if player1List.get_child_count() == 1 or player2List.get_child_count() == 1:
+	if player1List.get_child_count() == 1:
 		if FileAccess.file_exists(levelDataPath + saveFileName + ".dat") and overwrite == false:
 			status.show()
 			displayStatus(OVERWRITE_FILE, true)
@@ -487,14 +448,10 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/enemies")
 	if blockType == "player1":
 		return get_node("objectList/player1")
-	if blockType == "player2":
-		return get_node("objectList/player2")
 	if blockType == "goalBlock":
 		return get_node("objectList/goalBlocks")
 	if blockType == "p1checkpoint":
 		return get_node("objectList/player1checkpoints")
-	if blockType == "p2checkpoint":
-		return get_node("objectList/player2checkpoints")
 	if blockType == "killFloor":
 		return get_node("objectList/killFloors")
 	if blockType == "breakableWall":
