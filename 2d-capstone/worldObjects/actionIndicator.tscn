@@ -1,24 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvhi8ylhyxb4a"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/actionIndicator.gd" id="1_vgx8v"]
-[ext_resource type="Texture2D" uid="uid://dhk8ib54ejgwa" path="res://worldObjects/assets/circle.png" id="2_roerp"]
+[ext_resource type="Texture2D" uid="uid://cwjeh5jgwsky8" path="res://worldObjects/assets/circleRed.png" id="2_osalj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0jqk3"]
 size = Vector2(50, 50)
 
 [node name="ActionIndicator" type="Node2D" groups=["actionIndicators"]]
-z_index = 1
 script = ExtResource("1_vgx8v")
 startingScale = 0.75
 animation_time = 0.5
 
 [node name="innerCircle" type="Sprite2D" parent="."]
-z_index = 1
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_roerp")
+texture = ExtResource("2_osalj")
 
 [node name="outerCircle" type="Sprite2D" parent="."]
-texture = ExtResource("2_roerp")
+texture = ExtResource("2_osalj")
 
 [node name="Area2D" type="Area2D" parent="."]
 
