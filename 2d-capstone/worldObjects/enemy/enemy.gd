@@ -60,13 +60,15 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 	
 	
 	
-
+func GotHit():
+	self.ifDead = true
+	velocity.y = randi_range(-600, -300)
+	sprite.rotation = randf_range(min_rotation, max_rotation)
+	get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("playerHitbox"):
-		self.ifDead = true
-		velocity.y = randi_range(-600, -300)
-		sprite.rotation = randf_range(min_rotation, max_rotation)
-		get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
+		print("plaer hitbox")
+		GotHit()
 
 	pass # Replace with function body.
