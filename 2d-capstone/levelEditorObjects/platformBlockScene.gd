@@ -13,6 +13,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("extendBlock") and self.get_parent().index == self.get_parent().get_parent().get_parent().get_parent().currentBlock.index:
 		extendByOneTile()
+	if Input.is_action_just_pressed("reduceBlock") and self.get_parent().index == self.get_parent().get_parent().get_parent().get_parent().currentBlock.index:
+		decreaseByOneTile()
 	
 func extendByOneTile() -> void : 
 	#I need to get the max of the col and rows
@@ -27,7 +29,14 @@ func extendByOneTile() -> void :
 		newY+=1
 	
 func decreaseByOneTile() -> void: 
-	pass
+	var usedCells = tileMap.get_used_cells()
+	var minMax = getMaxMinCoord(usedCells)
+	#we want to delete one col
+	var startX = minMax[1].x
+	var startY = minMax[0].y
+	for i in range(0,3):
+		tileMap.erase_cell(Vector2i(startX, startY))
+		startY+=1
 	
 func getMaxMinCoord(usedCells : Array) -> Array:
 	#get the max/min of the tilemap 
