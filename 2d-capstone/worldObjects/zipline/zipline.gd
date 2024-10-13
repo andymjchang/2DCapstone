@@ -22,18 +22,11 @@ func _onBodyEntered(body):
 	print("Entering body: ", body.name)
 	if "Player" in body.name:
 		if self.name == "ziplineStart":
-			# print("My end: ", get_parent().get_child(END))
-			var otherPlayer = get_tree().root.get_node("level").get_node("objectList").get_node("players").get_node("Player2")
-			otherPlayer.position.x = body.position.x
 			var destination = get_parent().get_child(END)
 			var newVelocity = (destination.position - body.position) / 2
 			body.velocity = newVelocity
 			body.inZipline = true
 			body.relocating = true
-
-			otherPlayer.velocity = newVelocity
-			otherPlayer.inZipline = true
-			otherPlayer.relocating = true
 
 		elif self.name == "ziplineEnd" and body.inZipline:
 			print("at end")

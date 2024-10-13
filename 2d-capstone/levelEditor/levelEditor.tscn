@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=46 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -27,13 +27,12 @@
 [ext_resource type="Script" path="res://levelEditor/editorCamera.gd" id="10_seu87"]
 [ext_resource type="PackedScene" uid="uid://btjihhiq2yb5s" path="res://levelEditorObjects/playerScene.tscn" id="12_o6ydd"]
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="13_87vi8"]
-[ext_resource type="PackedScene" uid="uid://dr3t8111udl22" path="res://levelEditorObjects/player2Scene.tscn" id="13_i2xjp"]
 [ext_resource type="PackedScene" uid="uid://bq7uuovqf0df7" path="res://levelEditorObjects/killFloorScene.tscn" id="14_26o8v"]
 [ext_resource type="PackedScene" uid="uid://cy015hcaqhhta" path="res://levelEditor/baseObject.tscn" id="15_wsj3w"]
 [ext_resource type="PackedScene" uid="uid://bhlcoymbyox5y" path="res://levelEditorObjects/breakableWallScene.tscn" id="16_rjnnj"]
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
 [ext_resource type="PackedScene" uid="uid://d14ty44q7tqru" path="res://levelEditorObjects/ziplineScene.tscn" id="17_x5g52"]
-[ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="19_jlcy1"]
+[ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/Level1_Main_155bpm.mp3" id="19_jlcy1"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
 [ext_resource type="Texture2D" uid="uid://l8vpo2u44l4p" path="res://levelEditor/programmerArtAssets/p1checkpoint.png" id="22_1mwd2"]
 [ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
@@ -64,7 +63,6 @@ actionManager = ExtResource("9_6gh41")
 killFloorScript = ExtResource("10_jxp0h")
 levelUI = ExtResource("6_47xe5")
 player1 = ExtResource("12_o6ydd")
-player2 = ExtResource("13_i2xjp")
 killFloor = ExtResource("14_26o8v")
 baseObject = ExtResource("15_wsj3w")
 breakableWall = ExtResource("16_rjnnj")
@@ -92,9 +90,7 @@ stream = ExtResource("19_jlcy1")
 
 [node name="actionIndicators" type="Node2D" parent="objectList"]
 
-[node name="player1checkpoints" type="Node2D" parent="objectList"]
-
-[node name="player2checkpoints" type="Node2D" parent="objectList"]
+[node name="playerCheckpoints" type="Node2D" parent="objectList"]
 
 [node name="player1" type="Node2D" parent="objectList"]
 
@@ -171,7 +167,7 @@ offset_left = 93.0
 offset_top = 159.0
 offset_right = 208.0
 offset_bottom = 209.0
-text = "ziptest"
+text = "Lvl2.1"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Node2D" parent="UI"]
@@ -184,6 +180,7 @@ offset_bottom = 1107.0
 color = Color(0.259294, 0.259294, 0.259294, 1)
 
 [node name="p2checkpointButton" type="TextureButton" parent="UI/objectSelector"]
+visible = false
 offset_left = 416.0
 offset_top = 848.0
 offset_right = 516.0
@@ -201,6 +198,7 @@ layout_mode = 2
 texture_normal = ExtResource("3_kgvx7")
 
 [node name="mouseButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("7_dw7u5")
 

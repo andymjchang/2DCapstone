@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=25 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://worldObjects/scripts/camera.gd" id="4_nttx1"]
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
-[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="7_po4yx"]
 [ext_resource type="PackedScene" uid="uid://bam8jg1naascf" path="res://worldObjects/zipline/ziplineStart.tscn" id="10_h5bd4"]
 [ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://worldObjects/wall/breakableWallQ.tscn" id="10_twea0"]
@@ -37,7 +36,6 @@ killFloorInstance = ExtResource("3_6me16")
 actionIndicatorInstance = ExtResource("3_o6usx")
 checkpointInstance = ExtResource("4_ph2wq")
 player1Instance = ExtResource("5_dfiyk")
-player2Instance = ExtResource("6_5q6wy")
 enemyInstance = ExtResource("7_po4yx")
 breakableWallInstance = ExtResource("10_twea0")
 ziplineInstance = ExtResource("10_h5bd4")
@@ -71,9 +69,6 @@ script = ExtResource("4_nttx1")
 [node name="glitchLines" parent="Camera2D" instance=ExtResource("23_jq54w")]
 position = Vector2(0, 120)
 
-[node name="glitchLines2" parent="Camera2D" instance=ExtResource("23_jq54w")]
-position = Vector2(0, -155)
-
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
 position = Vector2(-960, -540)
 stream = ExtResource("21_i4u15")
@@ -89,9 +84,6 @@ texture = ExtResource("15_gryhe")
 
 [node name="ScorePopup1" parent="Camera2D" instance=ExtResource("16_kbija")]
 position = Vector2(-250, -158)
-
-[node name="ScorePopup2" parent="Camera2D" instance=ExtResource("16_kbija")]
-position = Vector2(-250, 255)
 
 [node name="RunBounds" type="Area2D" parent="Camera2D"]
 position = Vector2(-252, 1)
@@ -120,10 +112,7 @@ offset_bottom = 374.0
 [node name="actionIndicators" type="Node2D" parent="objectList"]
 script = ExtResource("13_euntf")
 
-[node name="player2checkpoints" type="Node2D" parent="objectList"]
-script = ExtResource("14_rbu47")
-
-[node name="player1checkpoints" type="Node2D" parent="objectList"]
+[node name="playerCheckpoints" type="Node2D" parent="objectList"]
 script = ExtResource("14_rbu47")
 
 [node name="players" type="Node2D" parent="objectList"]

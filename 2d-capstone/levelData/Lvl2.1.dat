@@ -325,18 +325,11 @@ actionIndicators
 19500, 625
 20700, 675
 18900, 625
-player1checkpoints
+playerCheckpoints
 17550, 600
 6300, 550
-player2checkpoints
-11400, 300
-11400, 650
-17550, 350
-6300, 250
-player1
+player
 0, 640
-player2
-0, 340
 enemies
 600, 325
 900, 325

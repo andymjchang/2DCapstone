@@ -131,7 +131,7 @@ script = ExtResource("14_rbu47")
 position = Vector2(802, 549)
 
 [node name="ziplineEnd" parent="objectList/ziplines/zipline" instance=ExtResource("24_ff25o")]
-position = Vector2(2544, 681)
+position = Vector2(2545, 681)
 
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 

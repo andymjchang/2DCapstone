@@ -7,8 +7,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Globals.inLevel:
-		#pass
 		position.x = position.x + Globals.pixelsPerFrame * delta
+
 		
 func moveCamera(newXPos) -> void:
 	#based on the x pos, shift the camera to where the characters are
