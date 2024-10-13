@@ -1,7 +1,10 @@
 extends Node2D
 
-
+#(1,0) (1,1) (1,3)
+#2.0 2,1 2,3
 @onready var tileMap = self.get("Node2D/TileMapLayer")
+var fillerTiles = [Vector2(1,0),Vector2(1,1), Vector2(1,3)]
+var endTiles = [Vector2(2,0),Vector2(2,1), Vector2(2,3)]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("tile m ap, ", self.get_node("Node2D/TileMapLayer"))
@@ -21,12 +24,20 @@ func extendByOneTile() -> void :
 	var usedCells = tileMap.get_used_cells()
 	var minMax = getMaxMinCoord(usedCells)
 	#we want to start one col over, so start with max x and min y
-	var newX = minMax[1].x + 1
-	var newY = minMax[0].y
-	print("new coords, ", Vector2i(4, 4))
+	
+	#we have to reset the end of the tile so that it doesnt look weird
+	
+	var startX = minMax[1].x 
+	var startY = minMax[0].y
+	
+	for i in range (0,3):
+		tileMap.set_cell(Vector2i(startX, startY+i), 1, fillerTiles[i])
+		
+	startX = minMax[1].x + 1
+	startY = minMax[0].y
 	for i in range(0,3):
-		tileMap.set_cell(Vector2i(newX, newY), 1,Vector2i(2,2))
-		newY+=1
+		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
+		startY+=1
 	
 func decreaseByOneTile() -> void: 
 	var usedCells = tileMap.get_used_cells()
@@ -36,6 +47,12 @@ func decreaseByOneTile() -> void:
 	var startY = minMax[0].y
 	for i in range(0,3):
 		tileMap.erase_cell(Vector2i(startX, startY))
+		startY+=1
+	
+	startX-=1
+	startY = minMax[0].y
+	for i in range (0,3):
+		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
 		startY+=1
 	
 func getMaxMinCoord(usedCells : Array) -> Array:
