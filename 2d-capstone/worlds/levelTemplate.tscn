@@ -1,5 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=26 format=3 uid="uid://cwc2nel1xt6xx"]
 
+[ext_resource type="Material" uid="uid://cixtw2m5uipv6" path="res://shaders/vignette.tres" id="1_emgut"]
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_78xmt"]
@@ -28,6 +29,7 @@
 size = Vector2(36, 1086)
 
 [node name="level" type="Node2D"]
+material = ExtResource("1_emgut")
 script = ExtResource("1_fl71r")
 levelFile = "Lvl2.1"
 platformBlockInstance = ExtResource("2_78xmt")
