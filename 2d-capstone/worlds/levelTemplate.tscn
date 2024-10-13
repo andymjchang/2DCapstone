@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="AudioStream" uid="uid://c0r4i7rsnwlm7" path="res://audioTracks/Level2_Main_156bpm.mp3" id="21_i4u15"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
-[ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
+[ext_resource type="PackedScene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rypfk"]
 size = Vector2(36, 1086)
