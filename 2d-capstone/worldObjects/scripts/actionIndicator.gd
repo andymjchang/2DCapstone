@@ -2,13 +2,16 @@ extends Node2D
 
 @export var startingScale : float
 @export var animation_time: float = 1.0
+@export var endColor : Color = Color(0.76, 0.23, 0.24, 1)
+var startColor : Color = Color(1, 1, 1, 1)
 var target_time: float = 1.0
 var elapsed_time: float = 0
 var active: bool = false
 var starting_scale
 var blockType = "actionIndicator"
 var curSprite
-var actionIndicatorManager
+var parent
+var parentSprite
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
 signal scored(indicator_position)
@@ -17,7 +20,9 @@ var index = 0
 
 # Start with higher scale and 0 opacity
 func initialize():
-	actionIndicatorManager = get_parent()
+	parent = get_parent()
+	if parent.is_in_group("enemies"):
+		parentSprite = parent.get_node("AnimatedSprite2D")
 	
 	curSprite = get_node("innerCircle").duplicate()
 	starting_scale = Vector2(startingScale, startingScale)
@@ -60,12 +65,17 @@ func _process(delta: float) -> void:
 	current_modulate.a = lerp(0.0, 1.0, t)
 	outer_circle.modulate = current_modulate
 	inner_circle.modulate = current_modulate
+	if parentSprite:
+		parentSprite.modulate = lerp(startColor, endColor, t)
 	
 	# Stop the transition if the time has been reached
 	if t >= 1.0:
 		FadeOut()
 
 func FadeOut():
+	if parentSprite:
+		var parentTween = create_tween()
+		parentTween.tween_property(parentSprite, "modulate", startColor, 1.0)
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 1.0)
 	tween.tween_callback(queue_free)

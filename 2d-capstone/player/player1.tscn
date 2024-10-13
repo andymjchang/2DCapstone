@@ -149,6 +149,7 @@ texture = ExtResource("2_a5rf3")
 position = Vector2(-18, -9.375)
 rotation = 0.000143446
 monitoring = false
+monitorable = false
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
 visible = false

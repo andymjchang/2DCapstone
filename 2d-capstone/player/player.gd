@@ -119,6 +119,7 @@ func _physics_process(delta: float) -> void:
 				# Technical
 				punchInProgress = true
 				attack.monitoring = true
+				attack.monitoring = true
 				canAttack = false
 				$attackTimer.start()
 				punchConnected = false
@@ -190,3 +191,4 @@ func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 func _on_attack_timer_timeout() -> void:
 	canAttack = true
 	attack.monitoring = false
+	attack.monitorable = false
