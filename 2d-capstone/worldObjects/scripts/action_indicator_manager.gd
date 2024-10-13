@@ -6,7 +6,7 @@ var current_index = 0
 var starting_index = 0
 
 func load_array():
-	actionIndicatorArray = get_children()
+	actionIndicatorArray = get_tree().get_nodes_in_group("actionIndicators")
 	for indicator in actionIndicatorArray:
 		indicator.connect("scored", on_scored)
 		indicator.initialize()

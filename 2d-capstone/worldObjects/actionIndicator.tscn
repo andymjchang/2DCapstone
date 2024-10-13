@@ -7,6 +7,7 @@
 size = Vector2(50, 50)
 
 [node name="ActionIndicator" type="Node2D" groups=["actionIndicators"]]
+z_index = 1
 script = ExtResource("1_vgx8v")
 startingScale = 0.75
 animation_time = 0.5

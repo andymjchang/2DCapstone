@@ -26,7 +26,7 @@ func initialize():
 	inner_circle.modulate.a = 0.0
 	
 	# decide target_time based on world position
-	var time = position.x / Globals.pixelsPerFrame
+	var time = global_position.x / Globals.pixelsPerFrame
 	set_target_time(time)
 
 # Set the time over which the transition occurs

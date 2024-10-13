@@ -214,7 +214,7 @@ func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 		Globals.screenFlashEffect()
 		other.active = false
 		other.FadeOut()
-		scored.emit(self.name, abs(other.position.x - position.x))
+		scored.emit(self.name, abs(other.global_position.x - global_position.x))
 
 
 func _on_attack_timer_timeout() -> void:
