@@ -5,6 +5,7 @@ signal gameOver()
 signal checkGameOver()
 signal levelCompleted()
 signal checkLevelCompleted()
+signal changeSpeed(speedType)
 
 @export var levelFile : String
 @export var platformBlockInstance : PackedScene
@@ -45,11 +46,12 @@ var musicTime = 0.0
 @onready var scoreText
 
 var textPopupScene1
+var restartCheckpoint = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	loadLevel()
-	
+	print("Restarting? ", restartCheckpoint)
 	# FIXME: temporary bpm setting
 	if levelFile == "Lvl0.1":
 		Globals.setBPM(120)
@@ -89,6 +91,7 @@ func _ready():
 	self.checkGameOver.connect(_onCheckGameOver)
 	self.checkLevelCompleted.connect(_onCheckLevelCompleted)
 	self.levelCompleted.connect(_onLevelCompleted)
+	self.changeSpeed.connect(_onChangeSpeed)
 
 	# Prep players
 	player1.editing = false
@@ -293,3 +296,14 @@ func _onScored(id, p_score):
 	scoreText.text = str(int(score))
 	if id == "Player1":
 		textPopupScene1.initText(scoreToAdd, player1.position)
+
+func _onChangeSpeed(speedType):
+	if speedType > 0:			# Speed up
+		music.pitch_scale = 2
+		Globals.scrollSpeed = 2
+	elif speedType < 0:			# Speed down
+		music.pitch_scale = 0.5
+		Globals.scrollSpeed = 0.5
+	else:						# Return to regular
+		music.pitch_scale = 1
+		Globals.scrollSpeed = 1

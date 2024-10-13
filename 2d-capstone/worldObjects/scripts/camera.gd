@@ -7,7 +7,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Globals.inLevel:
-		position.x = position.x + Globals.pixelsPerFrame * delta
+		position.x = position.x + Globals.pixelsPerFrame * delta * Globals.scrollSpeed
 
 		
 func moveCamera(newXPos) -> void:

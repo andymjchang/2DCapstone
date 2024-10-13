@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=24 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://levelEditor/goal_block.tscn" id="3_oih58"]
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
-[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="6_5q6wy"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="7_po4yx"]
 [ext_resource type="PackedScene" uid="uid://bam8jg1naascf" path="res://worldObjects/zipline/ziplineStart.tscn" id="10_h5bd4"]
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="12_jtaw1"]
@@ -36,7 +35,6 @@ killFloorInstance = ExtResource("3_6me16")
 actionIndicatorInstance = ExtResource("3_o6usx")
 checkpointInstance = ExtResource("4_ph2wq")
 player1Instance = ExtResource("5_dfiyk")
-player2Instance = ExtResource("6_5q6wy")
 enemyInstance = ExtResource("7_po4yx")
 ziplineInstance = ExtResource("10_h5bd4")
 
@@ -98,9 +96,6 @@ texture = ExtResource("15_gryhe")
 
 [node name="ScorePopup1" parent="Camera2D" instance=ExtResource("16_kbija")]
 position = Vector2(-250, -158)
-
-[node name="ScorePopup2" parent="Camera2D" instance=ExtResource("16_kbija")]
-position = Vector2(-250, 255)
 
 [node name="objectList" type="Node2D" parent="."]
 

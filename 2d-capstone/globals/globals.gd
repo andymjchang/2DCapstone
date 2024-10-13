@@ -7,6 +7,7 @@ var time = 0;
 var inLevel = false
 var stepSize = 0
 var pixelsPerFrame = 300
+var scrollSpeed = 1
 var curFile = ""
 
 var areaClicked = false

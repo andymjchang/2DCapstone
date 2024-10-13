@@ -4,6 +4,7 @@ signal takeDamage(amount)
 signal revive(who)
 signal relocate(nearestPoint)
 signal scored(id, score)
+signal getPowerUp(powerType)
 
 var curSprite
 var JUMP_VELOCITY = -550.0
@@ -28,6 +29,7 @@ var hitBounds = false
 var inZipline = false
 var onTop = false
 var originalPos
+var curPowerUp
 
 var jumpInProgress = false
 var punchInProgress = false
@@ -54,6 +56,7 @@ func _ready():
 	attack = get_node("AttackHitbox")
 
 	self.takeDamage.connect(_onTakeDamage)
+	self.getPowerUp.connect(_onGetPowerUp)
 	self.revive.connect(_onRevive)
 	self.relocate.connect(_onRelocate)
 	$Animation.animation_finished.connect(_onAnimationFinished)
@@ -68,10 +71,10 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	if not editing:
-		if not relocating:
+		if not inZipline:
 			# Lines
-			if is_on_floor():
-				glitchLines.global_position.y = self.global_position.y
+			# if is_on_floor():
+			# 	glitchLines.global_position.y = self.global_position.y
 			
 			# Add the gravity.
 			if not is_on_floor():
@@ -85,9 +88,9 @@ func _physics_process(delta: float) -> void:
 				# Pseudo-autoscroll prototype
 				var direction = Input.get_axis(left, right)
 				if not hitBounds and direction > 0:
-					velocity.x =  Globals.pixelsPerFrame + SPEED
+					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
 				elif hitBounds and direction > 0:
-					velocity.x = Globals.pixelsPerFrame
+					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 				else:
 					velocity.x = move_toward(velocity.x, 0, SPEED)
 
@@ -166,6 +169,8 @@ func _onRelocate(nearestPoint):
 		checkpoint = nearestPoint
 		position = nearestPoint.position
 
+
+
 func _onAnimationFinished():
 	#print("Finished, ", $Animation.animation)
 	if $Animation.animation == "Jump":
@@ -173,7 +178,6 @@ func _onAnimationFinished():
 	elif $Animation.animation == "Punch":
 		$Animation.play("Run")
 	pass
-
 
 func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 	var other = area.get_parent()
@@ -184,7 +188,32 @@ func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 		other.FadeOut()
 		scored.emit(self.name, abs(other.position.x - position.x))
 
-
 func _on_attack_timer_timeout() -> void:
 	canAttack = true
 	attack.monitoring = false
+
+
+# Powerup code
+# TODO: Swap from string to enum
+func _onGetPowerUp(powerType):
+	curPowerUp = powerType
+	if "invuln" in powerType:
+		invuln = true
+		$Animation.self_modulate.a = 0.5
+	elif "fast" == powerType:
+		worldNode.emit_signal("changeSpeed", 1)
+	elif "slow" == powerType:
+		worldNode.emit_signal("changeSpeed", -1)
+		pass
+	$powerUpTimer.start()
+	pass
+
+func _onPowerUpTimer() -> void:
+	if "invuln" in curPowerUp:
+		invuln = false
+		$Animation.self_modulate.a = 1
+	if "fast" in curPowerUp or "slow" in curPowerUp:
+		worldNode.emit_signal("changeSpeed", 0)
+	curPowerUp = null
+	$powerUpTimer.stop()
+	pass # Replace with function body.
