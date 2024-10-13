@@ -45,6 +45,7 @@ animations = [{
 }]
 
 [node name="Enemy" type="Node2D" groups=["enemies"]]
+z_index = 2
 script = ExtResource("1_fjqgg")
 
 [node name="Area2D" type="Area2D" parent="."]
