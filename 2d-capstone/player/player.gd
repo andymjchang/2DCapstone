@@ -90,8 +90,6 @@ func _physics_process(delta: float) -> void:
 					velocity.x = Globals.pixelsPerFrame
 				else:
 					velocity.x = move_toward(velocity.x, 0, SPEED)
-			else:
-				pass 
 
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
@@ -100,14 +98,14 @@ func _physics_process(delta: float) -> void:
 				#await get_tree().create_timer(0.2).timeout
 
 			if Input.is_action_just_pressed(slide):
-				print("Sliding")
-				get_node("Hitbox").scale *= Vector2(0.2, 0.2);
+				get_node("Hitbox").scale *= Vector2(1, 0.5);
+				get_node("Hitbox").position.y = 8
 				$Animation.play("Slide");
 				#get_node("Floor").disabled = false
 				
 			if Input.is_action_just_released(slide):
-				print("Release sliding")
-				get_node("Hitbox").scale *= Vector2(5, 5);
+				get_node("Hitbox").scale *= Vector2(1, 2);
+				get_node("Hitbox").position.y = 2
 				$Animation.play("Run");
 				#get_node("Floor").disabled = true
 			

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=24 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="2_a5rf3"]
@@ -113,16 +113,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(18.75, 17.5)
+size = Vector2(23.25, 19.625)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
 size = Vector2(9.99802, 10.992)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(23.75, 25.375)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5pw0"]
-size = Vector2(20.75, 1.25)
 
 [node name="Player1" type="CharacterBody2D" groups=["players"]]
 position = Vector2(0, -48)
@@ -136,8 +133,15 @@ sprite_frames = SubResource("SpriteFrames_h8xup")
 animation = &"Slide"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-14.375, 0.875)
+position = Vector2(-12.125, 2)
 shape = SubResource("RectangleShape2D_44r6d")
+
+[node name="ColorRect" type="ColorRect" parent="Hitbox"]
+visible = false
+offset_left = -12.0
+offset_top = -10.0
+offset_right = 12.0
+offset_bottom = 10.0
 
 [node name="ProtoMc" type="Sprite2D" parent="."]
 visible = false
@@ -164,11 +168,13 @@ rotation = 0.00184914
 shape = SubResource("RectangleShape2D_efrg4")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(-11.75, 10.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
 position = Vector2(0.5, -11.25)
 shape = SubResource("RectangleShape2D_rw1d5")
+disabled = true
 
 [node name="actionLine" type="Sprite2D" parent="."]
 position = Vector2(0, -0.25)
@@ -186,30 +192,6 @@ stream = ExtResource("7_wy6uo")
 [node name="damagePlayer" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, 11)
 stream = ExtResource("8_k3kow")
-
-[node name="topMark" type="Marker2D" parent="."]
-position = Vector2(-11.75, -41.5)
-
-[node name="ColorRect" type="ColorRect" parent="topMark"]
-visible = false
-offset_left = -11.75
-offset_top = -5.0
-offset_right = 10.25
-offset_bottom = 7.0
-
-[node name="bottomMark" type="Marker2D" parent="."]
-position = Vector2(-11.75, 39.25)
-
-[node name="ColorRect" type="ColorRect" parent="bottomMark"]
-visible = false
-offset_left = -11.75
-offset_top = -5.0
-offset_right = 10.25
-offset_bottom = 7.0
-
-[node name="Floor" type="CollisionShape2D" parent="."]
-position = Vector2(-10.375, 11.125)
-shape = SubResource("RectangleShape2D_l5pw0")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

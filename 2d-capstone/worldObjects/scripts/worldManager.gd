@@ -241,15 +241,14 @@ func round_to_dec(num, digit):
 
 # Helper function that grabs the target player's closest forward checkpoint
 func getNearestCheckpoint(who):
-	var checkpointPath = who.name.to_lower() + "checkpoints"
 	var viableCheckpoints = []
 	var nearestPoint = null
-	if len(objectList.get_node(checkpointPath).get_children()) > 0:
-		for i in objectList.get_node(checkpointPath).get_children():
+	if len(objectList.get_node("playerCheckpoints").get_children()) > 0:
+		for i in objectList.get_node("playerCheckpoints").get_children():
 			#print("Checking: ", i)
-			# Check if checkpoint in front of player
+			# Check if checkpoint behind player
 			var direction = (i.position.x - who.position.x)
-			if (direction >= 0):
+			if (direction < 0):
 				viableCheckpoints.append(i)
 		#print("Viable checkpoints: ", viableCheckpoints)
 		if len(viableCheckpoints) > 0:
