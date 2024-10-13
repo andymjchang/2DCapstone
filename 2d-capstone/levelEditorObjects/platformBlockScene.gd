@@ -63,6 +63,8 @@ func decreaseByOneTile() -> void:
 	for i in range (0,3):
 		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
 		startY+=1
+	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x -= tileWidth/2
+	self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x -= tileWidth/2
 	
 func getMaxMinCoord(usedCells : Array) -> Array:
 	#get the max/min of the tilemap 
