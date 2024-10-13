@@ -9,11 +9,11 @@ var extents
 var fillerTiles = [Vector2(1,0),Vector2(1,1), Vector2(1,3)]
 var endTiles = [Vector2(2,0),Vector2(2,1), Vector2(2,3)]
 var tileWidth
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	tileMap =  self.get_node("Node2D/TileMapLayer")
-	tileWidth = 15
+	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
+	print("tile width, ", tileWidth)
 	extents = self.get_node("Node2D/Area2D/CollisionShape2D").shape as RectangleShape2D
 	extents = extents.extents
 
@@ -44,6 +44,7 @@ func extendByOneTile() -> void :
 		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
 		startY+=1
 	print("node, ",self.get_node("Node2D/EditorArea0/CollisionShape2D").get_children())
+	#alter the area2d to represent the new size
 	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x += tileWidth
 	self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x += tileWidth
 	
