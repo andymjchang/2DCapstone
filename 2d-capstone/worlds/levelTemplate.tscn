@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="7_po4yx"]
 [ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://worldObjects/wall/breakableWallQ.tscn" id="10_twea0"]
-[ext_resource type="PackedScene" path="res://worldObjects/zipline/ziplineManager.tscn" id="11_mqtla"]
+[ext_resource type="PackedScene" uid="uid://i6r4tlbn3ltt" path="res://worldObjects/zipline/ziplineManager.tscn" id="11_mqtla"]
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="12_jtaw1"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
@@ -47,9 +47,9 @@ powerupInstance = ExtResource("19_5vjyv")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Timer" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 1853.0
+offset_left = 1854.0
 offset_top = 3.0
-offset_right = 1919.0
+offset_right = 1920.0
 offset_bottom = 67.0
 theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 

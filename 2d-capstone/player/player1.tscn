@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=25 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="2_a5rf3"]
 [ext_resource type="Texture2D" uid="uid://eoiqyev7gvq4" path="res://animations/raccoonAnims/Raccoon_jump.png" id="2_amwal"]
 [ext_resource type="Texture2D" uid="uid://bvvcm7r3cp3x7" path="res://animations/raccoonAnims/Raccoon_spriteSheet_v05.png" id="2_icjbr"]
 [ext_resource type="Texture2D" uid="uid://nchurhplqcb3" path="res://animations/raccoonAnims/Raccoon_punch.png" id="3_sudcy"]
+[ext_resource type="Texture2D" uid="uid://dpptplv42kqxc" path="res://animations/raccoonAnims/Slide.png" id="5_tonbw"]
 [ext_resource type="Texture2D" uid="uid://bt5jsder0msfx" path="res://player/playerActionCircle.png" id="6_4xpfe"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
 [ext_resource type="AudioStream" uid="uid://b67k06qom6hxa" path="res://audioEffects/SFX_Hit_4.mp3" id="8_k3kow"]
@@ -105,7 +106,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ntx1b")
+"texture": ExtResource("5_tonbw")
 }],
 "loop": true,
 "name": &"Slide",
@@ -127,7 +128,7 @@ scale = Vector2(4, 4)
 script = ExtResource("1_qyaa7")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-14.25, -1.25)
+position = Vector2(-15, 1.25)
 scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
 animation = &"Slide"

@@ -75,8 +75,8 @@ func _physics_process(delta: float) -> void:
 	if not editing:
 		if not inZipline:
 			# Lines
-			# if is_on_floor():
-			# 	glitchLines.global_position.y = self.global_position.y
+			if is_on_floor():
+				glitchLines.global_position.y = self.global_position.y
 			
 			# Add the gravity.
 			if not is_on_floor():

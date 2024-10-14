@@ -17,9 +17,9 @@
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="AudioStream" uid="uid://c0r4i7rsnwlm7" path="res://audioTracks/Level2_Main_156bpm.mp3" id="15_27j5g"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
-[ext_resource type="PackedScene" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
+[ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
-[ext_resource type="PackedScene" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
+[ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
 [ext_resource type="PackedScene" uid="uid://cql6hrj5lhevf" path="res://worldObjects/zipline/ziplineEnd.tscn" id="24_ff25o"]
 
