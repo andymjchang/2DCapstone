@@ -5,6 +5,7 @@ var beatsPerMeasure = 3
 var stepSize = 150  # This defines the fixed spacing for the grid lines
 var viewport_width
 var viewport_height
+@export var font : Font
 
 func _ready():
 	viewport_width = get_viewport_rect().size.x
@@ -18,7 +19,6 @@ func _draw():
 	var camera = get_viewport().get_camera_2d()
 	if not camera:
 		return
-
 	var zoom = camera.zoom
 	var camera_pos = camera.global_position
 
@@ -35,16 +35,20 @@ func _draw():
 	# Draw grid lines (fixed spacing)
 	for y in range(start_y, end_y + 1, stepSize):
 		draw_line(Vector2(start_x, y), Vector2(end_x, y), Color.GRAY, 2.0 / zoom.x)
-
 	for x in range(start_x, end_x + 1, stepSize):
 		draw_line(Vector2(x, start_y), Vector2(x, end_y), Color.GRAY, 2.0 / zoom.x)
 
-	# Draw measure lines (fixed spacing)
+	# Draw measure lines (fixed spacing) and label them
 	var measure_start_x = floor(top_left.x / measurePixels) * measurePixels
 	var measure_end_x = ceil(bottom_right.x / measurePixels) * measurePixels
 
 	for x in range(measure_start_x, measure_end_x + 1, measurePixels):
 		draw_line(Vector2(x, top_left.y), Vector2(x, bottom_right.y), Color.RED, 2.0 / zoom.x)
+		
+		# Calculate and draw measure number
+		var measure_number = int(x / measurePixels) + 1
+		var label_pos = Vector2(x, top_left.y + 25)
+		draw_string(font, label_pos, str(measure_number), HORIZONTAL_ALIGNMENT_CENTER, -1, 16 / zoom.x, Color.WHITE)
 
 		# Subdivide each measure based on beatsPerMeasure
 		if beatsPerMeasure > 1:

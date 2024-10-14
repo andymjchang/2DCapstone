@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=47 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://10fp02fn47up" path="res://levelEditor/programmerArtAssets/goal.png" id="17_3udhx"]
 [ext_resource type="PackedScene" uid="uid://d14ty44q7tqru" path="res://levelEditorObjects/ziplineScene.tscn" id="17_x5g52"]
 [ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/Level1_Main_155bpm.mp3" id="19_jlcy1"]
+[ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="20_l6054"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
 [ext_resource type="Texture2D" uid="uid://l8vpo2u44l4p" path="res://levelEditor/programmerArtAssets/p1checkpoint.png" id="22_1mwd2"]
 [ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
@@ -75,6 +76,7 @@ texture = ExtResource("13_87vi8")
 
 [node name="measureLines" type="Node2D" parent="."]
 script = ExtResource("2_mulbo")
+font = ExtResource("20_l6054")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
@@ -141,7 +143,7 @@ offset_left = 93.0
 offset_top = 3.0
 offset_right = 208.0
 offset_bottom = 53.0
-text = "156"
+text = "155"
 placeholder_text = "BPM: "
 
 [node name="TextEdit" type="TextEdit" parent="UI"]
@@ -165,7 +167,7 @@ offset_left = 93.0
 offset_top = 159.0
 offset_right = 208.0
 offset_bottom = 209.0
-text = "stest"
+text = "Lvl0.2"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Node2D" parent="UI"]
