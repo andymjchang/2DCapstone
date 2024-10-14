@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://ddeqbtwpcjgkc"]
 
 [ext_resource type="Script" path="res://worlds/scripts/restartButton.gd" id="1_sir47"]
-[ext_resource type="PackedScene" uid="uid://u5byse278f80" path="res://ui/gameOverScreen.tscn" id="2_nogfw"]
-[ext_resource type="PackedScene" uid="uid://bnlu5yanfcdgm" path="res://ui/pauseScreen.tscn" id="3_blxek"]
+[ext_resource type="PackedScene" path="res://ui/gameOverScreen.tscn" id="2_nogfw"]
+[ext_resource type="PackedScene" path="res://ui/pauseScreen.tscn" id="3_blxek"]
 
 [node name="LevelUI" type="CanvasLayer"]
 script = ExtResource("1_sir47")
@@ -39,6 +39,7 @@ visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Restart from checkpoint?"
+
 [node name="GameOverScreen" parent="Box" instance=ExtResource("2_nogfw")]
 visible = false
 

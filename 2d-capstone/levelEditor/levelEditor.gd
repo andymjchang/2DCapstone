@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -48,6 +48,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var baseObject : PackedScene
 @export var breakableWall : PackedScene
 @export var zipline : PackedScene
+@export var powerup : PackedScene
 
 
 @onready var objectList = $objectList
@@ -63,6 +64,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var ziplineList = $objectList/ziplines
 @onready var breakableWallList = $objectList/breakableWalls
 @onready var placerList = $objectList/placers
+@onready var powerupList = $objectList/powerups
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -157,7 +159,8 @@ func loadLevel():
 		"enemies": [enemyCharacter, enemyList, blockTypes[5]],
 		"player": [player1, player1List, blockTypes[0]],
 		"breakableWalls": [breakableWall,breakableWallList,  blockTypes[9]],
-		"ziplines": [zipline, ziplineList, blockTypes[10]]}
+		"ziplines": [zipline, ziplineList, blockTypes[10]],
+		"powerups": [powerup, powerupList, blockTypes[1]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -283,6 +286,13 @@ func _on_kill_floor_button_button_up() -> void:
 	kfParent.add_child(kfInstance)
 	kfParent.blockType = blockTypes[6]
 	place_block(kfParent, killFloorsList, camera.position, false)
+
+func _onPowerupButtonPressed() -> void:
+	var powerInstance = powerup.instantiate()
+	var powerParent = baseObject.instantiate()
+	powerParent.add_child(powerInstance)
+	powerParent.blockType = blockTypes[1]
+	place_block(powerParent, powerupList, camera.position, false)
 
 func _on_play_audio_button_pressed() -> void:
 	if not isPlaying:
@@ -468,6 +478,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/ziplines")
 	if blockType == "placer":
 		return get_node("objectList/placers")
+	if blockType == "powerup":
+		return get_node("objectList/powerups")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:
@@ -545,7 +557,3 @@ func lengthenPlatform() -> void:
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
 	place_block(blockParent, platformBlocksList, Vector2(newPos, blockArea.global_position.y), false)
-		
-	
-
-	

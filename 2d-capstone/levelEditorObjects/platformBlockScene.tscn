@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://yau5rmr187fi"]
+[gd_scene load_steps=5 format=4 uid="uid://yau5rmr187fi"]
 
 [ext_resource type="Script" path="res://levelEditorObjects/platformBlockScene.gd" id="1_1wl40"]
-[ext_resource type="Texture2D" uid="uid://71f5kajh7j21" path="res://backgrounds/tilemaps/level1tilemap.png" id="2_0mt0e"]
-[ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="2_gep2g"]
 [ext_resource type="TileSet" uid="uid://bvg1g8gls3atk" path="res://backgrounds/tilemaps/level1.tres" id="2_ft64r"]
+[ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="2_gep2g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s67gh"]
 size = Vector2(152, 57)
