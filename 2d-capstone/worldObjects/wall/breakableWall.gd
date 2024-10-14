@@ -43,14 +43,15 @@ func _on_Timer_timeout():
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	
-	var all_players = get_tree().get_nodes_in_group("players")
+	var allPlayers = get_tree().get_nodes_in_group("players")
 	var bothPunching = true
 	
-	for player in all_players:
-		if !player.attack.visible:
+	for player in allPlayers:
+		print("making it in loop")
+		if !player.punchInProgress:
 			bothPunching = false
 			
-	if bothPunching:
+	if bothPunching and Globals.inLevel and allPlayers.size() > 0:
 		#particleEffect.emitting = true
 		particleEffect = get_node("CPUParticles2D2")
 		var wallSprite = get_node("Area2D/Sprite2D")
@@ -61,7 +62,6 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 		wallBroken = true
 		#queue_free()
 		#self.visible = false
-	pass # Replace with function body.
 	
 func getRandomVelocity():
 	for i in range(velocities.size()):
