@@ -64,7 +64,7 @@ func decreaseByOneTile() -> void:
 		for i in range (0,4):
 			tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
 			startY+=1
-		#TODO, make sure this is right
+			
 		self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x -= tileWidth
 		self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x -= tileWidth
 		numCols-=1

@@ -19,8 +19,8 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer"]
-enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
+var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall"]
+enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER, SLIDEWALL}
 var delete = "deleteBlock"
 var bindedBlocks = []
 var isBinding = false
@@ -48,6 +48,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var baseObject : PackedScene
 @export var breakableWall : PackedScene
 @export var zipline : PackedScene
+@export var slideWall : PackedScene 
 
 
 @onready var objectList = $objectList
@@ -62,6 +63,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var beatsMinLabel = $UI/TextEdit0
 @onready var ziplineList = $objectList/ziplines
 @onready var breakableWallList = $objectList/breakableWalls
+@onready var slideWallList = $objectList/slideWalls
 @onready var placerList = $objectList/placers
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
@@ -157,7 +159,8 @@ func loadLevel():
 		"enemies": [enemyCharacter, enemyList, blockTypes[5]],
 		"player": [player1, player1List, blockTypes[0]],
 		"breakableWalls": [breakableWall,breakableWallList,  blockTypes[9]],
-		"ziplines": [zipline, ziplineList, blockTypes[10]]}
+		"ziplines": [zipline, ziplineList, blockTypes[10]],
+		"slideWalls": [slideWall, slideWallList, blockTypes[12]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -219,6 +222,14 @@ func _onZiplineButtonPressed() -> void:
 	ziplineList.add_child(zipParent)
 	place_block(zipParent, ziplineList, camera.position, false)
 	
+func _onSlideWallButtonUp() -> void:
+	var slideWallInstance = slideWall.instantiate()
+	var slideWallParent = baseObject.instantiate()
+	slideWallParent.add_child(slideWallInstance)
+	slideWallParent.blockType = blockTypes[12]
+	slideWallList.add_child(slideWallParent)
+	place_block(slideWallParent, slideWallList, camera.position, false)
+
 func _on_exit_button_pressed() -> void:
 	# This will be the final functionality so players can navigate between menus
 	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
@@ -471,6 +482,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/ziplines")
 	if blockType == "placer":
 		return get_node("objectList/placers")
+	if blockType == "slideWall":
+		return get_node("objectList/slideWalls")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:
@@ -549,6 +562,4 @@ func lengthenPlatform() -> void:
 	blockParent.blockType = blockTypes[2]
 	place_block(blockParent, platformBlocksList, Vector2(newPos, blockArea.global_position.y), false)
 		
-	
-
 	

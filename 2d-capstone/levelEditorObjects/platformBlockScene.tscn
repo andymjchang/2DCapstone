@@ -15,11 +15,8 @@ script = ExtResource("1_1wl40")
 [node name="Area2D" type="Area2D" parent="Node2D" groups=["goals"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
-modulate = Color(0.935511, 0.479721, 0.526804, 1)
-self_modulate = Color(0.671917, 0.000344616, 0.673596, 1)
 position = Vector2(0, 12.5)
 shape = SubResource("RectangleShape2D_s67gh")
-debug_color = Color(0.388235, 0.203922, 0.439216, 0.945098)
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 visible = false

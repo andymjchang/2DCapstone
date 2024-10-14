@@ -17,6 +17,7 @@ signal changeSpeed(speedType)
 @export var enemyInstance : PackedScene
 @export var breakableWallInstance : PackedScene
 @export var ziplineInstance : PackedScene
+@export var slideWallInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -28,6 +29,7 @@ signal changeSpeed(speedType)
 @onready var playersList = $objectList/players
 @onready var breakableWallList = $objectList/breakableWalls
 @onready var ziplineList = $objectList/ziplines
+@onready var slideWallList = $objectList/slideWalls
 
 var player1 
 var killWall
@@ -142,7 +144,8 @@ func loadLevel():
 		"enemies": [enemyInstance, enemiesList],
 		"player": [player1Instance, playersList],
 		"breakableWalls" : [breakableWallInstance, breakableWallList],
-		"ziplines": [ziplineInstance, ziplineList]}
+		"ziplines": [ziplineInstance, ziplineList],
+		"slideWalls": [slideWallInstance, slideWallList]}
 	var instance
 	var instanceParent
 	var name = ""

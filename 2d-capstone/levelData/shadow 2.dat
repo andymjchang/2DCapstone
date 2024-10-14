@@ -14,3 +14,5 @@ breakableWalls
 ziplines
 325, 575, 600, 575,
 placers
+slideWalls
+150, 600,
