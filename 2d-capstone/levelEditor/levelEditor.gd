@@ -342,12 +342,15 @@ func save_scene_to_file():
 						var index = 0
 						var editorName = "EditorArea"+str(index)
 						var posChain = ""
+						#go through all of the individual block components
 						for blockChild in childrenList:
-							#this is most likely where the zipline error/duplication is occuring
 							posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
-							#newFile.store_string(str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + "\n")
 							index+=1
 							editorName = "EditorArea"+str(index)
+							#saving for platfrom block differs since their size varies
+							#if itemList.name == "normal":
+								##save the number of cols as well as the extents so we know where to start drawing
+								#posChain = str(blockChild.extents) + ", " + str(blockChild.)
 						#print("child list in save, ", childrenList)
 						posChain = posChain.substr(0, posChain.length()-1)
 						posChain+="\n"

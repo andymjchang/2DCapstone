@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://yau5rmr187fi"]
+[gd_scene load_steps=5 format=4 uid="uid://yau5rmr187fi"]
 
 [ext_resource type="Script" path="res://levelEditorObjects/platformBlockScene.gd" id="1_1wl40"]
-[ext_resource type="Texture2D" uid="uid://71f5kajh7j21" path="res://backgrounds/tilemaps/level1tilemap.png" id="2_0mt0e"]
+[ext_resource type="TileSet" uid="uid://bva4vakjtko8x" path="res://backgrounds/tilemaps/level1.tres" id="2_ft64r"]
 [ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="2_gep2g"]
-[ext_resource type="TileSet" uid="uid://bvg1g8gls3atk" path="res://backgrounds/tilemaps/level1.tres" id="2_ft64r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s67gh"]
 size = Vector2(152, 57)
@@ -17,8 +16,10 @@ script = ExtResource("1_1wl40")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
 modulate = Color(0.935511, 0.479721, 0.526804, 1)
+self_modulate = Color(0.671917, 0.000344616, 0.673596, 1)
 position = Vector2(0, 12.5)
 shape = SubResource("RectangleShape2D_s67gh")
+debug_color = Color(0.388235, 0.203922, 0.439216, 0.945098)
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 visible = false

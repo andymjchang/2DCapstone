@@ -1,15 +1,14 @@
 extends Node2D
 
-#(1,0) (1,1) (1,3)
-#2.0 2,1 2,3
-#6 layers default
+
+#6 cols  default
 @onready var tileMap = self.get("Node2D/TileMapLayer")
-var numCols = 6
+var numCols = 12
 var extents
-var fillerTiles = [Vector2(1,0),Vector2(1,1), Vector2(1,3)]
-var endTiles = [Vector2(2,0),Vector2(2,1), Vector2(2,3)]
+var fillerTiles = [Vector2(2,1),Vector2(2,2),Vector2(2,2), Vector2(2,4)]
+var endTiles = [Vector2(4,1),Vector2(3,2),Vector2(3,2), Vector2(4,4)]
 var tileWidth
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	tileMap =  self.get_node("Node2D/TileMapLayer")
 	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
@@ -32,37 +31,43 @@ func extendByOneTile() -> void :
 	var startX = minMax[1].x 
 	var startY = minMax[0].y
 		#we have to reset the end of the tile so that it doesnt look weird
-	for i in range (0,3):
+	for i in range (0,4):
 		tileMap.set_cell(Vector2i(startX, startY+i), 1, fillerTiles[i])
 		
 	startX = minMax[1].x + 1
 	startY = minMax[0].y
-	for i in range(0,3):
+	for i in range(0,4):
 		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
 		startY+=1
 	print("node, ",self.get_node("Node2D/EditorArea0/CollisionShape2D").get_children())
 	#alter the area2d to represent the new size
+	print("before extending collision shape pos: ", self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x , " , extents: ",self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x, " , tile width: ", tileWidth )
 	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x += tileWidth
 	self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x += tileWidth
+	print("after extending collision shape pos: ", self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x , " , extents: ",self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x )
+
+	numCols+=1
 	
 func decreaseByOneTile() -> void: 
-	var usedCells = tileMap.get_used_cells()
-	var minMax = getMaxMinCoord(usedCells)
-	#we want to delete one col
-	var startX = minMax[1].x
-	var startY = minMax[0].y
-	for i in range(0,3):
-		tileMap.erase_cell(Vector2i(startX, startY))
-		startY+=1
-	
-	startX-=1
-	startY = minMax[0].y
-	for i in range (0,3):
-		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
-		startY+=1
-	#TODO, make sure this is right
-	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x -= tileWidth/2
-	self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x -= tileWidth/2
+	if numCols > 1:
+		var usedCells = tileMap.get_used_cells()
+		var minMax = getMaxMinCoord(usedCells)
+		#we want to delete one col
+		var startX = minMax[1].x
+		var startY = minMax[0].y
+		for i in range(0,4):
+			tileMap.erase_cell(Vector2i(startX, startY))
+			startY+=1
+		
+		startX-=1
+		startY = minMax[0].y
+		for i in range (0,4):
+			tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
+			startY+=1
+		#TODO, make sure this is right
+		self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x -= tileWidth
+		self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x -= tileWidth
+		numCols-=1
 	
 func getMaxMinCoord(usedCells : Array) -> Array:
 	#get the max/min of the tilemap 
