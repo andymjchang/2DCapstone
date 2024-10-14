@@ -29,12 +29,9 @@ func extendByOneTile() -> void :
 	var usedCells = tileMap.get_used_cells()
 	var minMax = getMaxMinCoord(usedCells)
 	#we want to start one col over, so start with max x and min y
-	
-	#we have to reset the end of the tile so that it doesnt look weird
-	
 	var startX = minMax[1].x 
 	var startY = minMax[0].y
-	
+		#we have to reset the end of the tile so that it doesnt look weird
 	for i in range (0,3):
 		tileMap.set_cell(Vector2i(startX, startY+i), 1, fillerTiles[i])
 		
@@ -63,6 +60,7 @@ func decreaseByOneTile() -> void:
 	for i in range (0,3):
 		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
 		startY+=1
+	#TODO, make sure this is right
 	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x -= tileWidth/2
 	self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x -= tileWidth/2
 	
@@ -81,7 +79,6 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 			maxCoords.y = cell.y
 		if cell.y < minCoords.y:
 			minCoords.y = cell.y
-		#tileMap.set_cell(cell, -1)
 			
 			
 	return [minCoords, maxCoords]

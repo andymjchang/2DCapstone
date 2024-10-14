@@ -210,7 +210,6 @@ func _onCheckGameOver():
 	if player1.dead and player2.dead:
 		print("Both dead")
 		self.emit_signal("gameOver")
-		$LevelUI/GameOverScreen.visible = true
 
 func _onCheckLevelCompleted():
 	print("checking if level completed!")
@@ -231,13 +230,16 @@ func _onGameOver():
 	Globals.inLevel = false
 
 func showGameOver():
-	statusMessage.text = "Game over!"
-	restartButton.visible = true
+	music.stop()
+	Engine.time_scale = 0.0
+	$LevelUI/Box/GameOverScreen.visible = true
 	
 func showLevelCompleted():
 	music.stop()
-	statusMessage.text = "Level Completed!"
-	restartButton.visible = true
+	Engine.time_scale = 0.0
+	$LevelUI/Box/GameOverScreen.visible = true
+	#statusMessage.text = "Level Completed!"
+	#restartButton.visible = true
 	
 func _onLevelCompleted():
 	showLevelCompleted()
