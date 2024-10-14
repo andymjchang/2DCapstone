@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bvvcm7r3cp3x7" path="res://animations/raccoonAnims/Raccoon_spriteSheet_v05.png" id="2_icjbr"]
 [ext_resource type="Texture2D" uid="uid://nchurhplqcb3" path="res://animations/raccoonAnims/Raccoon_punch.png" id="3_sudcy"]
 [ext_resource type="Texture2D" uid="uid://dpptplv42kqxc" path="res://animations/raccoonAnims/Slide.png" id="5_tonbw"]
-[ext_resource type="Texture2D" uid="uid://bt5jsder0msfx" path="res://player/playerActionCircle.png" id="6_4xpfe"]
+[ext_resource type="Texture2D" uid="uid://bf5aif1oibn04" path="res://player/playerActionCircle2.png" id="7_tnfmg"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
 [ext_resource type="AudioStream" uid="uid://b67k06qom6hxa" path="res://audioEffects/SFX_Hit_4.mp3" id="8_k3kow"]
 
@@ -180,8 +180,8 @@ disabled = true
 
 [node name="actionLine" type="Sprite2D" parent="."]
 position = Vector2(0, -0.25)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("6_4xpfe")
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("7_tnfmg")
 
 [node name="attackTimer" type="Timer" parent="."]
 wait_time = 0.25

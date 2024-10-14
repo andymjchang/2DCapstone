@@ -10,6 +10,7 @@ var stepSize = 0
 var pixelsPerFrame = 300
 var scrollSpeed = 1
 var curFile = ""
+var bpm = 156
 
 var areaClicked = false
 var startP1Coords
@@ -38,6 +39,7 @@ func enablePreviewUI():
 func disablePreviewUI():
 	$PreviewCanvasLayer.visible = false
 func setBPM(bpm):
+	self.bpm = bpm
 	pixelsPerFrame = bpm * beatSize / physicsFrameRate
 
 func _on_texture_button_button_down() -> void:

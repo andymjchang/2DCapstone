@@ -7,23 +7,25 @@
 script = ExtResource("1_gxkyf")
 
 [node name="player1" type="Node2D" parent="."]
+visible = false
+position = Vector2(960, 100)
 
 [node name="UiHeart" parent="player1" instance=ExtResource("1_mv5t0")]
-position = Vector2(70, 85)
+position = Vector2(-70, 0)
 
 [node name="UiHeart2" parent="player1" instance=ExtResource("1_mv5t0")]
-position = Vector2(144, 85)
 
 [node name="UiHeart3" parent="player1" instance=ExtResource("1_mv5t0")]
-position = Vector2(220, 85)
+position = Vector2(70, 0)
 
 [node name="player2" type="Node2D" parent="."]
+position = Vector2(960, 900)
+scale = Vector2(2, 2)
 
 [node name="UiHeart" parent="player2" instance=ExtResource("1_mv5t0")]
-position = Vector2(70, 958)
+position = Vector2(-70, 0)
 
 [node name="UiHeart2" parent="player2" instance=ExtResource("1_mv5t0")]
-position = Vector2(144, 958)
 
 [node name="UiHeart3" parent="player2" instance=ExtResource("1_mv5t0")]
-position = Vector2(220, 958)
+position = Vector2(70, 0)
