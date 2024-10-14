@@ -9,10 +9,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	powerType = "invuln"
 	pass
 
 
 func _onArea2dBodyEntered(body:Node2D) -> void:
 	if "players" in body.get_groups():
-		body.emit_signal("getPowerUp", powerType)
+		body.emit_signal("getPowerup", powerType)
 		pass

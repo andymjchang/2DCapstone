@@ -9,7 +9,7 @@ size = Vector2(238, 237)
 [node name="Powerup" type="Node2D"]
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_t5bed")
-powerType = "fast"
+powerType = "invuln"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cf53a")
