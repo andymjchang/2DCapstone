@@ -145,9 +145,11 @@ func loadLevel():
 		"ziplines": [ziplineInstance, ziplineList]}
 	var instance
 	var instanceParent
+	var name = ""
 	for line in content.split("\n"):
 		#print("Current line: ", line)
 		if line in instanceList.keys():
+			name = line
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
 		# Position
@@ -161,6 +163,15 @@ func loadLevel():
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
 			#print("instance parent: ", instanceParent)
 			instanceParent.add_child(instancedObj)
+			#check if zipline, TODO make this more 
+			if name == "ziplines":
+				print("pos points, ", posPoints)
+				var startPos = Vector2(posPoints[0], posPoints[1])
+				var endPos = Vector2(posPoints[2], posPoints[3])
+				instancedObj.get_node("ziplineStart").global_position = startPos
+				instancedObj.get_node("ziplineEnd").global_position = endPos
+				
+			print("instance!: ", name)
 			
 		elif ".mp3" in line:
 			# audio file
@@ -209,14 +220,16 @@ func _onGameOver():
 	Globals.inLevel = false
 
 func showGameOver():
-	statusMessage.text = "Game over!"
-	statusMessage.visible = true
-	restartButton.visible = true
+	music.stop()
+	Engine.time_scale = 0.0
+	$LevelUI/Box/GameOverScreen.visible = true
 	
 func showLevelCompleted():
 	music.stop()
-	statusMessage.text = "Level Completed!"
-	restartButton.visible = true
+	Engine.time_scale = 0.0
+	$LevelUI/Box/GameOverScreen.visible = true
+	#statusMessage.text = "Level Completed!"
+	#restartButton.visible = true
 	
 func _onLevelCompleted():
 	showLevelCompleted()
@@ -226,8 +239,15 @@ func _onLevelCompleted():
 func _physics_process(delta):
 	updateTime(delta)
 	if Input.is_action_just_pressed("toMainMenu"):
-		get_tree().change_scene_to_file("res://ui/landingPage.tscn")
-	
+		#do go to pause instead
+		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+		$Camera2D/Music.stream_paused = true
+		Globals.paused = true
+		$LevelUI/Box/PauseScreen.visible = true
+		Engine.time_scale = 0.0
+		
+	if time >= 3.0 and !Globals.inLevel and !Globals.paused:
+		startGame()
 
 func updateTime(delta: float):
 	time = time + delta
