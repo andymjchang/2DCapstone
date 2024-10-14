@@ -57,11 +57,11 @@ func _ready():
 	loadLevel()
 	print("Restarting? ", restartCheckpoint)
 	# FIXME: temporary bpm setting
-	if levelFile == "Lvl0.1":
+	if levelFile.begins_with("Lvl0."):
 		Globals.setBPM(120)
-	if levelFile == "Lvl1.2":
+	if levelFile.begins_with("Lvl1."):
 		Globals.setBPM(155)
-	if levelFile == "Lvl2.1":
+	if levelFile.begins_with("Lvl2."):
 		Globals.setBPM(156)
 		
 	# load the actionArrays (This must happen after bpm is set)
