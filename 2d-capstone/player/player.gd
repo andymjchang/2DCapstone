@@ -4,6 +4,8 @@ signal takeDamage(amount)
 signal revive(who)
 signal relocate(nearestPoint)
 signal scored(id, score)
+signal getPowerup(powerType)
+signal activatePowerup()
 
 var curSprite
 var JUMP_VELOCITY = -550.0
@@ -28,6 +30,7 @@ var hitBounds = false
 var inZipline = false
 var onTop = false
 var originalPos
+var curPowerUp
 
 var jumpInProgress = false
 var punchInProgress = false
@@ -54,6 +57,8 @@ func _ready():
 	attack = get_node("AttackHitbox")
 
 	self.takeDamage.connect(_onTakeDamage)
+	self.getPowerup.connect(_onGetPowerup)
+	self.activatePowerup.connect(_onActivatePowerup)
 	self.revive.connect(_onRevive)
 	self.relocate.connect(_onRelocate)
 	$Animation.animation_finished.connect(_onAnimationFinished)
@@ -68,7 +73,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	if not editing:
-		if not relocating:
+		if not inZipline:
 			# Lines
 			if is_on_floor():
 				glitchLines.global_position.y = self.global_position.y
@@ -85,13 +90,11 @@ func _physics_process(delta: float) -> void:
 				# Pseudo-autoscroll prototype
 				var direction = Input.get_axis(left, right)
 				if not hitBounds and direction > 0:
-					velocity.x =  Globals.pixelsPerFrame + SPEED
+					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
 				elif hitBounds and direction > 0:
-					velocity.x = Globals.pixelsPerFrame
+					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 				else:
 					velocity.x = move_toward(velocity.x, 0, SPEED)
-			else:
-				pass 
 
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
@@ -100,14 +103,14 @@ func _physics_process(delta: float) -> void:
 				#await get_tree().create_timer(0.2).timeout
 
 			if Input.is_action_just_pressed(slide):
-				print("Sliding")
-				get_node("Hitbox").scale *= Vector2(0.2, 0.2);
+				get_node("Hitbox").scale *= Vector2(1, 0.5);
+				get_node("Hitbox").position.y = 8
 				$Animation.play("Slide");
 				#get_node("Floor").disabled = false
 				
 			if Input.is_action_just_released(slide):
-				print("Release sliding")
-				get_node("Hitbox").scale *= Vector2(5, 5);
+				get_node("Hitbox").scale *= Vector2(1, 2);
+				get_node("Hitbox").position.y = 2
 				$Animation.play("Run");
 				#get_node("Floor").disabled = true
 			
@@ -123,6 +126,10 @@ func _physics_process(delta: float) -> void:
 				canAttack = false
 				$attackTimer.start()
 				punchConnected = false
+
+		if Input.is_action_just_pressed("activate"):
+			emit_signal("activatePowerup")
+
 		elif reachedCheckpoint:
 			pass
 		move_and_slide()
@@ -169,6 +176,8 @@ func _onRelocate(nearestPoint):
 		checkpoint = nearestPoint
 		position = nearestPoint.position
 
+
+
 func _onAnimationFinished():
 	#print("Finished, ", $Animation.animation)
 	if $Animation.animation == "Jump":
@@ -176,7 +185,6 @@ func _onAnimationFinished():
 	elif $Animation.animation == "Punch":
 		$Animation.play("Run")
 	pass
-
 
 func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 	var other = area.get_parent()
@@ -189,8 +197,34 @@ func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 	if other.is_in_group("enemies"):
 		other.GotHit()
 
-
 func _on_attack_timer_timeout() -> void:
 	canAttack = true
 	attack.monitoring = false
-	attack.monitorable = false
+
+# Powerup code
+# TODO: Swap from string to enum
+func _onGetPowerup(powerType):
+	curPowerUp = powerType
+	print("Set: ", curPowerUp)
+
+func _onActivatePowerup():
+	if curPowerUp != null:
+		if "invuln" in curPowerUp:
+			invuln = true
+			$Animation.self_modulate.a = 0.5
+		elif "fast" == curPowerUp:
+			worldNode.emit_signal("changeSpeed", 1)
+		elif "slow" == curPowerUp:
+			worldNode.emit_signal("changeSpeed", -1)
+			pass
+		$powerUpTimer.start()
+
+func _onPowerUpTimer() -> void:
+	if "invuln" in curPowerUp:
+		invuln = false
+		$Animation.self_modulate.a = 1
+	if "fast" in curPowerUp or "slow" in curPowerUp:
+		worldNode.emit_signal("changeSpeed", 0)
+	curPowerUp = null
+	$powerUpTimer.stop()
+	pass # Replace with function body.

@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "player2", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -48,6 +48,8 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var baseObject : PackedScene
 @export var breakableWall : PackedScene
 @export var zipline : PackedScene
+@export var slideWall : PackedScene 
+@export var powerup : PackedScene
 
 
 @onready var objectList = $objectList
@@ -62,7 +64,9 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var beatsMinLabel = $UI/TextEdit0
 @onready var ziplineList = $objectList/ziplines
 @onready var breakableWallList = $objectList/breakableWalls
+@onready var slideWallList = $objectList/slideWalls
 @onready var placerList = $objectList/placers
+@onready var powerupList = $objectList/powerups
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -108,12 +112,13 @@ func _process(delta: float) -> void:
 		#get current click on block and delete it 
 		var blockList = getList(currentBlock.blockType)
 		for block in blockList.get_children():
-			
 			if block.index == currentBlock.index:
 				#we have found our block, delete
 				currentBlock.queue_free()
 				currentBlock = null
 				break
+		for block in bindedBlocks:
+			block.queue_free()
 	if Input.is_action_just_pressed("lengthenBlock") and currentBlock.blockType == "normal":
 		#extend platform block by one platform block
 		lengthenPlatform()
@@ -156,7 +161,9 @@ func loadLevel():
 		"enemies": [enemyCharacter, enemyList, blockTypes[5]],
 		"player": [player1, player1List, blockTypes[0]],
 		"breakableWalls": [breakableWall,breakableWallList,  blockTypes[9]],
-		"ziplines": [zipline, ziplineList, blockTypes[10]]}
+		"ziplines": [zipline, ziplineList, blockTypes[10]],
+		"slideWalls": [slideWall, slideWallList, blockTypes[11]],
+		"powerups": [powerup, powerupList, blockTypes[1]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -173,10 +180,12 @@ func loadLevel():
 			var posPoints = []
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
-
+			print("pos points in load: ", posPoints)
 			objectParent.add_child(instancedObj)
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
+			objectParent.setComponents(posPoints)
+			#do this if object has more than one component
 
 func _on_save_button_down() -> void:
 	save_scene_to_file()
@@ -216,6 +225,14 @@ func _onZiplineButtonPressed() -> void:
 	ziplineList.add_child(zipParent)
 	place_block(zipParent, ziplineList, camera.position, false)
 	
+func _onSlideWallButtonUp() -> void:
+	var slideWallInstance = slideWall.instantiate()
+	var slideWallParent = baseObject.instantiate()
+	slideWallParent.add_child(slideWallInstance)
+	slideWallParent.blockType = blockTypes[11]
+	slideWallList.add_child(slideWallParent)
+	place_block(slideWallParent, slideWallList, camera.position, false)
+
 func _on_exit_button_pressed() -> void:
 	# This will be the final functionality so players can navigate between menus
 	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
@@ -281,6 +298,13 @@ func _on_kill_floor_button_button_up() -> void:
 	kfParent.blockType = blockTypes[6]
 	place_block(kfParent, killFloorsList, camera.position, false)
 
+func _onPowerupButtonPressed() -> void:
+	var powerInstance = powerup.instantiate()
+	var powerParent = baseObject.instantiate()
+	powerParent.add_child(powerInstance)
+	powerParent.blockType = blockTypes[1]
+	place_block(powerParent, powerupList, camera.position, false)
+
 func _on_play_audio_button_pressed() -> void:
 	if not isPlaying:
 		camera.get_node("audio").play()
@@ -338,13 +362,21 @@ func save_scene_to_file():
 						var childrenList = item.get_child(0).get_children()
 						var index = 0
 						var editorName = "EditorArea"+str(index)
+						var posChain = ""
+						#go through all of the individual block components
 						for blockChild in childrenList:
-							#this is most likely where the zipline error/duplication is occuring
-							newFile.store_string(str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + "\n")
+							posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
 							index+=1
 							editorName = "EditorArea"+str(index)
+							#saving for platfrom block differs since their size varies
+							#if itemList.name == "normal":
+								##save the number of cols as well as the extents so we know where to start drawing
+								#posChain = str(blockChild.extents) + ", " + str(blockChild.)
 						#print("child list in save, ", childrenList)
-					
+						posChain = posChain.substr(0, posChain.length()-1)
+						posChain+="\n"
+						newFile.store_string(posChain)
+						print("pos chain: ", posChain)
 	else:
 		displayStatus(UNABLE_TO_SAVE, false)
 		
@@ -460,6 +492,10 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/ziplines")
 	if blockType == "placer":
 		return get_node("objectList/placers")
+	if blockType == "slideWall":
+		return get_node("objectList/slideWalls")
+	if blockType == "powerup":
+		return get_node("objectList/powerups")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:
@@ -537,7 +573,3 @@ func lengthenPlatform() -> void:
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
 	place_block(blockParent, platformBlocksList, Vector2(newPos, blockArea.global_position.y), false)
-		
-	
-
-	

@@ -18,6 +18,7 @@ size = Vector2(81, 68)
 script = ExtResource("1_kanpy")
 
 [node name="Line" type="Node2D" parent="."]
+visible = false
 
 [node name="Area2D" type="Area2D" parent="Line"]
 
@@ -40,6 +41,7 @@ scale = Vector2(0.153968, 0.151923)
 texture = ExtResource("1_qgbxr")
 
 [node name="Player2" type="Node2D" parent="."]
+visible = false
 
 [node name="Area2D" type="Area2D" parent="Player2"]
 

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://eoiqyev7gvq4" path="res://animations/raccoonAnims/Raccoon_jump.png" id="2_amwal"]
 [ext_resource type="Texture2D" uid="uid://bvvcm7r3cp3x7" path="res://animations/raccoonAnims/Raccoon_spriteSheet_v05.png" id="2_icjbr"]
 [ext_resource type="Texture2D" uid="uid://nchurhplqcb3" path="res://animations/raccoonAnims/Raccoon_punch.png" id="3_sudcy"]
+[ext_resource type="Texture2D" uid="uid://dpptplv42kqxc" path="res://animations/raccoonAnims/Slide.png" id="5_tonbw"]
 [ext_resource type="Texture2D" uid="uid://bt5jsder0msfx" path="res://player/playerActionCircle.png" id="6_4xpfe"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
 [ext_resource type="AudioStream" uid="uid://b67k06qom6hxa" path="res://audioEffects/SFX_Hit_4.mp3" id="8_k3kow"]
@@ -105,7 +106,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ntx1b")
+"texture": ExtResource("5_tonbw")
 }],
 "loop": true,
 "name": &"Slide",
@@ -113,7 +114,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(18.75, 17.5)
+size = Vector2(23.25, 19.625)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
 size = Vector2(9.99802, 10.992)
@@ -121,23 +122,27 @@ size = Vector2(9.99802, 10.992)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(18.125, 21.1875)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5pw0"]
-size = Vector2(20.75, 1.25)
-
 [node name="Player1" type="CharacterBody2D" groups=["players"]]
 position = Vector2(0, -48)
 scale = Vector2(4, 4)
 script = ExtResource("1_qyaa7")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-14.25, -1.25)
+position = Vector2(-15, 1.25)
 scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
 animation = &"Slide"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-14.375, 0.875)
+position = Vector2(-12.125, 2)
 shape = SubResource("RectangleShape2D_44r6d")
+
+[node name="ColorRect" type="ColorRect" parent="Hitbox"]
+visible = false
+offset_left = -12.0
+offset_top = -10.0
+offset_right = 12.0
+offset_bottom = 10.0
 
 [node name="ProtoMc" type="Sprite2D" parent="."]
 visible = false
@@ -165,11 +170,13 @@ rotation = 0.00184914
 shape = SubResource("RectangleShape2D_efrg4")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(-11.75, 10.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
 position = Vector2(-2.3125, -9.15625)
 shape = SubResource("RectangleShape2D_rw1d5")
+disabled = true
 
 [node name="actionLine" type="Sprite2D" parent="."]
 position = Vector2(0, -0.25)
@@ -188,29 +195,9 @@ stream = ExtResource("7_wy6uo")
 position = Vector2(0, 11)
 stream = ExtResource("8_k3kow")
 
-[node name="topMark" type="Marker2D" parent="."]
-position = Vector2(-11.75, -41.5)
-
-[node name="ColorRect" type="ColorRect" parent="topMark"]
-visible = false
-offset_left = -11.75
-offset_top = -5.0
-offset_right = 10.25
-offset_bottom = 7.0
-
-[node name="bottomMark" type="Marker2D" parent="."]
-position = Vector2(-11.75, 39.25)
-
-[node name="ColorRect" type="ColorRect" parent="bottomMark"]
-visible = false
-offset_left = -11.75
-offset_top = -5.0
-offset_right = 10.25
-offset_bottom = 7.0
-
-[node name="Floor" type="CollisionShape2D" parent="."]
-position = Vector2(-10.375, 11.125)
-shape = SubResource("RectangleShape2D_l5pw0")
+[node name="powerUpTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="powerUpTimer" to="." method="_onPowerUpTimer"]

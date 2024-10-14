@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=27 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -10,8 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="7_po4yx"]
-[ext_resource type="PackedScene" uid="uid://bam8jg1naascf" path="res://worldObjects/zipline/ziplineStart.tscn" id="10_h5bd4"]
 [ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://worldObjects/wall/breakableWallQ.tscn" id="10_twea0"]
+[ext_resource type="PackedScene" uid="uid://bbbfabjbnvmbx" path="res://worldObjects/slideWall.tscn" id="11_hh0vp"]
+[ext_resource type="PackedScene" uid="uid://i6r4tlbn3ltt" path="res://worldObjects/zipline/ziplineManager.tscn" id="11_mqtla"]
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="12_jtaw1"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
@@ -19,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
+[ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="AudioStream" uid="uid://c0r4i7rsnwlm7" path="res://audioTracks/Level2_Main_156bpm.mp3" id="21_i4u15"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
@@ -29,7 +31,7 @@ size = Vector2(36, 1086)
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
-levelFile = "Lvl2.1"
+levelFile = "stest"
 platformBlockInstance = ExtResource("2_78xmt")
 goalBlockInstance = ExtResource("3_oih58")
 killFloorInstance = ExtResource("3_6me16")
@@ -38,16 +40,18 @@ checkpointInstance = ExtResource("4_ph2wq")
 player1Instance = ExtResource("5_dfiyk")
 enemyInstance = ExtResource("7_po4yx")
 breakableWallInstance = ExtResource("10_twea0")
-ziplineInstance = ExtResource("10_h5bd4")
+ziplineInstance = ExtResource("11_mqtla")
+slideWallInstance = ExtResource("11_hh0vp")
+powerupInstance = ExtResource("19_5vjyv")
 
 [node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Timer" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 1853.0
+offset_left = 1854.0
 offset_top = 3.0
-offset_right = 1919.0
+offset_right = 1920.0
 offset_bottom = 67.0
 theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 
@@ -120,6 +124,10 @@ script = ExtResource("14_rbu47")
 [node name="ziplines" type="Node2D" parent="objectList"]
 
 [node name="breakableWalls" type="Node2D" parent="objectList"]
+
+[node name="slideWalls" type="Node2D" parent="objectList"]
+
+[node name="powerups" type="Node2D" parent="objectList"]
 
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 

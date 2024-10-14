@@ -1,19 +1,20 @@
-[gd_scene load_steps=4 format=4 uid="uid://yau5rmr187fi"]
+[gd_scene load_steps=5 format=4 uid="uid://yau5rmr187fi"]
 
-[ext_resource type="TileSet" uid="uid://bvg1g8gls3atk" path="res://backgrounds/tilemaps/level1.tres" id="2_ft64r"]
+[ext_resource type="Script" path="res://levelEditorObjects/platformBlockScene.gd" id="1_1wl40"]
+[ext_resource type="TileSet" uid="uid://bva4vakjtko8x" path="res://backgrounds/tilemaps/level1.tres" id="2_ft64r"]
 [ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="2_gep2g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s67gh"]
 size = Vector2(152, 57)
 
 [node name="PlatformBlockScene" type="Node2D"]
+script = ExtResource("1_1wl40")
 
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="Node2D" groups=["goals"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
-modulate = Color(0.935511, 0.479721, 0.526804, 1)
 position = Vector2(0, 12.5)
 shape = SubResource("RectangleShape2D_s67gh")
 
