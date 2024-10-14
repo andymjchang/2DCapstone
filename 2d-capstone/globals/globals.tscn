@@ -21,10 +21,10 @@ scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("2_h7na6")
 texture_pressed = ExtResource("3_le2si")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Vignette" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="Vignette"]
 material = ExtResource("4_wlah7")
 offset_right = 1920.0
 offset_bottom = 1080.0

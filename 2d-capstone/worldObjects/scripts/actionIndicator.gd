@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 func FadeOut():
 	if parentSprite:
 		var parentTween = create_tween()
-		parentTween.tween_property(parentSprite, "modulate", startColor, 1.0)
+		parentTween.tween_property(parentSprite, "modulate", startColor, 0.5)
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 1.0)
 	tween.tween_callback(queue_free)
