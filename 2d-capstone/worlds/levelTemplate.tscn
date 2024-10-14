@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="7_po4yx"]
 [ext_resource type="PackedScene" uid="uid://csh1k6wpxxqre" path="res://worldObjects/wall/breakableWallQ.tscn" id="10_twea0"]
-[ext_resource type="PackedScene" uid="uid://bvyf66nsmrxac" path="res://levelEditorObjects/slideWall.tscn" id="11_krl8b"]
+[ext_resource type="PackedScene" uid="uid://bbbfabjbnvmbx" path="res://worldObjects/slideWall.tscn" id="11_hh0vp"]
 [ext_resource type="PackedScene" uid="uid://i6r4tlbn3ltt" path="res://worldObjects/zipline/ziplineManager.tscn" id="11_mqtla"]
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="12_jtaw1"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
@@ -41,7 +41,7 @@ player1Instance = ExtResource("5_dfiyk")
 enemyInstance = ExtResource("7_po4yx")
 breakableWallInstance = ExtResource("10_twea0")
 ziplineInstance = ExtResource("11_mqtla")
-slideWallInstance = ExtResource("11_krl8b")
+slideWallInstance = ExtResource("11_hh0vp")
 
 [node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
 

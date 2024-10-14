@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://ljo48af3c257" path="res://worldObjects/assets/Platform.png" id="1_h40a7"]
 [ext_resource type="Script" path="res://worldObjects/scripts/blockLong.gd" id="1_kddth"]
 [ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="3_85d55"]
-[ext_resource type="TileSet" uid="uid://bvg1g8gls3atk" path="res://backgrounds/tilemaps/level1.tres" id="4_43dwu"]
-[ext_resource type="TileSet" uid="uid://ba8phc7eyu83r" path="res://backgrounds/tilemaps/level2.tres" id="5_urnmp"]
+[ext_resource type="TileSet" uid="uid://bva4vakjtko8x" path="res://backgrounds/tilemaps/level1.tres" id="4_43dwu"]
+[ext_resource type="TileSet" uid="uid://3xspu4l7xt5j" path="res://backgrounds/tilemaps/level2.tres" id="5_urnmp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]
 size = Vector2(150, 69)
