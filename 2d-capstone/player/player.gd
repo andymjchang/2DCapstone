@@ -4,7 +4,8 @@ signal takeDamage(amount)
 signal revive(who)
 signal relocate(nearestPoint)
 signal scored(id, score)
-signal getPowerUp(powerType)
+signal getPowerup(powerType)
+signal activatePowerup()
 
 var curSprite
 var JUMP_VELOCITY = -550.0
@@ -56,7 +57,8 @@ func _ready():
 	attack = get_node("AttackHitbox")
 
 	self.takeDamage.connect(_onTakeDamage)
-	self.getPowerUp.connect(_onGetPowerUp)
+	self.getPowerup.connect(_onGetPowerup)
+	self.activatePowerup.connect(_onActivatePowerup)
 	self.revive.connect(_onRevive)
 	self.relocate.connect(_onRelocate)
 	$Animation.animation_finished.connect(_onAnimationFinished)
@@ -73,8 +75,8 @@ func _physics_process(delta: float) -> void:
 	if not editing:
 		if not inZipline:
 			# Lines
-			# if is_on_floor():
-			# 	glitchLines.global_position.y = self.global_position.y
+			if is_on_floor():
+				glitchLines.global_position.y = self.global_position.y
 			
 			# Add the gravity.
 			if not is_on_floor():
@@ -123,6 +125,10 @@ func _physics_process(delta: float) -> void:
 				canAttack = false
 				$attackTimer.start()
 				punchConnected = false
+
+		if Input.is_action_just_pressed("activate"):
+			emit_signal("activatePowerup")
+
 		elif reachedCheckpoint:
 			pass
 		move_and_slide()
@@ -192,21 +198,23 @@ func _on_attack_timer_timeout() -> void:
 	canAttack = true
 	attack.monitoring = false
 
-
 # Powerup code
 # TODO: Swap from string to enum
-func _onGetPowerUp(powerType):
+func _onGetPowerup(powerType):
 	curPowerUp = powerType
-	if "invuln" in powerType:
-		invuln = true
-		$Animation.self_modulate.a = 0.5
-	elif "fast" == powerType:
-		worldNode.emit_signal("changeSpeed", 1)
-	elif "slow" == powerType:
-		worldNode.emit_signal("changeSpeed", -1)
-		pass
-	$powerUpTimer.start()
-	pass
+	print("Set: ", curPowerUp)
+
+func _onActivatePowerup():
+	if curPowerUp != null:
+		if "invuln" in curPowerUp:
+			invuln = true
+			$Animation.self_modulate.a = 0.5
+		elif "fast" == curPowerUp:
+			worldNode.emit_signal("changeSpeed", 1)
+		elif "slow" == curPowerUp:
+			worldNode.emit_signal("changeSpeed", -1)
+			pass
+		$powerUpTimer.start()
 
 func _onPowerUpTimer() -> void:
 	if "invuln" in curPowerUp:

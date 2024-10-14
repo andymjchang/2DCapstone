@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7oer"]
 size = Vector2(50, 231)
 
-[node name="SlideWall" type="Node2D"]
+[node name="SlideWall2" type="Node2D"]
 position = Vector2(1, 105)
 
 [node name="Node2D" type="Node2D" parent="."]

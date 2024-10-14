@@ -24,7 +24,7 @@ position = Vector2(0, 17.5)
 shape = SubResource("RectangleShape2D_tpulb")
 
 [node name="sprite2D" type="Node2D" parent="."]
-position = Vector2(1, 15)
+position = Vector2(-1, 15)
 
 [node name="Platform2" type="Sprite2D" parent="sprite2D"]
 visible = false
@@ -39,13 +39,13 @@ scale = Vector2(0.121745, 0.0941406)
 texture = ExtResource("1_h40a7")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="sprite2D"]
-visible = false
 position = Vector2(0, -1)
 scale = Vector2(0.1, 0.1)
 tile_map_data = PackedByteArray("AAD9////AQAAAAEAAAD+////AQACAAEAAAD/////AQACAAEAAAAAAP//AQACAAEAAAABAP//AQACAAEAAAACAP//AQAEAAEAAAD9/wAAAQABAAMAAAD9/wEAAQAAAAQAAAD+/wEAAQACAAQAAAD//wEAAQACAAQAAAAAAAEAAQACAAQAAAABAAEAAQACAAQAAAACAAEAAQAEAAQAAAACAAAAAQADAAMAAAABAAAAAQACAAMAAAAAAAAAAQACAAIAAAD//wAAAQACAAIAAAD+/wAAAQACAAIAAAA=")
 tile_set = ExtResource("4_43dwu")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="sprite2D"]
+visible = false
 position = Vector2(0, -1)
 scale = Vector2(0.1, 0.1)
 tile_map_data = PackedByteArray("AAD9////AQABAAAAAAD+////AQACAAAAAAD/////AQADAAAAAAAAAP//AQACAAAAAAABAP//AQADAAAAAAACAP//AQAFAAAAAAACAAAAAQAFAAIAAAACAAEAAQAFAAEAAAD//wAAAQADAAIAAAD+/wAAAQACAAIAAAD9/wAAAQABAAIAAAD9/wEAAQAAAAEAAAD+/wEAAQACAAEAAAD//wEAAQADAAEAAAABAAEAAQADAAEAAAAAAAEAAQACAAEAAAAAAAAAAQACAAIAAAABAAAAAQADAAIAAAA=")

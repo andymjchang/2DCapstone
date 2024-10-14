@@ -42,15 +42,16 @@ enemyInstance = ExtResource("7_po4yx")
 breakableWallInstance = ExtResource("10_twea0")
 ziplineInstance = ExtResource("11_mqtla")
 slideWallInstance = ExtResource("11_hh0vp")
+powerupInstance = ExtResource("19_5vjyv")
 
 [node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Timer" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 1853.0
+offset_left = 1854.0
 offset_top = 3.0
-offset_right = 1919.0
+offset_right = 1920.0
 offset_bottom = 67.0
 theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 
@@ -63,9 +64,6 @@ theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 text = "0"
 
 [node name="Background" type="Node2D" parent="."]
-
-[node name="Powerup" parent="." instance=ExtResource("19_5vjyv")]
-position = Vector2(1480, 341)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(250, 432)
@@ -128,6 +126,8 @@ script = ExtResource("14_rbu47")
 [node name="breakableWalls" type="Node2D" parent="objectList"]
 
 [node name="slideWalls" type="Node2D" parent="objectList"]
+
+[node name="powerups" type="Node2D" parent="objectList"]
 
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 
