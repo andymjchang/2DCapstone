@@ -15,9 +15,12 @@ func _ready() -> void:
 	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
 	var newWidth = tileWidth * 12.0
 	print("tile width, ", tileWidth)
-	extents = self.get_node("Node2D/Area2D/CollisionShape2D").shape as RectangleShape2D
-	extents = extents.extents
+	extents = self.get_node("Node2D/Area2D/CollisionShape2D").shape.extents
+	extents = extents
+	print("old extents: ", extents)
 	extents = newWidth/2.0
+	print("new extents: ", extents)
+	self.get_node("Node2D/Area2D/CollisionShape2D").shape.extents.x = extents
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -47,8 +50,8 @@ func extendByOneTile() -> void :
 	print("node, ",self.get_node("Node2D/EditorArea0/CollisionShape2D").get_children())
 	#alter the area2d to represent the new size
 	print("before extending collision shape pos: ", self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x , " , extents: ",self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x, " , tile width: ", tileWidth )
-	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x += tileWidth
-	self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x += tileWidth
+	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x += tileWidth/2.0
+	self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x += tileWidth/2.0
 	print("after extending collision shape pos: ", self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x , " , extents: ",self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x )
 
 	numCols+=1
@@ -70,8 +73,8 @@ func decreaseByOneTile() -> void:
 			tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
 			startY+=1
 			
-		self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x -= tileWidth
-		self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x -= tileWidth
+		self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x -= tileWidth/2.0
+		self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x -= tileWidth/2.0
 		numCols-=1
 	
 func getMaxMinCoord(usedCells : Array) -> Array:
