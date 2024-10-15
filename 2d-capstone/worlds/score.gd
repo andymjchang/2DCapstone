@@ -12,7 +12,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if lerping:
 		lerpProgress += delta / lerpDuration
-		if lerpProgress >= 1.0:
+		if lerpProgress >= 0.5: # avoids slow last number tick
 			currentScore = targetScore
 			lerping = false
 		else:
@@ -29,6 +29,7 @@ func lerpText(score: int, duration: float = 1.0):
 	lerpDuration = duration
 	lerpProgress = 0.0
 	lerping = true
+	
 
 func smoothstep(edge0: float, edge1: float, x: float) -> float:
 	var t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0)
