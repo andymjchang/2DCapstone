@@ -149,7 +149,6 @@ func _on_text_edit_2_text_changed() -> void:
 		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
 		
-
 func loadLevel():
 	print("save file name, ", saveFileName)
 	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
@@ -229,7 +228,7 @@ func _onSlideWallButtonUp() -> void:
 	var slideWallInstance = slideWall.instantiate()
 	var slideWallParent = baseObject.instantiate()
 	slideWallParent.add_child(slideWallInstance)
-	slideWallParent.blockType = blockTypes[11]
+	slideWallParent.blockType = blockTypes[11	]
 	slideWallList.add_child(slideWallParent)
 	place_block(slideWallParent, slideWallList, camera.position, false)
 
@@ -240,7 +239,6 @@ func _on_exit_button_pressed() -> void:
 	# For debugging
 	# get_tree().quit()
 
-	
 func _on_rac_button_button_up() -> void:
 	if !player1List.has_node("baseObject"):
 		var player1Instance = player1.instantiate()

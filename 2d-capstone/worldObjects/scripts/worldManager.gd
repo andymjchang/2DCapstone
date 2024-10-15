@@ -87,6 +87,7 @@ func _ready():
 	textPopupScene1.initPosition(player1)
 
 	music = camera.get_node("Music")
+	music.stream.loop = false
 	loadAudio()
 	
 	# Setting signals
@@ -128,6 +129,7 @@ func loadAudio():
 	var audioPath = "res://audioTracks/" + Globals.currentSongFileName
 	var newAudio = load(audioPath) as AudioStream
 	music.stream = newAudio
+	music.stream.loop = false
 
 func loadLevel():
 	# set file to load
