@@ -36,11 +36,14 @@ func processBeat(delta: float) -> void:
 	
 	if beatTimer >= beatInterval:
 		beatTimer -= beatInterval
-		scale = increasedScale
-		lerpFactor = 0.0
+		if healthStatus == "full":
+			startPulse()
 	scale = lerp(scale, originalScale, lerpFactor)
 	lerpFactor = min(lerpFactor + delta * 2, 1)
-	
+
+func startPulse():
+	scale = increasedScale
+	lerpFactor = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if player == "player2" and changed:

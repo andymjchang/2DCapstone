@@ -38,8 +38,8 @@ func enablePreviewUI():
 	$PreviewCanvasLayer.visible = true
 func disablePreviewUI():
 	$PreviewCanvasLayer.visible = false
-func setBPM(bpm):
-	self.bpm = bpm
+func setBPM(p_bpm):
+	self.bpm = p_bpm
 	pixelsPerFrame = bpm * beatSize / physicsFrameRate
 
 func _on_texture_button_button_down() -> void:
