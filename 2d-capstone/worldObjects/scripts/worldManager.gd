@@ -319,10 +319,10 @@ func _onRunBoundsBodyExited(body: Node2D) -> void:
 func _onScored(id, p_score):
 	var scoreToAdd = 100 - p_score
 	score += scoreToAdd
-	scoreText.text = str(int(score))
+	scoreText.lerpText(int(score))
 	if id == "Player1":
 		textPopupScene1.initText(scoreToAdd, player1.position)
-
+		
 func _onChangeSpeed(speedType):
 	if speedType > 0:			# Speed up
 		music.pitch_scale = 2

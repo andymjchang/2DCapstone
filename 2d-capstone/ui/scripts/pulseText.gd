@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Label
 
 # variables for controlling pulse
 @export var timingScale = 1

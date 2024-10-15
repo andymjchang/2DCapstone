@@ -3,7 +3,7 @@ extends ColorRect
 # variables for controlling pulse
 @export var timingScale = 1
 @export var increasedScale = Vector2(1.2, 1.2)
-@onready var originalScale = Vector2(1, 1)
+@onready var originalScale = scale
 var beatInterval = 0.0
 var beatTimer = 0.0
 var lerpFactor = 0.0

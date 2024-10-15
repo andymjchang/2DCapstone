@@ -50,7 +50,7 @@ texture = ExtResource("4_e25yj")
 
 [node name="Layer4" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.6, 0.6)
-repeat_size = Vector2(1320, 0)
+repeat_size = Vector2(1319, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer4"]

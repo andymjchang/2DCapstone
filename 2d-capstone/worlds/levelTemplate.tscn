@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=28 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
+[ext_resource type="Script" path="res://worlds/score.gd" id="15_mx364"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
 [ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
@@ -55,18 +56,24 @@ offset_right = 1920.0
 offset_bottom = 67.0
 theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 
-[node name="Score" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 1639.0
-offset_top = 137.0
-offset_right = 1784.0
-offset_bottom = 202.0
-theme_override_fonts/normal_font = ExtResource("12_jtaw1")
-text = "0"
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 776.0
+offset_top = 121.0
+offset_right = 1155.0
+offset_bottom = 304.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("12_jtaw1")
+theme_override_font_sizes/font_size = 72
+text = "00000"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("15_mx364")
 
 [node name="Background" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(250, 432)
+position = Vector2(250, 550)
 zoom = Vector2(2, 2)
 script = ExtResource("4_nttx1")
 
