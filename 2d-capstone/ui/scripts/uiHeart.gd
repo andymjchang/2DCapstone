@@ -28,7 +28,7 @@ func _ready() -> void:
 		self.get_node("zeroP2Health").visible = false
 		zeroHealth = $zeroP2Health
 		
-	# set beat interval
+func setBPM():
 	beatInterval = 60.0 / Globals.bpm
 
 func processBeat(delta: float) -> void:

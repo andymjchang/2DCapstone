@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ciqrtrp85jsnw" path="res://ui/assets/Piper_Heart_Full.png" id="2_hu6l6"]
 [ext_resource type="Texture2D" uid="uid://dtd4f7n4phlhj" path="res://ui/assets/Piper_Heart_Zero.png" id="3_kx8ye"]
 
-[node name="uiHeart" type="Node2D"]
+[node name="uiHeart" type="Node2D" groups=["pulsingObjects"]]
 script = ExtResource("1_n0dm8")
 
 [node name="fullP1Health" type="Sprite2D" parent="."]

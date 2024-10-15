@@ -66,6 +66,9 @@ func _ready():
 		
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
+	# set bpm of all pulsing objects
+	for object in get_tree().get_nodes_in_group("pulsingObjects"):
+		object.setBPM()
 	# Load background
 	var backgroundScene = load("res://backgrounds/" + levelFile + "Background.tscn")
 	if backgroundScene:

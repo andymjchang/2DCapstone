@@ -19,7 +19,7 @@ position = Vector2(-70, 0)
 [node name="UiHeart3" parent="player1" instance=ExtResource("1_mv5t0")]
 position = Vector2(70, 0)
 
-[node name="redBar" type="ColorRect" parent="."]
+[node name="redBar" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = 1046.0
 offset_top = 915.0
 offset_right = 1175.0
@@ -31,7 +31,7 @@ script = ExtResource("3_0pt80")
 timingScale = 4
 increasedScale = Vector2(1, 1.2)
 
-[node name="redBar2" type="ColorRect" parent="."]
+[node name="redBar2" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = 862.0
 offset_top = 924.0
 offset_right = 1063.0
@@ -43,7 +43,7 @@ script = ExtResource("3_0pt80")
 timingScale = 2
 increasedScale = Vector2(1, 1.2)
 
-[node name="redBar3" type="ColorRect" parent="."]
+[node name="redBar3" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = 747.0
 offset_top = 915.0
 offset_right = 870.0
@@ -55,7 +55,7 @@ script = ExtResource("3_0pt80")
 timingScale = 4
 increasedScale = Vector2(1, 1.2)
 
-[node name="blackBar" type="ColorRect" parent="."]
+[node name="blackBar" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = 762.0
 offset_top = 937.0
 offset_right = 1161.0

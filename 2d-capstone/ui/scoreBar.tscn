@@ -30,7 +30,7 @@ texture_over = ExtResource("2_bmfs1")
 texture_progress = ExtResource("2_838in")
 script = ExtResource("3_3u3ml")
 
-[node name="topBlack" type="ColorRect" parent="."]
+[node name="topBlack" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = -2.0
 offset_top = -12.0
 offset_right = 1923.0
@@ -38,7 +38,7 @@ offset_bottom = 28.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("5_psxq1")
 
-[node name="topBlackMid" type="ColorRect" parent="."]
+[node name="topBlackMid" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = 489.0
 offset_top = -8.0
 offset_right = 1531.0
@@ -48,7 +48,7 @@ script = ExtResource("5_psxq1")
 timingScale = 2
 increasedScale = Vector2(1, 1.6)
 
-[node name="botBlack" type="ColorRect" parent="."]
+[node name="botBlack" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = -1.0
 offset_top = 1055.0
 offset_right = 1924.0
@@ -56,7 +56,7 @@ offset_bottom = 1095.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("5_psxq1")
 
-[node name="botBlackMid" type="ColorRect" parent="."]
+[node name="botBlackMid" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = 490.0
 offset_top = 1053.0
 offset_right = 1532.0

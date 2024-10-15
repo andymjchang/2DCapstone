@@ -41,6 +41,7 @@ enabled=PackedStringArray()
 
 actionIndicators=""
 playerHitbox=""
+pulsingObjects=""
 
 [input]
 
