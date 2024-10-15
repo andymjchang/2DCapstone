@@ -95,4 +95,11 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 						
 	return [minCoords, maxCoords]
 	
+#TODO make this work for more than one tilemap
+func setTileMaps(extents, cols, pos) -> void:
+	#have to get the start of where we arein the world
+	#TODO combine this into one var
+	var startX = pos.x - extents.x
+	var startY = pos.y - extents.x
+	
 	

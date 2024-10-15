@@ -135,4 +135,7 @@ func setComponents(posArray : Array) -> void :
 		index+=1
 		block.global_position.y = posArray[index]
 		index+=1
+		
+func setTileMaps() -> void:
+	pass
 	

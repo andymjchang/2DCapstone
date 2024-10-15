@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=28 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="AudioStream" uid="uid://c0r4i7rsnwlm7" path="res://audioTracks/Level2_Main_156bpm.mp3" id="21_i4u15"]
+[ext_resource type="PackedScene" uid="uid://bjqhlnpirpnte" path="res://worldObjects/popUp.tscn" id="21_ogola"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
 [ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
 
@@ -102,6 +103,8 @@ offset_left = -22.0
 offset_top = -448.0
 offset_right = 18.0
 offset_bottom = 374.0
+
+[node name="PopUp" parent="Camera2D" instance=ExtResource("21_ogola")]
 
 [node name="objectList" type="Node2D" parent="."]
 
