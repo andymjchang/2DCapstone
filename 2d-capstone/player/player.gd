@@ -30,7 +30,7 @@ var hitBounds = false
 var inZipline = false
 var onTop = false
 var originalPos
-var curPowerUp
+var curPowerup
 
 var jumpInProgress = false
 var punchInProgress = false
@@ -44,7 +44,6 @@ var sfxPlayer
 var glitchLines
 
 func _ready():
-	print("my name is: ",self.name)
 	curSprite = get_node("Animation").duplicate()
 	add_to_group("players")
 	# Controls for player
@@ -67,6 +66,8 @@ func _ready():
 	self.scored.connect(worldNode._onScored)
 	
 	sfxPlayer = $sfxPlayer
+
+	curPowerup = null
 	
 	# Attach to glitch line
 	glitchLines = worldNode.get_node("Camera2D").get_node("glitchLines")
@@ -100,20 +101,17 @@ func _physics_process(delta: float) -> void:
 				$Animation.play("Jump")
 				jumpInProgress = true
 				velocity.y = JUMP_VELOCITY
-				#await get_tree().create_timer(0.2).timeout
 
 			if Input.is_action_just_pressed(slide):
 				get_node("Hitbox").scale *= Vector2(1, 0.5);
-				get_node("Hitbox").position.y = 8
+				get_node("Hitbox").position.y = 6
 				$Animation.play("Slide");
-				#get_node("Floor").disabled = false
-				
+		
 			if Input.is_action_just_released(slide):
 				get_node("Hitbox").scale *= Vector2(1, 2);
 				get_node("Hitbox").position.y = 2
 				$Animation.play("Run");
-				#get_node("Floor").disabled = true
-			
+
 		if Input.is_action_just_pressed(punch):
 			if canAttack:
 				# Artistic
@@ -201,27 +199,33 @@ func _on_attack_timer_timeout() -> void:
 # Powerup code
 # TODO: Swap from string to enum
 func _onGetPowerup(powerType):
-	curPowerUp = powerType
-	print("Set: ", curPowerUp)
+	curPowerup = powerType
+	print("I got: ", curPowerup)
 
 func _onActivatePowerup():
-	if curPowerUp != null:
-		if "invuln" in curPowerUp:
+	match curPowerup:
+		Globals.powerType.INVULN:
 			invuln = true
 			$Animation.self_modulate.a = 0.5
-		elif "fast" == curPowerUp:
+		Globals.powerType.HEAL:
+			health += health / 3
+		Globals.powerType.SPEEDUP:
 			worldNode.emit_signal("changeSpeed", 1)
-		elif "slow" == curPowerUp:
+		Globals.powerType.SLOWDOWN:
+			print("Slowing down")
 			worldNode.emit_signal("changeSpeed", -1)
-			pass
-		$powerUpTimer.start()
+	$powerupTimer.start()
 
-func _onPowerUpTimer() -> void:
-	if "invuln" in curPowerUp:
-		invuln = false
-		$Animation.self_modulate.a = 1
-	if "fast" in curPowerUp or "slow" in curPowerUp:
-		worldNode.emit_signal("changeSpeed", 0)
-	curPowerUp = null
-	$powerUpTimer.stop()
-	pass # Replace with function body.
+func _onPowerupTimerTimeout() -> void:
+	print("Timeout!")
+	match curPowerup:
+		Globals.powerType.INVULN:
+			invuln = false
+			$Animation.self_modulate.a = 1
+		Globals.powerType.HEAL:
+			pass
+		Globals.powerType.SPEEDUP:
+			worldNode.emit_signal("changeSpeed", 0)
+		Globals.powerType.SLOWDOWN:
+			worldNode.emit_signal("changeSpeed", 0)
+	curPowerup = null

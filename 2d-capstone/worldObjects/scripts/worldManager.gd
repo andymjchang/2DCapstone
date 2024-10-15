@@ -55,13 +55,12 @@ var restartCheckpoint = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	loadLevel()
-	print("Restarting? ", restartCheckpoint)
 	# FIXME: temporary bpm setting
-	if levelFile == "Lvl0.1":
+	if levelFile.begins_with("Lvl0."):
 		Globals.setBPM(120)
-	if levelFile == "Lvl1.2":
+	if levelFile.begins_with("Lvl1."):
 		Globals.setBPM(155)
-	if levelFile == "Lvl2.1":
+	if levelFile.begins_with("Lvl2."):
 		Globals.setBPM(156)
 		
 	# load the actionArrays (This must happen after bpm is set)
@@ -117,6 +116,7 @@ func _ready():
 	Globals.inLevel = false
 	restartButton.visible = false
 	changeCountdown()
+	emit_signal("changeSpeed", 0)
 	#startGame()
 	
 func startGame():
@@ -138,7 +138,7 @@ func loadLevel():
 	if Globals.curFile:
 		levelFile = Globals.curFile
 	
-	print("level nameL ", levelFile)
+	print("level name ", levelFile)
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],
@@ -179,7 +179,7 @@ func loadLevel():
 				instancedObj.get_node("ziplineStart").global_position = startPos
 				instancedObj.get_node("ziplineEnd").global_position = endPos
 				
-			print("instance!: ", name)
+			#print("instance!: ", name)
 			
 		elif ".mp3" in line:
 			# audio file
