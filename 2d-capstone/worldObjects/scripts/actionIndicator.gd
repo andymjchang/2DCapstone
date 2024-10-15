@@ -14,7 +14,6 @@ var parent
 var parentSprite
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
-signal scored(indicator_position)
 
 var index = 0
 

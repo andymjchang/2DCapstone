@@ -180,7 +180,7 @@ func loadLevel():
 				instancedObj.get_node("ziplineStart").global_position = startPos
 				instancedObj.get_node("ziplineEnd").global_position = endPos
 				
-			print("instance!: ", name)
+			#print("instance!: ", name)
 			
 		elif ".mp3" in line:
 			# audio file

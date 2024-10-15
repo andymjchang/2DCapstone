@@ -25,7 +25,6 @@ func _process(delta: float) -> void:
 
 func _scoreIncrease() -> void:
 	#enemy has died
-	print("increase score signal reached")
 	self.value = self.value + 1
 	
 	
