@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=26 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="2_a5rf3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bf5aif1oibn04" path="res://player/playerActionCircle2.png" id="7_tnfmg"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
 [ext_resource type="AudioStream" uid="uid://b67k06qom6hxa" path="res://audioEffects/SFX_Hit_4.mp3" id="8_k3kow"]
+[ext_resource type="Script" path="res://ui/scripts/pulseSprite.gd" id="8_socwb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fb3mh"]
 atlas = ExtResource("2_amwal")
@@ -114,10 +115,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(23.25, 19.625)
+size = Vector2(23, 19.625)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
-size = Vector2(9.99802, 10.992)
+size = Vector2(12.5005, 12.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(18.125, 21.1875)
@@ -165,7 +166,7 @@ offset_bottom = 21.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(18.0013, 9.11843)
+position = Vector2(18.0011, 9.12292)
 rotation = 0.00184914
 shape = SubResource("RectangleShape2D_efrg4")
 
@@ -182,6 +183,8 @@ disabled = true
 position = Vector2(0, -0.25)
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("7_tnfmg")
+script = ExtResource("8_socwb")
+increasedScale = Vector2(0.03, 0.03)
 
 [node name="attackTimer" type="Timer" parent="."]
 wait_time = 0.25
