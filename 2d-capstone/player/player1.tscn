@@ -128,10 +128,10 @@ scale = Vector2(4, 4)
 script = ExtResource("1_qyaa7")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-15, 1.25)
+position = Vector2(-15, -0.75)
 scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Slide"
+animation = &"Punch"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-12.125, 2)
@@ -194,9 +194,10 @@ stream = ExtResource("7_wy6uo")
 position = Vector2(0, 11)
 stream = ExtResource("8_k3kow")
 
-[node name="powerUpTimer" type="Timer" parent="."]
+[node name="powerupTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="powerUpTimer" to="." method="_onPowerUpTimer"]
+[connection signal="timeout" from="powerupTimer" to="." method="_onPowerupTimerTimeout"]

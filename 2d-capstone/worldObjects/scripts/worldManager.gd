@@ -116,6 +116,7 @@ func _ready():
 	Globals.inLevel = false
 	restartButton.visible = false
 	changeCountdown()
+	emit_signal("changeSpeed", 0)
 	#startGame()
 	
 func startGame():
@@ -136,7 +137,7 @@ func loadLevel():
 	if Globals.curFile:
 		levelFile = Globals.curFile
 	
-	print("level nameL ", levelFile)
+	print("level name ", levelFile)
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],
@@ -177,7 +178,7 @@ func loadLevel():
 				instancedObj.get_node("ziplineStart").global_position = startPos
 				instancedObj.get_node("ziplineEnd").global_position = endPos
 				
-			print("instance!: ", name)
+			#print("instance!: ", name)
 			
 		elif ".mp3" in line:
 			# audio file
