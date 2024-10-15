@@ -1,9 +1,6 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://3xspu4l7xt5j"]
-
-[ext_resource type="Texture2D" uid="uid://d1dlyisstxmuw" path="res://backgrounds/tilemaps/Level_2_tilemap.png" id="1_waaja"]
+[gd_resource type="TileSet" load_steps=2 format=3 uid="uid://3xspu4l7xt5j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jpmkc"]
-texture = ExtResource("1_waaja")
 separation = Vector2i(125, 125)
 texture_region_size = Vector2i(250, 250)
 1:0/0 = 0
