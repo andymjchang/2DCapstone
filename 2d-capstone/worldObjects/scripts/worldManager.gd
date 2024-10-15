@@ -56,7 +56,8 @@ var restartCheckpoint = false
 func _ready():
 	loadLevel()
 	print("Restarting? ", restartCheckpoint)
-	# FIXME: temporary bpm setting
+	
+	var backgroundName : String = "Lvl1"
 	if levelFile.begins_with("Lvl0."):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Tutorial_New_155bpm.wav"
@@ -66,20 +67,22 @@ func _ready():
 	if levelFile.begins_with("Lvl2."):
 		Globals.setBPM(156)
 		Globals.currentSongFileName = "Level2_Main_156bpm_V2.mp3"
+		backgroundName = "Lvl2"
 		
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
 	# set bpm of all pulsing objects
 	for object in get_tree().get_nodes_in_group("pulsingObjects"):
 		object.setBPM()
+		
 	# Load background
-	var backgroundScene = load("res://backgrounds/" + levelFile + "Background.tscn")
+	var backgroundScene = load("res://backgrounds/" + backgroundName + "Background.tscn")
 	if backgroundScene:
 		var backgroundInstance = backgroundScene.instantiate()
 		$Background.add_child(backgroundInstance)
-	# Failsafe: load Lvl1.2
+	# Failsafe: load Lvl1
 	else:
-		backgroundScene = load("res://backgrounds/Lvl1.2Background.tscn")
+		backgroundScene = load("res://backgrounds/Lvl1Background.tscn")
 		var backgroundInstance = backgroundScene.instantiate()
 		$Background.add_child(backgroundInstance)
 	
@@ -192,7 +195,7 @@ func loadLevel():
 	
 	# load the actionArrays
 	$objectList/actionIndicators.load_array()
-	if Globals.curFile == "Lvl2.1" or levelFile == "Lvl2.1":
+	if levelFile.begins_with("Lvl2."):
 		for platform in platformBlocksList.get_children():
 			platform.get_node("sprite2D/TileMapLayer").visible = false
 			platform.get_node("sprite2D/TileMapLayer2").visible = true
