@@ -185,6 +185,10 @@ actionIndicators
 12900, 650,
 11100, 650,
 playerCheckpoints
+5425, 575,
+12000, 650,
+16800, 650,
+19800, 675,
 player
 0, 640,
 enemies
@@ -228,7 +232,11 @@ killFloors
 19425, 775,
 20350, 775,
 11500, 750,
+3050, 750,
+4350, 750,
+5475, 700,
 goalBlocks
+20975, 700,
 breakableWalls
 ziplines
 placers
