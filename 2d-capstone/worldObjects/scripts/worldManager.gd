@@ -55,7 +55,7 @@ var restartCheckpoint = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	loadLevel()
-	$Camera2D/PopUp/tutorialSlides.play()
+	
 	# FIXME: temporary bpm setting
 	if levelFile.begins_with("Lvl0."):
 		Globals.setBPM(120)
@@ -64,6 +64,11 @@ func _ready():
 	if levelFile.begins_with("Lvl2."):
 		Globals.setBPM(156)
 		
+	if levelFile == "Lvl0.2":
+		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
+		var popUpInstance = popUpScene.instantiate()
+		$Camera2D.add_child(popUpInstance)
+		$Camera2D/onboardingPopUp/tutorialSlides.play()
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
 	# Load background
