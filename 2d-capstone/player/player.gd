@@ -42,6 +42,7 @@ var otherPlayer
 var worldNode
 var sfxPlayer
 var glitchLines
+var camera
 
 func _ready():
 	print("my name is: ",self.name)
@@ -69,7 +70,9 @@ func _ready():
 	sfxPlayer = $sfxPlayer
 	
 	# Attach to glitch line
-	glitchLines = worldNode.get_node("Camera2D").get_node("glitchLines")
+	camera = worldNode.get_node("Camera2D")
+	glitchLines = camera.get_node("glitchLines")
+	camera.position = self.position + Vector2(250, -70)
 
 func _physics_process(delta: float) -> void:
 	if not editing:
