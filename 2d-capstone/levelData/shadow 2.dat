@@ -1,14 +1,23 @@
 platformBlocks
+950, 550,
 actionIndicators
+950, 550,
 playerCheckpoints
 player
 0, 540,
 enemies
+950, 550,
 killFloors
+950, 550,
 goalBlocks
+950, 550,
 breakableWalls
+950, 550,
 ziplines
+950, 550, 1050, 550,
 placers
 slideWalls
+951, 655,
+951, 655,
 powerups
 0, 540,
