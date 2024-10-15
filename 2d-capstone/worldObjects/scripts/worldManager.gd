@@ -55,7 +55,6 @@ var restartCheckpoint = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	loadLevel()
-	print("Restarting? ", restartCheckpoint)
 	# FIXME: temporary bpm setting
 	if levelFile.begins_with("Lvl0."):
 		Globals.setBPM(120)

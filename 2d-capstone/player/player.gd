@@ -44,7 +44,6 @@ var sfxPlayer
 var glitchLines
 
 func _ready():
-	print("my name is: ",self.name)
 	curSprite = get_node("Animation").duplicate()
 	add_to_group("players")
 	# Controls for player
