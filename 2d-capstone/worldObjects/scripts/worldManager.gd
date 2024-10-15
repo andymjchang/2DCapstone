@@ -58,11 +58,14 @@ func _ready():
 	print("Restarting? ", restartCheckpoint)
 	# FIXME: temporary bpm setting
 	if levelFile.begins_with("Lvl0."):
-		Globals.setBPM(120)
+		Globals.setBPM(155)
+		Globals.currentSongFileName = "Tutorial_New_155bpm.wav"
 	if levelFile.begins_with("Lvl1."):
 		Globals.setBPM(155)
+		Globals.currentSongFileName = "Level1_Main_155bpm.mp3"
 	if levelFile.begins_with("Lvl2."):
 		Globals.setBPM(156)
+		Globals.currentSongFileName = "Level2_Main_156bpm_V2.mp3"
 		
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
