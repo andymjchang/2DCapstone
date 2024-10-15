@@ -1,6 +1,5 @@
 extends Node2D
 
-
 #6 cols  default
 @onready var tileMap = self.get("Node2D/TileMapLayer")
 var numCols = 12
@@ -10,11 +9,16 @@ var endTiles = [Vector2(4,1),Vector2(3,2),Vector2(3,2), Vector2(4,4)]
 var tileWidth
 
 func _ready() -> void:
+	# set the extents to the width of the tile x 12
+
 	tileMap =  self.get_node("Node2D/TileMapLayer")
 	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
+	var newWidth = tileWidth * 12.0
 	print("tile width, ", tileWidth)
 	extents = self.get_node("Node2D/Area2D/CollisionShape2D").shape as RectangleShape2D
 	extents = extents.extents
+	extents = newWidth/2.0
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -39,6 +43,7 @@ func extendByOneTile() -> void :
 	for i in range(0,4):
 		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
 		startY+=1
+		
 	print("node, ",self.get_node("Node2D/EditorArea0/CollisionShape2D").get_children())
 	#alter the area2d to represent the new size
 	print("before extending collision shape pos: ", self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x , " , extents: ",self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x, " , tile width: ", tileWidth )
@@ -84,8 +89,7 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 			maxCoords.y = cell.y
 		if cell.y < minCoords.y:
 			minCoords.y = cell.y
-			
-			
+						
 	return [minCoords, maxCoords]
 	
 	

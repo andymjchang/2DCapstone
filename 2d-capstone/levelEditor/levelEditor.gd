@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -161,7 +161,7 @@ func loadLevel():
 		"player": [player1, player1List, blockTypes[0]],
 		"breakableWalls": [breakableWall,breakableWallList,  blockTypes[9]],
 		"ziplines": [zipline, ziplineList, blockTypes[10]],
-		"slideWalls": [slideWall, slideWallList, blockTypes[11]],
+		"slideWalls": [slideWall, slideWallList, blockTypes[12]],
 		"powerups": [powerup, powerupList, blockTypes[1]]}
 	var instance
 	var objectList
@@ -228,7 +228,7 @@ func _onSlideWallButtonUp() -> void:
 	var slideWallInstance = slideWall.instantiate()
 	var slideWallParent = baseObject.instantiate()
 	slideWallParent.add_child(slideWallInstance)
-	slideWallParent.blockType = blockTypes[11	]
+	slideWallParent.blockType = blockTypes[12]
 	slideWallList.add_child(slideWallParent)
 	place_block(slideWallParent, slideWallList, camera.position, false)
 
@@ -458,6 +458,7 @@ func reset_drag_tracking():
 
 func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 	trackingPosition = true
+	print("blockType: ", blockType)
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
@@ -481,7 +482,7 @@ func getList(blockType : String) -> Node:
 	if blockType == "goalBlock":
 		return get_node("objectList/goalBlocks")
 	if blockType == "p1checkpoint":
-		return get_node("objectList/player1checkpoints")
+		return get_node("objectList/playerCheckpoints")
 	if blockType == "killFloor":
 		return get_node("objectList/killFloors")
 	if blockType == "breakableWall":

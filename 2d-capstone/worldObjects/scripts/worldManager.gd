@@ -112,6 +112,7 @@ func _ready():
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
 	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
 
+
 	# Start game
 	Globals.inLevel = false
 	restartButton.visible = false
