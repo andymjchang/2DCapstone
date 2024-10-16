@@ -59,7 +59,7 @@ func _ready():
 	var backgroundName : String = "Lvl1"
 	if levelFile.begins_with("Lvl0."):
 		Globals.setBPM(155)
-		Globals.currentSongFileName = "Tutorial_New_155bpm.wav"
+		Globals.currentSongFileName = "Tutorial_New_155bpm.mp3"
 	if levelFile.begins_with("Lvl1."):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Level1_Main_155bpm.mp3"

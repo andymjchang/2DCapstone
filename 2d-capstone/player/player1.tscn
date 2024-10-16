@@ -265,5 +265,5 @@ wait_time = 0.25
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="damagedTimer" to="." method="_on_damaged_timer_timeout"]
 [connection signal="timeout" from="powerupTimer" to="." method="_onPowerupTimerTimeout"]
+[connection signal="timeout" from="damagedTimer" to="." method="_on_damaged_timer_timeout"]

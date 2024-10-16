@@ -179,7 +179,7 @@ func loadLevel():
 			var posPoints = []
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
-			print("pos points in load: ", posPoints)
+			#print("pos points in load: ", posPoints)
 			objectParent.add_child(instancedObj)
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
