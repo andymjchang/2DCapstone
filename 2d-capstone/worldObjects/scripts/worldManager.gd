@@ -68,7 +68,7 @@ func _ready():
 		Globals.currentSongFileName = "Level2_Main_156bpm_V2.mp3"
 		backgroundName = "Lvl2"
 		
-	if levelFile == "Lvl0.2":
+	if levelFile.begins_with("Lvl0."):
 		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
 		var popUpInstance = popUpScene.instantiate()
 		$Camera2D.add_child(popUpInstance)

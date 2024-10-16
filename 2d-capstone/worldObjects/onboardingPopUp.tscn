@@ -54,7 +54,7 @@ animations = [{
 script = ExtResource("1_oyrl3")
 
 [node name="tutorialSlides" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -185)
+scale = Vector2(0.735, 0.735)
 sprite_frames = SubResource("SpriteFrames_fxxyb")
 animation = &"new_animation"
 
