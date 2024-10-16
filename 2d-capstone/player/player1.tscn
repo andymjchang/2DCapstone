@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=32 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="2_a5rf3"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
 [ext_resource type="AudioStream" uid="uid://b67k06qom6hxa" path="res://audioEffects/SFX_Hit_4.mp3" id="8_k3kow"]
 [ext_resource type="Script" path="res://ui/scripts/pulseSprite.gd" id="8_socwb"]
+[ext_resource type="Texture2D" uid="uid://cuoxttcoy7weh" path="res://worldObjects/enemy/Poof_anim_1-sheet.png" id="11_1lfn5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fb3mh"]
 atlas = ExtResource("2_amwal")
@@ -123,6 +124,45 @@ size = Vector2(12.5005, 12.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(18.125, 21.1875)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffebv"]
+atlas = ExtResource("11_1lfn5")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtf81"]
+atlas = ExtResource("11_1lfn5")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f8co"]
+atlas = ExtResource("11_1lfn5")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rskh7"]
+atlas = ExtResource("11_1lfn5")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_brhml"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffebv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtf81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f8co")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rskh7")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="Player1" type="CharacterBody2D" groups=["players"]]
 position = Vector2(0, -48)
 scale = Vector2(4, 4)
@@ -200,6 +240,11 @@ stream = ExtResource("8_k3kow")
 
 [node name="powerUpTimer" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="HitEffect" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_brhml")
+frame = 4
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

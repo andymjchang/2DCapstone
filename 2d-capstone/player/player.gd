@@ -44,6 +44,8 @@ var sfxPlayer
 var glitchLines
 var camera
 
+@onready var hitEffect : AnimatedSprite2D = $HitEffect
+
 func _ready():
 	print("my name is: ",self.name)
 	curSprite = get_node("Animation").duplicate()
@@ -199,6 +201,9 @@ func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 		scored.emit(self.name, abs(other.global_position.x - global_position.x))
 	if other.is_in_group("enemies"):
 		other.GotHit()
+		# Play hit animation
+		hitEffect.frame = 0
+		hitEffect.play()
 
 func _on_attack_timer_timeout() -> void:
 	canAttack = true
