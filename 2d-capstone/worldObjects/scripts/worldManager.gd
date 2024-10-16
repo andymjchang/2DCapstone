@@ -61,9 +61,11 @@ func _ready():
 	if levelFile.begins_with("Lvl0."):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Tutorial_New_155bpm.mp3"
+		backgroundName = "Lvl0"
 	if levelFile.begins_with("Lvl1."):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Level1_Main_155bpm.mp3"
+		backgroundName = "Lvl1"
 	if levelFile.begins_with("Lvl2."):
 		Globals.setBPM(156)
 		Globals.currentSongFileName = "Level2_Main_156bpm_V2.mp3"
@@ -91,9 +93,9 @@ func _ready():
 		var backgroundInstance = backgroundScene.instantiate()
 		$Background.add_child(backgroundInstance)
 	
+	camera = $Camera2D
 	timerText = $CanvasLayer/Timer
 	player1 = playersList.get_node("Player1")
-	camera = $Camera2D
 	scoreText = $CanvasLayer/Score
 	powerupUI = $Camera2D/PowerupSlot
 	

@@ -32,36 +32,38 @@ script = ExtResource("3_3u3ml")
 
 [node name="topBlack" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = -2.0
-offset_top = -22.0
+offset_top = -25.0
 offset_right = 1923.0
-offset_bottom = 28.0
+offset_bottom = 25.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("5_psxq1")
+increasedScale = Vector2(1, 1.5)
 
 [node name="topBlackMid" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = 489.0
-offset_top = -19.0
+offset_top = -22.0
 offset_right = 1531.0
-offset_bottom = 28.0
+offset_bottom = 25.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("5_psxq1")
 timingScale = 2
-increasedScale = Vector2(1, 1.6)
+increasedScale = Vector2(1, 2)
 
 [node name="botBlack" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = -1.0
-offset_top = 1055.0
+offset_top = 1058.0
 offset_right = 1924.0
-offset_bottom = 1110.0
+offset_bottom = 1113.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("5_psxq1")
+increasedScale = Vector2(1, 1.5)
 
 [node name="botBlackMid" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = 490.0
-offset_top = 1053.0
+offset_top = 1056.0
 offset_right = 1532.0
-offset_bottom = 1110.0
+offset_bottom = 1113.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("5_psxq1")
 timingScale = 2
-increasedScale = Vector2(1, 1.6)
+increasedScale = Vector2(1, 2)
