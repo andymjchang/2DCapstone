@@ -51,3 +51,6 @@ func screenFlashEffect():
 	var screenFlashInstance = screenFlashNode.instantiate()
 	screenFlashInstance.screenFlash(0.25, 0.3)
 	add_child(screenFlashInstance)
+	
+func get_random_sign():
+	return -1 if randi() % 2 == 0 else 1

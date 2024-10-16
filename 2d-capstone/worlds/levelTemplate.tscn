@@ -74,6 +74,7 @@ script = ExtResource("15_mx364")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(250, 550)
+ignore_rotation = false
 zoom = Vector2(2, 2)
 script = ExtResource("4_nttx1")
 

@@ -45,6 +45,8 @@ var glitchLines
 var camera
 
 @onready var hitEffect : AnimatedSprite2D = $HitEffect
+@onready var tweenRot : Tween
+@onready var tweenZoom : Tween
 
 func _ready():
 	print("my name is: ",self.name)
@@ -112,12 +114,22 @@ func _physics_process(delta: float) -> void:
 				get_node("Hitbox").position.y = 8
 				$Animation.play("Slide");
 				#get_node("Floor").disabled = false
+				var rotDir = Globals.get_random_sign()
+				tweenRot = create_tween()
+				tweenZoom = create_tween()
+				tweenRot.tween_property(camera, "rotation", 0.004363323 * rotDir, 0.2)
+				tweenZoom.tween_property(camera, "zoom", Vector2(2.1, 2.1), 0.5)
+				#camera.zoom = Vector2(2.2, 2.2)
 				
 			if Input.is_action_just_released(slide):
 				get_node("Hitbox").scale *= Vector2(1, 2);
 				get_node("Hitbox").position.y = 2
 				$Animation.play("Run");
 				#get_node("Floor").disabled = true
+				tweenRot = create_tween()
+				tweenZoom = create_tween()
+				tweenRot.tween_property(camera, "rotation", 0, 0.2)
+				tweenZoom.tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.5)
 			
 		if Input.is_action_just_pressed(punch):
 			if canAttack:
