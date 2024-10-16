@@ -58,7 +58,7 @@ func _ready():
 	
 	# FIXME: temporary bpm setting
 	if levelFile.begins_with("Lvl0."):
-		Globals.setBPM(120)
+		Globals.setBPM(155)
 	if levelFile.begins_with("Lvl1."):
 		Globals.setBPM(155)
 	if levelFile.begins_with("Lvl2."):
