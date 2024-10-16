@@ -1,0 +1,61 @@
+[gd_scene load_steps=13 format=3 uid="uid://bjqhlnpirpnte"]
+
+[ext_resource type="Script" path="res://worldObjects/scripts/onboardingPopUp.gd" id="1_oyrl3"]
+[ext_resource type="Texture2D" uid="uid://d3j2apo38ukxr" path="res://ui/assets/onboarding/OnB_Welcome.png" id="2_t4vpf"]
+[ext_resource type="Texture2D" uid="uid://do7d5urfnve3i" path="res://ui/assets/onboarding/OnB_PowerUp.png" id="3_dpybw"]
+[ext_resource type="Texture2D" uid="uid://1v5fdgpcdyej" path="res://ui/assets/onboarding/OnB_Punch.png" id="3_iund1"]
+[ext_resource type="Texture2D" uid="uid://dhlj6wy6n7p3m" path="res://ui/assets/onboarding/OnB_PowerUp2.png" id="4_2urxs"]
+[ext_resource type="Texture2D" uid="uid://b815kq7nilpnf" path="res://ui/assets/onboarding/OnB_Jump.png" id="4_igbbg"]
+[ext_resource type="Texture2D" uid="uid://cx143fhmisr0e" path="res://ui/assets/onboarding/OnB_Movement.png" id="5_3lsgv"]
+[ext_resource type="Texture2D" uid="uid://u2pawy5g6wqo" path="res://ui/assets/onboarding/OnB_FastPunches.png" id="5_p4b6g"]
+[ext_resource type="Texture2D" uid="uid://c4whitm48f0o0" path="res://ui/assets/onboarding/OnB_Slide.png" id="6_auqlf"]
+[ext_resource type="Texture2D" uid="uid://ck0p7tflmjeb2" path="res://ui/assets/onboarding/OnB_JumpPunch.png" id="7_r1dec"]
+[ext_resource type="Texture2D" uid="uid://bcerjsohd7ocf" path="res://ui/assets/onboarding/OnB_BrkWall.png" id="8_nypwh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fxxyb"]
+animations = [{
+"frames": [{
+"duration": 7.0,
+"texture": ExtResource("2_t4vpf")
+}, {
+"duration": 6.0,
+"texture": ExtResource("3_dpybw")
+}, {
+"duration": 6.0,
+"texture": ExtResource("4_2urxs")
+}, {
+"duration": 6.0,
+"texture": ExtResource("5_3lsgv")
+}, {
+"duration": 14.0,
+"texture": ExtResource("3_iund1")
+}, {
+"duration": 12.0,
+"texture": ExtResource("4_igbbg")
+}, {
+"duration": 21.0,
+"texture": ExtResource("5_p4b6g")
+}, {
+"duration": 11.0,
+"texture": ExtResource("6_auqlf")
+}, {
+"duration": 13.0,
+"texture": ExtResource("7_r1dec")
+}, {
+"duration": 13.0,
+"texture": ExtResource("8_nypwh")
+}],
+"loop": false,
+"name": &"new_animation",
+"speed": 1.0
+}]
+
+[node name="onboardingPopUp" type="Node2D"]
+script = ExtResource("1_oyrl3")
+
+[node name="tutorialSlides" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -185)
+sprite_frames = SubResource("SpriteFrames_fxxyb")
+animation = &"new_animation"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="tutorialSlides"]

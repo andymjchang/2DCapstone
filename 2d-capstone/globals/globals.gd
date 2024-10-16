@@ -18,6 +18,14 @@ var startP2Coords
 var customStart = false
 
 
+enum powerType {
+	INVULN,
+	HEAL,
+	SPEEDUP,
+	SLOWDOWN
+}
+
+
 # File Names
 var currentEditorFileName
 var currentSongFileName

@@ -55,7 +55,6 @@ var restartCheckpoint = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	loadLevel()
-	print("Restarting? ", restartCheckpoint)
 	
 	var backgroundName : String = "Lvl1"
 	if levelFile.begins_with("Lvl0."):
@@ -69,6 +68,11 @@ func _ready():
 		Globals.currentSongFileName = "Level2_Main_156bpm_V2.mp3"
 		backgroundName = "Lvl2"
 		
+	if levelFile == "Lvl0.2":
+		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
+		var popUpInstance = popUpScene.instantiate()
+		$Camera2D.add_child(popUpInstance)
+		$Camera2D/onboardingPopUp/tutorialSlides.play()
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
 	# set bpm of all pulsing objects
@@ -96,6 +100,7 @@ func _ready():
 	textPopupScene1.initPosition(player1)
 
 	music = camera.get_node("Music")
+	music.stream.loop = false
 	loadAudio()
 	
 	# Setting signals
@@ -121,10 +126,12 @@ func _ready():
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
 	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
 
+
 	# Start game
 	Globals.inLevel = false
 	restartButton.visible = false
 	changeCountdown()
+	emit_signal("changeSpeed", 0)
 	#startGame()
 	
 func startGame():
@@ -137,6 +144,7 @@ func loadAudio():
 	var audioPath = "res://audioTracks/" + Globals.currentSongFileName
 	var newAudio = load(audioPath) as AudioStream
 	music.stream = newAudio
+	music.stream.loop = false
 
 func loadLevel():
 	# set file to load
@@ -145,7 +153,7 @@ func loadLevel():
 	if Globals.curFile:
 		levelFile = Globals.curFile
 	
-	print("level nameL ", levelFile)
+	print("level name ", levelFile)
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],

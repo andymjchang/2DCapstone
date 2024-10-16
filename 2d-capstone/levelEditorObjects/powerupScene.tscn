@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ce67hev01ibyl"]
+[gd_scene load_steps=4 format=3 uid="uid://ce67hev01ibyl"]
 
-[ext_resource type="Script" path="res://worldObjects/scripts/powerup.gd" id="1_twmo5"]
-[ext_resource type="Texture2D" uid="uid://2kbm71o22fjj" path="res://worldObjects/assets/powerUp.png" id="2_v43a4"]
+[ext_resource type="Texture2D" uid="uid://2kbm71o22fjj" path="res://worldObjects/assets/powerups/invuln.png" id="2_v43a4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5220h"]
 size = Vector2(236, 236)
@@ -11,8 +10,6 @@ size = Vector2(238, 237)
 
 [node name="PowerupScene" type="Node2D"]
 scale = Vector2(0.25, 0.25)
-script = ExtResource("1_twmo5")
-powerType = "fast"
 
 [node name="Powerup" type="Node2D" parent="."]
 

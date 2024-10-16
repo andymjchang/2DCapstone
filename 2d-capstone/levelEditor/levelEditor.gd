@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -149,7 +149,6 @@ func _on_text_edit_2_text_changed() -> void:
 		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
 		
-
 func loadLevel():
 	print("save file name, ", saveFileName)
 	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
@@ -162,7 +161,7 @@ func loadLevel():
 		"player": [player1, player1List, blockTypes[0]],
 		"breakableWalls": [breakableWall,breakableWallList,  blockTypes[9]],
 		"ziplines": [zipline, ziplineList, blockTypes[10]],
-		"slideWalls": [slideWall, slideWallList, blockTypes[11]],
+		"slideWalls": [slideWall, slideWallList, blockTypes[12]],
 		"powerups": [powerup, powerupList, blockTypes[1]]}
 	var instance
 	var objectList
@@ -185,6 +184,7 @@ func loadLevel():
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
 			objectParent.setComponents(posPoints)
+			
 			#do this if object has more than one component
 
 func _on_save_button_down() -> void:
@@ -229,7 +229,7 @@ func _onSlideWallButtonUp() -> void:
 	var slideWallInstance = slideWall.instantiate()
 	var slideWallParent = baseObject.instantiate()
 	slideWallParent.add_child(slideWallInstance)
-	slideWallParent.blockType = blockTypes[11]
+	slideWallParent.blockType = blockTypes[12]
 	slideWallList.add_child(slideWallParent)
 	place_block(slideWallParent, slideWallList, camera.position, false)
 
@@ -240,7 +240,6 @@ func _on_exit_button_pressed() -> void:
 	# For debugging
 	# get_tree().quit()
 
-	
 func _on_rac_button_button_up() -> void:
 	if !player1List.has_node("baseObject"):
 		var player1Instance = player1.instantiate()
@@ -365,13 +364,14 @@ func save_scene_to_file():
 						var posChain = ""
 						#go through all of the individual block components
 						for blockChild in childrenList:
-							posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
+							#saving for platfrom block differs since their size varies
+							if itemList.name == "normal":
+								#save the number of cols as well as the extents so we know where to start drawing
+								posChain = str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y)+" ,"+str(blockChild.numCols) + ", " + str(blockChild.extents)+ ", "
+							else:
+								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
 							index+=1
 							editorName = "EditorArea"+str(index)
-							#saving for platfrom block differs since their size varies
-							#if itemList.name == "normal":
-								##save the number of cols as well as the extents so we know where to start drawing
-								#posChain = str(blockChild.extents) + ", " + str(blockChild.)
 						#print("child list in save, ", childrenList)
 						posChain = posChain.substr(0, posChain.length()-1)
 						posChain+="\n"
@@ -460,6 +460,7 @@ func reset_drag_tracking():
 
 func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 	trackingPosition = true
+	print("blockType: ", blockType)
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
@@ -483,7 +484,7 @@ func getList(blockType : String) -> Node:
 	if blockType == "goalBlock":
 		return get_node("objectList/goalBlocks")
 	if blockType == "p1checkpoint":
-		return get_node("objectList/player1checkpoints")
+		return get_node("objectList/playerCheckpoints")
 	if blockType == "killFloor":
 		return get_node("objectList/killFloors")
 	if blockType == "breakableWall":

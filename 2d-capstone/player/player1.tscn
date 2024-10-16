@@ -250,8 +250,9 @@ stream = ExtResource("7_wy6uo")
 position = Vector2(0, 11)
 stream = ExtResource("8_k3kow")
 
-[node name="powerUpTimer" type="Timer" parent="."]
+[node name="powerupTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
 
 [node name="HitEffect" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
@@ -264,5 +265,5 @@ wait_time = 0.25
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="powerUpTimer" to="." method="_onPowerUpTimer"]
 [connection signal="timeout" from="damagedTimer" to="." method="_on_damaged_timer_timeout"]
+[connection signal="timeout" from="powerupTimer" to="." method="_onPowerupTimerTimeout"]

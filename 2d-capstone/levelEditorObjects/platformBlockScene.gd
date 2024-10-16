@@ -1,6 +1,5 @@
 extends Node2D
 
-
 #6 cols  default
 @onready var tileMap = self.get("Node2D/TileMapLayer")
 var numCols = 12
@@ -10,11 +9,19 @@ var endTiles = [Vector2(4,1),Vector2(3,2),Vector2(3,2), Vector2(4,4)]
 var tileWidth
 
 func _ready() -> void:
+	# set the extents to the width of the tile x 12
+
 	tileMap =  self.get_node("Node2D/TileMapLayer")
 	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
+	var newWidth = tileWidth * 12.0
 	print("tile width, ", tileWidth)
-	extents = self.get_node("Node2D/Area2D/CollisionShape2D").shape as RectangleShape2D
-	extents = extents.extents
+	extents = self.get_node("Node2D/Area2D/CollisionShape2D").shape.extents
+	extents = extents
+	print("old extents: ", extents)
+	extents = newWidth/2.0
+	print("new extents: ", extents)
+	self.get_node("Node2D/Area2D/CollisionShape2D").shape.extents.x = extents
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -39,11 +46,12 @@ func extendByOneTile() -> void :
 	for i in range(0,4):
 		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
 		startY+=1
+		
 	print("node, ",self.get_node("Node2D/EditorArea0/CollisionShape2D").get_children())
 	#alter the area2d to represent the new size
 	print("before extending collision shape pos: ", self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x , " , extents: ",self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x, " , tile width: ", tileWidth )
-	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x += tileWidth
-	self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x += tileWidth
+	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x += tileWidth/2.0
+	self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x += tileWidth/2.0
 	print("after extending collision shape pos: ", self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x , " , extents: ",self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x )
 
 	numCols+=1
@@ -65,8 +73,8 @@ func decreaseByOneTile() -> void:
 			tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
 			startY+=1
 			
-		self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x -= tileWidth
-		self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x -= tileWidth
+		self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x -= tileWidth/2.0
+		self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x -= tileWidth/2.0
 		numCols-=1
 	
 func getMaxMinCoord(usedCells : Array) -> Array:
@@ -84,8 +92,14 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 			maxCoords.y = cell.y
 		if cell.y < minCoords.y:
 			minCoords.y = cell.y
-			
-			
+						
 	return [minCoords, maxCoords]
+	
+#TODO make this work for more than one tilemap
+func setTileMaps(extents, cols, pos) -> void:
+	#have to get the start of where we arein the world
+	#TODO combine this into one var
+	var startX = pos.x - extents.x
+	var startY = pos.y - extents.x
 	
 	
