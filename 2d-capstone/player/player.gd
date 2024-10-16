@@ -155,6 +155,11 @@ func _physics_process(delta: float) -> void:
 
 func _onTakeDamage(amount):
 	$damagePlayer.play()
+	
+	# Glitch Shader
+	$GlitchShader.visible = true
+	$damagedTimer.start()
+	
 	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
 		if amount == 10:
 			amount = health
@@ -253,3 +258,7 @@ func _onPowerUpTimer() -> void:
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.get_parent().ifDead == false:
 		_onTakeDamage(3)
+
+
+func _on_damaged_timer_timeout() -> void:
+	$GlitchShader.visible = false

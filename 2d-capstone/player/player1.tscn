@@ -1,11 +1,11 @@
 [gd_scene load_steps=33 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
-[ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="2_a5rf3"]
 [ext_resource type="Texture2D" uid="uid://eoiqyev7gvq4" path="res://animations/raccoonAnims/Raccoon_jump.png" id="2_amwal"]
 [ext_resource type="Texture2D" uid="uid://bvvcm7r3cp3x7" path="res://animations/raccoonAnims/Raccoon_spriteSheet_v05.png" id="2_icjbr"]
 [ext_resource type="Texture2D" uid="uid://nchurhplqcb3" path="res://animations/raccoonAnims/Raccoon_punch.png" id="3_sudcy"]
 [ext_resource type="Texture2D" uid="uid://dpptplv42kqxc" path="res://animations/raccoonAnims/Slide.png" id="5_tonbw"]
+[ext_resource type="Material" uid="uid://bprabndekf50s" path="res://shaders/playerGlitch.tres" id="7_p3aw2"]
 [ext_resource type="Texture2D" uid="uid://bf5aif1oibn04" path="res://player/playerActionCircle2.png" id="7_tnfmg"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
 [ext_resource type="AudioStream" uid="uid://b67k06qom6hxa" path="res://audioEffects/SFX_Hit_4.mp3" id="8_k3kow"]
@@ -177,6 +177,14 @@ scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
 animation = &"Run"
 
+[node name="GlitchShader" type="ColorRect" parent="."]
+visible = false
+material = ExtResource("7_p3aw2")
+offset_left = -34.0
+offset_top = -12.0
+offset_right = 3.0
+offset_bottom = 13.0
+
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-12.125, 2)
 shape = SubResource("RectangleShape2D_44r6d")
@@ -187,12 +195,6 @@ offset_left = -12.0
 offset_top = -10.0
 offset_right = 12.0
 offset_bottom = 10.0
-
-[node name="ProtoMc" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-2.5, -11.75)
-scale = Vector2(0.368884, 0.344364)
-texture = ExtResource("2_a5rf3")
 
 [node name="AttackHitbox" type="Area2D" parent="." groups=["playerHitbox"]]
 position = Vector2(-18, -9.375)
@@ -256,7 +258,11 @@ scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_brhml")
 frame = 4
 
+[node name="damagedTimer" type="Timer" parent="."]
+wait_time = 0.25
+
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="powerUpTimer" to="." method="_onPowerUpTimer"]
+[connection signal="timeout" from="damagedTimer" to="." method="_on_damaged_timer_timeout"]
