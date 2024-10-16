@@ -1,11 +1,13 @@
-[gd_scene load_steps=33 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=35 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Texture2D" uid="uid://eoiqyev7gvq4" path="res://animations/raccoonAnims/Raccoon_jump.png" id="2_amwal"]
 [ext_resource type="Texture2D" uid="uid://bvvcm7r3cp3x7" path="res://animations/raccoonAnims/Raccoon_spriteSheet_v05.png" id="2_icjbr"]
 [ext_resource type="Texture2D" uid="uid://nchurhplqcb3" path="res://animations/raccoonAnims/Raccoon_punch.png" id="3_sudcy"]
 [ext_resource type="Texture2D" uid="uid://dpptplv42kqxc" path="res://animations/raccoonAnims/Slide.png" id="5_tonbw"]
+[ext_resource type="Texture2D" uid="uid://b18hph1l64gp1" path="res://animations/raccoonAnims/Zipline_Tango_slide.png" id="6_cw6gs"]
 [ext_resource type="Material" uid="uid://bprabndekf50s" path="res://shaders/playerGlitch.tres" id="7_p3aw2"]
+[ext_resource type="Texture2D" uid="uid://601aqkhuqjk5" path="res://animations/raccoonAnims/Zipline_Tango_punch.png" id="7_tegds"]
 [ext_resource type="Texture2D" uid="uid://bf5aif1oibn04" path="res://player/playerActionCircle2.png" id="7_tnfmg"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
 [ext_resource type="AudioStream" uid="uid://b67k06qom6hxa" path="res://audioEffects/SFX_Hit_4.mp3" id="8_k3kow"]
@@ -113,6 +115,22 @@ animations = [{
 "loop": true,
 "name": &"Slide",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_cw6gs")
+}],
+"loop": true,
+"name": &"Zip",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_tegds")
+}],
+"loop": true,
+"name": &"ZipPunch",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
@@ -175,7 +193,7 @@ script = ExtResource("1_qyaa7")
 position = Vector2(-15, -0.75)
 scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Run"
+animation = &"ZipPunch"
 
 [node name="GlitchShader" type="ColorRect" parent="."]
 visible = false

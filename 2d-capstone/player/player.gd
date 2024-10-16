@@ -132,11 +132,16 @@ func _physics_process(delta: float) -> void:
 				tweenZoom = create_tween()
 				tweenRot.tween_property(camera, "rotation", 0, 0.2)
 				tweenZoom.tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.5)
+		elif inZipline:
+			$Animation.play("Zip")
 			
 		if Input.is_action_just_pressed(punch):
 			if canAttack:
 				# Artistic
-				$Animation.play("Punch")
+				if not inZipline:
+					$Animation.play("Punch")
+				else:
+					$Animation.play("ZipPunch")
 				sfxPlayer.play()
 				# Technical
 				print("punch is now true!, ", Globals.time)

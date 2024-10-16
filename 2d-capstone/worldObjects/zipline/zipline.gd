@@ -34,6 +34,7 @@ func _onBodyEntered(body):
 			print("at end")
 			body.inZipline = false
 			body.relocating = false
+			body.get_node("Animation").play("Run")
 			body.position.y -= 100
 			body.velocity = Vector2(0, 0)
 
