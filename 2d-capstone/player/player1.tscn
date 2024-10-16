@@ -1,14 +1,16 @@
-[gd_scene load_steps=25 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=33 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
-[ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="2_a5rf3"]
 [ext_resource type="Texture2D" uid="uid://eoiqyev7gvq4" path="res://animations/raccoonAnims/Raccoon_jump.png" id="2_amwal"]
 [ext_resource type="Texture2D" uid="uid://bvvcm7r3cp3x7" path="res://animations/raccoonAnims/Raccoon_spriteSheet_v05.png" id="2_icjbr"]
 [ext_resource type="Texture2D" uid="uid://nchurhplqcb3" path="res://animations/raccoonAnims/Raccoon_punch.png" id="3_sudcy"]
 [ext_resource type="Texture2D" uid="uid://dpptplv42kqxc" path="res://animations/raccoonAnims/Slide.png" id="5_tonbw"]
-[ext_resource type="Texture2D" uid="uid://bt5jsder0msfx" path="res://player/playerActionCircle.png" id="6_4xpfe"]
+[ext_resource type="Material" uid="uid://bprabndekf50s" path="res://shaders/playerGlitch.tres" id="7_p3aw2"]
+[ext_resource type="Texture2D" uid="uid://bf5aif1oibn04" path="res://player/playerActionCircle2.png" id="7_tnfmg"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
 [ext_resource type="AudioStream" uid="uid://b67k06qom6hxa" path="res://audioEffects/SFX_Hit_4.mp3" id="8_k3kow"]
+[ext_resource type="Script" path="res://ui/scripts/pulseSprite.gd" id="8_socwb"]
+[ext_resource type="Texture2D" uid="uid://cuoxttcoy7weh" path="res://worldObjects/enemy/Poof_anim_1-sheet.png" id="11_1lfn5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fb3mh"]
 atlas = ExtResource("2_amwal")
@@ -114,13 +116,55 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(23.25, 19.625)
+size = Vector2(23, 19.625)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
-size = Vector2(9.99802, 10.992)
+size = Vector2(12.5005, 12.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2j42"]
+size = Vector2(15, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
-size = Vector2(23.75, 25.375)
+size = Vector2(18.125, 21.1875)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffebv"]
+atlas = ExtResource("11_1lfn5")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtf81"]
+atlas = ExtResource("11_1lfn5")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f8co"]
+atlas = ExtResource("11_1lfn5")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rskh7"]
+atlas = ExtResource("11_1lfn5")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_brhml"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffebv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtf81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f8co")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rskh7")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="Player1" type="CharacterBody2D" groups=["players"]]
 position = Vector2(0, -48)
@@ -131,7 +175,15 @@ script = ExtResource("1_qyaa7")
 position = Vector2(-15, -0.75)
 scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Punch"
+animation = &"Run"
+
+[node name="GlitchShader" type="ColorRect" parent="."]
+visible = false
+material = ExtResource("7_p3aw2")
+offset_left = -34.0
+offset_top = -12.0
+offset_right = 3.0
+offset_bottom = 13.0
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-12.125, 2)
@@ -144,16 +196,11 @@ offset_top = -10.0
 offset_right = 12.0
 offset_bottom = 10.0
 
-[node name="ProtoMc" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-2.5, -11.75)
-scale = Vector2(0.368884, 0.344364)
-texture = ExtResource("2_a5rf3")
-
-[node name="AttackHitbox" type="Area2D" parent="."]
+[node name="AttackHitbox" type="Area2D" parent="." groups=["playerHitbox"]]
 position = Vector2(-18, -9.375)
 rotation = 0.000143446
 monitoring = false
+monitorable = false
 
 [node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
 visible = false
@@ -164,23 +211,32 @@ offset_bottom = 21.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(18.0013, 9.11843)
+position = Vector2(18.0011, 9.12292)
 rotation = 0.00184914
 shape = SubResource("RectangleShape2D_efrg4")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-16, 1.25)
+shape = SubResource("RectangleShape2D_a2j42")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
 visible = false
 position = Vector2(-11.75, 10.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckpointHitbox"]
-position = Vector2(0.5, -11.25)
+position = Vector2(-2.3125, -9.15625)
 shape = SubResource("RectangleShape2D_rw1d5")
 disabled = true
 
-[node name="actionLine" type="Sprite2D" parent="."]
+[node name="actionLine" type="Sprite2D" parent="." groups=["pulsingObjects"]]
 position = Vector2(0, -0.25)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("6_4xpfe")
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("7_tnfmg")
+script = ExtResource("8_socwb")
+increasedScale = Vector2(0.03, 0.03)
 
 [node name="attackTimer" type="Timer" parent="."]
 wait_time = 0.25
@@ -198,6 +254,16 @@ stream = ExtResource("8_k3kow")
 wait_time = 5.0
 one_shot = true
 
+[node name="HitEffect" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_brhml")
+frame = 4
+
+[node name="damagedTimer" type="Timer" parent="."]
+wait_time = 0.25
+
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="powerupTimer" to="." method="_onPowerupTimerTimeout"]
+[connection signal="timeout" from="damagedTimer" to="." method="_on_damaged_timer_timeout"]

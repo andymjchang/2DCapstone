@@ -1,24 +1,67 @@
-[gd_scene load_steps=5 format=3 uid="uid://25td4r2m7r1e"]
+[gd_scene load_steps=6 format=3 uid="uid://25td4r2m7r1e"]
 
 [ext_resource type="Texture2D" uid="uid://d1em5aq73uubq" path="res://ui/assets/Guitar_Meter_No_Fill.png" id="1_mjrnw"]
 [ext_resource type="Texture2D" uid="uid://2qsydlecpwqu" path="res://ui/assets/Guitar_Meter_Fill.png" id="2_838in"]
 [ext_resource type="Texture2D" uid="uid://cayhsbosohd47" path="res://ui/assets/Guitar_Red.png" id="2_bmfs1"]
 [ext_resource type="Script" path="res://ui/scripts/textureScoreProgress_bar.gd" id="3_3u3ml"]
+[ext_resource type="Script" path="res://ui/scripts/pulseRect.gd" id="5_psxq1"]
 
 [node name="ScoreBar" type="CanvasLayer"]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-anchors_preset = -1
-anchor_left = 0.631
-anchor_top = -0.151
-anchor_right = 0.631
-anchor_bottom = -0.151
-offset_left = 189.48
-offset_top = 165.08
-offset_right = 706.48
-offset_bottom = 379.08
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -258.5
+offset_top = -540.0
+offset_right = 258.5
+offset_bottom = -326.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.00872665
+pivot_offset = Vector2(258, 0)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 nine_patch_stretch = true
 texture_under = ExtResource("1_mjrnw")
 texture_over = ExtResource("2_bmfs1")
 texture_progress = ExtResource("2_838in")
 script = ExtResource("3_3u3ml")
+
+[node name="topBlack" type="ColorRect" parent="." groups=["pulsingObjects"]]
+offset_left = -2.0
+offset_top = -22.0
+offset_right = 1923.0
+offset_bottom = 28.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("5_psxq1")
+
+[node name="topBlackMid" type="ColorRect" parent="." groups=["pulsingObjects"]]
+offset_left = 489.0
+offset_top = -19.0
+offset_right = 1531.0
+offset_bottom = 28.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("5_psxq1")
+timingScale = 2
+increasedScale = Vector2(1, 1.6)
+
+[node name="botBlack" type="ColorRect" parent="." groups=["pulsingObjects"]]
+offset_left = -1.0
+offset_top = 1055.0
+offset_right = 1924.0
+offset_bottom = 1110.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("5_psxq1")
+
+[node name="botBlackMid" type="ColorRect" parent="." groups=["pulsingObjects"]]
+offset_left = 490.0
+offset_top = 1053.0
+offset_right = 1532.0
+offset_bottom = 1110.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("5_psxq1")
+timingScale = 2
+increasedScale = Vector2(1, 1.6)

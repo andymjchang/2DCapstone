@@ -42,6 +42,11 @@ var otherPlayer
 var worldNode
 var sfxPlayer
 var glitchLines
+var camera
+
+@onready var hitEffect : AnimatedSprite2D = $HitEffect
+@onready var tweenRot : Tween
+@onready var tweenZoom : Tween
 
 func _ready():
 	curSprite = get_node("Animation").duplicate()
@@ -70,7 +75,11 @@ func _ready():
 	curPowerup = null
 	
 	# Attach to glitch line
-	glitchLines = worldNode.get_node("Camera2D").get_node("glitchLines")
+	camera = worldNode.get_node("Camera2D")
+	glitchLines = camera.get_node("glitchLines")
+	camera.global_position = self.global_position + Vector2(250, -70)
+	var background = worldNode.get_node("Background")
+	background.global_position = camera.global_position
 
 func _physics_process(delta: float) -> void:
 	if not editing:
@@ -106,12 +115,24 @@ func _physics_process(delta: float) -> void:
 				get_node("Hitbox").scale *= Vector2(1, 0.5);
 				get_node("Hitbox").position.y = 6
 				$Animation.play("Slide");
-		
+				#get_node("Floor").disabled = false
+				var rotDir = Globals.get_random_sign()
+				tweenRot = create_tween()
+				tweenZoom = create_tween()
+				tweenRot.tween_property(camera, "rotation", 0.004363323 * rotDir, 0.2)
+				tweenZoom.tween_property(camera, "zoom", Vector2(2.1, 2.1), 0.5)
+				#camera.zoom = Vector2(2.2, 2.2)
+				
 			if Input.is_action_just_released(slide):
 				get_node("Hitbox").scale *= Vector2(1, 2);
 				get_node("Hitbox").position.y = 2
 				$Animation.play("Run");
-
+				#get_node("Floor").disabled = true
+				tweenRot = create_tween()
+				tweenZoom = create_tween()
+				tweenRot.tween_property(camera, "rotation", 0, 0.2)
+				tweenZoom.tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.5)
+			
 		if Input.is_action_just_pressed(punch):
 			if canAttack:
 				# Artistic
@@ -120,6 +141,7 @@ func _physics_process(delta: float) -> void:
 				# Technical
 				print("punch is now true!, ", Globals.time)
 				punchInProgress = true
+				attack.monitoring = true
 				attack.monitoring = true
 				canAttack = false
 				$attackTimer.start()
@@ -136,6 +158,11 @@ func _physics_process(delta: float) -> void:
 
 func _onTakeDamage(amount):
 	$damagePlayer.play()
+	
+	# Glitch Shader
+	$GlitchShader.visible = true
+	$damagedTimer.start()
+	
 	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
 		if amount == 10:
 			amount = health
@@ -187,11 +214,17 @@ func _onAnimationFinished():
 func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 	var other = area.get_parent()
 	if other.is_in_group("actionIndicators") and other.active and !punchConnected:
+		_on_attack_timer_timeout() # reset attack timer
 		punchConnected = true
 		Globals.screenFlashEffect()
 		other.active = false
 		other.FadeOut()
-		scored.emit(self.name, abs(other.position.x - position.x))
+		scored.emit(self.name, abs(other.global_position.x - global_position.x))
+	if other.is_in_group("enemies"):
+		other.GotHit()
+		# Play hit animation
+		hitEffect.frame = 0
+		hitEffect.play()
 
 func _on_attack_timer_timeout() -> void:
 	canAttack = true
@@ -217,6 +250,14 @@ func _onActivatePowerup():
 			worldNode.emit_signal("changeSpeed", -1)
 	$powerupTimer.start()
 
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area.get_parent().ifDead == false:
+		_onTakeDamage(3)
+
+
+func _on_damaged_timer_timeout() -> void:
+	$GlitchShader.visible = false
 func _onPowerupTimerTimeout() -> void:
 	print("Timeout!")
 	match curPowerup:

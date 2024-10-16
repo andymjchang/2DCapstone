@@ -6,9 +6,8 @@ var current_index = 0
 var starting_index = 0
 
 func load_array():
-	actionIndicatorArray = get_children()
+	actionIndicatorArray = get_tree().get_nodes_in_group("actionIndicators")
 	for indicator in actionIndicatorArray:
-		indicator.connect("scored", on_scored)
 		indicator.initialize()
 	actionIndicatorArray.sort_custom(sortIndicators)
 	currentWorldScene = get_parent().get_parent()
@@ -32,5 +31,3 @@ func _process(_delta: float) -> void:
 		else:
 			break
 			
-func on_scored(indicator_position):
-	currentWorldScene.updateScore(indicator_position)

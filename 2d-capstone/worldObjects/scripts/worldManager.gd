@@ -56,35 +56,45 @@ var restartCheckpoint = false
 func _ready():
 	loadLevel()
 	
-	# FIXME: temporary bpm setting
+	var backgroundName : String = "Lvl1"
 	if levelFile.begins_with("Lvl0."):
 		Globals.setBPM(155)
+		Globals.currentSongFileName = "Tutorial_New_155bpm.mp3"
+		backgroundName = "Lvl0"
 	if levelFile.begins_with("Lvl1."):
 		Globals.setBPM(155)
+		Globals.currentSongFileName = "Level1_Main_155bpm.mp3"
+		backgroundName = "Lvl1"
 	if levelFile.begins_with("Lvl2."):
 		Globals.setBPM(156)
+		Globals.currentSongFileName = "Level2_Main_156bpm_V2.mp3"
+		backgroundName = "Lvl2"
 		
-	if levelFile == "Lvl0.2":
+	if levelFile.begins_with("Lvl0."):
 		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
 		var popUpInstance = popUpScene.instantiate()
 		$Camera2D.add_child(popUpInstance)
 		$Camera2D/onboardingPopUp/tutorialSlides.play()
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
+	# set bpm of all pulsing objects
+	for object in get_tree().get_nodes_in_group("pulsingObjects"):
+		object.setBPM()
+		
 	# Load background
-	var backgroundScene = load("res://backgrounds/" + levelFile + "Background.tscn")
+	var backgroundScene = load("res://backgrounds/" + backgroundName + "Background.tscn")
 	if backgroundScene:
 		var backgroundInstance = backgroundScene.instantiate()
 		$Background.add_child(backgroundInstance)
-	# Failsafe: load Lvl1.2
+	# Failsafe: load Lvl1
 	else:
-		backgroundScene = load("res://backgrounds/Lvl1.2Background.tscn")
+		backgroundScene = load("res://backgrounds/Lvl1Background.tscn")
 		var backgroundInstance = backgroundScene.instantiate()
 		$Background.add_child(backgroundInstance)
 	
+	camera = $Camera2D
 	timerText = $CanvasLayer/Timer
 	player1 = playersList.get_node("Player1")
-	camera = $Camera2D
 	scoreText = $CanvasLayer/Score
 	
 	# intialize text popup node
@@ -195,7 +205,7 @@ func loadLevel():
 	
 	# load the actionArrays
 	$objectList/actionIndicators.load_array()
-	if Globals.curFile == "Lvl2.1" or levelFile == "Lvl2.1":
+	if levelFile.begins_with("Lvl2."):
 		for platform in platformBlocksList.get_children():
 			platform.get_node("sprite2D/TileMapLayer").visible = false
 			platform.get_node("sprite2D/TileMapLayer2").visible = true
@@ -328,10 +338,10 @@ func _onRunBoundsBodyExited(body: Node2D) -> void:
 func _onScored(id, p_score):
 	var scoreToAdd = 100 - p_score
 	score += scoreToAdd
-	scoreText.text = str(int(score))
+	scoreText.lerpText(int(score))
 	if id == "Player1":
 		textPopupScene1.initText(scoreToAdd, player1.position)
-
+		
 func _onChangeSpeed(speedType):
 	if speedType > 0:			# Speed up
 		music.pitch_scale = 2

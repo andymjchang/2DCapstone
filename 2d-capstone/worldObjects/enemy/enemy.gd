@@ -48,16 +48,16 @@ func DeathAnimation(delta: float) -> void:
 	velocity.x = move_speed
 	position += velocity * delta
 
-func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	if body.is_in_group("players") and body.attack.monitoring:
-		self.ifDead = true
-		velocity.y = randi_range(-600, -300)
-		sprite.rotation = randf_range(min_rotation, max_rotation)
-		get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
-	elif body.is_in_group("players"):
-		body.emit_signal("takeDamage",1)
-	pass # Replace with function body.
 
 	
 	
 	
+func GotHit():
+	self.ifDead = true
+	velocity.y = randi_range(-600, -300)
+	sprite.rotation = randf_range(min_rotation, max_rotation)
+	get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
+
+
+
+	pass # Replace with function body.

@@ -7,6 +7,12 @@ var player : String
 @onready var zeroHealth = $zeroP1Health
 var changed = true
 
+# variables for controlling pulse
+@onready var originalScale = self.transform.get_scale()
+var increasedScale = Vector2(1.2, 1.2)
+var beatInterval = 0.0
+var beatTimer = 0.0
+var lerpFactor = 0.0
 
 # Called when the node enters the scene tree for the first time.
 #TODO add this for both players
@@ -22,9 +28,22 @@ func _ready() -> void:
 		self.get_node("zeroP2Health").visible = false
 		zeroHealth = $zeroP2Health
 		
+func setBPM():
+	beatInterval = 60.0 / Globals.bpm
+
+func processBeat(delta: float) -> void:
+	beatTimer += delta
 	
+	if beatTimer >= beatInterval:
+		beatTimer -= beatInterval
+		if healthStatus == "full":
+			startPulse()
+	scale = lerp(scale, originalScale, lerpFactor)
+	lerpFactor = min(lerpFactor + delta * 2, 1)
 
-
+func startPulse():
+	scale = increasedScale
+	lerpFactor = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if player == "player2" and changed:
@@ -35,6 +54,8 @@ func _process(delta: float) -> void:
 		changed = false
 		zeroHealth = $zeroP2Health
 		fullHealth = $fullP2Health
+	
+	processBeat(delta)
 		
 #is this redundant?	
 func takeDamage() -> void:

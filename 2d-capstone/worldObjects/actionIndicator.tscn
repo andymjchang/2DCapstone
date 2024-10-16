@@ -10,6 +10,7 @@ size = Vector2(50, 50)
 script = ExtResource("1_vgx8v")
 startingScale = 0.75
 animation_time = 0.5
+endColor = Color(0.505882, 0.760784, 0.239216, 1)
 
 [node name="innerCircle" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
