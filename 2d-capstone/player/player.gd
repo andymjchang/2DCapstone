@@ -182,9 +182,6 @@ func _onAnimationFinished():
 		$Animation.play("Run")
 	elif $Animation.animation == "Punch":
 		$Animation.play("Run")
-		print("punch is now false!, ", Globals.time)
-		
-		punchInProgress = false
 	pass
 
 func _on_attack_hitbox_area_entered(area: Area2D) -> void:

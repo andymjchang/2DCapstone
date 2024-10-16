@@ -63,7 +63,6 @@ func _process(delta: float) -> void:
 			getRandomVelocity()
 			wallBroken = true
 			self.get_node(\"Area2D/Sprite2D\").visible = false
-			print(\"self childreb, \", self.get_children())
 			if self.get_node(\"CollisionShape2D\"):
 				self.get_node(\"CollisionShape2D\").queue_free()
 			#queue_free()
