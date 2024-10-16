@@ -7,6 +7,14 @@
 [node name="LevelUI" type="CanvasLayer"]
 script = ExtResource("1_sir47")
 
+[node name="PauseScreen" parent="." instance=ExtResource("3_blxek")]
+visible = false
+size_flags_horizontal = 4
+
+[node name="GameOverScreen" parent="." instance=ExtResource("2_nogfw")]
+visible = false
+size_flags_horizontal = 4
+
 [node name="Box" type="VBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -39,12 +47,6 @@ visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Restart from checkpoint?"
-
-[node name="GameOverScreen" parent="Box" instance=ExtResource("2_nogfw")]
-visible = false
-
-[node name="PauseScreen" parent="Box" instance=ExtResource("3_blxek")]
-visible = false
 
 [node name="TimerScore" type="CanvasLayer" parent="."]
 visible = false

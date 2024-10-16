@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -12,7 +12,7 @@ func _onResumeButtonUp() -> void:
 	Engine.time_scale = 1.0
 	self.visible = false
 	Globals.paused = false
-	self.get_parent().get_parent().get_parent().get_node("Camera2D/Music").stream_paused = false
+	self.get_parent().get_parent().get_node("Camera2D/Music").stream_paused = false
 
 func _onMainMenuButtonUp() -> void:
 	Engine.time_scale = 1.0

@@ -7,7 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://0bnybv0niqyw" path="res://ui/assets/Resume_button_unpressed.png" id="5_sjbko"]
 [ext_resource type="Texture2D" uid="uid://dctqd6x4q8auv" path="res://ui/assets/Resume_button_pressed.png" id="6_d3r4m"]
 
-[node name="PauseScreen" type="Node2D"]
+[node name="PauseScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_42jy6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

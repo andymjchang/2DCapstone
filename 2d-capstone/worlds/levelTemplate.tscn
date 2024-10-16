@@ -21,7 +21,7 @@
 [ext_resource type="Script" path="res://worlds/score.gd" id="15_mx364"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
-[ext_resource type="PackedScene" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
+[ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="AudioStream" uid="uid://c0r4i7rsnwlm7" path="res://audioTracks/Level2_Main_156bpm.mp3" id="21_i4u15"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
@@ -33,7 +33,7 @@ size = Vector2(36, 1086)
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
-levelFile = "stest"
+levelFile = "Lvl0.3"
 platformBlockInstance = ExtResource("2_78xmt")
 goalBlockInstance = ExtResource("3_oih58")
 killFloorInstance = ExtResource("3_6me16")
@@ -45,8 +45,6 @@ breakableWallInstance = ExtResource("10_twea0")
 ziplineInstance = ExtResource("11_mqtla")
 slideWallInstance = ExtResource("11_hh0vp")
 powerupInstance = ExtResource("19_5vjyv")
-
-[node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -147,6 +145,8 @@ script = ExtResource("14_rbu47")
 
 [node name="ProgressBar" parent="." instance=ExtResource("22_7f6ic")]
 visible = false
+
+[node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
 
 [connection signal="body_entered" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyEntered"]
 [connection signal="body_exited" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyExited"]

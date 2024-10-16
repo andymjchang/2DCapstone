@@ -249,7 +249,7 @@ func _onGameOver():
 func showGameOver():
 	music.stop()
 	Engine.time_scale = 0.0
-	$LevelUI/Box/GameOverScreen.visible = true
+	$LevelUI/GameOverScreen.visible = true
 	
 func showLevelCompleted():
 	music.stop()
@@ -270,7 +270,7 @@ func _physics_process(delta):
 		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 		$Camera2D/Music.stream_paused = true
 		Globals.paused = true
-		$LevelUI/Box/PauseScreen.visible = true
+		$LevelUI/PauseScreen.visible = true
 		Engine.time_scale = 0.0
 		
 	if time >= 3.0 and !Globals.inLevel and !Globals.paused:
