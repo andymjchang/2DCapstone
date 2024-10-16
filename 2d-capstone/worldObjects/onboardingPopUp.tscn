@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bjqhlnpirpnte"]
+[gd_scene load_steps=13 format=3 uid="uid://bssitt6qv44jp"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/onboardingPopUp.gd" id="1_oyrl3"]
 [ext_resource type="Texture2D" uid="uid://d3j2apo38ukxr" path="res://ui/assets/onboarding/OnB_Welcome.png" id="2_t4vpf"]
@@ -19,13 +19,13 @@ animations = [{
 "texture": ExtResource("2_t4vpf")
 }, {
 "duration": 6.0,
+"texture": ExtResource("5_3lsgv")
+}, {
+"duration": 6.0,
 "texture": ExtResource("3_dpybw")
 }, {
 "duration": 6.0,
 "texture": ExtResource("4_2urxs")
-}, {
-"duration": 6.0,
-"texture": ExtResource("5_3lsgv")
 }, {
 "duration": 14.0,
 "texture": ExtResource("3_iund1")
