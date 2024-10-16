@@ -7,14 +7,6 @@
 [node name="LevelUI" type="CanvasLayer"]
 script = ExtResource("1_sir47")
 
-[node name="PauseScreen" parent="." instance=ExtResource("3_blxek")]
-visible = false
-size_flags_horizontal = 4
-
-[node name="GameOverScreen" parent="." instance=ExtResource("2_nogfw")]
-visible = false
-size_flags_horizontal = 4
-
 [node name="Box" type="VBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -61,6 +53,14 @@ offset_left = 1056.0
 offset_right = 1104.0
 offset_bottom = 64.0
 text = "0"
+
+[node name="PauseScreen" parent="." instance=ExtResource("3_blxek")]
+visible = false
+size_flags_horizontal = 4
+
+[node name="GameOverScreen" parent="." instance=ExtResource("2_nogfw")]
+visible = false
+size_flags_horizontal = 4
 
 [connection signal="button_down" from="Box/RestartButton" to="." method="_on_restart_button_button_down"]
 [connection signal="pressed" from="Box/CheckpointButton" to="." method="_onCheckpointButtonPressed"]

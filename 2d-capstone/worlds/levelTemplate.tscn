@@ -139,9 +139,6 @@ script = ExtResource("14_rbu47")
 
 [node name="powerups" type="Node2D" parent="objectList"]
 
-[node name="Powerup" parent="objectList/powerups" instance=ExtResource("19_5vjyv")]
-position = Vector2(409, 551)
-
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 
 [node name="ScoreBar" parent="." instance=ExtResource("20_iu2pl")]
