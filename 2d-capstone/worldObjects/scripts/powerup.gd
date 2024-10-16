@@ -18,4 +18,5 @@ func _process(delta: float) -> void:
 func _onArea2dBodyEntered(body:Node2D) -> void:
 	if "players" in body.get_groups():
 		body.emit_signal("getPowerup", powerType)
+		$Display.hide()
 		pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=29 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -26,6 +26,7 @@
 [ext_resource type="AudioStream" uid="uid://c0r4i7rsnwlm7" path="res://audioTracks/Level2_Main_156bpm.mp3" id="21_i4u15"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
 [ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
+[ext_resource type="PackedScene" uid="uid://bo0d4wxsgmli1" path="res://ui/powerupSlot.tscn" id="25_wa2am"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rypfk"]
 size = Vector2(36, 1086)
@@ -77,6 +78,8 @@ position = Vector2(250, 550)
 ignore_rotation = false
 zoom = Vector2(2, 2)
 script = ExtResource("4_nttx1")
+
+[node name="PowerupSlot" parent="Camera2D" instance=ExtResource("25_wa2am")]
 
 [node name="glitchLines" parent="Camera2D" instance=ExtResource("23_jq54w")]
 position = Vector2(0, 120)

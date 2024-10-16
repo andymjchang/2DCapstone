@@ -48,6 +48,7 @@ var musicTime = 0.0
 @onready var player
 @onready var camera
 @onready var scoreText
+@onready var powerupUI
 
 var textPopupScene1
 var restartCheckpoint = false
@@ -94,6 +95,7 @@ func _ready():
 	player1 = playersList.get_node("Player1")
 	camera = $Camera2D
 	scoreText = $CanvasLayer/Score
+	powerupUI = $Camera2D/PowerupSlot
 	
 	# intialize text popup node
 	textPopupScene1 = $Camera2D/ScorePopup1
