@@ -71,9 +71,10 @@ vertical_alignment = 1
 script = ExtResource("15_mx364")
 
 [node name="Background" type="Node2D" parent="."]
+position = Vector2(250, 645)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(250, 550)
+position = Vector2(250, 645)
 ignore_rotation = false
 zoom = Vector2(2, 2)
 script = ExtResource("4_nttx1")

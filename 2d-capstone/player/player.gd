@@ -77,7 +77,9 @@ func _ready():
 	# Attach to glitch line
 	camera = worldNode.get_node("Camera2D")
 	glitchLines = camera.get_node("glitchLines")
-	camera.position = self.position + Vector2(250, -70)
+	camera.global_position = self.global_position + Vector2(250, -70)
+	var background = worldNode.get_node("Background")
+	background.global_position = camera.global_position
 
 func _physics_process(delta: float) -> void:
 	if not editing:
