@@ -163,23 +163,24 @@ func _onTakeDamage(amount):
 	$GlitchShader.visible = true
 	$damagedTimer.start()
 	
-	if !dead or amount >= 10 or !invuln:		# amount over 10(or some num) means insta-death regardless of invuln
-		if amount == 10:
-			amount = health
-		health -= amount
-		#print("Got hit! Health now: ", self.health)
-		if health % 9 == 0:
-			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
-		if health <= 0:
-			#print("Player died!")
-			#self.visible = false
-			$Animation.self_modulate.a = 0.5
-			dead = true
-			invuln = false
-			get_parent().get_parent().get_parent().emit_signal("checkGameOver")
-			if Globals.inLevel:
-				await get_tree().create_timer(3.0).timeout
-				emit_signal("revive", self)
+	if !invuln:
+		if !dead or amount >= 10:		# amount over 10(or some num) means insta-death regardless of invuln
+			if amount == 10:
+				amount = health
+			health -= amount
+			#print("Got hit! Health now: ", self.health)
+			if health % 9 == 0:
+				get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
+			if health <= 0:
+				#print("Player died!")
+				#self.visible = false
+				$Animation.self_modulate.a = 0.5
+				dead = true
+				invuln = false
+				get_parent().get_parent().get_parent().emit_signal("checkGameOver")
+				if Globals.inLevel:
+					await get_tree().create_timer(3.0).timeout
+					emit_signal("revive", self)
 
 func _onRevive(who):
 	who.get_node("Animation").self_modulate.a = 1
@@ -244,7 +245,12 @@ func _onActivatePowerup():
 			invuln = true
 			$Animation.self_modulate.a = 0.5
 		Globals.powerType.HEAL:
-			health += health / 3
+			var potentialHealth = health + 9
+			if potentialHealth > 27:
+				health = 27
+			else:
+				health += 9
+			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("increaseHealth", self.name)
 		Globals.powerType.SPEEDUP:
 			worldNode.emit_signal("changeSpeed", 1)
 		Globals.powerType.SLOWDOWN:

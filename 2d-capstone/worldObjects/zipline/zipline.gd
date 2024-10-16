@@ -26,7 +26,7 @@ func _onBodyEntered(body):
 			var newVelocity = (destination.position - self.position) / 2
 			print("Destination: ", destination.position)
 			print("Velocity: ", newVelocity)
-			body.velocity = newVelocity
+			body.velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 			body.inZipline = true
 			body.relocating = true
 
@@ -34,6 +34,7 @@ func _onBodyEntered(body):
 			print("at end")
 			body.inZipline = false
 			body.relocating = false
+			body.position.y -= 100
 			body.velocity = Vector2(0, 0)
 
 	pass
