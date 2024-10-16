@@ -234,6 +234,8 @@ func _on_attack_timer_timeout() -> void:
 # TODO: Swap from string to enum
 func _onGetPowerup(powerType):
 	curPowerup = powerType
+	worldNode.powerupUI.visual.frame = powerType
+	worldNode.powerupUI.visual.show()
 	print("I got: ", curPowerup)
 
 func _onActivatePowerup():
@@ -248,6 +250,7 @@ func _onActivatePowerup():
 		Globals.powerType.SLOWDOWN:
 			print("Slowing down")
 			worldNode.emit_signal("changeSpeed", -1)
+	worldNode.powerupUI.visual.hide()
 	$powerupTimer.start()
 
 

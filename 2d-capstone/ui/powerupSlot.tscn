@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://bo0d4wxsgmli1"]
+
+[ext_resource type="Script" path="res://ui/scripts/powerupSlot.gd" id="1_jp2jo"]
+[ext_resource type="Texture2D" uid="uid://2kbm71o22fjj" path="res://worldObjects/assets/powerups/invuln.png" id="1_n2ext"]
+[ext_resource type="Texture2D" uid="uid://cyk5gf1yphxnj" path="res://ui/assets/powerupFrame.png" id="2_g2eg4"]
+[ext_resource type="Texture2D" uid="uid://7jj5y6vl2j1n" path="res://worldObjects/assets/powerups/heal.png" id="4_cpu11"]
+[ext_resource type="Texture2D" uid="uid://clr5r236a7rkc" path="res://worldObjects/assets/powerups/speedup.png" id="5_tnroa"]
+[ext_resource type="Texture2D" uid="uid://d21jr8ipfpnpu" path="res://worldObjects/assets/powerups/slowdown.png" id="6_lm2pc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6g8jy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_n2ext")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cpu11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tnroa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lm2pc")
+}],
+"loop": true,
+"name": &"powerups",
+"speed": 5.0
+}]
+
+[node name="PowerupSlot" type="CanvasLayer"]
+script = ExtResource("1_jp2jo")
+
+[node name="Container" type="Node2D" parent="."]
+position = Vector2(130, 119)
+
+[node name="Frame" type="Sprite2D" parent="Container"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_g2eg4")
+
+[node name="Powerup" type="AnimatedSprite2D" parent="Container"]
+scale = Vector2(0.45, 0.45)
+sprite_frames = SubResource("SpriteFrames_6g8jy")
+animation = &"powerups"
