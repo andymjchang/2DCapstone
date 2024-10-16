@@ -23,7 +23,9 @@ func _onBodyEntered(body):
 	if "Player" in body.name:
 		if self.name == "ziplineStart":
 			var destination = get_parent().get_child(END)
-			var newVelocity = (destination.position - body.position) / 2
+			var newVelocity = (destination.position - self.position) / 2
+			print("Destination: ", destination.position)
+			print("Velocity: ", newVelocity)
 			body.velocity = newVelocity
 			body.inZipline = true
 			body.relocating = true

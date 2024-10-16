@@ -23,6 +23,7 @@ scale = Vector2(0.291, 0.291)
 texture = ExtResource("2_30uwk")
 
 [node name="mainMenuButton" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = -404.0
 offset_top = -216.0
 offset_right = 405.0
@@ -33,6 +34,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="resumeButton" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = -392.0
 offset_top = -5.0
 offset_right = 391.0

@@ -253,7 +253,7 @@ func showGameOver():
 	
 func showLevelCompleted():
 	music.stop()
-	$LevelUI/Box/GameOverScreen.visible = true
+	$LevelUI/GameOverScreen.visible = true
 	Engine.time_scale = 0.0
 	#statusMessage.text = "Level Completed!"
 	#restartButton.visible = true
