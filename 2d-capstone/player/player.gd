@@ -252,4 +252,4 @@ func _onPowerUpTimer() -> void:
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.get_parent().ifDead == false:
-		_onTakeDamage(1)
+		_onTakeDamage(3)
