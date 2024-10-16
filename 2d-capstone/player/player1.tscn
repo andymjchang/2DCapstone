@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=33 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Texture2D" uid="uid://c2lnms0ahtxeh" path="res://player/player1.png" id="2_a5rf3"]
@@ -121,6 +121,9 @@ size = Vector2(23, 19.625)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
 size = Vector2(12.5005, 12.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2j42"]
+size = Vector2(17.25, 21)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(18.125, 21.1875)
 
@@ -169,10 +172,10 @@ scale = Vector2(4, 4)
 script = ExtResource("1_qyaa7")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-15, 1.25)
+position = Vector2(-15, -0.75)
 scale = Vector2(0.0521429, 0.0521429)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Slide"
+animation = &"Run"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-12.125, 2)
@@ -209,6 +212,13 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(18.0011, 9.12292)
 rotation = 0.00184914
 shape = SubResource("RectangleShape2D_efrg4")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-14.875, 1.25)
+shape = SubResource("RectangleShape2D_a2j42")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
 visible = false
@@ -247,5 +257,6 @@ sprite_frames = SubResource("SpriteFrames_brhml")
 frame = 4
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="powerUpTimer" to="." method="_onPowerUpTimer"]

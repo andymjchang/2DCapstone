@@ -236,3 +236,8 @@ func _onPowerUpTimer() -> void:
 	curPowerUp = null
 	$powerUpTimer.stop()
 	pass # Replace with function body.
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area.get_parent().ifDead == false:
+		_onTakeDamage(1)
