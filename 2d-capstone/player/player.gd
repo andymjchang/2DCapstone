@@ -211,6 +211,7 @@ func _onAnimationFinished():
 func _on_attack_hitbox_area_entered(area: Area2D) -> void:
 	var other = area.get_parent()
 	if other.is_in_group("actionIndicators") and other.active and !punchConnected:
+		_on_attack_timer_timeout() # reset attack timer
 		punchConnected = true
 		Globals.screenFlashEffect()
 		other.active = false
