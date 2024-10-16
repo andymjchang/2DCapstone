@@ -1,10 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgjl1xcxhhjxu"]
+[gd_scene load_steps=13 format=3 uid="uid://cgjl1xcxhhjxu"]
 
 [ext_resource type="Texture2D" uid="uid://2kbm71o22fjj" path="res://worldObjects/assets/powerups/invuln.png" id="1_cf53a"]
 [ext_resource type="Script" path="res://worldObjects/scripts/powerup.gd" id="1_t5bed"]
 [ext_resource type="Texture2D" uid="uid://7jj5y6vl2j1n" path="res://worldObjects/assets/powerups/heal.png" id="3_bdst0"]
 [ext_resource type="Texture2D" uid="uid://clr5r236a7rkc" path="res://worldObjects/assets/powerups/speedup.png" id="4_mlsi3"]
 [ext_resource type="Texture2D" uid="uid://d21jr8ipfpnpu" path="res://worldObjects/assets/powerups/slowdown.png" id="5_gka8h"]
+[ext_resource type="Texture2D" uid="uid://cuoxttcoy7weh" path="res://worldObjects/enemy/Poof_anim_1-sheet.png" id="6_gie7s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs2ps"]
+atlas = ExtResource("6_gie7s")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gc3gm"]
+atlas = ExtResource("6_gie7s")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vamwc"]
+atlas = ExtResource("6_gie7s")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6g3q2"]
+atlas = ExtResource("6_gie7s")
+region = Rect2(600, 0, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ijhdg"]
 animations = [{
@@ -23,7 +40,24 @@ animations = [{
 }],
 "loop": true,
 "name": &"display",
-"speed": 5.0
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vs2ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gc3gm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vamwc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6g3q2")
+}],
+"loop": false,
+"name": &"poof",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6vhqr"]
@@ -35,7 +69,7 @@ script = ExtResource("1_t5bed")
 
 [node name="Display" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ijhdg")
-animation = &"display"
+animation = &"poof"
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -43,4 +77,5 @@ animation = &"display"
 position = Vector2(-1, 2.5)
 shape = SubResource("RectangleShape2D_6vhqr")
 
+[connection signal="animation_finished" from="Display" to="." method="_onDisplayAnimationFinished"]
 [connection signal="body_entered" from="Area2D" to="." method="_onArea2dBodyEntered"]

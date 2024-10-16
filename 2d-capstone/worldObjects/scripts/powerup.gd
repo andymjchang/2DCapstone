@@ -8,6 +8,7 @@ var rng = RandomNumberGenerator.new()
 func _ready() -> void:
 	rng.randomize()
 	powerType = rng.randi_range(0, len(Globals.powerType) - 1)
+	$Display.play("display")
 	$Display.frame = powerType
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,5 +19,9 @@ func _process(delta: float) -> void:
 func _onArea2dBodyEntered(body:Node2D) -> void:
 	if "players" in body.get_groups():
 		body.emit_signal("getPowerup", powerType)
-		$Display.hide()
+		$Display.play("poof")
 		pass
+
+func _onDisplayAnimationFinished():
+	if $Display.animation == "poof":
+		$Display.hide()
