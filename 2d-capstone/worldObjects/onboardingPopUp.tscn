@@ -15,7 +15,7 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_fxxyb"]
 animations = [{
 "frames": [{
-"duration": 4.0,
+"duration": 7.0,
 "texture": ExtResource("2_t4vpf")
 }, {
 "duration": 6.0,
