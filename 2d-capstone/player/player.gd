@@ -118,12 +118,13 @@ func _physics_process(delta: float) -> void:
 				$Animation.play("Punch")
 				sfxPlayer.play()
 				# Technical
+				print("punch is now true!, ", Globals.time)
 				punchInProgress = true
 				attack.monitoring = true
 				canAttack = false
 				$attackTimer.start()
 				punchConnected = false
-
+		
 		if Input.is_action_just_pressed("activate"):
 			emit_signal("activatePowerup")
 
@@ -181,6 +182,9 @@ func _onAnimationFinished():
 		$Animation.play("Run")
 	elif $Animation.animation == "Punch":
 		$Animation.play("Run")
+		print("punch is now false!, ", Globals.time)
+		
+		punchInProgress = false
 	pass
 
 func _on_attack_hitbox_area_entered(area: Area2D) -> void:

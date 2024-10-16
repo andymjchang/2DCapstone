@@ -57,5 +57,3 @@ script = ExtResource("1_oyrl3")
 position = Vector2(0, -185)
 sprite_frames = SubResource("SpriteFrames_fxxyb")
 animation = &"new_animation"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="tutorialSlides"]
