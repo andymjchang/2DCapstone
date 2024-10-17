@@ -119,6 +119,7 @@ func _process(delta: float) -> void:
 				break
 		for block in bindedBlocks:
 			block.queue_free()
+	#TODO make sure that pressing l while typing in name doesnt mess anything up 
 	if Input.is_action_just_pressed("lengthenBlock") and currentBlock.blockType == "normal":
 		#extend platform block by one platform block
 		lengthenPlatform()
@@ -184,6 +185,7 @@ func loadLevel():
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
 			objectParent.setComponents(posPoints)
+			objectParent.setTileMaps(posPoints)
 			
 			#do this if object has more than one component
 
@@ -364,17 +366,20 @@ func save_scene_to_file():
 						var posChain = ""
 						#go through all of the individual block components
 						for blockChild in childrenList:
-							#saving for platfrom block differs since their size varies
-							if itemList.name == "normal":
+							#saving for platfrom block differs since their size varies#
+							#TODO I dont want to do this, delegate this work to the child class
+							print("item list name, ", itemList.name)
+							if itemList.name == "platformBlocks":
 								#save the number of cols as well as the extents so we know where to start drawing
-								posChain = str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y)+" ,"+str(blockChild.numCols) + ", " + str(blockChild.extents)+ ", "
+								print("saving normal block", blockChild)
+								posChain = str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "
 							else:
 								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
 							index+=1
 							editorName = "EditorArea"+str(index)
 						#print("child list in save, ", childrenList)
 						posChain = posChain.substr(0, posChain.length()-1)
-						posChain+="\n"
+						posChain += "\n"
 						newFile.store_string(posChain)
 						print("pos chain: ", posChain)
 	else:

@@ -6,7 +6,9 @@ var numCols = 12
 var extents
 var fillerTiles = [Vector2(2,1),Vector2(2,2),Vector2(2,2), Vector2(2,4)]
 var endTiles = [Vector2(4,1),Vector2(3,2),Vector2(3,2), Vector2(4,4)]
+var startTiles = [Vector2(0,1),Vector2(1,2),Vector2(1,3), Vector2(0,4)]
 var tileWidth
+var allTiles = [startTiles, fillerTiles, endTiles]
 
 func _ready() -> void:
 	# set the extents to the width of the tile x 12
@@ -96,10 +98,27 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 	return [minCoords, maxCoords]
 	
 #TODO make this work for more than one tilemap
-func setTileMaps(extents, cols, pos) -> void:
+func setTileMaps(posPoints : Array) -> void:
 	#have to get the start of where we arein the world
 	#TODO combine this into one var
-	var startX = pos.x - extents.x
-	var startY = pos.y - extents.x
-	
-	
+	print("pos points, ", posPoints)
+	if posPoints.size() > 2:
+		var cols = posPoints[2]
+		var minMax = getMaxMinCoord(tileMap.get_used_cells())
+		var curTileSet = allTiles[0]
+		var startX = minMax[0].x
+		var startY = minMax[0].y
+		tileMap.clear()
+		
+		print()
+		for col in range(0, cols):
+			if col == cols:
+				curTileSet = allTiles[2]
+			elif col > 0:
+				curTileSet = allTiles[1]
+			startY = minMax[0].y
+			for i in range(0,4):
+				#place a tile down
+				tileMap.set_cell(Vector2i(startX, startY),1, curTileSet[i])
+				startY+=1
+			startX+=1

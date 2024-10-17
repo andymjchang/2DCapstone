@@ -136,6 +136,8 @@ func setComponents(posArray : Array) -> void :
 		block.global_position.y = posArray[index]
 		index+=1
 		
-func setTileMaps() -> void:
+func setTileMaps(posPoints : Array) -> void:
+	if blockType == "normal":
+		get_child(0).setTileMaps(posPoints)
 	pass
 	

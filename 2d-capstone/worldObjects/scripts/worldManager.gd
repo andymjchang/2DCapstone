@@ -71,11 +71,11 @@ func _ready():
 		Globals.currentSongFileName = "Level2_Main_156bpm_V2.mp3"
 		backgroundName = "Lvl2"
 		
-	if levelFile.begins_with("Lvl0."):
-		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
-		var popUpInstance = popUpScene.instantiate()
-		$Camera2D.add_child(popUpInstance)
-		$Camera2D/onboardingPopUp/tutorialSlides.play()
+	#if levelFile.begins_with("Lvl0."):
+		#var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
+		#var popUpInstance = popUpScene.instantiate()
+		#$Camera2D.add_child(popUpInstance)
+		#$Camera2D/onboardingPopUp/tutorialSlides.play()
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
 	# set bpm of all pulsing objects
@@ -104,7 +104,7 @@ func _ready():
 	textPopupScene1.initPosition(player1)
 
 	music = camera.get_node("Music")
-	music.stream.loop = false
+	#music.stream.loop = false
 	loadAudio()
 	
 	# Setting signals
@@ -346,11 +346,11 @@ func _onScored(id, p_score):
 		
 func _onChangeSpeed(speedType):
 	if speedType > 0:			# Speed up
-		music.pitch_scale = 1.25
-		Globals.scrollSpeed = 1.25
+		music.pitch_scale = 2
+		Globals.scrollSpeed = 2
 	elif speedType < 0:			# Speed down
-		music.pitch_scale = 0.75
-		Globals.scrollSpeed = 0.75
+		music.pitch_scale = 0.5
+		Globals.scrollSpeed = 0.5
 	else:						# Return to regular
 		music.pitch_scale = 1
 		Globals.scrollSpeed = 1
