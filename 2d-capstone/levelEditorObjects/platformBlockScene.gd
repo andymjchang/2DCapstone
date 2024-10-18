@@ -4,6 +4,7 @@ extends Node2D
 @onready var tileMap = self.get("Node2D/TileMapLayer")
 var numCols = 12
 var extents
+var newPos
 var fillerTiles = [Vector2(2,1),Vector2(2,2),Vector2(2,2), Vector2(2,4)]
 var endTiles = [Vector2(4,1),Vector2(3,2),Vector2(3,2), Vector2(4,4)]
 var startTiles = [Vector2(0,1),Vector2(1,2),Vector2(1,3), Vector2(0,4)]
@@ -53,9 +54,10 @@ func extendByOneTile() -> void :
 	#alter the area2d to represent the new size
 	print("before extending collision shape pos: ", self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x , " , extents: ",self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x, " , tile width: ", tileWidth )
 	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x += tileWidth/2.0
-	self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x += tileWidth/2.0
+	self.get_node("Node2D/EditorArea0").global_position.x += tileWidth/2.0
+	newPos = self.get_node("Node2D/EditorArea0").global_position.x
 	print("after extending collision shape pos: ", self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x , " , extents: ",self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x )
-
+	extents = self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x
 	numCols+=1
 	
 func decreaseByOneTile() -> void: 
@@ -76,7 +78,9 @@ func decreaseByOneTile() -> void:
 			startY+=1
 			
 		self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x -= tileWidth/2.0
-		self.get_node("Node2D/EditorArea0/CollisionShape2D").global_position.x -= tileWidth/2.0
+		self.get_node("Node2D/EditorArea0").global_position.x -= tileWidth/2.0
+		newPos = self.get_node("Node2D/EditorArea0").global_position.x 
+		extents = self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x
 		numCols-=1
 	
 func getMaxMinCoord(usedCells : Array) -> Array:
@@ -102,6 +106,16 @@ func setTileMaps(posPoints : Array) -> void:
 	#have to get the start of where we arein the world
 	#TODO combine this into one var
 	print("pos points, ", posPoints)
+	print("editor area , ", posPoints[3] , " extents, ", self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x)
+	self.extents = posPoints[3]
+	self.numCols = posPoints[2]
+	#var scalingFactor = posPoints[3]/self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x
+	#self.get_node("Node2D/EditorArea0").scale.x *= scalingFactor
+	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x = posPoints[3]
+	self.get_node("Node2D/EditorArea0").global_position.x += posPoints[3]/2.0
+	self.newPos = global_position.x
+	print("editor area after , ", posPoints[3] , " extents, ", self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x)
+	#self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x = posPoints[3]
 	if posPoints.size() > 2:
 		var cols = posPoints[2]
 		var minMax = getMaxMinCoord(tileMap.get_used_cells())

@@ -36,11 +36,12 @@ func setTileMaps(posPoints : Array):
 	var startY = minMax[0].y
 	tileMap.clear()
 	var newExtents = (tileWidth)/2.0
-	$Area2D/CollisionShape2D.shape.extents.x =  tileWidth/2.0
-	$CollisionShape2D.shape.extents.x =  tileWidth/2.0
-	$CollisionShape2D2.shape.extents.x = tileWidth/2.0
-	$CollisionShape2D2.shape.extents.y = tileHeight*0.9
-	$CollisionShape2D.shape.extents.y = tileHeight*0.9
+	#$Area2D/CollisionShape2D.shape.extents.x =  tileWidth/2.0
+	
+	#$CollisionShape2D.scale.x =  ($CollisionShape2D.shape.extents.x*2.0) + tileWidth
+	#$CollisionShape2D2.shape.extents.x = tileWidth/2.0
+	#$CollisionShape2D2.shape.extents.y = tileHeight*0.9
+	#$CollisionShape2D.shape.extents.y = tileHeight*0.9
 	#$CollisionShape2D2.shape.extents.x = $CollisionShape2D2.shape.extents.x + (tileWidth/2.0)
 		
 	print()
@@ -60,12 +61,17 @@ func setTileMaps(posPoints : Array):
 				tileMap.set_cell(Vector2i(startX, startY),1, curTileSet[i])
 				startY+=1
 			startX+=1
-			print("current extents: ",$Area2D/CollisionShape2D.shape.extents.x, ", ",  $CollisionShape2D.shape.extents.x ," , ", $CollisionShape2D2.shape.extents.x, " tile width: ", tileWidth)
+			var newWidth = ($CollisionShape2D.shape.extents.x*2.0) + tileWidth
+			#var newScale = newWidth / $CollisionShape2D.shape.extents.x 
+			print("current extents: ", ", ",  $CollisionShape2D.shape.extents.x ," , ", " tile width: ", tileWidth)
 			#$Area2D/CollisionShape2D.shape.extents.x = $Area2D/CollisionShape2D.shape.extents.x + (tileWidth/2.0)
-			#$CollisionShape2D.shape.extents.x = $CollisionShape2D.shape.extents.x + (tileWidth/2.0)
+			#$CollisionShape2D.shape.extents.x += (tileWidth/2.0)
+			#$CollisionShape2D.scale.x = newWidth
 			#$CollisionShape2D2.shape.extents.x = $CollisionShape2D2.shape.extents.x + (tileWidth/2.0)
-			print("new extents: ",$Area2D/CollisionShape2D.shape.extents.x, ", ",  $CollisionShape2D.shape.extents.x ," , ", $CollisionShape2D2.shape.extents.x)
-
+			print("new extents: ",", ",  $CollisionShape2D.shape.extents.x)
+	self.get_node("CollisionShape2D").shape.extents.x = posPoints[3]
+	self.get_node("CollisionShape2D").global_position.x += posPoints[3]/2.0
+	
 			
 		
 func getMaxMinCoord(usedCells : Array) -> Array:

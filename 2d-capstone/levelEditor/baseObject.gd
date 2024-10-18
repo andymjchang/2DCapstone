@@ -49,7 +49,8 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, 
 		if event.is_action_pressed("click") and checkOrder():
 			print("click! on base object - ", self)
 			self.get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType,curAreaDragging)
-			if clickResult:
+			#if clickResult:
+			if true:
 			#this will be the path to area2d given that we have the scene object
 				curAreaDragging = str(areaParent.name)+"/"+str(areaName)
 				curArea = str(areaName)
@@ -113,7 +114,7 @@ func checkOrder() -> bool:
 		if (!block.get_parent().get_parent().get_parent().is_class("CanvasLayer") and !self.is_class("CanvasLayer") and block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced and !(self.blockType == "normal" and block.get_parent().get_parent().get_parent().blockType == "normal")):
 			#verlapping block was placed earlier, it is selected 
 			#check how close the pos our to allow manuverbility
-			return false
+			return true
 			#TODO revist this, reverse the logic
 			#if block.get_parent().get_parent().get_parent().blockType == "normal" and abs(block.get_parent().get_parent().get_parent().global_position.x - self.global_position.x) > 500:
 				#print("overlapping blocks position: ", block.get_parent().get_parent().get_parent().global_position )

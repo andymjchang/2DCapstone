@@ -183,10 +183,13 @@ func loadLevel():
 		#does not work with goal/checkpoints
 		elif line.contains(", "):
 			#print("Object: ", instance)
+			print("line: ", line)
 			var instancedObj = instance.instantiate()
 			var posPoints = []
+			
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
+				
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
 			#print("instance parent: ", instanceParent)
 			instanceParent.add_child(instancedObj)
@@ -200,7 +203,8 @@ func loadLevel():
 				instancedObj.get_node("ziplineEnd").global_position = endPos
 				
 			if name =="platformBlocks":
-				instancedObj.setTileMaps(posPoints) 
+				print("posPoints in load level: ", posPoints)
+				instancedObj.setTileMaps(posPoints.duplicate()) 
 				
 			#print("instance!: ", name)
 			
