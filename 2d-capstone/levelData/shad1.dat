@@ -1,5 +1,5 @@
 platformBlocks
-24.75, 600, 23, 149.5, 160.25,
+-87.25, 600, 27, 175.5, 135.25,
 actionIndicators
 playerCheckpoints
 player
@@ -9,6 +9,10 @@ killFloors
 goalBlocks
 breakableWalls
 ziplines
+1150, 550, 1175, 700,
 placers
 slideWalls
 powerups
+-275, 600,
+0, 540,
+125, 625,

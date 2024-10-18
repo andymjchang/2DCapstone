@@ -191,12 +191,12 @@ func loadLevel():
 				posPoints.append(pos.to_float())
 				
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
+			print("place in Level: ", 	instancedObj.position )
 			#print("instance parent: ", instanceParent)
 			instanceParent.add_child(instancedObj)
 			
 			#check if zipline, TODO make this more 
 			if name == "ziplines":
-				print("pos points, ", posPoints)
 				var startPos = Vector2(posPoints[0], posPoints[1])
 				var endPos = Vector2(posPoints[2], posPoints[3])
 				instancedObj.get_node("ziplineStart").global_position = startPos

@@ -109,13 +109,10 @@ func setTileMaps(posPoints : Array) -> void:
 	print("editor area , ", posPoints[3] , " extents, ", self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x)
 	self.extents = posPoints[3]
 	self.numCols = posPoints[2]
-	#var scalingFactor = posPoints[3]/self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x
-	#self.get_node("Node2D/EditorArea0").scale.x *= scalingFactor
 	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x = posPoints[3]
 	self.get_node("Node2D/EditorArea0").global_position.x += posPoints[3]/2.0
 	self.newPos = global_position.x
 	print("editor area after , ", posPoints[3] , " extents, ", self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x)
-	#self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x = posPoints[3]
 	if posPoints.size() > 2:
 		var cols = posPoints[2]
 		var minMax = getMaxMinCoord(tileMap.get_used_cells())
@@ -123,8 +120,6 @@ func setTileMaps(posPoints : Array) -> void:
 		var startX = minMax[0].x
 		var startY = minMax[0].y
 		tileMap.clear()
-		
-		print()
 		for col in range(0, cols):
 			if col == cols:
 				curTileSet = allTiles[2]

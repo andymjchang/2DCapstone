@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="2_gep2g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s67gh"]
-size = Vector2(152, 57)
+size = Vector2(152, 74)
 
 [node name="PlatformBlockScene" type="Node2D"]
 script = ExtResource("1_1wl40")
@@ -15,7 +15,6 @@ script = ExtResource("1_1wl40")
 [node name="Area2D" type="Area2D" parent="Node2D" groups=["goals"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
-position = Vector2(0, 12.5)
 shape = SubResource("RectangleShape2D_s67gh")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
@@ -25,7 +24,6 @@ scale = Vector2(0.119609, 0.119609)
 texture = ExtResource("2_gep2g")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Node2D"]
-position = Vector2(0, -1)
 scale = Vector2(0.052, 0.052)
 tile_map_data = PackedByteArray("AAD9////AQACAAEAAAD+////AQACAAEAAAD/////AQACAAEAAAAAAP//AQACAAEAAAABAP//AQACAAEAAAACAP//AQACAAEAAAD9/wAAAQACAAMAAAACAAAAAQACAAIAAAD//wAAAQACAAIAAAABAAAAAQACAAIAAAAAAAAAAQACAAIAAAD+/wAAAQACAAIAAAD9/wEAAQACAAIAAAD+/wEAAQACAAIAAAD//wEAAQACAAIAAAAAAAEAAQACAAIAAAABAAEAAQACAAIAAAACAAEAAQACAAMAAAD6////AQAAAAEAAAD7////AQACAAEAAAD8////AQACAAEAAAADAP//AQACAAEAAAAEAP//AQACAAEAAAAFAP//AQAEAAEAAAAFAAAAAQADAAIAAAAFAAEAAQADAAIAAAAFAAIAAQAEAAQAAAD6/wAAAQABAAIAAAD6/wEAAQABAAMAAAD6/wIAAQAAAAQAAAD7/wIAAQACAAQAAAD8/wIAAQACAAQAAAD9/wIAAQACAAQAAAD+/wIAAQACAAQAAAD//wIAAQACAAQAAAAAAAIAAQACAAQAAAABAAIAAQACAAQAAAACAAIAAQACAAQAAAADAAIAAQACAAQAAAAEAAIAAQACAAQAAAD7/wAAAQACAAIAAAD7/wEAAQACAAIAAAD8/wAAAQACAAIAAAD8/wEAAQACAAIAAAADAAAAAQACAAIAAAAEAAAAAQACAAIAAAAEAAEAAQACAAIAAAADAAEAAQACAAIAAAA=")
 tile_set = ExtResource("2_ft64r")

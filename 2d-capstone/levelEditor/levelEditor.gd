@@ -180,13 +180,14 @@ func loadLevel():
 			var posPoints = []
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
-			#print("pos points in load: ", posPoints)
+			print("posPoints in load: ", posPoints)
 			objectParent.add_child(instancedObj)
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
 			objectParent.setComponents(posPoints)
 			objectParent.setTileMaps(posPoints)
-			
+			print("editor pos place: ", instancedObj.global_position)
+			 
 			#do this if object has more than one component
 
 func _on_save_button_down() -> void:
@@ -370,8 +371,7 @@ func save_scene_to_file():
 							#TODO I dont want to do this, delegate this work to the child class
 							print("item list name, ", itemList.name)
 							if itemList.name == "platformBlocks":
-								#save the number of cols as well as the extents so we know where to start drawing
-								print("saving normal block", blockChild)
+								#save the number of cols as well as the extents so we know where to start drawing	
 								posChain = str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", " 
 							else:
 								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
@@ -381,7 +381,7 @@ func save_scene_to_file():
 						posChain = posChain.substr(0, posChain.length()-1)
 						posChain += "\n"
 						newFile.store_string(posChain)
-						print("pos chain: ", posChain)
+						print("posPoints in save: ", posChain)
 	else:
 		displayStatus(UNABLE_TO_SAVE, false)
 		

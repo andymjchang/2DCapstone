@@ -25,9 +25,6 @@ func _ready():
 	else:
 		$sprite2D/TileMapLayer.visible = true
 		$sprite2D/TileMapLayer2.visible = false
-	#var randIndex = randi_range(0, 1)
-	#$sprite2D.get_children()[randIndex].visible = true
-	#activeSprite = 	$sprite2D.get_children()[randIndex]
 
 func setTileMaps(posPoints : Array):
 	var minMax = getMaxMinCoord(tileMap.get_used_cells())
@@ -36,16 +33,6 @@ func setTileMaps(posPoints : Array):
 	var startY = minMax[0].y
 	tileMap.clear()
 	var newExtents = (tileWidth)/2.0
-	#$Area2D/CollisionShape2D.shape.extents.x =  tileWidth/2.0
-	
-	#$CollisionShape2D.scale.x =  ($CollisionShape2D.shape.extents.x*2.0) + tileWidth
-	#$CollisionShape2D2.shape.extents.x = tileWidth/2.0
-	#$CollisionShape2D2.shape.extents.y = tileHeight*0.9
-	#$CollisionShape2D.shape.extents.y = tileHeight*0.9
-	#$CollisionShape2D2.shape.extents.x = $CollisionShape2D2.shape.extents.x + (tileWidth/2.0)
-		
-	print()
-	
 	print("pos points, ", posPoints) 
 	#have to change the extents as well
 	if posPoints.size() > 2:
@@ -62,15 +49,9 @@ func setTileMaps(posPoints : Array):
 				startY+=1
 			startX+=1
 			var newWidth = ($CollisionShape2D.shape.extents.x*2.0) + tileWidth
-			#var newScale = newWidth / $CollisionShape2D.shape.extents.x 
-			print("current extents: ", ", ",  $CollisionShape2D.shape.extents.x ," , ", " tile width: ", tileWidth)
-			#$Area2D/CollisionShape2D.shape.extents.x = $Area2D/CollisionShape2D.shape.extents.x + (tileWidth/2.0)
-			#$CollisionShape2D.shape.extents.x += (tileWidth/2.0)
-			#$CollisionShape2D.scale.x = newWidth
-			#$CollisionShape2D2.shape.extents.x = $CollisionShape2D2.shape.extents.x + (tileWidth/2.0)
-			print("new extents: ",", ",  $CollisionShape2D.shape.extents.x)
 	self.get_node("CollisionShape2D").shape.extents.x = posPoints[3]
-	self.get_node("CollisionShape2D").global_position.x += posPoints[3]/2.0
+	#self.get_node("CollisionShape2D").global_position.x =posPoints[4]
+	self.global_position.x += posPoints[3]/2.0
 	
 			
 		
