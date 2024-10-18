@@ -372,7 +372,7 @@ func save_scene_to_file():
 							print("item list name, ", itemList.name)
 							if itemList.name == "platformBlocks":
 								#save the number of cols as well as the extents so we know where to start drawing	
-								posChain = str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", " 
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", " 
 							else:
 								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
 							index+=1

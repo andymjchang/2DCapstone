@@ -191,7 +191,7 @@ func loadLevel():
 				posPoints.append(pos.to_float())
 				
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
-			print("place in Level: ", 	instancedObj.position )
+			print("place in Level: ", 	instancedObj.position)	
 			#print("instance parent: ", instanceParent)
 			instanceParent.add_child(instancedObj)
 			

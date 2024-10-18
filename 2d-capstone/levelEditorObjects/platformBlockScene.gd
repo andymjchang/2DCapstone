@@ -120,6 +120,8 @@ func setTileMaps(posPoints : Array) -> void:
 		var startX = minMax[0].x
 		var startY = minMax[0].y
 		tileMap.clear()
+		
+		print()
 		for col in range(0, cols):
 			if col == cols:
 				curTileSet = allTiles[2]

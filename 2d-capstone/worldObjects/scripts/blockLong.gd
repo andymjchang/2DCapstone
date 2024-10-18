@@ -51,8 +51,8 @@ func setTileMaps(posPoints : Array):
 			var newWidth = ($CollisionShape2D.shape.extents.x*2.0) + tileWidth
 	self.get_node("CollisionShape2D").shape.extents.x = posPoints[3]
 	#self.get_node("CollisionShape2D").global_position.x =posPoints[4]
-	self.global_position.x += posPoints[3]/2.0
-	
+	self.global_position.x -= $CollisionShape2D.shape.extents.x*2.0
+	self.get_node("CollisionShape2D").global_position.x += $CollisionShape2D.shape.extents.x*2.0
 			
 		
 func getMaxMinCoord(usedCells : Array) -> Array:

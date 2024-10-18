@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bo4tu6ogem3aj"]
+[gd_scene load_steps=20 format=3 uid="uid://bo4tu6ogem3aj"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_jnx1w"]
 [ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_14qfq"]
@@ -7,12 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="5_x8wut"]
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="6_oeo2q"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="7_0hsj5"]
-[ext_resource type="PackedScene" uid="uid://dakwrycm2d4ei" path="res://player/player2.tscn" id="8_ssa0s"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="9_hkc0n"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="10_6f720"]
 [ext_resource type="Script" path="res://worldObjects/scripts/camera.gd" id="11_wbkas"]
 [ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="12_lah8m"]
-[ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/JamdayDemo_Techno_155bpm_EMin.mp3" id="13_kr4pj"]
+[ext_resource type="AudioStream" uid="uid://dq1o5ig60kmfd" path="res://audioTracks/Level1_Main_155bpm.mp3" id="13_kr4pj"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="14_38rn5"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="15_kmoyh"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="16_dayq1"]
@@ -30,7 +29,6 @@ killFloorInstance = ExtResource("4_o4w26")
 actionIndicatorInstance = ExtResource("5_x8wut")
 checkpointInstance = ExtResource("6_oeo2q")
 player1Instance = ExtResource("7_0hsj5")
-player2Instance = ExtResource("8_ssa0s")
 enemyInstance = ExtResource("9_hkc0n")
 
 [node name="LevelUI" parent="." instance=ExtResource("10_6f720")]

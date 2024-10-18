@@ -83,7 +83,6 @@ func setArea2D():
 		#give them each a unique name
 		newArea.name = "EditorArea"+str(nameIndex)
 		nameIndex+=1
-		#self.add_child(newArea)
 		newArea.connect("input_event",  _on_area_2d_input_event.bind(newArea.name, blockChild))
 		newArea.connect("area_shape_entered", _onBodyEntered)
 		newArea.connect("area_shape_exited", _onBodyExited)
@@ -92,18 +91,11 @@ func _setClickResult(result) -> void:
 	clickResult = result
 	
 func _onBodyEntered(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_index:int) -> void:
-	#add all overlapping blocks to array
-	#on default theres two overlaps - discount these for now
-	#each block collision starts with editorarea0 and is a twofer
 	overlappingBlocks.append(area)
-	#print("me -> ", self.get_child(0).name)
-	#print("my overlapping blocks! -> ", overlappingBlocks)
 	
 func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_index:int) -> void:
 	#if block not overlapping anymore, remove from array
 	print("overlapping blocks before delete, ", overlappingBlocks)
-	#do I have to delete two things? 
-	#print("area deleting: ", area.get_parent().get_parent().get_parent().timePlaced)
 	overlappingBlocks.erase(area)
 	
 	print("overlapping blocks after delete, ", overlappingBlocks)
