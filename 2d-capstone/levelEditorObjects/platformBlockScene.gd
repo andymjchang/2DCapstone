@@ -96,9 +96,10 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 #TODO make this work for more than one tilemap
 func setTileMaps(posPoints : Array) -> void:
 
-	if posPoints[2] < numCols:
-		while numCols > posPoints[2]:
-			self.decreaseByOneTile()
-	elif posPoints[2] > numCols:
-		while numCols < posPoints[2]:
-			self.extendByOneTile()
+	if posPoints.size() > 2:
+		if posPoints[2] < numCols:
+			while numCols > posPoints[2]:
+				self.decreaseByOneTile()
+		elif posPoints[2] > numCols:
+			while numCols < posPoints[2]:
+				self.extendByOneTile()

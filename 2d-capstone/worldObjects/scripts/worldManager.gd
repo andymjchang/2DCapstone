@@ -104,7 +104,6 @@ func _ready():
 	textPopupScene1.initPosition(player1)
 
 	music = camera.get_node("Music")
-	#music.stream.loop = false
 	loadAudio()
 	
 	# Setting signals
@@ -124,6 +123,7 @@ func _ready():
 		var distance = abs(0.0 - player1.global_position.x)
 		var playerSpeed = player1.SPEED
 		musicTime = distance / Globals.pixelsPerFrame
+		Globals.Time = musicTime + 3.0
 		print("time gone, ", musicTime)
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
