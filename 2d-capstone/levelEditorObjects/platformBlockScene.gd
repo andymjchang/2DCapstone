@@ -107,29 +107,36 @@ func setTileMaps(posPoints : Array) -> void:
 	#TODO combine this into one var
 	print("pos points, ", posPoints)
 	print("editor area , ", posPoints[3] , " extents, ", self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x)
-	self.extents = posPoints[3]
-	self.numCols = posPoints[2]
-	self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x = posPoints[3]
-	self.get_node("Node2D/EditorArea0").global_position.x += posPoints[3]/2.0
-	self.newPos = global_position.x
+	#self.extents = posPoints[3]
+	#self.numCols = posPoints[2]
+	#self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x = posPoints[3]
+	#self.get_node("Node2D/EditorArea0").global_position.x += posPoints[3]/2.0
+	#self.newPos = global_position.x
 	print("editor area after , ", posPoints[3] , " extents, ", self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x)
-	if posPoints.size() > 2:
-		var cols = posPoints[2]
-		var minMax = getMaxMinCoord(tileMap.get_used_cells())
-		var curTileSet = allTiles[0]
-		var startX = minMax[0].x
-		var startY = minMax[0].y
-		tileMap.clear()
-		
-		print()
-		for col in range(0, cols):
-			if col == cols:
-				curTileSet = allTiles[2]
-			elif col > 0:
-				curTileSet = allTiles[1]
-			startY = minMax[0].y
-			for i in range(0,4):
-				#place a tile down
-				tileMap.set_cell(Vector2i(startX, startY),1, curTileSet[i])
-				startY+=1
-			startX+=1
+	
+	if posPoints[2] < numCols:
+		while numCols > posPoints[2]:
+			self.decreaseByOneTile()
+	elif posPoints[2] > numCols:
+		while numCols < posPoints[2]:
+			self.extendByOneTile()
+	#if posPoints.size() > 2:
+		#var cols = posPoints[2]
+		#var minMax = getMaxMinCoord(tileMap.get_used_cells())
+		#var curTileSet = allTiles[0]
+		#var startX = minMax[0].x
+		#var startY = minMax[0].y
+		#tileMap.clear()
+		#
+		#print()
+		#for col in range(0, cols):
+			#if col == cols:
+				#curTileSet = allTiles[2]
+			#elif col > 0:
+				#curTileSet = allTiles[1]
+			#startY = minMax[0].y
+			#for i in range(0,4):
+				##place a tile down
+				#tileMap.set_cell(Vector2i(startX, startY),1, curTileSet[i])
+				#startY+=1
+			#startX+=1

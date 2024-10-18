@@ -1,5 +1,5 @@
 platformBlocks
-0, 625, 16, 104, 26,
+625, 350, 6, 39, 811,
 actionIndicators
 playerCheckpoints
 player
@@ -14,5 +14,6 @@ slideWalls
 powerups
 0, 625,
 0, 550,
-125, 625,
--100, 625,
+200, 650,
+-250, 525,
+575, 650,
