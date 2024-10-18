@@ -7,6 +7,7 @@ var curSprite
 
 var numCols = 12
 var extents
+var tileHeight
 var fillerTiles = [Vector2(2,1),Vector2(2,2),Vector2(2,2), Vector2(2,4)]
 var endTiles = [Vector2(4,1),Vector2(3,2),Vector2(3,2), Vector2(4,4)]
 var startTiles = [Vector2(0,1),Vector2(1,2),Vector2(1,3), Vector2(0,4)]
@@ -16,6 +17,8 @@ var allTiles = [startTiles, fillerTiles, endTiles]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("blocks")
+	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
+	tileHeight = tileMap.tile_set.tile_size.y * tileMap.scale.y 
 	if Globals.curFile.begins_with("Lvl2."):
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = true
@@ -32,10 +35,18 @@ func setTileMaps(posPoints : Array):
 	var startX = minMax[0].x
 	var startY = minMax[0].y
 	tileMap.clear()
+	var newExtents = (tileWidth)/2.0
+	$Area2D/CollisionShape2D.shape.extents.x =  tileWidth/2.0
+	$CollisionShape2D.shape.extents.x =  tileWidth/2.0
+	$CollisionShape2D2.shape.extents.x = tileWidth/2.0
+	$CollisionShape2D2.shape.extents.y = tileHeight*0.9
+	$CollisionShape2D.shape.extents.y = tileHeight*0.9
+	#$CollisionShape2D2.shape.extents.x = $CollisionShape2D2.shape.extents.x + (tileWidth/2.0)
 		
 	print()
 	
-	print("pos points, ", posPoints)
+	print("pos points, ", posPoints) 
+	#have to change the extents as well
 	if posPoints.size() > 2:
 		var cols = posPoints[2]
 		for col in range(0, cols):
@@ -49,6 +60,12 @@ func setTileMaps(posPoints : Array):
 				tileMap.set_cell(Vector2i(startX, startY),1, curTileSet[i])
 				startY+=1
 			startX+=1
+			print("current extents: ",$Area2D/CollisionShape2D.shape.extents.x, ", ",  $CollisionShape2D.shape.extents.x ," , ", $CollisionShape2D2.shape.extents.x, " tile width: ", tileWidth)
+			#$Area2D/CollisionShape2D.shape.extents.x = $Area2D/CollisionShape2D.shape.extents.x + (tileWidth/2.0)
+			#$CollisionShape2D.shape.extents.x = $CollisionShape2D.shape.extents.x + (tileWidth/2.0)
+			#$CollisionShape2D2.shape.extents.x = $CollisionShape2D2.shape.extents.x + (tileWidth/2.0)
+			print("new extents: ",$Area2D/CollisionShape2D.shape.extents.x, ", ",  $CollisionShape2D.shape.extents.x ," , ", $CollisionShape2D2.shape.extents.x)
+
 			
 		
 func getMaxMinCoord(usedCells : Array) -> Array:

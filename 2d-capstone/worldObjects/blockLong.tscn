@@ -51,12 +51,10 @@ tile_map_data = PackedByteArray("AAD9////AAAAAAAAAAD+////AAAEAAAAAAD/////AAACAAA
 tile_set = ExtResource("5_urnmp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 25)
 shape = SubResource("RectangleShape2D_tpulb")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 24.5)
 shape = SubResource("RectangleShape2D_albr6")
 
