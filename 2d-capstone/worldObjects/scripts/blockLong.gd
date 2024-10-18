@@ -20,12 +20,9 @@ func _ready():
 	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
 	tileHeight = tileMap.tile_set.tile_size.y * tileMap.scale.y 
 	var newWidth = tileWidth * 12.0
-	print("tile width, ", tileWidth)
 	extents = self.get_node("CollisionShape2D").shape.extents
 	extents = extents
-	print("old extents: ", extents)
 	extents = newWidth/2.0
-	print("new extents: ", extents)
 	self.get_node("CollisionShape2D").shape.extents.x = extents
 	if Globals.curFile.begins_with("Lvl2."):
 		$sprite2D/TileMapLayer.visible = false
@@ -78,47 +75,21 @@ func decreaseByOneTile() -> void:
 		numCols-=1
 
 func setTileMaps(posPoints : Array):
-	if posPoints[2] < numCols:
-		while numCols > posPoints[2]+1:
-			self.decreaseByOneTile()
-	elif posPoints[2] > numCols-1:
-		while numCols < posPoints[2]:
-			self.extendByOneTile()
-	#var minMax = getMaxMinCoord(tileMap.get_used_cells())
-	#var curTileSet = allTiles[0]
-	#var startX = minMax[0].x
-	#var startY = minMax[0].y
-	#tileMap.clear()
-	#var newExtents = (tileWidth)/2.0
-	#print("pos points, ", posPoints) 
-	##have to change the extents as well
-	#if posPoints.size() > 2:
-		#var cols = posPoints[2]
-		#for col in range(0, cols):
-			#if col == cols:
-				#curTileSet = allTiles[2]
-			#elif col > 0:
-				#curTileSet = allTiles[1]
-			#startY = minMax[0].y
-			#for i in range(0,4):
-				##place a tile down
-				#tileMap.set_cell(Vector2i(startX, startY),1, curTileSet[i])
-				#startY+=1
-			#startX+=1
-			#var newWidth = ($CollisionShape2D.shape.extents.x*2.0) + tileWidth
-	#self.get_node("CollisionShape2D").shape.extents.x = posPoints[3]
-	##self.get_node("CollisionShape2D").global_position.x =posPoints[4]
-	#self.global_position.x -= $CollisionShape2D.shape.extents.x*2.0
-	#self.get_node("CollisionShape2D").global_position.x += $CollisionShape2D.shape.extents.x*2.0
-			
-		
+	if posPoints.size() >= 3:
+		if posPoints[2] < numCols:
+			while numCols > posPoints[2]+1:
+				self.decreaseByOneTile()
+		elif posPoints[2] > numCols-1:
+			while numCols < posPoints[2]:
+				self.extendByOneTile()
+
+					
 func getMaxMinCoord(usedCells : Array) -> Array:
 	#get the max/min of the tilemap 
 	var minCoords = Vector2(INF, INF)
 	var maxCoords = Vector2(-INF, -INF)
 	
 	for cell in usedCells:
-		print("cell coords, ", cell)
 		if cell.x > maxCoords.x:
 			maxCoords.x = cell.x
 		if cell.x < minCoords.x:

@@ -71,11 +71,11 @@ func _ready():
 		Globals.currentSongFileName = "Level2_Main_156bpm_V2.mp3"
 		backgroundName = "Lvl2"
 		
-	#if levelFile.begins_with("Lvl0."):
-		#var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
-		#var popUpInstance = popUpScene.instantiate()
-		#$Camera2D.add_child(popUpInstance)
-		#$Camera2D/onboardingPopUp/tutorialSlides.play()
+	if levelFile.begins_with("Lvl0."):
+		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
+		var popUpInstance = popUpScene.instantiate()
+		$Camera2D.add_child(popUpInstance)
+		$Camera2D/onboardingPopUp/tutorialSlides.play()
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
 	# set bpm of all pulsing objects
@@ -191,8 +191,6 @@ func loadLevel():
 				posPoints.append(pos.to_float())
 				
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
-			print("place in Level: ", 	instancedObj.position)	
-			#print("instance parent: ", instanceParent)
 			instanceParent.add_child(instancedObj)
 			
 			#check if zipline, TODO make this more 
@@ -203,10 +201,7 @@ func loadLevel():
 				instancedObj.get_node("ziplineEnd").global_position = endPos
 				
 			if name =="platformBlocks":
-				print("posPoints in load level: ", posPoints)
 				instancedObj.setTileMaps(posPoints.duplicate()) 
-				
-			#print("instance!: ", name)
 			
 		elif ".mp3" in line:
 			# audio file

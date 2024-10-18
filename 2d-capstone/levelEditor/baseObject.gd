@@ -106,7 +106,8 @@ func checkOrder() -> bool:
 		if (!block.get_parent().get_parent().get_parent().is_class("CanvasLayer") and !self.is_class("CanvasLayer") and block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced and !(self.blockType == "normal" and block.get_parent().get_parent().get_parent().blockType == "normal")):
 			#verlapping block was placed earlier, it is selected 
 			#check how close the pos our to allow manuverbility
-			return true
+			#temp while I implement block click heriarchy that isnt horrible
+			return false
 			#TODO revist this, reverse the logic
 			#if block.get_parent().get_parent().get_parent().blockType == "normal" and abs(block.get_parent().get_parent().get_parent().global_position.x - self.global_position.x) > 500:
 				#print("overlapping blocks position: ", block.get_parent().get_parent().get_parent().global_position )
