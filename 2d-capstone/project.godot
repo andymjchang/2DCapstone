@@ -180,6 +180,11 @@ activate={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_2="ENEMIES"
+2d_render/layer_3="INDICATORS"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -207,26 +207,12 @@ offset_bottom = 13.0
 position = Vector2(-12.125, 2)
 shape = SubResource("RectangleShape2D_44r6d")
 
-[node name="ColorRect" type="ColorRect" parent="Hitbox"]
-visible = false
-offset_left = -12.0
-offset_top = -10.0
-offset_right = 12.0
-offset_bottom = 10.0
-
 [node name="AttackHitbox" type="Area2D" parent="." groups=["playerHitbox"]]
 position = Vector2(-18, -9.375)
 rotation = 0.000143446
+collision_mask = 6
 monitoring = false
 monitorable = false
-
-[node name="ColorRect" type="ColorRect" parent="AttackHitbox"]
-visible = false
-offset_left = 10.0
-offset_top = -3.0
-offset_right = 26.0
-offset_bottom = 21.0
-metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
 position = Vector2(18.0011, 9.12292)
@@ -280,7 +266,6 @@ frame = 4
 [node name="damagedTimer" type="Timer" parent="."]
 wait_time = 0.25
 
-[connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="powerupTimer" to="." method="_onPowerupTimerTimeout"]

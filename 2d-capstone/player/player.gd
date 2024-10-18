@@ -33,7 +33,6 @@ var originalPos
 var curPowerup
 
 var jumpInProgress = false
-var punchInProgress = false
 var runInProgress = false
 var punchConnected = false
 
@@ -156,16 +155,15 @@ func _physics_process(delta: float) -> void:
 			
 		if Input.is_action_just_pressed(punch):
 			if canAttack:
-				# Artistic
+				# Animation
 				if not inZipline:
 					$Animation.play("Punch")
 				else:
 					$Animation.play("ZipPunch")
+				$Animation.frame = 0 # Reset animation to 0 if already punching
 				sfxPlayer.play()
+				
 				# Technical
-				#print("punch is now true!, ", Globals.time)
-				punchInProgress = true
-				attack.monitoring = true
 				attack.monitoring = true
 				canAttack = false
 				$attackTimer.start()
@@ -179,6 +177,11 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 	else:
 		invuln = true
+		
+	# Monitor Attack Hitbox Collisions
+	var overlappingAreas = attack.get_overlapping_areas()
+	for area in overlappingAreas:
+		MonitorAttackHitbox(area)
 
 func _onTakeDamage(amount):
 	$damagePlayer.play()
@@ -236,22 +239,26 @@ func _onAnimationFinished():
 		$Animation.play("Run")
 	pass
 
-func _on_attack_hitbox_area_entered(area: Area2D) -> void:
+func MonitorAttackHitbox(area : Area2D):
 	var other = area.get_parent()
 	if other.is_in_group("actionIndicators") and other.active and !punchConnected:
-		_on_attack_timer_timeout() # reset attack timer
+		ResetAttack()
 		punchConnected = true
 		Globals.screenFlashEffect()
 		other.active = false
 		other.FadeOut()
 		scored.emit(self.name, abs(other.global_position.x - global_position.x))
-	if other.is_in_group("enemies"):
-		other.GotHit()
-		# Play hit animation
-		hitEffect.frame = 0
-		hitEffect.play()
+		other = other.get_parent()
+		if other.is_in_group("enemies"):
+			other.GotHit()
+			# Play hit animation
+			hitEffect.frame = 0
+			hitEffect.play()
 
 func _on_attack_timer_timeout() -> void:
+	ResetAttack()
+
+func ResetAttack():
 	canAttack = true
 	attack.monitoring = false
 
