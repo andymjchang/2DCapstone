@@ -19,40 +19,97 @@ func _ready():
 	add_to_group("blocks")
 	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
 	tileHeight = tileMap.tile_set.tile_size.y * tileMap.scale.y 
+	var newWidth = tileWidth * 12.0
+	print("tile width, ", tileWidth)
+	extents = self.get_node("CollisionShape2D").shape.extents
+	extents = extents
+	print("old extents: ", extents)
+	extents = newWidth/2.0
+	print("new extents: ", extents)
+	self.get_node("CollisionShape2D").shape.extents.x = extents
 	if Globals.curFile.begins_with("Lvl2."):
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = true
 	else:
 		$sprite2D/TileMapLayer.visible = true
 		$sprite2D/TileMapLayer2.visible = false
+		
+func extendByOneTile() -> void : 
+	#I need to get the max of the col and rows
+	var usedCells = tileMap.get_used_cells()
+	var minMax = getMaxMinCoord(usedCells)
+	#we want to start one col over, so start with max x and min y
+	var startX = minMax[1].x 
+	var startY = minMax[0].y
+		#we have to reset the end of the tile so that it doesnt look weird
+	for i in range (0,4):
+		tileMap.set_cell(Vector2i(startX, startY+i), 1, fillerTiles[i])
+		
+	startX = minMax[1].x + 1
+	startY = minMax[0].y
+	for i in range(0,4):
+		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
+		startY+=1
+		
+	#alter the area2d to represent the new size
+	self.get_node("CollisionShape2D").shape.extents.x += tileWidth/2.0
+	self.get_node("CollisionShape2D").global_position.x += tileWidth/2.0
+	numCols+=1
+
+func decreaseByOneTile() -> void: 
+	if numCols > 1:
+		var usedCells = tileMap.get_used_cells()
+		var minMax = getMaxMinCoord(usedCells)
+		#we want to delete one col
+		var startX = minMax[1].x
+		var startY = minMax[0].y
+		for i in range(0,4):
+			tileMap.erase_cell(Vector2i(startX, startY))
+			startY+=1
+		
+		startX-=1
+		startY = minMax[0].y
+		for i in range (0,4):
+			tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
+			startY+=1
+			
+		self.get_node("CollisionShape2D").shape.extents.x -= tileWidth/2.0
+		self.get_node("CollisionShape2D").global_position.x -= tileWidth/2.0
+		numCols-=1
 
 func setTileMaps(posPoints : Array):
-	var minMax = getMaxMinCoord(tileMap.get_used_cells())
-	var curTileSet = allTiles[0]
-	var startX = minMax[0].x
-	var startY = minMax[0].y
-	tileMap.clear()
-	var newExtents = (tileWidth)/2.0
-	print("pos points, ", posPoints) 
-	#have to change the extents as well
-	if posPoints.size() > 2:
-		var cols = posPoints[2]
-		for col in range(0, cols):
-			if col == cols:
-				curTileSet = allTiles[2]
-			elif col > 0:
-				curTileSet = allTiles[1]
-			startY = minMax[0].y
-			for i in range(0,4):
-				#place a tile down
-				tileMap.set_cell(Vector2i(startX, startY),1, curTileSet[i])
-				startY+=1
-			startX+=1
-			var newWidth = ($CollisionShape2D.shape.extents.x*2.0) + tileWidth
-	self.get_node("CollisionShape2D").shape.extents.x = posPoints[3]
-	#self.get_node("CollisionShape2D").global_position.x =posPoints[4]
-	self.global_position.x -= $CollisionShape2D.shape.extents.x*2.0
-	self.get_node("CollisionShape2D").global_position.x += $CollisionShape2D.shape.extents.x*2.0
+	if posPoints[2] < numCols:
+		while numCols > posPoints[2]+1:
+			self.decreaseByOneTile()
+	elif posPoints[2] > numCols-1:
+		while numCols < posPoints[2]:
+			self.extendByOneTile()
+	#var minMax = getMaxMinCoord(tileMap.get_used_cells())
+	#var curTileSet = allTiles[0]
+	#var startX = minMax[0].x
+	#var startY = minMax[0].y
+	#tileMap.clear()
+	#var newExtents = (tileWidth)/2.0
+	#print("pos points, ", posPoints) 
+	##have to change the extents as well
+	#if posPoints.size() > 2:
+		#var cols = posPoints[2]
+		#for col in range(0, cols):
+			#if col == cols:
+				#curTileSet = allTiles[2]
+			#elif col > 0:
+				#curTileSet = allTiles[1]
+			#startY = minMax[0].y
+			#for i in range(0,4):
+				##place a tile down
+				#tileMap.set_cell(Vector2i(startX, startY),1, curTileSet[i])
+				#startY+=1
+			#startX+=1
+			#var newWidth = ($CollisionShape2D.shape.extents.x*2.0) + tileWidth
+	#self.get_node("CollisionShape2D").shape.extents.x = posPoints[3]
+	##self.get_node("CollisionShape2D").global_position.x =posPoints[4]
+	#self.global_position.x -= $CollisionShape2D.shape.extents.x*2.0
+	#self.get_node("CollisionShape2D").global_position.x += $CollisionShape2D.shape.extents.x*2.0
 			
 		
 func getMaxMinCoord(usedCells : Array) -> Array:

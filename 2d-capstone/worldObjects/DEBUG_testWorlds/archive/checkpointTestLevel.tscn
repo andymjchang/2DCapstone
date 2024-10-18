@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dqcw25tgbop6q"]
 
-[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="1_1jngf"]
+[ext_resource type="PackedScene" uid="uid://kw4j0yjkt6bb" path="res://worldObjects/blockLong.tscn" id="1_1jngf"]
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_232eq"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="2_5mni6"]
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="2_xrlme"]

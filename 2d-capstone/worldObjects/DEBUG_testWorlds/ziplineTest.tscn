@@ -1,10 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://bo4tu6ogem3aj"]
+[gd_scene load_steps=26 format=4 uid="uid://bo4tu6ogem3aj"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_jnx1w"]
-[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_14qfq"]
+[ext_resource type="Script" path="res://worldObjects/scripts/blockLong.gd" id="2_e2u2t"]
+[ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="3_o3xwr"]
 [ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://levelEditor/goal_block.tscn" id="3_tsvm3"]
+[ext_resource type="Texture2D" uid="uid://ljo48af3c257" path="res://worldObjects/assets/Platform.png" id="4_e4fyp"]
 [ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="4_o4w26"]
+[ext_resource type="TileSet" uid="uid://bva4vakjtko8x" path="res://backgrounds/tilemaps/level1.tres" id="5_tpkr3"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="5_x8wut"]
+[ext_resource type="TileSet" uid="uid://da7dt3s360auf" path="res://backgrounds/tilemaps/level2.tres" id="6_1dtxa"]
 [ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="6_oeo2q"]
 [ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="7_0hsj5"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="9_hkc0n"]
@@ -20,10 +24,26 @@
 [ext_resource type="PackedScene" uid="uid://cql6hrj5lhevf" path="res://worldObjects/zipline/ziplineEnd.tscn" id="18_53os7"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="18_sbvoc"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]
+size = Vector2(155, 47)
+
+[sub_resource type="PackedScene" id="PackedScene_7cafg"]
+_bundled = {
+"conn_count": 2,
+"conns": PackedInt32Array(0, 0, 21, 20, 2, 0, 0, 1, 0, 21, 22, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("Block", "position", "script", "blocks", "StaticBody2D", "Area2D", "CollisionShape2D", "visible", "shape", "sprite2D", "Node2D", "Platform2", "scale", "texture", "Sprite2D", "Platform1", "TileMapLayer", "tile_map_data", "tile_set", "TileMapLayer2", "_on_input_event", "input_event", "_on_area_2d_input_event"),
+"node_count": 9,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 4, 0, -1, 2, 1, 0, 2, 1, 1, 3, 0, 0, 5, 5, -1, 1, 1, 2, 0, 1, 0, 6, 6, -1, 3, 7, 3, 1, 4, 8, 5, 0, 0, 0, 10, 9, -1, 1, 1, 6, 0, 3, 0, 14, 11, -1, 4, 7, 3, 1, 7, 12, 8, 13, 9, 0, 3, 0, 14, 15, -1, 4, 7, 3, 1, 10, 12, 11, 13, 12, 0, 3, 0, 16, 16, -1, 3, 12, 13, 17, 14, 18, 15, 0, 3, 0, 16, 19, -1, 5, 7, 3, 1, 16, 12, 13, 17, 17, 18, 18, 0, 0, 0, 6, 6, -1, 2, 1, 19, 8, 5, 0),
+"variants": [Vector2(0, -3), ExtResource("2_e2u2t"), Vector2(0, 8), false, Vector2(0, 17.5), SubResource("RectangleShape2D_tpulb"), Vector2(-1, 15), Vector2(0, 9), Vector2(0.119609, 0.119609), ExtResource("3_o3xwr"), Vector2(-1, 9), Vector2(0.121745, 0.0941406), ExtResource("4_e4fyp"), Vector2(0.11, 0.11), PackedByteArray("AAD9////AQAAAAEAAAD+////AQACAAEAAAD/////AQACAAEAAAAAAP//AQACAAEAAAABAP//AQACAAEAAAACAP//AQAEAAEAAAD9/wAAAQABAAMAAAD9/wEAAQAAAAQAAAD+/wEAAQACAAQAAAD//wEAAQACAAQAAAAAAAEAAQACAAQAAAABAAEAAQACAAQAAAACAAEAAQAEAAQAAAACAAAAAQADAAMAAAABAAAAAQACAAMAAAAAAAAAAQACAAIAAAD//wAAAQACAAIAAAD+/wAAAQACAAIAAAA="), ExtResource("5_tpkr3"), Vector2(1, 3), PackedByteArray("AAD9////AAAAAAAAAAD+////AAAEAAAAAAD/////AAACAAAAAAAAAP//AAADAAAAAAABAP//AAAEAAAAAAACAP//AAAFAAAAAAACAAAAAAAFAAEAAAABAAAAAAAEAAEAAAAAAAAAAAADAAIAAAD//wAAAAACAAIAAAD+/wAAAAAEAAEAAAD9/wAAAAAAAAEAAAD9/wEAAAAAAAEAAAD+/wEAAAAEAAEAAAD//wEAAAAEAAEAAAAAAAEAAAAEAAEAAAABAAEAAAAEAAEAAAACAAEAAAAFAAEAAAACAAIAAAAFAAIAAAACAAMAAAAFAAEAAAACAAQAAAAFAAEAAAACAAUAAAAFAAIAAAACAAYAAAAFAAEAAAACAAcAAAAFAAIAAAD9/wIAAAAAAAEAAAD9/wMAAAAAAAEAAAD9/wQAAAAAAAEAAAD9/wUAAAAAAAEAAAD9/wYAAAAAAAEAAAD9/wcAAAAAAAEAAAD//wIAAAACAAEAAAAAAAIAAAADAAEAAAD//wMAAAACAAIAAAD//wQAAAAEAAEAAAAAAAMAAAADAAIAAAAAAAQAAAAEAAEAAAABAAIAAAAEAAEAAAABAAMAAAAEAAEAAAABAAQAAAAEAAEAAAABAAUAAAAEAAEAAAABAAYAAAAEAAEAAAABAAcAAAAEAAEAAAAAAAcAAAAEAAEAAAD//wcAAAAEAAEAAAD+/wcAAAAEAAEAAAD+/wYAAAAEAAEAAAD+/wUAAAAEAAEAAAD+/wQAAAAEAAEAAAD+/wMAAAAEAAEAAAD+/wIAAAAEAAEAAAD//wUAAAACAAEAAAAAAAUAAAADAAEAAAAAAAYAAAADAAIAAAD//wYAAAACAAIAAAA="), ExtResource("6_1dtxa"), Vector2(0, 25)],
+"version": 3
+}
+
 [node name="level" type="Node2D"]
 script = ExtResource("1_jnx1w")
 levelFile = "Lvl1.2"
-platformBlockInstance = ExtResource("2_14qfq")
+platformBlockInstance = SubResource("PackedScene_7cafg")
 goalBlockInstance = ExtResource("3_tsvm3")
 killFloorInstance = ExtResource("4_o4w26")
 actionIndicatorInstance = ExtResource("5_x8wut")
