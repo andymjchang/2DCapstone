@@ -37,6 +37,11 @@ var punchInProgress = false
 var runInProgress = false
 var punchConnected = false
 
+# Jump Hang Time
+var hang_time_duration := 0.05
+var hang_time_remaining := 0.0 
+var is_hanging := false   
+
 # Other nodes
 var otherPlayer
 var worldNode
@@ -87,10 +92,24 @@ func _physics_process(delta: float) -> void:
 			# Lines
 			if is_on_floor():
 				glitchLines.global_position.y = self.global_position.y
+				hang_time_remaining = 0.0
+				is_hanging = false
 			
 			# Add the gravity.
 			if not is_on_floor():
-				velocity += get_gravity() * delta * 2
+				# Check if we're at the peak of our jump (very low upward velocity)
+				if abs(velocity.y) < 30 and velocity.y < 0 and not is_hanging:
+					is_hanging = true
+					hang_time_remaining = hang_time_duration
+				
+				# Apply hang time logic
+				if is_hanging and hang_time_remaining > 0:
+					hang_time_remaining -= delta
+					velocity.y = 0  # Keep vertical velocity at 0 during hang time
+				else:
+					is_hanging = false
+					velocity += get_gravity() * delta * 2
+					#$Animation.play("Jump")
 
 			#velocity.x = SPEED
 
@@ -144,7 +163,7 @@ func _physics_process(delta: float) -> void:
 					$Animation.play("ZipPunch")
 				sfxPlayer.play()
 				# Technical
-				print("punch is now true!, ", Globals.time)
+				#print("punch is now true!, ", Globals.time)
 				punchInProgress = true
 				attack.monitoring = true
 				attack.monitoring = true
