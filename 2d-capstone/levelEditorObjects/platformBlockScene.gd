@@ -16,10 +16,10 @@ func _ready() -> void:
 	tileMap =  self.get_node("Node2D/TileMapLayer")
 	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
 	var newWidth = tileWidth * 12.0
-	extents = self.get_node("Node2D/Area2D/CollisionShape2D").shape.extents
-	extents = extents
-	extents = newWidth/2.0
-	self.get_node("Node2D/Area2D/CollisionShape2D").shape.extents.x = extents
+	#extents = self.get_node("Node2D/Area2D/CollisionShape2D").shape.extents
+	#extents = extents
+	#extents = newWidth/2.0
+	#self.get_node("Node2D/Area2D/CollisionShape2D").shape.extents.x = extents
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
