@@ -565,16 +565,34 @@ func _on_play_level_button_button_down() -> void:
 func lengthenPlatform() -> void:
 	#this isnt modular but it will work for now TODO
 	var blockArea = currentBlock.get_child(0).get_child(0).get_node("EditorArea0")
-	var blockShape = blockArea.get_node("CollisionShape2D").shape as RectangleShape2D
+	var blockShape = blockArea.get_node("%CollisionShape2D").shape as RectangleShape2D
+	var collision = blockArea.get_node("%CollisionShape2D")
 	var blockExtents = blockShape.extents
 	#get the lower left and upp right coords of the current block
-	var upperLeft = currentBlock.global_position + blockExtents
-	var lowerRight = currentBlock.global_position - blockExtents
+	var colDif =  currentBlock.get_child(0).numCols - 12.0
+	print("colDif, ", colDif)
+	var tileWidth = currentBlock.get_child(0).tileWidth
+	var xChange = 0.0
+	if colDif < 0.0:
+		#this is a shrunken block, we need to add back in the tile diff
+		xChange = -1* abs(colDif)*(tileWidth/2.0)
+	elif colDif > 0.0:
+		xChange =  (colDif * (tileWidth/2.0))
+	
+	var upperLeft = blockArea.global_position + blockExtents
+	var lowerRight = blockArea.global_position - blockExtents
+	print("block im adding on too upper left: ", upperLeft, ", lowerRight, ", lowerRight)
+	print("xChange, ", xChange)
+	#lowerRight.x += xChange
 	var width = abs(upperLeft.x - lowerRight.x)
 	var newPos = blockArea.global_position.x + width
-		
+	#i need to add up half of 12 width and half of my wdith ohhh
+	var defaultWidth = (12.0 * tileWidth)/2.0
+	var currentBlockWidth = width/2.0
+	var newXPos = defaultWidth + currentBlockWidth
+	newXPos = blockArea.global_position.x + newXPos
 	var blockInstance = platformBlock.instantiate()
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
-	place_block(blockParent, platformBlocksList, Vector2(newPos, blockArea.global_position.y), false)
+	place_block(blockParent, platformBlocksList, Vector2(newXPos, blockArea.global_position.y), false)
