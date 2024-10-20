@@ -123,7 +123,7 @@ func _ready():
 		var distance = abs(0.0 - player1.global_position.x)
 		var playerSpeed = player1.SPEED
 		musicTime = distance / Globals.pixelsPerFrame
-		time += musicTime 
+		time += musicTime
 		Globals.time += time + 3.0
 		print("time gone, ", musicTime)
 	#killWall = get_node("KillWall")
@@ -277,10 +277,12 @@ func _physics_process(delta):
 		$LevelUI/PauseScreen.visible = true
 		Engine.time_scale = 0.0
 		
-	if time >= 3.0 and !Globals.inLevel and !Globals.paused:
-		if Globals.customStart:
-			await get_tree().create_timer(3).timeout
+	if time >= 3.0 and !Globals.inLevel and !Globals.paused and !Globals.customStart:
 		startGame()
+	elif Globals.customStart and !Globals.inLevel and time >= musicTime + 3.0:
+		startGame()
+
+		
 
 func updateTime(delta: float):
 	time = time + delta
