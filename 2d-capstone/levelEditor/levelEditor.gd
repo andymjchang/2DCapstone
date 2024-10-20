@@ -446,6 +446,7 @@ func place_block(instance, parent, placePos, initial):
 		instance.position.y = placePos.y
 	else:
 		instance.position = snap_position(placePos)
+		instance.position = placePos
 	parent.add_child(instance)	
 	
 	instance.setArea2D()
@@ -575,9 +576,9 @@ func lengthenPlatform() -> void:
 	var xChange = 0.0
 	if colDif < 0.0:
 		#this is a shrunken block, we need to add back in the tile diff
-		xChange = -1* abs(colDif)*(tileWidth/2.0)
+		xChange = tileWidth
 	elif colDif > 0.0:
-		xChange =  (colDif * (tileWidth/2.0))
+		xChange =  -tileWidth
 	
 	var upperLeft = blockArea.global_position + blockExtents
 	var lowerRight = blockArea.global_position - blockExtents
@@ -588,11 +589,12 @@ func lengthenPlatform() -> void:
 	var newPos = blockArea.global_position.x + width
 	#i need to add up half of 12 width and half of my wdith ohhh
 	var defaultWidth = (12.0 * tileWidth)/2.0
-	var currentBlockWidth = width/2.0
+	var currentBlockWidth = (currentBlock.get_child(0).numCols * tileWidth)/2.0
 	var newXPos = defaultWidth + currentBlockWidth
 	newXPos = blockArea.global_position.x + newXPos
 	var blockInstance = platformBlock.instantiate()
 	var blockParent = baseObject.instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
+	#print("block im adding upper left: ", , ", lowerRight, ", lowerRight)
 	place_block(blockParent, platformBlocksList, Vector2(newXPos, blockArea.global_position.y), false)
