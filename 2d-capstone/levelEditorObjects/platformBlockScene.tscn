@@ -4,8 +4,9 @@
 [ext_resource type="TileSet" uid="uid://bva4vakjtko8x" path="res://backgrounds/tilemaps/level1.tres" id="2_ft64r"]
 [ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="2_gep2g"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s67gh"]
-size = Vector2(152, 74)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymyh8"]
+resource_local_to_scene = true
+size = Vector2(153, 50)
 
 [node name="PlatformBlockScene" type="Node2D"]
 script = ExtResource("1_1wl40")
@@ -15,7 +16,9 @@ script = ExtResource("1_1wl40")
 [node name="Area2D" type="Area2D" parent="Node2D" groups=["goals"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
-shape = SubResource("RectangleShape2D_s67gh")
+unique_name_in_owner = true
+position = Vector2(-0.5, 13)
+shape = SubResource("RectangleShape2D_ymyh8")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 visible = false

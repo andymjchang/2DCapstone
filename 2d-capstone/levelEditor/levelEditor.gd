@@ -256,8 +256,12 @@ func _on_rac_button_button_up() -> void:
 
 #start here
 func _on_block_button_button_up() -> void:
-	var blockInstance = platformBlock.instantiate()
+	
+	#load("res://levelEditorObjects/platformBlockScene.tscn")
+	var whuh = load("res://levelEditorObjects/platformBlockScene.tscn").duplicate()
 	var blockParent = baseObject.instantiate()
+	blockParent.index = lEindex
+	var blockInstance = whuh.duplicate(true).instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
 	place_block(blockParent, platformBlocksList, camera.position, false)
