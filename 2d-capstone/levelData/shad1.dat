@@ -1,8 +1,14 @@
 platformBlocks
-675, 425, 19, 122, 695.5,
-900, 575, 5, 31, 904.5,
-925, 575, 12, <null>, <null>,
-975, 425, 12, <null>, <null>,
+25, 625, 19, 122, 720.5,
+272, 625, 12, <null>, <null>,
+428, 625, 12, <null>, <null>,
+584, 625, 12, <null>, <null>,
+740, 625, 12, <null>, <null>,
+896, 625, 12, <null>, <null>,
+1052, 625, 12, <null>, <null>,
+1208, 625, 12, <null>, <null>,
+1364, 625, 12, <null>, <null>,
+1520, 625, 4, 24.5, 1468,
 actionIndicators
 playerCheckpoints
 player

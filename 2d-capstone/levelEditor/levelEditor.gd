@@ -121,7 +121,7 @@ func _process(delta: float) -> void:
 		for block in bindedBlocks:
 			block.queue_free()
 	#TODO make sure that pressing l while typing in name doesnt mess anything up 
-	if Input.is_action_just_pressed("lengthenBlock") and currentBlock.blockType == "normal":
+	if Input.is_action_just_pressed("lengthenBlock") and currentBlock and currentBlock.blockType == "normal":
 		#extend platform block by one platform block
 		lengthenPlatform()
 	if Input.is_action_just_pressed("bindBlocks"):
@@ -579,6 +579,5 @@ func lengthenPlatform() -> void:
 	var blockParent = baseObject.instantiate()
 	blockParent.blockType = blockTypes[2]
 	blockParent.add_child(blockInstance)
-	#print("block im adding upper left: ", , ", lowerRight, ", lowerRight)
 	turnOffSnap = true
 	place_block(blockParent, platformBlocksList, Vector2(newXPos, blockArea.global_position.y), false)

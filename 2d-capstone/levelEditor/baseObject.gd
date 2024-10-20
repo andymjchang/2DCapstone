@@ -43,6 +43,7 @@ func _process(delta: float) -> void:
 		spriteInScene = false
 		spriteNode.visible = false
 	self.global_position = self.get_child(0).global_position
+		
 	
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, areaName, areaParent) -> void:
 	if "player" not in blockType:

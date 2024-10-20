@@ -35,13 +35,7 @@ func initScene() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !hasBeenSet and self.get_parent().index == self.get_parent().get_parent().get_parent().get_parent().currentBlock.index:
-		#extents = self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents
-		#extents = extents
-		#var newWidth = tileWidth * 12.0
-		#extents = newWidth/2.0
-		#self.get_node("Node2D/EditorArea0/CollisionShape2D").shape.extents.x = extents
-		hasBeenSet = true
+
 	if Input.is_action_just_pressed("extendBlock") and self.get_parent().index == self.get_parent().get_parent().get_parent().get_parent().currentBlock.index:
 		extendByOneTile()
 	if Input.is_action_just_pressed("reduceBlock") and self.get_parent().index == self.get_parent().get_parent().get_parent().get_parent().currentBlock.index:
