@@ -1,26 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://yau5rmr187fi"]
+[gd_scene load_steps=5 format=4 uid="uid://yau5rmr187fi"]
 
-[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="1_digyc"]
+[ext_resource type="Script" path="res://levelEditorObjects/platformBlockScene.gd" id="1_1wl40"]
+[ext_resource type="TileSet" uid="uid://bva4vakjtko8x" path="res://backgrounds/tilemaps/level1.tres" id="2_ft64r"]
 [ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="2_gep2g"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s67gh"]
-size = Vector2(152, 57)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymyh8"]
+resource_local_to_scene = true
+size = Vector2(153, 50)
 
 [node name="PlatformBlockScene" type="Node2D"]
+script = ExtResource("1_1wl40")
 
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="Node2D" groups=["goals"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
-modulate = Color(0.935511, 0.479721, 0.526804, 1)
-position = Vector2(0, 12.5)
-shape = SubResource("RectangleShape2D_s67gh")
+unique_name_in_owner = true
+position = Vector2(-0.5, 13)
+shape = SubResource("RectangleShape2D_ymyh8")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+visible = false
 position = Vector2(0, 9)
 scale = Vector2(0.119609, 0.119609)
 texture = ExtResource("2_gep2g")
 
-[node name="Block" parent="Node2D" instance=ExtResource("1_digyc")]
-script = null
+[node name="TileMapLayer" type="TileMapLayer" parent="Node2D"]
+scale = Vector2(0.052, 0.052)
+tile_map_data = PackedByteArray("AAD9////AQACAAEAAAD+////AQACAAEAAAD/////AQACAAEAAAAAAP//AQACAAEAAAABAP//AQACAAEAAAACAP//AQACAAEAAAD9/wAAAQACAAMAAAACAAAAAQACAAIAAAD//wAAAQACAAIAAAABAAAAAQACAAIAAAAAAAAAAQACAAIAAAD+/wAAAQACAAIAAAD9/wEAAQACAAIAAAD+/wEAAQACAAIAAAD//wEAAQACAAIAAAAAAAEAAQACAAIAAAABAAEAAQACAAIAAAACAAEAAQACAAMAAAD6////AQAAAAEAAAD7////AQACAAEAAAD8////AQACAAEAAAADAP//AQACAAEAAAAEAP//AQACAAEAAAAFAP//AQAEAAEAAAAFAAAAAQADAAIAAAAFAAEAAQADAAIAAAAFAAIAAQAEAAQAAAD6/wAAAQABAAIAAAD6/wEAAQABAAMAAAD6/wIAAQAAAAQAAAD7/wIAAQACAAQAAAD8/wIAAQACAAQAAAD9/wIAAQACAAQAAAD+/wIAAQACAAQAAAD//wIAAQACAAQAAAAAAAIAAQACAAQAAAABAAIAAQACAAQAAAACAAIAAQACAAQAAAADAAIAAQACAAQAAAAEAAIAAQACAAQAAAD7/wAAAQACAAIAAAD7/wEAAQACAAIAAAD8/wAAAQACAAIAAAD8/wEAAQACAAIAAAADAAAAAQACAAIAAAAEAAAAAQACAAIAAAAEAAEAAQACAAIAAAADAAEAAQACAAIAAAA=")
+tile_set = ExtResource("2_ft64r")

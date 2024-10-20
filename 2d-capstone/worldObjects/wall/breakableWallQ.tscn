@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://csh1k6wpxxqre"]
+[gd_scene load_steps=11 format=3 uid="uid://csh1k6wpxxqre"]
 
 [ext_resource type="Texture2D" uid="uid://v6w028pdwdn8" path="res://worldObjects/assets/breakableWall.png" id="1_1xpll"]
 [ext_resource type="Texture2D" uid="uid://dm870min7d5ri" path="res://worldObjects/wall/wallPieces/wallPart1.png" id="3_w7cmg"]
@@ -17,11 +17,14 @@ var wallBroken = false
 const FRICTION: float = 0.98
 const explosionForce = 600.0
 const GRAVITY = 575
+var isPlayer
 var wall1
 var wall2
 var wall3
 var wall4
 var wall5
+var playerInside = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	wall1 = get_node(\"Area2D/wallPart1\")
@@ -29,7 +32,7 @@ func _ready() -> void:
 	wall3 = get_node(\"Area2D/wallPart3\")
 	wall4 = get_node(\"Area2D/wallPart4\")
 	wall5 = get_node(\"Area2D/wallPart5\")
-
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,42 +47,38 @@ func _process(delta: float) -> void:
 		wall5.position +=velocities[4]* delta
 		addFriction()
 		#TODO get rid of the wall at some point after the explosion
+	if playerInside:
+		var punching = true
+		var players = get_tree().get_nodes_in_group(\"players\")
+		for player in players:
+			punching = player.attack.monitoring	
 	
-	if Input.is_action_just_pressed(\"click\"):
-		
-		particleEffect = get_node(\"CPUParticles2D\")
-		var wallSprite = get_node(\"Area2D/Sprite2D\")
-		wallSprite.visible = false
-		particleEffect.emitting = true
-		particleEffect.visible = true
-		getRandomVelocity()
-		wallBroken = true
-		
-#func _on_Timer_timeout():
-	#queue_free()
+		if punching and Globals.inLevel:
+			#particleEffect.emitting = true
+			particleEffect = get_node(\"CPUParticles2D2\")
+			var wallSprite = get_node(\"Area2D/Sprite2D\")
+			#wallSprite.visible = false
+			#particleEffect.emitting = true
+			#particleEffect.visible = true
+			getRandomVelocity()
+			wallBroken = true
+			self.get_node(\"Area2D/Sprite2D\").visible = false
+			if self.get_node(\"CollisionShape2D\"):
+				self.get_node(\"CollisionShape2D\").queue_free()
+			#queue_free()
+			#self.visible = false
+
+	
+	
+func _on_Timer_timeout():
+	queue_free()
 	
 
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	
-	var all_players = get_tree().get_nodes_in_group(\"players\")
-	var bothPunching = true
-	print(\"players: \", body.is_in_group(\"players\") )
-	for player in all_players:
-		print(\"player vsiibility: \",player.attack.visible )
-		if !player.attack.visible:
-			bothPunching = false
-			
-	if bothPunching:
-		print(\"both punching\")
-		#particleEffect.emitting = true
-		particleEffect = get_node(\"CPUParticles2D\")
-		var wallSprite = get_node(\"Area2D/Sprite2D\")
-		wallSprite.visible = false
-		#particleEffect.emitting = true
-		#particleEffect.visible = true
-		getRandomVelocity()
-		wallBroken = true
+	if body.is_in_group(\"players\"):
+		playerInside = true
+
 	
 func getRandomVelocity():
 	for i in range(velocities.size()):
@@ -92,12 +91,23 @@ func changeVelocityY(delta: float):
 func addFriction():
 	for i in range(velocities.size()):
 		velocities[i] = velocities[i]*FRICTION
+
+
+	
+
+
+func _on_area_2d_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	if body.is_in_group(\"players\"):
+		playerInside = false
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1mny3"]
 size = Vector2(238.5, 671)
 
-[node name="breakableWallQ" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sy87x"]
+size = Vector2(84, 606)
+
+[node name="breakableWallQ" type="StaticBody2D"]
 script = SubResource("GDScript_kpawh")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -133,7 +143,7 @@ texture = ExtResource("7_3wcov")
 
 [node name="wallPart6" type="Sprite2D" parent="Area2D"]
 visible = false
-position = Vector2(0.999985, 9)
+position = Vector2(-5, 9)
 scale = Vector2(0.2275, 0.228)
 texture = ExtResource("8_fcfbu")
 
@@ -147,5 +157,8 @@ visible = false
 emitting = false
 amount = 4
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-32, 15)
+shape = SubResource("RectangleShape2D_sy87x")
+
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

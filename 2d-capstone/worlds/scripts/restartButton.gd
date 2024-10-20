@@ -8,3 +8,7 @@ func _on_restart_button_button_down() -> void:
 		get_tree().reload_current_scene()
 	else:
 		get_tree().change_scene_to_file(goToScenePath)
+
+
+func _onCheckpointButtonPressed() -> void:
+	get_tree().reload_current_scene()

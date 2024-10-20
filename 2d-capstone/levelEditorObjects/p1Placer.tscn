@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://bi1t7ju171wyu"]
+
+[ext_resource type="Script" path="res://levelEditorObjects/p1Placer.gd" id="1_kanpy"]
+[ext_resource type="Texture2D" uid="uid://cxpyh4hstkkni" path="res://ui/assets/fullHealth.png" id="1_qgbxr"]
+[ext_resource type="Texture2D" uid="uid://6w21s3eo76lr" path="res://ui/assets/Placer_Line.png" id="2_4emwg"]
+[ext_resource type="Texture2D" uid="uid://cpvil4blpom7p" path="res://ui/assets/fullP2Health.png" id="2_g4ag4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hnd73"]
+size = Vector2(30, 1210)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejnwc"]
+size = Vector2(80, 67)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8hj0"]
+size = Vector2(81, 68)
+
+[node name="P1Placer" type="Node2D"]
+script = ExtResource("1_kanpy")
+
+[node name="Line" type="Node2D" parent="."]
+visible = false
+
+[node name="Area2D" type="Area2D" parent="Line"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line/Area2D"]
+shape = SubResource("RectangleShape2D_hnd73")
+
+[node name="Sprite2D" type="Sprite2D" parent="Line"]
+scale = Vector2(0.221978, 1.1828)
+texture = ExtResource("2_4emwg")
+
+[node name="Player1" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Player1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1/Area2D"]
+shape = SubResource("RectangleShape2D_ejnwc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player1"]
+scale = Vector2(0.153968, 0.151923)
+texture = ExtResource("1_qgbxr")
+
+[node name="Player2" type="Node2D" parent="."]
+visible = false
+
+[node name="Area2D" type="Area2D" parent="Player2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2/Area2D"]
+shape = SubResource("RectangleShape2D_u8hj0")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player2"]
+scale = Vector2(0.04125, 0.0345833)
+texture = ExtResource("2_g4ag4")

@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnlu5yanfcdgm"]
+
+[ext_resource type="Script" path="res://ui/scripts/pauseScreen.gd" id="1_42jy6"]
+[ext_resource type="Texture2D" uid="uid://byewomg48i32x" path="res://ui/assets/Pause_Menu_back.png" id="2_30uwk"]
+[ext_resource type="Texture2D" uid="uid://11uu7t2ekshk" path="res://ui/assets/MainMenu_button_unpressed.png" id="3_xhr1l"]
+[ext_resource type="Texture2D" uid="uid://bbia4tw56raak" path="res://ui/assets/MainMenu_button_pressed.png" id="4_4v28i"]
+[ext_resource type="Texture2D" uid="uid://0bnybv0niqyw" path="res://ui/assets/Resume_button_unpressed.png" id="5_sjbko"]
+[ext_resource type="Texture2D" uid="uid://dctqd6x4q8auv" path="res://ui/assets/Resume_button_pressed.png" id="6_d3r4m"]
+
+[node name="PauseScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_42jy6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.291, 0.291)
+texture = ExtResource("2_30uwk")
+
+[node name="mainMenuButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = -404.0
+offset_top = -216.0
+offset_right = 405.0
+offset_bottom = -86.0
+texture_normal = ExtResource("3_xhr1l")
+texture_pressed = ExtResource("4_4v28i")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="resumeButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = -392.0
+offset_top = -5.0
+offset_right = 391.0
+offset_bottom = 156.0
+texture_normal = ExtResource("5_sjbko")
+texture_pressed = ExtResource("6_d3r4m")
+
+[connection signal="button_up" from="mainMenuButton" to="." method="_onMainMenuButtonUp"]
+[connection signal="button_up" from="resumeButton" to="." method="_onResumeButtonUp"]

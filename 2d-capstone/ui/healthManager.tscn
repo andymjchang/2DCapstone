@@ -1,29 +1,79 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqwryhi02l72w"]
+[gd_scene load_steps=4 format=3 uid="uid://bqwryhi02l72w"]
 
 [ext_resource type="Script" path="res://ui/scripts/healthManager.gd" id="1_gxkyf"]
 [ext_resource type="PackedScene" uid="uid://bcy8j7jujip35" path="res://ui/uiHeart.tscn" id="1_mv5t0"]
+[ext_resource type="Script" path="res://ui/scripts/pulseRect.gd" id="3_0pt80"]
 
 [node name="HealthManager" type="CanvasLayer"]
 script = ExtResource("1_gxkyf")
 
 [node name="player1" type="Node2D" parent="."]
+visible = false
 
 [node name="UiHeart" parent="player1" instance=ExtResource("1_mv5t0")]
-position = Vector2(70, 85)
+position = Vector2(-70, 0)
 
 [node name="UiHeart2" parent="player1" instance=ExtResource("1_mv5t0")]
-position = Vector2(144, 85)
 
 [node name="UiHeart3" parent="player1" instance=ExtResource("1_mv5t0")]
-position = Vector2(220, 85)
+position = Vector2(70, 0)
+
+[node name="redBar" type="ColorRect" parent="." groups=["pulsingObjects"]]
+offset_left = 1046.0
+offset_top = 915.0
+offset_right = 1175.0
+offset_bottom = 996.0
+rotation = -0.0261799
+pivot_offset = Vector2(199.5, 28.5)
+color = Color(0.305882, 0.0196078, 0.0235294, 1)
+script = ExtResource("3_0pt80")
+timingScale = 4
+increasedScale = Vector2(1, 1.2)
+
+[node name="redBar2" type="ColorRect" parent="." groups=["pulsingObjects"]]
+offset_left = 862.0
+offset_top = 924.0
+offset_right = 1063.0
+offset_bottom = 997.0
+rotation = -0.0261799
+pivot_offset = Vector2(199.5, 28.5)
+color = Color(0.305882, 0.0196078, 0.0235294, 1)
+script = ExtResource("3_0pt80")
+timingScale = 2
+increasedScale = Vector2(1, 1.2)
+
+[node name="redBar3" type="ColorRect" parent="." groups=["pulsingObjects"]]
+offset_left = 747.0
+offset_top = 915.0
+offset_right = 870.0
+offset_bottom = 1011.0
+rotation = -0.0261799
+pivot_offset = Vector2(199.5, 28.5)
+color = Color(0.305882, 0.0196078, 0.0235294, 1)
+script = ExtResource("3_0pt80")
+timingScale = 4
+increasedScale = Vector2(1, 1.2)
+
+[node name="blackBar" type="ColorRect" parent="." groups=["pulsingObjects"]]
+offset_left = 762.0
+offset_top = 937.0
+offset_right = 1161.0
+offset_bottom = 989.0
+rotation = -0.0174533
+pivot_offset = Vector2(199.5, 28.5)
+color = Color(0.10748, 0.10748, 0.10748, 1)
+script = ExtResource("3_0pt80")
+timingScale = 2
+increasedScale = Vector2(1.2, 1)
 
 [node name="player2" type="Node2D" parent="."]
+position = Vector2(960, 900)
+scale = Vector2(2, 2)
 
 [node name="UiHeart" parent="player2" instance=ExtResource("1_mv5t0")]
-position = Vector2(70, 958)
+position = Vector2(-70, 0)
 
 [node name="UiHeart2" parent="player2" instance=ExtResource("1_mv5t0")]
-position = Vector2(144, 958)
 
 [node name="UiHeart3" parent="player2" instance=ExtResource("1_mv5t0")]
-position = Vector2(220, 958)
+position = Vector2(70, 0)

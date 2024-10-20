@@ -1,0 +1,26 @@
+platformBlocks
+25, 625, 19, 122, 70.5,
+272, 625, 12, <null>, <null>,
+428, 625, 12, <null>, <null>,
+584, 625, 12, <null>, <null>,
+1875, 625, 17, 109, 607.5,
+896, 625, 12, <null>, <null>,
+1052, 625, 12, <null>, <null>,
+1208, 625, 12, <null>, <null>,
+1364, 625, 12, <null>, <null>,
+1520, 625, 4, 24.5, 1468,
+1725, 625, 12, <null>, <null>,
+1575, 625, 12, <null>, <null>,
+725, 625, 14, 89.5, 738,
+actionIndicators
+playerCheckpoints
+player
+0, 540,
+enemies
+killFloors
+goalBlocks
+breakableWalls
+ziplines
+placers
+slideWalls
+powerups

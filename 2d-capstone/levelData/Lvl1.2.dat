@@ -514,3 +514,7 @@ goalBlocks
 31275, 700
 breakableWalls
 ziplines
+placers
+slideWalls
+powerups
+900, 300,

@@ -5,6 +5,7 @@ signal gameOver()
 signal checkGameOver()
 signal levelCompleted()
 signal checkLevelCompleted()
+signal changeSpeed(speedType)
 
 @export var levelFile : String
 @export var platformBlockInstance : PackedScene
@@ -13,9 +14,11 @@ signal checkLevelCompleted()
 @export var actionIndicatorInstance : PackedScene
 @export var checkpointInstance : PackedScene
 @export var player1Instance : PackedScene
-@export var player2Instance : PackedScene
 @export var enemyInstance : PackedScene
+@export var breakableWallInstance : PackedScene
 @export var ziplineInstance : PackedScene
+@export var slideWallInstance : PackedScene
+@export var powerupInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -23,13 +26,14 @@ signal checkLevelCompleted()
 @onready var killFloorsList = $objectList/killFloors
 @onready var enemiesList = $objectList/enemies
 @onready var actionIndicatorsList = $objectList/actionIndicators
-@onready var p1checkpointsList = $objectList/player1checkpoints
-@onready var p2checkpointsList = $objectList/player2checkpoints
+@onready var p1checkpointsList = $objectList/playerCheckpoints
 @onready var playersList = $objectList/players
+@onready var breakableWallList = $objectList/breakableWalls
 @onready var ziplineList = $objectList/ziplines
+@onready var slideWallList = $objectList/slideWalls
+@onready var powerupList = $objectList/powerups
 
 var player1 
-var player2
 var killWall
 var countdownUI
 var statusMessage
@@ -38,31 +42,67 @@ var music
 
 var time : float = 0
 var score = 0
+var musicTime = 0.0
 
 @onready var timerText
 @onready var player
 @onready var camera
 @onready var scoreText
+@onready var powerupUI
 
 var textPopupScene1
-var textPopupScene2
-
+var restartCheckpoint = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	loadLevel()
+	
+	var backgroundName : String = "Lvl1"
+	if levelFile.begins_with("Lvl0."):
+		Globals.setBPM(155)
+		Globals.currentSongFileName = "Tutorial_New_155bpm.mp3"
+		backgroundName = "Lvl0"
+	if levelFile.begins_with("Lvl1."):
+		Globals.setBPM(155)
+		Globals.currentSongFileName = "Level1_Main_155bpm.mp3"
+		backgroundName = "Lvl1"
+	if levelFile.begins_with("Lvl2."):
+		Globals.setBPM(156)
+		Globals.currentSongFileName = "Level2_Main_156bpm_V2.mp3"
+		backgroundName = "Lvl2"
+		
+	if levelFile.begins_with("Lvl0."):
+		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
+		var popUpInstance = popUpScene.instantiate()
+		$Camera2D.add_child(popUpInstance)
+		$Camera2D/onboardingPopUp/tutorialSlides.play()
+	# load the actionArrays (This must happen after bpm is set)
+	$objectList/actionIndicators.load_array()
+	# set bpm of all pulsing objects
+	for object in get_tree().get_nodes_in_group("pulsingObjects"):
+		object.setBPM()
+		
+	# Load background
+	var backgroundScene = load("res://backgrounds/" + backgroundName + "Background.tscn")
+	if backgroundScene:
+		var backgroundInstance = backgroundScene.instantiate()
+		$Background.add_child(backgroundInstance)
+	# Failsafe: load Lvl1
+	else:
+		backgroundScene = load("res://backgrounds/Lvl1Background.tscn")
+		var backgroundInstance = backgroundScene.instantiate()
+		$Background.add_child(backgroundInstance)
+	
+	camera = $Camera2D
 	timerText = $CanvasLayer/Timer
 	player1 = playersList.get_node("Player1")
-	player2 = playersList.get_node("Player2")
-	camera = $Camera2D
 	scoreText = $CanvasLayer/Score
+	powerupUI = $Camera2D/PowerupSlot
 	
 	# intialize text popup node
 	textPopupScene1 = $Camera2D/ScorePopup1
-	textPopupScene2 = $Camera2D/ScorePopup2
 	textPopupScene1.initPosition(player1)
-	textPopupScene2.initPosition(player2)
-	
+
 	music = camera.get_node("Music")
 	loadAudio()
 	
@@ -72,23 +112,35 @@ func _ready():
 	self.checkGameOver.connect(_onCheckGameOver)
 	self.checkLevelCompleted.connect(_onCheckLevelCompleted)
 	self.levelCompleted.connect(_onLevelCompleted)
+	self.changeSpeed.connect(_onChangeSpeed)
 
 	# Prep players
 	player1.editing = false
-	player2.editing = false
+	if Globals.customStart:
+		#we are starting at a user picked place
+		player1.global_position = Globals.startP1Coords
+		get_node("Camera2D").moveCamera(player1.global_position.x)
+		var distance = abs(0.0 - player1.global_position.x)
+		var playerSpeed = player1.SPEED
+		musicTime = distance / Globals.pixelsPerFrame
+		time += musicTime 
+		Globals.time += time + 3.0
+		print("time gone, ", musicTime)
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
 	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
 
+
 	# Start game
 	Globals.inLevel = false
 	restartButton.visible = false
 	changeCountdown()
+	emit_signal("changeSpeed", 0)
 	#startGame()
 	
 func startGame():
-	music.play(0.0)
+	music.play(musicTime)
 	Globals.inLevel = true
 
 func loadAudio():
@@ -97,47 +149,72 @@ func loadAudio():
 	var audioPath = "res://audioTracks/" + Globals.currentSongFileName
 	var newAudio = load(audioPath) as AudioStream
 	music.stream = newAudio
+	music.stream.loop = false
 
 func loadLevel():
 	# set file to load
-	if Globals.currentSongFileName:
-		levelFile = Globals.currentEditorFileName
+	#if Globals.currentSongFileName:
+		#levelFile = Globals.currentEditorFileName
 	if Globals.curFile:
 		levelFile = Globals.curFile
 	
-	print("level nameL ", levelFile)
+	print("level name ", levelFile)
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],
 		"killFloors": [killFloorInstance, killFloorsList],
 		"actionIndicators": [actionIndicatorInstance, actionIndicatorsList], 
-		"player1checkpoints": [checkpointInstance, p1checkpointsList],
-		"player2checkpoints": [checkpointInstance, p2checkpointsList], 
+		"playerCheckpoints": [checkpointInstance, p1checkpointsList],
 		"enemies": [enemyInstance, enemiesList],
-		"player1": [player1Instance, playersList],
-		"player2": [player2Instance, playersList],
-		"ziplines": [ziplineInstance, ziplineList]}
+		"player": [player1Instance, playersList],
+		"breakableWalls" : [breakableWallInstance, breakableWallList],
+		"ziplines": [ziplineInstance, ziplineList],
+		"slideWalls": [slideWallInstance, slideWallList],
+		"powerups": [powerupInstance, powerupList]}
 	var instance
 	var instanceParent
+	var name = ""
 	for line in content.split("\n"):
 		#print("Current line: ", line)
 		if line in instanceList.keys():
+			name = line
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
 		# Position
 		#does not work with goal/checkpoints
-		if line.contains(", "):
+		elif line.contains(", "):
 			#print("Object: ", instance)
+			print("line: ", line)
 			var instancedObj = instance.instantiate()
 			var posPoints = []
+			
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
+				
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
-			#print("instance parent: ", instanceParent)
 			instanceParent.add_child(instancedObj)
+			
+			#check if zipline, TODO make this more 
+			if name == "ziplines":
+				var startPos = Vector2(posPoints[0], posPoints[1])
+				var endPos = Vector2(posPoints[2], posPoints[3])
+				instancedObj.get_node("ziplineStart").global_position = startPos
+				instancedObj.get_node("ziplineEnd").global_position = endPos
+				
+			if name =="platformBlocks":
+				instancedObj.setTileMaps(posPoints.duplicate()) 
+			
+		elif ".mp3" in line:
+			# audio file
+			print("Changing audio to: ", line)
+			Globals.currentSongFileName = line
 	
 	# load the actionArrays
 	$objectList/actionIndicators.load_array()
+	if levelFile.begins_with("Lvl2."):
+		for platform in platformBlocksList.get_children():
+			platform.get_node("sprite2D/TileMapLayer").visible = false
+			platform.get_node("sprite2D/TileMapLayer2").visible = true
 
 func changeCountdown():
 	await get_tree().create_timer(1.0).timeout
@@ -146,13 +223,13 @@ func changeCountdown():
 	statusMessage.text = "1"
 	await get_tree().create_timer(1.0).timeout
 	statusMessage.text = "Go!"
+	startGame()
 	await get_tree().create_timer(1.0).timeout
 	statusMessage.text = ""
 
 func _onCheckGameOver():
 	print("Checking if both dead")
-	if player1.dead and player2.dead:
-		print("Both dead")
+	if player1.dead:
 		self.emit_signal("gameOver")
 
 func _onCheckLevelCompleted():
@@ -174,13 +251,16 @@ func _onGameOver():
 	Globals.inLevel = false
 
 func showGameOver():
-	statusMessage.text = "Game over!"
-	restartButton.visible = true
+	music.stop()
+	$LevelUI/GameOverScreen.visible = true
+	Engine.time_scale = 0.0
 	
 func showLevelCompleted():
 	music.stop()
-	statusMessage.text = "Level Completed!"
-	restartButton.visible = true
+	$LevelUI/GameOverScreen.visible = true
+	Engine.time_scale = 0.0
+	#statusMessage.text = "Level Completed!"
+	#restartButton.visible = true
 	
 func _onLevelCompleted():
 	showLevelCompleted()
@@ -190,9 +270,16 @@ func _onLevelCompleted():
 func _physics_process(delta):
 	updateTime(delta)
 	if Input.is_action_just_pressed("toMainMenu"):
-		get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+		#do go to pause instead
+		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+		$Camera2D/Music.stream_paused = true
+		Globals.paused = true
+		$LevelUI/PauseScreen.visible = true
+		Engine.time_scale = 0.0
 		
-	if time >= 3.0 and !Globals.inLevel:
+	if time >= 3.0 and !Globals.inLevel and !Globals.paused:
+		if Globals.customStart:
+			await get_tree().create_timer(3).timeout
 		startGame()
 
 func updateTime(delta: float):
@@ -210,32 +297,30 @@ func round_to_dec(num, digit):
 
 # Helper function that grabs the target player's closest forward checkpoint
 func getNearestCheckpoint(who):
-	var checkpointPath = who.name.to_lower() + "checkpoints"
 	var viableCheckpoints = []
-	for i in objectList.get_node(checkpointPath).get_children():
-		#print("Checking: ", i)
-		# Check if checkpoint in front of player
-		var direction = (i.position.x - who.position.x)
-		if (direction >= 0):
-			viableCheckpoints.append(i)
-	#print("Viable checkpoints: ", viableCheckpoints)
-	var nearestPoint = viableCheckpoints[0]
-	var shortestDistance = who.position.distance_to(viableCheckpoints[0].position)
-	for i in viableCheckpoints:
-		var distance = who.position.distance_to(i.position)
-		if distance < shortestDistance:
-			nearestPoint = i
-			shortestDistance = distance
-	#print("Relocating to: ", nearestPoint.position)
+	var nearestPoint = null
+	if len(objectList.get_node("playerCheckpoints").get_children()) > 0:
+		for i in objectList.get_node("playerCheckpoints").get_children():
+			#print("Checking: ", i)
+			# Check if checkpoint behind player
+			var direction = (i.position.x - who.position.x)
+			if (direction < 0):
+				viableCheckpoints.append(i)
+		#print("Viable checkpoints: ", viableCheckpoints)
+		if len(viableCheckpoints) > 0:
+			nearestPoint = viableCheckpoints[0]
+			var shortestDistance = who.position.distance_to(viableCheckpoints[0].position)
+			for i in viableCheckpoints:
+				var distance = who.position.distance_to(i.position)
+				if distance < shortestDistance:
+						nearestPoint = i
+						shortestDistance = distance
+			#print("Relocating to: ", nearestPoint.position)
 	return nearestPoint
 	
 # Basic checkpointing system
 func _onResetPosition(who):
 	if who.name == "Player1":
-		var nearestPoint = getNearestCheckpoint(who)
-		who.emit_signal("relocate", nearestPoint)
-		pass
-	elif who.name == "Player2":
 		var nearestPoint = getNearestCheckpoint(who)
 		who.emit_signal("relocate", nearestPoint)
 		pass
@@ -248,19 +333,30 @@ func _onEndGameBodyEntered(body:Node2D):
 
 func _onRunBoundsBodyEntered(body: Node2D) -> void:
 	if (body.name.contains("Player")):
-		print("Entering max run bounds")
+		#print("Entering max run bounds")
 		body.hitBounds = true
 
 
 func _onRunBoundsBodyExited(body: Node2D) -> void:
 	if (body.name.contains("Player")):
-		print("Leaving max run bounds")
+		#print("Leaving max run bounds")
 		body.hitBounds = false
+
+
 func _onScored(id, p_score):
 	var scoreToAdd = 100 - p_score
 	score += scoreToAdd
-	scoreText.text = str(int(score))
+	scoreText.lerpText(int(score))
 	if id == "Player1":
 		textPopupScene1.initText(scoreToAdd, player1.position)
-	if id == "Player2":
-		textPopupScene2.initText(scoreToAdd, player2.position)
+		
+func _onChangeSpeed(speedType):
+	if speedType > 0:			# Speed up
+		music.pitch_scale = 2
+		Globals.scrollSpeed = 2
+	elif speedType < 0:			# Speed down
+		music.pitch_scale = 0.5
+		Globals.scrollSpeed = 0.5
+	else:						# Return to regular
+		music.pitch_scale = 1
+		Globals.scrollSpeed = 1

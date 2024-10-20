@@ -10,9 +10,10 @@ size = Vector2(50, 50)
 script = ExtResource("1_vgx8v")
 startingScale = 0.75
 animation_time = 0.5
+endColor = Color(0.505882, 0.760784, 0.239216, 1)
 
 [node name="innerCircle" type="Sprite2D" parent="."]
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_roerp")
 
 [node name="outerCircle" type="Sprite2D" parent="."]
@@ -22,3 +23,7 @@ texture = ExtResource("2_roerp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_0jqk3")
+
+[node name="DeathTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

@@ -1,0 +1,138 @@
+[gd_scene load_steps=24 format=3 uid="uid://cwc2nel1xt6xx"]
+
+[ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
+[ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
+[ext_resource type="PackedScene" uid="uid://durvh6v8u5exu" path="res://worldObjects/blockLong.tscn" id="2_78xmt"]
+[ext_resource type="PackedScene" uid="uid://bsbq6v7ueradk" path="res://worldObjects/killFloor.tscn" id="3_6me16"]
+[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_o6usx"]
+[ext_resource type="PackedScene" uid="uid://dcehy21ekao56" path="res://levelEditor/goal_block.tscn" id="3_oih58"]
+[ext_resource type="PackedScene" uid="uid://di7r6ds1tcpfj" path="res://worldObjects/checkpoint.tscn" id="4_ph2wq"]
+[ext_resource type="PackedScene" uid="uid://bwbudlc6eqg88" path="res://player/player1.tscn" id="5_dfiyk"]
+[ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="7_po4yx"]
+[ext_resource type="PackedScene" uid="uid://bam8jg1naascf" path="res://worldObjects/zipline/ziplineStart.tscn" id="10_h5bd4"]
+[ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="12_jtaw1"]
+[ext_resource type="Texture2D" uid="uid://b18o1hn8u7e7a" path="res://backgrounds/bkg_scroll.png" id="12_ngrii"]
+[ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
+[ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
+[ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
+[ext_resource type="AudioStream" uid="uid://c0r4i7rsnwlm7" path="res://audioTracks/Level2_Main_156bpm.mp3" id="15_27j5g"]
+[ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
+[ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
+[ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
+[ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
+[ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
+[ext_resource type="PackedScene" uid="uid://cql6hrj5lhevf" path="res://worldObjects/zipline/ziplineEnd.tscn" id="24_ff25o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx12w"]
+size = Vector2(36, 1086)
+
+[node name="level" type="Node2D"]
+script = ExtResource("1_fl71r")
+levelFile = "ziptest"
+platformBlockInstance = ExtResource("2_78xmt")
+goalBlockInstance = ExtResource("3_oih58")
+killFloorInstance = ExtResource("3_6me16")
+actionIndicatorInstance = ExtResource("3_o6usx")
+checkpointInstance = ExtResource("4_ph2wq")
+player1Instance = ExtResource("5_dfiyk")
+enemyInstance = ExtResource("7_po4yx")
+ziplineInstance = ExtResource("10_h5bd4")
+
+[node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Timer" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1853.0
+offset_top = 3.0
+offset_right = 1919.0
+offset_bottom = 67.0
+theme_override_fonts/normal_font = ExtResource("12_jtaw1")
+
+[node name="Score" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1639.0
+offset_top = 137.0
+offset_right = 1784.0
+offset_bottom = 202.0
+theme_override_fonts/normal_font = ExtResource("12_jtaw1")
+text = "0"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 536)
+zoom = Vector2(0.25, 0.25)
+
+[node name="MenuBg" type="Sprite2D" parent="Camera2D"]
+visible = false
+position = Vector2(19.208, -32.8751)
+scale = Vector2(0.223264, 0.223264)
+texture = ExtResource("12_ngrii")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
+position = Vector2(-960, -540)
+stream = ExtResource("15_27j5g")
+max_distance = 10000.0
+
+[node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
+position = Vector2(-1327, -526)
+scale = Vector2(1.5, 1.5)
+
+[node name="RunBounds" type="Area2D" parent="Camera2D"]
+position = Vector2(-252, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RunBounds"]
+position = Vector2(-943, -20)
+shape = SubResource("RectangleShape2D_jx12w")
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/RunBounds"]
+visible = false
+offset_left = -22.0
+offset_top = -448.0
+offset_right = 18.0
+offset_bottom = 374.0
+
+[node name="ActionLine" type="Sprite2D" parent="Camera2D"]
+position = Vector2(-250, 0)
+texture = ExtResource("15_gryhe")
+
+[node name="ScorePopup1" parent="Camera2D" instance=ExtResource("16_kbija")]
+position = Vector2(-250, -158)
+
+[node name="objectList" type="Node2D" parent="."]
+
+[node name="platformBlocks" type="Node2D" parent="objectList"]
+
+[node name="goalBlocks" type="Node2D" parent="objectList"]
+
+[node name="killFloors" type="Node2D" parent="objectList"]
+
+[node name="enemies" type="Node2D" parent="objectList"]
+
+[node name="actionIndicators" type="Node2D" parent="objectList"]
+script = ExtResource("13_euntf")
+
+[node name="player2checkpoints" type="Node2D" parent="objectList"]
+script = ExtResource("14_rbu47")
+
+[node name="player1checkpoints" type="Node2D" parent="objectList"]
+script = ExtResource("14_rbu47")
+
+[node name="players" type="Node2D" parent="objectList"]
+
+[node name="ziplines" type="Node2D" parent="objectList"]
+
+[node name="zipline" type="Node2D" parent="objectList/ziplines"]
+
+[node name="ziplineStart" parent="objectList/ziplines/zipline" instance=ExtResource("10_h5bd4")]
+position = Vector2(802, 549)
+
+[node name="ziplineEnd" parent="objectList/ziplines/zipline" instance=ExtResource("24_ff25o")]
+position = Vector2(2545, 681)
+
+[node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
+
+[node name="ScoreBar" parent="." instance=ExtResource("20_iu2pl")]
+
+[node name="ProgressBar" parent="." instance=ExtResource("22_7f6ic")]
+
+[connection signal="body_entered" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyEntered"]
+[connection signal="body_exited" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyExited"]

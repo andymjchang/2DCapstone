@@ -22,14 +22,19 @@ func _onBodyEntered(body):
 	print("Entering body: ", body.name)
 	if "Player" in body.name:
 		if self.name == "ziplineStart":
-			# print("My end: ", get_parent().get_child(END))
 			var destination = get_parent().get_child(END)
-			var newVelocity = destination.position - body.position
-			body.velocity = newVelocity
+			var newVelocity = (destination.position - self.position) / 2
+			print("Destination: ", destination.position)
+			print("Velocity: ", newVelocity)
+			body.velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+			body.inZipline = true
 			body.relocating = true
-		elif self.name == "ziplineEnd" and body.relocating:
+
+		elif self.name == "ziplineEnd" and body.inZipline:
 			print("at end")
+			body.inZipline = false
 			body.relocating = false
+			body.position.y -= 100
 			body.velocity = Vector2(0, 0)
 
 	pass

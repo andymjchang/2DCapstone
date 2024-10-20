@@ -1,0 +1,13 @@
+platformBlocks
+actionIndicators
+player1checkpoints
+player2checkpoints
+player1
+0, 540
+player2
+0.00000190735, 240
+enemies
+killFloors
+goalBlocks
+breakableWalls
+ziplines

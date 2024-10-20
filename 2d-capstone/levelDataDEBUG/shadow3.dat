@@ -1,0 +1,19 @@
+platformBlocks
+0, 600,
+150, 600,
+300, 600,
+500, 550,
+650, 550,
+actionIndicators
+playerCheckpoints
+player
+0, 540,
+enemies
+killFloors
+goalBlocks
+breakableWalls
+ziplines
+325, 525, 775, 500,
+placers
+slideWalls
+powerups

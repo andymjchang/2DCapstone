@@ -6,12 +6,12 @@ var current_index = 0
 var starting_index = 0
 
 func load_array():
-	actionIndicatorArray = get_children()
-	actionIndicatorArray.sort_custom(sortIndicators)
+	actionIndicatorArray = get_tree().get_nodes_in_group("actionIndicators")
 	for indicator in actionIndicatorArray:
-		indicator.connect("scored", on_scored)
-	
+		indicator.initialize()
+	actionIndicatorArray.sort_custom(sortIndicators)
 	currentWorldScene = get_parent().get_parent()
+	print("current world scene: ", currentWorldScene)
 	
 
 func sortIndicators(a, b):
@@ -26,11 +26,9 @@ func _process(_delta: float) -> void:
 		var indicator = actionIndicatorArray[current_index]
 		current_index += 1
 		if currentWorldScene.time >= indicator.get_target_time():
-			#print("current time" + str(currentWorldScene.time))
+			print("current time" + str(currentWorldScene.time))
 			indicator.start_transition()
 			starting_index += 1 # don't search through here again
 		else:
 			break
 			
-func on_scored(indicator_position):
-	currentWorldScene.updateScore(indicator_position)
