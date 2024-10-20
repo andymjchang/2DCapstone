@@ -7,6 +7,7 @@
 [ext_resource type="TileSet" uid="uid://da7dt3s360auf" path="res://backgrounds/tilemaps/level2.tres" id="5_urnmp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpulb"]
+resource_local_to_scene = true
 size = Vector2(155, 47)
 
 [node name="Block" type="StaticBody2D" groups=["blocks"]]
