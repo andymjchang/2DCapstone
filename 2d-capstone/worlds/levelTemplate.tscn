@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=29 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -15,24 +15,25 @@
 [ext_resource type="PackedScene" uid="uid://u4osldlbr3sl" path="res://worldObjects/zipline/ziplineManager.tscn" id="11_mqtla"]
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="12_jtaw1"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
+[ext_resource type="PackedScene" uid="uid://b8v38gkay1bem" path="res://worldObjects/jumpBoost.tscn" id="13_iujdl"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="Script" path="res://worlds/score.gd" id="15_mx364"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
-[ext_resource type="PackedScene" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
+[ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
-[ext_resource type="PackedScene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
-[ext_resource type="PackedScene" path="res://ui/powerupSlot.tscn" id="25_wa2am"]
+[ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
+[ext_resource type="PackedScene" uid="uid://bo0d4wxsgmli1" path="res://ui/powerupSlot.tscn" id="25_wa2am"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rypfk"]
 size = Vector2(36, 1086)
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
-levelFile = "Lvl0.3"
+levelFile = "verttest"
 platformBlockInstance = ExtResource("2_78xmt")
 goalBlockInstance = ExtResource("3_oih58")
 killFloorInstance = ExtResource("3_6me16")
@@ -44,6 +45,7 @@ breakableWallInstance = ExtResource("10_twea0")
 ziplineInstance = ExtResource("11_mqtla")
 slideWallInstance = ExtResource("11_hh0vp")
 powerupInstance = ExtResource("19_5vjyv")
+jumpInstance = ExtResource("13_iujdl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -136,6 +138,8 @@ script = ExtResource("14_rbu47")
 [node name="slideWalls" type="Node2D" parent="objectList"]
 
 [node name="powerups" type="Node2D" parent="objectList"]
+
+[node name="jumpBoosts" type="Node2D" parent="objectList"]
 
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 

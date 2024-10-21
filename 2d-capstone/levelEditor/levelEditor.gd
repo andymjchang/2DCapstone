@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -51,6 +51,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var zipline : PackedScene
 @export var slideWall : PackedScene 
 @export var powerup : PackedScene
+@export var jumpBoost : PackedScene
 
 
 @onready var objectList = $objectList
@@ -68,6 +69,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var slideWallList = $objectList/slideWalls
 @onready var placerList = $objectList/placers
 @onready var powerupList = $objectList/powerups
+@onready var jumpList = $objectList/jumpBoosts
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -309,6 +311,14 @@ func _onPowerupButtonPressed() -> void:
 	powerParent.blockType = blockTypes[1]
 	place_block(powerParent, powerupList, camera.position, false)
 
+
+func _onJumpBoostButtonPressed() -> void:
+	var jumpInstance = jumpBoost.instantiate()
+	var jumpParent = baseObject.instantiate()
+	jumpParent.add_child(jumpInstance)
+	jumpParent.blockType = blockTypes[13]
+	place_block(jumpParent, jumpList, camera.position, false)
+
 func _on_play_audio_button_pressed() -> void:
 	if not isPlaying:
 		camera.get_node("audio").play()
@@ -442,9 +452,6 @@ func place_block(instance, parent, placePos, initial):
 	elif instance.blockType == blockTypes[0]: 
 		instance.position.x = 0
 		instance.position.y = placePos.y
-	elif instance.blockType == blockTypes[1]: 
-		instance.position.x = 0
-		instance.position.y = placePos.y
 	elif !turnOffSnap:
 		instance.position = snap_position(placePos)
 	else:
@@ -505,6 +512,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/slideWalls")
 	if blockType == "powerup":
 		return get_node("objectList/powerups")
+	if blockType == "jumpBoost":
+		return get_node("objectList/jumpBoosts")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:

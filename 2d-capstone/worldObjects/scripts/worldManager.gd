@@ -19,6 +19,7 @@ signal changeSpeed(speedType)
 @export var ziplineInstance : PackedScene
 @export var slideWallInstance : PackedScene
 @export var powerupInstance : PackedScene
+@export var jumpInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -32,6 +33,7 @@ signal changeSpeed(speedType)
 @onready var ziplineList = $objectList/ziplines
 @onready var slideWallList = $objectList/slideWalls
 @onready var powerupList = $objectList/powerups
+@onready var jumpBoostList = $objectList/jumpBoosts
 
 var player1 
 var killWall
@@ -170,7 +172,8 @@ func loadLevel():
 		"breakableWalls" : [breakableWallInstance, breakableWallList],
 		"ziplines": [ziplineInstance, ziplineList],
 		"slideWalls": [slideWallInstance, slideWallList],
-		"powerups": [powerupInstance, powerupList]}
+		"powerups": [powerupInstance, powerupList],
+		"jumpBoosts": [jumpInstance, jumpBoostList]}
 	var instance
 	var instanceParent
 	var name = ""
@@ -203,6 +206,7 @@ func loadLevel():
 				
 			if name =="platformBlocks":
 				instancedObj.setTileMaps(posPoints.duplicate()) 
+				instancedObj.add_to_group("platforms")
 			
 		elif ".mp3" in line:
 			# audio file
@@ -281,6 +285,11 @@ func _physics_process(delta):
 		if Globals.customStart:
 			await get_tree().create_timer(3).timeout
 		startGame()
+		
+	if Globals.vertical:
+		camera.emit_signal("moveCameraY", player1.position.y)
+	elif Globals.resetCamera:
+		camera.emit_signal("moveCameraY", player1.position.y)
 
 func updateTime(delta: float):
 	time = time + delta

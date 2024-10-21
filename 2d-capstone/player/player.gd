@@ -6,6 +6,7 @@ signal relocate(nearestPoint)
 signal scored(id, score)
 signal getPowerup(powerType)
 signal activatePowerup()
+signal doubleJump()
 
 var curSprite
 var JUMP_VELOCITY = -550.0
@@ -65,6 +66,7 @@ func _ready():
 	self.activatePowerup.connect(_onActivatePowerup)
 	self.revive.connect(_onRevive)
 	self.relocate.connect(_onRelocate)
+	self.doubleJump.connect(_onDoubleJump)
 	$Animation.animation_finished.connect(_onAnimationFinished)
 	$Animation.play("Run")
 	worldNode = get_tree().get_root().get_node("level")
@@ -87,6 +89,8 @@ func _physics_process(delta: float) -> void:
 			# Lines
 			if is_on_floor():
 				glitchLines.global_position.y = self.global_position.y
+				camera.global_position.y = self.global_position.y + -70
+				Globals.resetCamera = false
 			
 			# Add the gravity.
 			if not is_on_floor():
@@ -104,7 +108,7 @@ func _physics_process(delta: float) -> void:
 				elif hitBounds and direction > 0:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 				else:
-					velocity.x = move_toward(velocity.x, 0, SPEED)
+					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
@@ -280,3 +284,13 @@ func _onPowerupTimerTimeout() -> void:
 		Globals.powerType.SLOWDOWN:
 			worldNode.emit_signal("changeSpeed", 0)
 	curPowerup = null
+
+func _onVisibleOnScreenNotifier2dScreenExited() -> void:
+	print("Left camera")
+	Globals.resetCamera = true
+	pass # Replace with function body.
+
+func _onDoubleJump():
+	$Animation.play("Jump")
+	jumpInProgress = true
+	velocity.y = JUMP_VELOCITY * 2

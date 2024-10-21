@@ -27,8 +27,10 @@ func _onBodyEntered(body):
 			print("Destination: ", destination.position)
 			print("Velocity: ", newVelocity)
 			body.velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+			body.velocity.y = newVelocity.y
 			body.inZipline = true
 			body.relocating = true
+			Globals.vertical = true
 
 		elif self.name == "ziplineEnd" and body.inZipline:
 			print("at end")
@@ -36,5 +38,7 @@ func _onBodyEntered(body):
 			body.relocating = false
 			body.position.y -= 100
 			body.velocity = Vector2(0, 0)
+			Globals.vertical = false
+			Globals.resetCamera = true
 
 	pass
