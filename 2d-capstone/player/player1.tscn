@@ -246,11 +246,11 @@ increasedScale = Vector2(0.03, 0.03)
 wait_time = 0.25
 one_shot = true
 
-[node name="sfxPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="sfxPlayer" type="AudioStreamPlayer2D" parent="." groups=["playerSounds"]]
 position = Vector2(0, 11)
 stream = ExtResource("7_wy6uo")
 
-[node name="damagePlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="damagePlayer" type="AudioStreamPlayer2D" parent="." groups=["playerSounds"]]
 position = Vector2(0, 11)
 stream = ExtResource("8_k3kow")
 

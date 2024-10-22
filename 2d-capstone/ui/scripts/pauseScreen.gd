@@ -19,3 +19,13 @@ func _onMainMenuButtonUp() -> void:
 	Globals.paused = false
 	Globals.time = 0.0
 	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+
+
+func _onOptionsButtonUp() -> void:
+	var optionsScene = load("res://ui/options.tscn")
+	var optionsInstance = optionsScene.instantiate()
+	print("root, ", get_tree().current_scene)
+	get_tree().current_scene.get_node("LevelUI").add_child(optionsInstance)
+	self.visible = false
+	#TODO find a better way to do this
+	#get_tree().change_scene_to_file("res://ui/options.tscn")

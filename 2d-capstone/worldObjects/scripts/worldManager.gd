@@ -128,18 +128,7 @@ func _ready():
 		var distance = abs(0.0 - player1.global_position.x)
 		var playerSpeed = player1.SPEED
 		musicTime = distance / Globals.pixelsPerFrame
-		Globals.time = musicTime 
-		print("time gone, ", musicTime)
-
-	elif Globals.relocateToCheckpoint and Globals.checkpoint != null:
-		player1.global_position = Globals.checkpoint
-		get_node("Camera2D").moveCamera(player1.global_position.x)
-		var distance = abs(0.0 - player1.global_position.x)
-		var playerSpeed = player1.SPEED
-		musicTime = distance / Globals.pixelsPerFrame
 		Globals.time += musicTime
-
-
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
@@ -157,7 +146,8 @@ func startGame():
 	music.play(musicTime)
 	print("starting")
 	Globals.inLevel = true
-	Globals.time = 0.0
+	if !Globals.customStart:
+		Globals.time = 0.0
 
 func loadAudio():
 	if !Globals.currentSongFileName:
@@ -294,7 +284,7 @@ func _onLevelCompleted():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	updateTime(delta)
-	if Input.is_action_just_pressed("toMainMenu"):
+	if Input.is_action_just_pressed("pause"):
 		#do go to pause instead
 		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 		$Camera2D/Music.stream_paused = true
@@ -302,15 +292,21 @@ func _physics_process(delta):
 		$LevelUI/PauseScreen.visible = true
 		Engine.time_scale = 0.0
 		
-	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused:
-		if Globals.customStart or Globals.relocateToCheckpoint:
-			await get_tree().create_timer(3).timeout
-		startGame()
-		
+	#if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused:
+		#if Globals.customStart or Globals.relocateToCheckpoint:
+			#await get_tree().create_timer(3).timeout
+		#startGame()
+		#
 	if Globals.vertical:
 		camera.emit_signal("moveCameraY", player1.position.y)
 	elif Globals.resetCamera:
 		camera.emit_signal("moveCameraY", player1.position.y)
+	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused and !Globals.customStart:
+		startGame()
+	elif Globals.customStart and !Globals.inLevel and Globals.time >= musicTime + 3.0:
+		startGame()
+
+		
 
 func updateTime(delta: float):
 	if Globals.inLevel:

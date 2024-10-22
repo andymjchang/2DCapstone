@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://doiamwbhll34f"]
+
+[ext_resource type="Script" path="res://ui/scripts/options.gd" id="1_n6aap"]
+[ext_resource type="Texture2D" uid="uid://byewomg48i32x" path="res://ui/assets/Pause_Menu_back.png" id="2_ufdgt"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+size_flags_horizontal = 4
+script = ExtResource("1_n6aap")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 0)
+scale = Vector2(2.02839, 2.13021)
+texture = ExtResource("2_ufdgt")
+
+[node name="keybindingsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = -1682.0
+offset_top = -1493.0
+offset_right = 1547.0
+offset_bottom = -924.0
+theme_override_font_sizes/font_size = 200
+text = "Key bindings"
+
+[node name="backButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = -1690.0
+offset_top = 610.0
+offset_right = 1644.0
+offset_bottom = 1123.0
+theme_override_font_sizes/font_size = 200
+text = "Back
+"
+
+[node name="volumeButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = -1682.0
+offset_top = -513.0
+offset_right = 1547.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 200
+text = "Volume"
+
+[connection signal="button_up" from="keybindingsButton" to="." method="_onKeyBindingsButtonUp"]
+[connection signal="button_up" from="backButton" to="." method="_onBackButtonUp"]
+[connection signal="button_up" from="volumeButton" to="." method="_onVolumeButtonUp"]

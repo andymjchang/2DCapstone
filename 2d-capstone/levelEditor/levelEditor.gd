@@ -110,9 +110,9 @@ func _ready():
 		displayStatus(FILE_EXISTS_PATH, true)
 	
 func _process(delta: float) -> void:
-	if (trackingPosition):
-		currentPosition = get_global_mouse_position()
-		timeHeld += delta
+	#if (trackingPosition):
+		#currentPosition = get_global_mouse_position()
+		#timeHeld += delta
 	if Input.is_action_just_pressed("click"):
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds

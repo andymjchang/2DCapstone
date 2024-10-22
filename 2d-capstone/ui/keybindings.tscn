@@ -1,0 +1,117 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn1epcentmy3x"]
+
+[ext_resource type="Script" path="res://ui/scripts/keybindings.gd" id="1_ohtkt"]
+
+[node name="Keybindings" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 173.0
+offset_top = 100.0
+offset_right = 173.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_ohtkt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -565.0
+offset_top = -320.0
+offset_right = 390.0
+offset_bottom = 218.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.219501, 0.219501, 0.219501, 1)
+
+[node name="buttons" type="Node2D" parent="."]
+
+[node name="jumpKey" type="Button" parent="buttons"]
+offset_left = -198.0
+offset_top = -286.5
+offset_right = -2.0
+offset_bottom = -255.5
+text = "Jump"
+
+[node name="slideKey" type="Button" parent="buttons"]
+offset_left = -201.5
+offset_top = -105.5
+offset_right = -8.5
+offset_bottom = -73.5
+text = "Slide"
+
+[node name="punchKey" type="Button" parent="buttons"]
+offset_left = -486.5
+offset_top = -285.5
+offset_right = -301.5
+offset_bottom = -254.5
+text = "Punch
+"
+
+[node name="activateKey" type="Button" parent="buttons"]
+offset_left = -481.5
+offset_top = -109.5
+offset_right = -293.5
+offset_bottom = -78.5
+text = "Powerup"
+
+[node name="pauseKey" type="Button" parent="buttons"]
+offset_left = 90.5
+offset_top = -285.5
+offset_right = 279.5
+offset_bottom = -254.5
+text = "Pause"
+
+[node name="currentKeys" type="Node2D" parent="."]
+
+[node name="jumpCurrent" type="TextEdit" parent="currentKeys"]
+offset_left = -197.0
+offset_top = -233.0
+offset_right = -8.0
+offset_bottom = -135.0
+
+[node name="slideCurrent" type="TextEdit" parent="currentKeys"]
+offset_left = -206.5
+offset_top = -59.5
+offset_right = 2.5
+offset_bottom = 55.5
+
+[node name="punchCurrent" type="TextEdit" parent="currentKeys"]
+offset_left = -485.0
+offset_top = -236.0
+offset_right = -299.0
+offset_bottom = -137.0
+
+[node name="activateCurrent" type="TextEdit" parent="currentKeys"]
+offset_left = -488.5
+offset_top = -59.0
+offset_right = -290.5
+offset_bottom = 49.0
+
+[node name="pauseCurrent" type="TextEdit" parent="currentKeys"]
+offset_left = 92.0
+offset_top = -233.5
+offset_right = 278.0
+offset_bottom = -136.5
+
+[node name="backButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = -508.0
+offset_top = 153.0
+offset_right = -419.0
+offset_bottom = 184.0
+text = "Back"
+
+[connection signal="button_up" from="buttons/jumpKey" to="." method="_onJumpKeyButtonUp"]
+[connection signal="button_up" from="backButton" to="." method="_onBackButtonUp"]
