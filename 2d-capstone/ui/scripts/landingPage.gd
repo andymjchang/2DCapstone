@@ -13,7 +13,7 @@ func _process(delta):
 
 
 func _onStoryButtonPressed():
-	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+	Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 
 func _onEditorButtonPressed():
 	get_tree().change_scene_to_file("res://levelEditor/levelEditor.tscn")

@@ -29,7 +29,6 @@ func initialize():
 	
 	var time = global_position.x / Globals.pixelsPerFrame
 	set_target_time(time)
-	print(time)
 
 func set_target_time(time: float) -> void:
 	target_time = time

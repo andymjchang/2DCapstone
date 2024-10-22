@@ -34,7 +34,7 @@ var currentSongFileName
 var previewNode
 @onready var editorNode = preload("res://levelEditor/levelEditor.tscn")
 @onready var screenFlashNode = preload("res://screenEffects/screenFlashEffect.tscn")
-@onready var vignette = $PreviewCanvasLayer
+@onready var vignette = $Vignette/ColorRect
 
 func _ready():
 	randomize()
@@ -62,3 +62,19 @@ func screenFlashEffect():
 	
 func get_random_sign():
 	return -1 if randi() % 2 == 0 else 1
+	
+func FadeIn():
+	var tween = create_tween()
+	tween.tween_property(vignette.material, "shader_parameter/inner_radius", -1.2, 0.5)
+	
+func FadeOut(sceneFileName : String):
+	get_tree().change_scene_to_file(sceneFileName)
+	var tween = create_tween()
+	tween.tween_property(vignette.material, "shader_parameter/inner_radius", 0.5, 0.5)
+
+func FadeTransition(sceneFileName : String):
+	# Chain the transitions together
+	var tween = create_tween()
+	tween.tween_property(vignette.material, "shader_parameter/inner_radius", -1.2, 0.5)
+	tween.tween_interval(0.1)  # Optional small pause between transitions
+	tween.tween_callback(func(): FadeOut(sceneFileName))
