@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dis3tqrrssvdv"]
+[gd_scene load_steps=12 format=3 uid="uid://dis3tqrrssvdv"]
 
 [ext_resource type="Script" path="res://ui/scripts/landingPage.gd" id="1_4duo3"]
 [ext_resource type="Texture2D" uid="uid://uqstjyc7iyr2" path="res://ui/assets/Main_Menu.png" id="2_3x1ff"]
@@ -9,12 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://2oimrp82wd5r" path="res://ui/assets/Level_Editor_Button_Unpressed.png" id="5_q0m6t"]
 [ext_resource type="Texture2D" uid="uid://c3kyue8ikcygn" path="res://ui/assets/Level_SELECT_Button_Unpressed.png" id="8_tjihd"]
 [ext_resource type="Texture2D" uid="uid://clikapbp8jtdo" path="res://ui/assets/Level_SELECT_button_Pressed.png" id="9_osbfx"]
+[ext_resource type="Texture2D" uid="uid://be1627hjo7mg1" path="res://ui/assets/Options_button_unpressed.png" id="10_v6ykf"]
+[ext_resource type="Texture2D" uid="uid://b315tisfu41j4" path="res://ui/assets/Options_button_pressed.png" id="11_aoani"]
 
 [node name="LandingPage" type="CanvasLayer"]
 script = ExtResource("1_4duo3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1913.0
+offset_left = 1.0
+offset_right = 1914.0
 offset_bottom = 1076.0
 texture = ExtResource("2_3x1ff")
 expand_mode = 1
@@ -74,7 +77,22 @@ texture_pressed = ExtResource("9_osbfx")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="optionsButton" type="TextureButton" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1500.0
+offset_top = -126.0
+offset_right = 1801.0
+offset_bottom = -31.0
+grow_vertical = 0
+texture_normal = ExtResource("10_v6ykf")
+texture_pressed = ExtResource("11_aoani")
+ignore_texture_size = true
+stretch_mode = 0
+
 [connection signal="pressed" from="storyButton" to="." method="_onStoryButtonPressed"]
 [connection signal="pressed" from="editorButton" to="." method="_onEditorButtonPressed"]
 [connection signal="pressed" from="quitButton" to="." method="_onQuitButtonPressed"]
 [connection signal="pressed" from="levelSelect" to="." method="_onLevelSelectPressed"]
+[connection signal="pressed" from="optionsButton" to="." method="_onOptionsButtonPressed"]

@@ -25,3 +25,7 @@ func _onQuitButtonPressed():
 	
 func _onLevelSelectPressed() -> void:
 	get_tree().change_scene_to_file("res://ui/levelSelect.tscn")
+
+
+func _onOptionsButtonPressed() -> void:
+	get_tree().change_scene_to_file("res://ui/options.tscn")
