@@ -56,6 +56,7 @@ var restartCheckpoint = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Globals.inLevel = false
 	loadLevel()
 	
 	var backgroundName : String = "Lvl1"
@@ -95,8 +96,8 @@ func _ready():
 		$Background.add_child(backgroundInstance)
 	
 	camera = $Camera2D
-	timerText = $CanvasLayer/Timer
 	player1 = playersList.get_node("Player1")
+	timerText = $CanvasLayer/Timer
 	scoreText = $CanvasLayer/Score
 	powerupUI = $Camera2D/PowerupSlot
 	
@@ -126,6 +127,17 @@ func _ready():
 		musicTime = distance / Globals.pixelsPerFrame
 		Globals.time = musicTime 
 		print("time gone, ", musicTime)
+
+	elif Globals.relocateToCheckpoint and Globals.checkpoint != null:
+		player1.global_position = Globals.checkpoint
+		get_node("Camera2D").moveCamera(player1.global_position.x)
+		var distance = abs(0.0 - player1.global_position.x)
+		var playerSpeed = player1.SPEED
+		musicTime = distance / Globals.pixelsPerFrame
+		time += musicTime 
+		Globals.time += time + 3.0
+
+
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
@@ -141,6 +153,7 @@ func _ready():
 	
 func startGame():
 	music.play(musicTime)
+	print("starting")
 	Globals.inLevel = true
 	Globals.time = 0.0
 
@@ -185,8 +198,6 @@ func loadLevel():
 		# Position
 		#does not work with goal/checkpoints
 		elif line.contains(", "):
-			#print("Object: ", instance)
-			print("line: ", line)
 			var instancedObj = instance.instantiate()
 			var posPoints = []
 			
@@ -250,6 +261,7 @@ func _onCheckLevelCompleted():
 		self.emit_signal("levelCompleted")
 
 func _onGameOver():
+	Globals.checkpoint = self.getNearestCheckpoint(player1).position
 	showGameOver()
 	Globals.inLevel = false
 
@@ -279,7 +291,9 @@ func _physics_process(delta):
 		$LevelUI/PauseScreen.visible = true
 		Engine.time_scale = 0.0
 		
-	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused:
+	if time >= 3.0 and !Globals.inLevel and !Globals.paused:
+		if Globals.customStart or Globals.relocateToCheckpoint:
+			await get_tree().create_timer(3).timeout
 		startGame()
 		
 	if Globals.vertical:
@@ -322,6 +336,7 @@ func getNearestCheckpoint(who):
 						nearestPoint = i
 						shortestDistance = distance
 			#print("Relocating to: ", nearestPoint.position)
+	print("The nearest point is: ", nearestPoint)
 	return nearestPoint
 	
 # Basic checkpointing system

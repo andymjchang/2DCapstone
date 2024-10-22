@@ -13,10 +13,20 @@ func _process(delta: float) -> void:
 
 
 func _onRetryButtonUp() -> void:
-	get_tree().reload_current_scene()
+	Globals.relocateToCheckpoint = false
 	Engine.time_scale = 1.0
+	get_tree().reload_current_scene()
 
 
 func _onMenuButtonUp() -> void:
-	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 	Engine.time_scale = 1.0
+	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+
+func _onCheckpointButtonDown() -> void:
+	Globals.relocateToCheckpoint = true
+	Globals.inLevel = false
+
+
+func _onCheckpointButtonUp() -> void:
+	Engine.time_scale = 1.0
+	get_tree().reload_current_scene()
