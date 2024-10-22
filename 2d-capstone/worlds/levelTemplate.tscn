@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=30 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://u4osldlbr3sl" path="res://worldObjects/zipline/ziplineManager.tscn" id="11_mqtla"]
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="12_jtaw1"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
+[ext_resource type="PackedScene" path="res://worldObjects/jumpBoost.tscn" id="13_iujdl"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
@@ -45,6 +46,7 @@ breakableWallInstance = ExtResource("10_twea0")
 ziplineInstance = ExtResource("11_mqtla")
 slideWallInstance = ExtResource("11_hh0vp")
 powerupInstance = ExtResource("19_5vjyv")
+jumpInstance = ExtResource("13_iujdl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -138,6 +140,8 @@ script = ExtResource("14_rbu47")
 [node name="slideWalls" type="Node2D" parent="objectList"]
 
 [node name="powerups" type="Node2D" parent="objectList"]
+
+[node name="jumpBoosts" type="Node2D" parent="objectList"]
 
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 
