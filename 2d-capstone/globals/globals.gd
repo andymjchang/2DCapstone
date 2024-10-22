@@ -35,6 +35,7 @@ var previewNode
 @onready var editorNode = preload("res://levelEditor/levelEditor.tscn")
 @onready var screenFlashNode = preload("res://screenEffects/screenFlashEffect.tscn")
 @onready var vignette = $Vignette/ColorRect
+@onready var glitch = $Glitch/TransitionRect
 
 func _ready():
 	randomize()
@@ -71,10 +72,14 @@ func FadeOut(sceneFileName : String):
 	get_tree().change_scene_to_file(sceneFileName)
 	var tween = create_tween()
 	tween.tween_property(vignette.material, "shader_parameter/inner_radius", 0.5, 0.5)
+	tween.tween_property(glitch.material, "shader_parameter/shake_power", 0.0, 0.25)
+	tween.tween_property(glitch.material, "shader_parameter/fade", 0.001, 0.25)
 
 func FadeTransition(sceneFileName : String):
 	# Chain the transitions together
 	var tween = create_tween()
 	tween.tween_property(vignette.material, "shader_parameter/inner_radius", -1.2, 0.5)
+	tween.tween_property(glitch.material, "shader_parameter/shake_power", 0.3, 0.25)
+	tween.tween_property(glitch.material, "shader_parameter/fade", 0.01, 0.25)
 	tween.tween_interval(0.1)  # Optional small pause between transitions
 	tween.tween_callback(func(): FadeOut(sceneFileName))
