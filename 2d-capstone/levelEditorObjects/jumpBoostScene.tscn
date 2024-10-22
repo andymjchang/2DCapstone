@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://lp8tddjvga83"]
+
+[ext_resource type="Script" path="res://worldObjects/scripts/jumpBoost.gd" id="1_gf6qg"]
+[ext_resource type="Texture2D" uid="uid://bu0atyvylqowb" path="res://worldObjects/assets/jumpBoost.png" id="2_l4pdq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_djwvr"]
+size = Vector2(78, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00iro"]
+size = Vector2(80, 73)
+
+[node name="JumpBoostScene" type="Node2D"]
+script = ExtResource("1_gf6qg")
+
+[node name="JumpBoost" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="JumpBoost"]
+scale = Vector2(0.293, 0.293)
+texture = ExtResource("2_l4pdq")
+
+[node name="Area2D" type="Area2D" parent="JumpBoost"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpBoost/Area2D"]
+shape = SubResource("RectangleShape2D_djwvr")
+
+[node name="Area2D2" type="Area2D" parent="JumpBoost"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpBoost/Area2D2"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_00iro")
+
+[connection signal="body_entered" from="JumpBoost/Area2D" to="." method="_OnArea2dBodyEntered"]
+[connection signal="body_exited" from="JumpBoost/Area2D" to="." method="_onArea2dBodyExited"]

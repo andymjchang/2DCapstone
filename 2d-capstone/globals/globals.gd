@@ -5,6 +5,8 @@ const beatSize : float = 150
 
 var time : float = 0;
 var inLevel = false
+var vertical = false
+var resetCamera = false
 var paused = false
 var stepSize = 0
 var pixelsPerFrame : float = 300

@@ -42,14 +42,16 @@ func _process(delta: float) -> void:
 		self.remove_child(spriteNode)
 		spriteInScene = false
 		spriteNode.visible = false
-	pass
+	self.global_position = self.get_child(0).global_position
+		
 	
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, areaName, areaParent) -> void:
 	if "player" not in blockType:
 		if event.is_action_pressed("click") and checkOrder():
 			print("click! on base object - ", self)
 			self.get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType,curAreaDragging)
-			if clickResult:
+			#if clickResult:
+			if true:
 			#this will be the path to area2d given that we have the scene object
 				curAreaDragging = str(areaParent.name)+"/"+str(areaName)
 				curArea = str(areaName)
@@ -82,7 +84,6 @@ func setArea2D():
 		#give them each a unique name
 		newArea.name = "EditorArea"+str(nameIndex)
 		nameIndex+=1
-		#self.add_child(newArea)
 		newArea.connect("input_event",  _on_area_2d_input_event.bind(newArea.name, blockChild))
 		newArea.connect("area_shape_entered", _onBodyEntered)
 		newArea.connect("area_shape_exited", _onBodyExited)
@@ -91,18 +92,11 @@ func _setClickResult(result) -> void:
 	clickResult = result
 	
 func _onBodyEntered(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_index:int) -> void:
-	#add all overlapping blocks to array
-	#on default theres two overlaps - discount these for now
-	#each block collision starts with editorarea0 and is a twofer
 	overlappingBlocks.append(area)
-	#print("me -> ", self.get_child(0).name)
-	#print("my overlapping blocks! -> ", overlappingBlocks)
 	
 func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_index:int) -> void:
 	#if block not overlapping anymore, remove from array
 	print("overlapping blocks before delete, ", overlappingBlocks)
-	#do I have to delete two things? 
-	#print("area deleting: ", area.get_parent().get_parent().get_parent().timePlaced)
 	overlappingBlocks.erase(area)
 	
 	print("overlapping blocks after delete, ", overlappingBlocks)
@@ -113,6 +107,7 @@ func checkOrder() -> bool:
 		if (!block.get_parent().get_parent().get_parent().is_class("CanvasLayer") and !self.is_class("CanvasLayer") and block.get_parent().get_parent().get_parent().timePlaced > self.timePlaced and !(self.blockType == "normal" and block.get_parent().get_parent().get_parent().blockType == "normal")):
 			#verlapping block was placed earlier, it is selected 
 			#check how close the pos our to allow manuverbility
+			#temp while I implement block click heriarchy that isnt horrible
 			return false
 			#TODO revist this, reverse the logic
 			#if block.get_parent().get_parent().get_parent().blockType == "normal" and abs(block.get_parent().get_parent().get_parent().global_position.x - self.global_position.x) > 500:
@@ -136,6 +131,8 @@ func setComponents(posArray : Array) -> void :
 		block.global_position.y = posArray[index]
 		index+=1
 		
-func setTileMaps() -> void:
+func setTileMaps(posPoints : Array) -> void:
+	if blockType == "normal":
+		get_child(0).setTileMaps(posPoints)
 	pass
 	

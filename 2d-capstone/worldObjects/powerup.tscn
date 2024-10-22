@@ -69,7 +69,7 @@ script = ExtResource("1_t5bed")
 
 [node name="Display" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ijhdg")
-animation = &"poof"
+animation = &"display"
 
 [node name="Area2D" type="Area2D" parent="."]
 

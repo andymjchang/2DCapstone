@@ -19,11 +19,12 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
 var isBinding = false
+var turnOffSnap = false
 
 var MIN_STEP : int = 25
 
@@ -50,6 +51,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var zipline : PackedScene
 @export var slideWall : PackedScene 
 @export var powerup : PackedScene
+@export var jumpBoost : PackedScene
 
 
 @onready var objectList = $objectList
@@ -67,6 +69,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var slideWallList = $objectList/slideWalls
 @onready var placerList = $objectList/placers
 @onready var powerupList = $objectList/powerups
+@onready var jumpList = $objectList/jumpBoosts
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -119,7 +122,8 @@ func _process(delta: float) -> void:
 				break
 		for block in bindedBlocks:
 			block.queue_free()
-	if Input.is_action_just_pressed("lengthenBlock") and currentBlock.blockType == "normal":
+	#TODO make sure that pressing l while typing in name doesnt mess anything up 
+	if Input.is_action_just_pressed("lengthenBlock") and currentBlock and currentBlock.blockType == "normal":
 		#extend platform block by one platform block
 		lengthenPlatform()
 	if Input.is_action_just_pressed("bindBlocks"):
@@ -179,12 +183,11 @@ func loadLevel():
 			var posPoints = []
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
-			#print("pos points in load: ", posPoints)
 			objectParent.add_child(instancedObj)
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
 			objectParent.setComponents(posPoints)
-			
+			objectParent.setTileMaps(posPoints)			 
 			#do this if object has more than one component
 
 func _on_save_button_down() -> void:
@@ -256,8 +259,12 @@ func _on_rac_button_button_up() -> void:
 
 #start here
 func _on_block_button_button_up() -> void:
-	var blockInstance = platformBlock.instantiate()
+	
+	#load("res://levelEditorObjects/platformBlockScene.tscn")
+	var whuh = load("res://levelEditorObjects/platformBlockScene.tscn").duplicate()
 	var blockParent = baseObject.instantiate()
+	blockParent.index = lEindex
+	var blockInstance = whuh.duplicate(true).instantiate()
 	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
 	place_block(blockParent, platformBlocksList, camera.position, false)
@@ -303,6 +310,14 @@ func _onPowerupButtonPressed() -> void:
 	powerParent.add_child(powerInstance)
 	powerParent.blockType = blockTypes[1]
 	place_block(powerParent, powerupList, camera.position, false)
+
+
+func _onJumpBoostButtonPressed() -> void:
+	var jumpInstance = jumpBoost.instantiate()
+	var jumpParent = baseObject.instantiate()
+	jumpParent.add_child(jumpInstance)
+	jumpParent.blockType = blockTypes[13]
+	place_block(jumpParent, jumpList, camera.position, false)
 
 func _on_play_audio_button_pressed() -> void:
 	if not isPlaying:
@@ -364,19 +379,19 @@ func save_scene_to_file():
 						var posChain = ""
 						#go through all of the individual block components
 						for blockChild in childrenList:
-							#saving for platfrom block differs since their size varies
-							if itemList.name == "normal":
-								#save the number of cols as well as the extents so we know where to start drawing
-								posChain = str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y)+" ,"+str(blockChild.numCols) + ", " + str(blockChild.extents)+ ", "
+							#saving for platfrom block differs since their size varies#
+							#TODO I dont want to do this, delegate this work to the child class
+							if itemList.name == "platformBlocks":
+								#save the number of cols as well as the extents so we know where to start drawing	
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", " 
 							else:
 								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
 							index+=1
 							editorName = "EditorArea"+str(index)
 						#print("child list in save, ", childrenList)
 						posChain = posChain.substr(0, posChain.length()-1)
-						posChain+="\n"
+						posChain += "\n"
 						newFile.store_string(posChain)
-						print("pos chain: ", posChain)
 	else:
 		displayStatus(UNABLE_TO_SAVE, false)
 		
@@ -437,11 +452,11 @@ func place_block(instance, parent, placePos, initial):
 	elif instance.blockType == blockTypes[0]: 
 		instance.position.x = 0
 		instance.position.y = placePos.y
-	elif instance.blockType == blockTypes[1]: 
-		instance.position.x = 0
-		instance.position.y = placePos.y
-	else:
+	elif !turnOffSnap:
 		instance.position = snap_position(placePos)
+	else:
+		instance.position = placePos
+		turnOffSnap = false
 	parent.add_child(instance)	
 	
 	instance.setArea2D()
@@ -497,6 +512,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/slideWalls")
 	if blockType == "powerup":
 		return get_node("objectList/powerups")
+	if blockType == "jumpBoost":
+		return get_node("objectList/jumpBoosts")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:
@@ -561,16 +578,15 @@ func _on_play_level_button_button_down() -> void:
 func lengthenPlatform() -> void:
 	#this isnt modular but it will work for now TODO
 	var blockArea = currentBlock.get_child(0).get_child(0).get_node("EditorArea0")
-	var blockShape = blockArea.get_node("CollisionShape2D").shape as RectangleShape2D
-	var blockExtents = blockShape.extents
 	#get the lower left and upp right coords of the current block
-	var upperLeft = currentBlock.global_position + blockExtents
-	var lowerRight = currentBlock.global_position - blockExtents
-	var width = abs(upperLeft.x - lowerRight.x)
-	var newPos = blockArea.global_position.x + width
-		
+	var tileWidth = currentBlock.get_child(0).tileWidth
+	var defaultWidth = (12.0 * tileWidth)/2.0
+	var currentBlockWidth = (currentBlock.get_child(0).numCols * tileWidth)/2.0
+	var newXPos = defaultWidth + currentBlockWidth
+	newXPos = blockArea.global_position.x + newXPos
 	var blockInstance = platformBlock.instantiate()
 	var blockParent = baseObject.instantiate()
-	blockParent.add_child(blockInstance)
 	blockParent.blockType = blockTypes[2]
-	place_block(blockParent, platformBlocksList, Vector2(newPos, blockArea.global_position.y), false)
+	blockParent.add_child(blockInstance)
+	turnOffSnap = true
+	place_block(blockParent, platformBlocksList, Vector2(newXPos, blockArea.global_position.y), false)

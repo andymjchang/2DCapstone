@@ -266,7 +266,13 @@ frame = 4
 [node name="damagedTimer" type="Timer" parent="."]
 wait_time = 0.25
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-10, 1.625)
+scale = Vector2(1.75, 1.1625)
+
+[connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="powerupTimer" to="." method="_onPowerupTimerTimeout"]
 [connection signal="timeout" from="damagedTimer" to="." method="_on_damaged_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_onVisibleOnScreenNotifier2dScreenExited"]

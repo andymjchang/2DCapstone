@@ -19,6 +19,7 @@ signal changeSpeed(speedType)
 @export var ziplineInstance : PackedScene
 @export var slideWallInstance : PackedScene
 @export var powerupInstance : PackedScene
+@export var jumpInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -32,6 +33,7 @@ signal changeSpeed(speedType)
 @onready var ziplineList = $objectList/ziplines
 @onready var slideWallList = $objectList/slideWalls
 @onready var powerupList = $objectList/powerups
+@onready var jumpBoostList = $objectList/jumpBoosts
 
 var player1 
 var killWall
@@ -103,7 +105,6 @@ func _ready():
 	textPopupScene1.initPosition(player1)
 
 	music = camera.get_node("Music")
-	music.stream.loop = false
 	loadAudio()
 	
 	# Setting signals
@@ -123,6 +124,8 @@ func _ready():
 		var distance = abs(0.0 - player1.global_position.x)
 		var playerSpeed = player1.SPEED
 		musicTime = distance / Globals.pixelsPerFrame
+		time += musicTime 
+		Globals.time += time + 3.0
 		print("time gone, ", musicTime)
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
@@ -169,7 +172,8 @@ func loadLevel():
 		"breakableWalls" : [breakableWallInstance, breakableWallList],
 		"ziplines": [ziplineInstance, ziplineList],
 		"slideWalls": [slideWallInstance, slideWallList],
-		"powerups": [powerupInstance, powerupList]}
+		"powerups": [powerupInstance, powerupList],
+		"jumpBoosts": [jumpInstance, jumpBoostList]}
 	var instance
 	var instanceParent
 	var name = ""
@@ -183,22 +187,26 @@ func loadLevel():
 		#does not work with goal/checkpoints
 		elif line.contains(", "):
 			#print("Object: ", instance)
+			print("line: ", line)
 			var instancedObj = instance.instantiate()
 			var posPoints = []
+			
 			for pos in line.split(", "):
 				posPoints.append(pos.to_float())
+				
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
-			#print("instance parent: ", instanceParent)
 			instanceParent.add_child(instancedObj)
+			
 			#check if zipline, TODO make this more 
 			if name == "ziplines":
-				print("pos points, ", posPoints)
 				var startPos = Vector2(posPoints[0], posPoints[1])
 				var endPos = Vector2(posPoints[2], posPoints[3])
 				instancedObj.get_node("ziplineStart").global_position = startPos
 				instancedObj.get_node("ziplineEnd").global_position = endPos
 				
-			#print("instance!: ", name)
+			if name =="platformBlocks":
+				instancedObj.setTileMaps(posPoints.duplicate()) 
+				instancedObj.add_to_group("platforms")
 			
 		elif ".mp3" in line:
 			# audio file
@@ -274,6 +282,11 @@ func _physics_process(delta):
 		
 	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused:
 		startGame()
+		
+	if Globals.vertical:
+		camera.emit_signal("moveCameraY", player1.position.y)
+	elif Globals.resetCamera:
+		camera.emit_signal("moveCameraY", player1.position.y)
 
 func updateTime(delta: float):
 	if Globals.inLevel:
@@ -346,11 +359,11 @@ func _onScored(id, p_score):
 		
 func _onChangeSpeed(speedType):
 	if speedType > 0:			# Speed up
-		music.pitch_scale = 1.25
-		Globals.scrollSpeed = 1.25
+		music.pitch_scale = 2
+		Globals.scrollSpeed = 2
 	elif speedType < 0:			# Speed down
-		music.pitch_scale = 0.75
-		Globals.scrollSpeed = 0.75
+		music.pitch_scale = 0.5
+		Globals.scrollSpeed = 0.5
 	else:						# Return to regular
 		music.pitch_scale = 1
 		Globals.scrollSpeed = 1

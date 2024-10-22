@@ -11,6 +11,7 @@ func load_array():
 		indicator.initialize()
 	actionIndicatorArray.sort_custom(sortIndicators)
 	currentWorldScene = get_parent().get_parent()
+	print("current world scene: ", currentWorldScene)
 	
 
 func sortIndicators(a, b):
