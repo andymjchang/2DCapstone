@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcrbvcdcbn5ay"]
+[gd_scene load_steps=6 format=3 uid="uid://dcrbvcdcbn5ay"]
 
 [ext_resource type="Script" path="res://globals/globals.gd" id="1_nrp7m"]
 [ext_resource type="Texture2D" uid="uid://bpr2jpqk4ugbf" path="res://ui/assets/Quit_button_unpressed.png" id="2_h7na6"]
 [ext_resource type="Texture2D" uid="uid://cvl0lsfhi2474" path="res://ui/assets/Quit_button_pressed.png" id="3_le2si"]
 [ext_resource type="Material" uid="uid://cixtw2m5uipv6" path="res://shaders/vignette.tres" id="4_wlah7"]
+[ext_resource type="Material" uid="uid://b1u8t6hm0lac3" path="res://shaders/screenGlitch.tres" id="5_nr5wo"]
 
 [node name="Globals" type="Node2D"]
 script = ExtResource("1_nrp7m")
@@ -29,5 +30,13 @@ material = ExtResource("4_wlah7")
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TransitionRect" type="ColorRect" parent="CanvasLayer"]
+material = ExtResource("5_nr5wo")
+offset_right = 1920.0
+offset_bottom = 1080.0
 
 [connection signal="button_down" from="PreviewCanvasLayer/TextureButton" to="." method="_on_texture_button_button_down"]

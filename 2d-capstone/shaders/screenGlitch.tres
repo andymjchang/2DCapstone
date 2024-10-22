@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b1u8t6hm0lac3"]
+
+[ext_resource type="Shader" path="res://shaders/screenGlitch.gdshader" id="1_w2fly"]
+
+[resource]
+shader = ExtResource("1_w2fly")
+shader_parameter/shake_power = 0.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/fade = 0.001
+shader_parameter/direction_r = Vector2(1, 0)
+shader_parameter/direction_g = Vector2(0.4, 1)
+shader_parameter/direction_b = Vector2(-0.7, -0.3)

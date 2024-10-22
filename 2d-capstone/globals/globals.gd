@@ -1,16 +1,16 @@
 extends Node
 
-const physicsFrameRate = 60
-const beatSize = 150
+const physicsFrameRate : float = 60
+const beatSize : float = 150
 
 var time = 0;
 var inLevel = false
 var paused = false
 var stepSize = 0
-var pixelsPerFrame = 300
+var pixelsPerFrame : float = 300
 var scrollSpeed = 1
 var curFile = ""
-var bpm = 156
+var bpm : float = 156
 
 var areaClicked = false
 var startP1Coords
@@ -46,9 +46,10 @@ func enablePreviewUI():
 	$PreviewCanvasLayer.visible = true
 func disablePreviewUI():
 	$PreviewCanvasLayer.visible = false
-func setBPM(p_bpm):
+func setBPM(p_bpm : float):
 	self.bpm = p_bpm
 	pixelsPerFrame = bpm * beatSize / physicsFrameRate
+	print(pixelsPerFrame)
 
 func _on_texture_button_button_down() -> void:
 	get_tree().change_scene_to_packed(editorNode)

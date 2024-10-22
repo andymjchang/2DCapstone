@@ -4,7 +4,7 @@
 
 [resource]
 shader = ExtResource("1_a5phy")
-shader_parameter/shake_power = 0.03
+shader_parameter/shake_power = 0.095
 shader_parameter/shake_rate = 1.0
 shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.5
