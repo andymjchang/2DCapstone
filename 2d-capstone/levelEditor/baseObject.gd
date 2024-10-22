@@ -48,7 +48,6 @@ func _process(delta: float) -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, areaName, areaParent) -> void:
 	if "player" not in blockType:
 		if event.is_action_pressed("click") and checkOrder():
-			print("click! on base object - ", self)
 			self.get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType,curAreaDragging)
 			#if clickResult:
 			if true:
@@ -62,12 +61,10 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, 
 					
 				self.get_parent().get_parent().get_parent().setTrackingPosition(true)
 				isDragging = true
-			print("mouse pressed")
 	
 	#when the player releases the mouse, set the scene object to that new position
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.pressed and self.get_parent().get_parent().get_parent().currentBlock and self.index == self.get_parent().get_parent().get_parent().currentBlock.index and isDragging:
-		print("mouse released")
 		self.get_child(0).get_node(curAreaDragging).get_parent().global_position= self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
 		timePlaced = Globals.time
 		isDragging = false
@@ -96,10 +93,7 @@ func _onBodyEntered(area_rid:RID, area:Area2D, area_shape_index:int, local_shape
 	
 func _onBodyExited(area_rid:RID, area:Area2D, area_shape_index:int, local_shape_index:int) -> void:
 	#if block not overlapping anymore, remove from array
-	print("overlapping blocks before delete, ", overlappingBlocks)
 	overlappingBlocks.erase(area)
-	
-	print("overlapping blocks after delete, ", overlappingBlocks)
 	
 		
 func checkOrder() -> bool:

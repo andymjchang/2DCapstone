@@ -45,6 +45,6 @@ ziplines
 2000, 550, 2225, 425,
 placers
 slideWalls
-0, 425,
+-400, 225,
 powerups
-0, 540,
+0, 175,

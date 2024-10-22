@@ -13,10 +13,6 @@ var allTiles = [startTiles, fillerTiles, endTiles]
 @export var hasBeenSet : bool = false
 
 
-
-
-
-
 func _ready() -> void:
 	# set the extents to the width of the tile x 12
 	tileMap =  self.get_node("Node2D/TileMapLayer")

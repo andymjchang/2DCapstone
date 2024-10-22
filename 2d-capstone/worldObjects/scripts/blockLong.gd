@@ -11,8 +11,14 @@ var tileHeight
 var fillerTiles = [Vector2(2,1),Vector2(2,2),Vector2(2,2), Vector2(2,4)]
 var endTiles = [Vector2(4,1),Vector2(3,2),Vector2(3,2), Vector2(4,4)]
 var startTiles = [Vector2(0,1),Vector2(1,2),Vector2(1,3), Vector2(0,4)]
+
+var filler2Tiles = [Vector2(4,0),Vector2(4,1),Vector2(4,1) ,Vector2(4,1) ]
+var end2Tiles = [Vector2(5,0),Vector2(5,1),Vector2(5,1) ,Vector2(5,1)]
+var start2Tiles = [Vector2(0,0),Vector2(0,1),Vector2(0,1) ,Vector2(0,1) ]
 var tileWidth
 var allTiles = [startTiles, fillerTiles, endTiles]
+
+@onready var defaultTileMap = $sprite2D/TileMapLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,6 +33,8 @@ func _ready():
 	if Globals.curFile.begins_with("Lvl2."):
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = true
+		tileMap = $sprite2D/TileMapLayer2
+		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
 	else:
 		$sprite2D/TileMapLayer.visible = true
 		$sprite2D/TileMapLayer2.visible = false
@@ -40,12 +48,12 @@ func extendByOneTile() -> void :
 	var startY = minMax[0].y
 		#we have to reset the end of the tile so that it doesnt look weird
 	for i in range (0,4):
-		tileMap.set_cell(Vector2i(startX, startY+i), 1, fillerTiles[i])
+		tileMap.set_cell(Vector2i(startX, startY+i), 1, allTiles[1][i])
 		
 	startX = minMax[1].x + 1
 	startY = minMax[0].y
 	for i in range(0,4):
-		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
+		tileMap.set_cell(Vector2i(startX, startY), 1, allTiles[0][i])
 		startY+=1
 		
 	#alter the area2d to represent the new size
@@ -67,7 +75,7 @@ func decreaseByOneTile() -> void:
 		startX-=1
 		startY = minMax[0].y
 		for i in range (0,4):
-			tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
+			tileMap.set_cell(Vector2i(startX, startY), 1, allTiles[2][i])
 			startY+=1
 			
 		self.get_node("CollisionShape2D").shape.extents.x -= tileWidth/2.0
@@ -100,3 +108,6 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 			minCoords.y = cell.y
 						
 	return [minCoords, maxCoords]
+	
+#func addExtraTiles() -> void:
+	

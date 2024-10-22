@@ -18,3 +18,7 @@ func _onMainMenuButtonUp() -> void:
 	Engine.time_scale = 1.0
 	Globals.paused = false
 	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+
+
+func _onOptionsButtonUp() -> void:
+	get_tree().change_scene_to_file("res://ui/options.tscn")

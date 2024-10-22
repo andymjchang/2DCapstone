@@ -269,7 +269,7 @@ func _onLevelCompleted():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	updateTime(delta)
-	if Input.is_action_just_pressed("toMainMenu"):
+	if Input.is_action_just_pressed("pause"):
 		#do go to pause instead
 		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 		$Camera2D/Music.stream_paused = true
