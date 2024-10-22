@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://kw4j0yjkt6bb"]
+[gd_scene load_steps=7 format=4 uid="uid://durvh6v8u5exu"]
 
 [ext_resource type="Texture2D" uid="uid://ljo48af3c257" path="res://worldObjects/assets/Platform.png" id="1_h40a7"]
 [ext_resource type="Script" path="res://worldObjects/scripts/blockLong.gd" id="1_kddth"]

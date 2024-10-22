@@ -37,7 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://ce67hev01ibyl" path="res://levelEditorObjects/powerupScene.tscn" id="19_tbbcg"]
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="20_l6054"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
-[ext_resource type="PackedScene" uid="uid://lp8tddjvga83" path="res://levelEditorObjects/jumpBoostScene.tscn" id="20_wtqqv"]
+[ext_resource type="PackedScene" path="res://levelEditorObjects/jumpBoostScene.tscn" id="20_wtqqv"]
 [ext_resource type="Texture2D" uid="uid://l8vpo2u44l4p" path="res://levelEditor/programmerArtAssets/p1checkpoint.png" id="22_1mwd2"]
 [ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
 [ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
