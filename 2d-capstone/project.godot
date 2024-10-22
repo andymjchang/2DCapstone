@@ -42,6 +42,8 @@ enabled=PackedStringArray()
 actionIndicators=""
 playerHitbox=""
 pulsingObjects=""
+musicSounds=""
+playerSounds=""
 
 [input]
 

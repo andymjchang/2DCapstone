@@ -82,7 +82,7 @@ script = ExtResource("4_nttx1")
 [node name="glitchLines" parent="Camera2D" instance=ExtResource("23_jq54w")]
 position = Vector2(0, 120)
 
-[node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
+[node name="Music" type="AudioStreamPlayer2D" parent="Camera2D" groups=["musicSounds"]]
 position = Vector2(-960, -540)
 max_distance = 10000.0
 

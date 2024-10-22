@@ -27,16 +27,27 @@ offset_left = -1682.0
 offset_top = -1493.0
 offset_right = 1547.0
 offset_bottom = -924.0
-text = "Key Bindings"
+theme_override_font_sizes/font_size = 200
+text = "Key bindings"
 
 [node name="backButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = -1650.0
-offset_top = -38.0
-offset_right = 1684.0
-offset_bottom = 475.0
+offset_left = -1690.0
+offset_top = 610.0
+offset_right = 1644.0
+offset_bottom = 1123.0
+theme_override_font_sizes/font_size = 200
 text = "Back
 "
 
+[node name="volumeButton" type="Button" parent="."]
+offset_left = -1682.0
+offset_top = -513.0
+offset_right = 1547.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 200
+text = "Volume"
+
 [connection signal="button_up" from="keybindingsButton" to="." method="_onKeyBindingsButtonUp"]
 [connection signal="button_up" from="backButton" to="." method="_onBackButtonUp"]
+[connection signal="button_up" from="volumeButton" to="." method="_onVolumeButtonUp"]

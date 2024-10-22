@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp8ha1sehgc3x"]
+
+[ext_resource type="Script" path="res://ui/scripts/volumeScreen.gd" id="1_cvgld"]
+
+[node name="VolumeScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+script = ExtResource("1_cvgld")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1922.0
+offset_bottom = 1080.0
+color = Color(0.2484, 0.2484, 0.2484, 1)
+
+[node name="sliders" type="Node2D" parent="."]
+
+[node name="playerSlider" type="HSlider" parent="sliders"]
+offset_left = 557.0
+offset_top = 114.0
+offset_right = 1333.0
+offset_bottom = 301.0
+size_flags_horizontal = 4
+
+[node name="objectSlider" type="HSlider" parent="sliders"]
+offset_left = 557.0
+offset_top = 358.0
+offset_right = 1333.0
+offset_bottom = 545.0
+size_flags_horizontal = 4
+
+[node name="musicSlider" type="HSlider" parent="sliders"]
+offset_left = 557.0
+offset_top = 603.0
+offset_right = 1333.0
+offset_bottom = 790.0
+size_flags_horizontal = 4
+
+[node name="labels" type="Node2D" parent="."]
+
+[node name="playerSounds" type="TextEdit" parent="labels"]
+anchors_preset = -1
+offset_left = 575.0
+offset_top = 81.0
+offset_right = 1323.0
+offset_bottom = 173.0
+theme_override_font_sizes/font_size = 50
+text = "Player Sounds"
+
+[node name="objectSounds" type="TextEdit" parent="labels"]
+anchors_preset = -1
+offset_left = 575.0
+offset_top = 291.0
+offset_right = 1323.0
+offset_bottom = 383.0
+theme_override_font_sizes/font_size = 50
+text = "Object Sounds"
+
+[node name="musicSounds" type="TextEdit" parent="labels"]
+anchors_preset = -1
+offset_left = 575.0
+offset_top = 532.0
+offset_right = 1323.0
+offset_bottom = 624.0
+theme_override_font_sizes/font_size = 50
+text = "Music"
+
+[node name="backButton" type="Button" parent="."]
+offset_left = 15.0
+offset_top = 905.0
+offset_right = 314.0
+offset_bottom = 1045.0
+theme_override_font_sizes/font_size = 100
+text = "Back"
+
+[connection signal="button_up" from="backButton" to="." method="_onBackButtonUp"]

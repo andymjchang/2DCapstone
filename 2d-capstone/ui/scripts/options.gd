@@ -12,9 +12,20 @@ func _process(delta: float) -> void:
 
 
 func _onKeyBindingsButtonUp() -> void:
-	get_tree().change_scene_to_file("res://ui/keybindings.tscn")
-
-
+	#get_tree().change_scene_to_file("res://ui/keybindings.tscn")
+	var kbScene = load("res://ui/keybindings.tscn")
+	var kbInstance = kbScene.instantiate()
+	get_tree().current_scene.get_node("LevelUI").add_child(kbInstance)
+	self.visible = false
 
 func _onBackButtonUp() -> void:
-	get_tree().change_scene_to_file("res://ui/pauseScreen.tscn")
+	#get_tree().change_scene_to_file("res://ui/pauseScreen.tscn")
+	get_tree().current_scene.get_node("LevelUI/PauseScreen").visible = true
+	self.queue_free()
+
+func _onVolumeButtonUp() -> void:
+	#get_tree().change_scene_to_file("res://ui/volumeScreen.tscn")
+	var volumeScene = load("res://ui/volumeScreen.tscn")
+	var volumeInstance = volumeScene.instantiate()
+	get_tree().current_scene.get_node("LevelUI").add_child(volumeInstance)
+	self.visible = false

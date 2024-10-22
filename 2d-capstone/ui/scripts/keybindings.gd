@@ -53,8 +53,8 @@ func formatText(commands) -> String:
 	return returnString
 
 func _onBackButtonUp() -> void:
-	#TODO make a stack of scens so that we can go back to the calling sce
-	get_tree().change_scene_to_file("res://ui/options.tscn")
+	get_tree().current_scene.get_node("LevelUI/Options").visible = true
+	self.queue_free()
 
 func _onKeyButtonUp(name) -> void:
 	buttonResetting = self.get_node("buttons/"+name)
