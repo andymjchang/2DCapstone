@@ -32,9 +32,9 @@ goalBlocks
 2750, 550,
 breakableWalls
 ziplines
-400, 525, 1000, 125,
+425, 425, 900, 225,
 placers
 slideWalls
 powerups
 jumpBoosts
-1775, 475,
+1800, 500,

@@ -20,6 +20,7 @@ signal changeSpeed(speedType)
 @export var slideWallInstance : PackedScene
 @export var powerupInstance : PackedScene
 @export var jumpInstance : PackedScene
+@export var ziplineMiddle : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -207,11 +208,19 @@ func loadLevel():
 			instanceParent.add_child(instancedObj)
 			
 			#check if zipline, TODO make this more 
+			# TODO: Finish zipline line
 			if name == "ziplines":
 				var startPos = Vector2(posPoints[0], posPoints[1])
 				var endPos = Vector2(posPoints[2], posPoints[3])
 				instancedObj.get_node("ziplineStart").global_position = startPos
 				instancedObj.get_node("ziplineEnd").global_position = endPos
+				var vec1 = Vector2(endPos - startPos)
+				var vec2 = Vector2(0, 1)
+				var connectLine = ziplineMiddle.instantiate()
+				connectLine.position = (startPos + endPos)/2
+				connectLine.rotation = endPos.angle_to_point(startPos)
+				connectLine.scale.x = 2
+				objectList.add_child(connectLine)
 				
 			if name =="platformBlocks":
 				instancedObj.setTileMaps(posPoints.duplicate()) 

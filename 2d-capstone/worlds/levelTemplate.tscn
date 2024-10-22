@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=31 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
 [ext_resource type="PackedScene" uid="uid://b8v38gkay1bem" path="res://worldObjects/jumpBoost.tscn" id="13_iujdl"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
+[ext_resource type="PackedScene" uid="uid://dchr6kx2lhuq5" path="res://worldObjects/zipline/ziplineMiddle.tscn" id="14_jwoui"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="Script" path="res://worlds/score.gd" id="15_mx364"]
@@ -34,7 +35,7 @@ size = Vector2(12, 1086)
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
-levelFile = "Lvl0.3"
+levelFile = "verttest"
 platformBlockInstance = ExtResource("2_78xmt")
 goalBlockInstance = ExtResource("3_oih58")
 killFloorInstance = ExtResource("3_6me16")
@@ -47,6 +48,7 @@ ziplineInstance = ExtResource("11_mqtla")
 slideWallInstance = ExtResource("11_hh0vp")
 powerupInstance = ExtResource("19_5vjyv")
 jumpInstance = ExtResource("13_iujdl")
+ziplineMiddle = ExtResource("14_jwoui")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
