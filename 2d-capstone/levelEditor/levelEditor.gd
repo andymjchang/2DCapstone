@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -52,6 +52,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var slideWall : PackedScene 
 @export var powerup : PackedScene
 @export var jumpBoost : PackedScene
+@export var coin : PackedScene
 
 
 @onready var objectList = $objectList
@@ -70,6 +71,10 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var placerList = $objectList/placers
 @onready var powerupList = $objectList/powerups
 @onready var jumpList = $objectList/jumpBoosts
+@onready var coinList = $objectList/coins
+
+
+
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var fileLabel = $UI/TextEdit3
@@ -166,7 +171,9 @@ func loadLevel():
 		"breakableWalls": [breakableWall,breakableWallList,  blockTypes[9]],
 		"ziplines": [zipline, ziplineList, blockTypes[10]],
 		"slideWalls": [slideWall, slideWallList, blockTypes[12]],
-		"powerups": [powerup, powerupList, blockTypes[1]]}
+		"powerups": [powerup, powerupList, blockTypes[1]],
+		"jumpBoosts": [jumpBoost, jumpList, blockTypes[13]],
+		"coins": [coin, coinList, blockTypes[14]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -311,13 +318,20 @@ func _onPowerupButtonPressed() -> void:
 	powerParent.blockType = blockTypes[1]
 	place_block(powerParent, powerupList, camera.position, false)
 
-
 func _onJumpBoostButtonPressed() -> void:
 	var jumpInstance = jumpBoost.instantiate()
 	var jumpParent = baseObject.instantiate()
 	jumpParent.add_child(jumpInstance)
 	jumpParent.blockType = blockTypes[13]
 	place_block(jumpParent, jumpList, camera.position, false)
+
+func _onCoinButtonPressed() -> void:
+	var coinInstance = coin.instantiate()
+	var coinParent = baseObject.instantiate()
+	coinParent.add_child(coinInstance)
+	coinParent.blockType = blockTypes[14]
+	place_block(coinParent, coinList, camera.position, false)
+
 
 func _on_play_audio_button_pressed() -> void:
 	if not isPlaying:
@@ -514,6 +528,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/powerups")
 	if blockType == "jumpBoost":
 		return get_node("objectList/jumpBoosts")
+	if blockType == "coin":
+		return get_node("objectList/coins")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:

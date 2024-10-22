@@ -21,6 +21,7 @@ signal changeSpeed(speedType)
 @export var powerupInstance : PackedScene
 @export var jumpInstance : PackedScene
 @export var ziplineMiddle : PackedScene
+@export var coinInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -35,6 +36,7 @@ signal changeSpeed(speedType)
 @onready var slideWallList = $objectList/slideWalls
 @onready var powerupList = $objectList/powerups
 @onready var jumpBoostList = $objectList/jumpBoosts
+@onready var coinList = $objectList/coins
 
 var player1 
 var killWall
@@ -185,7 +187,8 @@ func loadLevel():
 		"ziplines": [ziplineInstance, ziplineList],
 		"slideWalls": [slideWallInstance, slideWallList],
 		"powerups": [powerupInstance, powerupList],
-		"jumpBoosts": [jumpInstance, jumpBoostList]}
+		"jumpBoosts": [jumpInstance, jumpBoostList],
+		"coins": [coinInstance, coinList]}
 	var instance
 	var instanceParent
 	var name = ""

@@ -4,7 +4,6 @@ platformBlocks
 375, 600, 12, <null>, <null>,
 1000, 400, 12, <null>, <null>,
 1125, 400, 12, <null>, <null>,
-1250, 400, 12, <null>, <null>,
 1125, 600, 12, <null>, <null>,
 1275, 600, 12, <null>, <null>,
 1425, 600, 12, <null>, <null>,
@@ -32,9 +31,12 @@ goalBlocks
 2750, 550,
 breakableWalls
 ziplines
-425, 425, 900, 225,
+300, 425, 900, 225,
 placers
 slideWalls
 powerups
 jumpBoosts
 1800, 500,
+coins
+2225, 300,
+2125, 300,

@@ -7,6 +7,7 @@ signal scored(id, score)
 signal getPowerup(powerType)
 signal activatePowerup()
 signal doubleJump()
+signal getCoin()
 
 var curSprite
 var JUMP_VELOCITY = -550.0
@@ -48,6 +49,7 @@ var worldNode
 var sfxPlayer
 var glitchLines
 var camera
+var coins = 0
 
 @onready var hitEffect : AnimatedSprite2D = $HitEffect
 @onready var tweenRot : Tween
@@ -71,6 +73,7 @@ func _ready():
 	self.revive.connect(_onRevive)
 	self.relocate.connect(_onRelocate)
 	self.doubleJump.connect(_onDoubleJump)
+	self.getCoin.connect(_onGetCoin)
 	$Animation.animation_finished.connect(_onAnimationFinished)
 	$Animation.play("Run")
 	worldNode = get_tree().get_root().get_node("level")
@@ -328,3 +331,7 @@ func _onDoubleJump():
 	$Animation.play("Jump")
 	jumpInProgress = true
 	velocity.y = JUMP_VELOCITY * 2
+
+func _onGetCoin():
+	print("Coin get")
+	self.coins += 1

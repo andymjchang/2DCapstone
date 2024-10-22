@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=55 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -38,6 +38,7 @@
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="20_l6054"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
 [ext_resource type="PackedScene" uid="uid://lp8tddjvga83" path="res://levelEditorObjects/jumpBoostScene.tscn" id="20_wtqqv"]
+[ext_resource type="PackedScene" uid="uid://crx75iquuvwem" path="res://levelEditorObjects/coinScene.tscn" id="22_0maqw"]
 [ext_resource type="Texture2D" uid="uid://l8vpo2u44l4p" path="res://levelEditor/programmerArtAssets/p1checkpoint.png" id="22_1mwd2"]
 [ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
 [ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
@@ -51,6 +52,7 @@
 [ext_resource type="Texture2D" uid="uid://pbxrq067grxi" path="res://levelEditor/programmerArtAssets/breakableWall.jpg" id="45_iuf20"]
 [ext_resource type="Texture2D" uid="uid://dsavpthfoealy" path="res://ui/assets/slide.webp" id="46_ochwq"]
 [ext_resource type="Texture2D" uid="uid://bu2yib2n2hcyf" path="res://levelEditor/programmerArtAssets/jumpBoost.png" id="50_nrfgt"]
+[ext_resource type="Texture2D" uid="uid://5uf885vsslwn" path="res://levelEditor/programmerArtAssets/coin.png" id="52_ulykl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl84f"]
 size = Vector2(278, 43)
@@ -77,6 +79,7 @@ zipline = ExtResource("17_x5g52")
 slideWall = ExtResource("19_buskr")
 powerup = ExtResource("19_tbbcg")
 jumpBoost = ExtResource("20_wtqqv")
+coin = ExtResource("22_0maqw")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(939, 601)
@@ -122,6 +125,8 @@ stream = ExtResource("19_jlcy1")
 [node name="powerups" type="Node2D" parent="objectList"]
 
 [node name="jumpBoosts" type="Node2D" parent="objectList"]
+
+[node name="coins" type="Node2D" parent="objectList"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -185,7 +190,9 @@ offset_bottom = 209.0
 text = "verttest"
 placeholder_text = "Step Size:"
 
-[node name="objectSelector" type="Node2D" parent="UI"]
+[node name="objectSelector" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="ColorRect" type="ColorRect" parent="UI/objectSelector"]
 offset_left = -1.0
@@ -382,12 +389,20 @@ texture_normal = ExtResource("46_ochwq")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="jumpBoostButton" type="TextureButton" parent="UI/objectSelector"]
-offset_left = 623.0
-offset_top = 847.0
-offset_right = 723.0
-offset_bottom = 947.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/objectSelector"]
+layout_mode = 0
+offset_left = 521.0
+offset_top = 846.0
+offset_right = 725.0
+offset_bottom = 946.0
+
+[node name="jumpBoostButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer2"]
+layout_mode = 2
 texture_normal = ExtResource("50_nrfgt")
+
+[node name="coinButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("52_ulykl")
 
 [node name="StatusWindow" type="CanvasLayer" parent="."]
 process_mode = 2
@@ -490,6 +505,7 @@ clip_text = true
 [connection signal="button_up" from="UI/objectSelector/p1PlacerButton" to="." method="_on_p_1_placer_button_button_up"]
 [connection signal="button_up" from="UI/objectSelector/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]
 [connection signal="button_up" from="UI/objectSelector/slideWallButton" to="." method="_onSlideWallButtonUp"]
-[connection signal="pressed" from="UI/objectSelector/jumpBoostButton" to="." method="_onJumpBoostButtonPressed"]
+[connection signal="pressed" from="UI/objectSelector/HBoxContainer2/jumpBoostButton" to="." method="_onJumpBoostButtonPressed"]
+[connection signal="pressed" from="UI/objectSelector/HBoxContainer2/coinButton" to="." method="_onCoinButtonPressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]
