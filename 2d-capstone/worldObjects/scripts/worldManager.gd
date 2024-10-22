@@ -40,7 +40,6 @@ var statusMessage
 var restartButton
 var music
 
-var time : float = 0
 var score = 0
 var musicTime = 0.0
 
@@ -141,6 +140,7 @@ func _ready():
 func startGame():
 	music.play(musicTime)
 	Globals.inLevel = true
+	Globals.time = 0.0
 
 func loadAudio():
 	if !Globals.currentSongFileName:
@@ -272,12 +272,13 @@ func _physics_process(delta):
 		$LevelUI/PauseScreen.visible = true
 		Engine.time_scale = 0.0
 		
-	if time >= 3.0 and !Globals.inLevel and !Globals.paused:
+	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused:
 		startGame()
 
 func updateTime(delta: float):
-	time = time + delta
-	timerText.text = str(round_to_dec(time, 2))
+	if Globals.inLevel:
+		Globals.time = Globals.time + delta
+	timerText.text = str(round_to_dec(Globals.time, 2))
 	
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)

@@ -179,9 +179,10 @@ func _physics_process(delta: float) -> void:
 		invuln = true
 		
 	# Monitor Attack Hitbox Collisions
-	var overlappingAreas = attack.get_overlapping_areas()
-	for area in overlappingAreas:
-		MonitorAttackHitbox(area)
+	if attack.monitoring:
+		var overlappingAreas = attack.get_overlapping_areas()
+		for area in overlappingAreas:
+			MonitorAttackHitbox(area)
 
 func _onTakeDamage(amount):
 	$damagePlayer.play()

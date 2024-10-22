@@ -32,11 +32,11 @@ offset_bottom = 1080.0
 mouse_filter = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="TransitionRect" type="ColorRect" parent="CanvasLayer"]
 material = ExtResource("5_nr5wo")
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 
 [connection signal="button_down" from="PreviewCanvasLayer/TextureButton" to="." method="_on_texture_button_button_down"]

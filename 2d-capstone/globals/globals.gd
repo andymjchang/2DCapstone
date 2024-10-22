@@ -3,7 +3,7 @@ extends Node
 const physicsFrameRate : float = 60
 const beatSize : float = 150
 
-var time = 0;
+var time : float = 0;
 var inLevel = false
 var paused = false
 var stepSize = 0
@@ -39,8 +39,8 @@ var previewNode
 func _ready():
 	randomize()
 
-func _process(delta: float) -> void:
-	time += delta;
+#func _process(delta: float) -> void:
+	#time += delta;
 
 func enablePreviewUI():
 	$PreviewCanvasLayer.visible = true
@@ -49,7 +49,6 @@ func disablePreviewUI():
 func setBPM(p_bpm : float):
 	self.bpm = p_bpm
 	pixelsPerFrame = bpm * beatSize / physicsFrameRate
-	print(pixelsPerFrame)
 
 func _on_texture_button_button_down() -> void:
 	get_tree().change_scene_to_packed(editorNode)
