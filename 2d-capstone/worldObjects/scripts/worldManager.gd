@@ -125,7 +125,6 @@ func _ready():
 		musicTime = distance / Globals.pixelsPerFrame
 		time += musicTime
 		Globals.time += time + 3.0
-		print("time gone, ", musicTime)
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
@@ -184,7 +183,6 @@ func loadLevel():
 		#does not work with goal/checkpoints
 		elif line.contains(", "):
 			#print("Object: ", instance)
-			print("line: ", line)
 			var instancedObj = instance.instantiate()
 			var posPoints = []
 			
