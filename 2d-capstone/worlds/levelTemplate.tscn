@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://u4osldlbr3sl" path="res://worldObjects/zipline/ziplineManager.tscn" id="11_mqtla"]
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="12_jtaw1"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
-[ext_resource type="PackedScene" path="res://worldObjects/jumpBoost.tscn" id="13_iujdl"]
+[ext_resource type="PackedScene" uid="uid://b8v38gkay1bem" path="res://worldObjects/jumpBoost.tscn" id="13_iujdl"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
