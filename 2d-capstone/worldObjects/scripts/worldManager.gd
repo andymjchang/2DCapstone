@@ -262,7 +262,9 @@ func _onCheckLevelCompleted():
 		self.emit_signal("levelCompleted")
 
 func _onGameOver():
-	Globals.checkpoint = self.getNearestCheckpoint(player1).position
+	var closestPoint = self.getNearestCheckpoint(player1)
+	if closestPoint != null:
+		Globals.checkpoint = closestPoint.position
 	showGameOver()
 	Globals.inLevel = false
 

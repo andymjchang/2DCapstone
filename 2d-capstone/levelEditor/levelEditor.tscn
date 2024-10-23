@@ -37,7 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://ce67hev01ibyl" path="res://levelEditorObjects/powerupScene.tscn" id="19_tbbcg"]
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="20_l6054"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
-[ext_resource type="PackedScene" path="res://levelEditorObjects/jumpBoostScene.tscn" id="20_wtqqv"]
+[ext_resource type="PackedScene" uid="uid://lp8tddjvga83" path="res://levelEditorObjects/jumpBoostScene.tscn" id="20_wtqqv"]
 [ext_resource type="PackedScene" uid="uid://crx75iquuvwem" path="res://levelEditorObjects/coinScene.tscn" id="22_0maqw"]
 [ext_resource type="Texture2D" uid="uid://l8vpo2u44l4p" path="res://levelEditor/programmerArtAssets/p1checkpoint.png" id="22_1mwd2"]
 [ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
@@ -187,7 +187,7 @@ offset_left = 93.0
 offset_top = 159.0
 offset_right = 208.0
 offset_bottom = 209.0
-text = "verttest"
+text = "Lvl1.3"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Control" parent="UI"]

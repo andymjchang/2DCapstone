@@ -330,7 +330,7 @@ func _onVisibleOnScreenNotifier2dScreenExited() -> void:
 func _onDoubleJump():
 	$Animation.play("Jump")
 	jumpInProgress = true
-	velocity.y = JUMP_VELOCITY * 2
+	velocity.y = JUMP_VELOCITY * 2.7
 
 func _onGetCoin():
 	print("Coin get")

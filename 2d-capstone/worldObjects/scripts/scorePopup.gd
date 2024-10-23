@@ -46,7 +46,7 @@ func initText(text, player_position):
 	else: 
 		labelText = "BARELY!"
 		clefSprite.texture = redTiming
-		Globals.numBarleys += 1
+		Globals.numBarelys += 1
 	label.text = labelText
 	#position.y = player_position.y
 	fadeMode = true
