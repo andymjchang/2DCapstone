@@ -268,12 +268,10 @@ one_shot = true
 [node name="sfxPlayer" type="AudioStreamPlayer2D" parent="." groups=["playerSounds"]]
 position = Vector2(0, 11)
 stream = ExtResource("7_wy6uo")
-bus = &"player"
 
 [node name="damagePlayer" type="AudioStreamPlayer2D" parent="." groups=["playerSounds"]]
 position = Vector2(0, 11)
 stream = ExtResource("8_k3kow")
-bus = &"player"
 
 [node name="powerupTimer" type="Timer" parent="."]
 wait_time = 5.0
