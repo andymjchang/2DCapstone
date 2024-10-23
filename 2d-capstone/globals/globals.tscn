@@ -34,7 +34,6 @@ mouse_filter = 2
 [node name="Glitch" type="CanvasLayer" parent="."]
 
 [node name="TransitionRect" type="ColorRect" parent="Glitch"]
-z_index = 1
 material = ExtResource("5_nr5wo")
 offset_right = 1920.0
 offset_bottom = 1080.0
