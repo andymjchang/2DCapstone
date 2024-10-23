@@ -1,8 +1,6 @@
 extends Control
 
-#var playerSoundsVolume
-#var musicSoundsVolume
-#var inGameMusicSoundsVolume
+
 var sound = AudioServer.get_bus_index("Master")
 var busIndex
 @onready var groupPair = { $sliders/playerSlider : "player",
@@ -18,15 +16,8 @@ func _ready() -> void:
 		slider.max_value = 1.0
 		slider.step = 0.05
 		var curVolGroup = groupPair[slider]
-		print("cur volw groyp ", curVolGroup)
-			#TODO only really need to do this once
 		busIndex = AudioServer.get_bus_index(curVolGroup)
-		slider.value = db_to_linear(AudioServer.get_bus_volume_db(busIndex))
-		#var globalVal = curVolGroup + "Volume"
-		#print("globasl. ", globalVal)
-		#sound.volume_db = linear_to_db(Globals.get(globalVal))
-		#slider.value = db_to_linear(sound.volume_db)
-			
+		slider.value = db_to_linear(AudioServer.get_bus_volume_db(busIndex))	
 
  
 
@@ -38,12 +29,7 @@ func _onDragEnd(value, slider) -> void:
 	var soundGroup = groupPair[slider]
 	busIndex = AudioServer.get_bus_index(soundGroup)
 	AudioServer.set_bus_volume_db(busIndex, linear_to_db(value))
-	#for sound in get_tree().get_nodes_in_group(soundGroup):
-		#sound.volume_db = linear_to_db(value)
-		#var globalVal = soundGroup + "Volume"
-		#Globals.set(globalVal,slider.value )
-		
-	#AudioServer.set_bus_volume_db(sound, linear_to_db(value))
+
 
 
 func _onBackButtonUp() -> void:

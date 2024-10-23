@@ -59,6 +59,7 @@ var restartCheckpoint = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Globals.gameOver = false
 	Globals.inLevel = false
 	loadLevel()
 	Globals.time = 0.0
@@ -155,7 +156,7 @@ func loadAudio():
 	var audioPath = "res://audioTracks/" + Globals.currentSongFileName
 	var newAudio = load(audioPath) as AudioStream
 	music.stream = newAudio
-	music.stream.loop = false
+	#music.stream.loop = false
 
 func loadLevel():
 	# set file to load
@@ -268,13 +269,15 @@ func _onGameOver():
 
 func showGameOver():
 	music.stop()
-	#$LevelUI/GameOverScreen.visible = true
-	#$LevelUI/GameOverScreen.playMusic()
-	#Globals.restartLevelData()
+	Globals.gameOver = true
+	$LevelUI/GameOverScreen.visible = true
+	$LevelUI/GameOverScreen.playMusic()
+	Globals.restartLevelData()
 	Engine.time_scale = 0.0
 	
 func showLevelCompleted():
 	music.stop()
+	Globals.gameOver = true
 	$LevelUI/levelCompleteScreen.emit_signal("updateScoreData")
 	$LevelUI/levelCompleteScreen.visible = true
 	$LevelUI/levelCompleteScreen.playMusic()
@@ -290,7 +293,7 @@ func _onLevelCompleted():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	updateTime(delta)
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") and !$LevelUI/GameOverScreen.visible and !$LevelUI/levelCompleteScreen.visible:
 		#do go to pause instead
 		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 		$Camera2D/Music.stream_paused = true
@@ -307,9 +310,9 @@ func _physics_process(delta):
 		camera.emit_signal("moveCameraY", player1.position.y)
 	elif Globals.resetCamera:
 		camera.emit_signal("moveCameraY", player1.position.y)
-	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused and !Globals.customStart:
+	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused and !Globals.customStart and !Globals.gameOver:
 		startGame()
-	elif Globals.customStart and !Globals.inLevel and Globals.time >= musicTime + 3.0:
+	elif Globals.customStart and !Globals.inLevel and Globals.time >= musicTime + 3.0 and !Globals.gameOver:
 		startGame()
 
 		

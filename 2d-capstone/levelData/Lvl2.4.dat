@@ -156,6 +156,7 @@ playerCheckpoints
 12000, 650,
 16800, 475,
 19825, 475,
+250, 625,
 player
 0, 640,
 enemies
@@ -206,7 +207,7 @@ killFloors
 4350, 750,
 5475, 700,
 goalBlocks
-22775, 525,
+22725, 525,
 breakableWalls
 ziplines
 21000, 500, 22200, 500,
@@ -228,3 +229,5 @@ powerups
 7875, 500,
 3075, 525,
 20325, 425,
+jumpBoosts
+coins

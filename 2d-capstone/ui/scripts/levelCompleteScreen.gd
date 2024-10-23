@@ -43,4 +43,10 @@ func _onUpdateScoreData() -> void:
 	$VBoxContainer/scoreLabel.text += " "+ str(Globals.endScore)
 
 func playMusic() -> void:
+	#getting 
+	print("getting here23")
+	Engine.time_scale = 1.0
+	var audioPath = load("res://audioTracks/CourseComplete_153bpm.mp3") as AudioStream
+	music.stream = audioPath
+	music.stream.loop = false
 	music.play()

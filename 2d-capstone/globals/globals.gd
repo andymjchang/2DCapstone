@@ -28,6 +28,7 @@ var numPerfects = 0.0
 var numGoods = 0.0
 var percetageHit = 0.0
 var endScore = 0.0
+var gameOver = false 
 
 #volume 
 var playerSoundsVolume =1.0
