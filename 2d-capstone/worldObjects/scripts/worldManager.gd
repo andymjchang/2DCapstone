@@ -61,7 +61,7 @@ var restartCheckpoint = false
 func _ready():
 	Globals.inLevel = false
 	loadLevel()
-	
+	Globals.time = 0.0
 	var backgroundName : String = "Lvl1"
 	if levelFile.begins_with("Lvl0."):
 		Globals.setBPM(155)
