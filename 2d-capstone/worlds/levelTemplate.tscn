@@ -78,7 +78,7 @@ vertical_alignment = 1
 script = ExtResource("15_mx364")
 
 [node name="Visualizer" type="Node2D" parent="CanvasLayer"]
-position = Vector2(758, -73)
+position = Vector2(772, -73)
 script = ExtResource("31_wssgq")
 
 [node name="Background" type="Node2D" parent="."]
@@ -99,7 +99,6 @@ position = Vector2(0, 120)
 position = Vector2(-960, -540)
 stream = ExtResource("18_44qgl")
 max_distance = 10000.0
-bus = &"levelMusic"
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
 position = Vector2(-598, -502)
