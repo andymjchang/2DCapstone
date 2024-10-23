@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=39 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Texture2D" uid="uid://eoiqyev7gvq4" path="res://animations/raccoonAnims/Raccoon_jump.png" id="2_amwal"]
@@ -184,6 +184,25 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ecghn"]
+
+[sub_resource type="Curve" id="Curve_4x8se"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 43.5165), 0.0, 0.0, 0, 0, Vector2(0.553672, -19.7802), 0.0, 0.0, 0, 0, Vector2(1, 19.7802), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_svjwv"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(0.358974, -360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_oxxop"]
+_data = [Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
 [node name="Player1" type="CharacterBody2D" groups=["players"]]
 position = Vector2(0, -48)
 scale = Vector2(4, 4)
@@ -269,6 +288,29 @@ wait_time = 0.25
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-10, 1.625)
 scale = Vector2(1.75, 1.1625)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_ecghn")
+position = Vector2(-12, 2)
+scale = Vector2(0.25, 0.25)
+emitting = false
+amount = 5
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 7.4
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 433.18
+initial_velocity_max = 433.18
+angular_velocity_max = 360.0
+angular_velocity_curve = SubResource("Curve_4x8se")
+damping_max = 9.184
+angle_curve = SubResource("Curve_svjwv")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_oxxop")
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

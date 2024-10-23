@@ -279,6 +279,12 @@ func _onGetPowerup(powerType):
 	worldNode.powerupUI.visual.frame = powerType
 	worldNode.powerupUI.visual.show()
 	print("I got: ", curPowerup)
+	var particleEffect = get_node("CPUParticles2D")
+	print("Loading: ", "res://particles/powerups/" + str(powerType) + ".png")
+	particleEffect.texture = load("res://particles/powerups/" + str(powerType) + ".png")
+	var powerSprite = get_node("Area2D/Sprite2D")
+	particleEffect.emitting = true
+	particleEffect.visible = true
 
 func _onActivatePowerup():
 	match curPowerup:
@@ -308,6 +314,8 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 
 func _on_damaged_timer_timeout() -> void:
 	$GlitchShader.visible = false
+
+
 func _onPowerupTimerTimeout() -> void:
 	print("Timeout!")
 	match curPowerup:
