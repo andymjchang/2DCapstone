@@ -91,6 +91,7 @@ var levelSaved = false
 
 func _ready():
 	Globals.customStart = false
+	Globals.levelEditorTime = 0.0
 	self.objectClicked.connect(_onObjectClicked)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
@@ -113,6 +114,7 @@ func _process(delta: float) -> void:
 	#if (trackingPosition):
 		#currentPosition = get_global_mouse_position()
 		#timeHeld += delta
+	updateTime(delta)
 	if Input.is_action_just_pressed("click"):
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
@@ -158,6 +160,10 @@ func _on_text_edit_2_text_changed() -> void:
 		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
 		
+func updateTime(delta: float):
+	Globals.levelEditorTime = Globals.levelEditorTime + delta
+
+	
 func loadLevel():
 	print("save file name, ", saveFileName)
 	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()

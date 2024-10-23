@@ -23,7 +23,7 @@ var size: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	clickSuccess.connect(_setClickResult)
-	timePlaced = Globals.time
+	timePlaced = Globals.levelEditorTime
 	set_process_input(true)
 
 
@@ -66,7 +66,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.pressed and self.get_parent().get_parent().get_parent().currentBlock and self.index == self.get_parent().get_parent().get_parent().currentBlock.index and isDragging:
 		self.get_child(0).get_node(curAreaDragging).get_parent().global_position= self.get_parent().get_parent().get_parent().snap_position(get_global_mouse_position())
-		timePlaced = Globals.time
+		timePlaced = Globals.levelEditorTime
 		isDragging = false
 		
 		

@@ -4,6 +4,7 @@ const physicsFrameRate : float = 60
 const beatSize : float = 150
 
 var time : float = 0;
+var levelEditorTime = 0.0
 var inLevel = false
 var vertical = false
 var resetCamera = false
