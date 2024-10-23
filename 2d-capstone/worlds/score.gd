@@ -26,6 +26,7 @@ func _process(delta: float) -> void:
 func lerpText(score: int, duration: float = 1.0):
 	targetScore = float(score)
 	currentScore = float(text) if text.is_valid_int() else 0
+	Globals.endScore = currentScore
 	lerpDuration = duration
 	lerpProgress = 0.0
 	lerping = true

@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=3 uid="uid://ct4vs8l2rrmii"]
+
+[ext_resource type="Script" path="res://ui/scripts/gameOverScreen.gd" id="1_08mo7"]
+[ext_resource type="Texture2D" uid="uid://gkiuu3artph0" path="res://ui/assets/Game_Over_Menu.png" id="2_vhrkf"]
+[ext_resource type="Texture2D" uid="uid://11uu7t2ekshk" path="res://ui/assets/MainMenu_button_unpressed.png" id="3_3nbdk"]
+[ext_resource type="Texture2D" uid="uid://bbia4tw56raak" path="res://ui/assets/MainMenu_button_pressed.png" id="4_5calm"]
+[ext_resource type="Texture2D" uid="uid://73bcgskod8qu" path="res://ui/assets/Restart_button_unpressed.png" id="5_1mi21"]
+[ext_resource type="Texture2D" uid="uid://dbqpl3k5lnxb8" path="res://ui/assets/Restart_button_pressed.png" id="6_o6lwd"]
+
+[node name="levelCompleteScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_08mo7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.291406, 0.270313)
+texture = ExtResource("2_vhrkf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -376.0
+offset_top = -192.0
+offset_right = 1064.0
+offset_bottom = 466.0
+scale = Vector2(0.5, 0.5)
+alignment = 1
+
+[node name="perfectLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Num. Perfect:"
+
+[node name="goodLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Num. Good: "
+
+[node name="barelyLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Num. Barely:"
+
+[node name="overallPercentageLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Overall Percentage: "
+
+[node name="scoreLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Score: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = 105.0
+offset_right = 2105.0
+offset_bottom = 522.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.28, 0.35)
+
+[node name="menuButton" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_3nbdk")
+texture_pressed = ExtResource("4_5calm")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="retryButton" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_1mi21")
+texture_pressed = ExtResource("6_o6lwd")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="checkpointButton" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_1mi21")
+texture_pressed = ExtResource("6_o6lwd")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_up" from="HBoxContainer/menuButton" to="." method="_onMenuButtonUp"]
+[connection signal="button_up" from="HBoxContainer/retryButton" to="." method="_onRetryButtonUp"]
+[connection signal="button_down" from="HBoxContainer/checkpointButton" to="." method="_onCheckpointButtonDown"]
+[connection signal="button_up" from="HBoxContainer/checkpointButton" to="." method="_onCheckpointButtonUp"]

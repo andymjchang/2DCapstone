@@ -335,3 +335,4 @@ func _onDoubleJump():
 func _onGetCoin():
 	print("Coin get")
 	self.coins += 1
+	Globals.coinsCollected = self.coins

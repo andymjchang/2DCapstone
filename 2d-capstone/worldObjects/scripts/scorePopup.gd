@@ -38,12 +38,15 @@ func initText(text, player_position):
 	if text > 80:
 		labelText = "PERFECT!"
 		clefSprite.texture = greenTiming
+		Globals.numPerfects+=1
 	elif text > 50:
 		labelText = "GOOD!"
 		clefSprite.texture = yellowTiming
+		Globals.numGoods += 1
 	else: 
 		labelText = "BARELY!"
 		clefSprite.texture = redTiming
+		Globals.numBarleys += 1
 	label.text = labelText
 	#position.y = player_position.y
 	fadeMode = true

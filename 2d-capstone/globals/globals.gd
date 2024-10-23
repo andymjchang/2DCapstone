@@ -21,6 +21,14 @@ var startP1Coords
 var startP2Coords
 var customStart = false
 
+#player level details 
+var coinsCollected
+var numBarelys = 0.0
+var numPerfects = 0.0
+var numGoods = 0.0
+var percetageHit = 0.0
+var endScore = 0.0
+
 
 enum powerType {
 	INVULN,
@@ -87,3 +95,10 @@ func FadeTransition(sceneFileName : String):
 	tween.tween_property(glitch.material, "shader_parameter/fade", 0.01, 0.25)
 	tween.tween_interval(0.1)  # Optional small pause between transitions
 	tween.tween_callback(func(): FadeOut(sceneFileName))
+
+func restartLevelData() -> void:
+	numBarelys = 0.0
+	numGoods = 0.0
+	numPerfects = 0.0
+	endScore = 0.0
+	percetageHit = 0.0

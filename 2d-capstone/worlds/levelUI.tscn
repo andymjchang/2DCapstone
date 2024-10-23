@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddeqbtwpcjgkc"]
+[gd_scene load_steps=5 format=3 uid="uid://ddeqbtwpcjgkc"]
 
 [ext_resource type="Script" path="res://worlds/scripts/restartButton.gd" id="1_sir47"]
 [ext_resource type="PackedScene" uid="uid://u5byse278f80" path="res://ui/gameOverScreen.tscn" id="2_nogfw"]
 [ext_resource type="PackedScene" uid="uid://bnlu5yanfcdgm" path="res://ui/pauseScreen.tscn" id="3_blxek"]
+[ext_resource type="PackedScene" uid="uid://ct4vs8l2rrmii" path="res://ui/levelCompleteScreen.tscn" id="4_hvmfr"]
 
 [node name="LevelUI" type="CanvasLayer"]
 script = ExtResource("1_sir47")
@@ -61,6 +62,9 @@ size_flags_horizontal = 4
 [node name="GameOverScreen" parent="." instance=ExtResource("2_nogfw")]
 visible = false
 size_flags_horizontal = 4
+
+[node name="levelCompleteScreen" parent="." instance=ExtResource("4_hvmfr")]
+visible = false
 
 [connection signal="button_down" from="Box/RestartButton" to="." method="_on_restart_button_button_down"]
 [connection signal="pressed" from="Box/CheckpointButton" to="." method="_onCheckpointButtonPressed"]
