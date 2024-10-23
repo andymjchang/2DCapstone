@@ -3,7 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://dy5o3srpp4sfs" path="res://worldObjects/zipline/mid.png" id="1_g17yu"]
 
 [node name="ziplineMiddle" type="Node2D"]
+position = Vector2(0, -106)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture = ExtResource("1_g17yu")
+polygon = PackedVector2Array(-97, 2, -97, -2, -60, -2, 61, -2, 97, -2, 97, 2, 61, 2, -60, 2)
+uv = PackedVector2Array(-97, 2, -97, -2, -60, -2, 61, -2, 97, -2, 97, 2, 61, 2, -60, 2)
+polygons = [PackedInt32Array(1, 2, 7, 0), PackedInt32Array(2, 3, 6, 7), PackedInt32Array(3, 4, 5, 6)]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_g17yu")
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 50.0
+default_color = Color(0, 0, 0, 1)
