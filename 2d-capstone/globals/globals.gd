@@ -29,6 +29,12 @@ var numGoods = 0.0
 var percetageHit = 0.0
 var endScore = 0.0
 
+#volume 
+var playerSoundsVolume =1.0
+var musicSoundsVolume = 1.0
+var levelMusicSoundsVolume = 1.0
+
+var allVolumes = [playerSoundsVolume, musicSoundsVolume, levelMusicSoundsVolume]
 
 enum powerType {
 	INVULN,

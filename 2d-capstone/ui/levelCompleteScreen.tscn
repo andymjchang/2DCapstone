@@ -104,6 +104,7 @@ stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="jingle" type="AudioStreamPlayer2D" parent="." groups=["musicSounds"]]
+bus = &"music"
 
 [connection signal="button_up" from="HBoxContainer/menuButton" to="." method="_onMenuButtonUp"]
 [connection signal="button_up" from="HBoxContainer/retryButton" to="." method="_onRetryButtonUp"]

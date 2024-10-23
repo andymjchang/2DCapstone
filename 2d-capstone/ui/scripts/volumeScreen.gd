@@ -1,9 +1,13 @@
 extends Control
 
+#var playerSoundsVolume
+#var musicSoundsVolume
+#var inGameMusicSoundsVolume
 var sound = AudioServer.get_bus_index("Master")
-@onready var groupPair = { $sliders/playerSlider : "playerSounds",
-	$sliders/objectSlider : "objectSounds",
-	$sliders/musicSlider : "musicSounds"
+var busIndex
+@onready var groupPair = { $sliders/playerSlider : "player",
+	$sliders/inGameMusicSlider : "levelMusic",
+	$sliders/musicSlider : "music"
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -14,10 +18,15 @@ func _ready() -> void:
 		slider.max_value = 1.0
 		slider.step = 0.05
 		var curVolGroup = groupPair[slider]
-		for sound in get_tree().get_nodes_in_group(curVolGroup):
+		print("cur volw groyp ", curVolGroup)
 			#TODO only really need to do this once
-			slider.value = db_to_linear(sound.volume_db)
-		#slider.value = db_to_linear(groupPair[slider].volume)
+		busIndex = AudioServer.get_bus_index(curVolGroup)
+		slider.value = db_to_linear(AudioServer.get_bus_volume_db(busIndex))
+		#var globalVal = curVolGroup + "Volume"
+		#print("globasl. ", globalVal)
+		#sound.volume_db = linear_to_db(Globals.get(globalVal))
+		#slider.value = db_to_linear(sound.volume_db)
+			
 
  
 
@@ -27,8 +36,13 @@ func _process(delta: float) -> void:
 	
 func _onDragEnd(value, slider) -> void:
 	var soundGroup = groupPair[slider]
-	for sound in get_tree().get_nodes_in_group(soundGroup):
-		sound.volume_db = linear_to_db(value)
+	busIndex = AudioServer.get_bus_index(soundGroup)
+	AudioServer.set_bus_volume_db(busIndex, linear_to_db(value))
+	#for sound in get_tree().get_nodes_in_group(soundGroup):
+		#sound.volume_db = linear_to_db(value)
+		#var globalVal = soundGroup + "Volume"
+		#Globals.set(globalVal,slider.value )
+		
 	#AudioServer.set_bus_volume_db(sound, linear_to_db(value))
 
 
