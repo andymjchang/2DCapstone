@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=34 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://worlds/score.gd" id="15_mx364"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
+[ext_resource type="FontFile" uid="uid://7vgw2bg26xi" path="res://fonts/BankGothic Md BT.ttf" id="17_wcnv0"]
 [ext_resource type="AudioStream" uid="uid://cwunsxkx78vcj" path="res://audioTracks/Tutorial_New_155bpm.mp3" id="18_44qgl"]
 [ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
@@ -70,7 +71,7 @@ offset_bottom = 316.0
 pivot_offset = Vector2(225, 92)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
-theme_override_fonts/font = ExtResource("12_jtaw1")
+theme_override_fonts/font = ExtResource("17_wcnv0")
 theme_override_font_sizes/font_size = 96
 text = "00000"
 horizontal_alignment = 1
