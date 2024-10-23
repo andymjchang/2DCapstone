@@ -91,6 +91,9 @@ texture_pressed = ExtResource("11_aoani")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="music" type="AudioStreamPlayer2D" parent="." groups=["musicSounds"]]
+bus = &"music"
+
 [connection signal="pressed" from="storyButton" to="." method="_onStoryButtonPressed"]
 [connection signal="pressed" from="editorButton" to="." method="_onEditorButtonPressed"]
 [connection signal="pressed" from="quitButton" to="." method="_onQuitButtonPressed"]

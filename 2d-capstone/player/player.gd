@@ -51,6 +51,12 @@ var glitchLines
 var camera
 var coins = 0
 
+#soundEffects
+@onready var punchSfx = load("res://audioEffects/Punch.mp3") as AudioStream
+@onready var healthSfx = load("res://audioEffects/SFX_HealthItem_temp.mp3") as AudioStream
+@onready var coinGrabSfx = load("res://audioEffects/SFX_CoinCollect_temp.mp3") as AudioStream
+@onready var itemGrabSfX = load("res://audioEffects/SFX_ItemGrab_temp.wav") as AudioStream
+
 @onready var hitEffect : AnimatedSprite2D = $HitEffect
 @onready var tweenRot : Tween
 @onready var tweenZoom : Tween
@@ -168,6 +174,8 @@ func _physics_process(delta: float) -> void:
 				else:
 					$Animation.play("ZipPunch")
 				$Animation.frame = 0 # Reset animation to 0 if already punching
+				sfxPlayer.stream = punchSfx
+				sfxPlayer.stream.loop = false
 				sfxPlayer.play()
 				
 				# Technical
@@ -275,6 +283,9 @@ func ResetAttack():
 # Powerup code
 # TODO: Swap from string to enum
 func _onGetPowerup(powerType):
+	sfxPlayer.stream = itemGrabSfX
+	#sfxPlayer.stream.loop = false
+	sfxPlayer.play()
 	curPowerup = powerType
 	worldNode.powerupUI.visual.frame = powerType
 	worldNode.powerupUI.visual.show()
@@ -292,6 +303,9 @@ func _onActivatePowerup():
 			invuln = true
 			$Animation.self_modulate.a = 0.5
 		Globals.powerType.HEAL:
+			sfxPlayer.stream = healthSfx
+			sfxPlayer.stream.loop = false
+			sfxPlayer.play()
 			var potentialHealth = health + 9
 			if potentialHealth > 27:
 				health = 27
@@ -342,5 +356,8 @@ func _onDoubleJump():
 
 func _onGetCoin():
 	print("Coin get")
+	sfxPlayer.stream = coinGrabSfx
+	sfxPlayer.stream.loop = false
+	sfxPlayer.play()
 	self.coins += 1
 	Globals.coinsCollected = self.coins

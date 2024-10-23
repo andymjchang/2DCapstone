@@ -1,10 +1,14 @@
 extends CanvasLayer
 
-
+@onready var music = $music
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.relocateToCheckpoint = false
 	Globals.checkpoint = null
+	var audioPath = load("res://audioTracks/MainMenu_115bpm.mp3") as AudioStream
+	music.stream = audioPath
+	music.play()
+	music.stream.loop = true
 	pass # Replace with function body.
 
 

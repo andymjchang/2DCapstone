@@ -28,7 +28,7 @@ offset_right = 1333.0
 offset_bottom = 301.0
 size_flags_horizontal = 4
 
-[node name="objectSlider" type="HSlider" parent="sliders"]
+[node name="inGameMusicSlider" type="HSlider" parent="sliders"]
 offset_left = 557.0
 offset_top = 358.0
 offset_right = 1333.0
@@ -52,13 +52,13 @@ offset_bottom = 173.0
 theme_override_font_sizes/font_size = 50
 text = "Player Sounds"
 
-[node name="objectSounds" type="TextEdit" parent="labels"]
+[node name="inGameMusicSounds" type="TextEdit" parent="labels"]
 offset_left = 575.0
 offset_top = 291.0
 offset_right = 1323.0
 offset_bottom = 383.0
 theme_override_font_sizes/font_size = 50
-text = "Object Sounds"
+text = "In Game Music"
 
 [node name="musicSounds" type="TextEdit" parent="labels"]
 offset_left = 575.0

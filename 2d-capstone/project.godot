@@ -44,6 +44,7 @@ playerHitbox=""
 pulsingObjects=""
 musicSounds=""
 playerSounds=""
+levelMusicSounds=""
 
 [input]
 

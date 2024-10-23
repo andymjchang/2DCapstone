@@ -26,9 +26,17 @@ killFloors
 goalBlocks
 1600, 550,
 breakableWalls
+300, -75,
 ziplines
 placers
 slideWalls
 powerups
+950, 550,
+650, 550,
+950, 550,
+950, 550,
+950, 550,
 jumpBoosts
 coins
+225, 575,
+550, 375,
