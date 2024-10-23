@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://lc6sx7h55k1p"]
+[gd_scene load_steps=18 format=3 uid="uid://lc6sx7h55k1p"]
 
 [ext_resource type="Script" path="res://worldObjects/enemy/enemy.gd" id="1_fjqgg"]
 [ext_resource type="Texture2D" uid="uid://fkay4q6vfugt" path="res://worldObjects/enemy/single_enemy_Rusted_anim_1-sheet.png" id="3_6xp7w"]
 [ext_resource type="Texture2D" uid="uid://dhk8ib54ejgwa" path="res://worldObjects/assets/circle.png" id="4_h4ccn"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="5_1luba"]
 [ext_resource type="Script" path="res://ui/scripts/pulseAnimatedSprite.gd" id="5_4of7g"]
+[ext_resource type="Texture2D" uid="uid://pj0qfwt8un1l" path="res://worldObjects/enemy/flying enemy 1-sheet.png" id="6_83knw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gswvj"]
 size = Vector2(50, 50)
@@ -42,7 +43,43 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 7.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouin1"]
+atlas = ExtResource("6_83knw")
+region = Rect2(0, 0, 350, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5qqe"]
+atlas = ExtResource("6_83knw")
+region = Rect2(350, 0, 350, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyfgk"]
+atlas = ExtResource("6_83knw")
+region = Rect2(700, 0, 350, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8etd"]
+atlas = ExtResource("6_83knw")
+region = Rect2(1050, 0, 350, 250)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pk1od"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouin1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5qqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyfgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8etd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
 }]
 
 [node name="Enemy" type="Node2D" groups=["enemies"]]
@@ -63,12 +100,23 @@ texture = ExtResource("4_h4ccn")
 position = Vector2(1.19209e-07, -9.53674e-07)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["pulsingObjects"]]
-position = Vector2(2, -14)
+position = Vector2(2, -15)
 scale = Vector2(0.12, 0.12)
 sprite_frames = SubResource("SpriteFrames_l3chy")
 autoplay = "default"
+frame_progress = 0.575385
 script = ExtResource("5_4of7g")
 timingScale = 2
 increasedScale = Vector2(0.15, 0.15)
+
+[node name="FlyingAnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["pulsingObjects"]]
+visible = false
+position = Vector2(9, -2.38419e-07)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_pk1od")
+autoplay = "default"
+frame_progress = 0.506056
+script = ExtResource("5_4of7g")
+increasedScale = Vector2(0.48, 0.48)
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

@@ -1,16 +1,9 @@
 extends Node2D
-signal takeDamage
 
 var count = 0
 var ifDead = false
 var secondTime = false
 var blockType = "enemy"
-
-var up
-var down 
-var left
-var right
-var index = 0
 
 # Death animation
 var velocity = Vector2(0, 0)
@@ -24,18 +17,25 @@ var soundPlayer := AudioStreamPlayer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	add_to_group("enemies")
-	add_child(soundPlayer)
-	up = "up"
-	down = "down"
-	left = "left"
-	right = "right"
+	# Check for platform below
+	var has_platform_below = check_platform_below()
+	
+	# Set up sprites
+	sprite = $AnimatedSprite2D
+	var flying_sprite = $FlyingAnimatedSprite2D
+	
+	if has_platform_below:
+		sprite.visible = true
+		flying_sprite.visible = false
+	else:
+		sprite.visible = false
+		flying_sprite.visible = true
 	
 	# vary animation
-	sprite = $AnimatedSprite2D
-	sprite.speed_scale = randf_range(0.8, 1.2)
-	sprite.frame = randi() % 4
-	
+	var active_sprite = sprite if has_platform_below else flying_sprite
+	active_sprite.speed_scale = randf_range(0.8, 1.2)
+	active_sprite.frame = randi() % 4
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if ifDead:
@@ -58,6 +58,9 @@ func GotHit():
 	sprite.rotation = randf_range(min_rotation, max_rotation)
 	get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
 
-
-
-	pass # Replace with function body.
+func check_platform_below() -> bool:
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 50))
+	query.collision_mask = 0b1  # Platform is on layer 1
+	var result = space_state.intersect_ray(query)
+	return result and result.collider.is_in_group("blocks")
