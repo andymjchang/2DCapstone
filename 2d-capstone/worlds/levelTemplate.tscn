@@ -78,7 +78,7 @@ vertical_alignment = 1
 script = ExtResource("15_mx364")
 
 [node name="Visualizer" type="Node2D" parent="CanvasLayer"]
-position = Vector2(772, -73)
+position = Vector2(772, 25)
 script = ExtResource("31_wssgq")
 
 [node name="Background" type="Node2D" parent="."]

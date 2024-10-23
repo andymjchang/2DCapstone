@@ -5,8 +5,8 @@ const VU_COUNT = 32
 const FREQ_MAX = 11050.0
 
 const WIDTH = 375.0
-const HEIGHT = 250.0
-const HEIGHT_SCALE = 3.0
+const HEIGHT = 150.0
+const HEIGHT_SCALE = 0.5
 const MIN_DB = 75
 const ANIMATION_SPEED = 0.1
 
@@ -56,7 +56,7 @@ func _process(_delta):
 		var hz = i * FREQ_MAX / VU_COUNT
 		var magnitude = spectrum.get_magnitude_for_frequency_range(prev_hz, hz).length()
 		var energy = clampf((MIN_DB + linear_to_db(magnitude)) / MIN_DB, 0, 1)
-		var height = energy * HEIGHT * HEIGHT_SCALE
+		var height = max(energy * HEIGHT * HEIGHT_SCALE, HEIGHT * 0.05)  # Add minimum height
 		data.append(height)
 		prev_hz = hz
 
@@ -66,8 +66,10 @@ func _process(_delta):
 		else:
 			max_values[i] = lerp(max_values[i], data[i], ANIMATION_SPEED)
 
-		if data[i] <= 0.0:
-			min_values[i] = lerp(min_values[i], 0.0, ANIMATION_SPEED)
+		if data[i] <= HEIGHT * 0.1:  # Adjust minimum height for lerping
+			min_values[i] = lerp(min_values[i], HEIGHT * 0.1, ANIMATION_SPEED)
+		else:
+			min_values[i] = lerp(min_values[i], data[i], ANIMATION_SPEED)
 
 	# Sound plays back continuously, so the graph needs to be updated every frame.
 	queue_redraw()
