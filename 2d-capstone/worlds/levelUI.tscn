@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://worlds/scripts/restartButton.gd" id="1_sir47"]
 [ext_resource type="PackedScene" uid="uid://u5byse278f80" path="res://ui/gameOverScreen.tscn" id="2_nogfw"]
 [ext_resource type="PackedScene" uid="uid://bnlu5yanfcdgm" path="res://ui/pauseScreen.tscn" id="3_blxek"]
-[ext_resource type="PackedScene" uid="uid://ct4vs8l2rrmii" path="res://ui/levelCompleteScreen.tscn" id="4_hvmfr"]
+[ext_resource type="PackedScene" path="res://ui/levelCompleteScreen.tscn" id="4_hvmfr"]
 
 [node name="LevelUI" type="CanvasLayer"]
 script = ExtResource("1_sir47")

@@ -129,10 +129,18 @@ func _ready():
 		var playerSpeed = player1.SPEED
 		musicTime = distance / Globals.pixelsPerFrame
 		Globals.time += musicTime
+	elif Globals.relocateToCheckpoint and Globals.checkpoint != null:
+		player1.global_position = Globals.checkpoint
+		get_node("Camera2D").moveCamera(player1.global_position.x)
+		var distance = abs(0.0 - player1.global_position.x)
+		var playerSpeed = player1.SPEED
+		musicTime = distance / Globals.pixelsPerFrame
+		Globals.time += musicTime + 3.0
 	#killWall = get_node("KillWall")
 	countdownUI = get_node("LevelUI")
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
 	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
+	
 
 
 	# Start game
