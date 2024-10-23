@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwh65mb8uywkc"
-path="res://.godot/imported/tilemap_level1.2.png-c93900c05b04d56b68949325a7602f0c.ctex"
+uid="uid://cu38ma2jmuyps"
+path="res://.godot/imported/Raccoon_punch_sprite_sheet.png-a99ef94c98ef9df015e24eb83d027e37.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://backgrounds/tilemaps/tilemap_level1.2.png"
-dest_files=["res://.godot/imported/tilemap_level1.2.png-c93900c05b04d56b68949325a7602f0c.ctex"]
+source_file="res://animations/raccoonAnims/Raccoon_punch_sprite_sheet.png"
+dest_files=["res://.godot/imported/Raccoon_punch_sprite_sheet.png-a99ef94c98ef9df015e24eb83d027e37.ctex"]
 
 [params]
 

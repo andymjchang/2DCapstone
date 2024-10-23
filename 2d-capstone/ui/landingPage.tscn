@@ -17,7 +17,7 @@ script = ExtResource("1_4duo3")
 offset_right = 1913.0
 offset_bottom = 1076.0
 texture = ExtResource("2_3x1ff")
-expand_mode = 1
+expand_mode = 2
 
 [node name="storyButton" type="TextureButton" parent="."]
 anchors_preset = 6
