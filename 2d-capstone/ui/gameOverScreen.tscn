@@ -52,6 +52,8 @@ texture_pressed = ExtResource("6_1qhke")
 stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
+[node name="jingle" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="button_up" from="VBoxContainer/menuButton" to="." method="_onMenuButtonUp"]
 [connection signal="button_up" from="VBoxContainer/retryButton" to="." method="_onRetryButtonUp"]
 [connection signal="button_down" from="VBoxContainer/checkpointButton" to="." method="_onCheckpointButtonDown"]
