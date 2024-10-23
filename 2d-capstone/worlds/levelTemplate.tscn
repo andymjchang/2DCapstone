@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=33 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
 [ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
 [ext_resource type="PackedScene" uid="uid://bo0d4wxsgmli1" path="res://ui/powerupSlot.tscn" id="25_wa2am"]
+[ext_resource type="Script" path="res://ui/scripts/visualizer.gd" id="31_wssgq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rypfk"]
 size = Vector2(12, 1086)
@@ -75,6 +76,10 @@ text = "00000"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("15_mx364")
+
+[node name="Visualizer" type="Node2D" parent="CanvasLayer"]
+position = Vector2(758, -73)
+script = ExtResource("31_wssgq")
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2(250, 645)
