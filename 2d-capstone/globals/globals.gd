@@ -76,7 +76,7 @@ func FadeOut(sceneFileName : String):
 	get_tree().change_scene_to_file(sceneFileName)
 	var tween = create_tween()
 	tween.tween_property(vignette.material, "shader_parameter/inner_radius", 0.5, 0.5)
-	tween.tween_property(glitch.material, "shader_parameter/shake_power", 0.0, 0.25)
+	tween.tween_property(glitch.material, "shader_parameter/shake_power", 0.01, 0.25)
 	tween.tween_property(glitch.material, "shader_parameter/fade", 0.001, 0.25)
 
 func FadeTransition(sceneFileName : String):

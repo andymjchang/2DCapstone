@@ -98,7 +98,7 @@ func _physics_process(delta: float) -> void:
 				glitchLines.global_position.y = self.global_position.y
 				hang_time_remaining = 0.0
 				is_hanging = false
-				camera.global_position.y = self.global_position.y + -70
+				camera.smooth_pan_to(self.global_position.y + -50)
 				Globals.resetCamera = false
 			
 			# Add the gravity.
