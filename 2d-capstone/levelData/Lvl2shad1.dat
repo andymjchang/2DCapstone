@@ -19,10 +19,10 @@ enemies
 150, 575,
 300, 575,
 450, 575,
-600, 575,
+675, 200,
 600, 500,
 killFloors
-625, 575,
+1475, 550,
 goalBlocks
 1600, 550,
 breakableWalls

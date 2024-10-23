@@ -135,8 +135,8 @@ func _ready():
 		var distance = abs(0.0 - player1.global_position.x)
 		var playerSpeed = player1.SPEED
 		musicTime = distance / Globals.pixelsPerFrame
-		Globals.time += musicTime + 3.0
-	#killWall = get_node("KillWall")
+		Globals.time += musicTime
+	#killWall = get_node("KillWall")start
 	countdownUI = get_node("LevelUI")
 	statusMessage = countdownUI.get_node("Box").get_node("Status")
 	restartButton = countdownUI.get_node("Box").get_node("RestartButton")
@@ -315,9 +315,9 @@ func _physics_process(delta):
 		camera.emit_signal("moveCameraY", player1.position.y)
 	elif Globals.resetCamera:
 		camera.emit_signal("moveCameraY", player1.position.y)
-	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused and !Globals.customStart:
+	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused and !Globals.customStart and !Globals.relocateToCheckpoint:
 		startGame()
-	elif Globals.customStart and !Globals.inLevel and Globals.time >= musicTime + 3.0:
+	elif (Globals.customStart or Globals.relocateToCheckpoint) and !Globals.inLevel and Globals.time >= musicTime + 3.0:
 		startGame()
 
 		
