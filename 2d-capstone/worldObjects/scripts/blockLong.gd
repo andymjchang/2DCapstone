@@ -15,8 +15,9 @@ var startTiles = [Vector2(0,1),Vector2(1,2),Vector2(1,3), Vector2(0,4)]
 var filler2Tiles = [Vector2(4,0),Vector2(4,1),Vector2(4,1) ,Vector2(4,1) ]
 var end2Tiles = [Vector2(5,0),Vector2(5,1),Vector2(5,1) ,Vector2(5,1)]
 var start2Tiles = [Vector2(0,0),Vector2(0,1),Vector2(0,1) ,Vector2(0,1) ]
-var tileWidth
+var tileWidth	
 var allTiles = [startTiles, fillerTiles, endTiles]
+var id = 1
 
 @onready var defaultTileMap = $sprite2D/TileMapLayer
 
@@ -35,9 +36,13 @@ func _ready():
 		$sprite2D/TileMapLayer2.visible = true
 		tileMap = $sprite2D/TileMapLayer2
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
+		id = 0
 	else:
 		$sprite2D/TileMapLayer.visible = true
 		$sprite2D/TileMapLayer2.visible = false
+		tileMap = $sprite2D/TileMapLayer
+		allTiles = [startTiles, fillerTiles, endTiles]
+		id = 1
 		
 func extendByOneTile() -> void : 
 	#I need to get the max of the col and rows
@@ -48,12 +53,12 @@ func extendByOneTile() -> void :
 	var startY = minMax[0].y
 		#we have to reset the end of the tile so that it doesnt look weird
 	for i in range (0,4):
-		tileMap.set_cell(Vector2i(startX, startY+i), 1, allTiles[1][i])
+		tileMap.set_cell(Vector2i(startX, startY+i), id, allTiles[1][i])
 		
 	startX = minMax[1].x + 1
 	startY = minMax[0].y
 	for i in range(0,4):
-		tileMap.set_cell(Vector2i(startX, startY), 1, allTiles[0][i])
+		tileMap.set_cell(Vector2i(startX, startY), id, allTiles[0][i])
 		startY+=1
 		
 	#alter the area2d to represent the new size
@@ -75,15 +80,19 @@ func decreaseByOneTile() -> void:
 		startX-=1
 		startY = minMax[0].y
 		for i in range (0,4):
-			tileMap.set_cell(Vector2i(startX, startY), 1, allTiles[2][i])
+			tileMap.set_cell(Vector2i(startX, startY), id, allTiles[2][i])
 			startY+=1
 			
 		self.get_node("CollisionShape2D").shape.extents.x -= tileWidth/2.0
 		self.get_node("CollisionShape2D").global_position.x -= tileWidth/2.0
 		numCols-=1
 
+
 func setTileMaps(posPoints : Array):
+	
 	if posPoints.size() >= 3:
+		print("num Cols", posPoints[2])
+		print("setting tile map")
 		if posPoints[2] < numCols:
 			while numCols > posPoints[2]+1:
 				self.decreaseByOneTile()

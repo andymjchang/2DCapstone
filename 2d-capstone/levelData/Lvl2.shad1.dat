@@ -1,6 +1,7 @@
 platformBlocks
--25, 600, 29, 187, 85.5,
 -25, 375, 12, <null>, <null>,
+175, 375, 3, 18, 116.5,
+0, 625, 19, 122, 45.5,
 actionIndicators
 playerCheckpoints
 player
@@ -13,3 +14,5 @@ ziplines
 placers
 slideWalls
 powerups
+jumpBoosts
+coins
