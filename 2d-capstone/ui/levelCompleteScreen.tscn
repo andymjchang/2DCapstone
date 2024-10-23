@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct4vs8l2rrmii"]
+[gd_scene load_steps=7 format=3 uid="uid://d05n5e2m50hb1"]
 
 [ext_resource type="Script" path="res://ui/scripts/levelCompleteScreen.gd" id="1_qafpk"]
 [ext_resource type="Texture2D" uid="uid://gkiuu3artph0" path="res://ui/assets/Game_Over_Menu.png" id="2_vhrkf"]
@@ -48,6 +48,12 @@ layout_mode = 2
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Num. Barely:"
+
+[node name="coinsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Coins Collected:"
 
 [node name="overallPercentageLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2

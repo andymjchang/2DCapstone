@@ -38,6 +38,7 @@ func _onUpdateScoreData() -> void:
 	$VBoxContainer/perfectLabel.text += " " + str(Globals.numPerfects)
 	$VBoxContainer/goodLabel.text += " " + str(Globals.numGoods)
 	$VBoxContainer/barelyLabel.text += " " + str(Globals.numBarelys)
+	$VBoxContainer/coinsLabel.text += " " + str(Globals.coinsCollected)
 	$VBoxContainer/overallPercentageLabel.text += " " + str(Globals.percetageHit)+"%"
 	$VBoxContainer/scoreLabel.text += " "+ str(Globals.endScore)
 

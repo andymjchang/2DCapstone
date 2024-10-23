@@ -268,9 +268,9 @@ func _onGameOver():
 
 func showGameOver():
 	music.stop()
-	$LevelUI/GameOverScreen.visible = true
-	$LevelUI/GameOverScreen.playMusic()
-	Globals.restartLevelData()
+	#$LevelUI/GameOverScreen.visible = true
+	#$LevelUI/GameOverScreen.playMusic()
+	#Globals.restartLevelData()
 	Engine.time_scale = 0.0
 	
 func showLevelCompleted():

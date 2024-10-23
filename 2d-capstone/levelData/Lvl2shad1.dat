@@ -17,7 +17,7 @@ enemies
 killFloors
 625, 225,
 goalBlocks
-825, 550,
+775, 575,
 breakableWalls
 ziplines
 placers
@@ -25,3 +25,5 @@ slideWalls
 powerups
 jumpBoosts
 coins
+225, 575,
+550, 400,

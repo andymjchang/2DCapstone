@@ -22,7 +22,7 @@ var startP2Coords
 var customStart = false
 
 #player level details 
-var coinsCollected
+var coinsCollected = 0.0
 var numBarelys = 0.0
 var numPerfects = 0.0
 var numGoods = 0.0
@@ -101,4 +101,5 @@ func restartLevelData() -> void:
 	numGoods = 0.0
 	numPerfects = 0.0
 	endScore = 0.0
+	coinsCollected = 0.0
 	percetageHit = 0.0
