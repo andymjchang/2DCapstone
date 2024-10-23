@@ -37,7 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://ce67hev01ibyl" path="res://levelEditorObjects/powerupScene.tscn" id="19_tbbcg"]
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="20_l6054"]
 [ext_resource type="Texture2D" uid="uid://cyh8bef4a3qeo" path="res://levelEditor/programmerArtAssets/enemy.png" id="20_rbssn"]
-[ext_resource type="PackedScene" uid="uid://lp8tddjvga83" path="res://levelEditorObjects/jumpBoostScene.tscn" id="20_wtqqv"]
+[ext_resource type="PackedScene" path="res://levelEditorObjects/jumpBoostScene.tscn" id="20_wtqqv"]
 [ext_resource type="PackedScene" uid="uid://crx75iquuvwem" path="res://levelEditorObjects/coinScene.tscn" id="22_0maqw"]
 [ext_resource type="Texture2D" uid="uid://l8vpo2u44l4p" path="res://levelEditor/programmerArtAssets/p1checkpoint.png" id="22_1mwd2"]
 [ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
@@ -195,6 +195,7 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="ColorRect" type="ColorRect" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = -1.0
 offset_top = 915.0
 offset_right = 1922.0
@@ -203,6 +204,7 @@ color = Color(0.259294, 0.259294, 0.259294, 1)
 
 [node name="p2checkpointButton" type="TextureButton" parent="UI/objectSelector"]
 visible = false
+layout_mode = 0
 offset_left = 416.0
 offset_top = 848.0
 offset_right = 516.0
@@ -210,6 +212,7 @@ offset_bottom = 948.0
 texture_normal = ExtResource("26_3eu32")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 104.0
 offset_top = 951.0
 offset_right = 949.0
@@ -249,6 +252,7 @@ layout_mode = 2
 texture_normal = ExtResource("33_pappt")
 
 [node name="exitButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 1795.0
 offset_top = 15.0
 offset_right = 1895.0
@@ -256,6 +260,7 @@ offset_bottom = 115.0
 texture_normal = ExtResource("7_esiun")
 
 [node name="killFloorButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 832.0
 offset_top = 951.0
 offset_right = 924.0
@@ -265,12 +270,14 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_top = 955.0
 offset_right = 100.0
 offset_bottom = 1055.0
 texture_normal = ExtResource("4_rduon")
 
 [node name="playAudioButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 1206.0
 offset_top = 919.0
 offset_right = 1256.0
@@ -278,6 +285,7 @@ offset_bottom = 969.0
 texture_normal = ExtResource("26_m4kik")
 
 [node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 1680.0
 offset_top = 16.0
 offset_right = 1780.0
@@ -285,6 +293,7 @@ offset_bottom = 116.0
 texture_normal = ExtResource("7_0wc3n")
 
 [node name="rightButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 1579.0
 offset_top = 954.0
 offset_right = 1679.0
@@ -292,6 +301,7 @@ offset_bottom = 1054.0
 texture_normal = ExtResource("4_7fuo1")
 
 [node name="upButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 1682.0
 offset_top = 954.0
 offset_right = 1782.0
@@ -299,6 +309,7 @@ offset_bottom = 1054.0
 texture_normal = ExtResource("5_8qxnf")
 
 [node name="leftButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 1476.0
 offset_top = 954.0
 offset_right = 1576.0
@@ -306,6 +317,7 @@ offset_bottom = 1054.0
 texture_normal = ExtResource("5_cuiw6")
 
 [node name="downButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 1785.0
 offset_top = 954.0
 offset_right = 1885.0
@@ -313,6 +325,7 @@ offset_bottom = 1054.0
 texture_normal = ExtResource("7_u6v8f")
 
 [node name="audioProgress" type="ProgressBar" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 1095.0
 offset_top = 971.0
 offset_right = 1369.0
@@ -326,6 +339,7 @@ position = Vector2(135, 23)
 shape = SubResource("RectangleShape2D_jl84f")
 
 [node name="timeInto" type="RichTextLabel" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 970.0
 offset_top = 969.0
 offset_right = 1094.0
@@ -334,6 +348,7 @@ text = "Time Into Song:
 "
 
 [node name="timeLeft" type="RichTextLabel" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 1371.0
 offset_top = 971.0
 offset_right = 1465.0
@@ -341,6 +356,7 @@ offset_bottom = 1009.0
 text = "Time Left:"
 
 [node name="audioTracks" type="ScrollContainer" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 1097.0
 offset_top = 1025.0
 offset_right = 1373.0
@@ -356,6 +372,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="playLevelButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 1565.0
 offset_top = 15.0
 offset_right = 1665.0
@@ -363,6 +380,7 @@ offset_bottom = 115.0
 texture_normal = ExtResource("37_5oir0")
 
 [node name="p1PlacerButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 17.0
 offset_top = 875.0
 offset_right = 88.0
@@ -372,6 +390,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="breakableWallButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 113.0
 offset_top = 880.0
 offset_right = 180.0
@@ -381,6 +400,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="slideWallButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 0
 offset_left = 221.0
 offset_top = 875.0
 offset_right = 286.0
