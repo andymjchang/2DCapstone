@@ -240,7 +240,7 @@ script = ExtResource("1_qyaa7")
 position = Vector2(-13.75, -1.80001)
 scale = Vector2(0.133929, 0.133929)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"ZipPunch"
+animation = &"Slide"
 
 [node name="GlitchShader" type="ColorRect" parent="."]
 visible = false
