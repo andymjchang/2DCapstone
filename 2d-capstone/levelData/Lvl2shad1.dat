@@ -1,0 +1,53 @@
+platformBlocks
+25, 625, 22, 141.5, 90,
+311, 625, 12, <null>, <null>,
+467, 625, 12, <null>, <null>,
+623, 625, 12, <null>, <null>,
+775, 625, 12, <null>, <null>,
+931, 625, 12, <null>, <null>,
+1087, 625, 12, <null>, <null>,
+1243, 625, 12, <null>, <null>,
+1399, 625, 12, <null>, <null>,
+1550, 625, 12, <null>, <null>,
+1706, 625, 12, <null>, <null>,
+1862, 625, 12, <null>, <null>,
+2018, 625, 12, <null>, <null>,
+2174, 625, 12, <null>, <null>,
+2330, 625, 12, <null>, <null>,
+2486, 625, 12, <null>, <null>,
+2642, 625, 12, <null>, <null>,
+2798, 625, 12, <null>, <null>,
+2954, 625, 12, <null>, <null>,
+3110, 625, 12, <null>, <null>,
+actionIndicators
+playerCheckpoints
+100, 550,
+700, 550,
+player
+0, 540,
+enemies
+150, 575,
+300, 575,
+450, 575,
+675, 200,
+600, 575,
+375, 575,
+killFloors
+1250, 225,
+goalBlocks
+2850, 550,
+breakableWalls
+300, -75,
+ziplines
+placers
+slideWalls
+powerups
+950, 550,
+875, 300,
+950, 550,
+950, 550,
+950, 550,
+jumpBoosts
+coins
+225, 575,
+550, 375,

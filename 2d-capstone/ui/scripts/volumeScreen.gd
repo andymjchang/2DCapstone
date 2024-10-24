@@ -29,7 +29,7 @@ func _onDragEnd(value, slider) -> void:
 	var soundGroup = groupPair[slider]
 	busIndex = AudioServer.get_bus_index(soundGroup)
 	AudioServer.set_bus_volume_db(busIndex, linear_to_db(value))
-
+	
 
 
 func _onBackButtonUp() -> void:
