@@ -58,8 +58,8 @@ var coins = 0
 @onready var itemGrabSfX = load("res://audioEffects/SFX_ItemGrab_temp.wav") as AudioStream
 
 @onready var hitEffect : AnimatedSprite2D = $HitEffect
-@onready var tweenRot : Tween
-@onready var tweenZoom : Tween
+@onready var tweenSlide : Tween
+@onready var tweenHit : Tween
 
 func _ready():
 	curSprite = get_node("Animation").duplicate()
@@ -147,22 +147,18 @@ func _physics_process(delta: float) -> void:
 				get_node("Hitbox").position.y = 6
 				$Animation.play("Slide");
 				#get_node("Floor").disabled = false
-				var rotDir = Globals.get_random_sign()
-				tweenRot = create_tween()
-				tweenZoom = create_tween()
-				tweenRot.tween_property(camera, "rotation", 0.004363323 * rotDir, 0.2)
-				tweenZoom.tween_property(camera, "zoom", Vector2(2.1, 2.1), 0.5)
-				#camera.zoom = Vector2(2.2, 2.2)
+				tweenSlide = create_tween()
+				tweenSlide.tween_property(camera, "rotation", 0.008363323, 0.15)
+				tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.2, 2.2), 0.15)
 				
 			if Input.is_action_just_released(slide):
 				get_node("Hitbox").scale *= Vector2(1, 2);
 				get_node("Hitbox").position.y = 2
 				$Animation.play("Run");
 				#get_node("Floor").disabled = true
-				tweenRot = create_tween()
-				tweenZoom = create_tween()
-				tweenRot.tween_property(camera, "rotation", 0, 0.2)
-				tweenZoom.tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.5)
+				tweenSlide = create_tween()
+				tweenSlide.tween_property(camera, "rotation", 0, 0.15)
+				tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
 		elif inZipline:
 			$Animation.play("Zip")
 			
