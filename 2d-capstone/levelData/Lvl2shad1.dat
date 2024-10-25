@@ -22,16 +22,10 @@ platformBlocks
 actionIndicators
 playerCheckpoints
 100, 550,
-700, 550,
 player
 0, 540,
 enemies
-150, 575,
-300, 575,
-450, 575,
 675, 200,
-600, 575,
-375, 575,
 killFloors
 1250, 225,
 goalBlocks
@@ -46,7 +40,6 @@ powerups
 1000, 400,
 jumpBoosts
 coins
-225, 575,
 550, 375,
 multiPunches
-725, 550, 750, 475, 750, 425, 750, 375,
+725, 600, 900, 575, 1050, 575, 1150, 575,

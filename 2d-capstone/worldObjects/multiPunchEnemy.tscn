@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpn3bm1tqg6fk"]
+
+[ext_resource type="Script" path="res://worldObjects/scripts/multiPunchEnemy.gd" id="1_ateg4"]
+[ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="2_ewehu"]
+
+[node name="multiPunchEnemy" type="Node2D"]
+script = ExtResource("1_ateg4")
+
+[node name="Enemy" parent="." instance=ExtResource("2_ewehu")]

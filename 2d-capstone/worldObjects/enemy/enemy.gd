@@ -22,6 +22,9 @@ var max_rotation = 45 * (PI / 180)
 var soundPlayer := AudioStreamPlayer.new()
 @onready var sprite
 
+var isMultiPunch = false
+var punchesLeft = 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("enemies")
@@ -53,11 +56,17 @@ func DeathAnimation(delta: float) -> void:
 	
 	
 func GotHit():
-	self.ifDead = true
-	velocity.y = randi_range(-600, -300)
-	sprite.rotation = randf_range(min_rotation, max_rotation)
-	get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
-
+	if !isMultiPunch or punchesLeft == 0.0:
+		self.ifDead = true
+		velocity.y = randi_range(-600, -300)
+		sprite.rotation = randf_range(min_rotation, max_rotation)
+		#get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
+		get_tree().current_scene.get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
+	else:
+		punchesLeft-=1
+		get_parent().moveToNext()
+		#got to move self to next indictaor
+		
 
 
 	pass # Replace with function body.
