@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "multiPunch"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -53,6 +53,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var powerup : PackedScene
 @export var jumpBoost : PackedScene
 @export var coin : PackedScene
+@export var multiPunch : PackedScene
 
 
 @onready var objectList = $objectList
@@ -72,6 +73,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var powerupList = $objectList/powerups
 @onready var jumpList = $objectList/jumpBoosts
 @onready var coinList = $objectList/coins
+@onready var multiPunchList = $objectList/multiPunches
 
 
 
@@ -115,6 +117,7 @@ func _process(delta: float) -> void:
 		#currentPosition = get_global_mouse_position()
 		#timeHeld += delta
 	updateTime(delta)
+	
 	if Input.is_action_just_pressed("click"):
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
@@ -248,7 +251,14 @@ func _onSlideWallButtonUp() -> void:
 	slideWallParent.blockType = blockTypes[12]
 	slideWallList.add_child(slideWallParent)
 	place_block(slideWallParent, slideWallList, camera.position, false)
-
+func _onMultiPunchButtonUp() -> void:
+	var multiPunchInstance = multiPunch.instantiate()
+	var multiPunchParent = baseObject.instantiate()
+	multiPunchParent.add_child(multiPunchInstance)
+	multiPunchParent.blockType = blockTypes[15]
+	multiPunchList.add_child(multiPunchParent)
+	place_block(multiPunchParent, multiPunchList, camera.position, false)
+	
 func _on_exit_button_pressed() -> void:
 	# This will be the final functionality so players can navigate between menus
 	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
@@ -536,6 +546,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/jumpBoosts")
 	if blockType == "coin":
 		return get_node("objectList/coins")
+	if blockType == "multiPunch":
+		return get_node("objectList/multiPunches")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:
