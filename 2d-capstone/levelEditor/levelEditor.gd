@@ -182,7 +182,8 @@ func loadLevel():
 		"slideWalls": [slideWall, slideWallList, blockTypes[12]],
 		"powerups": [powerup, powerupList, blockTypes[1]],
 		"jumpBoosts": [jumpBoost, jumpList, blockTypes[13]],
-		"coins": [coin, coinList, blockTypes[14]]}
+		"coins": [coin, coinList, blockTypes[14]],
+		"multiPunches": [multiPunch, multiPunchList, blockTypes[15]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]

@@ -42,12 +42,11 @@ ziplines
 placers
 slideWalls
 powerups
-950, 550,
 875, 300,
-950, 550,
-950, 550,
-950, 550,
+1000, 400,
 jumpBoosts
 coins
 225, 575,
 550, 375,
+multiPunches
+725, 550, 750, 475, 750, 425, 750, 375,
