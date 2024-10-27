@@ -106,6 +106,7 @@ func _physics_process(delta: float) -> void:
 				is_hanging = false
 				camera.smooth_pan_to(self.global_position.y + -50)
 				Globals.resetCamera = false
+				jumpInProgress = false
 			
 			# Add the gravity.
 			if not is_on_floor():
@@ -139,8 +140,10 @@ func _physics_process(delta: float) -> void:
 
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
-				jumpInProgress = true
 				velocity.y = JUMP_VELOCITY
+
+			if Input.is_action_just_released(jump) and not jumpInProgress:
+				velocity.y = 0
 
 			if Input.is_action_just_pressed(slide):
 				get_node("Hitbox").scale *= Vector2(1, 0.5);
