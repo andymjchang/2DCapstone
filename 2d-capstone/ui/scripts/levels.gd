@@ -31,6 +31,6 @@ func fillAudioScroll() -> void:
 			
 func _on_button_pressed(fileName) -> void:
 	Globals.curFile = fileName
-	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+	Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 			
 	

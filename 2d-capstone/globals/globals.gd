@@ -98,7 +98,7 @@ func FadeOut(sceneFileName : String):
 func FadeTransition(sceneFileName : String):
 	# Chain the transitions together
 	var tween = create_tween()
-	tween.tween_property(vignette.material, "shader_parameter/inner_radius", -1.2, 0.5)
+	tween.tween_property(vignette.material, "shader_parameter/inner_radius", -1.5, 0.5)
 	tween.tween_property(glitch.material, "shader_parameter/shake_power", 0.3, 0.25)
 	tween.tween_property(glitch.material, "shader_parameter/fade", 0.01, 0.25)
 	tween.tween_interval(0.1)  # Optional small pause between transitions

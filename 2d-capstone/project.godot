@@ -45,6 +45,7 @@ pulsingObjects=""
 musicSounds=""
 playerSounds=""
 levelMusicSounds=""
+blocks=""
 
 [input]
 

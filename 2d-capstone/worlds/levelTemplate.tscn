@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=33 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -15,28 +15,29 @@
 [ext_resource type="PackedScene" uid="uid://u4osldlbr3sl" path="res://worldObjects/zipline/ziplineManager.tscn" id="11_mqtla"]
 [ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="12_jtaw1"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="13_euntf"]
-[ext_resource type="PackedScene" path="res://worldObjects/jumpBoost.tscn" id="13_iujdl"]
+[ext_resource type="PackedScene" uid="uid://b8v38gkay1bem" path="res://worldObjects/jumpBoost.tscn" id="13_iujdl"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
-[ext_resource type="PackedScene" path="res://worldObjects/zipline/ziplineMiddle.tscn" id="14_jwoui"]
+[ext_resource type="PackedScene" uid="uid://dchr6kx2lhuq5" path="res://worldObjects/zipline/ziplineMiddle.tscn" id="14_jwoui"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
-[ext_resource type="PackedScene" path="res://worldObjects/coin.tscn" id="15_4qhng"]
+[ext_resource type="PackedScene" uid="uid://djj8kajulhmho" path="res://worldObjects/coin.tscn" id="15_4qhng"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="Script" path="res://worlds/score.gd" id="15_mx364"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
+[ext_resource type="Script" path="res://ui/scripts/visualizer.gd" id="18_0o0nt"]
 [ext_resource type="AudioStream" uid="uid://cwunsxkx78vcj" path="res://audioTracks/Tutorial_New_155bpm.mp3" id="18_44qgl"]
-[ext_resource type="PackedScene" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
+[ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
-[ext_resource type="PackedScene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
-[ext_resource type="PackedScene" path="res://ui/powerupSlot.tscn" id="25_wa2am"]
+[ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
+[ext_resource type="PackedScene" uid="uid://bo0d4wxsgmli1" path="res://ui/powerupSlot.tscn" id="25_wa2am"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rypfk"]
 size = Vector2(12, 1086)
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
-levelFile = "verttest"
+levelFile = "Lvl1.4"
 platformBlockInstance = ExtResource("2_78xmt")
 goalBlockInstance = ExtResource("3_oih58")
 killFloorInstance = ExtResource("3_6me16")
@@ -74,6 +75,11 @@ text = "00000"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("15_mx364")
+increasedScale = Vector2(1, 1.5)
+
+[node name="Visualizer" type="Node2D" parent="CanvasLayer"]
+position = Vector2(772, 25)
+script = ExtResource("18_0o0nt")
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2(250, 645)
@@ -93,7 +99,6 @@ position = Vector2(0, 120)
 position = Vector2(-960, -540)
 stream = ExtResource("18_44qgl")
 max_distance = 10000.0
-bus = &"levelMusic"
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
 position = Vector2(-598, -502)

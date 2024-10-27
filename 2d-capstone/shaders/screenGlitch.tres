@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://buwusfo7l4xkn"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b1u8t6hm0lac3"]
 
 [ext_resource type="Shader" path="res://shaders/screenGlitch.gdshader" id="1_w2fly"]
 

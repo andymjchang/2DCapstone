@@ -7,9 +7,9 @@ var lerpDuration = 1.0  # Default duration in seconds, can be customized
 var lerpProgress = 0.0
 
 # New variables for pulsing
-@export var timingScale = 1
-@export var increasedScale = Vector2(1.0, 1.5)
+@export var increasedScale = Vector2(1.2, 1.2)
 @onready var originalScale = scale
+var lerpFactor = 0.0
 var pulseLerpFactor = 0.0
 
 func _ready() -> void:
@@ -31,6 +31,10 @@ func _process(delta: float) -> void:
 	
 	processBeat(delta)
 
+	# Add pulsing effect
+	scale = lerp(scale, originalScale, lerpFactor)
+	lerpFactor = min(lerpFactor + delta * 2, 1)
+
 func lerpText(score: int, duration: float = 1.0):
 	targetScore = float(score)
 	currentScore = float(text) if text.is_valid_int() else 0
@@ -40,6 +44,13 @@ func lerpText(score: int, duration: float = 1.0):
 	lerping = true
 	startPulse()
 	
+	# Trigger pulse effect
+	startPulse()
+
+# New function for pulsing
+func startPulse():
+	scale = increasedScale
+	lerpFactor = 0.0
 
 func smoothstep(edge0: float, edge1: float, x: float) -> float:
 	var t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0)
@@ -52,6 +63,6 @@ func processBeat(delta: float) -> void:
 	scale = lerp(scale, originalScale, pulseLerpFactor)
 	pulseLerpFactor = min(pulseLerpFactor + delta * 2, 1)
 
-func startPulse():
-	scale = increasedScale
-	pulseLerpFactor = 0.0
+# func startPulse():
+# 	scale = increasedScale
+# 	pulseLerpFactor = 0.0
