@@ -30,7 +30,7 @@ func _scoreIncrease() -> void:
 	#enemy has died
 	self.value = self.value + 1
 	enemiesHit+=1
-	Globals.percetageHit = (enemiesHit/numEnemies) * 100
+	Globals.percentageHit = (enemiesHit/numEnemies) * 100
 	print("making it to score incerase")
 	
 	

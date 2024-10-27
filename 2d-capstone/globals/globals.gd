@@ -27,7 +27,7 @@ var coinsCollected = 0.0
 var numBarelys = 0.0
 var numPerfects = 0.0
 var numGoods = 0.0
-var percetageHit = 0.0
+var percentageHit = 0.0
 var endScore = 0.0
 var gameOver = false 
 
@@ -110,4 +110,4 @@ func restartLevelData() -> void:
 	numPerfects = 0.0
 	endScore = 0.0
 	coinsCollected = 0.0
-	percetageHit = 0.0
+	percentageHit = 0.0
