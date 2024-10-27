@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://uxlkwamlw0b1"]
+[gd_scene load_steps=6 format=3 uid="uid://cvsgm7etkow3e"]
 
 [ext_resource type="Script" path="res://levelEditorObjects/multiPunchEnemyScene.gd" id="1_g4v4i"]
 [ext_resource type="Texture2D" uid="uid://cxdhrplc2qstb" path="res://worldObjects/assets/singleBot.png" id="2_6x0kw"]

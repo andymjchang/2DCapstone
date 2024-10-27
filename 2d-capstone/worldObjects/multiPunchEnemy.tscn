@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpn3bm1tqg6fk"]
+[gd_scene load_steps=3 format=3 uid="uid://7u3l2y4rsgik"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/multiPunchEnemy.gd" id="1_ateg4"]
 [ext_resource type="PackedScene" uid="uid://lc6sx7h55k1p" path="res://worldObjects/enemy/enemy.tscn" id="2_ewehu"]

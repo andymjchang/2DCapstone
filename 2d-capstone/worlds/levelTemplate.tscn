@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=33 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -22,23 +22,22 @@
 [ext_resource type="PackedScene" path="res://worldObjects/coin.tscn" id="15_4qhng"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="Script" path="res://worlds/score.gd" id="15_mx364"]
-[ext_resource type="PackedScene" uid="uid://cpn3bm1tqg6fk" path="res://worldObjects/multiPunchEnemy.tscn" id="16_cwkxd"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
+[ext_resource type="Script" path="res://ui/scripts/visualizer.gd" id="18_0o0nt"]
 [ext_resource type="AudioStream" uid="uid://cwunsxkx78vcj" path="res://audioTracks/Tutorial_New_155bpm.mp3" id="18_44qgl"]
 [ext_resource type="PackedScene" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
 [ext_resource type="PackedScene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
 [ext_resource type="PackedScene" uid="uid://ddx53vf6dn1ey" path="res://ui/powerupSlot.tscn" id="25_wa2am"]
-[ext_resource type="Script" path="res://ui/scripts/visualizer.gd" id="31_wssgq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rypfk"]
 size = Vector2(12, 1086)
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_fl71r")
-levelFile = "verttest"
+levelFile = "Lvl1.4"
 platformBlockInstance = ExtResource("2_78xmt")
 goalBlockInstance = ExtResource("3_oih58")
 killFloorInstance = ExtResource("3_6me16")
@@ -53,7 +52,6 @@ powerupInstance = ExtResource("19_5vjyv")
 jumpInstance = ExtResource("13_iujdl")
 ziplineMiddle = ExtResource("14_jwoui")
 coinInstance = ExtResource("15_4qhng")
-multiPunchInstance = ExtResource("16_cwkxd")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -68,8 +66,7 @@ theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 offset_left = 743.0
 offset_top = 132.0
 offset_right = 1193.0
-offset_bottom = 316.0
-pivot_offset = Vector2(225, 92)
+offset_bottom = 315.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("12_jtaw1")
@@ -80,8 +77,8 @@ vertical_alignment = 1
 script = ExtResource("15_mx364")
 
 [node name="Visualizer" type="Node2D" parent="CanvasLayer"]
-position = Vector2(772, -73)
-script = ExtResource("31_wssgq")
+position = Vector2(772, 25)
+script = ExtResource("18_0o0nt")
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2(250, 645)
@@ -156,8 +153,6 @@ script = ExtResource("14_rbu47")
 [node name="jumpBoosts" type="Node2D" parent="objectList"]
 
 [node name="coins" type="Node2D" parent="objectList"]
-
-[node name="multiPunches" type="Node2D" parent="objectList"]
 
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 
