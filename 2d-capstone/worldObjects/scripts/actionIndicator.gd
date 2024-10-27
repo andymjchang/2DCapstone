@@ -89,6 +89,7 @@ func resetAnimation(newPos) -> void :
 	outer_circle.scale = starting_scale
 	outer_circle.modulate.a = 0.0
 	inner_circle.modulate.a = 0.0
-	
-	get_tree().current_scene.get_node("objectList/actionIndicators").startingIndex -= 1
+	outer_circle.texture = load("res://worldObjects/assets/circle.png")
+	fadeOut = false
+	get_tree().current_scene.get_node("objectList/actionIndicators").starting_index -= 1
 	

@@ -17,3 +17,4 @@ func _process(delta: float) -> void:
 func moveToNext() -> void:
 	enemy.global_position = actionIndicatorLocations[index]
 	index+=1
+	self.get_node("Enemy/ActionIndicator").resetAnimation(actionIndicatorLocations[index]) 

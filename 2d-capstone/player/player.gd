@@ -51,6 +51,9 @@ var glitchLines
 var camera
 var coins = 0
 
+var slideFriction = 0.999
+var isSliding = false
+
 #soundEffects
 @onready var punchSfx = load("res://audioEffects/Punch.mp3") as AudioStream
 @onready var healthSfx = load("res://audioEffects/SFX_HealthItem_temp.mp3") as AudioStream
@@ -130,12 +133,15 @@ func _physics_process(delta: float) -> void:
 				# velocity.x = Globals.pixelsPerFrame
 				# Pseudo-autoscroll prototype
 				var direction = Input.get_axis(left, right)
-				if not hitBounds and direction > 0:
+				if not hitBounds and direction > 0 and !isSliding:
 					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0:
+				elif hitBounds and direction > 0 and !isSliding:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-				else:
+				elif !isSliding:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+
+			if Input.is_action_pressed(slide):
+				velocity.x *= slideFriction
 
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
@@ -146,6 +152,7 @@ func _physics_process(delta: float) -> void:
 				get_node("Hitbox").scale *= Vector2(1, 0.5);
 				get_node("Hitbox").position.y = 6
 				$Animation.play("Slide");
+				isSliding = true
 				#get_node("Floor").disabled = false
 				var rotDir = Globals.get_random_sign()
 				tweenRot = create_tween()
@@ -159,6 +166,7 @@ func _physics_process(delta: float) -> void:
 				get_node("Hitbox").position.y = 2
 				$Animation.play("Run");
 				#get_node("Floor").disabled = true
+				isSliding = false
 				tweenRot = create_tween()
 				tweenZoom = create_tween()
 				tweenRot.tween_property(camera, "rotation", 0, 0.2)
@@ -190,7 +198,7 @@ func _physics_process(delta: float) -> void:
 		elif reachedCheckpoint:
 			pass
 		move_and_slide()
-		if position.x > camera.position.x - 250:
+		if position.x > camera.position.x - 250 and !isSliding:
 			position.x = camera.position.x - 244
 	else:
 		invuln = true

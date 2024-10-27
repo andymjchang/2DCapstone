@@ -26,6 +26,7 @@ player
 0, 540,
 enemies
 675, 200,
+1350, 575,
 killFloors
 1250, 225,
 goalBlocks
@@ -42,4 +43,4 @@ jumpBoosts
 coins
 550, 375,
 multiPunches
-700, 550, 800, 575, 900, 575, 975, 575,
+700, 550, 800, 575, 850, 575, 900, 575,
