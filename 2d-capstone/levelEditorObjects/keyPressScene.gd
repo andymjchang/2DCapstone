@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 
 
 func _input(event):
-	var eventName = event.as_text()
+	var eventName = event.as_text().to_lower()
 	var pathToTarget = keyFolderPath
 	if event is InputEventKey:# and # get_tree().current_scene.currentBlock.index == get_parent().index:
 		var dir = DirAccess.open(keyFolderPath)
