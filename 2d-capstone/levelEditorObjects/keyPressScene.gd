@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 func _input(event):
 	var eventName = event.as_text().to_lower()
 	var pathToTarget = keyFolderPath
-	if event is InputEventKey:# and # get_tree().current_scene.currentBlock.index == get_parent().index:
+	if event is InputEventKey and get_tree().current_scene.currentBlock.index == get_parent().index:
 		var dir = DirAccess.open(keyFolderPath)
 		dir.list_dir_begin()
 		var curFileName = dir.get_next()
@@ -27,6 +27,11 @@ func _input(event):
 				pathToTarget += "/"+curFileName
 				var newImage = load(pathToTarget)
 				self.get_node("Node2D/Sprite2D").texture = newImage
+				#set the size of the image
+				
+				var colShape = get_node("Node2D/EditorArea0/CollisionShape2D").shape as RectangleShape2D
+				var newSize = colShape.extents *2.0
+				self.get_node("Node2D/Sprite2D").scale = newSize /( self.get_node("Node2D/Sprite2D").texture.get_size()  )
 			curFileName = dir.get_next()
 	#if event is InputEventJoypadButton and get_tree().current_scene.currentBlock.index == get_parent().index:
 		#pass

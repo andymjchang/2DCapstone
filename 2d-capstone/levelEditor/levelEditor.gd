@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "multiPunch"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "multiPunch"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -54,6 +54,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var jumpBoost : PackedScene
 @export var coin : PackedScene
 @export var multiPunch : PackedScene
+@export var keyBinding : PackedScene
 
 
 @onready var objectList = $objectList
@@ -74,6 +75,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var jumpList = $objectList/jumpBoosts
 @onready var coinList = $objectList/coins
 @onready var multiPunchList = $objectList/multiPunches
+@onready var keyBindingList = $objectList/keyBindings
 
 
 
@@ -236,7 +238,14 @@ func _on_p1checkpoint_button_pressed() -> void:
 	p1checkpointsList.add_child(checkParent)
 	place_block(checkParent, p1checkpointsList, camera.position, false)
 
-	
+func _onKeyBindingButtonUp() -> void:
+	var kbInstance = keyBinding.instantiate()
+	var kbParent = baseObject.instantiate()
+	kbParent.add_child(kbInstance)
+	kbParent.blockType = blockTypes[15]
+	keyBindingList.add_child(kbParent)
+	place_block(kbParent, keyBindingList, camera.position, false)
+
 func _onZiplineButtonPressed() -> void:
 	var ziplineInstance = zipline.instantiate()
 	var zipParent = baseObject.instantiate()
@@ -256,7 +265,7 @@ func _onMultiPunchButtonUp() -> void:
 	var multiPunchInstance = multiPunch.instantiate()
 	var multiPunchParent = baseObject.instantiate()
 	multiPunchParent.add_child(multiPunchInstance)
-	multiPunchParent.blockType = blockTypes[15]
+	multiPunchParent.blockType = blockTypes[16]
 	multiPunchList.add_child(multiPunchParent)
 	place_block(multiPunchParent, multiPunchList, camera.position, false)
 	
@@ -409,12 +418,15 @@ func save_scene_to_file():
 						var editorName = "EditorArea"+str(index)
 						var posChain = ""
 						#go through all of the individual block components
+						#TODO deligate this to the children not here
 						for blockChild in childrenList:
 							#saving for platfrom block differs since their size varies#
 							#TODO I dont want to do this, delegate this work to the child class
 							if itemList.name == "platformBlocks":
 								#save the number of cols as well as the extents so we know where to start drawing	
-								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", " 
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", "
+							elif itemList.name == "keyBindings":
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+ str(blockChild.get_parent().get_parent().pathToTarget)
 							else:
 								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
 							index+=1
@@ -506,7 +518,7 @@ func reset_drag_tracking():
 
 func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 	trackingPosition = true
-	print("blockType: ", blockType)
+	print("blockType!!: ", blockType)
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
@@ -549,6 +561,9 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/coins")
 	if blockType == "multiPunch":
 		return get_node("objectList/multiPunches")
+	if blockType == "keyBinding":
+		print("making it here ohohoho")
+		return get_node("objectList/keyBindings")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:

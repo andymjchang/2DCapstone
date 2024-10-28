@@ -48,7 +48,7 @@ func _process(delta: float) -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, areaName, areaParent) -> void:
 	if "player" not in blockType:
 		if event.is_action_pressed("click") and checkOrder():
-			self.get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType,curAreaDragging)
+			get_tree().current_scene.emit_signal("objectClicked",index, blockType,curAreaDragging)
 			#if clickResult:
 			if true:
 			#this will be the path to area2d given that we have the scene object
@@ -76,6 +76,7 @@ func setArea2D():
 	#given a scene object, go through all of its individual major components
 	for blockChild in childrenList:
 		#grab each compents area2d
+		print("setting area 2d: ", blockType)
 		var newArea = blockChild.get_node("Area2D")
 		blockChild.get_node("Area2D").name = "EditorArea"+str(nameIndex)
 		#give them each a unique name
