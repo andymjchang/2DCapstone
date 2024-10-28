@@ -91,8 +91,6 @@ func decreaseByOneTile() -> void:
 func setTileMaps(posPoints : Array):
 	
 	if posPoints.size() >= 3:
-		print("num Cols", posPoints[2])
-		print("setting tile map")
 		if posPoints[2] < numCols:
 			while numCols > posPoints[2]+1:
 				self.decreaseByOneTile()

@@ -32,6 +32,7 @@ var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
 var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 
+
 @export var p1Placer : PackedScene
 @export var p2Placer : PackedScene
 @export var actionIndicator : PackedScene
@@ -55,6 +56,31 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var coin : PackedScene
 @export var multiPunch : PackedScene
 @export var keyBinding : PackedScene
+
+#block variants list
+@onready var enemyType = {"enemy" : enemyCharacter, "slide" : enemyCharacter}
+@onready var platformType = ["rustic", "city"]
+@onready var instructionType = ["punch", "slide", "jump", "activate"]
+@onready var gameObjectType = {"checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin}
+
+@onready var typeArrays = { "enemyType" : {"enemy" : enemyCharacter, "slide" : enemyCharacter},
+							"platformType" : ["rustic", "city"],
+							"instructionType" : ["punch", "slide", "jump", "activate"],
+							"gameObjectType" : {"checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin} }
+#var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "multiPunch"]
+@onready var typeMap = {blockTypes[1]: "gameObjectType",
+						blockTypes[2]: "platformType",
+						blockTypes[3]: "gameObjectType",
+						blockTypes[4]: "gameObjectType",
+						blockTypes[5]: "enemyType",
+						blockTypes[6]: "gameObjectType",
+						blockTypes[7]: "gameObjectType",
+						blockTypes[9]: "gameObjectType",
+						blockTypes[10]: "gameObjectType",
+						blockTypes[12]: "gameObjectType",
+						blockTypes[13]: "gameObjectType",
+						blockTypes[14]: "gameObjectType",
+						blockTypes[15]: "instructionType"}
 
 
 @onready var objectList = $objectList
@@ -120,6 +146,18 @@ func _process(delta: float) -> void:
 		#timeHeld += delta
 	updateTime(delta)
 	
+	if Input.is_action_just_pressed("tab"):
+		#we want to go through the list of objects for current block
+		#TODO add binded block functionality later
+		if !isBinding and currentBlock:
+			#grab the list of similiar types
+			#TODO add a check here to see if this is a valid grab
+			print("am tabbing")
+			var curTypeName = typeMap[currentBlock.blockType]
+			print("cur type name: ", curTypeName)
+			var curTypeList = typeArrays[curTypeName]
+			print("cur type list: ", curTypeList)
+			currentBlock.tabType(curTypeList, curTypeName)
 	if Input.is_action_just_pressed("click"):
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
@@ -159,8 +197,6 @@ func _on_text_edit_2_text_changed() -> void:
 		var step = int(stepLabel.text)
 		if (step < MIN_STEP):
 			step = MIN_STEP
-		#if currentBlock and currentBlock.blockType == "actionIndicator" or currentBlock.blockType == "enemy":
-			#step = MIN_STEP
 		stepSize = step
 		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
@@ -520,7 +556,6 @@ func reset_drag_tracking():
 
 func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 	trackingPosition = true
-	print("blockType!!: ", blockType)
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
@@ -564,7 +599,6 @@ func getList(blockType : String) -> Node:
 	if blockType == "multiPunch":
 		return get_node("objectList/multiPunches")
 	if blockType == "keyBinding":
-		print("making it here ohohoho")
 		return get_node("objectList/keyBindings")
 	return null
 	

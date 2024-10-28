@@ -135,3 +135,28 @@ func setImage(posPoints):
 	if get_child(0).has_method("setImage"):
 		get_child(0).setImage(posPoints)
 	
+
+func tabType(typeOptions, typeName) -> void:
+	var curIndex = 0
+	var keyList
+	var newObjectKey
+	var newObject
+	if typeName == "platformType":
+		#we just want to change the tile map that is active
+		pass
+	elif typeName == "enemyType":
+		pass
+	elif typeName == "instructionType":
+		pass
+	elif typeName == "gameObjectType":
+		#get the index of where we are in the list and move forward vy one
+		keyList = typeOptions.keys()
+		curIndex = keyList.find(blockType)
+		print("index in list: ",curIndex )
+		newObjectKey = keyList[curIndex+1] if curIndex+1 < keyList.size()-1 else keyList[0]
+		print("newKey ", newObjectKey)
+		newObject = typeOptions[newObjectKey].instantiate()
+		self.get_child(0).queue_free()
+		self.add_child(newObject)
+		self.move_child(newObject, 0)
+		

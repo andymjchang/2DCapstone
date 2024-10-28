@@ -39,9 +39,9 @@ func _input(event):
 func setImage(posPoints):
 	if posPoints.size() > 2:
 		print("image path: ", posPoints[2])
-		var newImage = load(posPoints[2])
-		self.get_node("Node2D/Sprite2D").texture = newImage
-		#set the size of the image
-		var colShape = get_node("Node2D/EditorArea0/CollisionShape2D").shape as RectangleShape2D
-		var newSize = colShape.extents * 2.0
-		self.get_node("Node2D/Sprite2D").scale = newSize /( self.get_node("Node2D/Sprite2D").texture.get_size()  )
+		#var newImage = load(posPoints[2])
+		#self.get_node("Node2D/Sprite2D").texture = newImage
+		##set the size of the image
+		#var colShape = get_node("Node2D/EditorArea0/CollisionShape2D").shape as RectangleShape2D
+		#var newSize = colShape.extents * 2.0
+		#self.get_node("Node2D/Sprite2D").scale = newSize /( self.get_node("Node2D/Sprite2D").texture.get_size()  )
