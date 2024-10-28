@@ -201,7 +201,6 @@ func _onTakeDamage(amount):
 	$damagePlayer.play()
 	
 	# Glitch Shader
-	$GlitchShader.visible = true
 	$damagedTimer.start()
 	
 	if !invuln:
@@ -324,7 +323,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 
 
 func _on_damaged_timer_timeout() -> void:
-	$GlitchShader.visible = false
+	pass
 
 
 func _onPowerupTimerTimeout() -> void:
