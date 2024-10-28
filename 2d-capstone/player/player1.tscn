@@ -17,9 +17,12 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3fn7t"]
 shader = ExtResource("2_75si5")
 shader_parameter/flash_speed = 2.0
+shader_parameter/damage_flash_speed = 20.0
 shader_parameter/rainbow_saturation = 0.8
 shader_parameter/rainbow_value = 1.0
-shader_parameter/flash_intensity = 0.0
+shader_parameter/invulnerable_intensity = 0.0
+shader_parameter/damage_intensity = 0.0
+shader_parameter/damage_color = Color(1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gk61f"]
 atlas = ExtResource("2_hwmte")
