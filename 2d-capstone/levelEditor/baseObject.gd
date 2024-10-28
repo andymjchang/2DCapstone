@@ -131,3 +131,7 @@ func setTileMaps(posPoints : Array) -> void:
 		get_child(0).setTileMaps(posPoints)
 	pass
 	
+func setImage(posPoints):
+	if get_child(0).has_method("setImage"):
+		get_child(0).setImage(posPoints)
+	

@@ -23,6 +23,7 @@ signal changeSpeed(speedType)
 @export var ziplineMiddle : PackedScene
 @export var coinInstance : PackedScene
 @export var multiPunchInstance : PackedScene
+@export var keyBindingInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -39,6 +40,7 @@ signal changeSpeed(speedType)
 @onready var jumpBoostList = $objectList/jumpBoosts
 @onready var coinList = $objectList/coins
 @onready var multiPunchList = $objectList/multiPunches
+@onready var keyBindingList = $objectList/keyBindings
 
 var player1 
 var killWall
@@ -190,7 +192,8 @@ func loadLevel():
 		"powerups": [powerupInstance, powerupList],
 		"jumpBoosts": [jumpInstance, jumpBoostList],
 		"coins": [coinInstance, coinList],
-		"multiPunches": [multiPunchInstance, multiPunchList]}
+		"multiPunches": [multiPunchInstance, multiPunchList],
+		"keyBindings":[keyBindingInstance, keyBindingList]}
 	var instance
 	var instanceParent
 	var name = ""
@@ -240,6 +243,8 @@ func loadLevel():
 					#var actionInd = actionIndicatorInstance.instantiate()
 					#actionIndicatorsList.add_child(actionInd)
 					#actionInd.global_position = Vector2(posPoints[xIndex + i], posPoints[yIndex + i])
+			if name == "keyBindings":
+				instancedObj.setImage(posPoints)
 			
 		elif ".mp3" in line:
 			# audio file

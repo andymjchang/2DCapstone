@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=34 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" path="res://worldObjects/coin.tscn" id="15_4qhng"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="Script" path="res://worlds/score.gd" id="15_mx364"]
+[ext_resource type="PackedScene" uid="uid://bey14qtr0uw3o" path="res://worldObjects/keyBinding.tscn" id="16_5ehlb"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
 [ext_resource type="Script" path="res://ui/scripts/visualizer.gd" id="18_0o0nt"]
@@ -52,6 +53,7 @@ powerupInstance = ExtResource("19_5vjyv")
 jumpInstance = ExtResource("13_iujdl")
 ziplineMiddle = ExtResource("14_jwoui")
 coinInstance = ExtResource("15_4qhng")
+keyBindingInstance = ExtResource("16_5ehlb")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -153,6 +155,8 @@ script = ExtResource("14_rbu47")
 [node name="jumpBoosts" type="Node2D" parent="objectList"]
 
 [node name="coins" type="Node2D" parent="objectList"]
+
+[node name="keyBindings" type="Node2D" parent="objectList"]
 
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 
