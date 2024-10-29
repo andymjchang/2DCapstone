@@ -63,7 +63,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var instructionType = ["punch", "slide", "jump", "activate"]
 @onready var gameObjectType = {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin}
 
-@onready var typeArrays = { "enemyType" : {"enemy" : enemyCharacter, "slide" : enemyCharacter},
+@onready var typeArrays = { "enemyType" : ["enemy", "slideEnemy"],
 							"platformType" : ["rustic", "city"],
 							"instructionType" : ["punch", "slide", "jump", "activate"],
 							"gameObjectType" : {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin} }

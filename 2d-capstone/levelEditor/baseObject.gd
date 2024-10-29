@@ -149,7 +149,10 @@ func tabType(typeOptions, typeName) -> void:
 		
 		pass
 	elif typeName == "enemyType":
-		pass
+		curIndex = typeOptions.find(self.get_child(0).enemyType)
+		var newEnemyType = typeOptions[curIndex+1] if curIndex+1 <= typeOptions.size()-1 else typeOptions[0]
+		self.get_child(0).setEnemyType(newEnemyType)
+		
 	elif typeName == "instructionType":
 		curIndex = typeOptions.find(self.get_child(0).instructionType)
 		var newInstructionType = typeOptions[curIndex+1] if curIndex+1 <= typeOptions.size()-1 else typeOptions[0]
