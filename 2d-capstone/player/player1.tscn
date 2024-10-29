@@ -293,7 +293,7 @@ script = ExtResource("8_socwb")
 increasedScale = Vector2(0.03, 0.03)
 
 [node name="attackTimer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.75
 one_shot = true
 
 [node name="sfxPlayer" type="AudioStreamPlayer2D" parent="." groups=["playerSounds"]]
