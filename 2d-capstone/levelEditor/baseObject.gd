@@ -150,13 +150,23 @@ func tabType(typeOptions, typeName) -> void:
 		pass
 	elif typeName == "gameObjectType":
 		#get the index of where we are in the list and move forward vy one
+		var currentScene = get_tree().current_scene
+		var listToRemoveFrom = currentScene.getList(currentScene.currentBlock.blockType).get_children()
+		for block in listToRemoveFrom:
+			if block.index == currentScene.currentBlock.index:
+				listToRemoveFrom.erase(block)
 		keyList = typeOptions.keys()
+		print("key list, ", keyList)
+		print("block type: ", blockType)
 		curIndex = keyList.find(blockType)
 		print("index in list: ",curIndex )
-		newObjectKey = keyList[curIndex+1] if curIndex+1 < keyList.size()-1 else keyList[0]
+		newObjectKey = keyList[curIndex+1] if curIndex+1 <= keyList.size()-1 else keyList[0]
 		print("newKey ", newObjectKey)
 		newObject = typeOptions[newObjectKey].instantiate()
+		var listToAddToo = currentScene.getList(newObjectKey)
+		listToAddToo.add_child(self)
 		self.get_child(0).queue_free()
 		self.add_child(newObject)
-		self.move_child(newObject, 0)
+		blockType = newObjectKey
+		#self.move_child(newObject, 0)
 		

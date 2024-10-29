@@ -61,12 +61,12 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var enemyType = {"enemy" : enemyCharacter, "slide" : enemyCharacter}
 @onready var platformType = ["rustic", "city"]
 @onready var instructionType = ["punch", "slide", "jump", "activate"]
-@onready var gameObjectType = {"checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin}
+@onready var gameObjectType = {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin}
 
 @onready var typeArrays = { "enemyType" : {"enemy" : enemyCharacter, "slide" : enemyCharacter},
 							"platformType" : ["rustic", "city"],
 							"instructionType" : ["punch", "slide", "jump", "activate"],
-							"gameObjectType" : {"checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin} }
+							"gameObjectType" : {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin} }
 #var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "multiPunch"]
 @onready var typeMap = {blockTypes[1]: "gameObjectType",
 						blockTypes[2]: "platformType",
