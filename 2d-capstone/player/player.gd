@@ -61,6 +61,11 @@ var coins = 0
 @onready var tweenSlide : Tween
 @onready var tweenHit : Tween
 
+# Add these variables near the top with other variables
+var shake_strength = 30.0
+var shake_decay = 5.0
+var shake_intensity = 0.0
+
 func _ready():
 	curSprite = get_node("Animation").duplicate()
 	add_to_group("players")
@@ -97,6 +102,15 @@ func _ready():
 	background.global_position = camera.global_position
 
 func _physics_process(delta: float) -> void:
+	if shake_intensity > 0:
+		shake_intensity = lerpf(shake_intensity, 0, shake_decay * delta)
+		camera.offset = Vector2(
+			randf_range(-shake_intensity, shake_intensity),
+			randf_range(-shake_intensity, shake_intensity)
+		)
+	else:
+		camera.offset = Vector2.ZERO
+		
 	if not editing:
 		if not inZipline:
 			# Lines
@@ -196,6 +210,7 @@ func _physics_process(delta: float) -> void:
 
 func _onTakeDamage(amount):
 	$damagePlayer.play()
+	shake_camera() # Add camera shake when taking damage
 	
 	# Glitch Shader
 	$damagedTimer.start()
@@ -372,3 +387,7 @@ func PunchTween():
 	tweenHit = create_tween()
 	tweenHit.tween_property(camera, "rotation", 0, 0.15)
 	tweenHit.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
+
+# Add this new function
+func shake_camera(strength: float = 30.0):
+	shake_intensity = strength
