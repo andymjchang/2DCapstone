@@ -9,6 +9,8 @@ var spriteParent = null
 var curAreaDragging = null
 var curAreaDraggingParent = null
 var curArea = null
+var platformType = "rustic"
+var instructionType = "punch"
 @onready var childrenList = self.get_child(0).get_children()
 var spriteInScene = false
 
@@ -144,10 +146,15 @@ func tabType(typeOptions, typeName) -> void:
 	var newObject
 	if typeName == "platformType":
 		#we just want to change the tile map that is active
+		
 		pass
 	elif typeName == "enemyType":
 		pass
 	elif typeName == "instructionType":
+		curIndex = typeOptions.find(self.get_child(0).instructionType)
+		var newInstructionType = typeOptions[curIndex+1] if curIndex+1 <= typeOptions.size()-1 else typeOptions[0]
+		self.get_child(0).setInstructionType(newInstructionType)
+		#we have the new instruction type 
 		pass
 	elif typeName == "gameObjectType":
 		#get the index of where we are in the list and move forward vy one
@@ -158,23 +165,16 @@ func tabType(typeOptions, typeName) -> void:
 			if block.index == currentScene.currentBlock.index:
 				currentScene.getList(currentScene.currentBlock.blockType).get_children().erase(block)
 		keyList = typeOptions.keys()
-		print("key list, ", keyList)
-		print("block type: ", blockType)
 		curIndex = keyList.find(blockType)
-		print("index in list: ",curIndex )
 		newObjectKey = keyList[curIndex+1] if curIndex+1 <= keyList.size()-1 else keyList[0]
-		print("newKey ", newObjectKey)
 		newObject = typeOptions[newObjectKey].instantiate()
 		var listToAddToo = currentScene.getList(newObjectKey)
 		currentScene.getList(newObjectKey).add_child(self)
-		#place_block(instance, parent, placePos, initial):
-		print("before deleteing and adding new child: ", self.get_children())
 		var removeNode = self.get_child(0)
 		self.get_child(0).queue_free()
 		self.remove_child(removeNode) 
 		self.add_child(newObject)
 		self.move_child(newObject, 0)
 		blockType = newObjectKey
-		print("after deleteing and adding new child: ", self.get_children())
 		currentScene.place_block(self, listToAddToo, pos, false)
 		
