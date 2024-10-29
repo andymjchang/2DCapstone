@@ -238,7 +238,14 @@ func loadLevel():
 			var instancedObj = instance.instantiate()
 			var posPoints = []
 			for pos in line.split(", "):
-				posPoints.append(pos.to_float())
+				print("pos being added:", pos)
+				pos = pos.replace(",", "")
+				if pos.is_valid_float():
+			
+					posPoints.append(pos.to_float())
+				else:
+					posPoints.append(pos)
+			print("pos points in load: ", posPoints)
 			objectParent.add_child(instancedObj)
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
@@ -464,7 +471,8 @@ func save_scene_to_file():
 								#save the number of cols as well as the extents so we know where to start drawing	
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", "
 							elif itemList.name == "keyBindings":
-								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().pathToTarget)+", "
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().instructionType)+", "
+								print("key bidnings pso cahin", posChain)
 							else:
 								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
 							index+=1

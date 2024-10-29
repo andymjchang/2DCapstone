@@ -66,7 +66,8 @@ func setInstructionType(newInst) -> void:
 	
 func setImage(posPoints):
 	if posPoints.size() > 2:
-		print("image path: ", posPoints[2])
+		print("image name: ", posPoints[2])
+		setInstructionType(posPoints[2])
 		#var newImage = load(posPoints[2])
 		#self.get_node("Node2D/Sprite2D").texture = newImage
 		##set the size of the image

@@ -16,4 +16,4 @@ jumpBoosts
 coins
 multiPunches
 keyBindings
-100, 525, res://ui/assets/onboarding/keys,
+350, 325, jump,
