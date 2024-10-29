@@ -147,18 +147,15 @@ func _physics_process(delta: float) -> void:
 				get_node("Hitbox").position.y = 6
 				$Animation.play("Slide");
 				#get_node("Floor").disabled = false
-				tweenSlide = create_tween()
-				tweenSlide.tween_property(camera, "rotation", 0.008363323, 0.15)
-				tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.2, 2.2), 0.15)
+				SlideTweenStart()
 				
 			if Input.is_action_just_released(slide):
 				get_node("Hitbox").scale *= Vector2(1, 2);
 				get_node("Hitbox").position.y = 2
 				$Animation.play("Run");
 				#get_node("Floor").disabled = true
-				tweenSlide = create_tween()
-				tweenSlide.tween_property(camera, "rotation", 0, 0.15)
-				tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
+				SlideTweenEnd()
+
 		elif inZipline:
 			$Animation.play("Zip")
 			
@@ -173,7 +170,7 @@ func _physics_process(delta: float) -> void:
 				sfxPlayer.stream = punchSfx
 				sfxPlayer.stream.loop = false
 				sfxPlayer.play()
-				
+
 				# Technical
 				attack.monitoring = true
 				canAttack = false
@@ -256,6 +253,7 @@ func MonitorAttackHitbox(area : Area2D):
 	var other = area.get_parent()
 	if other.is_in_group("actionIndicators") and other.active and !punchConnected:
 		ResetAttack()
+		PunchTween() # Camera
 		punchConnected = true
 		Globals.screenFlashEffect()
 		other.active = false
@@ -357,3 +355,20 @@ func _onGetCoin():
 	sfxPlayer.play()
 	self.coins += 1
 	Globals.coinsCollected = self.coins
+
+func SlideTweenStart():
+	tweenSlide = create_tween()
+	tweenSlide.tween_property(camera, "rotation", 0.008363323, 0.15)
+	tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.2, 2.2), 0.15)
+
+func SlideTweenEnd():
+	tweenSlide = create_tween()
+	tweenSlide.tween_property(camera, "rotation", 0, 0.15)
+	tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
+
+func PunchTween():
+	camera.zoom = Vector2(2.025, 2.025)
+	camera.rotation = camera.rotation-0.01363323
+	tweenHit = create_tween()
+	tweenHit.tween_property(camera, "rotation", 0, 0.15)
+	tweenHit.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
