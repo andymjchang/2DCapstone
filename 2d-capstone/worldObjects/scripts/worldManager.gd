@@ -216,12 +216,16 @@ func loadLevel():
 				var endPos = Vector2(posPoints[2], posPoints[3])
 				instancedObj.get_node("ziplineStart").global_position = startPos
 				instancedObj.get_node("ziplineEnd").global_position = endPos
-				var vec1 = Vector2(endPos - startPos)
-				var vec2 = Vector2(0, 1)
+				var vec1 = instancedObj.get_node("ziplineStart/Marker2D").global_position
+				var vec2 = instancedObj.get_node("ziplineEnd/Marker2D").global_position
+				var tgtPosX = (vec1.x + vec2.x)/2
+				var tgtPosY = (vec1.y + vec2.y)/2
 				var connectLine = ziplineMiddle.instantiate()
-				connectLine.position = (startPos + endPos)/2
-				connectLine.rotation = endPos.angle_to_point(startPos)
-				connectLine.scale.x = 2
+				connectLine.position = Vector2(tgtPosX, tgtPosY)
+				connectLine.rotation = vec1.angle_to_point(vec2)
+				var defaultLen = 195
+				var tgtLen = (vec2 - vec1).length()
+				connectLine.scale.x = tgtLen / defaultLen
 				objectList.add_child(connectLine)
 				
 			if name =="platformBlocks":
