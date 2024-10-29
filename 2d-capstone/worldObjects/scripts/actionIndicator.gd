@@ -10,16 +10,11 @@ var fadeOut : bool = false
 var starting_scale
 var blockType = "actionIndicator"
 var curSprite
-var parent
-var parentSprite
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
 var index = 0
 
 func initialize():
-	parent = get_parent()
-	if parent.is_in_group("enemies"):
-		parentSprite = parent.get_node("AnimatedSprite2D")
 	
 	curSprite = get_node("innerCircle").duplicate()
 	starting_scale = Vector2(startingScale, startingScale)
@@ -57,9 +52,6 @@ func _process(_delta: float) -> void:
 	outer_circle.modulate = current_modulate
 	inner_circle.modulate = current_modulate
 	
-	if parentSprite:
-		parentSprite.modulate = lerp(startColor, endColor, t)
-	
 	# Trigger fade out when animation completes
 	if t >= 1.0:
 		FadeOut()
@@ -68,9 +60,6 @@ func _process(_delta: float) -> void:
 func FadeOut():
 	if fadeOut:
 		return
-	if parentSprite:
-		var parentTween = create_tween()
-		parentTween.tween_property(parentSprite, "modulate", startColor, 0.5)
 	
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 1.0)
