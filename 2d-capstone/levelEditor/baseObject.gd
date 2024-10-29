@@ -74,7 +74,8 @@ func _input(event: InputEvent) -> void:
 func setArea2D():
 	var nameIndex = 0
 	#given a scene object, go through all of its individual major components
-	for blockChild in childrenList:
+	print("children list: ", childrenList)
+	for blockChild in self.get_child(0).get_children():
 		#grab each compents area2d
 		print("setting area 2d: ", blockType)
 		var newArea = blockChild.get_node("Area2D")
@@ -150,11 +151,12 @@ func tabType(typeOptions, typeName) -> void:
 		pass
 	elif typeName == "gameObjectType":
 		#get the index of where we are in the list and move forward vy one
+		var pos = self.get_child(0).get_child(0).get_node("EditorArea0").global_position
 		var currentScene = get_tree().current_scene
 		var listToRemoveFrom = currentScene.getList(currentScene.currentBlock.blockType).get_children()
 		for block in listToRemoveFrom:
 			if block.index == currentScene.currentBlock.index:
-				listToRemoveFrom.erase(block)
+				currentScene.getList(currentScene.currentBlock.blockType).get_children().erase(block)
 		keyList = typeOptions.keys()
 		print("key list, ", keyList)
 		print("block type: ", blockType)
@@ -164,9 +166,15 @@ func tabType(typeOptions, typeName) -> void:
 		print("newKey ", newObjectKey)
 		newObject = typeOptions[newObjectKey].instantiate()
 		var listToAddToo = currentScene.getList(newObjectKey)
-		listToAddToo.add_child(self)
+		currentScene.getList(newObjectKey).add_child(self)
+		#place_block(instance, parent, placePos, initial):
+		print("before deleteing and adding new child: ", self.get_children())
+		var removeNode = self.get_child(0)
 		self.get_child(0).queue_free()
+		self.remove_child(removeNode) 
 		self.add_child(newObject)
+		self.move_child(newObject, 0)
 		blockType = newObjectKey
-		#self.move_child(newObject, 0)
+		print("after deleteing and adding new child: ", self.get_children())
+		currentScene.place_block(self, listToAddToo, pos, false)
 		
