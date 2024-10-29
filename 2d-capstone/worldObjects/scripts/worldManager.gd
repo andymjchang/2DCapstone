@@ -210,7 +210,11 @@ func loadLevel():
 			var posPoints = []
 			
 			for pos in line.split(", "):
-				posPoints.append(pos.to_float())
+				pos = pos.replace(",", "")
+				if pos.is_valid_float():
+					posPoints.append(pos.to_float())
+				else:
+					posPoints.append(pos)
 				
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
 			instanceParent.add_child(instancedObj)

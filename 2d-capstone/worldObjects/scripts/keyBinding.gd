@@ -4,6 +4,11 @@ var pathToImage = ""
 var imageName = ""
 @onready var sprite = $Sprite2D
 
+@onready var punchImage = preload("res://ui/assets/onboarding/punchGraphic.png")
+@onready var slideImage = preload("res://ui/assets/slide.webp")
+@onready var activateImage = preload("res://ui/assets/onboarding/activateGraphic.png")
+@onready var jumpImage = preload("res://ui/assets/onboarding/jumpGraphic.png")
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -15,9 +20,14 @@ func _process(delta: float) -> void:
 
 func setImage(posPoints : Array) -> void:
 	if posPoints.size() > 2.0:
-		var path = posPoints[2]
-		pathToImage = path
-		#var endFile = path.get_file()
-		#imageName = endFile.get_basename()
-		#sprite.texture = load(path)
-		
+		var instructionType = posPoints[2]
+		print("in world object pos poinst: ", posPoints)
+		match instructionType:
+			"punch":
+				sprite.texture = punchImage
+			"slide":
+				sprite.texture = slideImage
+			"jump":
+				sprite.texture = jumpImage
+			"activate":
+				sprite.texture = activateImage
