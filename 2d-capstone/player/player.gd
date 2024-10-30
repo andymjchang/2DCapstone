@@ -147,29 +147,11 @@ func _physics_process(delta: float) -> void:
 			if Globals.inLevel:
 				# velocity.x = Globals.pixelsPerFrame
 				# Pseudo-autoscroll prototype
-				#var direction = Input.get_axis(left, right)
-				#debug this
-				#if not hitBounds and direction > 0 and !isSliding:
-					#velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				#elif hitBounds and direction > 0 and !isSliding:
-					#velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-				#elif !isSliding:
-					#velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 				
 				var direction = Input.get_axis(left, right)
-				if not hitBounds and direction > 0  and !Globals.isSliding:
+				if not hitBounds and direction > 0 :
 					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0 and !Globals.isSliding:
-					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-				elif !Globals.isSliding:
-					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-				else:
-					velocity.x *= slideFriction
-
-#--------
-				if not hitBounds and direction > 0 and !isSliding:
-					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0 and !isSliding:
+				elif hitBounds and direction > 0:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 				elif !isSliding:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
@@ -230,8 +212,6 @@ func _physics_process(delta: float) -> void:
 		elif reachedCheckpoint:
 			pass
 		move_and_slide()
-		if (position.x > camera.position.x - 250 and !isSliding) or hitBounds:
-			position.x = camera.position.x - 244
 		if global_position.x > camera.global_position.x - 250:
 			global_position.x = camera.global_position.x - 244
 	else:
