@@ -188,6 +188,7 @@ func _physics_process(delta: float) -> void:
 				# Technical
 				attack.monitoring = true
 				canAttack = false
+				$attackLockoutTimer.start()
 				$attackTimer.start()
 				punchConnected = false
 		
@@ -280,9 +281,6 @@ func MonitorAttackHitbox(area : Area2D):
 			# Play hit animation
 			hitEffect.frame = 0
 			hitEffect.play()
-
-func _on_attack_timer_timeout() -> void:
-	ResetAttack()
 
 func ResetAttack():
 	canAttack = true
@@ -391,3 +389,9 @@ func PunchTween():
 # Add this new function
 func shake_camera(strength: float = 25.0):
 	shake_intensity = strength
+
+func _on_attack_timer_timeout() -> void:
+	attack.monitoring = false
+
+func _on_attack_lockout_timer_timeout() -> void:
+	canAttack = true

@@ -293,6 +293,10 @@ script = ExtResource("8_socwb")
 increasedScale = Vector2(0.03, 0.03)
 
 [node name="attackTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="attackLockoutTimer" type="Timer" parent="."]
 wait_time = 0.75
 one_shot = true
 
@@ -346,6 +350,7 @@ scale_amount_curve = SubResource("Curve_oxxop")
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="attackLockoutTimer" to="." method="_on_attack_lockout_timer_timeout"]
 [connection signal="timeout" from="powerupTimer" to="." method="_onPowerupTimerTimeout"]
 [connection signal="timeout" from="damagedTimer" to="." method="_on_damaged_timer_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_onVisibleOnScreenNotifier2dScreenExited"]
