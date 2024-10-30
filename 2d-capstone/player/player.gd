@@ -133,7 +133,7 @@ func _physics_process(delta: float) -> void:
 			if Globals.inLevel:
 				# velocity.x = Globals.pixelsPerFrame
 				# Pseudo-autoscroll prototype
-				var direction = Input.get_axis(left, right)
+				#var direction = Input.get_axis(left, right)
 				#debug this
 				#if not hitBounds and direction > 0 and !isSliding:
 					#velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
@@ -142,14 +142,17 @@ func _physics_process(delta: float) -> void:
 				#elif !isSliding:
 					#velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 				
-				if not hitBounds and direction > 0:
+				var direction = Input.get_axis(left, right)
+				if not hitBounds and direction > 0  and !isSliding:
 					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0:
+				elif hitBounds and direction > 0 and !isSliding:
+					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+				elif !isSliding:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 
 			#debug this
-			#if Input.is_action_pressed(slide):
-				#velocity.x *= slideFriction
+			if Input.is_action_pressed(slide):
+				velocity.x *= slideFriction
 
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
