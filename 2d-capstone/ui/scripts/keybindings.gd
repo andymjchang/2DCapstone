@@ -42,7 +42,6 @@ func formatText(commands) -> String:
 	for command in commands:
 		#var keyName = OS.get_keycode_string(command.scancode)
 		if command.get_class() == "InputEventKey":
-			#keyboardString += OS.get_keycode_string(command.physical_keycode)+", "
 			keyboardString += command.as_text()+", "
 		elif command.get_class() == "InputEventJoypadMotion":
 			controllerString+=command.as_text()+", "
@@ -88,11 +87,18 @@ func addCommand(event) -> bool:
 	for commandKey in nodePairs.keys():
 		var curCommandPair = nodePairs[commandKey]
 		var commandString = curCommandPair[1]
-		
+		print("command string: ", commandString)
 		for binding in allCommands[commandString]:
-			if binding.as_text() == event.as_text():
+			print("binding: ", binding.as_text(), " event: ", event.as_text())
+			var bindingText = binding.as_text()
+			bindingText = bindingText.replace("Physical", "")
+			bindingText = bindingText.replace(" ", "")
+			bindingText = bindingText.replace("(", "")
+			bindingText = bindingText.replace(")", "")
+			if bindingText == event.as_text():
 				#we have find the same command in another action, delete
 				InputMap.action_erase_event(commandString, event)
+				print("command string: ", commandString)
 				setTextBoxes()
 				break
 	
@@ -115,5 +121,5 @@ func setTextBoxes() -> void:
 	for key in allCommands.keys():
 		curTextBox =  self.get_node("currentKeys/"+str(key)+"Current")
 		var rawText = allCommands[key]
-		formatText(rawText)
+		#formatText(rawText)
 		curTextBox.text = formatText(rawText)
