@@ -52,10 +52,12 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 			bothPunching = false
 			
 	if bothPunching and Globals.inLevel and allPlayers.size() > 0:
-		#particleEffect.emitting = true
+		# Add screen shake when wall breaks
+		for player in allPlayers:
+			player.shake_camera(35.0)  # Using a slightly higher shake strength for wall break
+		
 		particleEffect = get_node("CPUParticles2D2")
 		var wallSprite = get_node("Area2D/Sprite2D")
-		#wallSprite.visible = false
 		particleEffect.emitting = true
 		particleEffect.visible = true
 		getRandomVelocity()
