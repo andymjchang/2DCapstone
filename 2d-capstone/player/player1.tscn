@@ -1,12 +1,12 @@
 [gd_scene load_steps=44 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
+[ext_resource type="Shader" path="res://shaders/immune.gdshader" id="2_75si5"]
 [ext_resource type="Texture2D" uid="uid://chjj58435tkhb" path="res://animations/raccoonAnims/raccoon_jump_sprite_sheet.png" id="2_hwmte"]
 [ext_resource type="Texture2D" uid="uid://dekngay2ghh64" path="res://animations/raccoonAnims/Raccoon_punch_sprite_sheet.png" id="3_kqmek"]
 [ext_resource type="Texture2D" uid="uid://coymment44w5p" path="res://animations/raccoonAnims/Raccoon_run_sprite_sheet.png" id="4_vkpc8"]
 [ext_resource type="Texture2D" uid="uid://dpptplv42kqxc" path="res://animations/raccoonAnims/Slide.png" id="5_tonbw"]
 [ext_resource type="Texture2D" uid="uid://b18hph1l64gp1" path="res://animations/raccoonAnims/Zipline_Tango_slide.png" id="6_cw6gs"]
-[ext_resource type="Material" uid="uid://bprabndekf50s" path="res://shaders/playerGlitch.tres" id="7_p3aw2"]
 [ext_resource type="Texture2D" uid="uid://601aqkhuqjk5" path="res://animations/raccoonAnims/Zipline_Tango_punch.png" id="7_tegds"]
 [ext_resource type="Texture2D" uid="uid://bf5aif1oibn04" path="res://player/playerActionCircle2.png" id="7_tnfmg"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
@@ -14,6 +14,16 @@
 [ext_resource type="Script" path="res://ui/scripts/pulseSprite.gd" id="8_socwb"]
 [ext_resource type="Texture2D" uid="uid://cuoxttcoy7weh" path="res://worldObjects/enemy/Poof_anim_1-sheet.png" id="11_1lfn5"]
 [ext_resource type="SpriteFrames" uid="uid://cjvuoe42ob7h8" path="res://worldObjects/assets/powerups/powerupSlot.tres" id="14_6bgu6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fn7t"]
+shader = ExtResource("2_75si5")
+shader_parameter/flash_speed = 2.0
+shader_parameter/damage_flash_speed = 20.0
+shader_parameter/rainbow_saturation = 0.8
+shader_parameter/rainbow_value = 1.0
+shader_parameter/invulnerable_intensity = 0.0
+shader_parameter/damage_intensity = 0.0
+shader_parameter/damage_color = Color(1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gk61f"]
 atlas = ExtResource("2_hwmte")
@@ -238,18 +248,11 @@ scale = Vector2(4, 4)
 script = ExtResource("1_qyaa7")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_3fn7t")
 position = Vector2(-13.75, -1.80001)
 scale = Vector2(0.133929, 0.133929)
 sprite_frames = SubResource("SpriteFrames_h8xup")
 animation = &"Slide"
-
-[node name="GlitchShader" type="ColorRect" parent="."]
-visible = false
-material = ExtResource("7_p3aw2")
-offset_left = -34.0
-offset_top = -12.0
-offset_right = 3.0
-offset_bottom = 13.0
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-12.125, 2)
@@ -291,7 +294,11 @@ script = ExtResource("8_socwb")
 increasedScale = Vector2(0.03, 0.03)
 
 [node name="attackTimer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.1
+one_shot = true
+
+[node name="attackLockoutTimer" type="Timer" parent="."]
+wait_time = 0.75
 one_shot = true
 
 [node name="sfxPlayer" type="AudioStreamPlayer2D" parent="." groups=["playerSounds"]]
@@ -351,6 +358,7 @@ animation = &"powerups"
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="attackLockoutTimer" to="." method="_on_attack_lockout_timer_timeout"]
 [connection signal="timeout" from="powerupTimer" to="." method="_onPowerupTimerTimeout"]
 [connection signal="timeout" from="damagedTimer" to="." method="_on_damaged_timer_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_onVisibleOnScreenNotifier2dScreenExited"]
