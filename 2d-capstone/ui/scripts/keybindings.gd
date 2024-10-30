@@ -41,12 +41,17 @@ func formatText(commands) -> String:
 	var controllerString = ""
 	for command in commands:
 		#var keyName = OS.get_keycode_string(command.scancode)
+		var commandText = command.as_text()
+		commandText = commandText.replace("Physical", "")
+		commandText = commandText.replace(" ", "")
+		commandText = commandText.replace("(", "")
+		commandText = commandText.replace(")", "")
 		if command.get_class() == "InputEventKey":
-			keyboardString += command.as_text()+", "
+			keyboardString += commandText+", "
 		elif command.get_class() == "InputEventJoypadMotion":
-			controllerString+=command.as_text()+", "
+			controllerString+=commandText+", "
 		else:
-			controllerString+=command.as_text()+", "
+			controllerString+=commandText+", "
 			
 	returnString += "Keyboard: "+keyboardString+"\n"+"Controller: "+controllerString
 	return returnString
