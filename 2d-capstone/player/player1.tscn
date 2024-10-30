@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=44 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Texture2D" uid="uid://chjj58435tkhb" path="res://animations/raccoonAnims/raccoon_jump_sprite_sheet.png" id="2_hwmte"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://b67k06qom6hxa" path="res://audioEffects/SFX_Hit_4.mp3" id="8_k3kow"]
 [ext_resource type="Script" path="res://ui/scripts/pulseSprite.gd" id="8_socwb"]
 [ext_resource type="Texture2D" uid="uid://cuoxttcoy7weh" path="res://worldObjects/enemy/Poof_anim_1-sheet.png" id="11_1lfn5"]
+[ext_resource type="SpriteFrames" uid="uid://cjvuoe42ob7h8" path="res://worldObjects/assets/powerups/powerupSlot.tres" id="14_6bgu6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gk61f"]
 atlas = ExtResource("2_hwmte")
@@ -339,6 +340,13 @@ damping_max = 9.184
 angle_curve = SubResource("Curve_svjwv")
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_oxxop")
+
+[node name="Powerup" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -17.75)
+scale = Vector2(0.05, 0.05)
+sprite_frames = ExtResource("14_6bgu6")
+animation = &"powerups"
 
 [connection signal="area_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

@@ -135,18 +135,13 @@ func _physics_process(delta: float) -> void:
 				# Pseudo-autoscroll prototype
 				var direction = Input.get_axis(left, right)
 				#debug this
-				#if not hitBounds and direction > 0 and !isSliding:
-					#velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				#elif hitBounds and direction > 0 and !isSliding:
-					#velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-				#elif !isSliding:
-					#velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-				
-				if not hitBounds and direction > 0:
+				if not hitBounds and direction > 0 and !isSliding:
 					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0:
+				elif hitBounds and direction > 0 and !isSliding:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-
+				elif !isSliding:
+					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+					
 			#debug this
 			#if Input.is_action_pressed(slide):
 				#velocity.x *= slideFriction
@@ -305,13 +300,13 @@ func _onGetPowerup(powerType):
 		#sfxPlayer.stream.loop = false
 		sfxPlayer.play()
 		curPowerup = powerType
-		worldNode.powerupUI.visual.frame = powerType
-		worldNode.powerupUI.visual.show()
 		print("I got: ", curPowerup)
 		var particleEffect = get_node("CPUParticles2D")
 		print("Loading: ", "res://particles/powerups/" + str(powerType) + ".png")
 		particleEffect.texture = load("res://particles/powerups/" + str(powerType) + ".png")
-		var powerSprite = get_node("Area2D/Sprite2D")
+		var powerSprite = get_node("Powerup")
+		powerSprite.frame = powerType
+		powerSprite.visible = true
 		particleEffect.emitting = true
 		particleEffect.visible = true
 
@@ -335,7 +330,8 @@ func _onActivatePowerup():
 		Globals.powerType.SLOWDOWN:
 			print("Slowing down")
 			worldNode.emit_signal("changeSpeed", -1)
-	worldNode.powerupUI.visual.hide()
+	var powerSprite = get_node("Powerup")
+	powerSprite.visible = false
 	$powerupTimer.start()
 
 
@@ -377,7 +373,7 @@ func _onPowerupTimerTimeout() -> void:
 
 func _onVisibleOnScreenNotifier2dScreenExited() -> void:
 	print("Left camera")
-	Globals.resetCamera = true
+	#Globals.resetCamera = true
 	pass # Replace with function body.
 
 func _onDoubleJump():
