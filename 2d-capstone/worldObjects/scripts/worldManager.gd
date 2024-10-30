@@ -105,7 +105,6 @@ func _ready():
 	player1 = playersList.get_node("Player1")
 	timerText = $CanvasLayer/Timer
 	scoreText = $CanvasLayer/Score
-	powerupUI = $Camera2D/PowerupSlot
 	
 	# intialize text popup node
 	textPopupScene1 = $Camera2D/ScorePopup1
@@ -385,7 +384,6 @@ func _onResetPosition(who):
 		var nearestPoint = getNearestCheckpoint(who)
 		who.emit_signal("relocate", nearestPoint)
 		pass
-
 
 func _onEndGameBodyEntered(body:Node2D):
 	if (body.is_in_group("players")):

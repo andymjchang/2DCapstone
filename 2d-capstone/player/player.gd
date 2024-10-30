@@ -64,6 +64,11 @@ var isSliding = false
 @onready var tweenSlide : Tween
 @onready var tweenHit : Tween
 
+# Camera Shake
+var shake_strength = 25.0
+var shake_decay = 5.0
+var shake_intensity = 0.0
+
 func _ready():
 	curSprite = get_node("Animation").duplicate()
 	add_to_group("players")
@@ -100,6 +105,15 @@ func _ready():
 	background.global_position = camera.global_position
 
 func _physics_process(delta: float) -> void:
+	if shake_intensity > 0:
+		shake_intensity = lerpf(shake_intensity, 0, shake_decay * delta)
+		camera.offset = Vector2(
+			randf_range(-shake_intensity, shake_intensity),
+			randf_range(-shake_intensity, shake_intensity)
+		)
+	else:
+		camera.offset = Vector2.ZERO
+		
 	if not editing:
 		if not inZipline:
 			# Lines
@@ -152,6 +166,14 @@ func _physics_process(delta: float) -> void:
 				else:
 					velocity.x *= slideFriction
 
+#--------
+				if not hitBounds and direction > 0 and !isSliding:
+					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
+				elif hitBounds and direction > 0 and !isSliding:
+					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+				elif !isSliding:
+					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+					
 			#debug this
 			#if Input.is_action_pressed(slide):
 				#velocity.x *= slideFriction
@@ -171,20 +193,15 @@ func _physics_process(delta: float) -> void:
 				isSliding = true
 				Globals.isSliding = true
 				#get_node("Floor").disabled = false
-				tweenSlide = create_tween()
-				tweenSlide.tween_property(camera, "rotation", 0.008363323, 0.15)
-				tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.2, 2.2), 0.15)
+				SlideTweenStart()
 				
 			if Input.is_action_just_released(slide):
 				get_node("Hitbox").scale *= Vector2(1, 2);
 				get_node("Hitbox").position.y = 2
 				$Animation.play("Run");
 				#get_node("Floor").disabled = true
-				isSliding = false
-				Globals.isSliding = false
-				tweenSlide = create_tween()
-				tweenSlide.tween_property(camera, "rotation", 0, 0.15)
-				tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
+				SlideTweenEnd()
+
 		elif inZipline:
 			$Animation.play("Zip")
 			
@@ -199,10 +216,11 @@ func _physics_process(delta: float) -> void:
 				sfxPlayer.stream = punchSfx
 				sfxPlayer.stream.loop = false
 				sfxPlayer.play()
-				
+
 				# Technical
 				attack.monitoring = true
 				canAttack = false
+				$attackLockoutTimer.start()
 				$attackTimer.start()
 				punchConnected = false
 		
@@ -214,6 +232,8 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		if (position.x > camera.position.x - 250 and !isSliding) or hitBounds:
 			position.x = camera.position.x - 244
+		if global_position.x > camera.global_position.x - 250:
+			global_position.x = camera.global_position.x - 244
 	else:
 		invuln = true
 		
@@ -225,9 +245,10 @@ func _physics_process(delta: float) -> void:
 
 func _onTakeDamage(amount):
 	$damagePlayer.play()
+	shake_camera() # Add camera shake when taking damage
 	
 	# Glitch Shader
-	$GlitchShader.visible = true
+	$Animation.material.set_shader_parameter("damage_intensity", 0.5)
 	$damagedTimer.start()
 	
 	if !invuln:
@@ -283,6 +304,7 @@ func MonitorAttackHitbox(area : Area2D):
 	var other = area.get_parent()
 	if other.is_in_group("actionIndicators") and other.active and !punchConnected:
 		ResetAttack()
+		PunchTween() # Camera
 		punchConnected = true
 		Globals.screenFlashEffect()
 		other.active = false
@@ -294,9 +316,6 @@ func MonitorAttackHitbox(area : Area2D):
 			# Play hit animation
 			hitEffect.frame = 0
 			hitEffect.play()
-
-func _on_attack_timer_timeout() -> void:
-	ResetAttack()
 
 func ResetAttack():
 	canAttack = true
@@ -310,13 +329,13 @@ func _onGetPowerup(powerType):
 		#sfxPlayer.stream.loop = false
 		sfxPlayer.play()
 		curPowerup = powerType
-		worldNode.powerupUI.visual.frame = powerType
-		worldNode.powerupUI.visual.show()
 		print("I got: ", curPowerup)
 		var particleEffect = get_node("CPUParticles2D")
 		print("Loading: ", "res://particles/powerups/" + str(powerType) + ".png")
 		particleEffect.texture = load("res://particles/powerups/" + str(powerType) + ".png")
-		var powerSprite = get_node("Area2D/Sprite2D")
+		var powerSprite = get_node("Powerup")
+		powerSprite.frame = powerType
+		powerSprite.visible = true
 		particleEffect.emitting = true
 		particleEffect.visible = true
 
@@ -324,7 +343,7 @@ func _onActivatePowerup():
 	match curPowerup:
 		Globals.powerType.INVULN:
 			invuln = true
-			$Animation.self_modulate.a = 0.5
+			$Animation.material.set_shader_parameter("invulnerable_intensity", 0.5)
 		Globals.powerType.HEAL:
 			sfxPlayer.stream = healthSfx
 			sfxPlayer.stream.loop = false
@@ -340,7 +359,8 @@ func _onActivatePowerup():
 		Globals.powerType.SLOWDOWN:
 			print("Slowing down")
 			worldNode.emit_signal("changeSpeed", -1)
-	worldNode.powerupUI.visual.hide()
+	var powerSprite = get_node("Powerup")
+	powerSprite.visible = false
 	$powerupTimer.start()
 
 
@@ -363,7 +383,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 
 
 func _on_damaged_timer_timeout() -> void:
-	$GlitchShader.visible = false
+	$Animation.material.set_shader_parameter("damage_intensity", 0.0)
 
 
 func _onPowerupTimerTimeout() -> void:
@@ -372,6 +392,7 @@ func _onPowerupTimerTimeout() -> void:
 		Globals.powerType.INVULN:
 			invuln = false
 			$Animation.self_modulate.a = 1
+			$Animation.material.set_shader_parameter("invulnerable_intensity", 0.0)
 		Globals.powerType.HEAL:
 			pass
 		Globals.powerType.SPEEDUP:
@@ -382,7 +403,7 @@ func _onPowerupTimerTimeout() -> void:
 
 func _onVisibleOnScreenNotifier2dScreenExited() -> void:
 	print("Left camera")
-	Globals.resetCamera = true
+	#Globals.resetCamera = true
 	pass # Replace with function body.
 
 func _onDoubleJump():
@@ -397,3 +418,30 @@ func _onGetCoin():
 	sfxPlayer.play()
 	self.coins += 1
 	Globals.coinsCollected = self.coins
+
+func SlideTweenStart():
+	tweenSlide = create_tween()
+	tweenSlide.tween_property(camera, "rotation", 0.008363323, 0.15)
+	tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.2, 2.2), 0.15)
+
+func SlideTweenEnd():
+	tweenSlide = create_tween()
+	tweenSlide.tween_property(camera, "rotation", 0, 0.15)
+	tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
+
+func PunchTween():
+	camera.zoom = camera.zoom + Vector2(0.025, 0.025)
+	camera.rotation = camera.rotation - 0.01363323
+	tweenHit = create_tween()
+	tweenHit.tween_property(camera, "rotation", 0, 0.15)
+	tweenHit.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
+
+# Add this new function
+func shake_camera(strength: float = 25.0):
+	shake_intensity = strength
+
+func _on_attack_timer_timeout() -> void:
+	attack.monitoring = false
+
+func _on_attack_lockout_timer_timeout() -> void:
+	canAttack = true

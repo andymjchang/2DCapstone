@@ -12,6 +12,8 @@ size = Vector2(908, 37)
 size = Vector2(1006, 35)
 
 [node name="KillFloor" type="StaticBody2D"]
+position = Vector2(0, -1)
+collision_layer = 8192
 script = ExtResource("1_mw5fv")
 
 [node name="Area2D2" type="Area2D" parent="."]

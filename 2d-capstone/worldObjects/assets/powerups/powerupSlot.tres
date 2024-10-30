@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cjvuoe42ob7h8"]
+
+[ext_resource type="Texture2D" uid="uid://2kbm71o22fjj" path="res://worldObjects/assets/powerups/invuln.png" id="1_h4uts"]
+[ext_resource type="Texture2D" uid="uid://7jj5y6vl2j1n" path="res://worldObjects/assets/powerups/heal.png" id="2_6fmma"]
+[ext_resource type="Texture2D" uid="uid://clr5r236a7rkc" path="res://worldObjects/assets/powerups/speedup.png" id="3_t1nj2"]
+[ext_resource type="Texture2D" uid="uid://d21jr8ipfpnpu" path="res://worldObjects/assets/powerups/slowdown.png" id="4_8eirp"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_h4uts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6fmma")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_t1nj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8eirp")
+}],
+"loop": true,
+"name": &"powerups",
+"speed": 5.0
+}]

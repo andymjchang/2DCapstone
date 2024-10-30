@@ -9,6 +9,7 @@ size = Vector2(31, 672)
 size = Vector2(31, 671)
 
 [node name="KillWall" type="StaticBody2D"]
+collision_layer = 16384
 script = ExtResource("1_1o0bc")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -27,3 +28,5 @@ offset_bottom = 334.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5.5, 325.5)
 shape = SubResource("RectangleShape2D_1aka3")
+
+[connection signal="body_entered" from="Area2D" to="." method="_onArea2DBodyEntered"]
