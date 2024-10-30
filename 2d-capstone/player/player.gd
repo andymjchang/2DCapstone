@@ -166,7 +166,7 @@ func _physics_process(delta: float) -> void:
 
 			if Input.is_action_just_released(jump) and not jumpInProgress:
 				if velocity.y < 0:
-					velocity.y = min(0, velocity.y + 1000 * get_physics_process_delta_time())
+					velocity += get_gravity() * delta * 10
 
 			if Input.is_action_just_pressed(slide):
 				get_node("Hitbox").scale *= Vector2(1, 0.5);
