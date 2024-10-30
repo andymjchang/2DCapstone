@@ -66,15 +66,15 @@ func _ready():
 	loadLevel()
 	Globals.time = 0.0
 	var backgroundName : String = "Lvl1"
-	if levelFile.begins_with("Lvl0."):
+	if levelFile.begins_with("Tutorial"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Tutorial_New_155bpm.mp3"
 		backgroundName = "Lvl0"
-	if levelFile.begins_with("Lvl1."):
+	if levelFile.begins_with("Level 1"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Level1_Main_155bpm.mp3"
 		backgroundName = "Lvl1"
-	if levelFile.begins_with("Lvl2."):
+	if levelFile.begins_with("Level 2"):
 		Globals.setBPM(156)
 		Globals.currentSongFileName = "Level2_Main_156bpm_V2.mp3"
 		backgroundName = "Lvl2"
