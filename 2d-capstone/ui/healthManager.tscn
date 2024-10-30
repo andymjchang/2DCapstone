@@ -7,17 +7,6 @@
 [node name="HealthManager" type="CanvasLayer"]
 script = ExtResource("1_gxkyf")
 
-[node name="player1" type="Node2D" parent="."]
-visible = false
-
-[node name="UiHeart" parent="player1" instance=ExtResource("1_mv5t0")]
-position = Vector2(-70, 0)
-
-[node name="UiHeart2" parent="player1" instance=ExtResource("1_mv5t0")]
-
-[node name="UiHeart3" parent="player1" instance=ExtResource("1_mv5t0")]
-position = Vector2(70, 0)
-
 [node name="redBar" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = 1046.0
 offset_top = 915.0

@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -31,6 +31,7 @@ var MIN_STEP : int = 25
 var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
 var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
+
 
 @export var p1Placer : PackedScene
 @export var p2Placer : PackedScene
@@ -53,6 +54,32 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var powerup : PackedScene
 @export var jumpBoost : PackedScene
 @export var coin : PackedScene
+@export var keyBinding : PackedScene
+
+#block variants list
+@onready var enemyType = {"enemy" : enemyCharacter, "slide" : enemyCharacter}
+@onready var platformType = ["rustic", "city"]
+@onready var instructionType = ["punch", "slide", "jump", "activate"]
+@onready var gameObjectType = {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin}
+
+@onready var typeArrays = { "enemyType" : ["enemy", "slideEnemy"],
+							"platformType" : ["rustic", "city"],
+							"instructionType" : ["punch", "slide", "jump", "activate"],
+							"gameObjectType" : {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin} }
+#var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "multiPunch"]
+@onready var typeMap = {blockTypes[1]: "gameObjectType",
+						blockTypes[2]: "platformType",
+						blockTypes[3]: "gameObjectType",
+						blockTypes[4]: "gameObjectType",
+						blockTypes[5]: "enemyType",
+						blockTypes[6]: "gameObjectType",
+						blockTypes[7]: "gameObjectType",
+						blockTypes[9]: "gameObjectType",
+						blockTypes[10]: "gameObjectType",
+						blockTypes[12]: "gameObjectType",
+						blockTypes[13]: "gameObjectType",
+						blockTypes[14]: "gameObjectType",
+						blockTypes[15]: "instructionType"}
 
 
 @onready var objectList = $objectList
@@ -72,6 +99,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var powerupList = $objectList/powerups
 @onready var jumpList = $objectList/jumpBoosts
 @onready var coinList = $objectList/coins
+@onready var keyBindingList = $objectList/keyBindings
 
 
 
@@ -115,6 +143,16 @@ func _process(delta: float) -> void:
 		#currentPosition = get_global_mouse_position()
 		#timeHeld += delta
 	updateTime(delta)
+	
+	if Input.is_action_just_pressed("tab"):
+		#we want to go through the list of objects for current block
+		#TODO add binded block functionality later
+		if !isBinding and currentBlock:
+			#grab the list of similiar types
+			#TODO add a check here to see if this is a valid grab
+			var curTypeName = typeMap[currentBlock.blockType]
+			var curTypeList = typeArrays[curTypeName]
+			currentBlock.tabType(curTypeList, curTypeName)
 	if Input.is_action_just_pressed("click"):
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
@@ -154,8 +192,6 @@ func _on_text_edit_2_text_changed() -> void:
 		var step = int(stepLabel.text)
 		if (step < MIN_STEP):
 			step = MIN_STEP
-		#if currentBlock and currentBlock.blockType == "actionIndicator" or currentBlock.blockType == "enemy":
-			#step = MIN_STEP
 		stepSize = step
 		Globals.stepSize = stepSize
 		measureLines.stepSize = stepSize
@@ -179,7 +215,8 @@ func loadLevel():
 		"slideWalls": [slideWall, slideWallList, blockTypes[12]],
 		"powerups": [powerup, powerupList, blockTypes[1]],
 		"jumpBoosts": [jumpBoost, jumpList, blockTypes[13]],
-		"coins": [coin, coinList, blockTypes[14]]}
+		"coins": [coin, coinList, blockTypes[14]],
+		"keyBindings":[keyBinding, keyBindingList, blockTypes[15]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -195,12 +232,17 @@ func loadLevel():
 			var instancedObj = instance.instantiate()
 			var posPoints = []
 			for pos in line.split(", "):
-				posPoints.append(pos.to_float())
+				pos = pos.replace(",", "")
+				if pos.is_valid_float():
+					posPoints.append(pos.to_float())
+				else:
+					posPoints.append(pos)
 			objectParent.add_child(instancedObj)
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
 			objectParent.setComponents(posPoints)
-			objectParent.setTileMaps(posPoints)			 
+			objectParent.setTileMaps(posPoints)		
+			objectParent.setImage(posPoints)	 
 			#do this if object has more than one component
 
 func _on_save_button_down() -> void:
@@ -232,7 +274,14 @@ func _on_p1checkpoint_button_pressed() -> void:
 	p1checkpointsList.add_child(checkParent)
 	place_block(checkParent, p1checkpointsList, camera.position, false)
 
-	
+func _onKeyBindingButtonUp() -> void:
+	var kbInstance = keyBinding.instantiate()
+	var kbParent = baseObject.instantiate()
+	kbParent.add_child(kbInstance)
+	kbParent.blockType = blockTypes[15]
+	keyBindingList.add_child(kbParent)
+	place_block(kbParent, keyBindingList, camera.position, false)
+
 func _onZiplineButtonPressed() -> void:
 	var ziplineInstance = zipline.instantiate()
 	var zipParent = baseObject.instantiate()
@@ -248,7 +297,6 @@ func _onSlideWallButtonUp() -> void:
 	slideWallParent.blockType = blockTypes[12]
 	slideWallList.add_child(slideWallParent)
 	place_block(slideWallParent, slideWallList, camera.position, false)
-
 func _on_exit_button_pressed() -> void:
 	# This will be the final functionality so players can navigate between menus
 	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
@@ -398,12 +446,17 @@ func save_scene_to_file():
 						var editorName = "EditorArea"+str(index)
 						var posChain = ""
 						#go through all of the individual block components
+						#TODO deligate this to the children not here
 						for blockChild in childrenList:
 							#saving for platfrom block differs since their size varies#
 							#TODO I dont want to do this, delegate this work to the child class
 							if itemList.name == "platformBlocks":
 								#save the number of cols as well as the extents so we know where to start drawing	
-								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", " 
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", "
+							elif itemList.name == "keyBindings":
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().instructionType)+", "
+							elif itemList.name == "enemies":
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().enemyType)+", "
 							else:
 								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
 							index+=1
@@ -495,7 +548,6 @@ func reset_drag_tracking():
 
 func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 	trackingPosition = true
-	print("blockType: ", blockType)
 	var list = getList(blockType).get_children()
 	for block in list:
 		if block.index == index:
@@ -536,6 +588,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/jumpBoosts")
 	if blockType == "coin":
 		return get_node("objectList/coins")
+	if blockType == "keyBinding":
+		return get_node("objectList/keyBindings")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:

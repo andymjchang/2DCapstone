@@ -46,6 +46,9 @@ enum powerType {
 }
 
 
+#player details
+var isSliding = false
+
 # File Names
 var currentEditorFileName
 var currentSongFileName

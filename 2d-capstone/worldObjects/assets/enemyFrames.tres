@@ -1,0 +1,48 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://b5j67osrrdmmd"]
+
+[ext_resource type="Texture2D" uid="uid://fkay4q6vfugt" path="res://worldObjects/enemy/single_enemy_Rusted_anim_1-sheet.png" id="1_o25mf"]
+[ext_resource type="Texture2D" uid="uid://dcwx1y37lvgxh" path="res://worldObjects/assets/slideEnemy.png" id="2_f8fyy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gv8c"]
+atlas = ExtResource("1_o25mf")
+region = Rect2(0, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ly2ev"]
+atlas = ExtResource("1_o25mf")
+region = Rect2(800, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbi68"]
+atlas = ExtResource("1_o25mf")
+region = Rect2(1600, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3wfk"]
+atlas = ExtResource("1_o25mf")
+region = Rect2(2400, 0, 800, 800)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gv8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ly2ev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbi68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3wfk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f8fyy")
+}],
+"loop": true,
+"name": &"slideEnemy",
+"speed": 5.0
+}]

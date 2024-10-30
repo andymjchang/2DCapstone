@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://lc6sx7h55k1p"]
+[gd_scene load_steps=19 format=3 uid="uid://lc6sx7h55k1p"]
 
 [ext_resource type="Script" path="res://worldObjects/enemy/enemy.gd" id="1_fjqgg"]
 [ext_resource type="Texture2D" uid="uid://fkay4q6vfugt" path="res://worldObjects/enemy/single_enemy_Rusted_anim_1-sheet.png" id="3_6xp7w"]
 [ext_resource type="Texture2D" uid="uid://dhk8ib54ejgwa" path="res://worldObjects/assets/circle.png" id="4_h4ccn"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="5_1luba"]
+[ext_resource type="Texture2D" uid="uid://dcwx1y37lvgxh" path="res://worldObjects/assets/slideEnemy.png" id="5_3lur0"]
 [ext_resource type="Script" path="res://ui/scripts/pulseAnimatedSprite.gd" id="5_4of7g"]
 [ext_resource type="Texture2D" uid="uid://pj0qfwt8un1l" path="res://worldObjects/enemy/flying enemy 1-sheet.png" id="6_83knw"]
 
@@ -44,6 +45,14 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_3lur0")
+}],
+"loop": true,
+"name": &"slideEnemy",
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ouin1"]
@@ -104,8 +113,8 @@ visible = false
 position = Vector2(2, -15)
 scale = Vector2(0.12, 0.12)
 sprite_frames = SubResource("SpriteFrames_l3chy")
+animation = &"slideEnemy"
 autoplay = "default"
-frame_progress = 0.666094
 script = ExtResource("5_4of7g")
 timingScale = 2
 increasedScale = Vector2(0.15, 0.15)

@@ -4,6 +4,10 @@ var count = 0
 var ifDead = false
 var secondTime = false
 var blockType = "enemy"
+var enemyType = "enemy"
+
+@onready var enemyImage = preload("res://worldObjects/assets/singleBot.png") as Texture2D
+@onready var slideEnemyImage = preload("res://worldObjects/assets/slideEnemy.png") as Texture2D
 
 # Death animation
 var velocity = Vector2(0, 0)
@@ -14,6 +18,10 @@ var max_rotation = 45 * (PI / 180)
 
 var soundPlayer := AudioStreamPlayer.new()
 @onready var sprite
+@onready var animatedSprite = $AnimatedSprite2D
+
+var isMultiPunch = false
+var punchesLeft = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,7 +46,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if ifDead:
+	if ifDead:	
 		#sprite.position.y += 4
 		#sprite.rotation = 0.8
 		DeathAnimation(delta)
@@ -48,16 +56,33 @@ func DeathAnimation(delta: float) -> void:
 	velocity.x = move_speed
 	position += velocity * delta
 
-
-	
-	
-	
 func GotHit():
+
 	self.ifDead = true
 	velocity.y = randi_range(-600, -300)
 	sprite.rotation = randf_range(min_rotation, max_rotation)
-	get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
+	#get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
+	get_tree().current_scene.get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
 
+		
+func setEnemyType(posPoints) -> void :
+	
+	if posPoints.size() > 2:
+		var newType = posPoints[2]
+		match newType:
+			"enemy":
+				animatedSprite.animation = "default"
+				enemyType = "enemy"
+				var newYExtents = (enemyImage.get_size().y * animatedSprite.scale.y) / 2.0
+				var newXExtents = (enemyImage.get_size().x * animatedSprite.scale.x) / 2.0
+				$Area2D/CollisionShape2D.shape.extents = Vector2(newXExtents, newYExtents)
+			"slideEnemy":
+				animatedSprite.animation = "slideEnemy"
+				enemyType = "slideEnemy"
+				var newYExtents = (slideEnemyImage.get_size().y * animatedSprite.scale.y) / 2.0
+				var newXExtents = (slideEnemyImage.get_size().x * animatedSprite.scale.x) / 2.0
+				$Area2D/CollisionShape2D.shape.extents = Vector2(newXExtents, newYExtents)
+		#set the collision based on it 
 func check_platform_below() -> bool:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 50))

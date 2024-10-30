@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bo0d4wxsgmli1"]
+[gd_scene load_steps=8 format=3 uid="uid://ddx53vf6dn1ey"]
 
 [ext_resource type="Script" path="res://ui/scripts/powerupSlot.gd" id="1_jp2jo"]
 [ext_resource type="Texture2D" uid="uid://2kbm71o22fjj" path="res://worldObjects/assets/powerups/invuln.png" id="1_n2ext"]

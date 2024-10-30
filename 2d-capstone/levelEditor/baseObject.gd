@@ -9,6 +9,8 @@ var spriteParent = null
 var curAreaDragging = null
 var curAreaDraggingParent = null
 var curArea = null
+var platformType = "rustic"
+var instructionType = "punch"
 @onready var childrenList = self.get_child(0).get_children()
 var spriteInScene = false
 
@@ -48,7 +50,7 @@ func _process(delta: float) -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int, areaName, areaParent) -> void:
 	if "player" not in blockType:
 		if event.is_action_pressed("click") and checkOrder():
-			self.get_parent().get_parent().get_parent().emit_signal("objectClicked",index, blockType,curAreaDragging)
+			get_tree().current_scene.emit_signal("objectClicked",index, blockType,curAreaDragging)
 			#if clickResult:
 			if true:
 			#this will be the path to area2d given that we have the scene object
@@ -74,7 +76,7 @@ func _input(event: InputEvent) -> void:
 func setArea2D():
 	var nameIndex = 0
 	#given a scene object, go through all of its individual major components
-	for blockChild in childrenList:
+	for blockChild in self.get_child(0).get_children():
 		#grab each compents area2d
 		var newArea = blockChild.get_node("Area2D")
 		blockChild.get_node("Area2D").name = "EditorArea"+str(nameIndex)
@@ -130,3 +132,50 @@ func setTileMaps(posPoints : Array) -> void:
 		get_child(0).setTileMaps(posPoints)
 	pass
 	
+func setImage(posPoints):
+	if get_child(0).has_method("setImage"):
+		get_child(0).setImage(posPoints)
+	
+
+func tabType(typeOptions, typeName) -> void:
+	var curIndex = 0
+	var keyList
+	var newObjectKey
+	var newObject
+	if typeName == "platformType":
+		#we just want to change the tile map that is active
+		
+		pass
+	elif typeName == "enemyType":
+		curIndex = typeOptions.find(self.get_child(0).enemyType)
+		var newEnemyType = typeOptions[curIndex+1] if curIndex+1 <= typeOptions.size()-1 else typeOptions[0]
+		self.get_child(0).setEnemyType(newEnemyType)
+		
+	elif typeName == "instructionType":
+		curIndex = typeOptions.find(self.get_child(0).instructionType)
+		var newInstructionType = typeOptions[curIndex+1] if curIndex+1 <= typeOptions.size()-1 else typeOptions[0]
+		self.get_child(0).setInstructionType(newInstructionType)
+		#we have the new instruction type 
+		pass
+	elif typeName == "gameObjectType":
+		#get the index of where we are in the list and move forward vy one
+		var pos = self.get_child(0).get_child(0).get_node("EditorArea0").global_position
+		var currentScene = get_tree().current_scene
+		var listToRemoveFrom = currentScene.getList(currentScene.currentBlock.blockType).get_children()
+		for block in listToRemoveFrom:
+			if block.index == currentScene.currentBlock.index:
+				currentScene.getList(currentScene.currentBlock.blockType).get_children().erase(block)
+		keyList = typeOptions.keys()
+		curIndex = keyList.find(blockType)
+		newObjectKey = keyList[curIndex+1] if curIndex+1 <= keyList.size()-1 else keyList[0]
+		newObject = typeOptions[newObjectKey].instantiate()
+		var listToAddToo = currentScene.getList(newObjectKey)
+		currentScene.getList(newObjectKey).add_child(self)
+		var removeNode = self.get_child(0)
+		self.get_child(0).queue_free()
+		self.remove_child(removeNode) 
+		self.add_child(newObject)
+		self.move_child(newObject, 0)
+		blockType = newObjectKey
+		currentScene.place_block(self, listToAddToo, pos, false)
+		

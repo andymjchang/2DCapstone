@@ -22,6 +22,7 @@ signal changeSpeed(speedType)
 @export var jumpInstance : PackedScene
 @export var ziplineMiddle : PackedScene
 @export var coinInstance : PackedScene
+@export var keyBindingInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -37,6 +38,7 @@ signal changeSpeed(speedType)
 @onready var powerupList = $objectList/powerups
 @onready var jumpBoostList = $objectList/jumpBoosts
 @onready var coinList = $objectList/coins
+@onready var keyBindingList = $objectList/keyBindings
 
 var player1 
 var killWall
@@ -187,7 +189,8 @@ func loadLevel():
 		"slideWalls": [slideWallInstance, slideWallList],
 		"powerups": [powerupInstance, powerupList],
 		"jumpBoosts": [jumpInstance, jumpBoostList],
-		"coins": [coinInstance, coinList]}
+		"coins": [coinInstance, coinList],
+		"keyBindings":[keyBindingInstance, keyBindingList]}
 	var instance
 	var instanceParent
 	var name = ""
@@ -204,7 +207,11 @@ func loadLevel():
 			var posPoints = []
 			
 			for pos in line.split(", "):
-				posPoints.append(pos.to_float())
+				pos = pos.replace(",", "")
+				if pos.is_valid_float():
+					posPoints.append(pos.to_float())
+				else:
+					posPoints.append(pos)
 				
 			instancedObj.position = Vector2(posPoints[0], posPoints[1])
 			instanceParent.add_child(instancedObj)
@@ -231,6 +238,11 @@ func loadLevel():
 			if name =="platformBlocks":
 				instancedObj.setTileMaps(posPoints.duplicate()) 
 				instancedObj.add_to_group("platforms")
+				
+			if name == "keyBindings":
+				instancedObj.setImage(posPoints)
+			if name == "enemies":
+				instancedObj.setEnemyType(posPoints)
 			
 		elif ".mp3" in line:
 			# audio file

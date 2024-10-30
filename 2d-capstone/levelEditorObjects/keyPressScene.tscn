@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj0b5a5yg6sr0"]
+
+[ext_resource type="Script" path="res://levelEditorObjects/keyPressScene.gd" id="1_q3sja"]
+[ext_resource type="Texture2D" uid="uid://qpkbf501h41u" path="res://ui/assets/onboarding/punchGraphic.png" id="2_taymo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2p8ef"]
+size = Vector2(80, 67)
+
+[node name="keyPressScene" type="Node2D"]
+scale = Vector2(1, 1.1)
+script = ExtResource("1_q3sja")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+shape = SubResource("RectangleShape2D_2p8ef")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(-1.34543e-06, 3.9041e-06)
+scale = Vector2(0.0337268, 0.0289594)
+texture = ExtResource("2_taymo")

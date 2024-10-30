@@ -15,7 +15,7 @@ var beatTimer = 0.0
 var lerpFactor = 0.0
 
 # Called when the node enters the scene tree for the first time.
-#TODO add this for both players
+#TODO rework this for only one player
 func _ready() -> void:
 	#connect signal for when player takes damage
 	#self.decreaseHealth.connect(_onDamageTaken)
@@ -23,10 +23,7 @@ func _ready() -> void:
 		self.get_node("fullP1Health").visible = true
 		self.get_node("zeroP1Health").visible = false
 		fullHealth = $fullP1Health
-	if player == "player2":
-		self.get_node("fullP2Health").visible = true
-		self.get_node("zeroP2Health").visible = false
-		zeroHealth = $zeroP2Health
+
 		
 func setBPM():
 	beatInterval = 60.0 / Globals.bpm
@@ -68,3 +65,12 @@ func takeDamage() -> void:
 		"zero":
 			#should not be getting here
 			print("should not be checking heart still")
+			
+func gainHeart() -> void:
+	#only do this if we are damaged
+	#TODO once we decide if we are doing half heart, incorporate that 
+	if healthStatus == "zero":
+		self.zeroHealth.visible = false
+		self.fullHealth.visible = true
+		healthStatus = "full"
+		

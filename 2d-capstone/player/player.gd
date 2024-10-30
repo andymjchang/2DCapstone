@@ -51,6 +51,9 @@ var glitchLines
 var camera
 var coins = 0
 
+var slideFriction = 0.999
+var isSliding = false
+
 #soundEffects
 @onready var punchSfx = load("res://audioEffects/Punch.mp3") as AudioStream
 @onready var healthSfx = load("res://audioEffects/SFX_HealthItem_temp.mp3") as AudioStream
@@ -131,12 +134,22 @@ func _physics_process(delta: float) -> void:
 				# velocity.x = Globals.pixelsPerFrame
 				# Pseudo-autoscroll prototype
 				var direction = Input.get_axis(left, right)
+				#debug this
+				#if not hitBounds and direction > 0 and !isSliding:
+					#velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
+				#elif hitBounds and direction > 0 and !isSliding:
+					#velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+				#elif !isSliding:
+					#velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+				
 				if not hitBounds and direction > 0:
 					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
 				elif hitBounds and direction > 0:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-				else:
-					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+
+			#debug this
+			#if Input.is_action_pressed(slide):
+				#velocity.x *= slideFriction
 
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
@@ -149,6 +162,9 @@ func _physics_process(delta: float) -> void:
 				get_node("Hitbox").scale *= Vector2(1, 0.5);
 				get_node("Hitbox").position.y = 6
 				$Animation.play("Slide");
+				#TODO get rid of double var
+				isSliding = true
+				Globals.isSliding = true
 				#get_node("Floor").disabled = false
 				tweenSlide = create_tween()
 				tweenSlide.tween_property(camera, "rotation", 0.008363323, 0.15)
@@ -159,6 +175,8 @@ func _physics_process(delta: float) -> void:
 				get_node("Hitbox").position.y = 2
 				$Animation.play("Run");
 				#get_node("Floor").disabled = true
+				isSliding = false
+				Globals.isSliding = false
 				tweenSlide = create_tween()
 				tweenSlide.tween_property(camera, "rotation", 0, 0.15)
 				tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
@@ -189,7 +207,7 @@ func _physics_process(delta: float) -> void:
 		elif reachedCheckpoint:
 			pass
 		move_and_slide()
-		if position.x > camera.position.x - 250:
+		if position.x > camera.position.x - 250 and !isSliding:
 			position.x = camera.position.x - 244
 	else:
 		invuln = true
@@ -322,7 +340,20 @@ func _onActivatePowerup():
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area.get_parent().ifDead == false:
+	if area.get_parent().enemyType == "slideEnemy" and Globals.isSliding:
+		#we slid into enemy
+		print("made it into slide damage: ")
+		var other = area.get_parent()
+		scored.emit(self.name, abs(other.global_position.x - global_position.x))
+		other = other.get_parent()
+		print("made it into slide damage: 1")
+		if other.is_in_group("enemies"):
+			print("made it into slide damage: 2")
+			other.GotHit()
+				# Play hit animation
+			hitEffect.frame = 0
+			hitEffect.play()
+	elif area.get_parent().ifDead == false :
 		_onTakeDamage(3)
 
 

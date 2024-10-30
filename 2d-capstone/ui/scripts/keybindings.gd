@@ -110,7 +110,6 @@ func setTextBoxes() -> void:
 		"activate" : InputMap.action_get_events("activate")
 	}
 	for button in $buttons.get_children():
-			#newArea.connect("input_event",  _on_area_2d_input_event.bind(newArea.name, blockChild))
 		button.connect("button_up", _onKeyButtonUp.bind(button.name))
 	var curTextBox
 	for key in allCommands.keys():

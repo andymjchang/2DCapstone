@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://jixi0wddqipj"]
+[gd_scene load_steps=4 format=3 uid="uid://jixi0wddqipj"]
 
 [ext_resource type="Texture2D" uid="uid://cxdhrplc2qstb" path="res://worldObjects/assets/singleBot.png" id="1_bja54"]
+[ext_resource type="Script" path="res://levelEditorObjects/enemyScene.gd" id="1_yqhmu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ud4en"]
 size = Vector2(36, 59)
 
 [node name="EnemyScene" type="Node2D"]
+script = ExtResource("1_yqhmu")
 
 [node name="Node2D" type="Node2D" parent="."]
 

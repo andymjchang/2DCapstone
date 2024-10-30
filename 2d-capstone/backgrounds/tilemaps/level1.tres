@@ -1,32 +1,65 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bva4vakjtko8x"]
 
-[ext_resource type="Texture2D" uid="uid://71f5kajh7j21" path="res://backgrounds/tilemaps/level1tilemap.png" id="1_423n7"]
+[ext_resource type="Texture2D" uid="uid://c03hj5t6fk8wv" path="res://backgrounds/tilemaps/Level_1_tilemap_v04.png" id="1_iucli"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jpmkc"]
-texture = ExtResource("1_423n7")
-separation = Vector2i(125, 125)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ka823"]
+texture = ExtResource("1_iucli")
 texture_region_size = Vector2i(250, 250)
-2:3/0 = 0
-1:3/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-2:1/0 = 0
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
-1:0/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-1:5/0 = 0
-2:4/0 = 0
-3:4/0 = 0
-3:5/0 = 0
-4:4/0 = 0
-3:3/0 = 0
-3:2/0 = 0
+2:1/0 = 0
 3:1/0 = 0
 4:1/0 = 0
-3:0/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+11:2/0 = 0
 
 [resource]
 tile_size = Vector2i(250, 250)
-sources/1 = SubResource("TileSetAtlasSource_jpmkc")
+sources/1 = SubResource("TileSetAtlasSource_ka823")

@@ -78,3 +78,18 @@ func FadeOut():
 
 func _on_death_timer_timeout() -> void:
 	queue_free()
+	#
+func resetAnimation(newPos) -> void :
+	#enemy has been pushed back, reset the action indicator
+	target_time = newPos.x / Globals.pixelsPerFrame
+	active = true 
+	
+	curSprite = get_node("innerCircle").duplicate()
+	starting_scale = Vector2(startingScale, startingScale)
+	outer_circle.scale = starting_scale
+	outer_circle.modulate.a = 0.0
+	inner_circle.modulate.a = 0.0
+	outer_circle.texture = load("res://worldObjects/assets/circle.png")
+	fadeOut = false
+	get_tree().current_scene.get_node("objectList/actionIndicators").starting_index -= 1
+	

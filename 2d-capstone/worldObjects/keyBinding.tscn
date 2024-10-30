@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://duhio7geil4dc"]
+
+[ext_resource type="Script" path="res://worldObjects/scripts/keyBinding.gd" id="1_a8dno"]
+[ext_resource type="Texture2D" uid="uid://cxpyh4hstkkni" path="res://ui/assets/fullHealth.png" id="2_6w36b"]
+
+[node name="keyBinding" type="Node2D"]
+script = ExtResource("1_a8dno")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.153968, 0.151923)
+texture = ExtResource("2_6w36b")
