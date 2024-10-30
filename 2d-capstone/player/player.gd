@@ -152,7 +152,9 @@ func _physics_process(delta: float) -> void:
 				get_node("Hitbox").scale *= Vector2(1, 0.5);
 				get_node("Hitbox").position.y = 6
 				$Animation.play("Slide");
+				#TODO get rid of double var
 				isSliding = true
+				Globals.isSliding = true
 				#get_node("Floor").disabled = false
 				var rotDir = Globals.get_random_sign()
 				tweenRot = create_tween()
@@ -167,6 +169,7 @@ func _physics_process(delta: float) -> void:
 				$Animation.play("Run");
 				#get_node("Floor").disabled = true
 				isSliding = false
+				Globals.isSliding = false
 				tweenRot = create_tween()
 				tweenZoom = create_tween()
 				tweenRot.tween_property(camera, "rotation", 0, 0.2)
@@ -330,7 +333,20 @@ func _onActivatePowerup():
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area.get_parent().ifDead == false:
+	if area.get_parent().enemyType == "slideEnemy" and Globals.isSliding:
+		#we slid into enemy
+		print("made it into slide damage: ")
+		var other = area.get_parent()
+		scored.emit(self.name, abs(other.global_position.x - global_position.x))
+		other = other.get_parent()
+		print("made it into slide damage: 1")
+		if other.is_in_group("enemies"):
+			print("made it into slide damage: 2")
+			other.GotHit()
+				# Play hit animation
+			hitEffect.frame = 0
+			hitEffect.play()
+	elif area.get_parent().ifDead == false :
 		_onTakeDamage(3)
 
 

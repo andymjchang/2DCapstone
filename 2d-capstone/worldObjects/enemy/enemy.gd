@@ -63,17 +63,13 @@ func DeathAnimation(delta: float) -> void:
 	
 	
 func GotHit():
-	if !isMultiPunch or punchesLeft == 0.0:
-		self.ifDead = true
-		velocity.y = randi_range(-600, -300)
-		sprite.rotation = randf_range(min_rotation, max_rotation)
-		#get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
-		get_tree().current_scene.get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
-	else:
-		punchesLeft-=1
-		get_parent().moveToNext()
-		#got to move self to next indictaor
-		
+
+	self.ifDead = true
+	velocity.y = randi_range(-600, -300)
+	sprite.rotation = randf_range(min_rotation, max_rotation)
+	#get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
+	get_tree().current_scene.get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
+
 		
 func setEnemyType(posPoints) -> void :
 	
