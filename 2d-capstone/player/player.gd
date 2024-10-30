@@ -197,8 +197,8 @@ func _physics_process(delta: float) -> void:
 		elif reachedCheckpoint:
 			pass
 		move_and_slide()
-		if position.x > camera.position.x - 250:
-			position.x = camera.position.x - 244
+		if global_position.x > camera.global_position.x - 250:
+			global_position.x = camera.global_position.x - 244
 	else:
 		invuln = true
 		

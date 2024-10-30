@@ -22,15 +22,15 @@ stream = ExtResource("6_l5gx2")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 784.0
-offset_top = 398.0
-offset_right = 1424.0
-offset_bottom = 514.0
+offset_left = 693.0
+offset_top = 402.0
+offset_right = 1333.0
+offset_bottom = 518.0
 pivot_offset = Vector2(160, 32)
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("2_6gsne")
-theme_override_font_sizes/font_size = 96
+theme_override_font_sizes/font_size = 60
 text = "Perfect!"
 horizontal_alignment = 1
 vertical_alignment = 1
