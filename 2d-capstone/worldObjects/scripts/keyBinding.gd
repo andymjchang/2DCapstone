@@ -42,21 +42,26 @@ func setKeyBindingImages():
 	var eventBinds = allCommands[instType]
 	#looping through all the events
 	for event in eventBinds:
-			event = event.as_text().to_lower()
-			event = event.replace("physical", "")
-			event = event.replace(" ", "")
-			event = event.replace("(", "")
-			event = event.replace(")", "")
+			var eventText = event.as_text().to_lower()
+			eventText = eventText.replace("physical", "")
+			eventText = eventText.replace(" ", "")
+			eventText = eventText.replace("(", "")
+			eventText = eventText.replace(")", "")
+			print("Event im matching too: ", event)
 			var dir = DirAccess.open(keyFolderPath)
 			dir.list_dir_begin()
 			var curFileName = dir.get_next()
 			#I do not think I need to loop here
 			while curFileName != "":
-				if curFileName == (event+".png"):
+				if curFileName == (eventText+".png") and event is InputEventKey:
 					dir.list_dir_end()
+					print("Matching file name: ", curFileName)
+					pathToTarget = keyFolderPath
 					pathToTarget += "/"+curFileName
+					print("path to target: ", pathToTarget)
 					var newImage = load(pathToTarget)
 					self.get_node("Sprite2D").texture = newImage
+					break
 				curFileName = dir.get_next()
 func setImage(posPoints : Array) -> void:
 	if posPoints.size() > 2.0:

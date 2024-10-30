@@ -138,6 +138,7 @@ func _ready():
 		var distance = abs(0.0 - player1.global_position.x)
 		var playerSpeed = player1.SPEED
 		musicTime = distance / Globals.pixelsPerFrame
+		Globals.time = 0.0
 		Globals.time += musicTime
 	#killWall = get_node("KillWall")start
 	countdownUI = get_node("LevelUI")
@@ -157,8 +158,9 @@ func startGame():
 	music.play(musicTime)
 	print("starting")
 	Globals.inLevel = true
-	if !Globals.customStart:
+	if !Globals.customStart and !Globals.relocateToCheckpoint:
 		Globals.time = 0.0
+		Globals.relocateToCheckpoint = false
 
 func loadAudio():
 	if !Globals.currentSongFileName:
@@ -326,19 +328,15 @@ func _physics_process(delta):
 		Globals.paused = true
 		$LevelUI/PauseScreen.visible = true
 		Engine.time_scale = 0.0
-		
-	#if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused:
-		#if Globals.customStart or Globals.relocateToCheckpoint:
-			#await get_tree().create_timer(3).timeout
-		#startGame()
-		#
 	if Globals.vertical:
 		camera.emit_signal("moveCameraY", player1.position.y)
 	elif Globals.resetCamera:
 		camera.emit_signal("moveCameraY", player1.position.y)
 	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused and !Globals.customStart and !Globals.relocateToCheckpoint:
+		print("should not be making it here")
 		startGame()
 	elif (Globals.customStart or Globals.relocateToCheckpoint) and !Globals.inLevel and Globals.time >= musicTime + 3.0:
+		print("global time: ", Globals.time, " music time: ", musicTime)
 		startGame()
 
 		

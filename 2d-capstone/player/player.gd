@@ -144,7 +144,6 @@ func _physics_process(delta: float) -> void:
 				
 				var direction = Input.get_axis(left, right)
 				if not hitBounds and direction > 0  and !Globals.isSliding:
-					print("issliding, ", isSliding)
 					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
 				elif hitBounds and direction > 0 and !Globals.isSliding:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed

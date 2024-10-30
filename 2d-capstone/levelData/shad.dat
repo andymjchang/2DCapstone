@@ -21,13 +21,27 @@ platformBlocks
 2964, 625, 12, <null>, <null>,
 3120, 625, 12, <null>, <null>,
 actionIndicators
+150, 550,
+300, 575,
+450, 575,
+600, 575,
 playerCheckpoints
+950, 550,
 player
 0, 540,
 enemies
+1125, 550, enemy,
+1275, 550, enemy,
+1425, 550, enemy,
+1575, 550, enemy,
+1700, 550, enemy,
+1750, 550, enemy,
+1700, 550, enemy,
+1700, 550, enemy,
 killFloors
 goalBlocks
 breakableWalls
+1900, 550,
 ziplines
 placers
 slideWalls
@@ -35,3 +49,6 @@ powerups
 jumpBoosts
 coins
 keyBindings
+150, 475, slide,
+450, 475.000030517578, activate,
+275, 475, punch,
