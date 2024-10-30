@@ -143,16 +143,19 @@ func _physics_process(delta: float) -> void:
 					#velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 				
 				var direction = Input.get_axis(left, right)
-				if not hitBounds and direction > 0  and !isSliding:
+				if not hitBounds and direction > 0  and !Globals.isSliding:
+					print("issliding, ", isSliding)
 					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0 and !isSliding:
+				elif hitBounds and direction > 0 and !Globals.isSliding:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-				elif !isSliding:
+				elif !Globals.isSliding:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+				else:
+					velocity.x *= slideFriction
 
 			#debug this
-			if Input.is_action_pressed(slide):
-				velocity.x *= slideFriction
+			#if Input.is_action_pressed(slide):
+				#velocity.x *= slideFriction
 
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
@@ -210,7 +213,7 @@ func _physics_process(delta: float) -> void:
 		elif reachedCheckpoint:
 			pass
 		move_and_slide()
-		if position.x > camera.position.x - 250 and !isSliding:
+		if (position.x > camera.position.x - 250 and !isSliding) or hitBounds:
 			position.x = camera.position.x - 244
 	else:
 		invuln = true

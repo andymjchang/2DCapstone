@@ -1,0 +1,37 @@
+platformBlocks
+0, 625, 12, <null>, <null>,
+156, 625, 12, <null>, <null>,
+312, 625, 12, <null>, <null>,
+468, 625, 12, <null>, <null>,
+624, 625, 12, <null>, <null>,
+780, 625, 12, <null>, <null>,
+936, 625, 12, <null>, <null>,
+1092, 625, 12, <null>, <null>,
+1248, 625, 12, <null>, <null>,
+1404, 625, 12, <null>, <null>,
+1560, 625, 12, <null>, <null>,
+1716, 625, 12, <null>, <null>,
+1872, 625, 12, <null>, <null>,
+2028, 625, 12, <null>, <null>,
+2184, 625, 12, <null>, <null>,
+2340, 625, 12, <null>, <null>,
+2496, 625, 12, <null>, <null>,
+2652, 625, 12, <null>, <null>,
+2808, 625, 12, <null>, <null>,
+2964, 625, 12, <null>, <null>,
+3120, 625, 12, <null>, <null>,
+actionIndicators
+playerCheckpoints
+player
+0, 540,
+enemies
+killFloors
+goalBlocks
+breakableWalls
+ziplines
+placers
+slideWalls
+powerups
+jumpBoosts
+coins
+keyBindings

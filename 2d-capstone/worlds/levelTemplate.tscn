@@ -101,6 +101,7 @@ position = Vector2(0, 120)
 position = Vector2(-960, -540)
 stream = ExtResource("18_44qgl")
 max_distance = 10000.0
+bus = &"levelMusic"
 
 [node name="KillWall" parent="Camera2D" instance=ExtResource("13_sbyxw")]
 position = Vector2(-598, -502)
