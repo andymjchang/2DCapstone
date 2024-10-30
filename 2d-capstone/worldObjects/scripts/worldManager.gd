@@ -295,21 +295,28 @@ func _onGameOver():
 	Globals.inLevel = false
 
 func showGameOver():
+	Engine.time_scale = 1.0
 	music.stop()
 	Globals.gameOver = true
+	Globals.inLevel = false
 	$LevelUI/GameOverScreen.visible = true
 	$LevelUI/GameOverScreen.playMusic()
 	Globals.restartLevelData()
-	Engine.time_scale = 0.0
+	Engine.time_scale = 1.0
 	
 func showLevelCompleted():
+	Engine.time_scale = 1.0
 	music.stop()
 	Globals.gameOver = true
+	Globals.inLevel = false
 	$LevelUI/levelCompleteScreen.emit_signal("updateScoreData")
 	$LevelUI/levelCompleteScreen.visible = true
-	$LevelUI/levelCompleteScreen.playMusic()
+	var newAudio = load("res://audioTracks/CourseComplete_153bpm.mp3") as AudioStream
+	$LevelUI/levelCompleteScreen/jingle.stream = newAudio
+	$LevelUI/levelCompleteScreen/jingle.play()
+	
 	Globals.restartLevelData()
-	Engine.time_scale = 0.0
+	await get_tree().create_timer(5.0).timeout
 	#statusMessage.text = "Level Completed!"
 	#restartButton.visible = true
 	
@@ -331,10 +338,9 @@ func _physics_process(delta):
 		camera.emit_signal("moveCameraY", player1.position.y)
 	elif Globals.resetCamera:
 		camera.emit_signal("moveCameraY", player1.position.y)
-	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused and !Globals.customStart and !Globals.relocateToCheckpoint:
-		print("should not be making it here")
+	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused and !Globals.customStart and !Globals.relocateToCheckpoint and !Globals.gameOver:
 		startGame()
-	elif (Globals.customStart or Globals.relocateToCheckpoint) and !Globals.inLevel and Globals.time >= musicTime + 3.0:
+	elif (Globals.customStart or Globals.relocateToCheckpoint) and !Globals.inLevel and Globals.time >= musicTime + 3.0 and !Globals.gameOver:
 		print("global time: ", Globals.time, " music time: ", musicTime)
 		startGame()
 

@@ -40,6 +40,7 @@ enemies
 1700, 550, enemy,
 killFloors
 goalBlocks
+150, 575,
 breakableWalls
 1900, 550,
 ziplines

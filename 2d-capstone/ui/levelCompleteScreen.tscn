@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d05n5e2m50hb1"]
+[gd_scene load_steps=8 format=3 uid="uid://d05n5e2m50hb1"]
 
 [ext_resource type="Script" path="res://ui/scripts/levelCompleteScreen.gd" id="1_qafpk"]
 [ext_resource type="Texture2D" uid="uid://gkiuu3artph0" path="res://ui/assets/Game_Over_Menu.png" id="2_vhrkf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bbia4tw56raak" path="res://ui/assets/MainMenu_button_pressed.png" id="4_5calm"]
 [ext_resource type="Texture2D" uid="uid://73bcgskod8qu" path="res://ui/assets/Restart_button_unpressed.png" id="5_1mi21"]
 [ext_resource type="Texture2D" uid="uid://dbqpl3k5lnxb8" path="res://ui/assets/Restart_button_pressed.png" id="6_o6lwd"]
+[ext_resource type="AudioStream" uid="uid://blg7fxg41fnsb" path="res://audioTracks/CourseComplete_153bpm.mp3" id="7_j5x8q"]
 
 [node name="levelCompleteScreen" type="Control"]
 layout_mode = 3
@@ -103,7 +104,9 @@ texture_pressed = ExtResource("6_o6lwd")
 stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="jingle" type="AudioStreamPlayer2D" parent="." groups=["musicSounds"]]
+[node name="jingle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_j5x8q")
+volume_db = 9.333
 bus = &"music"
 
 [connection signal="button_up" from="HBoxContainer/menuButton" to="." method="_onMenuButtonUp"]

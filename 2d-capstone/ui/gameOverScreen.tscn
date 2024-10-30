@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://u5byse278f80"]
+[gd_scene load_steps=8 format=3 uid="uid://u5byse278f80"]
 
 [ext_resource type="Script" path="res://ui/scripts/gameOverScreen.gd" id="1_tmgw1"]
 [ext_resource type="Texture2D" uid="uid://gkiuu3artph0" path="res://ui/assets/Game_Over_Menu.png" id="2_g3kqk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bbia4tw56raak" path="res://ui/assets/MainMenu_button_pressed.png" id="4_bxjpc"]
 [ext_resource type="Texture2D" uid="uid://73bcgskod8qu" path="res://ui/assets/Restart_button_unpressed.png" id="5_wmnct"]
 [ext_resource type="Texture2D" uid="uid://dbqpl3k5lnxb8" path="res://ui/assets/Restart_button_pressed.png" id="6_1qhke"]
+[ext_resource type="AudioStream" uid="uid://ipcdljmmnyyx" path="res://audioTracks/GameOver_120bpm.mp3" id="7_gngc8"]
 
 [node name="GameOverScreen" type="Control"]
 layout_mode = 3
@@ -53,6 +54,7 @@ stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="jingle" type="AudioStreamPlayer2D" parent="." groups=["musicSounds"]]
+stream = ExtResource("7_gngc8")
 bus = &"music"
 
 [connection signal="button_up" from="VBoxContainer/menuButton" to="." method="_onMenuButtonUp"]
