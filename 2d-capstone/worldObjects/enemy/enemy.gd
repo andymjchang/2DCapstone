@@ -5,6 +5,10 @@ var count = 0
 var ifDead = false
 var secondTime = false
 var blockType = "enemy"
+var enemyType = "enemy"
+
+@onready var enemyImage = preload("res://worldObjects/assets/singleBot.png") as Texture2D
+@onready var slideEnemyImage = preload("res://worldObjects/assets/slideEnemy.png") as Texture2D
 
 var up
 var down 
@@ -21,9 +25,12 @@ var max_rotation = 45 * (PI / 180)
 
 var soundPlayer := AudioStreamPlayer.new()
 @onready var sprite
+@onready var animatedSprite = $AnimatedSprite2D
 
 var isMultiPunch = false
 var punchesLeft = 0.0
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -67,6 +74,23 @@ func GotHit():
 		get_parent().moveToNext()
 		#got to move self to next indictaor
 		
-
-
-	pass # Replace with function body.
+		
+func setEnemyType(posPoints) -> void :
+	
+	if posPoints.size() > 2:
+		var newType = posPoints[2]
+		match newType:
+			"enemy":
+				animatedSprite.animation = "default"
+				enemyType = "enemy"
+				var newYExtents = (enemyImage.get_size().y * animatedSprite.scale.y) / 2.0
+				var newXExtents = (enemyImage.get_size().x * animatedSprite.scale.x) / 2.0
+				$Area2D/CollisionShape2D.shape.extents = Vector2(newXExtents, newYExtents)
+			"slideEnemy":
+				animatedSprite.animation = "slideEnemy"
+				enemyType = "slideEnemy"
+				var newYExtents = (slideEnemyImage.get_size().y * animatedSprite.scale.y) / 2.0
+				var newXExtents = (slideEnemyImage.get_size().x * animatedSprite.scale.x) / 2.0
+				$Area2D/CollisionShape2D.shape.extents = Vector2(newXExtents, newYExtents)
+		
+		#set the collision based on it 

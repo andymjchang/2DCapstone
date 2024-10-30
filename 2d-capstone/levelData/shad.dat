@@ -1,10 +1,17 @@
 platformBlocks
-25, 600, 12, <null>, <null>,
+0, 600, 12, <null>, <null>,
+156, 600, 12, <null>, <null>,
+312, 600, 12, <null>, <null>,
+468, 600, 12, <null>, <null>,
+624, 600, 12, <null>, <null>,
+780, 600, 12, <null>, <null>,
+936, 600, 12, <null>, <null>,
 actionIndicators
 playerCheckpoints
 player
 0, 540,
 enemies
+450, 550, slideEnemy,
 killFloors
 goalBlocks
 breakableWalls
@@ -16,4 +23,4 @@ jumpBoosts
 coins
 multiPunches
 keyBindings
-150, 500, jump,
+250, 350, jump,

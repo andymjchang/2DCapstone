@@ -249,6 +249,8 @@ func loadLevel():
 					#actionInd.global_position = Vector2(posPoints[xIndex + i], posPoints[yIndex + i])
 			if name == "keyBindings":
 				instancedObj.setImage(posPoints)
+			if name == "enemies":
+				instancedObj.setEnemyType(posPoints)
 			
 		elif ".mp3" in line:
 			# audio file

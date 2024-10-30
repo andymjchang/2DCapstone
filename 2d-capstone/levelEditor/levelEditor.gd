@@ -473,6 +473,8 @@ func save_scene_to_file():
 							elif itemList.name == "keyBindings":
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().instructionType)+", "
 								print("key bidnings pso cahin", posChain)
+							elif itemList.name == "enemies":
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().enemyType)+", "
 							else:
 								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
 							index+=1
