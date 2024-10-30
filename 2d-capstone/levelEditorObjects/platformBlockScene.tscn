@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=4 uid="uid://yau5rmr187fi"]
 
 [ext_resource type="Script" path="res://levelEditorObjects/platformBlockScene.gd" id="1_1wl40"]
-[ext_resource type="TileSet" uid="uid://bva4vakjtko8x" path="res://backgrounds/tilemaps/level1.tres" id="2_ft64r"]
 [ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="2_gep2g"]
+[ext_resource type="TileSet" uid="uid://dr84xn7bhbyva" path="res://backgrounds/tilemaps/level1.2.tres" id="3_rrrbc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymyh8"]
 resource_local_to_scene = true
@@ -29,4 +29,4 @@ texture = ExtResource("2_gep2g")
 [node name="TileMapLayer" type="TileMapLayer" parent="Node2D"]
 scale = Vector2(0.052, 0.052)
 tile_map_data = PackedByteArray("AAD9////AQADAAAAAAD+////AQAEAAAAAAD/////AQAFAAAAAAAAAP//AQAGAAAAAAABAP//AQAHAAAAAAACAP//AQAIAAAAAAD9/wAAAQADAAEAAAACAAAAAQAIAAEAAAD//wAAAQAFAAEAAAABAAAAAQAHAAEAAAAAAAAAAQAGAAEAAAD+/wAAAQAEAAEAAAD9/wEAAQADAAIAAAD+/wEAAQAEAAIAAAD//wEAAQAFAAIAAAAAAAEAAQAGAAIAAAABAAEAAQAHAAIAAAACAAEAAQAIAAIAAAD6////AQAAAAAAAAD7////AQABAAAAAAD8////AQACAAAAAAADAP//AQAJAAAAAAAEAP//AQAKAAAAAAAFAP//AQALAAAAAAAFAAAAAQALAAEAAAAFAAEAAQALAAMAAAAFAAIAAQAEAAQAAAD6/wAAAQAAAAEAAAD6/wEAAQAAAAIAAAD6/wIAAQAAAAMAAAD7/wIAAQABAAMAAAD8/wIAAQACAAMAAAD9/wIAAQADAAMAAAD+/wIAAQAEAAMAAAD//wIAAQAFAAMAAAAAAAIAAQAGAAMAAAABAAIAAQAHAAMAAAACAAIAAQAIAAMAAAADAAIAAQAJAAMAAAAEAAIAAQAKAAMAAAD7/wAAAQABAAEAAAD7/wEAAQABAAIAAAD8/wAAAQACAAEAAAD8/wEAAQACAAIAAAADAAAAAQAJAAEAAAAEAAAAAQABAAEAAAAEAAEAAQAKAAIAAAADAAEAAQAJAAIAAAAAAAMAAQAGAAQAAAD//wMAAQAFAAQAAAD9/wMAAQADAAQAAAD8/wMAAQACAAQAAAD7/wMAAQABAAQAAAA=")
-tile_set = ExtResource("2_ft64r")
+tile_set = ExtResource("3_rrrbc")
