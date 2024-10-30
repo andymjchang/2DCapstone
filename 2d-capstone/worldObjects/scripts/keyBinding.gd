@@ -68,3 +68,12 @@ func setImage(posPoints : Array) -> void:
 		var instructionType = posPoints[2]
 		instType = instructionType
 		setKeyBindingImages()
+		stretchImage()
+		
+func stretchImage() -> void:
+	var spriteSize = sprite.texture.get_size()
+	var curExtents = $Area2D/CollisionShape2D.shape.extents
+	var newSize = curExtents * 2.0
+	var newScale = newSize/spriteSize
+	sprite.scale = newScale
+	
