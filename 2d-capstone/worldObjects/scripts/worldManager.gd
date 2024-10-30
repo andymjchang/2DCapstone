@@ -252,7 +252,7 @@ func loadLevel():
 	
 	# load the actionArrays
 	$objectList/actionIndicators.load_array()
-	if levelFile.begins_with("Lvl2."):
+	if levelFile.begins_with("Level 2"):
 		for platform in platformBlocksList.get_children():
 			platform.get_node("sprite2D/TileMapLayer").visible = false
 			platform.get_node("sprite2D/TileMapLayer2").visible = true
