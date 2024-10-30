@@ -61,8 +61,8 @@ var coins = 0
 @onready var tweenSlide : Tween
 @onready var tweenHit : Tween
 
-# Add these variables near the top with other variables
-var shake_strength = 30.0
+# Camera Shake
+var shake_strength = 25.0
 var shake_decay = 5.0
 var shake_intensity = 0.0
 
@@ -382,12 +382,12 @@ func SlideTweenEnd():
 	tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
 
 func PunchTween():
-	camera.zoom = Vector2(2.025, 2.025)
-	camera.rotation = camera.rotation-0.01363323
+	camera.zoom = camera.zoom + Vector2(0.025, 0.025)
+	camera.rotation = camera.rotation - 0.01363323
 	tweenHit = create_tween()
 	tweenHit.tween_property(camera, "rotation", 0, 0.15)
 	tweenHit.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
 
 # Add this new function
-func shake_camera(strength: float = 30.0):
+func shake_camera(strength: float = 25.0):
 	shake_intensity = strength
