@@ -214,6 +214,7 @@ func _onTakeDamage(amount):
 	shake_camera() # Add camera shake when taking damage
 	
 	# Glitch Shader
+	$Animation.material.set_shader_parameter("damage_intensity", 0.5)
 	$damagedTimer.start()
 	
 	if !invuln:
@@ -308,7 +309,7 @@ func _onActivatePowerup():
 	match curPowerup:
 		Globals.powerType.INVULN:
 			invuln = true
-			$Animation.self_modulate.a = 0.5
+			$Animation.material.set_shader_parameter("invulnerable_intensity", 0.5)
 		Globals.powerType.HEAL:
 			sfxPlayer.stream = healthSfx
 			sfxPlayer.stream.loop = false
@@ -334,7 +335,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 
 
 func _on_damaged_timer_timeout() -> void:
-	pass
+	$Animation.material.set_shader_parameter("damage_intensity", 0.0)
 
 
 func _onPowerupTimerTimeout() -> void:
@@ -343,6 +344,7 @@ func _onPowerupTimerTimeout() -> void:
 		Globals.powerType.INVULN:
 			invuln = false
 			$Animation.self_modulate.a = 1
+			$Animation.material.set_shader_parameter("invulnerable_intensity", 0.0)
 		Globals.powerType.HEAL:
 			pass
 		Globals.powerType.SPEEDUP:
