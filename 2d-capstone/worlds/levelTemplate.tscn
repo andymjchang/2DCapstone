@@ -79,7 +79,7 @@ script = ExtResource("15_mx364")
 increasedScale = Vector2(1, 1.5)
 
 [node name="Visualizer" type="Node2D" parent="CanvasLayer"]
-position = Vector2(772, 25)
+position = Vector2(780, 25)
 script = ExtResource("18_0o0nt")
 
 [node name="Background" type="Node2D" parent="."]

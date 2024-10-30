@@ -165,7 +165,8 @@ func _physics_process(delta: float) -> void:
 				velocity.y = JUMP_VELOCITY
 
 			if Input.is_action_just_released(jump) and not jumpInProgress:
-				velocity.y = 0
+				if velocity.y < 0:
+					velocity.y = min(0, velocity.y + 1000 * get_physics_process_delta_time())
 
 			if Input.is_action_just_pressed(slide):
 				get_node("Hitbox").scale *= Vector2(1, 0.5);
@@ -236,12 +237,12 @@ func _onTakeDamage(amount):
 			if amount == 10:
 				amount = health
 			health -= amount
-			#print("Got hit! Health now: ", self.health)
 			if health % 9 == 0:
 				get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
 			if health <= 0:
-				#print("Player died!")
-				#self.visible = false
+				# Reset shader parameters on death
+				$Animation.material.set_shader_parameter("damage_intensity", 0.0)
+				$Animation.material.set_shader_parameter("invulnerable_intensity", 0.0)
 				$Animation.self_modulate.a = 0.5
 				dead = true
 				invuln = false
@@ -252,10 +253,12 @@ func _onTakeDamage(amount):
 
 func _onRevive(who):
 	who.get_node("Animation").self_modulate.a = 1
+	# Ensure shader parameters are reset on revive
+	who.get_node("Animation").material.set_shader_parameter("damage_intensity", 0.0)
+	who.get_node("Animation").material.set_shader_parameter("invulnerable_intensity", 0.0)
 	who.health = 27
 	get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("reviveUI", self.name)
-	#reset ui Indicator
-	who.dead = false
+	who.dead = false # reset ui Indicator
 
 func _onRelocate(nearestPoint):
 	# Disable collisions, change flags for relocation

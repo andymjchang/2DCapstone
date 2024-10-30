@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://b67k06qom6hxa" path="res://audioEffects/SFX_Hit_4.mp3" id="8_k3kow"]
 [ext_resource type="Script" path="res://ui/scripts/pulseSprite.gd" id="8_socwb"]
 [ext_resource type="Texture2D" uid="uid://cuoxttcoy7weh" path="res://worldObjects/enemy/Poof_anim_1-sheet.png" id="11_1lfn5"]
-[ext_resource type="SpriteFrames" path="res://worldObjects/assets/powerups/powerupSlot.tres" id="14_6bgu6"]
+[ext_resource type="SpriteFrames" uid="uid://cjvuoe42ob7h8" path="res://worldObjects/assets/powerups/powerupSlot.tres" id="14_6bgu6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3fn7t"]
 shader = ExtResource("2_75si5")
