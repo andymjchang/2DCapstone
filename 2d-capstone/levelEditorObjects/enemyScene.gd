@@ -27,6 +27,11 @@ func setEnemyType(newInst) -> void:
 		"slideEnemy":
 			sprite.texture = slideEnemyImage
 			enemyType = "slideEnemy"
+	
+	#set the collision based on it 
+	var newYExtents = (sprite.texture.get_size().y * sprite.scale.y) / 2.0
+	var newXExtents = (sprite.texture.get_size().x * sprite.scale.x) / 2.0
+	$Node2D/EditorArea0/CollisionShape2D.shape.extents = Vector2(newXExtents, newYExtents)
 		
 	
 func setImage(posPoints):
