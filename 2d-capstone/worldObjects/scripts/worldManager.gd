@@ -22,7 +22,6 @@ signal changeSpeed(speedType)
 @export var jumpInstance : PackedScene
 @export var ziplineMiddle : PackedScene
 @export var coinInstance : PackedScene
-@export var multiPunchInstance : PackedScene
 @export var keyBindingInstance : PackedScene
 
 @onready var objectList = $objectList
@@ -39,7 +38,6 @@ signal changeSpeed(speedType)
 @onready var powerupList = $objectList/powerups
 @onready var jumpBoostList = $objectList/jumpBoosts
 @onready var coinList = $objectList/coins
-@onready var multiPunchList = $objectList/multiPunches
 @onready var keyBindingList = $objectList/keyBindings
 
 var player1 
@@ -192,7 +190,6 @@ func loadLevel():
 		"powerups": [powerupInstance, powerupList],
 		"jumpBoosts": [jumpInstance, jumpBoostList],
 		"coins": [coinInstance, coinList],
-		"multiPunches": [multiPunchInstance, multiPunchList],
 		"keyBindings":[keyBindingInstance, keyBindingList]}
 	var instance
 	var instanceParent
@@ -238,15 +235,6 @@ func loadLevel():
 				instancedObj.setTileMaps(posPoints.duplicate()) 
 				instancedObj.add_to_group("platforms")
 				
-			if name == "multiPunches":
-				#pos points array starts from  45, 67 , 89
-				var xIndex = 4
-				var yIndex = 5
-				for i in range (0,3):
-					instancedObj.actionIndicatorLocations.append(Vector2(posPoints[xIndex + i], posPoints[yIndex + i]))
-					#var actionInd = actionIndicatorInstance.instantiate()
-					#actionIndicatorsList.add_child(actionInd)
-					#actionInd.global_position = Vector2(posPoints[xIndex + i], posPoints[yIndex + i])
 			if name == "keyBindings":
 				instancedObj.setImage(posPoints)
 			if name == "enemies":

@@ -4,7 +4,6 @@
 resource_name = "SpectrumAnalyzer"
 
 [resource]
-bus/0/send = &"player"
 bus/0/effect/0/effect = SubResource("AudioEffectSpectrumAnalyzer_mtg2o")
 bus/0/effect/0/enabled = true
 bus/1/name = &"player"

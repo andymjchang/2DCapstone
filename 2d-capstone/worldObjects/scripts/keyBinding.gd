@@ -52,29 +52,14 @@ func setKeyBindingImages():
 			var curFileName = dir.get_next()
 			#I do not think I need to loop here
 			while curFileName != "":
-				print("cur file name: ", curFileName, " event name: ", event)
 				if curFileName == (event+".png"):
 					dir.list_dir_end()
 					pathToTarget += "/"+curFileName
 					var newImage = load(pathToTarget)
 					self.get_node("Sprite2D").texture = newImage
-					#set the size of the image
-					
-					#var colShape = get_node("Node2D/EditorArea0/CollisionShape2D").shape as RectangleShape2D
-					#var newSize = colShape.extents * 2.0
-					#self.get_node("Node2D/Sprite2D").scale = newSize /( self.get_node("Node2D/Sprite2D").texture.get_size()  )
 				curFileName = dir.get_next()
 func setImage(posPoints : Array) -> void:
 	if posPoints.size() > 2.0:
 		var instructionType = posPoints[2]
 		instType = instructionType
 		setKeyBindingImages()
-		#match instructionType:
-			#"punch":
-				#sprite.texture = punchImage
-			#"slide":
-				#sprite.texture = slideImage
-			#"jump":
-				#sprite.texture = jumpImage
-			#"activate":
-				#sprite.texture = activateImage

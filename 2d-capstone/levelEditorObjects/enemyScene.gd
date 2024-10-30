@@ -36,5 +36,4 @@ func setEnemyType(newInst) -> void:
 	
 func setImage(posPoints):
 	if posPoints.size() > 2:
-		print("image name: ", posPoints[2])
 		setEnemyType(posPoints[2])

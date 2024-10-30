@@ -61,8 +61,8 @@ var isSliding = false
 @onready var itemGrabSfX = load("res://audioEffects/SFX_ItemGrab_temp.wav") as AudioStream
 
 @onready var hitEffect : AnimatedSprite2D = $HitEffect
-@onready var tweenRot : Tween
-@onready var tweenZoom : Tween
+@onready var tweenSlide : Tween
+@onready var tweenHit : Tween
 
 func _ready():
 	curSprite = get_node("Animation").duplicate()
@@ -109,6 +109,7 @@ func _physics_process(delta: float) -> void:
 				is_hanging = false
 				camera.smooth_pan_to(self.global_position.y + -50)
 				Globals.resetCamera = false
+				jumpInProgress = false
 			
 			# Add the gravity.
 			if not is_on_floor():
@@ -133,20 +134,29 @@ func _physics_process(delta: float) -> void:
 				# velocity.x = Globals.pixelsPerFrame
 				# Pseudo-autoscroll prototype
 				var direction = Input.get_axis(left, right)
-				if not hitBounds and direction > 0 and !isSliding:
+				#debug this
+				#if not hitBounds and direction > 0 and !isSliding:
+					#velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
+				#elif hitBounds and direction > 0 and !isSliding:
+					#velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+				#elif !isSliding:
+					#velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+				
+				if not hitBounds and direction > 0:
 					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0 and !isSliding:
-					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-				elif !isSliding:
+				elif hitBounds and direction > 0:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 
-			if Input.is_action_pressed(slide):
-				velocity.x *= slideFriction
+			#debug this
+			#if Input.is_action_pressed(slide):
+				#velocity.x *= slideFriction
 
 			if Input.is_action_just_pressed(jump) and is_on_floor():
 				$Animation.play("Jump")
-				jumpInProgress = true
 				velocity.y = JUMP_VELOCITY
+
+			if Input.is_action_just_released(jump) and not jumpInProgress:
+				velocity.y = 0
 
 			if Input.is_action_just_pressed(slide):
 				get_node("Hitbox").scale *= Vector2(1, 0.5);
@@ -156,12 +166,9 @@ func _physics_process(delta: float) -> void:
 				isSliding = true
 				Globals.isSliding = true
 				#get_node("Floor").disabled = false
-				var rotDir = Globals.get_random_sign()
-				tweenRot = create_tween()
-				tweenZoom = create_tween()
-				tweenRot.tween_property(camera, "rotation", 0.004363323 * rotDir, 0.2)
-				tweenZoom.tween_property(camera, "zoom", Vector2(2.1, 2.1), 0.5)
-				#camera.zoom = Vector2(2.2, 2.2)
+				tweenSlide = create_tween()
+				tweenSlide.tween_property(camera, "rotation", 0.008363323, 0.15)
+				tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.2, 2.2), 0.15)
 				
 			if Input.is_action_just_released(slide):
 				get_node("Hitbox").scale *= Vector2(1, 2);
@@ -170,10 +177,9 @@ func _physics_process(delta: float) -> void:
 				#get_node("Floor").disabled = true
 				isSliding = false
 				Globals.isSliding = false
-				tweenRot = create_tween()
-				tweenZoom = create_tween()
-				tweenRot.tween_property(camera, "rotation", 0, 0.2)
-				tweenZoom.tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.5)
+				tweenSlide = create_tween()
+				tweenSlide.tween_property(camera, "rotation", 0, 0.15)
+				tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
 		elif inZipline:
 			$Animation.play("Zip")
 			
@@ -294,19 +300,20 @@ func ResetAttack():
 # Powerup code
 # TODO: Swap from string to enum
 func _onGetPowerup(powerType):
-	sfxPlayer.stream = itemGrabSfX
-	#sfxPlayer.stream.loop = false
-	sfxPlayer.play()
-	curPowerup = powerType
-	worldNode.powerupUI.visual.frame = powerType
-	worldNode.powerupUI.visual.show()
-	print("I got: ", curPowerup)
-	var particleEffect = get_node("CPUParticles2D")
-	print("Loading: ", "res://particles/powerups/" + str(powerType) + ".png")
-	particleEffect.texture = load("res://particles/powerups/" + str(powerType) + ".png")
-	var powerSprite = get_node("Area2D/Sprite2D")
-	particleEffect.emitting = true
-	particleEffect.visible = true
+	if curPowerup == null:
+		sfxPlayer.stream = itemGrabSfX
+		#sfxPlayer.stream.loop = false
+		sfxPlayer.play()
+		curPowerup = powerType
+		worldNode.powerupUI.visual.frame = powerType
+		worldNode.powerupUI.visual.show()
+		print("I got: ", curPowerup)
+		var particleEffect = get_node("CPUParticles2D")
+		print("Loading: ", "res://particles/powerups/" + str(powerType) + ".png")
+		particleEffect.texture = load("res://particles/powerups/" + str(powerType) + ".png")
+		var powerSprite = get_node("Area2D/Sprite2D")
+		particleEffect.emitting = true
+		particleEffect.visible = true
 
 func _onActivatePowerup():
 	match curPowerup:

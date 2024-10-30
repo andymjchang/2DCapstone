@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "multiPunch"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -54,7 +54,6 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var powerup : PackedScene
 @export var jumpBoost : PackedScene
 @export var coin : PackedScene
-@export var multiPunch : PackedScene
 @export var keyBinding : PackedScene
 
 #block variants list
@@ -100,7 +99,6 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var powerupList = $objectList/powerups
 @onready var jumpList = $objectList/jumpBoosts
 @onready var coinList = $objectList/coins
-@onready var multiPunchList = $objectList/multiPunches
 @onready var keyBindingList = $objectList/keyBindings
 
 
@@ -152,11 +150,8 @@ func _process(delta: float) -> void:
 		if !isBinding and currentBlock:
 			#grab the list of similiar types
 			#TODO add a check here to see if this is a valid grab
-			print("am tabbing")
 			var curTypeName = typeMap[currentBlock.blockType]
-			print("cur type name: ", curTypeName)
 			var curTypeList = typeArrays[curTypeName]
-			print("cur type list: ", curTypeList)
 			currentBlock.tabType(curTypeList, curTypeName)
 	if Input.is_action_just_pressed("click"):
 		var mouseCoords = get_global_mouse_position()
@@ -221,7 +216,6 @@ func loadLevel():
 		"powerups": [powerup, powerupList, blockTypes[1]],
 		"jumpBoosts": [jumpBoost, jumpList, blockTypes[13]],
 		"coins": [coin, coinList, blockTypes[14]],
-		"multiPunches": [multiPunch, multiPunchList, blockTypes[16]],
 		"keyBindings":[keyBinding, keyBindingList, blockTypes[15]]}
 	var instance
 	var objectList
@@ -238,14 +232,11 @@ func loadLevel():
 			var instancedObj = instance.instantiate()
 			var posPoints = []
 			for pos in line.split(", "):
-				print("pos being added:", pos)
 				pos = pos.replace(",", "")
 				if pos.is_valid_float():
-			
 					posPoints.append(pos.to_float())
 				else:
 					posPoints.append(pos)
-			print("pos points in load: ", posPoints)
 			objectParent.add_child(instancedObj)
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
@@ -306,14 +297,6 @@ func _onSlideWallButtonUp() -> void:
 	slideWallParent.blockType = blockTypes[12]
 	slideWallList.add_child(slideWallParent)
 	place_block(slideWallParent, slideWallList, camera.position, false)
-func _onMultiPunchButtonUp() -> void:
-	var multiPunchInstance = multiPunch.instantiate()
-	var multiPunchParent = baseObject.instantiate()
-	multiPunchParent.add_child(multiPunchInstance)
-	multiPunchParent.blockType = blockTypes[16]
-	multiPunchList.add_child(multiPunchParent)
-	place_block(multiPunchParent, multiPunchList, camera.position, false)
-	
 func _on_exit_button_pressed() -> void:
 	# This will be the final functionality so players can navigate between menus
 	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
@@ -472,7 +455,6 @@ func save_scene_to_file():
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", "
 							elif itemList.name == "keyBindings":
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().instructionType)+", "
-								print("key bidnings pso cahin", posChain)
 							elif itemList.name == "enemies":
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().enemyType)+", "
 							else:
@@ -606,8 +588,6 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/jumpBoosts")
 	if blockType == "coin":
 		return get_node("objectList/coins")
-	if blockType == "multiPunch":
-		return get_node("objectList/multiPunches")
 	if blockType == "keyBinding":
 		return get_node("objectList/keyBindings")
 	return null

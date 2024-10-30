@@ -39,7 +39,7 @@ func _onUpdateScoreData() -> void:
 	$VBoxContainer/goodLabel.text += " " + str(Globals.numGoods)
 	$VBoxContainer/barelyLabel.text += " " + str(Globals.numBarelys)
 	$VBoxContainer/coinsLabel.text += " " + str(Globals.coinsCollected)
-	$VBoxContainer/overallPercentageLabel.text += " " + str(Globals.percetageHit)+"%"
+	$VBoxContainer/overallPercentageLabel.text += " " + "%10.2f" % Globals.percentageHit + "%"
 	$VBoxContainer/scoreLabel.text += " "+ str(Globals.endScore)
 
 func playMusic() -> void:

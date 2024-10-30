@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bey14qtr0uw3o"]
+[gd_scene load_steps=3 format=3 uid="uid://duhio7geil4dc"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/keyBinding.gd" id="1_a8dno"]
 [ext_resource type="Texture2D" uid="uid://cxpyh4hstkkni" path="res://ui/assets/fullHealth.png" id="2_6w36b"]

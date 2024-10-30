@@ -76,10 +76,8 @@ func _input(event: InputEvent) -> void:
 func setArea2D():
 	var nameIndex = 0
 	#given a scene object, go through all of its individual major components
-	print("children list: ", childrenList)
 	for blockChild in self.get_child(0).get_children():
 		#grab each compents area2d
-		print("setting area 2d: ", blockType)
 		var newArea = blockChild.get_node("Area2D")
 		blockChild.get_node("Area2D").name = "EditorArea"+str(nameIndex)
 		#give them each a unique name

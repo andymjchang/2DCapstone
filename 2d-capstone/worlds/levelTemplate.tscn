@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" path="res://worldObjects/coin.tscn" id="15_4qhng"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="Script" path="res://worlds/score.gd" id="15_mx364"]
-[ext_resource type="PackedScene" uid="uid://bey14qtr0uw3o" path="res://worldObjects/keyBinding.tscn" id="16_5ehlb"]
+[ext_resource type="PackedScene" uid="uid://duhio7geil4dc" path="res://worldObjects/keyBinding.tscn" id="16_5ehlb"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
 [ext_resource type="Script" path="res://ui/scripts/visualizer.gd" id="18_0o0nt"]
@@ -77,6 +77,7 @@ text = "00000"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("15_mx364")
+increasedScale = Vector2(1, 1.5)
 
 [node name="Visualizer" type="Node2D" parent="CanvasLayer"]
 position = Vector2(772, 25)
