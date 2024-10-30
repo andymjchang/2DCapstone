@@ -287,13 +287,13 @@ func _onGetPowerup(powerType):
 		#sfxPlayer.stream.loop = false
 		sfxPlayer.play()
 		curPowerup = powerType
-		worldNode.powerupUI.visual.frame = powerType
-		worldNode.powerupUI.visual.show()
 		print("I got: ", curPowerup)
 		var particleEffect = get_node("CPUParticles2D")
 		print("Loading: ", "res://particles/powerups/" + str(powerType) + ".png")
 		particleEffect.texture = load("res://particles/powerups/" + str(powerType) + ".png")
-		var powerSprite = get_node("Area2D/Sprite2D")
+		var powerSprite = get_node("Powerup")
+		powerSprite.frame = powerType
+		powerSprite.visible = true
 		particleEffect.emitting = true
 		particleEffect.visible = true
 
@@ -317,7 +317,8 @@ func _onActivatePowerup():
 		Globals.powerType.SLOWDOWN:
 			print("Slowing down")
 			worldNode.emit_signal("changeSpeed", -1)
-	worldNode.powerupUI.visual.hide()
+	var powerSprite = get_node("Powerup")
+	powerSprite.visible = false
 	$powerupTimer.start()
 
 
