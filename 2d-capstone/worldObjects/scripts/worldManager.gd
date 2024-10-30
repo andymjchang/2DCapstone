@@ -6,6 +6,7 @@ signal checkGameOver()
 signal levelCompleted()
 signal checkLevelCompleted()
 signal changeSpeed(speedType)
+signal resetPositionForward(who)
 
 @export var levelFile : String
 @export var platformBlockInstance : PackedScene
@@ -114,6 +115,7 @@ func _ready():
 	
 	# Setting signals
 	self.resetPosition.connect(_onResetPosition)
+	self.resetPositionForward.connect(_onResetPositionForward)
 	self.gameOver.connect(_onGameOver)
 	self.checkGameOver.connect(_onCheckGameOver)
 	self.checkLevelCompleted.connect(_onCheckLevelCompleted)
@@ -375,6 +377,36 @@ func _onResetPosition(who):
 		var nearestPoint = getNearestCheckpoint(who)
 		who.emit_signal("relocate", nearestPoint)
 		pass
+
+func _onResetPositionForward(who):
+	if who.name == "Player1":
+		var nearestPoint = getNearestCheckpointForward(who)
+		who.emit_signal("relocate", nearestPoint)
+		pass
+
+# Helper function that grabs the target player's closest forward checkpoint
+func getNearestCheckpointForward(who):
+	var viableCheckpoints = []
+	var nearestPoint = null
+	if len(objectList.get_node("playerCheckpoints").get_children()) > 0:
+		for i in objectList.get_node("playerCheckpoints").get_children():
+			#print("Checking: ", i)
+			# Check if checkpoint behind player
+			var direction = (i.position.x - who.position.x)
+			if (direction > 0):
+				viableCheckpoints.append(i)
+		#print("Viable checkpoints: ", viableCheckpoints)
+		if len(viableCheckpoints) > 0:
+			nearestPoint = viableCheckpoints[0]
+			var shortestDistance = who.position.distance_to(viableCheckpoints[0].position)
+			for i in viableCheckpoints:
+				var distance = who.position.distance_to(i.position)
+				if distance < shortestDistance:
+						nearestPoint = i
+						shortestDistance = distance
+			#print("Relocating to: ", nearestPoint.position)
+	print("The nearest point is: ", nearestPoint)
+	return nearestPoint
 
 
 func _onEndGameBodyEntered(body:Node2D):

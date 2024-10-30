@@ -346,7 +346,7 @@ func _onPowerupTimerTimeout() -> void:
 
 func _onVisibleOnScreenNotifier2dScreenExited() -> void:
 	print("Left camera")
-	Globals.resetCamera = true
+	#Globals.resetCamera = true
 	pass # Replace with function body.
 
 func _onDoubleJump():
