@@ -55,10 +55,10 @@ var slideFriction = 0.999
 var isSliding = false
 
 #soundEffects
-@onready var punchSfx = load("res://audioEffects/Punch.mp3") as AudioStream
-@onready var healthSfx = load("res://audioEffects/SFX_HealthItem_temp.mp3") as AudioStream
-@onready var coinGrabSfx = load("res://audioEffects/SFX_CoinCollect_temp.mp3") as AudioStream
-@onready var itemGrabSfX = load("res://audioEffects/SFX_ItemGrab_temp.wav") as AudioStream
+@onready var punchSfx = preload("res://audioEffects/Punch.mp3") as AudioStream
+@onready var healthSfx = preload("res://audioEffects/SFX_HealthItem_temp.mp3") as AudioStream
+@onready var coinGrabSfx = preload("res://audioEffects/SFX_CoinCollect_temp.mp3") as AudioStream
+@onready var itemGrabSfX = preload("res://audioEffects/SFX_ItemGrab_temp.wav") as AudioStream
 
 @onready var hitEffect : AnimatedSprite2D = $HitEffect
 @onready var tweenSlide : Tween
