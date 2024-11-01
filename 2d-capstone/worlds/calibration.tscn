@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://juiqp2ueden8"]
+
+[ext_resource type="Script" path="res://worlds/calibration.gd" id="1_hallp"]
+[ext_resource type="AudioStream" uid="uid://ipcdljmmnyyx" path="res://audioTracks/GameOver_120bpm.mp3" id="2_gxhak"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(960, 540)
+script = ExtResource("1_hallp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_gxhak")
+autoplay = true
+
+[node name="Label" type="Label" parent="."]
+offset_right = 131.0
+offset_bottom = 57.0
