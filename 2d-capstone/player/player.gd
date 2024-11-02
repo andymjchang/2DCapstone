@@ -294,7 +294,7 @@ func MonitorAttackHitbox(area : Area2D):
 		other.FadeOut()
 		scored.emit(self.name, abs(other.global_position.x - global_position.x))
 		other = other.get_parent()
-		if other.is_in_group("enemies"):
+		if other.is_in_group("enemies") and other.enemyType == "enemy":
 			other.GotHit()
 			# Play hit animation
 			hitEffect.frame = 0
