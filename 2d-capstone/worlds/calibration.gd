@@ -32,6 +32,14 @@ func _draw() -> void:
 	# Draw main circle
 	draw_arc(circle_center, circle_radius, 0, TAU, 32, Color.WHITE)
 	
+	# Draw horizontal line through circle
+	draw_line(
+		Vector2(circle_center.x - circle_radius, circle_center.y),  # Start point
+		Vector2(circle_center.x + circle_radius, circle_center.y),  # End point
+		Color.WHITE,  # Same color as circle
+		2.0  # Line thickness
+	)
+	
 	# Draw rotating marker
 	var marker_angle = current_time * TAU  # Convert time to angle (full rotation per second)
 	var marker_pos = circle_center + Vector2(cos(marker_angle), sin(marker_angle)) * circle_radius
@@ -40,6 +48,7 @@ func _draw() -> void:
 	# Draw timing points
 	for point in timing_points:
 		var angle = (point) * TAU  # 0.5 seconds = full half rotation
+		#var angle = 0
 		var point_pos = circle_center + Vector2(cos(angle), sin(angle)) * circle_radius
 		draw_circle(point_pos, 5, Color.RED)
 
