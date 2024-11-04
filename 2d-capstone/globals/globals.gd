@@ -16,6 +16,7 @@ var pixelsPerFrame = 300
 var scrollSpeed = 1
 var curFile = ""
 var bpm : float = 156
+var timeDelay = 0.0
 
 var areaClicked = false
 var startP1Coords

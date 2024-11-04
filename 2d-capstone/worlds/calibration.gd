@@ -1,7 +1,10 @@
 extends Node2D
 
+@export var drawMarker : bool = true
+
 @onready var delayLabel : Label = $Label
-var bpm = 120.0
+@onready var averageDelayLabel : Label = $Label2
+var bpm = 115.0
 var beat_interval : float
 var next_beat_time : float
 var audio_player : AudioStreamPlayer2D
@@ -10,6 +13,7 @@ var audio_player : AudioStreamPlayer2D
 var circle_center = Vector2(200, 200)  # Position of circle center
 var circle_radius = 100
 var timing_points = []  # Store recent timing points
+var timing_differences = []  # Add this with other variables at the top
 
 var current_time : float = 0.0  # Track time for marker rotation
 
@@ -17,15 +21,12 @@ func _ready() -> void:
 	beat_interval = 60.0 / bpm
 	next_beat_time = 0.0
 	audio_player = $AudioStreamPlayer2D
-	print(beat_interval)
+
 
 func _process(delta: float) -> void:
-	if next_beat_time <= 0:
-		next_beat_time = beat_interval
-	next_beat_time -= delta
-	
-	# Update marker rotation
-	current_time = fmod(current_time + delta, 1.0)  # Keep time between 0 and 1
+	next_beat_time += delta
+	# Update marker rotation based on beat interval (2 beats per rotation)
+	current_time = fmod(next_beat_time, beat_interval * 2) / (beat_interval * 2)  # Normalize to 0-1 range
 	queue_redraw()
 
 func _draw() -> void:
@@ -41,26 +42,46 @@ func _draw() -> void:
 	)
 	
 	# Draw rotating marker
-	var marker_angle = current_time * TAU  # Convert time to angle (full rotation per second)
-	var marker_pos = circle_center + Vector2(cos(marker_angle), sin(marker_angle)) * circle_radius
-	draw_line(circle_center, marker_pos, Color.YELLOW, 2.0)
+	if drawMarker:
+		var marker_angle = current_time * TAU  
+		var marker_pos = circle_center + Vector2(cos(marker_angle), sin(marker_angle)) * circle_radius
+		draw_line(circle_center, marker_pos, Color.YELLOW, 2.0)
 	
-	# Draw timing points
+	# Draw timing points 
 	for point in timing_points:
-		var angle = (point) * TAU  # 0.5 seconds = full half rotation
-		#var angle = 0
+		var angle = point * TAU  
 		var point_pos = circle_center + Vector2(cos(angle), sin(angle)) * circle_radius
 		draw_circle(point_pos, 5, Color.RED)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
-		var timing_difference = next_beat_time
-		var delay_ms = abs(timing_difference - beat_interval) * 1000
-		if delay_ms > 250:
-			delay_ms = abs(250 - delay_ms)
+		# Calculate how many beats have passed
+		var beats_passed = floor(next_beat_time / beat_interval)
+		# Get the time of the closest beat
+		var closest_beat_time = beat_interval * beats_passed
+		# If we're closer to the next beat than the previous beat, use the next beat
+		if (next_beat_time - closest_beat_time) > (beat_interval / 2):
+			closest_beat_time += beat_interval
+		# Calculate timing difference (can be negative or positive)
+		var timing_difference = next_beat_time - closest_beat_time
+		var delay_ms = timing_difference * 1000
 		delayLabel.text = "Delay: %.1f ms" % delay_ms
+		
+		# Store timing difference and calculate average
+		timing_differences.append(timing_difference)
+		if timing_differences.size() > 10: 
+			timing_differences.pop_front()
+		
+		# Calculate and display average delay
+		var average_delay = 0.0
+		for diff in timing_differences:
+			average_delay += diff
+		average_delay = (average_delay / timing_differences.size()) * 1000  # Convert to ms
+		averageDelayLabel.text = "Average Delay: %.1f ms" % average_delay
+		if average_delay > 0.0:
+			Globals.timeDelay = average_delay
 		
 		# Add timing point to visualization
 		timing_points.append(current_time)
-		if timing_points.size() > 1:  # Keep last 20 points
+		if timing_points.size() > 10:
 			timing_points.pop_front()

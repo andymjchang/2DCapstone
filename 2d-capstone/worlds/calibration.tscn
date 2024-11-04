@@ -1,17 +1,24 @@
 [gd_scene load_steps=3 format=3 uid="uid://juiqp2ueden8"]
 
 [ext_resource type="Script" path="res://worlds/calibration.gd" id="1_hallp"]
-[ext_resource type="AudioStream" uid="uid://dh1kl3e41dqwi" path="res://audioTracks/120Metronome_v2.mp3" id="2_am3yu"]
+[ext_resource type="AudioStream" uid="uid://puuctcf72yw7" path="res://audioTracks/MainMenu_115bpm.mp3" id="2_4u4m2"]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(960, 540)
+position = Vector2(750, 400)
 script = ExtResource("1_hallp")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_am3yu")
+stream = ExtResource("2_4u4m2")
 autoplay = true
 parameters/looping = true
 
 [node name="Label" type="Label" parent="."]
 offset_right = 131.0
 offset_bottom = 57.0
+text = "Last Delay:"
+
+[node name="Label2" type="Label" parent="."]
+offset_top = -80.0
+offset_right = 131.0
+offset_bottom = -23.0
+text = "Average Delay:"
