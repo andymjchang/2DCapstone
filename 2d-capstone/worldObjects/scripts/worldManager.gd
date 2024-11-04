@@ -6,6 +6,7 @@ signal checkGameOver()
 signal levelCompleted()
 signal checkLevelCompleted()
 signal changeSpeed(speedType)
+signal resetLoop(destination)
 
 @export var levelFile : String
 @export var platformBlockInstance : PackedScene
@@ -120,6 +121,7 @@ func _ready():
 	self.checkLevelCompleted.connect(_onCheckLevelCompleted)
 	self.levelCompleted.connect(_onLevelCompleted)
 	self.changeSpeed.connect(_onChangeSpeed)
+	self.resetLoop.connect(_onResetLoop)
 
 	# Prep players
 	player1.editing = false
@@ -425,3 +427,11 @@ func _onChangeSpeed(speedType):
 	else:						# Return to regular
 		music.pitch_scale = 1
 		Globals.scrollSpeed = 1
+
+func _onResetLoop(destination):
+	print("Resetting loop")
+	print("Destination to: ", destination)
+	player1.position.x = destination.global_position.x
+	camera.position.x = destination.global_position.x
+	
+	pass
