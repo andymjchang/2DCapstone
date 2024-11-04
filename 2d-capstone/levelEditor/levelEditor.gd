@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "skip"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -55,6 +55,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var jumpBoost : PackedScene
 @export var coin : PackedScene
 @export var keyBinding : PackedScene
+@export var skip : PackedScene
 
 #block variants list
 @onready var enemyType = {"enemy" : enemyCharacter, "slide" : enemyCharacter}
@@ -100,6 +101,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var jumpList = $objectList/jumpBoosts
 @onready var coinList = $objectList/coins
 @onready var keyBindingList = $objectList/keyBindings
+@onready var skipList = $objectList/skips
 
 
 
@@ -386,7 +388,18 @@ func _onCoinButtonPressed() -> void:
 	coinParent.blockType = blockTypes[14]
 	place_block(coinParent, coinList, camera.position, false)
 
+#TODO change every button down to this
+func _onButtonDown(instanceType, list, blockType, val) -> void:
+	var objectInstance = instanceType.instantiate()
+	var instanceParent = baseObject.instantiate()
+	instanceParent.add_child(objectInstance)
+	instanceParent.blockType = blockType
+	place_block(instanceParent, list,camera.position, val)
+	
+func _onSkipButtonUp() -> void:
+	_onButtonDown(skip, skipList, blockTypes[16], false)
 
+	
 func _on_play_audio_button_pressed() -> void:
 	if not isPlaying:
 		camera.get_node("audio").play()
@@ -590,6 +603,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/coins")
 	if blockType == "keyBinding":
 		return get_node("objectList/keyBindings")
+	if blockType == "skip":
+		return get_node("objectList/skips")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:
@@ -666,3 +681,5 @@ func lengthenPlatform() -> void:
 	blockParent.add_child(blockInstance)
 	turnOffSnap = true
 	place_block(blockParent, platformBlocksList, Vector2(newXPos, blockArea.global_position.y), false)
+	
+	
