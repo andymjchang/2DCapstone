@@ -152,7 +152,7 @@ func _physics_process(delta: float) -> void:
 				direction = Input.get_axis(left, right)
 				if not hitBounds and direction > 0 :
 					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0 or !isSliding:
+				elif hitBounds and direction > 0 or direction == 0:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 
 			#debug this
@@ -168,19 +168,19 @@ func _physics_process(delta: float) -> void:
 					velocity += get_gravity() * delta * 10
 
 			if Input.is_action_just_pressed(slide):
-				get_node("Hitbox").scale *= Vector2(1, 0.5);
+				get_node("Hitbox").scale *= Vector2(1, 0.5)
 				get_node("Hitbox").position.y = 6
-				$Animation.play("Slide");
+				$Animation.play("Slide")
 				#TODO get rid of double var
 				isSliding = true
-				Globals.isSliding = true
 				#get_node("Floor").disabled = false
 				SlideTweenStart()
 				
 			if Input.is_action_just_released(slide):
-				get_node("Hitbox").scale *= Vector2(1, 2);
+				get_node("Hitbox").scale *= Vector2(1, 2)
 				get_node("Hitbox").position.y = 2
-				$Animation.play("Run");
+				isSliding = false
+				$Animation.play("Run")
 				#get_node("Floor").disabled = true
 				SlideTweenEnd()
 
@@ -348,7 +348,7 @@ func _onActivatePowerup():
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area.get_parent().enemyType == "slideEnemy" and Globals.isSliding:
+	if area.get_parent().enemyType == "slideEnemy" and isSliding: #Globals.isSliding:
 		#we slid into enemy
 		print("made it into slide damage: ")
 		var other = area.get_parent()

@@ -23,11 +23,16 @@ func _onBodyEntered(body):
 	if "Player" in body.name:
 		if self.name == "ziplineStart":
 			var destination = get_parent().get_child(END).get_node("Marker2D")
-			var newVelocity = (destination.position - self.position) / 2
-			print("Destination: ", destination.position)
-			print("Velocity: ", newVelocity)
-			body.velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-			body.velocity.y = newVelocity.y
+			var start = get_parent().get_child(START).get_node("Marker2D")
+			var direction = (destination.global_position - start.global_position).normalized()
+			body.position = start.global_position
+			body.position.y += 50
+			print("Destination: ", destination.global_position)
+			print("Velocity: ", direction)
+			#body.position -= direction * Globals.pixelsPerFrame * Globals.scrollSpeed
+			body.velocity = direction * Globals.pixelsPerFrame * Globals.scrollSpeed
+			#body.velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
+			#body.velocity.y =
 			body.inZipline = true
 			body.relocating = true
 			Globals.vertical = true

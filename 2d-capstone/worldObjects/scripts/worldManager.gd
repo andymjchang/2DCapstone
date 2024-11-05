@@ -286,6 +286,7 @@ func _onCheckLevelCompleted():
 	print("all reached = ", allReached)
 	if allReached:
 		self.emit_signal("levelCompleted")
+	self.emit_signal("levelCompleted")
 
 func _onGameOver():
 	var closestPoint = self.getNearestCheckpoint(player1)
