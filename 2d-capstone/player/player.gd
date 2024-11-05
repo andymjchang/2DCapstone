@@ -8,6 +8,8 @@ signal getPowerup(powerType)
 signal activatePowerup()
 signal doubleJump()
 signal getCoin()
+signal skipping()
+signal notSkipping()
 
 var curSprite
 var JUMP_VELOCITY = -550.0
@@ -37,6 +39,7 @@ var curPowerup
 var jumpInProgress = false
 var runInProgress = false
 var punchConnected = false
+var isSkipping
 
 # Jump Hang Time
 var hang_time_duration := 0.05
@@ -88,6 +91,8 @@ func _ready():
 	self.relocate.connect(_onRelocate)
 	self.doubleJump.connect(_onDoubleJump)
 	self.getCoin.connect(_onGetCoin)
+	self.skipping.connect(_onSkipping)
+	self.notSkipping.connect(_onNotSkipping)
 	$Animation.animation_finished.connect(_onAnimationFinished)
 	$Animation.play("Run")
 	worldNode = get_tree().get_root().get_node("level")
@@ -114,7 +119,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		camera.offset = Vector2.ZERO
 		
-	if not editing:
+	if not editing and not isSkipping:
 		if not inZipline:
 			# Lines
 			if is_on_floor():
@@ -428,3 +433,9 @@ func _on_attack_timer_timeout() -> void:
 
 func _on_attack_lockout_timer_timeout() -> void:
 	canAttack = true
+
+func _onSkipping() -> void:
+	isSkipping = true
+
+func _onNotSkipping() -> void:
+	isSkipping = false

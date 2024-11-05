@@ -218,7 +218,8 @@ func loadLevel():
 		"powerups": [powerup, powerupList, blockTypes[1]],
 		"jumpBoosts": [jumpBoost, jumpList, blockTypes[13]],
 		"coins": [coin, coinList, blockTypes[14]],
-		"keyBindings":[keyBinding, keyBindingList, blockTypes[15]]}
+		"keyBindings":[keyBinding, keyBindingList, blockTypes[15]],
+		"skips":[skip, skipList, blockTypes[16]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]

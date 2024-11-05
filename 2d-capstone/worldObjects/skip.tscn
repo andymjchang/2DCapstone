@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://t86xp6tpjvdg"]
+
+[ext_resource type="Script" path="res://worldObjects/scripts/skip.gd" id="1_0nkxi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1ms8"]
+size = Vector2(139, 103)
+
+[node name="Skip" type="Node2D"]
+script = ExtResource("1_0nkxi")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_x1ms8")
