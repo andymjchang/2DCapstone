@@ -148,14 +148,13 @@ func _physics_process(delta: float) -> void:
 				# velocity.x = Globals.pixelsPerFrame
 				# Pseudo-autoscroll prototype
 				
-				var direction = Input.get_axis(left, right)
+				var direction = Vector2.ZERO
+				direction = Input.get_axis(left, right)
 				if not hitBounds and direction > 0 :
 					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0:
+				elif hitBounds and direction > 0 or !isSliding:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-				elif !isSliding:
-					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-					
+
 			#debug this
 			#if Input.is_action_pressed(slide):
 				#velocity.x *= slideFriction
@@ -207,8 +206,8 @@ func _physics_process(delta: float) -> void:
 				$attackTimer.start()
 				punchConnected = false
 		
-		if Input.is_action_just_pressed("activate"):
-			emit_signal("activatePowerup")
+		#if Input.is_action_just_pressed("activate"):
+			#emit_signal("activatePowerup")
 
 		elif reachedCheckpoint:
 			pass
@@ -311,14 +310,15 @@ func _onGetPowerup(powerType):
 		sfxPlayer.stream = itemGrabSfX
 		#sfxPlayer.stream.loop = false
 		sfxPlayer.play()
-		curPowerup = powerType
+		#curPowerup = powerType
 		print("I got: ", curPowerup)
 		var particleEffect = get_node("CPUParticles2D")
 		print("Loading: ", "res://particles/powerups/" + str(powerType) + ".png")
 		particleEffect.texture = load("res://particles/powerups/" + str(powerType) + ".png")
-		var powerSprite = get_node("Powerup")
-		powerSprite.frame = powerType
-		powerSprite.visible = true
+		emit_signal("activatePowerup")
+		#var powerSprite = get_node("Powerup")
+		#powerSprite.frame = powerType
+		#powerSprite.visible = true
 		particleEffect.emitting = true
 		particleEffect.visible = true
 
@@ -342,8 +342,8 @@ func _onActivatePowerup():
 		Globals.powerType.SLOWDOWN:
 			print("Slowing down")
 			worldNode.emit_signal("changeSpeed", -1)
-	var powerSprite = get_node("Powerup")
-	powerSprite.visible = false
+	#var powerSprite = get_node("Powerup")
+	#powerSprite.visible = false
 	$powerupTimer.start()
 
 

@@ -344,8 +344,6 @@ func _physics_process(delta):
 		print("global time: ", Globals.time, " music time: ", musicTime)
 		startGame()
 
-		
-
 func updateTime(delta: float):
 	if Globals.inLevel:
 		Globals.time = Globals.time + delta
@@ -401,12 +399,10 @@ func _onRunBoundsBodyEntered(body: Node2D) -> void:
 		#print("Entering max run bounds")
 		body.hitBounds = true
 
-
 func _onRunBoundsBodyExited(body: Node2D) -> void:
 	if (body.name.contains("Player")):
 		#print("Leaving max run bounds")
 		body.hitBounds = false
-
 
 func _onScored(id, p_score):
 	var scoreToAdd = 100 - p_score

@@ -22,7 +22,7 @@ func _onBodyEntered(body):
 	print("Entering body: ", body.name)
 	if "Player" in body.name:
 		if self.name == "ziplineStart":
-			var destination = get_parent().get_child(END)
+			var destination = get_parent().get_child(END).get_node("Marker2D")
 			var newVelocity = (destination.position - self.position) / 2
 			print("Destination: ", destination.position)
 			print("Velocity: ", newVelocity)
