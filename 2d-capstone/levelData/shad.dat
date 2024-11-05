@@ -26,7 +26,20 @@ platformBlocks
 3693, 625, 12, <null>, <null>,
 3849, 625, 12, <null>, <null>,
 4005, 625, 12, <null>, <null>,
-4161, 625, 12, <null>, <null>,
+4150, 625, 12, <null>, <null>,
+4306, 625, 12, <null>, <null>,
+4462, 625, 12, <null>, <null>,
+4618, 625, 12, <null>, <null>,
+4774, 625, 12, <null>, <null>,
+4930, 625, 12, <null>, <null>,
+5086, 625, 12, <null>, <null>,
+5242, 625, 12, <null>, <null>,
+5398, 625, 12, <null>, <null>,
+5554, 625, 12, <null>, <null>,
+5710, 625, 12, <null>, <null>,
+5866, 625, 12, <null>, <null>,
+6022, 625, 12, <null>, <null>,
+6178, 625, 12, <null>, <null>,
 actionIndicators
 playerCheckpoints
 player
@@ -47,3 +60,4 @@ keyBindings
 skips
 950, 550,
 2150, 525,
+4775, 500,

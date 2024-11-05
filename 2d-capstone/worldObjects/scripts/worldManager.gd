@@ -360,12 +360,7 @@ func _physics_process(delta):
 			skipping = false
 			player1.emit_signal("notSkipping")
 			emit_signal("changeSpeed", 0)
-		
-		
 	
-
-		
-
 func updateTime(delta: float):
 	if Globals.inLevel:
 		Globals.time = Globals.time  + (delta*timeMultiplier)
@@ -445,7 +440,6 @@ func _onChangeSpeed(speedType):
 		Globals.scrollSpeed = 0.5
 		timeMultiplier = 0.5
 	else:						# Return to regular
-		print("resetting speed")
 		music.pitch_scale = 1
 		Globals.scrollSpeed = 1
 		timeMultiplier = 1.0
