@@ -310,7 +310,7 @@ func _onGetPowerup(powerType):
 		sfxPlayer.stream = itemGrabSfX
 		#sfxPlayer.stream.loop = false
 		sfxPlayer.play()
-		#curPowerup = powerType
+		curPowerup = powerType
 		print("I got: ", curPowerup)
 		var particleEffect = get_node("CPUParticles2D")
 		print("Loading: ", "res://particles/powerups/" + str(powerType) + ".png")
