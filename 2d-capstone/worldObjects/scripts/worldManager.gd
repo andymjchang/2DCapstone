@@ -296,6 +296,7 @@ func _onCheckLevelCompleted():
 	print("all reached = ", allReached)
 	if allReached:
 		self.emit_signal("levelCompleted")
+	self.emit_signal("levelCompleted")
 
 func _onGameOver():
 	var closestPoint = self.getNearestCheckpoint(player1)
@@ -353,14 +354,6 @@ func _physics_process(delta):
 	elif (Globals.customStart or Globals.relocateToCheckpoint) and !Globals.inLevel and Globals.time >= musicTime + 3.0 and !Globals.gameOver:
 		print("global time: ", Globals.time, " music time: ", musicTime)
 		startGame()
-		
-	if skipping:
-		#see player x matches to skip x
-		if skipCoords.x <= camera.global_position.x - 244:
-			skipping = false
-			player1.emit_signal("notSkipping")
-			emit_signal("changeSpeed", 0)
-	
 func updateTime(delta: float):
 	if Globals.inLevel:
 		Globals.time = Globals.time  + (delta*timeMultiplier)
@@ -416,12 +409,10 @@ func _onRunBoundsBodyEntered(body: Node2D) -> void:
 		#print("Entering max run bounds")
 		body.hitBounds = true
 
-
 func _onRunBoundsBodyExited(body: Node2D) -> void:
 	if (body.name.contains("Player")):
 		#print("Leaving max run bounds")
 		body.hitBounds = false
-
 
 func _onScored(id, p_score):
 	var scoreToAdd = 100 - p_score

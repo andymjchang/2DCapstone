@@ -22,3 +22,6 @@ texture = ExtResource("1_qovlm")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(-115, -74)
+
+[node name="Destination" type="Marker2D" parent="."]
+position = Vector2(110, -170)
