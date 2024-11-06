@@ -25,8 +25,8 @@ func _onBodyEntered(body):
 			var destination = get_parent().get_child(END).get_node("Marker2D")
 			var start = get_parent().get_child(START).get_node("Marker2D")
 			var direction = (destination.global_position - start.global_position).normalized()
-			body.position = start.global_position
-			body.position.y += 50
+			body.position.y = start.get_parent().get_node("PlayerMarker").global_position.y
+			#body.position.y = start.get_parent().get_node("playerMarker").global_position.y
 			print("Destination: ", destination.global_position)
 			print("Velocity: ", direction)
 			#body.position -= direction * Globals.pixelsPerFrame * Globals.scrollSpeed
