@@ -39,7 +39,7 @@ size = Vector2(12, 1086)
 
 [node name="level" type="Node2D" groups=["skips"]]
 script = ExtResource("1_fl71r")
-levelFile = "ziptest"
+levelFile = "Level 1"
 platformBlockInstance = ExtResource("2_78xmt")
 goalBlockInstance = ExtResource("3_oih58")
 killFloorInstance = ExtResource("3_6me16")
