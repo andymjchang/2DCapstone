@@ -17,6 +17,7 @@ var scrollSpeed = 1
 var curFile = ""
 var bpm : float = 156
 var timeDelay = 0.0
+var screenFlash : bool = true
 
 var areaClicked = false
 var startP1Coords
@@ -60,6 +61,7 @@ var previewNode
 @onready var screenFlashNode = preload("res://screenEffects/screenFlashEffect.tscn")
 @onready var vignette = $Vignette/ColorRect
 @onready var glitch = $Glitch/TransitionRect
+@onready var screenFlashTimer = $ScreenFlashTimer
 
 func _ready():
 	randomize()
@@ -81,9 +83,12 @@ func _on_texture_button_button_down() -> void:
 	inLevel = false
 	
 func screenFlashEffect():
-	var screenFlashInstance = screenFlashNode.instantiate()
-	screenFlashInstance.screenFlash(0.25, 0.3)
-	add_child(screenFlashInstance)
+	screenFlashTimer.start(1.0)
+	if screenFlash:
+		var screenFlashInstance = screenFlashNode.instantiate()
+		screenFlashInstance.screenFlash(0.2, 0.3)
+		add_child(screenFlashInstance)
+		screenFlash = false
 	
 func get_random_sign():
 	return -1 if randi() % 2 == 0 else 1
@@ -115,3 +120,7 @@ func restartLevelData() -> void:
 	endScore = 0.0
 	coinsCollected = 0.0
 	percentageHit = 0.0
+
+
+func _on_screen_flash_timer_timeout() -> void:
+	screenFlash = true
