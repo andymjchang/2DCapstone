@@ -134,7 +134,7 @@ func _ready():
 	self.movePlayer.connect(_onMovePlayer)
 
 	# Prep players
-	player1.editing = false
+	#player1.editing = false
 	if Globals.customStart:
 		#we are starting at a user picked place
 		player1.global_position = Globals.startP1Coords
