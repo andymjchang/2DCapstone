@@ -126,9 +126,9 @@ func _ready():
 	self.objectClicked.connect(_onObjectClicked)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
-	if Globals.curFile == "":
+	if Globals.curFile == "" or fileLabel.text != null:
 		saveFileName = fileLabel.text
-		Globals.curFile = saveFileName
+		#Globals.curFile = saveFileName
 	else:
 		fileLabel.text = Globals.curFile
 		saveFileName = fileLabel.text

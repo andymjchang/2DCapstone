@@ -197,6 +197,7 @@ offset_left = 93.0
 offset_top = 159.0
 offset_right = 208.0
 offset_bottom = 209.0
+text = "MyLevel"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Control" parent="UI"]
