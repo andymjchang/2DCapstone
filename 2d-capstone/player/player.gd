@@ -425,7 +425,7 @@ func PunchTween():
 
 # Add this new function
 func shake_camera(strength: float = 25.0):
-	shake_intensity = strength
+	shake_intensity = strength * Globals.screenShakeIntensity
 
 func _on_attack_timer_timeout() -> void:
 	attack.monitoring = false

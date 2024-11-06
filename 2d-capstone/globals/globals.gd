@@ -18,6 +18,7 @@ var curFile = "Tutorial"
 var bpm : float = 156
 var timeDelay = 0.0
 var screenFlash : bool = true
+var screenShakeIntensity = 1.0
 
 var areaClicked = false
 var startP1Coords
