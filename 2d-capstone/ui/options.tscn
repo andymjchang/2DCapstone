@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dn1epcentmy3x" path="res://ui/keybindings.tscn" id="7_hr1kh"]
 
 [node name="Options" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
