@@ -56,7 +56,7 @@ powerups
 jumpBoosts
 coins
 keyBindings
-300, 325, punch,
+275, 500, punch,
 skips
 950, 550,
 2150, 525,

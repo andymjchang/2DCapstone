@@ -4,6 +4,7 @@ var pathToImage = ""
 var imageName = ""
 var instType = ""
 @onready var sprite = $Sprite2D
+var watchEvent
 
 @onready var punchImage = preload("res://ui/assets/onboarding/punchGraphic.png")
 @onready var slideImage = preload("res://ui/assets/slide.webp")
@@ -27,8 +28,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-
+	if instType and Input.is_action_just_pressed(instType):
+		#grey out our image
+		sprite.modulate = Color(0.5, 0.5, 0.5)
+	if instType and Input.is_action_just_released(instType):
+		sprite.modulate = Color(1.0,1.0,1.0)
+		
 func setKeyBindingImages():
 	
 	pathToTarget = keyFolderPath
@@ -61,8 +66,11 @@ func setKeyBindingImages():
 					print("path to target: ", pathToTarget)
 					var newImage = load(pathToTarget)
 					self.get_node("Sprite2D").texture = newImage
+					watchEvent = eventText
+					print("watch event: ", watchEvent)
 					break
 				curFileName = dir.get_next()
+				
 func setImage(posPoints : Array) -> void:
 	if posPoints.size() > 2.0:
 		var instructionType = posPoints[2]
