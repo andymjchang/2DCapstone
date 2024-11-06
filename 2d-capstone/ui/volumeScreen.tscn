@@ -24,6 +24,7 @@ color = Color(0.2484, 0.2484, 0.2484, 1)
 anchors_preset = 0
 
 [node name="playerSlider" type="HSlider" parent="sliders"]
+layout_mode = 0
 offset_left = 557.0
 offset_top = 114.0
 offset_right = 1333.0
@@ -31,6 +32,7 @@ offset_bottom = 301.0
 size_flags_horizontal = 4
 
 [node name="inGameMusicSlider" type="HSlider" parent="sliders"]
+layout_mode = 0
 offset_left = 557.0
 offset_top = 358.0
 offset_right = 1333.0
@@ -38,6 +40,7 @@ offset_bottom = 545.0
 size_flags_horizontal = 4
 
 [node name="musicSlider" type="HSlider" parent="sliders"]
+layout_mode = 0
 offset_left = 557.0
 offset_top = 603.0
 offset_right = 1333.0
@@ -48,6 +51,7 @@ size_flags_horizontal = 4
 anchors_preset = 0
 
 [node name="playerSounds" type="TextEdit" parent="labels"]
+layout_mode = 0
 offset_left = 575.0
 offset_top = 81.0
 offset_right = 1323.0
@@ -56,6 +60,7 @@ theme_override_font_sizes/font_size = 50
 text = "Player Sounds"
 
 [node name="inGameMusicSounds" type="TextEdit" parent="labels"]
+layout_mode = 0
 offset_left = 575.0
 offset_top = 291.0
 offset_right = 1323.0
@@ -64,6 +69,7 @@ theme_override_font_sizes/font_size = 50
 text = "In Game Music"
 
 [node name="musicSounds" type="TextEdit" parent="labels"]
+layout_mode = 0
 offset_left = 575.0
 offset_top = 532.0
 offset_right = 1323.0

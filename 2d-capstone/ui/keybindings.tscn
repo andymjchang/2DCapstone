@@ -24,6 +24,7 @@ script = ExtResource("1_ohtkt")
 anchors_preset = 0
 
 [node name="jumpKey" type="Button" parent="buttons"]
+layout_mode = 0
 offset_left = -247.0
 offset_top = -286.5
 offset_right = -22.0
@@ -32,6 +33,7 @@ theme_override_font_sizes/font_size = 0
 text = "Jump"
 
 [node name="slideKey" type="Button" parent="buttons"]
+layout_mode = 0
 offset_left = -247.0
 offset_top = -109.0
 offset_right = -22.0
@@ -39,6 +41,7 @@ offset_bottom = -77.0
 text = "Slide"
 
 [node name="punchKey" type="Button" parent="buttons"]
+layout_mode = 0
 offset_left = -485.0
 offset_top = -285.0
 offset_right = -260.0
@@ -47,6 +50,7 @@ text = "Punch
 "
 
 [node name="activateKey" type="Button" parent="buttons"]
+layout_mode = 0
 offset_left = -485.0
 offset_top = -109.0
 offset_right = -260.0
@@ -55,6 +59,7 @@ text = "Powerup"
 
 [node name="pauseKey" type="Button" parent="buttons"]
 visible = false
+layout_mode = 0
 offset_left = 90.5
 offset_top = -285.5
 offset_right = 279.5
@@ -65,6 +70,7 @@ text = "Pause"
 anchors_preset = 0
 
 [node name="jumpCurrent" type="TextEdit" parent="currentKeys"]
+layout_mode = 0
 offset_left = -247.0
 offset_top = -233.0
 offset_right = -22.0
@@ -72,6 +78,7 @@ offset_bottom = -135.0
 editable = false
 
 [node name="slideCurrent" type="TextEdit" parent="currentKeys"]
+layout_mode = 0
 offset_left = -247.0
 offset_top = -59.0
 offset_right = -22.0
@@ -79,6 +86,7 @@ offset_bottom = 49.0
 editable = false
 
 [node name="punchCurrent" type="TextEdit" parent="currentKeys"]
+layout_mode = 0
 offset_left = -485.0
 offset_top = -236.0
 offset_right = -260.0
@@ -86,6 +94,7 @@ offset_bottom = -137.0
 editable = false
 
 [node name="activateCurrent" type="TextEdit" parent="currentKeys"]
+layout_mode = 0
 offset_left = -485.0
 offset_top = -59.0
 offset_right = -260.0
@@ -94,6 +103,7 @@ editable = false
 
 [node name="pauseCurrent" type="TextEdit" parent="currentKeys"]
 visible = false
+layout_mode = 0
 offset_left = 92.0
 offset_top = -233.5
 offset_right = 278.0
