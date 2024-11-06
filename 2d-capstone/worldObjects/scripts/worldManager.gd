@@ -354,6 +354,14 @@ func _physics_process(delta):
 	elif (Globals.customStart or Globals.relocateToCheckpoint) and !Globals.inLevel and Globals.time >= musicTime + 3.0 and !Globals.gameOver:
 		print("global time: ", Globals.time, " music time: ", musicTime)
 		startGame()
+		
+	if skipping:
+		#see player x matches to skip x
+		if skipCoords.x <= camera.global_position.x - 244:
+			skipping = false
+			player1.emit_signal("notSkipping")
+			emit_signal("changeSpeed", 0)
+	
 func updateTime(delta: float):
 	if Globals.inLevel:
 		Globals.time = Globals.time  + (delta*timeMultiplier)
