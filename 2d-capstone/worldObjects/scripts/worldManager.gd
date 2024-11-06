@@ -438,13 +438,13 @@ func _onScored(id, p_score):
 		
 func _onChangeSpeed(speedType):
 	if speedType > 0:			# Speed up
-		music.pitch_scale = 1.25
-		Globals.scrollSpeed = 1.25
-		timeMultiplier = 1.25
+		music.pitch_scale = 1.1
+		Globals.scrollSpeed = 1.1
+		timeMultiplier = 1.1
 	elif speedType < 0:			# Speed down
-		music.pitch_scale = 0.75
-		Globals.scrollSpeed = 0.75
-		timeMultiplier = 0.75
+		music.pitch_scale = 0.9
+		Globals.scrollSpeed = 0.9
+		timeMultiplier = 0.9
 	else:						# Return to regular
 		music.pitch_scale = 1
 		Globals.scrollSpeed = 1
