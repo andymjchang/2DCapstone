@@ -437,7 +437,11 @@ func _onScored(id, p_score):
 		textPopupScene1.initText(scoreToAdd, player1.position)
 		
 func _onChangeSpeed(speedType):
-	if speedType > 0:			# Speed up
+	if speedType == 2:
+		music.pitch_scale = 2.5
+		Globals.scrollSpeed = 2.5
+		timeMultiplier = 2.5
+	elif speedType > 0:			# Speed up
 		music.pitch_scale = 1.1
 		Globals.scrollSpeed = 1.1
 		timeMultiplier = 1.1
@@ -459,9 +463,7 @@ func _onMovePlayer(location : Vector2):
 	player1.global_position = location
 	skipCoords = location
 	skipping = true
-	emit_signal("changeSpeed", 1)
+	emit_signal("changeSpeed", 2)
 	player1.emit_signal("skipping")
-
-
 	
 	
