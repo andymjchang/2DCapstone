@@ -66,6 +66,7 @@ func _process(delta: float) -> void:
 func skipToNext():
 	if currentIndex == 0 and !pastFirst:
 		activatedSkip = skipArray[0]
+		get_tree().current_scene.emit_signal("movePlayer", activatedSkip.global_position)
 	elif currentIndex < skipArray.size() - 1 :
 		currentIndex = skipArray.find(activatedSkip)
 		currentIndex = currentIndex + 1
