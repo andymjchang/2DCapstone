@@ -46,6 +46,14 @@ player
 0, 540,
 enemies
 2675, 550, enemy,
+150, 575, enemy,
+225, 575, enemy,
+300, 575, enemy,
+400, 575, enemy,
+450, 575, enemy,
+525, 575, enemy,
+625, 575, enemy,
+700, 575, enemy,
 killFloors
 goalBlocks
 breakableWalls
@@ -53,11 +61,12 @@ ziplines
 placers
 slideWalls
 powerups
+1050, 550,
 jumpBoosts
 coins
 keyBindings
-275, 500, punch,
+300, 300, punch,
 skips
-950, 550,
+875, 550,
 2150, 525,
 4775, 500,
