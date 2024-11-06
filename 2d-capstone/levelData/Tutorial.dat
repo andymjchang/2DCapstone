@@ -338,6 +338,8 @@ slideWalls
 30675, 500,
 30975, 500,
 powerups
+12375, 500,
+300, 500,
 jumpBoosts
 coins
 keyBindings

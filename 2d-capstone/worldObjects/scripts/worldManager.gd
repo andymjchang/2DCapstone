@@ -43,6 +43,9 @@ signal movePlayer(location)
 @onready var keyBindingList = $objectList/keyBindings
 @onready var skipList = $objectList/skips
 
+@onready var onboardingSlides
+
+
 var player1 
 var killWall
 var countdownUI
@@ -89,7 +92,9 @@ func _ready():
 		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
 		var popUpInstance = popUpScene.instantiate()
 		$Camera2D.add_child(popUpInstance)
-		$Camera2D/onboardingPopUp/tutorialSlides.play()
+		onboardingSlides = $Camera2D/onboardingPopUp/tutorialSlides
+		onboardingSlides.play()
+		
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
 	# set bpm of all pulsing objects
@@ -442,6 +447,10 @@ func _onChangeSpeed(speedType):
 		music.pitch_scale = 1
 		Globals.scrollSpeed = 1
 		timeMultiplier = 1.0
+		
+	if onboardingSlides:
+		print("onbaording slides are in ")
+		self.get_tree().current_scene.get_node("Camera2D//onboardingPopUp").emit_signal("speedChange", timeMultiplier)
 
 func _onMovePlayer(location : Vector2):
 	#we have to move player based on new global loaction
@@ -450,4 +459,7 @@ func _onMovePlayer(location : Vector2):
 	skipping = true
 	emit_signal("changeSpeed", 1)
 	player1.emit_signal("skipping")
+
+
+	
 	
