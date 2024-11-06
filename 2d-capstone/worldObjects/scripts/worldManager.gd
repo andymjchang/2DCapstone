@@ -442,13 +442,13 @@ func _onChangeSpeed(speedType):
 		Globals.scrollSpeed = 2.5
 		timeMultiplier = 2.5
 	elif speedType > 0:			# Speed up
-		music.pitch_scale = 1.1
-		Globals.scrollSpeed = 1.1
-		timeMultiplier = 1.1
+		music.pitch_scale = 1.2
+		Globals.scrollSpeed = 1.2
+		timeMultiplier = 1.2
 	elif speedType < 0:			# Speed down
-		music.pitch_scale = 0.9
-		Globals.scrollSpeed = 0.9
-		timeMultiplier = 0.9
+		music.pitch_scale = 0.8
+		Globals.scrollSpeed = 0.8
+		timeMultiplier = 0.8
 	else:						# Return to regular
 		music.pitch_scale = 1
 		Globals.scrollSpeed = 1
