@@ -47,10 +47,7 @@ func initText(text, _player_position):
 	if text > 85:
 		labelText = "PERFECT!"
 		clefSprite.texture = greenTiming
-		Globals.numPerfects+=1
-	elif text > 75:
-		labelText = "GREAT!"
-		clefSprite.texture = greenTiming
+		Globals.numPerfects += 1
 	elif text > 65:
 		labelText = "GOOD!"
 		clefSprite.texture = yellowTiming

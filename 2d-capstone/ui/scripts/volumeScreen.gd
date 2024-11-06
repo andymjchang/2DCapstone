@@ -33,9 +33,4 @@ func _onDragEnd(value, slider) -> void:
 
 
 func _onBackButtonUp() -> void:
-	var curScene = get_tree().current_scene
-	if curScene == self:
-		get_tree().change_scene_to_file("res://ui/options.tscn")
-	else:
-		get_tree().current_scene.get_node("LevelUI/Options").visible = true
-		self.queue_free()
+	pass

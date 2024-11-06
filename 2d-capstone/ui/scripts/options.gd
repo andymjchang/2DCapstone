@@ -1,15 +1,59 @@
 extends Control
 
+enum MenuOptions {
+	KEY_BINDINGS,
+	CALIBRATION,
+	VOLUME,
+	BACK,
+}
+
+@export var vinyl_rotations: Array[float] = [0.0, -32.7, -61.7, -89.2]
+
+var current_option: int = 0
+var options_count: int = MenuOptions.size()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	update_selection()
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump"):
+		current_option = (current_option - 1 + options_count) % options_count
+		update_selection()
+	elif event.is_action_pressed("slide"):
+		current_option = (current_option + 1) % options_count
+		update_selection()
+	elif event.is_action_pressed("ui_accept"):
+		select_current_option()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func update_selection() -> void:
+	reset_options()
+	
+	$OptionsMenuVinyl.rotation_degrees = vinyl_rotations[current_option]
+	
+	match current_option:
+		MenuOptions.KEY_BINDINGS:
+			pass
+		MenuOptions.CALIBRATION:
+			pass
+		MenuOptions.VOLUME:
+			$VolumeScreen.visible = true
+		MenuOptions.BACK:
+			pass
 
+func select_current_option() -> void:
+	match current_option:
+		MenuOptions.KEY_BINDINGS:
+			_onKeyBindingsButtonUp()
+		MenuOptions.CALIBRATION:
+			pass
+		MenuOptions.VOLUME:
+			_onVolumeButtonUp()
+		MenuOptions.BACK:
+			_onBackButtonUp()
+
+func reset_options() -> void:
+	$VolumeScreen.visible = false
 
 func _onKeyBindingsButtonUp() -> void:
 	#get_tree().change_scene_to_file("res://ui/keybindings.tscn")
