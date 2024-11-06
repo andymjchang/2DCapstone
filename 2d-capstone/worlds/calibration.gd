@@ -14,6 +14,7 @@ var circle_center = Vector2(200, 200)  # Position of circle center
 var circle_radius = 100
 var timing_points = []  # Store recent timing points
 var timing_differences = []  # Add this with other variables at the top
+var average_delay : float = 0.0
 
 var current_time : float = 0.0  # Track time for marker rotation
 
@@ -21,7 +22,10 @@ func _ready() -> void:
 	beat_interval = 60.0 / bpm
 	next_beat_time = 0.0
 	audio_player = $AudioStreamPlayer2D
-
+	
+	# Center the circle on the screen
+	var viewport_size = get_viewport_rect().size
+	circle_center = viewport_size / 2
 
 func _process(delta: float) -> void:
 	next_beat_time += delta
@@ -73,15 +77,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			timing_differences.pop_front()
 		
 		# Calculate and display average delay
-		var average_delay = 0.0
+		average_delay = 0.0
 		for diff in timing_differences:
 			average_delay += diff
 		average_delay = (average_delay / timing_differences.size()) * 1000  # Convert to ms
 		averageDelayLabel.text = "Average Delay: %.1f ms" % average_delay
-		if average_delay > 0.0:
-			Globals.timeDelay = average_delay
 		
 		# Add timing point to visualization
 		timing_points.append(current_time)
 		if timing_points.size() > 10:
 			timing_points.pop_front()
+
+
+func _on_button_button_up() -> void:
+	if average_delay > 0.0:
+		Globals.timeDelay = average_delay
+	get_tree().change_scene_to_file("res://ui/options.tscn")

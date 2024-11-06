@@ -8,6 +8,7 @@ enum MenuOptions {
 }
 
 @export var vinyl_rotations: Array[float] = [0.0, -32.7, -61.7, -89.2]
+@export var rotation_tween_duration: float = 0.15  # Duration in seconds
 
 var current_option: int = 0
 var options_count: int = MenuOptions.size()
@@ -27,9 +28,13 @@ func _input(event: InputEvent) -> void:
 		select_current_option()
 
 func update_selection() -> void:
-	reset_options()
 	
-	$OptionsMenuVinyl.rotation_degrees = vinyl_rotations[current_option]
+	# Create tween for smooth rotation
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($OptionsMenuVinyl, "rotation_degrees", 
+		vinyl_rotations[current_option], rotation_tween_duration)
 	
 	match current_option:
 		MenuOptions.KEY_BINDINGS:
@@ -37,24 +42,26 @@ func update_selection() -> void:
 		MenuOptions.CALIBRATION:
 			pass
 		MenuOptions.VOLUME:
-			$VolumeScreen.visible = true
+			pass
 		MenuOptions.BACK:
 			pass
 
 func select_current_option() -> void:
+	reset_options()
 	match current_option:
 		MenuOptions.KEY_BINDINGS:
-			_onKeyBindingsButtonUp()
+			$Keybindings.visible = true
 		MenuOptions.CALIBRATION:
-			pass
+			get_tree().change_scene_to_file("res://worlds/calibration.tscn")
 		MenuOptions.VOLUME:
-			_onVolumeButtonUp()
+			$VolumeScreen.visible = true
 		MenuOptions.BACK:
 			_onBackButtonUp()
 
 func reset_options() -> void:
 	$VolumeScreen.visible = false
-
+	$Keybindings.visible = false
+	$Title2.visible = false
 func _onKeyBindingsButtonUp() -> void:
 	#get_tree().change_scene_to_file("res://ui/keybindings.tscn")
 	var curScene = get_tree().current_scene
