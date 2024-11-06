@@ -166,7 +166,7 @@ func _ready():
 	#startGame()
 	
 func startGame():
-	music.play(musicTime)
+	music.play(musicTime + Globals.timeDelay)
 	print("starting")
 	Globals.inLevel = true
 	if !Globals.customStart and !Globals.relocateToCheckpoint:
@@ -340,9 +340,11 @@ func _onLevelCompleted():
 	showLevelCompleted()
 	Globals.inLevel = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _process(delta):
 	updateTime(delta)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("pause") and !$LevelUI/GameOverScreen.visible and !$LevelUI/levelCompleteScreen.visible:
 		#do go to pause instead
 		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")

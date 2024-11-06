@@ -57,12 +57,9 @@ func formatText(commands) -> String:
 	return returnString
 
 func _onBackButtonUp() -> void:
-	var curScene = get_tree().current_scene
-	if curScene == self:
-		get_tree().change_scene_to_file("res://ui/options.tscn")
-	else:
-		get_tree().current_scene.get_node("LevelUI/Options").visible = true
-		self.queue_free()
+	for node in get_tree().get_nodes_in_group("Label"):
+		node.deselect()
+	buttonResetting = null
 
 func _onKeyButtonUp(name) -> void:
 	buttonResetting = self.get_node("buttons/"+name)

@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://doiamwbhll34f"]
+[gd_scene load_steps=8 format=3 uid="uid://doiamwbhll34f"]
 
 [ext_resource type="Script" path="res://ui/scripts/options.gd" id="1_n6aap"]
-[ext_resource type="Texture2D" uid="uid://byewomg48i32x" path="res://ui/assets/Pause_Menu_back.png" id="2_ufdgt"]
+[ext_resource type="Texture2D" uid="uid://ctgbh3bxdu020" path="res://ui/assets/options_menu_vinyl.png" id="2_6gwvt"]
+[ext_resource type="Texture2D" uid="uid://mji6d62y133n" path="res://ui/assets/Pause_menu_album_sleeve.png" id="3_o5thn"]
+[ext_resource type="PackedScene" uid="uid://cp8ha1sehgc3x" path="res://ui/volumeScreen.tscn" id="4_fo0ct"]
+[ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="5_ad7d3"]
+[ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="6_5eqhw"]
+[ext_resource type="PackedScene" uid="uid://dn1epcentmy3x" path="res://ui/keybindings.tscn" id="7_hr1kh"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -10,44 +15,91 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = 125.0
+offset_right = 125.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.1, 0.1)
 size_flags_horizontal = 4
 script = ExtResource("1_n6aap")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2, 0)
-scale = Vector2(2.02839, 2.13021)
-texture = ExtResource("2_ufdgt")
+[node name="OptionsMenuVinyl" type="Sprite2D" parent="."]
+position = Vector2(100, 0)
+texture = ExtResource("2_6gwvt")
+
+[node name="PauseMenuAlbumSleeve" type="Sprite2D" parent="."]
+position = Vector2(-466, 0)
+texture = ExtResource("3_o5thn")
+
+[node name="Pointer2" type="Sprite2D" parent="." groups=["pulsingObjects"]]
+position = Vector2(704, 0)
+texture = ExtResource("5_ad7d3")
+script = ExtResource("6_5eqhw")
+increasedScale = Vector2(1.1, 1.1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = -1078.0
+offset_top = -540.0
+offset_right = -499.0
+offset_bottom = -408.0
+theme_override_font_sizes/font_size = 96
+text = "OPTIONS"
+
+[node name="Title2" type="Label" parent="."]
+layout_mode = 0
+offset_left = -1032.0
+offset_top = -25.0
+offset_right = 35.0
+offset_bottom = 107.0
+theme_override_font_sizes/font_size = 48
+text = "Use Up, Down, and Space to select an option"
 
 [node name="keybindingsButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
-offset_left = -1682.0
-offset_top = -1493.0
-offset_right = 1547.0
-offset_bottom = -924.0
-theme_override_font_sizes/font_size = 200
+offset_left = -690.0
+offset_top = -155.0
+offset_right = -313.0
+offset_bottom = -64.0
+theme_override_font_sizes/font_size = 60
 text = "Key bindings"
 
 [node name="backButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
-offset_left = -1690.0
-offset_top = 610.0
-offset_right = 1644.0
-offset_bottom = 1123.0
-theme_override_font_sizes/font_size = 200
+offset_left = -690.0
+offset_top = 67.0
+offset_right = -313.0
+offset_bottom = 158.0
+theme_override_font_sizes/font_size = 60
 text = "Back
 "
 
 [node name="volumeButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
-offset_left = -1682.0
-offset_top = -513.0
-offset_right = 1547.0
-offset_bottom = 56.0
-theme_override_font_sizes/font_size = 200
+offset_left = -690.0
+offset_top = -44.0
+offset_right = -313.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 60
 text = "Volume"
+
+[node name="VolumeScreen" parent="." instance=ExtResource("4_fo0ct")]
+visible = false
+layout_mode = 1
+offset_left = -1452.0
+offset_top = -350.0
+offset_right = -1452.0
+offset_bottom = -350.0
+
+[node name="Keybindings" parent="." instance=ExtResource("7_hr1kh")]
+visible = false
+layout_mode = 1
+offset_left = 7.0
+offset_top = 282.0
+offset_right = 7.0
+offset_bottom = 282.0
 
 [connection signal="button_up" from="keybindingsButton" to="." method="_onKeyBindingsButtonUp"]
 [connection signal="button_up" from="backButton" to="." method="_onBackButtonUp"]
