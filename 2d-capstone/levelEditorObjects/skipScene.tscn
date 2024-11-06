@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dam4sj64yck3d"]
+
+[ext_resource type="Script" path="res://levelEditorObjects/scripts/skipScene.gd" id="1_fgw87"]
+[ext_resource type="Texture2D" uid="uid://davg4jbcubgii" path="res://ui/assets/onboarding/waypoint.png" id="2_mlyqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2eg8k"]
+size = Vector2(79, 67)
+
+[node name="SkipScene" type="Node2D"]
+script = ExtResource("1_fgw87")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+shape = SubResource("RectangleShape2D_2eg8k")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_mlyqv")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c20ws7h2bvhkf"
-path="res://.godot/imported/2.png-bf183bd7e4b51f39d1d9f41a650ebcf6.ctex"
+uid="uid://davg4jbcubgii"
+path="res://.godot/imported/waypoint.png-3bf6866c24fc9cb3563374a8704e1829.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://particles/powerups/2.png"
-dest_files=["res://.godot/imported/2.png-bf183bd7e4b51f39d1d9f41a650ebcf6.ctex"]
+source_file="res://ui/assets/onboarding/waypoint.png"
+dest_files=["res://.godot/imported/waypoint.png-3bf6866c24fc9cb3563374a8704e1829.ctex"]
 
 [params]
 

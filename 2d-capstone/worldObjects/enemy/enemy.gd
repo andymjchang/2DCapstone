@@ -77,6 +77,7 @@ func setEnemyType(posPoints) -> void :
 				var newXExtents = (enemyImage.get_size().x * animatedSprite.scale.x) / 2.0
 				$Area2D/CollisionShape2D.shape.extents = Vector2(newXExtents, newYExtents)
 			"slideEnemy":
+				#TODO make sure that the hiy boxes are not a shared resource
 				animatedSprite.animation = "slideEnemy"
 				enemyType = "slideEnemy"
 				var newYExtents = (slideEnemyImage.get_size().y * animatedSprite.scale.y) / 2.0

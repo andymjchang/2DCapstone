@@ -46,6 +46,7 @@ musicSounds=""
 playerSounds=""
 levelMusicSounds=""
 blocks=""
+skips=""
 
 [input]
 

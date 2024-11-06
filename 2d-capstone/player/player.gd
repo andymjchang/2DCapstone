@@ -8,6 +8,8 @@ signal getPowerup(powerType)
 signal activatePowerup()
 signal doubleJump()
 signal getCoin()
+signal skipping()
+signal notSkipping()
 
 var curSprite
 var JUMP_VELOCITY = -550.0
@@ -37,6 +39,7 @@ var curPowerup
 var jumpInProgress = false
 var runInProgress = false
 var punchConnected = false
+var isSkipping
 
 # Jump Hang Time
 var hang_time_duration := 0.05
@@ -88,6 +91,8 @@ func _ready():
 	self.relocate.connect(_onRelocate)
 	self.doubleJump.connect(_onDoubleJump)
 	self.getCoin.connect(_onGetCoin)
+	self.skipping.connect(_onSkipping)
+	self.notSkipping.connect(_onNotSkipping)
 	$Animation.animation_finished.connect(_onAnimationFinished)
 	$Animation.play("Run")
 	worldNode = get_tree().get_root().get_node("level")
@@ -114,7 +119,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		camera.offset = Vector2.ZERO
 		
-	if not editing:
+	if not editing and not isSkipping:
 		if not inZipline:
 			# Lines
 			if is_on_floor():
@@ -148,14 +153,13 @@ func _physics_process(delta: float) -> void:
 				# velocity.x = Globals.pixelsPerFrame
 				# Pseudo-autoscroll prototype
 				
-				var direction = Input.get_axis(left, right)
+				var direction = Vector2.ZERO
+				direction = Input.get_axis(left, right)
 				if not hitBounds and direction > 0 :
 					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0:
+				elif hitBounds and direction > 0 or direction == 0:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-				elif !isSliding:
-					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
-					
+
 			#debug this
 			#if Input.is_action_pressed(slide):
 				#velocity.x *= slideFriction
@@ -169,19 +173,19 @@ func _physics_process(delta: float) -> void:
 					velocity += get_gravity() * delta * 10
 
 			if Input.is_action_just_pressed(slide):
-				get_node("Hitbox").scale *= Vector2(1, 0.5);
+				get_node("Hitbox").scale *= Vector2(1, 0.5)
 				get_node("Hitbox").position.y = 6
-				$Animation.play("Slide");
+				$Animation.play("Slide")
 				#TODO get rid of double var
 				isSliding = true
-				Globals.isSliding = true
 				#get_node("Floor").disabled = false
 				SlideTweenStart()
 				
 			if Input.is_action_just_released(slide):
-				get_node("Hitbox").scale *= Vector2(1, 2);
+				get_node("Hitbox").scale *= Vector2(1, 2)
 				get_node("Hitbox").position.y = 2
-				$Animation.play("Run");
+				isSliding = false
+				$Animation.play("Run")
 				#get_node("Floor").disabled = true
 				SlideTweenEnd()
 
@@ -207,8 +211,8 @@ func _physics_process(delta: float) -> void:
 				$attackTimer.start()
 				punchConnected = false
 		
-		if Input.is_action_just_pressed("activate"):
-			emit_signal("activatePowerup")
+		#if Input.is_action_just_pressed("activate"):
+			#emit_signal("activatePowerup")
 
 		elif reachedCheckpoint:
 			pass
@@ -294,7 +298,7 @@ func MonitorAttackHitbox(area : Area2D):
 		other.FadeOut()
 		scored.emit(self.name, abs(other.global_position.x - global_position.x))
 		other = other.get_parent()
-		if other.is_in_group("enemies"):
+		if other.is_in_group("enemies") and other.enemyType == "enemy":
 			other.GotHit()
 			# Play hit animation
 			hitEffect.frame = 0
@@ -316,9 +320,10 @@ func _onGetPowerup(powerType):
 		var particleEffect = get_node("CPUParticles2D")
 		print("Loading: ", "res://particles/powerups/" + str(powerType) + ".png")
 		particleEffect.texture = load("res://particles/powerups/" + str(powerType) + ".png")
-		var powerSprite = get_node("Powerup")
-		powerSprite.frame = powerType
-		powerSprite.visible = true
+		emit_signal("activatePowerup")
+		#var powerSprite = get_node("Powerup")
+		#powerSprite.frame = powerType
+		#powerSprite.visible = true
 		particleEffect.emitting = true
 		particleEffect.visible = true
 
@@ -342,13 +347,13 @@ func _onActivatePowerup():
 		Globals.powerType.SLOWDOWN:
 			print("Slowing down")
 			worldNode.emit_signal("changeSpeed", -1)
-	var powerSprite = get_node("Powerup")
-	powerSprite.visible = false
+	#var powerSprite = get_node("Powerup")
+	#powerSprite.visible = false
 	$powerupTimer.start()
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area.get_parent().enemyType == "slideEnemy" and Globals.isSliding:
+	if area.get_parent().enemyType == "slideEnemy" and isSliding: #Globals.isSliding:
 		#we slid into enemy
 		print("made it into slide damage: ")
 		var other = area.get_parent()
@@ -428,3 +433,9 @@ func _on_attack_timer_timeout() -> void:
 
 func _on_attack_lockout_timer_timeout() -> void:
 	canAttack = true
+
+func _onSkipping() -> void:
+	isSkipping = true
+
+func _onNotSkipping() -> void:
+	isSkipping = false

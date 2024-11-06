@@ -40,10 +40,12 @@ func _onHealingTaken(who) -> void:
 	if curP2Heart:
 		if curP2HeartIndex + 1 < 3:
 			curP2HeartIndex += 1
+			curP2Heart = self.get_node("player2").get_child(curP2HeartIndex)
+			curP2Heart.gainHeart()	
 		else:
 			curP2HeartIndex = 3
-		curP2Heart = self.get_node("player2").get_child(curP2HeartIndex)
-		curP2Heart.gainHeart()	
+			curP2Heart = self.get_node("player2").get_child(curP2HeartIndex)
+			#curP2Heart.gainHeart()	
 func _onUIRevive(who):
 	print("made it to ui revive")
 	curP2Heart =  $player2/UiHeart3

@@ -7,6 +7,7 @@ signal levelCompleted()
 signal checkLevelCompleted()
 signal changeSpeed(speedType)
 signal resetLoop(destination)
+signal movePlayer(location)
 
 @export var levelFile : String
 @export var platformBlockInstance : PackedScene
@@ -24,6 +25,7 @@ signal resetLoop(destination)
 @export var ziplineMiddle : PackedScene
 @export var coinInstance : PackedScene
 @export var keyBindingInstance : PackedScene
+@export var skipInstance :PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -40,6 +42,7 @@ signal resetLoop(destination)
 @onready var jumpBoostList = $objectList/jumpBoosts
 @onready var coinList = $objectList/coins
 @onready var keyBindingList = $objectList/keyBindings
+@onready var skipList = $objectList/skips
 
 var player1 
 var killWall
@@ -59,6 +62,9 @@ var musicTime = 0.0
 
 var textPopupScene1
 var restartCheckpoint = false
+var skipping = false
+var timeMultiplier = 1.0
+var skipCoords : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -122,6 +128,7 @@ func _ready():
 	self.levelCompleted.connect(_onLevelCompleted)
 	self.changeSpeed.connect(_onChangeSpeed)
 	self.resetLoop.connect(_onResetLoop)
+	self.movePlayer.connect(_onMovePlayer)
 
 	# Prep players
 	player1.editing = false
@@ -193,7 +200,8 @@ func loadLevel():
 		"powerups": [powerupInstance, powerupList],
 		"jumpBoosts": [jumpInstance, jumpBoostList],
 		"coins": [coinInstance, coinList],
-		"keyBindings":[keyBindingInstance, keyBindingList]}
+		"keyBindings":[keyBindingInstance, keyBindingList],
+		"skips":[skipInstance, skipList]}
 	var instance
 	var instanceParent
 	var name = ""
@@ -254,6 +262,8 @@ func loadLevel():
 	
 	# load the actionArrays
 	$objectList/actionIndicators.load_array()
+	$objectList/skips.loadArray()
+	
 	if levelFile.begins_with("Level 2"):
 		for platform in platformBlocksList.get_children():
 			platform.get_node("sprite2D/TileMapLayer").visible = false
@@ -288,6 +298,7 @@ func _onCheckLevelCompleted():
 	print("all reached = ", allReached)
 	if allReached:
 		self.emit_signal("levelCompleted")
+	self.emit_signal("levelCompleted")
 
 func _onGameOver():
 	var closestPoint = self.getNearestCheckpoint(player1)
@@ -345,12 +356,17 @@ func _physics_process(delta):
 	elif (Globals.customStart or Globals.relocateToCheckpoint) and !Globals.inLevel and Globals.time >= musicTime + 3.0 and !Globals.gameOver:
 		print("global time: ", Globals.time, " music time: ", musicTime)
 		startGame()
-
 		
-
+	if skipping:
+		#see player x matches to skip x
+		if skipCoords.x <= camera.global_position.x - 244:
+			skipping = false
+			player1.emit_signal("notSkipping")
+			emit_signal("changeSpeed", 0)
+	
 func updateTime(delta: float):
 	if Globals.inLevel:
-		Globals.time = Globals.time + delta
+		Globals.time = Globals.time  + (delta*timeMultiplier)
 	timerText.text = str(round_to_dec(Globals.time, 2))
 	
 func round_to_dec(num, digit):
@@ -403,12 +419,10 @@ func _onRunBoundsBodyEntered(body: Node2D) -> void:
 		#print("Entering max run bounds")
 		body.hitBounds = true
 
-
 func _onRunBoundsBodyExited(body: Node2D) -> void:
 	if (body.name.contains("Player")):
 		#print("Leaving max run bounds")
 		body.hitBounds = false
-
 
 func _onScored(id, p_score):
 	var scoreToAdd = 100 - p_score
@@ -421,9 +435,11 @@ func _onChangeSpeed(speedType):
 	if speedType > 0:			# Speed up
 		music.pitch_scale = 2
 		Globals.scrollSpeed = 2
+		timeMultiplier = 2.0
 	elif speedType < 0:			# Speed down
 		music.pitch_scale = 0.5
 		Globals.scrollSpeed = 0.5
+		timeMultiplier = 0.5
 	else:						# Return to regular
 		music.pitch_scale = 1
 		Globals.scrollSpeed = 1
@@ -435,3 +451,13 @@ func _onResetLoop(destination):
 	camera.position.x = destination.global_position.x
 	
 	pass
+	#timeMultiplier = 1.0
+
+func _onMovePlayer(location : Vector2):
+	#we have to move player based on new global loaction
+	player1.global_position = location
+	skipCoords = location
+	skipping = true
+	emit_signal("changeSpeed", 1)
+	player1.emit_signal("skipping")
+	
