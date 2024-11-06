@@ -9,12 +9,30 @@ enum MenuOptions {
 
 @export var vinyl_rotations: Array[float] = [0.0, -32.7, -61.7, -89.2]
 @export var rotation_tween_duration: float = 0.15  # Duration in seconds
+@export var slide_in_duration: float = 0.5  # Duration for slide-in animation
+@export var slide_offset: float = -1000  # Starting X offset for slide animation
 
 var current_option: int = 0
 var options_count: int = MenuOptions.size()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Set initial position off-screen
+	$OptionsMenuVinyl.position.x += slide_offset
+	$Album.position.x += slide_offset
+	
+	# Create tween for slide-in animation
+	var tween = create_tween()
+	tween.set_parallel(true)  # Animate both nodes simultaneously
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	
+	# Tween both nodes to their original positions
+	tween.tween_property($OptionsMenuVinyl, "position:x", 
+		$OptionsMenuVinyl.position.x - slide_offset, slide_in_duration + 0.75)
+	tween.tween_property($Album, "position:x", 
+		$Album.position.x - slide_offset, slide_in_duration)
+	
 	update_selection()
 
 func _input(event: InputEvent) -> void:
