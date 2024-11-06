@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctn54mgrw1nra"]
+
+[ext_resource type="Script" path="res://worldObjects/loopMarkers/loopManager.gd" id="1_e2t5i"]
+[ext_resource type="PackedScene" uid="uid://b1xnmxmo2s7sg" path="res://worldObjects/loopMarkers/loopMarkerStart.tscn" id="1_gh20v"]
+[ext_resource type="PackedScene" uid="uid://bwcl1qhm1l82a" path="res://worldObjects/loopMarkers/loopMarkerEnd.tscn" id="2_6xywe"]
+
+[node name="LoopManager" type="Node2D"]
+script = ExtResource("1_e2t5i")
+
+[node name="LoopMarkerStart" parent="." instance=ExtResource("1_gh20v")]
+
+[node name="LoopMarkerEnd" parent="." instance=ExtResource("2_6xywe")]
+position = Vector2(816, 0)

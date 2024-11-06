@@ -25,6 +25,7 @@ func _onArea2dBodyEntered(body:Node2D) -> void:
 	if "Player" in body.name:
 		if self.name == "LoopMarkerStart":
 			print("at start")
+			get_parent().emit_signal("recordData")
 
 		elif self.name == "LoopMarkerEnd":
 			print("at end")
