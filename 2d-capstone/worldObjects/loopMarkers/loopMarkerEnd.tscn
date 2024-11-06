@@ -6,6 +6,7 @@
 size = Vector2(20, 53.2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfrma"]
+size = Vector2(20, 266)
 
 [node name="LoopMarkerEnd" type="Node2D"]
 script = ExtResource("1_iji7p")
@@ -27,6 +28,8 @@ color = Color(0.447059, 0.54902, 1, 1)
 [node name="Respawn" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Respawn"]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_lfrma")
 
 [connection signal="body_entered" from="Area2D" to="." method="_onArea2dBodyEntered"]
+[connection signal="area_entered" from="Respawn" to="." method="_onRespawnAreaEntered"]

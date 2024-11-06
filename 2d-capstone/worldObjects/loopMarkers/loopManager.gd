@@ -11,7 +11,7 @@ signal resetData()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	recordData.connect(_onRecordData)
-	rese
+	resetData.connect(_onResetData)
 	pass # Replace with function body.
 
 
@@ -24,3 +24,6 @@ func _onRecordData():
 	print("Hit start, recording data")
 	startTime = Globals.time
 	print("Restart at this time: ", startTime)
+
+func _onResetData():
+	Globals.time = startTime

@@ -10,4 +10,4 @@ script = ExtResource("1_e2t5i")
 [node name="LoopMarkerStart" parent="." instance=ExtResource("1_gh20v")]
 
 [node name="LoopMarkerEnd" parent="." instance=ExtResource("2_6xywe")]
-position = Vector2(816, 0)
+position = Vector2(1889, 0)

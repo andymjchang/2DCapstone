@@ -430,7 +430,7 @@ func _onChangeSpeed(speedType):
 
 func _onResetLoop(destination):
 	print("Resetting loop")
-	print("Destination to: ", destination)
+	print("Destination to: ", destination.global_position)
 	player1.position.x = destination.global_position.x
 	camera.position.x = destination.global_position.x
 	

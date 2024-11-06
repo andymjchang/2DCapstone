@@ -15,7 +15,8 @@ func _process(delta: float) -> void:
 		destination = get_parent().get_child(START)
 	elif self.name == "LoopMarkerEnd":
 		destination = get_parent().get_child(END)
-	
+	var dist = destination.position - self.position
+	get_node("Respawn").scale = Vector2(100, 1)
 	pass
 
 
@@ -34,5 +35,6 @@ func _onArea2dBodyEntered(body:Node2D) -> void:
 			get_tree().root.get_node("level").emit_signal("resetLoop", destination)
 
 
-
+func _onRespawnAreaEntered(area:Node2D) -> void:
+	print("Detected item in group: ", area.get_parent().get_parent().name)
 	pass

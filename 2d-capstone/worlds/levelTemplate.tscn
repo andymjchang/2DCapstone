@@ -173,7 +173,7 @@ visible = false
 [node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
 
 [node name="LoopManager" parent="." instance=ExtResource("32_nlg2e")]
-position = Vector2(205, 502)
+position = Vector2(271, 422)
 
 [connection signal="body_entered" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyEntered"]
 [connection signal="body_exited" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyExited"]
