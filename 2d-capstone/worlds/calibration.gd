@@ -80,8 +80,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		average_delay = 0.0
 		for diff in timing_differences:
 			average_delay += diff
-		average_delay = (average_delay / timing_differences.size()) * 1000  # Convert to ms
-		averageDelayLabel.text = "Average Delay: %.1f ms" % average_delay
+		average_delay = (average_delay / timing_differences.size())
+		var display_average_delay = average_delay * 1000
+		averageDelayLabel.text = "Average Delay: %.1f ms" % display_average_delay
 		
 		# Add timing point to visualization
 		timing_points.append(current_time)
@@ -92,4 +93,5 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_button_button_up() -> void:
 	if average_delay > 0.0:
 		Globals.timeDelay = average_delay
+		print("time delay: ", Globals.timeDelay)
 	get_tree().change_scene_to_file("res://ui/options.tscn")
