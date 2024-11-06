@@ -39,4 +39,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
 
+[node name="ScreenFlashTimer" type="Timer" parent="."]
+
 [connection signal="button_down" from="PreviewCanvasLayer/TextureButton" to="." method="_on_texture_button_button_down"]
+[connection signal="timeout" from="ScreenFlashTimer" to="." method="_on_screen_flash_timer_timeout"]

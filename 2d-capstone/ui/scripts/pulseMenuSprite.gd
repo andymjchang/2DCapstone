@@ -1,4 +1,4 @@
-extends AnimatedSprite2D
+extends Sprite2D
 
 # variables for controlling pulse
 @export var timingScale = 1
@@ -7,19 +7,14 @@ extends AnimatedSprite2D
 var beatInterval = 0.0
 var beatTimer = 0.0
 var lerpFactor = 0.0
-var isPulseActive = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
-	
-func setBPM():
 	beatInterval = timingScale * 60.0 / Globals.bpm
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if isPulseActive:
-		processBeat(delta)
+	processBeat(delta)
 
 func processBeat(delta: float) -> void:
 	beatTimer += delta

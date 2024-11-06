@@ -173,7 +173,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(23, 19.625)
+size = Vector2(15.625, 19.625)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
 size = Vector2(12.4995, 12.5)
@@ -255,7 +255,7 @@ sprite_frames = SubResource("SpriteFrames_h8xup")
 animation = &"Slide"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-12.125, 2)
+position = Vector2(-8.4375, 2)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="AttackHitbox" type="Area2D" parent="." groups=["playerHitbox"]]
