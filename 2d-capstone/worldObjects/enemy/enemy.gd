@@ -13,12 +13,16 @@ var enemyType = "enemy"
 var velocity = Vector2(0, 0)
 var move_speed = 600
 var gravity = 2000
-var min_rotation = -45 * (PI / 180)
+var min_rotation = 30 * (PI / 180)
 var max_rotation = 45 * (PI / 180)
+var death_timer = 0.0
+var initial_scale = Vector2(1, 1)
+var current_scale = Vector2(1, 1)
 
 var soundPlayer := AudioStreamPlayer.new()
 @onready var sprite
 @onready var animatedSprite = $AnimatedSprite2D
+var activeSprite
 
 var isMultiPunch = false
 var punchesLeft = 0.0
@@ -40,28 +44,45 @@ func _ready() -> void:
 		flying_sprite.visible = true
 	
 	# vary animation
-	var active_sprite = sprite if has_platform_below else flying_sprite
-	active_sprite.speed_scale = randf_range(0.8, 1.2)
-	active_sprite.frame = randi() % 4
+	activeSprite = sprite if has_platform_below else flying_sprite
+	activeSprite.speed_scale = randf_range(0.8, 1.2)
+	activeSprite.frame = randi() % 4
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if ifDead:	
-		#sprite.position.y += 4
-		#sprite.rotation = 0.8
 		DeathAnimation(delta)
 # Ensure that this func can be run after the hit detection on the same frame
 func DeathAnimation(delta: float) -> void:
+	death_timer += delta
+	
+	# Handle velocity
 	velocity.y += gravity * delta
-	velocity.x = move_speed
+	if death_timer > 0.25:  # Start slowing down after 0.3 seconds
+		velocity.x = move_toward(velocity.x, 0, move_speed * delta)
+	else:
+		velocity.x = move_speed
 	position += velocity * delta
+	
+	# Handle rotation
+	if death_timer > 0.25:  # Start rotating back to 0 after 0.3 seconds
+		activeSprite.rotation = move_toward(activeSprite.rotation, -1, 2 * delta)
+	
+	# Handle scale
+	if death_timer < 0.1:  # Initial scale increase
+		current_scale = initial_scale * 1.35
+	else:  # Scale back to normal
+		current_scale = current_scale.move_toward(initial_scale, delta)
+	activeSprite.scale = current_scale
 
 func GotHit():
-
 	self.ifDead = true
-	velocity.y = randi_range(-600, -300)
-	sprite.rotation = randf_range(min_rotation, max_rotation)
-	#get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
+	velocity.y = randi_range(-600, -500)
+	activeSprite.rotation = randf_range(min_rotation, max_rotation)
+	death_timer = 0.0
+	initial_scale = activeSprite.scale  # Store the initial scale
+	current_scale = initial_scale
+	activeSprite.isPulseActive = false
 	get_tree().current_scene.get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
 
 		
