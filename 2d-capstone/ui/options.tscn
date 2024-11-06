@@ -23,36 +23,37 @@ size_flags_horizontal = 4
 script = ExtResource("1_n6aap")
 
 [node name="OptionsMenuVinyl" type="Sprite2D" parent="."]
-position = Vector2(100, 0)
 texture = ExtResource("2_6gwvt")
 
-[node name="PauseMenuAlbumSleeve" type="Sprite2D" parent="."]
-position = Vector2(-466, 0)
+[node name="Album" type="Sprite2D" parent="."]
+position = Vector2(-566, 0)
 texture = ExtResource("3_o5thn")
 
 [node name="Pointer2" type="Sprite2D" parent="." groups=["pulsingObjects"]]
-position = Vector2(704, 0)
+position = Vector2(629, 0)
 texture = ExtResource("5_ad7d3")
 script = ExtResource("6_5eqhw")
 increasedScale = Vector2(1.1, 1.1)
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
-offset_left = -1078.0
+offset_left = -1056.0
 offset_top = -540.0
-offset_right = -499.0
+offset_right = -477.0
 offset_bottom = -408.0
 theme_override_font_sizes/font_size = 96
 text = "OPTIONS"
 
 [node name="Title2" type="Label" parent="."]
 layout_mode = 0
-offset_left = -1032.0
+offset_left = -1081.0
 offset_top = -25.0
-offset_right = 35.0
-offset_bottom = 107.0
+offset_right = -53.0
+offset_bottom = 112.0
 theme_override_font_sizes/font_size = 48
-text = "Use Up, Down, and Space to select an option"
+text = "Use Up, Down, and Space
+to select an option"
+horizontal_alignment = 1
 
 [node name="keybindingsButton" type="Button" parent="."]
 visible = false
@@ -88,17 +89,17 @@ text = "Volume"
 [node name="VolumeScreen" parent="." instance=ExtResource("4_fo0ct")]
 visible = false
 layout_mode = 1
-offset_left = -1452.0
+offset_left = -1491.0
 offset_top = -350.0
-offset_right = -1452.0
+offset_right = -1491.0
 offset_bottom = -350.0
 
 [node name="Keybindings" parent="." instance=ExtResource("7_hr1kh")]
 visible = false
 layout_mode = 1
-offset_left = 7.0
+offset_left = -49.0
 offset_top = 282.0
-offset_right = 7.0
+offset_right = -49.0
 offset_bottom = 282.0
 
 [connection signal="button_up" from="keybindingsButton" to="." method="_onKeyBindingsButtonUp"]
