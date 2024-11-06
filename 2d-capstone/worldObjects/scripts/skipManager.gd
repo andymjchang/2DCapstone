@@ -17,7 +17,8 @@ func loadArray():
 	for node in skipArray:
 		if node.name == "CanvasLayer":
 			skipArray.erase(node)
-
+	if skipArray.size() == 0:
+		return
 	print("all the skips in my array: ", skipArray)
 	skipArray.erase("CanvasLayer")
 	skipArray.sort_custom(sortSkips)

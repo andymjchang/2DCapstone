@@ -16,6 +16,7 @@ offset_bottom = 1031.0
 [node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 25
 text = "Press \"TAB\" to skip"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]

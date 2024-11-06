@@ -66,7 +66,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var typeArrays = { "enemyType" : ["enemy", "slideEnemy"],
 							"platformType" : ["rustic", "city"],
 							"instructionType" : ["punch", "slide", "jump", "activate"],
-							"gameObjectType" : {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin} }
+							"gameObjectType" : {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin, "skip":skip} }
 #var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "multiPunch"]
 @onready var typeMap = {blockTypes[1]: "gameObjectType",
 						blockTypes[2]: "platformType",
@@ -80,7 +80,8 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 						blockTypes[12]: "gameObjectType",
 						blockTypes[13]: "gameObjectType",
 						blockTypes[14]: "gameObjectType",
-						blockTypes[15]: "instructionType"}
+						blockTypes[15]: "instructionType",
+						blockTypes[16]: "gameObjectType"}
 
 
 @onready var objectList = $objectList
