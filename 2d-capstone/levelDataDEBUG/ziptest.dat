@@ -30,6 +30,9 @@ playerCheckpoints
 player
 0, 594.826110839844,
 enemies
+50, 700, enemy,
+75, 700, enemy,
+75, 700, enemy,
 killFloors
 goalBlocks
 3000, 525,
@@ -44,3 +47,4 @@ powerups
 jumpBoosts
 coins
 keyBindings
+skips
