@@ -298,7 +298,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="attackLockoutTimer" type="Timer" parent="."]
-wait_time = 0.75
+wait_time = 0.5
 one_shot = true
 
 [node name="sfxPlayer" type="AudioStreamPlayer2D" parent="." groups=["playerSounds"]]

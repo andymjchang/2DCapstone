@@ -73,6 +73,10 @@ var shake_decay = 5.0
 var shake_intensity = 0.0
 
 func _ready():
+	# Reset shader parameters
+	$Animation.material.set_shader_parameter("damage_intensity", 0.0)
+	$Animation.material.set_shader_parameter("invulnerable_intensity", 0.0)
+	
 	curSprite = get_node("Animation").duplicate()
 	add_to_group("players")
 	# Controls for player
@@ -150,14 +154,9 @@ func _physics_process(delta: float) -> void:
 
 			# If not currently in a song, allow regular movement, otherwise begin autoscroll
 			if Globals.inLevel:
-				# velocity.x = Globals.pixelsPerFrame
-				# Pseudo-autoscroll prototype
-				
-				var direction = Vector2.ZERO
-				direction = Input.get_axis(left, right)
-				if not hitBounds and direction > 0 :
-					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0 or direction == 0:
+				# Remove input check and always move forward at base speed plus scroll speed
+				velocity.x = Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
+				if hitBounds:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 
 			#debug this
