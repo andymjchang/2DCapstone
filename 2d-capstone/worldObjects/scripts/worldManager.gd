@@ -66,6 +66,10 @@ var skipping = false
 var timeMultiplier = 1.0
 var skipCoords : Vector2
 
+
+# Loop vars
+var enemiesToRespawn = {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.gameOver = false
@@ -444,11 +448,21 @@ func _onChangeSpeed(speedType):
 		music.pitch_scale = 1
 		Globals.scrollSpeed = 1
 
-func _onResetLoop(destination):
+func _onResetLoop(startTime, destination, enemyPos):
 	print("Resetting loop")
 	print("Destination to: ", destination.global_position)
+	print("Restarting to time: ", Globals.time)
 	player1.position.x = destination.global_position.x
 	camera.position.x = destination.global_position.x
+	
+	var distance = abs(0.0 - player1.global_position.x)
+	musicTime = distance / Globals.pixelsPerFrame
+	Globals.time = musicTime
+	for pos in enemyPos:
+		var instancedObj = enemyInstance.instantiate()	
+		instancedObj.position = pos
+		#instancedObj.get_node("ActionIndicator").initialize()
+		enemiesList.call_deferred("add_child", instancedObj)
 	
 	pass
 	#timeMultiplier = 1.0
