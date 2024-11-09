@@ -24,7 +24,8 @@ signal movePlayer(location)
 @export var ziplineMiddle : PackedScene
 @export var coinInstance : PackedScene
 @export var keyBindingInstance : PackedScene
-@export var skipInstance :PackedScene
+@export var skipInstance : PackedScene
+@export var mashInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -42,6 +43,7 @@ signal movePlayer(location)
 @onready var coinList = $objectList/coins
 @onready var keyBindingList = $objectList/keyBindings
 @onready var skipList = $objectList/skips
+@onready var mashList = $objectList/mashes
 
 @onready var onboardingSlides
 
@@ -204,7 +206,8 @@ func loadLevel():
 		"jumpBoosts": [jumpInstance, jumpBoostList],
 		"coins": [coinInstance, coinList],
 		"keyBindings":[keyBindingInstance, keyBindingList],
-		"skips":[skipInstance, skipList]}
+		"skips":[skipInstance, skipList], 
+		"mashes": [mashInstance, mashList]}
 	var instance
 	var instanceParent
 	var name = ""
@@ -257,6 +260,8 @@ func loadLevel():
 				instancedObj.setImage(posPoints)
 			if name == "enemies":
 				instancedObj.setEnemyType(posPoints)
+			if name == "mashes":
+				instancedObj.setTime(posPoints)
 			
 		elif ".mp3" in line:
 			# audio file

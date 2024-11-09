@@ -141,3 +141,22 @@ func check_platform_below() -> bool:
 	query.collision_mask = 0b1  # Platform is on layer 1
 	var result = space_state.intersect_ray(query)
 	return result and result.collider.is_in_group("blocks")
+	
+func setTime(posPoints):
+	#ugh math
+	var startX = posPoints[0]
+	var endX = posPoints[2]
+	
+	print("start x: ", startX , " end x: ", endX)
+	#have to caclulate the time from start to end
+		#player1.global_position = Globals.checkpoint
+		#get_node("Camera2D").moveCamera(player1.global_position.x)
+		#var distance = abs(0.0 - player1.global_position.x)
+		#var playerSpeed = player1.SPEED
+		#musicTime = distance / Globals.pixelsPerFrame
+		#Globals.time = 0.0
+		#Globals.time += musicTime
+	var distance = abs(endX - startX)
+	activeTime = distance / Globals.pixelsPerFrame
+	timeRemaining = 0.0
+	print("setting time to: ", distance / Globals.pixelsPerFrame)
