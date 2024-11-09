@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "skip"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "skip", "mash"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -56,6 +56,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var coin : PackedScene
 @export var keyBinding : PackedScene
 @export var skip : PackedScene
+@export var mash : PackedScene
 
 #block variants list
 @onready var enemyType = {"enemy" : enemyCharacter, "slide" : enemyCharacter}
@@ -103,6 +104,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var coinList = $objectList/coins
 @onready var keyBindingList = $objectList/keyBindings
 @onready var skipList = $objectList/skips
+@onready var mashList = $objectList/mashes
 
 
 
@@ -220,7 +222,8 @@ func loadLevel():
 		"jumpBoosts": [jumpBoost, jumpList, blockTypes[13]],
 		"coins": [coin, coinList, blockTypes[14]],
 		"keyBindings":[keyBinding, keyBindingList, blockTypes[15]],
-		"skips":[skip, skipList, blockTypes[16]]}
+		"skips":[skip, skipList, blockTypes[16]],
+		"mashes": [mash, mashList, blockTypes[17]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -244,9 +247,12 @@ func loadLevel():
 			objectParent.add_child(instancedObj)
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
+			#TODO just turn this into the load 
 			objectParent.setComponents(posPoints)
 			objectParent.setTileMaps(posPoints)		
-			objectParent.setImage(posPoints)	 
+			objectParent.setImage(posPoints)	
+			#this should be the onl call in the future 
+			#objectParent.load(posPoints)
 			#do this if object has more than one component
 
 func _on_save_button_down() -> void:
@@ -354,6 +360,8 @@ func _on_goal_button_button_up() -> void:
 	goalParent.add_child(goalInstance)
 	goalParent.blockType = blockTypes[4]
 	place_block(goalParent, goalBlocksList, camera.position, false)
+	
+	
 
 func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()
@@ -400,6 +408,8 @@ func _onButtonDown(instanceType, list, blockType, val) -> void:
 	
 func _onSkipButtonUp() -> void:
 	_onButtonDown(skip, skipList, blockTypes[16], false)
+func _onMashButtonUp() -> void:
+	_onButtonDown(mash, mashList, blockTypes[17], false)
 
 	
 func _on_play_audio_button_pressed() -> void:
@@ -472,6 +482,8 @@ func save_scene_to_file():
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().instructionType)+", "
 							elif itemList.name == "enemies":
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().enemyType)+", "
+							elif itemList.name == "mashes":
+								posChain = item.save()
 							else:
 								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
 							index+=1
@@ -607,6 +619,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/keyBindings")
 	if blockType == "skip":
 		return get_node("objectList/skips")
+	if blockType == "mash":
+		return get_node("objectList/mashes")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:

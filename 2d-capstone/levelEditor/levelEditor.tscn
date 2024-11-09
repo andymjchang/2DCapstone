@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=61 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -42,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://l8vpo2u44l4p" path="res://levelEditor/programmerArtAssets/p1checkpoint.png" id="22_1mwd2"]
 [ext_resource type="PackedScene" uid="uid://dam4sj64yck3d" path="res://levelEditorObjects/skipScene.tscn" id="24_5ioff"]
 [ext_resource type="PackedScene" uid="uid://dj0b5a5yg6sr0" path="res://levelEditorObjects/keyPressScene.tscn" id="24_r48c0"]
+[ext_resource type="PackedScene" uid="uid://luxlri5v0quk" path="res://levelEditorObjects/mashEnemyScene.tscn" id="25_1gpd6"]
 [ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
 [ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
 [ext_resource type="Texture2D" uid="uid://dd5m0kwji44w1" path="res://levelEditor/programmerArtAssets/zipline.png" id="30_pq2h6"]
@@ -55,6 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://dsavpthfoealy" path="res://ui/assets/slide.webp" id="46_ochwq"]
 [ext_resource type="Texture2D" uid="uid://bu2yib2n2hcyf" path="res://levelEditor/programmerArtAssets/jumpBoost.png" id="50_nrfgt"]
 [ext_resource type="Texture2D" uid="uid://5uf885vsslwn" path="res://levelEditor/programmerArtAssets/coin.png" id="52_ulykl"]
+[ext_resource type="Texture2D" uid="uid://5pb84xa1vjqv" path="res://ui/assets/multiPunch.jpg" id="53_q0jqn"]
 [ext_resource type="Texture2D" uid="uid://davg4jbcubgii" path="res://ui/assets/onboarding/waypoint.png" id="56_63qny"]
 [ext_resource type="Texture2D" uid="uid://b5duach4kwhsr" path="res://ui/assets/onboarding/keys/r.png" id="56_va5sc"]
 
@@ -86,6 +88,7 @@ jumpBoost = ExtResource("20_wtqqv")
 coin = ExtResource("22_0maqw")
 keyBinding = ExtResource("24_r48c0")
 skip = ExtResource("24_5ioff")
+mash = ExtResource("25_1gpd6")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(939, 601)
@@ -137,6 +140,8 @@ stream = ExtResource("19_jlcy1")
 [node name="keyBindings" type="Node2D" parent="objectList"]
 
 [node name="skips" type="Node2D" parent="objectList"]
+
+[node name="mashes" type="Node2D" parent="objectList"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -389,36 +394,6 @@ offset_right = 1665.0
 offset_bottom = 115.0
 texture_normal = ExtResource("37_5oir0")
 
-[node name="p1PlacerButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 875.0
-offset_right = 88.0
-offset_bottom = 937.0
-texture_normal = ExtResource("42_k3b5l")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="breakableWallButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 95.0
-offset_top = 877.0
-offset_right = 162.0
-offset_bottom = 935.0
-texture_normal = ExtResource("45_iuf20")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="slideWallButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 181.0
-offset_top = 874.0
-offset_right = 246.0
-offset_bottom = 936.0
-texture_normal = ExtResource("46_ochwq")
-ignore_texture_size = true
-stretch_mode = 0
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/objectSelector"]
 layout_mode = 0
 offset_left = 521.0
@@ -434,25 +409,40 @@ texture_normal = ExtResource("50_nrfgt")
 layout_mode = 2
 texture_normal = ExtResource("52_ulykl")
 
-[node name="keyBindingButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 245.0
-offset_top = 870.0
-offset_right = 332.0
-offset_bottom = 950.0
-texture_normal = ExtResource("56_va5sc")
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI"]
+offset_left = 8.0
+offset_top = 890.0
+offset_right = 3172.0
+offset_bottom = 1481.0
+scale = Vector2(0.1, 0.1)
+size_flags_horizontal = 0
+
+[node name="mashButton" type="TextureButton" parent="UI/HBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("53_q0jqn")
+stretch_mode = 0
+
+[node name="p1PlacerButton" type="TextureButton" parent="UI/HBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("42_k3b5l")
+
+[node name="breakableWallButton" type="TextureButton" parent="UI/HBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("45_iuf20")
+
+[node name="slideWallButton" type="TextureButton" parent="UI/HBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("46_ochwq")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="skipButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 325.0
-offset_top = 875.0
-offset_right = 423.0
-offset_bottom = 942.0
+[node name="keyBindingButton" type="TextureButton" parent="UI/HBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("56_va5sc")
+
+[node name="skipButton" type="TextureButton" parent="UI/HBoxContainer3"]
+layout_mode = 2
 texture_normal = ExtResource("56_63qny")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="StatusWindow" type="CanvasLayer" parent="."]
 process_mode = 2
@@ -552,12 +542,13 @@ clip_text = true
 [connection signal="gui_input" from="UI/objectSelector/audioProgress" to="." method="_on_audio_progress_gui_input"]
 [connection signal="input_event" from="UI/objectSelector/audioProgress/Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="button_down" from="UI/objectSelector/playLevelButton" to="." method="_on_play_level_button_button_down"]
-[connection signal="button_up" from="UI/objectSelector/p1PlacerButton" to="." method="_on_p_1_placer_button_button_up"]
-[connection signal="button_up" from="UI/objectSelector/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]
-[connection signal="button_up" from="UI/objectSelector/slideWallButton" to="." method="_onSlideWallButtonUp"]
 [connection signal="pressed" from="UI/objectSelector/HBoxContainer2/jumpBoostButton" to="." method="_onJumpBoostButtonPressed"]
 [connection signal="pressed" from="UI/objectSelector/HBoxContainer2/coinButton" to="." method="_onCoinButtonPressed"]
-[connection signal="button_up" from="UI/objectSelector/keyBindingButton" to="." method="_onKeyBindingButtonUp"]
-[connection signal="button_up" from="UI/objectSelector/skipButton" to="." method="_onSkipButtonUp"]
+[connection signal="button_up" from="UI/HBoxContainer3/mashButton" to="." method="_onMashButtonUp"]
+[connection signal="button_up" from="UI/HBoxContainer3/p1PlacerButton" to="." method="_on_p_1_placer_button_button_up"]
+[connection signal="button_up" from="UI/HBoxContainer3/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]
+[connection signal="button_up" from="UI/HBoxContainer3/slideWallButton" to="." method="_onSlideWallButtonUp"]
+[connection signal="button_up" from="UI/HBoxContainer3/keyBindingButton" to="." method="_onKeyBindingButtonUp"]
+[connection signal="button_up" from="UI/HBoxContainer3/skipButton" to="." method="_onSkipButtonUp"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]

@@ -141,4 +141,3 @@ func check_platform_below() -> bool:
 	query.collision_mask = 0b1  # Platform is on layer 1
 	var result = space_state.intersect_ray(query)
 	return result and result.collider.is_in_group("blocks")
-

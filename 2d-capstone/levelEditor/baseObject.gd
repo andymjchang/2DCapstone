@@ -79,13 +79,15 @@ func setArea2D():
 	for blockChild in self.get_child(0).get_children():
 		#grab each compents area2d
 		var newArea = blockChild.get_node("Area2D")
-		blockChild.get_node("Area2D").name = "EditorArea"+str(nameIndex)
-		#give them each a unique name
-		newArea.name = "EditorArea"+str(nameIndex)
-		nameIndex+=1
-		newArea.connect("input_event",  _on_area_2d_input_event.bind(newArea.name, blockChild))
-		newArea.connect("area_shape_entered", _onBodyEntered)
-		newArea.connect("area_shape_exited", _onBodyExited)
+		
+		if blockChild.get_node("Area2D"):
+			blockChild.get_node("Area2D").name = "EditorArea"+str(nameIndex)
+			#give them each a unique name
+			newArea.name = "EditorArea"+str(nameIndex)
+			nameIndex+=1
+			newArea.connect("input_event",  _on_area_2d_input_event.bind(newArea.name, blockChild))
+			newArea.connect("area_shape_entered", _onBodyEntered)
+			newArea.connect("area_shape_exited", _onBodyExited)
 		
 func _setClickResult(result) -> void:
 	clickResult = result
@@ -135,6 +137,17 @@ func setTileMaps(posPoints : Array) -> void:
 func setImage(posPoints):
 	if get_child(0).has_method("setImage"):
 		get_child(0).setImage(posPoints)
+
+func save() -> String:
+	if self.get_child(0).has_method("save"):
+		return get_child(0).save()
+	else:
+		#TODO just make this the default way to save
+		return ""
+		
+func load(posPoints) -> void:
+	if self.get_child(0).has_method("load"):
+		get_child(0).load(posPoints)
 	
 
 func tabType(typeOptions, typeName) -> void:

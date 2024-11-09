@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b6shtity07awa"]
+[gd_scene load_steps=19 format=3 uid="uid://h2r5t05jiyo5"]
 
 [ext_resource type="Script" path="res://worldObjects/enemy/mashEnemy.gd" id="1_d3a42"]
 [ext_resource type="Texture2D" uid="uid://dhk8ib54ejgwa" path="res://worldObjects/assets/circle.png" id="2_24gfp"]
