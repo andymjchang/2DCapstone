@@ -19,7 +19,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "skip", "mash"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "skip", "mash", "hold"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -57,6 +57,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var keyBinding : PackedScene
 @export var skip : PackedScene
 @export var mash : PackedScene
+@export var hold : PackedScene
 
 #block variants list
 @onready var enemyType = {"enemy" : enemyCharacter, "slide" : enemyCharacter}
@@ -105,6 +106,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var keyBindingList = $objectList/keyBindings
 @onready var skipList = $objectList/skips
 @onready var mashList = $objectList/mashes
+@onready var holdList = $objectList/holds
 
 
 
@@ -223,7 +225,8 @@ func loadLevel():
 		"coins": [coin, coinList, blockTypes[14]],
 		"keyBindings":[keyBinding, keyBindingList, blockTypes[15]],
 		"skips":[skip, skipList, blockTypes[16]],
-		"mashes": [mash, mashList, blockTypes[17]]}
+		"mashes": [mash, mashList, blockTypes[17]],
+		"holds": [hold, holdList, blockTypes[18]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -410,6 +413,8 @@ func _onSkipButtonUp() -> void:
 	_onButtonDown(skip, skipList, blockTypes[16], false)
 func _onMashButtonUp() -> void:
 	_onButtonDown(mash, mashList, blockTypes[17], false)
+func _onHoldButtonUp() -> void:
+	_onButtonDown(hold, holdList, blockTypes[18], false)
 
 	
 func _on_play_audio_button_pressed() -> void:
@@ -621,6 +626,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/skips")
 	if blockType == "mash":
 		return get_node("objectList/mashes")
+	if blockType == "hold": 
+		return get_node("objectList/holds")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:

@@ -37,7 +37,6 @@ func _draw():
 		draw_line(coords[0], coords[1], Color.WEB_PURPLE,0.2)
 		
 func save() -> String:
-	#posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().enemyType)+", "
 	return str($start.global_position.x) + ", " + str($start.global_position.y) +", "+ str($end.global_position.x) + ", " + str($end.global_position.y) + ", "
 
 func load(posPoints) -> void:
