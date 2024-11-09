@@ -13,7 +13,7 @@ var enemyType = "enemy"
 var velocity = Vector2(0, 0)
 var move_speed = 600
 var gravity = 2000
-var min_rotation = 30 * (PI / 180)
+var min_rotation = 15 * (PI / 180)
 var max_rotation = 45 * (PI / 180)
 var death_timer = 0.0
 var initial_scale = Vector2(1, 1)
@@ -28,6 +28,9 @@ var activeSprite
 var isFirstHit = false
 var activeTime = 2.0  # Time in seconds the enemy stays active
 var timeRemaining = 0.0
+
+# Add rotation direction variable
+var rotationDirection = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -92,6 +95,8 @@ func DeathAnimation(delta: float) -> void:
 func GotHit():
 	$ActionIndicator.active = true
 	$ActionIndicator.doNotFadeOut = true
+	activeSprite.rotation = randf_range(min_rotation, max_rotation) * rotationDirection
+	rotationDirection *= -1
 	if !isFirstHit:
 		# First hit behavior - activate the enemy
 		isFirstHit = true
