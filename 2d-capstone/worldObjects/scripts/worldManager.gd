@@ -463,6 +463,7 @@ func _onResetLoop(startTime, destination, enemyPos):
 		instancedObj.position = pos
 		#instancedObj.get_node("ActionIndicator").initialize()
 		enemiesList.call_deferred("add_child", instancedObj)
+	actionIndicatorsList.load_array()
 	
 	pass
 	#timeMultiplier = 1.0
