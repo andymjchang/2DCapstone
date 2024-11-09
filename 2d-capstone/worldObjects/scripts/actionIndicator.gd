@@ -13,6 +13,7 @@ var curSprite
 @onready var inner_circle = $innerCircle
 @onready var outer_circle = $outerCircle
 var index = 0
+var doNotFadeOut : bool = false
 
 func initialize():
 	
@@ -36,7 +37,7 @@ func start_transition():
 		active = true
 
 func _process(_delta: float) -> void:
-	if !active:
+	if !active or doNotFadeOut:
 		return
 	
 	# Calculate progress based on global time difference
@@ -58,21 +59,22 @@ func _process(_delta: float) -> void:
 		fadeOut = true
 
 func FadeOut():
-	if fadeOut:
+	if fadeOut or doNotFadeOut:
 		return
 	
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 1.0)
-	tween.tween_callback(queue_free)
+	tween.tween_callback(_on_death_timer_timeout)
 
 func _on_death_timer_timeout() -> void:
-	queue_free()
-	#
+	if !doNotFadeOut:
+		queue_free()
+	
 func resetAnimation(newPos) -> void :
 	#enemy has been pushed back, reset the action indicator
 	target_time = newPos.x / Globals.pixelsPerFrame
 	active = true 
-	
+		
 	curSprite = get_node("innerCircle").duplicate()
 	starting_scale = Vector2(startingScale, startingScale)
 	outer_circle.scale = starting_scale

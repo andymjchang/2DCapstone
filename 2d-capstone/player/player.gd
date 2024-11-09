@@ -289,19 +289,20 @@ func _onAnimationFinished():
 func MonitorAttackHitbox(area : Area2D):
 	var other = area.get_parent()
 	if other.is_in_group("actionIndicators") and other.active and !punchConnected:
+		var otherParent = other.get_parent()
+		other.active = false
+		if otherParent.is_in_group("enemies") and otherParent.enemyType == "enemy":
+			otherParent.GotHit()
+			# Play hit animation
+			hitEffect.frame = 0
+			hitEffect.play()
 		ResetAttack()
 		PunchTween() # Camera
 		punchConnected = true
 		Globals.screenFlashEffect()
-		other.active = false
 		other.FadeOut()
 		scored.emit(self.name, abs(other.global_position.x - global_position.x))
-		other = other.get_parent()
-		if other.is_in_group("enemies") and other.enemyType == "enemy":
-			other.GotHit()
-			# Play hit animation
-			hitEffect.frame = 0
-			hitEffect.play()
+		
 
 func ResetAttack():
 	canAttack = true
