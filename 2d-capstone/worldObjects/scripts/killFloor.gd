@@ -13,10 +13,6 @@ func _ready():
 	
 	curSprite = get_node("ColorRect").duplicate()
 	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 	
 func _onKillFloorBodyEntered(body:Node2D):
 	if "players" in body.get_groups():

@@ -1,12 +1,16 @@
 extends AudioStreamPlayer2D
 
 var max_y_position: float = 500.0  # Position where audio is silent
-var fade_distance: float = 1000.0   # Distance over which fading occurs
+var fade_distance: float = 500.0   # Distance over which fading occurs
+
+var active: bool = false
 
 func _ready() -> void:
 	volume_db = -80
 
 func _process(_delta: float) -> void:
+	if !active:
+		return
 	var current_y = global_position.y
 	
 	# Calculate fade based on distance from max_y_position

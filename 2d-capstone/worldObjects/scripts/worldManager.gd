@@ -75,6 +75,15 @@ func _ready():
 	Globals.inLevel = false
 	loadLevel()
 	Globals.time = 0.0
+	
+	# Get nodes
+	camera = $Camera2D
+	music = camera.get_node("Music")
+	adaptiveMusic = camera.get_node("ExtraTrackMusic")
+	player1 = playersList.get_node("Player1")
+	timerText = $CanvasLayer/Timer
+	scoreText = $CanvasLayer/Score
+
 	var backgroundName : String = "Lvl1"
 	if levelFile.begins_with("Tutorial"):
 		Globals.setBPM(155)
@@ -87,6 +96,7 @@ func _ready():
 	if levelFile.begins_with("Level 2"):
 		Globals.setBPM(156)
 		Globals.currentSongFileName = "Level2_OGNoMelody_156bpm_1.mp3"
+		adaptiveMusic.active = true
 		backgroundName = "Lvl2"
 		
 	if levelFile.begins_with("Tutorial"):
@@ -113,17 +123,9 @@ func _ready():
 		var backgroundInstance = backgroundScene.instantiate()
 		$Background.add_child(backgroundInstance)
 	
-	camera = $Camera2D
-	player1 = playersList.get_node("Player1")
-	timerText = $CanvasLayer/Timer
-	scoreText = $CanvasLayer/Score
-	
 	# intialize text popup node
 	textPopupScene1 = $Camera2D/ScorePopup1
 	textPopupScene1.initPosition(player1)
-
-	music = camera.get_node("Music")
-	adaptiveMusic = camera.get_node("ExtraTrackMusic")
 
 	loadAudio()
 	
@@ -143,14 +145,12 @@ func _ready():
 		player1.global_position = Globals.startP1Coords
 		get_node("Camera2D").moveCamera(player1.global_position.x)
 		var distance = abs(0.0 - player1.global_position.x)
-		var playerSpeed = player1.SPEED
 		musicTime = distance / Globals.pixelsPerFrame
 		Globals.time += musicTime
 	elif Globals.relocateToCheckpoint and Globals.checkpoint != null:
 		player1.global_position = Globals.checkpoint
 		get_node("Camera2D").moveCamera(player1.global_position.x)
 		var distance = abs(0.0 - player1.global_position.x)
-		var playerSpeed = player1.SPEED
 		musicTime = distance / Globals.pixelsPerFrame
 		Globals.time = 0.0
 		Globals.time += musicTime
@@ -211,11 +211,11 @@ func loadLevel():
 		"skips":[skipInstance, skipList]}
 	var instance
 	var instanceParent
-	var name = ""
+	var currentName = ""
 	for line in content.split("\n"):
 		#print("Current line: ", line)
 		if line in instanceList.keys():
-			name = line
+			currentName = line
 			instance = instanceList.get(line)[0]
 			instanceParent = instanceList.get(line)[1]
 		# Position
@@ -236,7 +236,7 @@ func loadLevel():
 			
 			#check if zipline, TODO make this more 
 			# TODO: Finish zipline line
-			if name == "ziplines":
+			if currentName == "ziplines":
 				var startPos = Vector2(posPoints[0], posPoints[1])
 				var endPos = Vector2(posPoints[2], posPoints[3])
 				instancedObj.get_node("ziplineStart").global_position = startPos
@@ -253,7 +253,7 @@ func loadLevel():
 				connectLine.scale.x = tgtLen / defaultLen
 				objectList.add_child(connectLine)
 				
-			if name =="platformBlocks":
+			if currentName =="platformBlocks":
 				instancedObj.setTileMaps(posPoints.duplicate()) 
 				instancedObj.add_to_group("platforms")
 				
@@ -352,7 +352,8 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("pause") and !$LevelUI/GameOverScreen.visible and !$LevelUI/levelCompleteScreen.visible:
 		#do go to pause instead
 		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
-		$Camera2D/Music.stream_paused = true
+		music.stream_paused = true
+		adaptiveMusic.stream_paused = true
 		Globals.paused = true
 		$LevelUI/PauseScreen.visible = true
 		Engine.time_scale = 0.0
@@ -443,18 +444,22 @@ func _onScored(id, p_score):
 func _onChangeSpeed(speedType):
 	if speedType == 2:
 		music.pitch_scale = 2.5
+		adaptiveMusic.pitch_scale = 2.5
 		Globals.scrollSpeed = 2.5
 		timeMultiplier = 2.5
 	elif speedType > 0:			# Speed up
 		music.pitch_scale = 1.2
+		adaptiveMusic.pitch_scale = 1.2
 		Globals.scrollSpeed = 1.2
 		timeMultiplier = 1.2
 	elif speedType < 0:			# Speed down
 		music.pitch_scale = 0.8
+		adaptiveMusic.pitch_scale = 0.8
 		Globals.scrollSpeed = 0.8
 		timeMultiplier = 0.8
 	else:						# Return to regular
 		music.pitch_scale = 1
+		adaptiveMusic.pitch_scale = 1
 		Globals.scrollSpeed = 1
 		timeMultiplier = 1.0
 		

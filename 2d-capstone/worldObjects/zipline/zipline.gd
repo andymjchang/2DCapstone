@@ -13,11 +13,6 @@ func _ready() -> void:
 	ziplineArea.body_entered.connect(_onBodyEntered)
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _onBodyEntered(body):
 	print("Entering body: ", body.name)
 	if "Player" in body.name:
