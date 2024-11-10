@@ -423,8 +423,6 @@ func _onHoldButtonUp() -> void:
 	_onButtonDown(hold, holdList, blockTypes[18], false)
 func _onMassMoveButtonUp() -> void:
 	_onButtonDown(moveLine, moveLineList, blockTypes[19], false)
-	var newLine = $objectList/moveLines
-	#setMassMove(newLine.global)
 
 	
 func _on_play_audio_button_pressed() -> void:
@@ -579,6 +577,11 @@ func place_block(instance, parent, placePos, initial):
 	lEindex+=1
 	currentBlock = instance
 
+	if currentBlock.blockType == blockTypes[19]:
+		emit_signal("setMassMove", instance.global_position, true)
+	if massMove and currentBlock.blockType != blockTypes[19]:
+		emit_signal("setMassMove", instance.global_position, false)
+		
 	_on_text_edit_2_text_changed()
 	reset_drag_tracking()
 
@@ -598,6 +601,10 @@ func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 				bindedBlocks.append(block)
 			else:
 				currentBlock = block
+				#if massMove and currentBlock.blockType != blockTypes[19]:
+					#emit_signal("setMassMove", currentBlock.global_position, false)
+				#elif massMove and currentBlock.blockType == blockTypes[19]:
+					#emit_signal("setMassMove", currentBlock.global_position, true)
 			return
 
 			
@@ -718,9 +725,9 @@ func lengthenPlatform() -> void:
 	place_block(blockParent, platformBlocksList, Vector2(newXPos, blockArea.global_position.y), false)
 	
 
-func _onSetMassMove(coords) -> void:
+func _onSetMassMove(coords, val) -> void:
 	#TODO switch this to bind maybe idk
-	if massMove:
+	if !val:
 		massMove = false
 		bindedBlocks = []
 	else:

@@ -72,7 +72,7 @@ func _input(event: InputEvent) -> void:
 		isDragging = false
 		#we do this if theres a mass move line
 		if self.blockType == "moveLine":
-			get_tree().current_scene.emit_signal("setMassMove", self.get_child(0).get_node(curAreaDragging).get_parent().global_position)
+			get_tree().current_scene.emit_signal("setMassMove", self.get_child(0).get_node(curAreaDragging).get_parent().global_position, true)
 		
 		
 #attaches area2Ds to the base object as well as enables them to detect being clicked on
