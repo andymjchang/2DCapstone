@@ -52,6 +52,7 @@ var countdownUI
 var statusMessage
 var restartButton
 var music
+var adaptiveMusic
 
 var score = 0
 var musicTime = 0.0
@@ -85,7 +86,7 @@ func _ready():
 		backgroundName = "Lvl1"
 	if levelFile.begins_with("Level 2"):
 		Globals.setBPM(156)
-		Globals.currentSongFileName = "Level2_Main_156bpm_V2.mp3"
+		Globals.currentSongFileName = "Level2_OGNoMelody_156bpm_1.mp3"
 		backgroundName = "Lvl2"
 		
 	if levelFile.begins_with("Tutorial"):
@@ -122,6 +123,8 @@ func _ready():
 	textPopupScene1.initPosition(player1)
 
 	music = camera.get_node("Music")
+	adaptiveMusic = camera.get_node("ExtraTrackMusic")
+
 	loadAudio()
 	
 	# Setting signals
@@ -167,6 +170,7 @@ func _ready():
 	
 func startGame():
 	music.play(musicTime + Globals.timeDelay)
+	adaptiveMusic.play(musicTime + Globals.timeDelay)
 	print("starting")
 	Globals.inLevel = true
 	if !Globals.customStart and !Globals.relocateToCheckpoint:
