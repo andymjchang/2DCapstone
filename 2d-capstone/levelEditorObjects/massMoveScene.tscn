@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://drwoyrkcgtkqc"]
+
+[ext_resource type="Script" path="res://levelEditorObjects/scripts/massMove.gd" id="1_x2ttq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_200pf"]
+size = Vector2(151, 20)
+
+[node name="MassMoveScene" type="Node2D"]
+script = ExtResource("1_x2ttq")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+position = Vector2(18.5, 0)
+shape = SubResource("RectangleShape2D_200pf")
+
+[node name="Line2D" type="Line2D" parent="Node2D"]
+points = PackedVector2Array(-56, 0, 0, 0, 24, 0, 93, -1)
+default_color = Color(0.0562916, 0.0562916, 0.0562916, 1)

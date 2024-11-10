@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=65 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -46,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
 [ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
 [ext_resource type="PackedScene" uid="uid://b3r5orhxswfha" path="res://levelEditorObjects/holdScene.tscn" id="26_oo2r2"]
+[ext_resource type="PackedScene" uid="uid://drwoyrkcgtkqc" path="res://levelEditorObjects/massMoveScene.tscn" id="27_1iynm"]
 [ext_resource type="Texture2D" uid="uid://dd5m0kwji44w1" path="res://levelEditor/programmerArtAssets/zipline.png" id="30_pq2h6"]
 [ext_resource type="Texture2D" uid="uid://b1ymqen6srbge" path="res://levelEditor/programmerArtAssets/powerup.png" id="33_pappt"]
 [ext_resource type="Texture2D" uid="uid://bv8ou5u1pkb2k" path="res://levelEditor/programmerArtAssets/R (1).jpg" id="34_wwivc"]
@@ -61,6 +62,7 @@
 [ext_resource type="Texture2D" uid="uid://davg4jbcubgii" path="res://ui/assets/onboarding/waypoint.png" id="56_63qny"]
 [ext_resource type="Texture2D" uid="uid://b5duach4kwhsr" path="res://ui/assets/onboarding/keys/r.png" id="56_va5sc"]
 [ext_resource type="Texture2D" uid="uid://dirtn80sqvt23" path="res://ui/assets/hold.png" id="60_w7oji"]
+[ext_resource type="Texture2D" uid="uid://hk8yyek0ymbh" path="res://ui/assets/massMove.png" id="62_w2amb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl84f"]
 size = Vector2(278, 43)
@@ -92,6 +94,7 @@ keyBinding = ExtResource("24_r48c0")
 skip = ExtResource("24_5ioff")
 mash = ExtResource("25_1gpd6")
 hold = ExtResource("26_oo2r2")
+moveLine = ExtResource("27_1iynm")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(939, 601)
@@ -147,6 +150,8 @@ stream = ExtResource("19_jlcy1")
 [node name="mashes" type="Node2D" parent="objectList"]
 
 [node name="holds" type="Node2D" parent="objectList"]
+
+[node name="moveLines" type="Node2D" parent="objectList"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -453,6 +458,10 @@ texture_normal = ExtResource("56_63qny")
 layout_mode = 2
 texture_normal = ExtResource("60_w7oji")
 
+[node name="massMoveButton" type="TextureButton" parent="UI/HBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("62_w2amb")
+
 [node name="StatusWindow" type="CanvasLayer" parent="."]
 process_mode = 2
 visible = false
@@ -560,5 +569,6 @@ clip_text = true
 [connection signal="button_up" from="UI/HBoxContainer3/keyBindingButton" to="." method="_onKeyBindingButtonUp"]
 [connection signal="button_up" from="UI/HBoxContainer3/skipButton" to="." method="_onSkipButtonUp"]
 [connection signal="button_up" from="UI/HBoxContainer3/holdButton" to="." method="_onHoldButtonUp"]
+[connection signal="button_up" from="UI/HBoxContainer3/massMoveButton" to="." method="_onMassMoveButtonUp"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]
