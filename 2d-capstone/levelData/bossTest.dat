@@ -25,8 +25,8 @@ playerCheckpoints
 player
 0, 540,
 enemies
-975, 550, enemy,
-1150, 550, enemy,
+825, 550, enemy,
+925, 550, enemy,
 1325, 550, enemy,
 1475, 550, enemy,
 killFloors
@@ -39,3 +39,4 @@ powerups
 jumpBoosts
 coins
 keyBindings
+skips

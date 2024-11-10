@@ -1,12 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwcl1qhm1l82a"]
+[gd_scene load_steps=3 format=3 uid="uid://bwcl1qhm1l82a"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/loopMarker.gd" id="1_iji7p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_px3m4"]
 size = Vector2(20, 53.2)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfrma"]
-size = Vector2(20, 266)
 
 [node name="LoopMarkerEnd" type="Node2D"]
 script = ExtResource("1_iji7p")
@@ -25,13 +22,4 @@ offset_right = 50.0
 offset_bottom = 132.0
 color = Color(0.447059, 0.54902, 1, 1)
 
-[node name="Respawn" type="Area2D" parent="."]
-collision_layer = 255
-collision_mask = 255
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Respawn"]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_lfrma")
-
 [connection signal="body_entered" from="Area2D" to="." method="_onArea2dBodyEntered"]
-[connection signal="area_entered" from="Respawn" to="." method="_onRespawnAreaEntered"]

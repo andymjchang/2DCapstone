@@ -63,7 +63,6 @@ func GotHit():
 	sprite.rotation = randf_range(min_rotation, max_rotation)
 	#get_parent().get_parent().get_parent().get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
 	get_tree().current_scene.get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
-
 		
 func setEnemyType(posPoints) -> void :
 	

@@ -15,7 +15,6 @@ var curSprite
 var index = 0
 
 func initialize():
-	print("Global time restart at here: ", Globals.time)
 	curSprite = get_node("innerCircle").duplicate()
 	starting_scale = Vector2(startingScale, startingScale)
 	outer_circle.scale = starting_scale

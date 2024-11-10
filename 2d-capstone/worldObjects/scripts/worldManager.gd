@@ -453,7 +453,7 @@ func _onResetLoop(startTime, destination, enemyPos):
 	print("Destination to: ", destination.global_position)
 	print("Restarting to time: ", Globals.time)
 	player1.position.x = destination.global_position.x
-	camera.position.x = destination.global_position.x
+	camera.position.x = destination.global_position.x + player1.position.x
 	
 	var distance = abs(0.0 - player1.global_position.x)
 	musicTime = distance / Globals.pixelsPerFrame
@@ -463,6 +463,7 @@ func _onResetLoop(startTime, destination, enemyPos):
 		instancedObj.position = pos
 		#instancedObj.get_node("ActionIndicator").initialize()
 		enemiesList.call_deferred("add_child", instancedObj)
+	music.play(startTime)
 	actionIndicatorsList.load_array()
 	
 	pass
