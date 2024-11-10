@@ -601,10 +601,6 @@ func _onObjectClicked(index : int, blockType: String, curAreaDragging):
 				bindedBlocks.append(block)
 			else:
 				currentBlock = block
-				#if massMove and currentBlock.blockType != blockTypes[19]:
-					#emit_signal("setMassMove", currentBlock.global_position, false)
-				#elif massMove and currentBlock.blockType == blockTypes[19]:
-					#emit_signal("setMassMove", currentBlock.global_position, true)
 			return
 
 			

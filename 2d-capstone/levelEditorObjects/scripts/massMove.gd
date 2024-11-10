@@ -1,5 +1,9 @@
 extends Node2D
 
+@onready var sprite = $Node2D/Sprite2D
+var axisTypes = ["vertical", "horizontal"]
+var axisType = "vertical"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,4 +12,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	#we want to allow the user to change the axis
+	if Input.is_action_just_pressed("rotate") and get_tree().current_scene.currentBlock and self.get_parent().index == get_tree().current_scene.currentBlock.index:
+		lineRotate()
+	
+
+func lineRotate() -> void:
+	if axisType == axisTypes[0]:
+		axisType = axisTypes[1]
+		sprite.rotation_degrees = 0
+	else:
+		axisType = axisTypes[0]
+		sprite.rotation_degrees = 90
+		
