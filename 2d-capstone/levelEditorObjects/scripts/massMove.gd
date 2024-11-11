@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var sprite = $Node2D/Sprite2D
+@onready var node = $Node2D
 var axisTypes = ["vertical", "horizontal"]
 var axisType = "vertical"
 
@@ -19,9 +20,12 @@ func _process(delta: float) -> void:
 
 func lineRotate() -> void:
 	if axisType == axisTypes[0]:
+		#changing from vertical to horizontal
 		axisType = axisTypes[1]
-		sprite.rotation_degrees = 0
+		node.rotation_degrees = 90
 	else:
+		#changing from horizontal to verticl
 		axisType = axisTypes[0]
-		sprite.rotation_degrees = 90
+		node.rotation_degrees = 0
+	get_tree().current_scene.emit_signal("setMassMove",node.global_position, true)
 		

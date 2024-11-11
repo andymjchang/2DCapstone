@@ -2,7 +2,7 @@ extends Node2D
 
 
 signal objectClicked(index : int, blockType: String, curAreaDragging)
-signal setMassMove()
+signal setMassMove(val : bool)
 # const values
 const measurePixels = 600
 const holdTime = 0.15
@@ -732,17 +732,29 @@ func _onSetMassMove(coords, val) -> void:
 		isBinding = false
 		#just clearing as like a sanity check
 		bindedBlocks = []
-		bindedBlocks = getAreaChildren(coords.x)
+		print("axis type: ",currentBlock.get_child(0).axisType  )
+		if currentBlock.get_child(0).axisType == "vertical":
+			#get all the blocks to the left 
+			bindedBlocks = getAreaChildren(coords.x, 0)
+		else:
+			print("horizontal true")
+			bindedBlocks = getAreaChildren(coords.y, 1)
 
-func getAreaChildren(xVal) -> Array:
-	var returnArray = []
-	#this is expensive, TODO - look into sorting nodes on insertion
-	for itemList in $objectList.get_children():
-		for item in itemList.get_children():
-			if item.global_position.x >= xVal:
-				returnArray.append(item)
+func getAreaChildren(xVal, coordType) -> Array:
+	#only do this if the current block is a moveLine
 	
-	print("return array: ", returnArray)
+	var returnArray = []
+	var arrayVec = []
+	if currentBlock.blockType == blockTypes[19]:
+		#this is expensive, TODO - look into sorting nodes on insertion
+		for itemList in $objectList.get_children():
+			for item in itemList.get_children():
+				if item.global_position[coordType] >= xVal:
+					returnArray.append(item)
+		
+		#print("return array: ", returnArray)
+	if returnArray.size() == 0.0:
+		returnArray.append(currentBlock)
 	return returnArray
 		
 	
