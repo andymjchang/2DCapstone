@@ -188,8 +188,12 @@ func _physics_process(delta: float) -> void:
 				#get_node("Floor").disabled = true
 				SlideTweenEnd()
 
-		elif inZipline:
+		elif inZipline and Input.is_action_just_pressed(jump):
 			$Animation.play("Zip")
+
+		elif inZipline and Input.is_action_just_released(jump):
+			inZipline = false
+			$Animation.play("Jump")
 			
 		if Input.is_action_just_pressed(punch):
 			if canAttack:
