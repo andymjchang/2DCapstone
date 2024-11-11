@@ -11,7 +11,7 @@ var audio_player : AudioStreamPlayer2D
 
 # Add new variables for visualization
 var circle_center = Vector2(200, 200)  # Position of circle center
-var circle_radius = 198
+var circle_radius = 792 / 2
 var timing_points = []  # Store recent timing points
 var timing_differences = []  # Add this with other variables at the top
 var average_delay : float = 0.0
@@ -70,7 +70,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Calculate timing difference (can be negative or positive)
 		var timing_difference = next_beat_time - closest_beat_time
 		var delay_ms = timing_difference * 1000
-		delayLabel.text = "Delay: %.1f ms" % delay_ms
+		delayLabel.text = "Delay:\n %.1f ms" % delay_ms
 		
 		# Store timing difference and calculate average
 		timing_differences.append(timing_difference)
@@ -83,7 +83,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			average_delay += diff
 		average_delay = (average_delay / timing_differences.size())
 		var display_average_delay = average_delay * 1000
-		averageDelayLabel.text = "Average Delay: %.1f ms" % display_average_delay
+		averageDelayLabel.text = "Average Delay:\n %.1f ms" % display_average_delay
 		
 		# Add timing point to visualization
 		timing_points.append(current_time)
