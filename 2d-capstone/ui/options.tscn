@@ -24,6 +24,7 @@ size_flags_horizontal = 4
 script = ExtResource("1_n6aap")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -1103.0
 offset_top = -549.0
 offset_right = 832.0

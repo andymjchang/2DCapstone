@@ -652,16 +652,17 @@ func displayStatus(message, display):
 
 func _on_play_level_button_button_down() -> void:
 	save_scene_to_file()
-	var scene_instance = levelTemplatePacked.instantiate()
+	# var scene_instance = levelTemplatePacked.instantiate()
 	
 	get_tree().paused = false
 	
 	# Access the current scene and remove it from the scene tree
 	#var current_scene = get_tree().current_scene
 	#Globals.editorNode = current_scene
-	Globals.enablePreviewUI()
+	# Globals.enablePreviewUI()
 	Globals.currentEditorFileName = saveFileName
-	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+	# get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+	Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 	#current_scene.visible = false
 
 	# Add the new scene to the scene tree and set it as the current scene
