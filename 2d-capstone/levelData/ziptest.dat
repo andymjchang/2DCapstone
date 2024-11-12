@@ -25,6 +25,18 @@ platformBlocks
 2925, 925, 12, <null>, <null>,
 3075, 925, 12, <null>, <null>,
 2975, 575, 12, <null>, <null>,
+3625, 850, 12, <null>, <null>,
+3781, 850, 12, <null>, <null>,
+3937, 850, 12, <null>, <null>,
+4093, 850, 12, <null>, <null>,
+4249, 850, 12, <null>, <null>,
+4405, 850, 12, <null>, <null>,
+4561, 850, 12, <null>, <null>,
+4717, 850, 12, <null>, <null>,
+4875, 850, 12, <null>, <null>,
+5031, 850, 12, <null>, <null>,
+5187, 850, 12, <null>, <null>,
+5343, 850, 12, <null>, <null>,
 actionIndicators
 playerCheckpoints
 player
@@ -32,14 +44,17 @@ player
 enemies
 killFloors
 goalBlocks
-3000, 525,
+5050, 750,
 3050, 875,
 breakableWalls
 ziplines
 650, 675, 2175, 500,
+3050, 400, 3975, 675,
+4300, 700, 4650, 350,
 placers
 slideWalls
 powerups
 jumpBoosts
 coins
 keyBindings
+skips

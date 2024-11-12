@@ -25,7 +25,8 @@ signal movePlayer(location)
 @export var ziplineMiddle : PackedScene
 @export var coinInstance : PackedScene
 @export var keyBindingInstance : PackedScene
-@export var skipInstance :PackedScene
+@export var skipInstance : PackedScene
+@export var mashInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -43,6 +44,10 @@ signal movePlayer(location)
 @onready var coinList = $objectList/coins
 @onready var keyBindingList = $objectList/keyBindings
 @onready var skipList = $objectList/skips
+@onready var mashList = $objectList/mashes
+
+@onready var onboardingSlides
+
 
 var player1 
 var killWall
@@ -94,7 +99,9 @@ func _ready():
 		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
 		var popUpInstance = popUpScene.instantiate()
 		$Camera2D.add_child(popUpInstance)
-		$Camera2D/onboardingPopUp/tutorialSlides.play()
+		onboardingSlides = $Camera2D/onboardingPopUp/tutorialSlides
+		onboardingSlides.play()
+		
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
 	# set bpm of all pulsing objects
@@ -135,7 +142,7 @@ func _ready():
 	self.movePlayer.connect(_onMovePlayer)
 
 	# Prep players
-	player1.editing = false
+	#player1.editing = false
 	if Globals.customStart:
 		#we are starting at a user picked place
 		player1.global_position = Globals.startP1Coords
@@ -167,7 +174,7 @@ func _ready():
 	#startGame()
 	
 func startGame():
-	music.play(musicTime)
+	music.play(musicTime + Globals.timeDelay)
 	print("starting")
 	Globals.inLevel = true
 	if !Globals.customStart and !Globals.relocateToCheckpoint:
@@ -205,7 +212,8 @@ func loadLevel():
 		"jumpBoosts": [jumpInstance, jumpBoostList],
 		"coins": [coinInstance, coinList],
 		"keyBindings":[keyBindingInstance, keyBindingList],
-		"skips":[skipInstance, skipList]}
+		"skips":[skipInstance, skipList], 
+		"mashes": [mashInstance, mashList]}
 	var instance
 	var instanceParent
 	var name = ""
@@ -258,6 +266,8 @@ func loadLevel():
 				instancedObj.setImage(posPoints)
 			if name == "enemies":
 				instancedObj.setEnemyType(posPoints)
+			if name == "mashes":
+				instancedObj.setTime(posPoints)
 			
 		elif ".mp3" in line:
 			# audio file
@@ -341,9 +351,11 @@ func _onLevelCompleted():
 	showLevelCompleted()
 	Globals.inLevel = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _process(delta):
 	updateTime(delta)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("pause") and !$LevelUI/GameOverScreen.visible and !$LevelUI/levelCompleteScreen.visible:
 		#do go to pause instead
 		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
@@ -436,17 +448,26 @@ func _onScored(id, p_score):
 		textPopupScene1.initText(scoreToAdd, player1.position)
 		
 func _onChangeSpeed(speedType):
-	if speedType > 0:			# Speed up
-		music.pitch_scale = 2
-		Globals.scrollSpeed = 2
-		timeMultiplier = 2.0
+	if speedType == 2:
+		music.pitch_scale = 2.5
+		Globals.scrollSpeed = 2.5
+		timeMultiplier = 2.5
+	elif speedType > 0:			# Speed up
+		music.pitch_scale = 1.2
+		Globals.scrollSpeed = 1.2
+		timeMultiplier = 1.2
 	elif speedType < 0:			# Speed down
-		music.pitch_scale = 0.5
-		Globals.scrollSpeed = 0.5
-		timeMultiplier = 0.5
+		music.pitch_scale = 0.8
+		Globals.scrollSpeed = 0.8
+		timeMultiplier = 0.8
 	else:						# Return to regular
 		music.pitch_scale = 1
 		Globals.scrollSpeed = 1
+		timeMultiplier = 1.0
+		
+	if onboardingSlides:
+		print("onbaording slides are in ")
+		self.get_tree().current_scene.get_node("Camera2D//onboardingPopUp").emit_signal("speedChange", timeMultiplier)
 
 func _onResetLoop(startTime, destination, enemyPos):
 	print("Resetting loop")
@@ -467,13 +488,13 @@ func _onResetLoop(startTime, destination, enemyPos):
 	actionIndicatorsList.load_array()
 	
 	pass
-	#timeMultiplier = 1.0
 
 func _onMovePlayer(location : Vector2):
 	#we have to move player based on new global loaction
 	player1.global_position = location
 	skipCoords = location
 	skipping = true
-	emit_signal("changeSpeed", 1)
+	emit_signal("changeSpeed", 2)
 	player1.emit_signal("skipping")
+	
 	

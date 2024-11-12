@@ -44,13 +44,10 @@ func initPosition(node):
 func initText(text, _player_position):
 	$sfxPlayer.play()
 	var labelText = ""
-	if text > 85:
+	if text > 90:
 		labelText = "PERFECT!"
 		clefSprite.texture = greenTiming
-		Globals.numPerfects+=1
-	elif text > 75:
-		labelText = "GREAT!"
-		clefSprite.texture = greenTiming
+		Globals.numPerfects += 1
 	elif text > 65:
 		labelText = "GOOD!"
 		clefSprite.texture = yellowTiming

@@ -14,14 +14,17 @@ size_flags_vertical = 3
 script = ExtResource("1_cvgld")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 1922.0
 offset_bottom = 1080.0
 color = Color(0.2484, 0.2484, 0.2484, 1)
 
-[node name="sliders" type="Node2D" parent="."]
+[node name="sliders" type="Control" parent="."]
+anchors_preset = 0
 
 [node name="playerSlider" type="HSlider" parent="sliders"]
+layout_mode = 0
 offset_left = 557.0
 offset_top = 114.0
 offset_right = 1333.0
@@ -29,6 +32,7 @@ offset_bottom = 301.0
 size_flags_horizontal = 4
 
 [node name="inGameMusicSlider" type="HSlider" parent="sliders"]
+layout_mode = 0
 offset_left = 557.0
 offset_top = 358.0
 offset_right = 1333.0
@@ -36,15 +40,18 @@ offset_bottom = 545.0
 size_flags_horizontal = 4
 
 [node name="musicSlider" type="HSlider" parent="sliders"]
+layout_mode = 0
 offset_left = 557.0
 offset_top = 603.0
 offset_right = 1333.0
 offset_bottom = 790.0
 size_flags_horizontal = 4
 
-[node name="labels" type="Node2D" parent="."]
+[node name="labels" type="Control" parent="."]
+anchors_preset = 0
 
 [node name="playerSounds" type="TextEdit" parent="labels"]
+layout_mode = 0
 offset_left = 575.0
 offset_top = 81.0
 offset_right = 1323.0
@@ -53,6 +60,7 @@ theme_override_font_sizes/font_size = 50
 text = "Player Sounds"
 
 [node name="inGameMusicSounds" type="TextEdit" parent="labels"]
+layout_mode = 0
 offset_left = 575.0
 offset_top = 291.0
 offset_right = 1323.0
@@ -61,6 +69,7 @@ theme_override_font_sizes/font_size = 50
 text = "In Game Music"
 
 [node name="musicSounds" type="TextEdit" parent="labels"]
+layout_mode = 0
 offset_left = 575.0
 offset_top = 532.0
 offset_right = 1323.0
@@ -69,12 +78,11 @@ theme_override_font_sizes/font_size = 50
 text = "Music"
 
 [node name="backButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
-offset_left = 15.0
-offset_top = 905.0
-offset_right = 314.0
-offset_bottom = 1045.0
-theme_override_font_sizes/font_size = 100
+offset_left = 575.0
+offset_top = 790.0
+offset_right = 721.0
+offset_bottom = 881.0
+theme_override_font_sizes/font_size = 60
 text = "Back"
-
-[connection signal="button_up" from="backButton" to="." method="_onBackButtonUp"]

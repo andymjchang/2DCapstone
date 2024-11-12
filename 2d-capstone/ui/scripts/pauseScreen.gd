@@ -22,10 +22,13 @@ func _onMainMenuButtonUp() -> void:
 
 
 func _onOptionsButtonUp() -> void:
-	var optionsScene = load("res://ui/options.tscn")
-	var optionsInstance = optionsScene.instantiate()
-	print("root, ", get_tree().current_scene)
-	get_tree().current_scene.get_node("LevelUI").add_child(optionsInstance)
-	self.visible = false
+	# var optionsScene = load("res://ui/options.tscn")
+	# var optionsInstance = optionsScene.instantiate()
+	# print("root, ", get_tree().current_scene)
+	# get_tree().get_root().add_child(optionsInstance)
+	# self.visible = false
 	#TODO find a better way to do this
-	#get_tree().change_scene_to_file("res://ui/options.tscn")
+	get_tree().change_scene_to_file("res://ui/options.tscn")
+	Engine.time_scale = 1.0
+	Globals.paused = false
+	self.get_parent().get_parent().get_node("Camera2D/Music").stream_paused = false

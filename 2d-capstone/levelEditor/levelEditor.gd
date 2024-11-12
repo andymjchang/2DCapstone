@@ -2,6 +2,7 @@ extends Node2D
 
 
 signal objectClicked(index : int, blockType: String, curAreaDragging)
+signal setMassMove(val : bool)
 # const values
 const measurePixels = 600
 const holdTime = 0.15
@@ -19,12 +20,13 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "skip"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "skip", "mash", "hold", "moveLine"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
 var isBinding = false
 var turnOffSnap = false
+var massMove = false
 
 var MIN_STEP : int = 25
 
@@ -56,6 +58,9 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var coin : PackedScene
 @export var keyBinding : PackedScene
 @export var skip : PackedScene
+@export var mash : PackedScene
+@export var hold : PackedScene
+@export var moveLine : PackedScene
 
 #block variants list
 @onready var enemyType = {"enemy" : enemyCharacter, "slide" : enemyCharacter}
@@ -103,6 +108,9 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var coinList = $objectList/coins
 @onready var keyBindingList = $objectList/keyBindings
 @onready var skipList = $objectList/skips
+@onready var mashList = $objectList/mashes
+@onready var holdList = $objectList/holds
+@onready var moveLineList = $objectList/moveLines
 
 
 
@@ -123,12 +131,14 @@ var levelSaved = false
 func _ready():
 	Globals.customStart = false
 	Globals.levelEditorTime = 0.0
+	#set signals
 	self.objectClicked.connect(_onObjectClicked)
+	self.setMassMove.connect(_onSetMassMove)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
-	if Globals.curFile == "":
+	if Globals.curFile == "" or fileLabel.text != null:
 		saveFileName = fileLabel.text
-		Globals.curFile = saveFileName
+		#Globals.curFile = saveFileName
 	else:
 		fileLabel.text = Globals.curFile
 		saveFileName = fileLabel.text
@@ -220,7 +230,9 @@ func loadLevel():
 		"jumpBoosts": [jumpBoost, jumpList, blockTypes[13]],
 		"coins": [coin, coinList, blockTypes[14]],
 		"keyBindings":[keyBinding, keyBindingList, blockTypes[15]],
-		"skips":[skip, skipList, blockTypes[16]]}
+		"skips":[skip, skipList, blockTypes[16]],
+		"mashes": [mash, mashList, blockTypes[17]],
+		"holds": [hold, holdList, blockTypes[18]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -244,9 +256,12 @@ func loadLevel():
 			objectParent.add_child(instancedObj)
 			objectParent.blockType = blockType
 			place_block(objectParent, objectList, Vector2(posPoints[0], posPoints[1]), true)
+			#TODO just turn this into the load 
 			objectParent.setComponents(posPoints)
 			objectParent.setTileMaps(posPoints)		
-			objectParent.setImage(posPoints)	 
+			objectParent.setImage(posPoints)	
+			#this should be the onl call in the future 
+			#objectParent.load(posPoints)
 			#do this if object has more than one component
 
 func _on_save_button_down() -> void:
@@ -354,6 +369,8 @@ func _on_goal_button_button_up() -> void:
 	goalParent.add_child(goalInstance)
 	goalParent.blockType = blockTypes[4]
 	place_block(goalParent, goalBlocksList, camera.position, false)
+	
+	
 
 func _on_enemy_button_button_up() -> void:
 	var enemyInstance = enemyCharacter.instantiate()
@@ -400,6 +417,12 @@ func _onButtonDown(instanceType, list, blockType, val) -> void:
 	
 func _onSkipButtonUp() -> void:
 	_onButtonDown(skip, skipList, blockTypes[16], false)
+func _onMashButtonUp() -> void:
+	_onButtonDown(mash, mashList, blockTypes[17], false)
+func _onHoldButtonUp() -> void:
+	_onButtonDown(hold, holdList, blockTypes[18], false)
+func _onMassMoveButtonUp() -> void:
+	_onButtonDown(moveLine, moveLineList, blockTypes[19], false)
 
 	
 func _on_play_audio_button_pressed() -> void:
@@ -414,7 +437,7 @@ func _on_play_audio_button_pressed() -> void:
 	
 func _on_right_button_button_down() -> void:
 	if (currentBlock == null or "player" in currentBlock.blockType): return
-	if(isBinding):
+	if(isBinding or massMove):
 		for block in bindedBlocks:
 			block.position.x += stepSize
 	else:
@@ -422,21 +445,21 @@ func _on_right_button_button_down() -> void:
 	
 func _on_left_button_button_down() -> void:
 	if (currentBlock == null or "player" in currentBlock.blockType): return	
-	if(isBinding):
+	if(isBinding or massMove):
 		for block in bindedBlocks:
 			block.position.x -= stepSize
 	else:
 		currentBlock.position.x -= stepSize
 func _on_down_button_button_down() -> void:
 	if (currentBlock == null): return
-	if(isBinding):
+	if(isBinding or massMove):
 		for block in bindedBlocks:
 			block.position.y += stepSize
 	else:
 		currentBlock.position.y += stepSize
 func _on_up_button_button_down() -> void:
 	if (currentBlock == null): return
-	if(isBinding):
+	if(isBinding or massMove):
 		for block in bindedBlocks:
 			block.position.y -= stepSize
 	else:
@@ -453,7 +476,7 @@ func save_scene_to_file():
 			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
-				if itemList.name !=  "placers":
+				if itemList.name !=  "placers" or itemList.name !=  "moveLines":
 					for item in itemList.get_children():
 						#go through each of the items children areas
 						var childrenList = item.get_child(0).get_children()
@@ -472,6 +495,8 @@ func save_scene_to_file():
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().instructionType)+", "
 							elif itemList.name == "enemies":
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().enemyType)+", "
+							elif itemList.name == "mashes":
+								posChain = item.save()
 							else:
 								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
 							index+=1
@@ -552,6 +577,11 @@ func place_block(instance, parent, placePos, initial):
 	lEindex+=1
 	currentBlock = instance
 
+	if currentBlock.blockType == blockTypes[19]:
+		emit_signal("setMassMove", instance.global_position, true)
+	if massMove and currentBlock.blockType != blockTypes[19]:
+		emit_signal("setMassMove", instance.global_position, false)
+		
 	_on_text_edit_2_text_changed()
 	reset_drag_tracking()
 
@@ -607,6 +637,12 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/keyBindings")
 	if blockType == "skip":
 		return get_node("objectList/skips")
+	if blockType == "mash":
+		return get_node("objectList/mashes")
+	if blockType == "hold": 
+		return get_node("objectList/holds")
+	if blockType == "moveLine":
+		return get_node("objectList/moveLines")
 	return null
 	
 func setTrackingPosition(setVal : bool) -> void:
@@ -684,4 +720,41 @@ func lengthenPlatform() -> void:
 	turnOffSnap = true
 	place_block(blockParent, platformBlocksList, Vector2(newXPos, blockArea.global_position.y), false)
 	
+
+func _onSetMassMove(coords, val) -> void:
+	#TODO switch this to bind maybe idk
+	if !val:
+		massMove = false
+		bindedBlocks = []
+	else:
+		#we need to gather all of the blocks to the right of the line
+		massMove = true
+		isBinding = false
+		#just clearing as like a sanity check
+		bindedBlocks = []
+		print("axis type: ",currentBlock.get_child(0).axisType  )
+		if currentBlock.get_child(0).axisType == "vertical":
+			#get all the blocks to the left 
+			bindedBlocks = getAreaChildren(coords.x, 0)
+		else:
+			print("horizontal true")
+			bindedBlocks = getAreaChildren(coords.y, 1)
+
+func getAreaChildren(xVal, coordType) -> Array:
+	#only do this if the current block is a moveLine
+	
+	var returnArray = []
+	var arrayVec = []
+	if currentBlock.blockType == blockTypes[19]:
+		#this is expensive, TODO - look into sorting nodes on insertion
+		for itemList in $objectList.get_children():
+			for item in itemList.get_children():
+				if item.global_position[coordType] >= xVal:
+					returnArray.append(item)
+		
+		#print("return array: ", returnArray)
+	if returnArray.size() == 0.0:
+		returnArray.append(currentBlock)
+	return returnArray
+		
 	

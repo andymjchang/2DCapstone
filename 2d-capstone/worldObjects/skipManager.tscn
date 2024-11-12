@@ -1,11 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://brhrxx3h4jgeq"]
+[gd_scene load_steps=3 format=3 uid="uid://brhrxx3h4jgeq"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/skipManager.gd" id="1_nqmx7"]
+[ext_resource type="Script" path="res://ui/scripts/pulseRect.gd" id="2_d3ysh"]
 
 [node name="SkipManager" type="Node2D"]
 script = ExtResource("1_nqmx7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" groups=["pulsingObjects"]]
+offset_left = 1331.0
+offset_top = 896.0
+offset_right = 1655.0
+offset_bottom = 1031.0
+color = Color(0.223103, 0.223103, 0.223103, 1)
+script = ExtResource("2_d3ysh")
+timingScale = 4
+increasedScale = Vector2(1.1, 1.1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 1342.0

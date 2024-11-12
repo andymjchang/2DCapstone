@@ -59,9 +59,9 @@ var isSliding = false
 
 #soundEffects
 @onready var punchSfx = preload("res://audioEffects/Punch.mp3") as AudioStream
-@onready var healthSfx = preload("res://audioEffects/SFX_HealthItem_temp.mp3") as AudioStream
-@onready var coinGrabSfx = preload("res://audioEffects/SFX_CoinCollect_temp.mp3") as AudioStream
-@onready var itemGrabSfX = preload("res://audioEffects/SFX_ItemGrab_temp.wav") as AudioStream
+@onready var healthSfx = preload("res://audioEffects/SFX_HealthItem.mp3") as AudioStream
+@onready var coinGrabSfx = preload("res://audioEffects/SFX_CoinCollect_1.mp3") as AudioStream
+@onready var itemGrabSfX = preload("res://audioEffects/SFX_ItemGrab.mp3") as AudioStream
 
 @onready var hitEffect : AnimatedSprite2D = $HitEffect
 @onready var tweenSlide : Tween
@@ -73,6 +73,10 @@ var shake_decay = 5.0
 var shake_intensity = 0.0
 
 func _ready():
+	# Reset shader parameters
+	$Animation.material.set_shader_parameter("damage_intensity", 0.0)
+	$Animation.material.set_shader_parameter("invulnerable_intensity", 0.0)
+	
 	curSprite = get_node("Animation").duplicate()
 	add_to_group("players")
 	# Controls for player
@@ -150,14 +154,9 @@ func _physics_process(delta: float) -> void:
 
 			# If not currently in a song, allow regular movement, otherwise begin autoscroll
 			if Globals.inLevel:
-				# velocity.x = Globals.pixelsPerFrame
-				# Pseudo-autoscroll prototype
-				
-				var direction = Vector2.ZERO
-				direction = Input.get_axis(left, right)
-				if not hitBounds and direction > 0 :
-					velocity.x =  Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
-				elif hitBounds and direction > 0 or direction == 0:
+				# Remove input check and always move forward at base speed plus scroll speed
+				velocity.x = Globals.pixelsPerFrame + (SPEED * Globals.scrollSpeed) * Globals.scrollSpeed
+				if hitBounds:
 					velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 
 			#debug this
@@ -189,8 +188,12 @@ func _physics_process(delta: float) -> void:
 				#get_node("Floor").disabled = true
 				SlideTweenEnd()
 
-		elif inZipline:
+		elif inZipline and Input.is_action_just_pressed(jump):
 			$Animation.play("Zip")
+
+		elif inZipline and Input.is_action_just_released(jump):
+			inZipline = false
+			$Animation.play("Jump")
 			
 		if Input.is_action_just_pressed(punch):
 			if canAttack:
@@ -290,19 +293,20 @@ func _onAnimationFinished():
 func MonitorAttackHitbox(area : Area2D):
 	var other = area.get_parent()
 	if other.is_in_group("actionIndicators") and other.active and !punchConnected:
+		var otherParent = other.get_parent()
+		other.active = false
+		if otherParent.is_in_group("enemies") and otherParent.enemyType == "enemy":
+			otherParent.GotHit()
+			# Play hit animation
+			hitEffect.frame = 0
+			hitEffect.play()
 		ResetAttack()
 		PunchTween() # Camera
 		punchConnected = true
 		Globals.screenFlashEffect()
-		other.active = false
 		other.FadeOut()
 		scored.emit(self.name, abs(other.global_position.x - global_position.x))
-		other = other.get_parent()
-		if other.is_in_group("enemies") and other.enemyType == "enemy":
-			other.GotHit()
-			# Play hit animation
-			hitEffect.frame = 0
-			hitEffect.play()
+		
 
 func ResetAttack():
 	canAttack = true
@@ -426,7 +430,7 @@ func PunchTween():
 
 # Add this new function
 func shake_camera(strength: float = 25.0):
-	shake_intensity = strength
+	shake_intensity = strength * Globals.screenShakeIntensity
 
 func _on_attack_timer_timeout() -> void:
 	attack.monitoring = false

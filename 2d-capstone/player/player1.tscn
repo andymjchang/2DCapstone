@@ -173,13 +173,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44r6d"]
-size = Vector2(23, 19.625)
+size = Vector2(15.625, 19.625)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efrg4"]
 size = Vector2(12.4995, 12.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2j42"]
-size = Vector2(10.75, 19.75)
+size = Vector2(7.5, 19.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(18.125, 21.1875)
@@ -252,10 +252,10 @@ material = SubResource("ShaderMaterial_3fn7t")
 position = Vector2(-13.75, -1.80001)
 scale = Vector2(0.133929, 0.133929)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Slide"
+animation = &"Punch"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-12.125, 2)
+position = Vector2(-8.4375, 2)
 shape = SubResource("RectangleShape2D_44r6d")
 
 [node name="AttackHitbox" type="Area2D" parent="." groups=["playerHitbox"]]
@@ -274,7 +274,7 @@ shape = SubResource("RectangleShape2D_efrg4")
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(-18.125, 1.875)
+position = Vector2(-23.75, 1.875)
 shape = SubResource("RectangleShape2D_a2j42")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
@@ -298,7 +298,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="attackLockoutTimer" type="Timer" parent="."]
-wait_time = 0.75
+wait_time = 0.5
 one_shot = true
 
 [node name="sfxPlayer" type="AudioStreamPlayer2D" parent="." groups=["playerSounds"]]

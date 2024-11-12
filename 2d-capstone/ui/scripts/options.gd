@@ -1,16 +1,85 @@
 extends Control
 
+enum MenuOptions {
+	KEY_BINDINGS,
+	CALIBRATION,
+	VOLUME,
+	BACK,
+}
+
+@export var vinyl_rotations: Array[float] = [0.0, -32.7, -61.7, -89.2]
+@export var rotation_tween_duration: float = 0.15  # Duration in seconds
+@export var slide_in_duration: float = 0.5  # Duration for slide-in animation
+@export var slide_offset: float = -1000  # Starting X offset for slide animation
+
+var current_option: int = 0
+var options_count: int = MenuOptions.size()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	# Set initial position off-screen
+	$OptionsMenuVinyl.position.x += slide_offset
+	$Album.position.x += slide_offset
+	
+	# Create tween for slide-in animation
+	var tween = create_tween()
+	tween.set_parallel(true)  # Animate both nodes simultaneously
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	
+	# Tween both nodes to their original positions
+	tween.tween_property($OptionsMenuVinyl, "position:x", 
+		$OptionsMenuVinyl.position.x - slide_offset, slide_in_duration + 0.75)
+	tween.tween_property($Album, "position:x", 
+		$Album.position.x - slide_offset, slide_in_duration)
+	
+	update_selection()
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump"):
+		current_option = (current_option - 1 + options_count) % options_count
+		update_selection()
+	elif event.is_action_pressed("slide"):
+		current_option = (current_option + 1) % options_count
+		update_selection()
+	elif event.is_action_pressed("ui_accept"):
+		select_current_option()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func update_selection() -> void:
+	
+	# Create tween for smooth rotation
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($OptionsMenuVinyl, "rotation_degrees", 
+		vinyl_rotations[current_option], rotation_tween_duration)
+	
+	match current_option:
+		MenuOptions.KEY_BINDINGS:
+			pass
+		MenuOptions.CALIBRATION:
+			pass
+		MenuOptions.VOLUME:
+			pass
+		MenuOptions.BACK:
+			pass
 
+func select_current_option() -> void:
+	reset_options()
+	match current_option:
+		MenuOptions.KEY_BINDINGS:
+			$Keybindings.visible = true
+		MenuOptions.CALIBRATION:
+			get_tree().change_scene_to_file("res://worlds/calibration.tscn")
+		MenuOptions.VOLUME:
+			$VolumeScreen.visible = true
+		MenuOptions.BACK:
+			_onBackButtonUp()
 
+func reset_options() -> void:
+	$VolumeScreen.visible = false
+	$Keybindings.visible = false
+	$Title2.visible = false
 func _onKeyBindingsButtonUp() -> void:
 	#get_tree().change_scene_to_file("res://ui/keybindings.tscn")
 	var curScene = get_tree().current_scene

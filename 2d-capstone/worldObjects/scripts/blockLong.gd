@@ -31,7 +31,7 @@ func _ready():
 	extents = extents
 	extents = newWidth/2.0
 	self.get_node("CollisionShape2D").shape.extents.x = extents
-	if Globals.curFile.begins_with("Lvl2."):
+	if Globals.curFile.begins_with("Level 2"):
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = true
 		tileMap = $sprite2D/TileMapLayer2

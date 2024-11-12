@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://luxlri5v0quk"]
+
+[ext_resource type="Script" path="res://levelEditorObjects/scripts/mashEnemyScene.gd" id="1_vt6rp"]
+[ext_resource type="Texture2D" uid="uid://cxdhrplc2qstb" path="res://worldObjects/assets/singleBot.png" id="2_dywfu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d85yx"]
+size = Vector2(33, 59)
+
+[node name="MashEnemyScene" type="Node2D"]
+script = ExtResource("1_vt6rp")
+
+[node name="start" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="start"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="start/Area2D"]
+shape = SubResource("RectangleShape2D_d85yx")
+
+[node name="Sprite2D" type="Sprite2D" parent="start"]
+scale = Vector2(0.1, 0.084)
+texture = ExtResource("2_dywfu")
+
+[node name="end" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="end"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="end/Area2D"]
+shape = SubResource("RectangleShape2D_d85yx")
+
+[node name="Sprite2D" type="Sprite2D" parent="end"]
+scale = Vector2(0.1, 0.084)
+texture = ExtResource("2_dywfu")

@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://t86xp6tpjvdg" path="res://worldObjects/skip.tscn" id="17_hifbs"]
 [ext_resource type="Script" path="res://ui/scripts/visualizer.gd" id="18_0o0nt"]
 [ext_resource type="AudioStream" uid="uid://cwunsxkx78vcj" path="res://audioTracks/Tutorial_New_155bpm.mp3" id="18_44qgl"]
+[ext_resource type="PackedScene" path="res://worldObjects/enemy/mashEnemy.tscn" id="18_qn7u4"]
 [ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
@@ -57,6 +58,7 @@ ziplineMiddle = ExtResource("14_jwoui")
 coinInstance = ExtResource("15_4qhng")
 keyBindingInstance = ExtResource("16_5ehlb")
 skipInstance = ExtResource("17_hifbs")
+mashInstance = ExtResource("18_qn7u4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -167,6 +169,8 @@ script = ExtResource("14_rbu47")
 [node name="LoopManager" type="Node2D" parent="objectList/loops"]
 
 [node name="skips" parent="objectList" instance=ExtResource("28_caqgn")]
+
+[node name="mashes" type="Node2D" parent="objectList"]
 
 [node name="HealthManager" parent="." instance=ExtResource("17_bwxam")]
 

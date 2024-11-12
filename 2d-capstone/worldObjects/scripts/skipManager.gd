@@ -10,6 +10,7 @@ var defaultText = "Skip Number: "
 var arrayLoaded = false
 var pastFirst = false
 @onready var textBox = $CanvasLayer/VBoxContainer/RichTextLabel
+@onready var ui = $CanvasLayer
 
 func loadArray():
 	skipArray = get_tree().current_scene.get_node("objectList/skips").get_children()
@@ -18,11 +19,9 @@ func loadArray():
 		if node.name == "CanvasLayer":
 			skipArray.erase(node)
 	if skipArray.size() == 0:
+		ui.visible = false
 		return
-	print("all the skips in my array: ", skipArray)
-	skipArray.erase("CanvasLayer")
 	skipArray.sort_custom(sortSkips)
-	print("all the skips in my array: ", skipArray)
 	currentWorldScene = get_tree().current_scene
 	currentIndex = 0
 	activatedSkip = skipArray[currentIndex]
@@ -53,12 +52,8 @@ func _process(delta: float) -> void:
 			textBox.text = defaultText 	+ str(currentIndex)
 			pastFirst = true
 			#print("current time" + str(currentWorldScene.time))
-			
-			
-			#currentIndex += 1
-			print("just passed a skip, new skip index: ", currentIndex)
 
-	if Input.is_action_just_pressed("tab"):
+	if Input.is_action_just_pressed("tab") and skipArray.size() > 0:
 		#skip to the next thing
 		skipToNext()
 		
@@ -71,8 +66,6 @@ func skipToNext():
 	elif currentIndex < skipArray.size() - 1 :
 		currentIndex = skipArray.find(activatedSkip)
 		currentIndex = currentIndex + 1
-		print("skipping to a skip that is the start")
 		textBox.text = defaultText + str(currentIndex)
 		activatedSkip = skipArray[currentIndex]
-		print("index Im skipping too: ", currentIndex)	
 		get_tree().current_scene.emit_signal("movePlayer", activatedSkip.global_position)
