@@ -179,7 +179,7 @@ size = Vector2(15.625, 19.625)
 size = Vector2(12.4995, 12.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2j42"]
-size = Vector2(10.75, 19.75)
+size = Vector2(7.5, 19.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1d5"]
 size = Vector2(18.125, 21.1875)
@@ -274,7 +274,7 @@ shape = SubResource("RectangleShape2D_efrg4")
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(-18.125, 1.875)
+position = Vector2(-23.75, 1.875)
 shape = SubResource("RectangleShape2D_a2j42")
 
 [node name="CheckpointHitbox" type="Area2D" parent="."]
