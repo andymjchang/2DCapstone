@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c0ekhpmiw28cb" path="res://ui/assets/calibration_menu_vinyl_middle.png" id="4_oeffc"]
 [ext_resource type="FontFile" uid="uid://cu6pmbl5ix2fe" path="res://fonts/MONOSPACE821BOLDBT.TTF" id="7_3dg6g"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 script = ExtResource("1_hallp")
 
 [node name="CalibrationMenuBack" type="Sprite2D" parent="."]
