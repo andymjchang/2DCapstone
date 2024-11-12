@@ -85,6 +85,8 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 						blockTypes[15]: "instructionType",
 						blockTypes[16]: "gameObjectType"}
 
+var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
+
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -125,6 +127,7 @@ var levelSaved = false
 
 
 func _ready():
+	listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
 	Globals.customStart = false
 	Globals.levelEditorTime = 0.0
 	self.objectClicked.connect(_onObjectClicked)
@@ -159,7 +162,7 @@ func _process(delta: float) -> void:
 			#TODO add a check here to see if this is a valid grab
 			var curTypeName = typeMap[currentBlock.blockType]
 			var curTypeList = typeArrays[curTypeName]
-			currentBlock.tabType(curTypeList, curTypeName)
+			currentBlock.tabType(curTypeList, curTypeName, listMap)
 	if Input.is_action_just_pressed("click"):
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
@@ -547,6 +550,7 @@ func round_to_step(value) -> int:
 
 func place_block(instance, parent, placePos, initial):
 	#print("I'm being placed")
+	
 	if initial:
 		instance.position = placePos
 	# ? Assume dragging
@@ -562,6 +566,7 @@ func place_block(instance, parent, placePos, initial):
 	else:
 		instance.position = placePos
 		turnOffSnap = false
+	print("list: ", parent, "instance:", instance.get_child(0))
 	parent.add_child(instance)	
 	
 	instance.setArea2D()

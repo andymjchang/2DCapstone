@@ -326,6 +326,7 @@ goalBlocks
 41950, 525,
 breakableWalls
 40900, 275,
+400, 250, 500, 250,
 ziplines
 placers
 slideWalls

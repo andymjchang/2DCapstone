@@ -1,0 +1,20 @@
+platformBlocks
+actionIndicators
+playerCheckpoints
+player
+0, 540,
+enemies
+killFloors
+goalBlocks
+breakableWalls
+850, 575, 1050, 550,
+ziplines
+placers
+slideWalls
+powerups
+jumpBoosts
+coins
+keyBindings
+skips
+mashes
+holds
