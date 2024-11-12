@@ -1,8 +1,4 @@
 platformBlocks
-50, 625, 12, <null>, <null>,
-206, 625, 12, <null>, <null>,
-362, 625, 12, <null>, <null>,
-518, 625, 12, <null>, <null>,
 actionIndicators
 playerCheckpoints
 player
@@ -12,10 +8,8 @@ killFloors
 goalBlocks
 breakableWalls
 ziplines
-375, 550, 475, 550,
 placers
 slideWalls
-201, 605,
 powerups
 jumpBoosts
 coins

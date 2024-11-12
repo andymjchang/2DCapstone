@@ -8,6 +8,7 @@ const measurePixels = 600
 const holdTime = 0.15
 var lEindex = 0.0
 
+var maxMin = []
 var placedBlocks = []
 var currentBlock
 var currentPosition : Vector2 = Vector2(450, 450)
@@ -585,7 +586,7 @@ func place_block(instance, parent, placePos, initial):
 	if currentBlock.blockType == blockTypes[19]:
 		emit_signal("setMassMove", instance.get_child(0).getStartEndPos(), true)
 	if massMove and currentBlock.blockType != blockTypes[19]:
-		emit_signal("setMassMove",  instance.get_child(0).getStartEndPos(), false)
+		emit_signal("setMassMove", null, false)
 		
 	_on_text_edit_2_text_changed()
 	reset_drag_tracking()

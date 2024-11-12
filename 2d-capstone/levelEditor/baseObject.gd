@@ -72,6 +72,8 @@ func _input(event: InputEvent) -> void:
 		isDragging = false
 		#we do this if theres a mass move line
 		if self.blockType == "moveLine":
+			self.get_child(0).snapEnd()
+			get_tree().current_scene.maxMin = self.get_child(0).getMaxMin()
 			get_tree().current_scene.emit_signal("setMassMove", self.get_child(0).get_node(curAreaDragging).get_parent().get_parent().getStartEndPos(), true)
 		
 		
