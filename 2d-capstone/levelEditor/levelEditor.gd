@@ -672,7 +672,7 @@ func displayStatus(message, display):
 		status.get_node("Buttons/No").text = "Close"
 
 func _on_play_level_button_button_down() -> void:
-	save_scene_to_file()
+	# save_scene_to_file()
 	# var scene_instance = levelTemplatePacked.instantiate()
 	
 	get_tree().paused = false
