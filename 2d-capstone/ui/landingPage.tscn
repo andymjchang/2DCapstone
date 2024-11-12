@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dis3tqrrssvdv"]
+[gd_scene load_steps=13 format=3 uid="uid://dis3tqrrssvdv"]
 
 [ext_resource type="Script" path="res://ui/scripts/landingPage.gd" id="1_4duo3"]
 [ext_resource type="Texture2D" uid="uid://uqstjyc7iyr2" path="res://ui/assets/Main_Menu.png" id="2_3x1ff"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://clikapbp8jtdo" path="res://ui/assets/Level_SELECT_button_Pressed.png" id="9_osbfx"]
 [ext_resource type="Texture2D" uid="uid://be1627hjo7mg1" path="res://ui/assets/Options_button_unpressed.png" id="10_v6ykf"]
 [ext_resource type="Texture2D" uid="uid://b315tisfu41j4" path="res://ui/assets/Options_button_pressed.png" id="11_aoani"]
+[ext_resource type="Texture2D" uid="uid://s1wm1fp1e2ar" path="res://ui/assets/TitleAlbumCover.png" id="12_j0q8p"]
 
 [node name="LandingPage" type="CanvasLayer"]
 script = ExtResource("1_4duo3")
@@ -92,6 +93,11 @@ stretch_mode = 0
 
 [node name="music" type="AudioStreamPlayer2D" parent="." groups=["musicSounds"]]
 bus = &"music"
+
+[node name="TitleAlbumCover" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(620, 540)
+texture = ExtResource("12_j0q8p")
 
 [connection signal="pressed" from="storyButton" to="." method="_onStoryButtonPressed"]
 [connection signal="pressed" from="editorButton" to="." method="_onEditorButtonPressed"]

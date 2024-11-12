@@ -325,7 +325,12 @@ killFloors
 goalBlocks
 42025, 625,
 breakableWalls
+<<<<<<< HEAD
 40975, 375,
+=======
+40900, 275,
+400, 250, 500, 250,
+>>>>>>> e872d5bbf6278d8e69c8ad9a68d7a36966bc7243
 ziplines
 placers
 slideWalls

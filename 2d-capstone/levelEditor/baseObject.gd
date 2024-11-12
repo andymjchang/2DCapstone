@@ -153,7 +153,7 @@ func load(posPoints) -> void:
 		get_child(0).load(posPoints)
 	
 
-func tabType(typeOptions, typeName) -> void:
+func tabType(typeOptions, typeName, listMap) -> void:
 	var curIndex = 0
 	var keyList
 	var newObjectKey
@@ -177,21 +177,33 @@ func tabType(typeOptions, typeName) -> void:
 		#get the index of where we are in the list and move forward vy one
 		var pos = self.get_child(0).get_child(0).get_node("EditorArea0").global_position
 		var currentScene = get_tree().current_scene
-		var listToRemoveFrom = currentScene.getList(currentScene.currentBlock.blockType).get_children()
+		print("list map" , listMap)
+		print("current block type: ", currentScene.currentBlock.blockType)
+		print("list mapping: ", listMap[currentScene.currentBlock.blockType])
+		var testStr = "objectList/"+ str(listMap[currentScene.currentBlock.blockType])
+		var listToRemoveFrom = currentScene.get_node(testStr).get_children()
+		print("list to remove from: ", listToRemoveFrom)
 		for block in listToRemoveFrom:
 			if block.index == currentScene.currentBlock.index:
-				currentScene.getList(currentScene.currentBlock.blockType).get_children().erase(block)
+				print("block to remove: ", block)
+				#currentScene.get_node(testStr+"/"+str(block.name)).queue_free()
+				currentScene.get_node(testStr).remove_child(block)
 		keyList = typeOptions.keys()
 		curIndex = keyList.find(blockType)
 		newObjectKey = keyList[curIndex+1] if curIndex+1 <= keyList.size()-1 else keyList[0]
 		newObject = typeOptions[newObjectKey].instantiate()
-		var listToAddToo = currentScene.getList(newObjectKey)
-		currentScene.getList(newObjectKey).add_child(self)
+		print("new object key", newObjectKey)
+		testStr = "objectList/"+ str(listMap[newObjectKey])
+		var listToAddToo = currentScene.get_node(testStr)
+		#TODO dont think I need this
+		currentScene.get_node(testStr).add_child(self)
+		print("is list we are adding ot real: ", currentScene.get_node(testStr))
 		var removeNode = self.get_child(0)
 		self.get_child(0).queue_free()
-		self.remove_child(removeNode) 
 		self.add_child(newObject)
 		self.move_child(newObject, 0)
 		blockType = newObjectKey
+		print("block type: ", blockType)
+		print("list that we are adding too: ", listToAddToo, "block type: ", blockType, " my self: ", self.get_child(0))
 		currentScene.place_block(self, listToAddToo, pos, false)
 		

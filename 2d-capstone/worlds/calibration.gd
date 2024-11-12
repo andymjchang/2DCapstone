@@ -11,7 +11,7 @@ var audio_player : AudioStreamPlayer2D
 
 # Add new variables for visualization
 var circle_center = Vector2(200, 200)  # Position of circle center
-var circle_radius = 100
+var circle_radius = 792 / 2
 var timing_points = []  # Store recent timing points
 var timing_differences = []  # Add this with other variables at the top
 var average_delay : float = 0.0
@@ -35,21 +35,22 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	# Draw main circle
-	draw_arc(circle_center, circle_radius, 0, TAU, 32, Color.WHITE)
+	# draw_arc(circle_center, circle_radius, 0, TAU, 64, Color.WHITE, 2.0, true)
 	
 	# Draw horizontal line through circle
-	draw_line(
-		Vector2(circle_center.x - circle_radius, circle_center.y),  # Start point
-		Vector2(circle_center.x + circle_radius, circle_center.y),  # End point
-		Color.WHITE,  # Same color as circle
-		2.0  # Line thickness
-	)
+	# draw_line(
+	# 	Vector2(circle_center.x - circle_radius, circle_center.y),  # Start point
+	# 	Vector2(circle_center.x + circle_radius, circle_center.y),  # End point
+	# 	Color.WHITE,  # Same color as circle
+	# 	2.0  # Line thickness
+	# )
 	
 	# Draw rotating marker
 	if drawMarker:
 		var marker_angle = current_time * TAU  
-		var marker_pos = circle_center + Vector2(cos(marker_angle), sin(marker_angle)) * circle_radius
-		draw_line(circle_center, marker_pos, Color.YELLOW, 2.0)
+		# var marker_pos = circle_center + Vector2(cos(marker_angle), sin(marker_angle)) * circle_radius
+		# draw_line(circle_center, marker_pos, Color.YELLOW, 2.0)
+		$Vinyl.rotation = marker_angle
 	
 	# Draw timing points 
 	for point in timing_points:
@@ -69,7 +70,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Calculate timing difference (can be negative or positive)
 		var timing_difference = next_beat_time - closest_beat_time
 		var delay_ms = timing_difference * 1000
-		delayLabel.text = "Delay: %.1f ms" % delay_ms
+		delayLabel.text = "Delay:\n %.1f ms" % delay_ms
 		
 		# Store timing difference and calculate average
 		timing_differences.append(timing_difference)
@@ -82,7 +83,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			average_delay += diff
 		average_delay = (average_delay / timing_differences.size())
 		var display_average_delay = average_delay * 1000
-		averageDelayLabel.text = "Average Delay: %.1f ms" % display_average_delay
+		averageDelayLabel.text = "Average Delay:\n %.1f ms" % display_average_delay
 		
 		# Add timing point to visualization
 		timing_points.append(current_time)

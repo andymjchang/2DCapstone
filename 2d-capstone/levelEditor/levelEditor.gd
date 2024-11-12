@@ -88,6 +88,8 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 						blockTypes[15]: "instructionType",
 						blockTypes[16]: "gameObjectType"}
 
+var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
+
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -129,6 +131,7 @@ var levelSaved = false
 
 
 func _ready():
+	listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
 	Globals.customStart = false
 	Globals.levelEditorTime = 0.0
 	#set signals
@@ -136,9 +139,9 @@ func _ready():
 	self.setMassMove.connect(_onSetMassMove)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
-	if Globals.curFile == "" or fileLabel.text != null:
-		saveFileName = fileLabel.text
-		#Globals.curFile = saveFileName
+	if Globals.curFile == "":
+		# saveFileName = fileLabel.text
+		Globals.curFile = saveFileName
 	else:
 		fileLabel.text = Globals.curFile
 		saveFileName = fileLabel.text
@@ -165,7 +168,7 @@ func _process(delta: float) -> void:
 			#TODO add a check here to see if this is a valid grab
 			var curTypeName = typeMap[currentBlock.blockType]
 			var curTypeList = typeArrays[curTypeName]
-			currentBlock.tabType(curTypeList, curTypeName)
+			currentBlock.tabType(curTypeList, curTypeName, listMap)
 	if Input.is_action_just_pressed("click"):
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
@@ -555,6 +558,7 @@ func round_to_step(value) -> int:
 
 func place_block(instance, parent, placePos, initial):
 	#print("I'm being placed")
+	
 	if initial:
 		instance.position = placePos
 	# ? Assume dragging
@@ -570,6 +574,7 @@ func place_block(instance, parent, placePos, initial):
 	else:
 		instance.position = placePos
 		turnOffSnap = false
+	print("list: ", parent, "instance:", instance.get_child(0))
 	parent.add_child(instance)	
 	
 	instance.setArea2D()
@@ -687,17 +692,18 @@ func displayStatus(message, display):
 		status.get_node("Buttons/No").text = "Close"
 
 func _on_play_level_button_button_down() -> void:
-	save_scene_to_file()
-	var scene_instance = levelTemplatePacked.instantiate()
+	# save_scene_to_file()
+	# var scene_instance = levelTemplatePacked.instantiate()
 	
 	get_tree().paused = false
 	
 	# Access the current scene and remove it from the scene tree
 	#var current_scene = get_tree().current_scene
 	#Globals.editorNode = current_scene
-	Globals.enablePreviewUI()
+	# Globals.enablePreviewUI()
 	Globals.currentEditorFileName = saveFileName
-	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+	# get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+	Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 	#current_scene.visible = false
 
 	# Add the new scene to the scene tree and set it as the current scene
