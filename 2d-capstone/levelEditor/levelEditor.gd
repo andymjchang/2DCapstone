@@ -583,9 +583,9 @@ func place_block(instance, parent, placePos, initial):
 	currentBlock = instance
 
 	if currentBlock.blockType == blockTypes[19]:
-		emit_signal("setMassMove", instance.global_position, true)
+		emit_signal("setMassMove", instance.get_child(0).getStartEndPos(), true)
 	if massMove and currentBlock.blockType != blockTypes[19]:
-		emit_signal("setMassMove", instance.global_position, false)
+		emit_signal("setMassMove",  instance.get_child(0).getStartEndPos(), false)
 		
 	_on_text_edit_2_text_changed()
 	reset_drag_tracking()
@@ -741,22 +741,39 @@ func _onSetMassMove(coords, val) -> void:
 		print("axis type: ",currentBlock.get_child(0).axisType  )
 		if currentBlock.get_child(0).axisType == "vertical":
 			#get all the blocks to the left 
-			bindedBlocks = getAreaChildren(coords.x, 0)
+			bindedBlocks = getAreaChildren(coords, 0)
 		else:
 			print("horizontal true")
-			bindedBlocks = getAreaChildren(coords.y, 1)
+			bindedBlocks = getAreaChildren(coords, 1)
 
-func getAreaChildren(xVal, coordType) -> Array:
-	#only do this if the current block is a moveLine
+func getAreaChildren(coords, coordType) -> Array:
 	
+	var xMin = min(coords[0].x, coords[1].x)
+	var xMax = max(coords[0].x, coords[1].x)
+	var yMin = min(coords[0].y, coords[1].y)
+	var yMax = max(coords[0].y, coords[1].y)
 	var returnArray = []
 	var arrayVec = []
+	#var newInstructionType = typeOptions[curIndex+1] if curIndex+1 <= typeOptions.size()-1 else typeOptions[0]
+	var coordTypeComplement = 0 if coordType == 1 else 1
+	#only do this if the current block is a moveLine
 	if currentBlock.blockType == blockTypes[19]:
-		#this is expensive, TODO - look into sorting nodes on insertion
+	#we are making a vertical box, meaning the lines are horizontal
+		var minMax = currentBlock.get_child(0).getMaxMin()
 		for itemList in $objectList.get_children():
 			for item in itemList.get_children():
-				if item.global_position[coordType] >= xVal:
+				#return [start.global_position.y, end.global_position.y, endMinVec.x, endMaxvec.x]
+				var pos = item.global_position
+				print("coord type: ", coordType, " other coord type: ", coordTypeComplement)
+				print("min max array: ", minMax)
+				print("coords we are checking: ", pos)
+				if  pos[coordType] >= minMax[0] && pos[coordType] <= minMax[1] && pos[coordTypeComplement] >= minMax[2] && pos[coordTypeComplement] <= minMax[3]:
+					print("making it inside")
 					returnArray.append(item)
+	
+	
+	#we are making a horizontal box, meaning the lines are vertical
+		#this is expensive, TODO - look into sorting nodes on insertion
 		
 		#print("return array: ", returnArray)
 	if returnArray.size() == 0.0:
