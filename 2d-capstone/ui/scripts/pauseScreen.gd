@@ -2,9 +2,6 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _onResumeButtonUp() -> void:
@@ -12,7 +9,8 @@ func _onResumeButtonUp() -> void:
 	Engine.time_scale = 1.0
 	self.visible = false
 	Globals.paused = false
-	self.get_parent().get_parent().get_node("Camera2D/Music").stream_paused = false
+	self.get_parent().get_parent().music.stream_paused = false
+	self.get_parent().get_parent().adaptiveMusic.stream_paused = false
 
 func _onMainMenuButtonUp() -> void:
 	Engine.time_scale = 1.0
@@ -31,4 +29,5 @@ func _onOptionsButtonUp() -> void:
 	get_tree().change_scene_to_file("res://ui/options.tscn")
 	Engine.time_scale = 1.0
 	Globals.paused = false
-	self.get_parent().get_parent().get_node("Camera2D/Music").stream_paused = false
+	self.get_parent().get_parent().music.stream_paused = false
+	self.get_parent().get_parent().adaptiveMusic.stream_paused = false

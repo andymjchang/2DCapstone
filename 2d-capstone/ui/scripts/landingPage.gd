@@ -22,14 +22,16 @@ func _onStoryButtonPressed():
 	Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 
 func _onEditorButtonPressed():
-	get_tree().change_scene_to_file("res://levelEditor/levelEditor.tscn")
+	# get_tree().change_scene_to_file("res://levelEditor/levelEditor.tscn")
+	Globals.FadeTransition("res://levelEditor/levelEditor.tscn")
 
 func _onQuitButtonPressed():
 	get_tree().quit()
 	
 func _onLevelSelectPressed() -> void:
 	get_tree().change_scene_to_file("res://ui/levelSelect.tscn")
+	
 
 
 func _onOptionsButtonPressed() -> void:
-	get_tree().change_scene_to_file("res://ui/options.tscn")
+	Globals.FadeTransition("res://ui/options.tscn")

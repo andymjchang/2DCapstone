@@ -11,7 +11,7 @@ func _ready() -> void:
 func getReached() -> bool:
 	return reached
 	
-func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+func _on_area_2d_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
 	if body.is_in_group("players"):
 		print("hit goal block")
 		print("entered collsion zone for goal block")

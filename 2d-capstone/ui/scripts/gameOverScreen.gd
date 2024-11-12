@@ -1,16 +1,10 @@
 extends Control
-signal updateScoreData()
 @onready var music = $jingle
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var newAudio = load("res://audioTracks/GameOver_120bpm.mp3") as AudioStream
 	music.stream = newAudio
 	music.stream.loop = false
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 
 
 func _onRetryButtonUp() -> void:

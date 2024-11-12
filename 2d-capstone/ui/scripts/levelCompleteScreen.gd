@@ -8,11 +8,6 @@ func _ready() -> void:
 	var newAudio = load("res://audioTracks/CourseComplete_153bpm.mp3") as AudioStream
 	jingle.stream = newAudio
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 
 func _onRetryButtonUp() -> void:
 	Globals.relocateToCheckpoint = false
