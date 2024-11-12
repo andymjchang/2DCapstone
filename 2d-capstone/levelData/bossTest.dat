@@ -36,7 +36,13 @@ ziplines
 placers
 slideWalls
 powerups
+1150, 525,
+1425, 525,
 jumpBoosts
+1025, 525,
 coins
 keyBindings
 skips
+mashes
+holds
+moveLines

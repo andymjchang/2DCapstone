@@ -71,10 +71,6 @@ var skipping = false
 var timeMultiplier = 1.0
 var skipCoords : Vector2
 
-
-# Loop vars
-var enemiesToRespawn = {}
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.gameOver = false
@@ -469,7 +465,7 @@ func _onChangeSpeed(speedType):
 		print("onbaording slides are in ")
 		self.get_tree().current_scene.get_node("Camera2D//onboardingPopUp").emit_signal("speedChange", timeMultiplier)
 
-func _onResetLoop(startTime, destination, enemyPos):
+func _onResetLoop(startTime, destination, enemyPos, powerPos):
 	print("Resetting loop")
 	print("Destination to: ", destination.global_position)
 	print("Restarting to time: ", Globals.time)
@@ -484,6 +480,11 @@ func _onResetLoop(startTime, destination, enemyPos):
 		instancedObj.position = pos
 		#instancedObj.get_node("ActionIndicator").initialize()
 		enemiesList.call_deferred("add_child", instancedObj)
+	for pos in powerPos:
+		var instancedObj = powerupInstance.instantiate()	
+		instancedObj.position = pos
+		#instancedObj.get_node("ActionIndicator").initialize()
+		powerupList.add_child(instancedObj)
 	music.play(startTime)
 	actionIndicatorsList.load_array()
 	

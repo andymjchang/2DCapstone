@@ -5,18 +5,23 @@ extends Node2D
 
 var startTime
 var enemiesToRespawn = []
+var powerupsToRespawn = []
+var jumpsToRespawn = []
+
+var loopMax = 3
+var loopNum = 0
 
 signal recordData()
 signal resetData()
 signal recordEnemies(enemyPos)
+signal recordPowers(powerPos)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	recordData.connect(_onRecordData)
 	resetData.connect(_onResetData)
 	recordEnemies.connect(_onRecordEnemies)
-	pass # Replace with function body.
-
+	recordPowers.connect(_onRecordPowers)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -30,9 +35,14 @@ func _onRecordData():
 
 func _onResetData(destination):
 	print("Resetting my loop")
-	get_tree().root.get_node("level").emit_signal("resetLoop", startTime, destination, enemiesToRespawn)
-
+	loopNum += 1
+	if loopNum < loopMax:
+		get_tree().root.get_node("level").emit_signal("resetLoop", startTime, destination, enemiesToRespawn, powerupsToRespawn)
 
 func _onRecordEnemies(enemyPos):
 	enemiesToRespawn.append(enemyPos)
 	#print("Need to respawn: ", enemiesToRespawn)
+
+func _onRecordPowers(powerPos):
+	print("Need to respawn: ", powerupsToRespawn)
+	powerupsToRespawn.append(powerPos)
