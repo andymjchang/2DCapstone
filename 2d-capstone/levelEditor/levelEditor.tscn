@@ -408,6 +408,16 @@ texture_normal = ExtResource("50_nrfgt")
 layout_mode = 2
 texture_normal = ExtResource("52_ulykl")
 
+[node name="slideWallButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 2
+offset_left = 335.0
+offset_top = 890.0
+offset_right = 430.0
+offset_bottom = 950.0
+texture_normal = ExtResource("46_ochwq")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="HBoxContainer3" type="HBoxContainer" parent="UI"]
 offset_left = 8.0
 offset_top = 890.0
@@ -428,12 +438,6 @@ texture_normal = ExtResource("42_k3b5l")
 [node name="breakableWallButton" type="TextureButton" parent="UI/HBoxContainer3"]
 layout_mode = 2
 texture_normal = ExtResource("45_iuf20")
-
-[node name="slideWallButton" type="TextureButton" parent="UI/HBoxContainer3"]
-layout_mode = 2
-texture_normal = ExtResource("46_ochwq")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="keyBindingButton" type="TextureButton" parent="UI/HBoxContainer3"]
 layout_mode = 2
@@ -547,10 +551,10 @@ clip_text = true
 [connection signal="button_down" from="UI/objectSelector/playLevelButton" to="." method="_on_play_level_button_button_down"]
 [connection signal="pressed" from="UI/objectSelector/HBoxContainer2/jumpBoostButton" to="." method="_onJumpBoostButtonPressed"]
 [connection signal="pressed" from="UI/objectSelector/HBoxContainer2/coinButton" to="." method="_onCoinButtonPressed"]
+[connection signal="button_up" from="UI/objectSelector/slideWallButton" to="." method="_onSlideWallButtonUp"]
 [connection signal="button_up" from="UI/HBoxContainer3/mashButton" to="." method="_onMashButtonUp"]
 [connection signal="button_up" from="UI/HBoxContainer3/p1PlacerButton" to="." method="_on_p_1_placer_button_button_up"]
 [connection signal="button_up" from="UI/HBoxContainer3/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]
-[connection signal="button_up" from="UI/HBoxContainer3/slideWallButton" to="." method="_onSlideWallButtonUp"]
 [connection signal="button_up" from="UI/HBoxContainer3/keyBindingButton" to="." method="_onKeyBindingButtonUp"]
 [connection signal="button_up" from="UI/HBoxContainer3/skipButton" to="." method="_onSkipButtonUp"]
 [connection signal="button_up" from="UI/HBoxContainer3/holdButton" to="." method="_onHoldButtonUp"]
