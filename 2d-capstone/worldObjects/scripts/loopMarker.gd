@@ -24,6 +24,7 @@ func _onArea2dBodyEntered(body:Node2D) -> void:
 			if firstPass:
 				get_parent().emit_signal("recordData")
 				firstPass = false
+				get_parent().firstPass = false
 
 		elif self.name == "LoopMarkerEnd":
 			print("at end")
@@ -35,9 +36,8 @@ func _onArea2dBodyEntered(body:Node2D) -> void:
 
 func _onRespawnAreaEntered(area:Node2D) -> void:
 	print("Detected item in group: ", area.get_parent().get_parent().get_groups())
-	if firstPass:
-		if "enemies" in area.get_parent().get_parent().get_groups():
-			get_parent().emit_signal("recordEnemies", area.get_parent().get_parent().global_position)
-		elif "powerup" in area.get_parent().get_groups():
-			print("Found a powerup")
-			get_parent().emit_signal("recordPowers", area.get_parent().global_position)
+	if "enemies" in area.get_parent().get_parent().get_groups():
+		get_parent().emit_signal("recordEnemies", area.get_parent().get_parent())
+	elif "powerup" in area.get_parent().get_groups():
+		print("Found a powerup")
+		get_parent().emit_signal("recordPowers", area.get_parent())

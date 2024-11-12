@@ -7,6 +7,10 @@ var startTime
 var enemiesToRespawn = []
 var powerupsToRespawn = []
 var jumpsToRespawn = []
+var firstPass = true
+
+var enemiesToDespawn = []
+var powerupsToDespawn = []
 
 var loopMax = 3
 var loopNum = 0
@@ -36,13 +40,23 @@ func _onRecordData():
 func _onResetData(destination):
 	print("Resetting my loop")
 	loopNum += 1
-	if loopNum < loopMax:
+	if loopNum <= loopMax:
+		for enemy in enemiesToDespawn:
+			enemy.queue_free()
+		for power in powerupsToDespawn:
+			power.queue_free()
+		enemiesToDespawn = []
+		powerupsToDespawn = []
 		get_tree().root.get_node("level").emit_signal("resetLoop", startTime, destination, enemiesToRespawn, powerupsToRespawn)
 
-func _onRecordEnemies(enemyPos):
-	enemiesToRespawn.append(enemyPos)
+func _onRecordEnemies(enemy):
+	if firstPass:
+		enemiesToRespawn.append(enemy.global_position)
 	#print("Need to respawn: ", enemiesToRespawn)
+	enemiesToDespawn.append(enemy)
 
-func _onRecordPowers(powerPos):
+func _onRecordPowers(power):
 	print("Need to respawn: ", powerupsToRespawn)
-	powerupsToRespawn.append(powerPos)
+	if firstPass:
+		powerupsToRespawn.append(power.global_position)
+	powerupsToDespawn.append(power)
