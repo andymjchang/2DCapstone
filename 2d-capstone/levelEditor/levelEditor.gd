@@ -182,8 +182,12 @@ func _process(delta: float) -> void:
 				currentBlock.queue_free()
 				currentBlock = null
 				break
-		for block in bindedBlocks:
-			block.queue_free()
+				
+		if !massMove:
+			for block in bindedBlocks:
+				block.queue_free()
+		else:
+			emit_signal("_onSetMassMove", null, false)
 	#TODO make sure that pressing l while typing in name doesnt mess anything up 
 	if Input.is_action_just_pressed("lengthenBlock") and currentBlock and currentBlock.blockType == "normal":
 		#extend platform block by one platform block
