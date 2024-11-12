@@ -183,7 +183,7 @@ func tabType(typeOptions, typeName, listMap) -> void:
 		for block in listToRemoveFrom:
 			if block.index == currentScene.currentBlock.index:
 				print("block to remove: ", block)
-				currentScene.get_node(testStr).erase(block)
+				currentScene.get_node(testStr+"/"+str(block.name)).queue_free()
 		keyList = typeOptions.keys()
 		curIndex = keyList.find(blockType)
 		newObjectKey = keyList[curIndex+1] if curIndex+1 <= keyList.size()-1 else keyList[0]
