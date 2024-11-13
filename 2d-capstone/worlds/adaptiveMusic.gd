@@ -1,7 +1,7 @@
 extends AudioStreamPlayer2D
 
 var max_y_position: float = 500.0  # Position where audio is silent
-var fade_distance: float = 500.0   # Distance over which fading occurs
+var fade_distance: float = 300.0   # Distance over which fading occurs
 
 var active: bool = false
 
