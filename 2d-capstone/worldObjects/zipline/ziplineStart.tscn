@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bam8jg1naascf"]
+[gd_scene load_steps=5 format=3 uid="uid://bam8jg1naascf"]
 
 [ext_resource type="Texture2D" uid="uid://cd3rk1jmye0pd" path="res://worldObjects/zipline/start.png" id="1_7lmlu"]
 [ext_resource type="Script" path="res://worldObjects/zipline/zipline.gd" id="1_oaf1g"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="3_vhpky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5w3a6"]
 size = Vector2(88, 227)
@@ -24,3 +25,12 @@ position = Vector2(120, -70)
 
 [node name="PlayerMarker" type="Marker2D" parent="."]
 position = Vector2(120, -22)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -270.0
+offset_top = -142.0
+offset_right = -97.0
+offset_bottom = -21.0
+theme = ExtResource("3_vhpky")
+text = "HOLD
+JUMP!"
