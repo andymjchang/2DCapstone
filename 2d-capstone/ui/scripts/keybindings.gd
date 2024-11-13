@@ -29,6 +29,8 @@ var buttonResetting
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	setTextBoxes()
+	for button in $buttons.get_children():
+		button.connect("button_up", _onKeyButtonUp.bind(button.name))
 		
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -117,8 +119,10 @@ func setTextBoxes() -> void:
 	"pause" : InputMap.action_get_events("pause"),
 		"activate" : InputMap.action_get_events("activate")
 	}
-	for button in $buttons.get_children():
-		button.connect("button_up", _onKeyButtonUp.bind(button.name))
+	
+	
+	#for button in $buttons.get_children():
+		#button.connect("button_up", _onKeyButtonUp.bind(button.name))
 	var curTextBox
 	for key in allCommands.keys():
 		curTextBox =  self.get_node("currentKeys/"+str(key)+"Current")
