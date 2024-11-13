@@ -28,9 +28,10 @@ func _onBodyEntered(body):
 			body.velocity = direction * Globals.pixelsPerFrame * Globals.scrollSpeed
 			#body.velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 			#body.velocity.y =
-			body.inZipline = true
-			body.relocating = true
-			Globals.vertical = true
+			if Input.is_action_pressed("jump"):
+				body.inZipline = true
+				body.relocating = true
+				Globals.vertical = true
 
 		elif self.name == "ziplineEnd" and body.inZipline:
 			print("at end")

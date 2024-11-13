@@ -32,6 +32,7 @@ var editing = false
 var index = 0
 var hitBounds = false
 var inZipline = false
+var exitedZip = false
 var onTop = false
 var originalPos
 var curPowerup
@@ -125,6 +126,9 @@ func _physics_process(delta: float) -> void:
 		if not inZipline:
 			# Lines
 			if is_on_floor():
+				if exitedZip:
+					$Animation.play("Run")
+					exitedZip = false
 				hang_time_remaining = 0.0
 				is_hanging = false
 				camera.smooth_pan_to(self.global_position.y + -50)
@@ -185,8 +189,13 @@ func _physics_process(delta: float) -> void:
 				#get_node("Floor").disabled = true
 				SlideTweenEnd()
 
-		elif inZipline:
+		elif inZipline and Input.is_action_pressed(jump):
 			$Animation.play("Zip")
+		
+		elif inZipline and Input.is_action_just_released(jump):
+			inZipline = false
+			exitedZip = true
+			$Animation.play("Fall")
 			
 		if Input.is_action_just_pressed(punch):
 			if canAttack:

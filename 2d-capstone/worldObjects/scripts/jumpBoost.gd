@@ -12,7 +12,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if playerContact and Input.is_action_just_pressed(jump):
+	if playerContact:# and Input.is_action_just_pressed(jump):
 		player.emit_signal("doubleJump")
 		Globals.resetCamera = true
 	pass

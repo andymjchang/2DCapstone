@@ -90,6 +90,14 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gk61f")
+}],
+"loop": true,
+"name": &"Fall",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk61f")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_inorw")
@@ -161,7 +169,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Zip",
-"speed": 5.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -252,7 +260,7 @@ material = SubResource("ShaderMaterial_3fn7t")
 position = Vector2(-13.75, -1.80001)
 scale = Vector2(0.133929, 0.133929)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Punch"
+animation = &"Zip"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-8.4375, 2)
