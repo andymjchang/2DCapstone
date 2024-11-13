@@ -18,8 +18,6 @@ extends Control
 @onready var nodePairs = {$buttons/jumpKey: [$currentKeys/jumpCurrent, "jump"],
 $buttons/slideKey: [$currentKeys/slideCurrent, "slide"],
 $buttons/punchKey: [$currentKeys/punchCurrent,"punch" ],
-$buttons/activateKey: [$currentKeys/activateCurrent, "activate"],
-$buttons/pauseKey: [$currentKeys/pauseCurrent, "pause"]
 }
 
 var buttonResetting
