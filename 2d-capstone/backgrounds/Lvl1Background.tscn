@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnwiio41v5wn7"]
+[gd_scene load_steps=5 format=3 uid="uid://bnwiio41v5wn7"]
 
 [ext_resource type="Texture2D" uid="uid://crrdd3ivqg4er" path="res://backgrounds/Level_1_Background_long_4.png" id="1_c3sr0"]
 [ext_resource type="Texture2D" uid="uid://knqid5r2rjqv" path="res://backgrounds/Level_1_Background_long_3.png" id="2_mv261"]
 [ext_resource type="Texture2D" uid="uid://dfxf548m7hap5" path="res://backgrounds/Level_1_Background_long_2.png" id="3_uxusv"]
-[ext_resource type="Texture2D" uid="uid://b2kqkpfp7dmjj" path="res://backgrounds/level1/bkg_scroll_ground.png" id="4_n5siv"]
 [ext_resource type="Texture2D" uid="uid://cwuu0h58wkvr5" path="res://backgrounds/Level_1_Background_1_long.png" id="5_k4aaq"]
 
 [node name="Background" type="Node2D"]
@@ -14,8 +13,8 @@ scroll_scale = Vector2(0.05, 0.05)
 repeat_size = Vector2(2880, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer0"]
-position = Vector2(50, -422.5)
-scale = Vector2(0.517361, 1.09722)
+position = Vector2(50, -358.5)
+scale = Vector2(10, 15.8056)
 texture = ExtResource("1_c3sr0")
 
 [node name="Layer1" type="Parallax2D" parent="."]
@@ -24,7 +23,6 @@ repeat_size = Vector2(2880, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer1"]
 position = Vector2(0, -50)
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_mv261")
 
 [node name="Layer2" type="Parallax2D" parent="."]
@@ -33,18 +31,7 @@ repeat_size = Vector2(2880, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer2"]
 position = Vector2(0, -40)
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_uxusv")
-
-[node name="Layer3" type="Parallax2D" parent="."]
-visible = false
-scroll_scale = Vector2(0.5, 0.5)
-repeat_size = Vector2(960, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Layer3"]
-position = Vector2(0, -40)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_n5siv")
 
 [node name="Layer4" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.6, 0.6)
@@ -52,5 +39,4 @@ repeat_size = Vector2(2880, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Layer4"]
 position = Vector2(0, -50)
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_k4aaq")
