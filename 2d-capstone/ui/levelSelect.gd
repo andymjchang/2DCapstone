@@ -53,25 +53,32 @@ func update_selection() -> void:
 	tween.tween_property(vinyl, "rotation_degrees", 
 		vinyl_rotations[current_option], rotation_tween_duration)
 	
+	$Album/Level1.visible = false
+	$Album/Level2.visible = false
+	$Album/Level3.visible = false
 	# You can add visual feedback for the current selection here
 	match current_option:
 		LevelOptions.LEVEL_1:
-			pass
+			$Album/Level1.visible = true
 		LevelOptions.LEVEL_2:
-			pass
+			$Album/Level2.visible = true
 		LevelOptions.LEVEL_3:
-			pass
+			$Album/Level3.visible = true
 		LevelOptions.BACK:
 			# Update UI to show Back is selected
 			pass
 
 func select_current_option() -> void:
 	match current_option:
-		LevelOptions.LEVEL_1:
-			Globals.FadeTransition("res://worlds/level1.tscn")
-		LevelOptions.LEVEL_2:
-			Globals.FadeTransition("res://worlds/level2.tscn")
-		LevelOptions.LEVEL_3:
-			Globals.FadeTransition("res://worlds/level3.tscn")
 		LevelOptions.BACK:
-			Globals.FadeTransition("res://ui/landingPage.tscn") 
+			Globals.FadeTransition("res://ui/landingPage.tscn") 		
+		LevelOptions.LEVEL_1:
+			Globals.curFile = "Tutorial"
+			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+		LevelOptions.LEVEL_2:
+			Globals.curFile = "Level 1"
+			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+		LevelOptions.LEVEL_3:
+			Globals.curFile = "Level 2"
+			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+
