@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=36 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -34,7 +34,6 @@
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
 [ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
 [ext_resource type="PackedScene" uid="uid://brhrxx3h4jgeq" path="res://worldObjects/skipManager.tscn" id="28_caqgn"]
-[ext_resource type="PackedScene" uid="uid://ctn54mgrw1nra" path="res://worldObjects/loopMarkers/loopManager.tscn" id="32_nlg2e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rypfk"]
 size = Vector2(12, 1086)
@@ -166,8 +165,6 @@ script = ExtResource("14_rbu47")
 
 [node name="loops" type="Node2D" parent="objectList"]
 
-[node name="LoopManager" type="Node2D" parent="objectList/loops"]
-
 [node name="skips" parent="objectList" instance=ExtResource("28_caqgn")]
 
 [node name="mashes" type="Node2D" parent="objectList"]
@@ -180,9 +177,6 @@ script = ExtResource("14_rbu47")
 visible = false
 
 [node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
-
-[node name="LoopManager" parent="." instance=ExtResource("32_nlg2e")]
-position = Vector2(250, 468)
 
 [connection signal="body_entered" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyEntered"]
 [connection signal="body_exited" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyExited"]
