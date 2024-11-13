@@ -164,10 +164,10 @@ position = Vector2(-32, 15)
 shape = SubResource("RectangleShape2D_sy87x")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -336.0
-offset_top = -104.0
-offset_right = -105.0
-offset_bottom = 17.0
+offset_left = -328.0
+offset_top = -22.0
+offset_right = -97.0
+offset_bottom = 99.0
 theme = ExtResource("8_iu4d5")
 text = "PUNCH TO
 BREAK!"
