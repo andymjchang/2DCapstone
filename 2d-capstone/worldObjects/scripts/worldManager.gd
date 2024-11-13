@@ -372,7 +372,8 @@ func _physics_process(_delta):
 		adaptiveMusic.stream_paused = true
 		Globals.paused = true
 		$LevelUI/PauseScreen.visible = true
-		Engine.time_scale = 0.0
+		# Engine.time_scale = 0.0
+		get_tree().paused = true
 	if Globals.vertical:
 		camera.emit_signal("moveCameraY", player1.position.y)
 	elif Globals.resetCamera:
