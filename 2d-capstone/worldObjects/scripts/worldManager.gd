@@ -172,7 +172,7 @@ func _ready():
 	
 func startGame():
 	music.play(musicTime + Globals.timeDelay)
-	#adaptiveMusic.play(musicTime + Globals.timeDelay)
+	adaptiveMusic.play(musicTime + Globals.timeDelay)
 	print("starting")
 	Globals.inLevel = true
 	if !Globals.customStart and !Globals.relocateToCheckpoint:
@@ -370,7 +370,7 @@ func _physics_process(_delta):
 		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 		music.stream_paused = true
 		#TODO add this back in 
-		#adaptiveMusic.stream_paused = true
+		adaptiveMusic.stream_paused = true
 		Globals.paused = true
 		$LevelUI/PauseScreen.visible = true
 		Engine.time_scale = 0.0
@@ -461,23 +461,23 @@ func _onScored(id, p_score):
 func _onChangeSpeed(speedType):
 	if speedType == 2:
 		music.pitch_scale = 2.5
-		#adaptiveMusic.pitch_scale = 2.5
+		adaptiveMusic.pitch_scale = 2.5
 		Globals.scrollSpeed = 2.5
 		timeMultiplier = 2.5
 	elif speedType > 0:			# Speed up
 		music.pitch_scale = 1.2
-		#adaptiveMusic.pitch_scale = 1.2
+		adaptiveMusic.pitch_scale = 1.2
 		Globals.scrollSpeed = 1.2
 		timeMultiplier = 1.2
 	elif speedType < 0:			# Speed down
 		music.pitch_scale = 0.8
-		#adaptiveMusic.pitch_scale = 0.8
+		adaptiveMusic.pitch_scale = 0.8
 		Globals.scrollSpeed = 0.8
 		timeMultiplier = 0.8
 	else:						# Return to regular
 		music.pitch_scale = 1
 		#TODO ask andy why this does not work
-		#adaptiveMusic.pitch_scale = 1
+		adaptiveMusic.pitch_scale = 1
 		Globals.scrollSpeed = 1
 		timeMultiplier = 1.0
 		
