@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=37 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -32,7 +32,6 @@
 [ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
-[ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
 [ext_resource type="Script" path="res://worlds/adaptiveMusic.gd" id="25_1auu1"]
 [ext_resource type="AudioStream" uid="uid://c8m6611e1qqd3" path="res://audioTracks/Level2_MelodyOnly_156bpm.mp3" id="25_t4rxr"]
 [ext_resource type="PackedScene" uid="uid://brhrxx3h4jgeq" path="res://worldObjects/skipManager.tscn" id="28_caqgn"]
@@ -97,10 +96,6 @@ position = Vector2(250, 645)
 ignore_rotation = false
 zoom = Vector2(2, 2)
 script = ExtResource("4_nttx1")
-
-[node name="glitchLines" parent="Camera2D" instance=ExtResource("23_jq54w")]
-visible = false
-position = Vector2(0, 120)
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D" groups=["levelMusicSounds"]]
 stream = ExtResource("18_44qgl")
