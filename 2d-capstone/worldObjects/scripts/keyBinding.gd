@@ -81,9 +81,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if instType and Input.is_action_just_pressed(instType):
 		#grey out our image
-		sprite.modulate = Color(0.5, 0.5, 0.5)
+		if Globals.usingController:
+			sprite.modulate = Color(0.5, 0.5, 0.5)
+		else:
+			$ColorRect.modulate = Color(0.5, 0.5, 0.5)
 	if instType and Input.is_action_just_released(instType):
-		sprite.modulate = Color(1.0,1.0,1.0)
+		if Globals.usingController:
+			sprite.modulate = Color(1.0,1.0,1.0)
+		else:
+			$ColorRect.modulate = Color(1.0,1.0,1.0)
 		
 func setKeyBindingImages():
 	
@@ -105,7 +111,8 @@ func setKeyBindingImages():
 			eventText = eventText.replace(" ", "")
 			eventText = eventText.replace("(", "")
 			eventText = eventText.replace(")", "")
-			keyName.text = str(eventText).to_upper()
+			#"[center]Centered Text[/center]
+			keyName.text = "[center]"+str(eventText).to_upper()+"[/center]"
 			sprite.visible = false
 			$ColorRect.visible = true
 			keyName.visible = true
