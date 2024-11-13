@@ -114,8 +114,6 @@ func setTextBoxes() -> void:
 	allCommands = { "jump": InputMap.action_get_events("jump"),
 	"slide" : InputMap.action_get_events("slide"),
 	"punch" : InputMap.action_get_events("punch"),
-	"pause" : InputMap.action_get_events("pause"),
-		"activate" : InputMap.action_get_events("activate")
 	}
 	for button in $buttons.get_children():
 		button.connect("button_up", _onKeyButtonUp.bind(button.name))
