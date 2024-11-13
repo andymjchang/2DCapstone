@@ -465,7 +465,7 @@ func _onChangeSpeed(speedType):
 		timeMultiplier = 2.5
 	elif speedType > 0:			# Speed up
 		music.pitch_scale = 1.2
-		adaptiveMusic.pitch_scale = 1.2
+		#adaptiveMusic.pitch_scale = 1.2
 		Globals.scrollSpeed = 1.2
 		timeMultiplier = 1.2
 	elif speedType < 0:			# Speed down
