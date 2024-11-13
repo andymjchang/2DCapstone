@@ -7,6 +7,7 @@ signal speedChange(newSpeed)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.speedChange.connect(_onSpeedChange)
+	animation.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,3 +18,7 @@ func _process(delta: float) -> void:
 func _onSpeedChange(newSpeed) -> void:
 	print("made it to speed chaneg pop up u")
 	animation.speed_scale = newSpeed
+
+
+func _onTutorialSlidesSnimationFinished() -> void:
+	animation.visible = false
