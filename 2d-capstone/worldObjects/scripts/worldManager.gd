@@ -342,7 +342,6 @@ func showLevelCompleted():
 	$LevelUI/levelCompleteScreen/jingle.play()
 	
 	Globals.restartLevelData()
-	await get_tree().create_timer(5.0).timeout
 	#statusMessage.text = "Level Completed!"
 	#restartButton.visible = true
 	
