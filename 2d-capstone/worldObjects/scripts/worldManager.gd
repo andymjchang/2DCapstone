@@ -264,7 +264,7 @@ func loadLevel():
 				instancedObj.setImage(posPoints)
 			if currentName == "enemies":
 				instancedObj.setEnemyType(posPoints)
-			if name == "mashes":
+			if currentName== "mashes":
 				instancedObj.setTime(posPoints)
 			
 		elif ".mp3" in line:
