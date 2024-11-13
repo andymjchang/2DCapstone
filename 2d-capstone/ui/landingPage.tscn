@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dis3tqrrssvdv"]
+[gd_scene load_steps=16 format=3 uid="uid://dis3tqrrssvdv"]
 
 [ext_resource type="Script" path="res://ui/scripts/landingPage.gd" id="1_4duo3"]
 [ext_resource type="Texture2D" uid="uid://dxspywuv7m6gp" path="res://ui/assets/Start_button_unpressed.png" id="2_76o7c"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://by8ayp2fgfo5w" path="res://ui/assets/Levels_button_pressed.png" id="10_1i44b"]
 [ext_resource type="Texture2D" uid="uid://b315tisfu41j4" path="res://ui/assets/Options_button_pressed.png" id="11_aoani"]
 [ext_resource type="Texture2D" uid="uid://cm2uia226ni58" path="res://ui/assets/options_button_upressed.png" id="11_vd7xa"]
-[ext_resource type="Texture2D" uid="uid://s1wm1fp1e2ar" path="res://ui/assets/TitleAlbumCover.png" id="12_j0q8p"]
 [ext_resource type="AudioStream" uid="uid://puuctcf72yw7" path="res://audioTracks/MainMenu_115bpm.mp3" id="13_1wn55"]
 [ext_resource type="Texture2D" uid="uid://jtrt6x2e2mhf" path="res://ui/assets/Title_Screen.png" id="13_7u8fu"]
 [ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="14_jbabd"]
@@ -96,11 +95,6 @@ texture_hover = ExtResource("11_aoani")
 [node name="music" type="AudioStreamPlayer2D" parent="." groups=["musicSounds"]]
 stream = ExtResource("13_1wn55")
 bus = &"music"
-
-[node name="TitleAlbumCover" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(620, 540)
-texture = ExtResource("12_j0q8p")
 
 [node name="Pointer" type="Sprite2D" parent="."]
 position = Vector2(1401, 347)
