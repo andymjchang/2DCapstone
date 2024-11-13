@@ -106,7 +106,6 @@ func _ready():
 		var popUpInstance = popUpScene.instantiate()
 		$Camera2D.add_child(popUpInstance)
 		onboardingSlides = $Camera2D/onboardingPopUp/tutorialSlides
-		onboardingSlides.play()
 		
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()

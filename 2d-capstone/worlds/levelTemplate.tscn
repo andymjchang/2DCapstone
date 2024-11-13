@@ -98,10 +98,6 @@ ignore_rotation = false
 zoom = Vector2(2, 2)
 script = ExtResource("4_nttx1")
 
-[node name="glitchLines" parent="Camera2D" instance=ExtResource("23_jq54w")]
-visible = false
-position = Vector2(0, 120)
-
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D" groups=["levelMusicSounds"]]
 stream = ExtResource("18_44qgl")
 max_distance = 10000.0
@@ -137,6 +133,9 @@ offset_left = -22.0
 offset_top = -448.0
 offset_right = 18.0
 offset_bottom = 374.0
+
+[node name="glitchLines" parent="Camera2D" instance=ExtResource("23_jq54w")]
+visible = false
 
 [node name="objectList" type="Node2D" parent="."]
 

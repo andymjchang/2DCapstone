@@ -18,9 +18,6 @@ func _onKillFloorBodyEntered(body:Node2D):
 	if "players" in body.get_groups():
 		#print(body, " Entered")
 		pass
-		#body.emit_signal("takeDamage", 10)
-		
-		#get_parent().get_parent().get_parent().emit_signal("resetPosition", body)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -36,7 +33,6 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		body.emit_signal("takeDamage", 9)
 		body.position.x = get_tree().root.get_node("level/Camera2D/ActionLine").global_position.x
 		body.position.y = get_tree().root.get_node("level/Camera2D/glitchLines").global_position.y
-		#get_tree().root.get_node("level").emit_signal("resetPositionForward", body)
 	pass # Replace with function body.
 	
 #func temp () -> void:

@@ -22,3 +22,5 @@ position = Vector2(200, -48)
 scale = Vector2(0.6225, 0.6225)
 sprite_frames = SubResource("SpriteFrames_fxxyb")
 animation = &"new_animation"
+
+[connection signal="animation_finished" from="tutorialSlides" to="." method="_onTutorialSlidesSnimationFinished"]
