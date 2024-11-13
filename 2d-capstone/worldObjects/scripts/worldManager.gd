@@ -353,6 +353,14 @@ func _onLevelCompleted():
 func _process(delta):
 	updateTime(delta)
 
+func _input(event: InputEvent) -> void:
+	#check to see whether or not the user has switched to keyboard or controller
+	if event.get_class() == "InputEventJoypadButton" and event.get_class() == "InputEventJoypadMotion":
+		#player is using controller
+		Globals.usingController = true
+	else:
+		#player is not using controller
+		Globals.usingController = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("pause") and !$LevelUI/GameOverScreen.visible and !$LevelUI/levelCompleteScreen.visible:

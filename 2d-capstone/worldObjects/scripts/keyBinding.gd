@@ -7,10 +7,60 @@ var instType = ""
 @onready var keyName = $keyName
 var watchEvent
 
+#load controller images
+var aController = preload("res://ui/assets/onboarding/keys/a_xbox.png")
+var bController = preload("res://ui/assets/onboarding/keys/b_xbox.png")
+var dPadDownController = preload("res://ui/assets/onboarding/keys/down_xbox.png")
+var LBController = preload("res://ui/assets/onboarding/keys/LB_xbox.png")
+var leftMidController = preload("res://ui/assets/onboarding/keys/left_mid_button_xbox.png")
+var dPadLeftController = preload("res://ui/assets/onboarding/keys/left_xbox.png")
+var LSController = preload("res://ui/assets/onboarding/keys/LS_xbox.png")
+var LTController = preload("res://ui/assets/onboarding/keys/LT_xbox.png")
+var RBController = preload("res://ui/assets/onboarding/keys/RB_xbox.png")
+var rightMidController = preload("res://ui/assets/onboarding/keys/right_mid_button_xbox.png")
+var dPadRightController = preload("res://ui/assets/onboarding/keys/right_xbox.png")
+var RSController = preload("res://ui/assets/onboarding/keys/RS_xbox.png")
+var RTController = preload("res://ui/assets/onboarding/keys/RT_xbox.png")
+var dPadUpController = preload("res://ui/assets/onboarding/keys/up_xbox.png")
+var xController = preload("res://ui/assets/onboarding/keys/x_xbox.png")
+var yController = preload("res://ui/assets/onboarding/keys/y_xbox.png")
+
+
 @onready var punchImage = preload("res://ui/assets/onboarding/punchGraphic.png")
 @onready var slideImage = preload("res://ui/assets/slide.webp")
 @onready var activateImage = preload("res://ui/assets/onboarding/activateGraphic.png")
 @onready var jumpImage = preload("res://ui/assets/onboarding/jumpGraphic.png")
+
+var controllerArray = ["Joypad Button 0", "Joypad Button 1", "Joypad Button 2", "Joypad Button 3", "Joypad Button 4", "Joypad Button 5", "Joypad Button 6", "Joypad Button 7", "Joypad Button 8",  "Joypad Button 9", "Joypad Button 0", "Joypad Button 10", "Joypad Button 12", "Joypad Button 13", "Joypad Button 14", "Joypad Button 15", "Joypad Button 16", "Joypad Button 17", "Joypad Button 18",  "Joypad Button 19"  , "Joypad Button 20", "Joypad Button 21", "Joypad Button 22",  "Joypad Button 23"  ]
+@onready var controllerMap = {controllerArray[0]: aController,
+							controllerArray[1]: bController,
+							controllerArray[2]: xController,
+							controllerArray[3]: yController,
+							controllerArray[4]: LBController,
+							controllerArray[5]: RBController,
+							controllerArray[6]: LSController,
+							controllerArray[7]: RSController,
+							controllerArray[8]: aController, #back/select
+							controllerArray[9]: aController, #start option
+							controllerArray[10]: LSController,
+							controllerArray[11]: RSController,
+							controllerArray[12]: dPadUpController,
+							controllerArray[13]: dPadDownController,
+							controllerArray[14]: dPadLeftController,
+							controllerArray[15]: dPadRightController,
+							controllerArray[16]: aController, #the rest of these are axis contols, do later
+							controllerArray[17]: aController,
+							controllerArray[18]: aController,
+							controllerArray[19]: aController,
+							controllerArray[20]: aController,
+							controllerArray[21]: aController,	
+							controllerArray[22]: aController,
+							controllerArray[23]: aController
+	
+}
+
+#grab all of the controller images
+
 
 var keyFolderPath = "res://ui/assets/onboarding/keys"
 var pathToTarget = ""
@@ -49,13 +99,31 @@ func setKeyBindingImages():
 	#looping through all the events
 	for event in eventBinds:
 		print("event kind: ", event)
-		if event.get_class() != "InputEventJoypadButton" and event.get_class() != "InputEventJoypadMotion":
+		if event.get_class() != "InputEventJoypadButton" and event.get_class() != "InputEventJoypadMotion" and !Globals.usingController:
 			var eventText = event.as_text().to_lower()
 			eventText = eventText.replace("physical", "")
 			eventText = eventText.replace(" ", "")
 			eventText = eventText.replace("(", "")
 			eventText = eventText.replace(")", "")
-			keyName.text = str(eventText)
+			keyName.text = str(eventText).to_upper()
+			sprite.visible = false
+			$ColorRect.visible = true
+			keyName.visible = true
+		elif Globals.usingController:
+			print("controller name: ", event.as_text())
+			
+			var eventText = event.as_text()
+			for control in controllerArray:
+				print("control: ", control, " event text:", eventText)
+				if control in (eventText):
+					var newImage = controllerMap[control]
+					print("new Image: ", newImage)
+					sprite.texture = newImage
+					keyName.visible = false
+					$ColorRect.visible = false
+					break
+					
+			
 			#print("Event im matching too: ", event)
 			#var dir = DirAccess.open(keyFolderPath)
 			#dir.list_dir_begin()

@@ -34,6 +34,9 @@ var percentageHit = 0.0
 var endScore = 0.0
 var gameOver = false 
 
+#general
+var usingController = false
+
 #volume 
 var playerSoundsVolume =1.0
 var musicSoundsVolume = 1.0

@@ -18,7 +18,15 @@ texture = ExtResource("2_6w36b")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_uh44k")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="keyName" type="RichTextLabel" parent="."]
+visible = false
 offset_left = -7.0
 offset_top = -11.0
 offset_right = 4.0
@@ -28,10 +36,3 @@ bbcode_enabled = true
 text = "A"
 fit_content = true
 scroll_active = false
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 40.0
-offset_bottom = 40.0
