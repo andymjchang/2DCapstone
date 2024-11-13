@@ -21,6 +21,7 @@ grow_vertical = 2
 script = ExtResource("1_42jy6")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -976.0
 offset_top = -545.327
 offset_right = 959.0

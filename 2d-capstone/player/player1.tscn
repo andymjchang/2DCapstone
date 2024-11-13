@@ -260,7 +260,7 @@ material = SubResource("ShaderMaterial_3fn7t")
 position = Vector2(-13.75, -1.80001)
 scale = Vector2(0.133929, 0.133929)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Zip"
+animation = &"Run"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-8.4375, 2)
