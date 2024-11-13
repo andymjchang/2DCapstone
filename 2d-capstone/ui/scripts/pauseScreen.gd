@@ -1,19 +1,19 @@
 extends Control
 
 enum MenuOptions {
-	RESUME,
-	CHECKPOINT,
 	RESTART,
+	CHECKPOINT,
+	RESUME,
 	OPTIONS,
 	MAIN_MENU
 }
 
-@export var vinyl_rotations: Array[float] = [0.0, -20.0, -40.0, -60.0, -80.0]  # Adjust angles as needed
+@export var vinyl_rotations: Array[float] = [60.0, 30.0, 0.0, -30.0, -60.0]  # Adjust angles as needed
 @export var rotation_tween_duration: float = 0.15
 
 @onready var vinyl: Sprite2D = $Vinyl
 
-var current_option: int = 0
+var current_option: int = 2
 var options_count: int = MenuOptions.size()
 
 func _ready() -> void:

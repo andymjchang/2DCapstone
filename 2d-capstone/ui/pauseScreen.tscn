@@ -37,6 +37,7 @@ position = Vector2(179, -0.327026)
 texture = ExtResource("3_htdc1")
 
 [node name="1" type="Node2D" parent="Vinyl"]
+rotation = -1.0472
 
 [node name="Level1" type="Label" parent="Vinyl/1"]
 anchors_preset = 4
@@ -48,12 +49,12 @@ offset_right = 480.0
 offset_bottom = 30.0
 grow_vertical = 2
 theme = ExtResource("4_bkb1b")
-text = "Resume"
+text = "Restart"
 horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="2" type="Node2D" parent="Vinyl"]
-rotation = 0.349066
+rotation = -0.523599
 
 [node name="Level2" type="Label" parent="Vinyl/2"]
 anchors_preset = 4
@@ -71,7 +72,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="3" type="Node2D" parent="Vinyl"]
-rotation = 0.698132
 
 [node name="Level2" type="Label" parent="Vinyl/3"]
 anchors_preset = 4
@@ -83,12 +83,12 @@ offset_right = 467.0
 offset_bottom = 61.0
 grow_vertical = 2
 theme = ExtResource("4_bkb1b")
-text = "Restart"
+text = "Resume"
 horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="4" type="Node2D" parent="Vinyl"]
-rotation = 1.0472
+rotation = 0.523599
 
 [node name="Level2" type="Label" parent="Vinyl/4"]
 anchors_preset = 4
@@ -105,7 +105,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="5" type="Node2D" parent="Vinyl"]
-rotation = 1.39626
+rotation = 1.0472
 
 [node name="Level2" type="Label" parent="Vinyl/5"]
 anchors_preset = 4
