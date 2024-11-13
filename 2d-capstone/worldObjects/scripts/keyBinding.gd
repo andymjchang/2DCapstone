@@ -4,6 +4,7 @@ var pathToImage = ""
 var imageName = ""
 var instType = ""
 @onready var sprite = $Sprite2D
+@onready var keyName = $keyName
 var watchEvent
 
 @onready var punchImage = preload("res://ui/assets/onboarding/punchGraphic.png")
@@ -47,29 +48,32 @@ func setKeyBindingImages():
 	var eventBinds = allCommands[instType]
 	#looping through all the events
 	for event in eventBinds:
+		print("event kind: ", event)
+		if event.get_class() != "InputEventJoypadButton" and event.get_class() != "InputEventJoypadMotion":
 			var eventText = event.as_text().to_lower()
 			eventText = eventText.replace("physical", "")
 			eventText = eventText.replace(" ", "")
 			eventText = eventText.replace("(", "")
 			eventText = eventText.replace(")", "")
-			print("Event im matching too: ", event)
-			var dir = DirAccess.open(keyFolderPath)
-			dir.list_dir_begin()
-			var curFileName = dir.get_next()
-			#I do not think I need to loop here
-			while curFileName != "":
-				if curFileName == (eventText+".png") and event is InputEventKey:
-					dir.list_dir_end()
-					print("Matching file name: ", curFileName)
-					pathToTarget = keyFolderPath
-					pathToTarget += "/"+curFileName
-					print("path to target: ", pathToTarget)
-					var newImage = load(pathToTarget)
-					self.get_node("Sprite2D").texture = newImage
-					watchEvent = eventText
-					print("watch event: ", watchEvent)
-					break
-				curFileName = dir.get_next()
+			keyName.text = str(eventText)
+			#print("Event im matching too: ", event)
+			#var dir = DirAccess.open(keyFolderPath)
+			#dir.list_dir_begin()
+			#var curFileName = dir.get_next()
+			##I do not think I need to loop here
+			#while curFileName != "":
+				#if curFileName == (eventText+".png") and event is InputEventKey:
+					#dir.list_dir_end()
+					#print("Matching file name: ", curFileName)
+					#pathToTarget = keyFolderPath
+					#pathToTarget += "/"+curFileName
+					#print("path to target: ", pathToTarget)
+					#var newImage = load(pathToTarget)
+					#self.get_node("Sprite2D").texture = newImage
+					#watchEvent = eventText
+					#print("watch event: ", watchEvent)
+					#break
+				#curFileName = dir.get_next()
 				
 func setImage(posPoints : Array) -> void:
 	if posPoints.size() > 2.0:

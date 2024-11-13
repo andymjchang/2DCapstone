@@ -194,7 +194,9 @@ coins
 12825, 450,
 13425, 450,
 keyBindings
+3000, 425, punch,
 skips
 mashes
 19800, 0, 20400, 0,
 holds
+moveLines

@@ -10,7 +10,7 @@ func _onResumeButtonUp() -> void:
 	self.visible = false
 	Globals.paused = false
 	self.get_parent().get_parent().music.stream_paused = false
-	self.get_parent().get_parent().adaptiveMusic.stream_paused = false
+	#self.get_parent().get_parent().adaptiveMusic.stream_paused = false
 
 func _onMainMenuButtonUp() -> void:
 	Engine.time_scale = 1.0

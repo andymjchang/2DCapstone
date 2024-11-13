@@ -172,7 +172,7 @@ func _ready():
 	
 func startGame():
 	music.play(musicTime + Globals.timeDelay)
-	adaptiveMusic.play(musicTime + Globals.timeDelay)
+	#adaptiveMusic.play(musicTime + Globals.timeDelay)
 	print("starting")
 	Globals.inLevel = true
 	if !Globals.customStart and !Globals.relocateToCheckpoint:
@@ -260,9 +260,10 @@ func loadLevel():
 				instancedObj.setTileMaps(posPoints.duplicate()) 
 				instancedObj.add_to_group("platforms")
 				
-			if name == "keyBindings":
+			if currentName == "keyBindings":
+				print("setting image")
 				instancedObj.setImage(posPoints)
-			if name == "enemies":
+			if currentName == "enemies":
 				instancedObj.setEnemyType(posPoints)
 			if name == "mashes":
 				instancedObj.setTime(posPoints)
@@ -450,7 +451,7 @@ func _onScored(id, p_score):
 func _onChangeSpeed(speedType):
 	if speedType == 2:
 		music.pitch_scale = 2.5
-		adaptiveMusic.pitch_scale = 2.5
+		#adaptiveMusic.pitch_scale = 2.5
 		Globals.scrollSpeed = 2.5
 		timeMultiplier = 2.5
 	elif speedType > 0:			# Speed up

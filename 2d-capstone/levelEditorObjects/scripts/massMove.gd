@@ -87,10 +87,5 @@ func getMaxMin() -> Array:
 		print("end min vec: ", endMinVec, "start min vec: ", startMinVec)
 		print("end max vec: ", endMaxvec, "start max vec: ", startMaxvec)
 		return [end.global_position.y, start.global_position.y, endMinVec.x, endMaxvec.x]
-	
 	#horizontal ones should have the same x min and max
-	
-	
-
-	
 		
