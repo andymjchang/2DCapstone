@@ -50,7 +50,6 @@ var is_hanging := false
 var otherPlayer
 var worldNode
 var sfxPlayer
-var glitchLines
 var camera
 var coins = 0
 
@@ -108,7 +107,6 @@ func _ready():
 	
 	# Attach to glitch line
 	camera = worldNode.get_node("Camera2D")
-	glitchLines = camera.get_node("glitchLines")
 	camera.global_position = self.global_position + Vector2(250, -70)
 	var background = worldNode.get_node("Background")
 	background.global_position = camera.global_position
@@ -127,7 +125,6 @@ func _physics_process(delta: float) -> void:
 		if not inZipline:
 			# Lines
 			if is_on_floor():
-				glitchLines.global_position.y = self.global_position.y
 				hang_time_remaining = 0.0
 				is_hanging = false
 				camera.smooth_pan_to(self.global_position.y + -50)

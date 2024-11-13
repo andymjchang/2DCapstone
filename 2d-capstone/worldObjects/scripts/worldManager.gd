@@ -101,12 +101,12 @@ func _ready():
 		adaptiveMusic.active = true
 		backgroundName = "Lvl2"
 		
-	if levelFile.begins_with("Tutorial"):
-		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
-		var popUpInstance = popUpScene.instantiate()
-		$Camera2D.add_child(popUpInstance)
-		onboardingSlides = $Camera2D/onboardingPopUp/tutorialSlides
-		onboardingSlides.play()
+	# if levelFile.begins_with("Tutorial"):
+		# var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
+		# var popUpInstance = popUpScene.instantiate()
+		# $Camera2D.add_child(popUpInstance)
+		# onboardingSlides = $Camera2D/onboardingPopUp/tutorialSlides
+		# onboardingSlides.play()
 		
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
