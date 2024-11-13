@@ -103,6 +103,7 @@ func setKeyBindingImages():
 	}
 	var eventBinds = allCommands[instType]
 	#looping through all the events
+	var keyArray = []
 	for event in eventBinds:
 		print("event kind: ", event)
 		if event.get_class() != "InputEventJoypadButton" and event.get_class() != "InputEventJoypadMotion" and !Globals.usingController:
@@ -111,11 +112,12 @@ func setKeyBindingImages():
 			eventText = eventText.replace(" ", "")
 			eventText = eventText.replace("(", "")
 			eventText = eventText.replace(")", "")
+			keyArray.append(str(eventText))
 			#"[center]Centered Text[/center]
-			keyName.text = "[center]"+str(eventText).to_upper()+"[/center]"
-			sprite.visible = false
-			$ColorRect.visible = true
-			keyName.visible = true
+			#keyName.text = "[center]"+str(eventText).to_upper()+"[/center]"
+			#sprite.visible = false
+			#$ColorRect.visible = true
+			#keyName.visible = true
 		elif Globals.usingController:
 			print("controller name: ", event.as_text())
 			
@@ -130,7 +132,16 @@ func setKeyBindingImages():
 					$ColorRect.visible = false
 					break
 					
-			
+		if keyArray.size() > 0:
+			keyArray.sort_custom(sortLength)
+			#"[center]Centered Text[/center]
+			keyName.text = "[center]"+str(keyArray[0]).to_upper()+"[/center]"
+			sprite.visible = false
+			$ColorRect.visible = true
+			keyName.visible = true
+					
+					
+					
 			#print("Event im matching too: ", event)
 			#var dir = DirAccess.open(keyFolderPath)
 			#dir.list_dir_begin()
@@ -149,7 +160,12 @@ func setKeyBindingImages():
 					#print("watch event: ", watchEvent)
 					#break
 				#curFileName = dir.get_next()
-				
+	
+func sortLength(a : String, b : String ):
+	if a.length() < b.length():
+		return false
+	return true
+					
 func setImage(posPoints : Array) -> void:
 	if posPoints.size() > 2.0:
 		var instructionType = posPoints[2]

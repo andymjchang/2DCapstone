@@ -36,11 +36,18 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+	
+	
+func sortLength(a : String, b : String ):
+	if a.length() < b.length():
+		return false
+	return true
 
 func formatText(commands) -> String:
 	var returnString = "" 
-	var keyboardString = ""
-	var controllerString = ""
+	var keyboardArray = []
+	var controllerArray = []
 	for command in commands:
 		#var keyName = OS.get_keycode_string(command.scancode)
 		var commandText = command.as_text()
@@ -49,13 +56,20 @@ func formatText(commands) -> String:
 		commandText = commandText.replace("(", "")
 		commandText = commandText.replace(")", "")
 		if command.get_class() == "InputEventKey":
-			keyboardString += commandText+", "
+			keyboardArray.append(str(commandText))
 		elif command.get_class() == "InputEventJoypadMotion":
-			controllerString+=commandText+", "
+			controllerArray.append(str(commandText))
 		else:
-			controllerString+=commandText+", "
-			
-	returnString += "Keyboard: "+keyboardString+"\n"+"Controller: "+controllerString
+			controllerArray.append(str(commandText))
+	
+	#temp solution
+	keyboardArray.sort_custom(sortLength)
+	returnString += "Keyboard: "
+	for keyPress in keyboardArray:
+		returnString += keyPress + ", "
+	returnString += "\nController: "
+	for controllerPress in controllerArray	:
+		returnString += controllerPress + ", "
 	return returnString
 
 func _onBackButtonUp() -> void:
