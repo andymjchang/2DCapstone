@@ -9,7 +9,6 @@
 modulate = Color(0.886262, 0.886261, 0.886262, 1)
 
 [node name="Layer0" type="Parallax2D" parent="."]
-visible = false
 scroll_scale = Vector2(0.05, 0.05)
 repeat_size = Vector2(960, 0)
 
