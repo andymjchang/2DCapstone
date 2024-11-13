@@ -17,6 +17,7 @@ func _ready():
 	Globals.checkpoint = null
 	music.play()
 	music.stream.loop = true
+	await get_tree().create_timer(0.0).timeout
 	update_pointer_position()
 
 func _process(_delta):
@@ -34,14 +35,19 @@ func update_pointer_position():
 	match current_option:
 		MenuOptions.START:
 			pointer.position.y = $storyButton.position.y + ($storyButton.size.y / 2)
+			Input.warp_mouse($storyButton.global_position + Vector2($storyButton.size.x/2, $storyButton.size.y/2))
 		MenuOptions.LEVELS:
 			pointer.position.y = $levelSelect.position.y + ($levelSelect.size.y / 2)
+			Input.warp_mouse($levelSelect.global_position + Vector2($levelSelect.size.x/2, $levelSelect.size.y/2))
 		MenuOptions.EDITOR:
 			pointer.position.y = $editorButton.position.y + ($editorButton.size.y / 2)
+			Input.warp_mouse($editorButton.global_position + Vector2($editorButton.size.x/2, $editorButton.size.y/2))
 		MenuOptions.OPTIONS:
 			pointer.position.y = $optionsButton.position.y + ($optionsButton.size.y / 2)
+			Input.warp_mouse($optionsButton.global_position + Vector2($optionsButton.size.x/2, $optionsButton.size.y/2))
 		MenuOptions.QUIT:
 			pointer.position.y = $quitButton.position.y + ($quitButton.size.y / 2)
+			Input.warp_mouse($quitButton.global_position + Vector2($quitButton.size.x/2, $quitButton.size.y/2))
 
 func handle_selection():
 	match current_option:
