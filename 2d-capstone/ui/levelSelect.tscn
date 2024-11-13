@@ -1,27 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://clemg8ird1smt"]
+[gd_scene load_steps=7 format=3 uid="uid://clemg8ird1smt"]
 
-[ext_resource type="Texture2D" uid="uid://uqstjyc7iyr2" path="res://ui/assets/Main_Menu.png" id="1_u6n0r"]
-[ext_resource type="Script" path="res://ui/scripts/levels.gd" id="2_rglla"]
+[ext_resource type="Texture2D" uid="uid://dmka458bsdkck" path="res://ui/assets/vinyl_envelope_back.png" id="1_mbnry"]
+[ext_resource type="Texture2D" uid="uid://cfkgyb786idsq" path="res://ui/assets/vinyl_blank.png" id="2_vuw53"]
+[ext_resource type="Texture2D" uid="uid://mji6d62y133n" path="res://ui/assets/Pause_menu_album_sleeve.png" id="3_aoh1x"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="3_ho80d"]
+[ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="4_pejwk"]
+[ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="5_36grs"]
 
 [node name="LevelSelect" type="CanvasLayer"]
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1928.0
-offset_bottom = 1092.0
-texture = ExtResource("1_u6n0r")
-expand_mode = 1
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -3.5
+offset_top = -9.0
+offset_right = 1931.5
+offset_bottom = 1089.0
+color = Color(1, 0.956863, 0.933333, 1)
 
-[node name="levels" type="ScrollContainer" parent="."]
-offset_left = 571.0
-offset_top = 526.0
-offset_right = 1363.0
-offset_bottom = 915.0
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
-script = ExtResource("2_rglla")
+[node name="VinylEnvelopeBack" type="Sprite2D" parent="."]
+position = Vector2(752.5, 540)
+texture = ExtResource("1_mbnry")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="levels"]
-layout_mode = 2
+[node name="OptionsMenuVinyl" type="Sprite2D" parent="."]
+position = Vector2(1091.5, 540)
+texture = ExtResource("2_vuw53")
 
-[node name="VScrollBar" type="VScrollBar" parent="levels/VBoxContainer"]
-layout_mode = 2
+[node name="Label" type="Label" parent="OptionsMenuVinyl"]
+offset_left = 273.0
+offset_top = -31.0
+offset_right = 475.0
+offset_bottom = 29.0
+theme = ExtResource("3_ho80d")
+text = "Level 1"
+vertical_alignment = 1
+
+[node name="Album" type="Sprite2D" parent="."]
+position = Vector2(525.5, 540)
+texture = ExtResource("3_aoh1x")
+
+[node name="Pointer2" type="Sprite2D" parent="." groups=["pulsingObjects"]]
+position = Vector2(1720.5, 540)
+texture = ExtResource("4_pejwk")
+script = ExtResource("5_36grs")
+increasedScale = Vector2(1.1, 1.1)
