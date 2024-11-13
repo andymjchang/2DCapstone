@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdrievkpea8pi"]
+
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="1_3ifx3"]
+
+[node name="Advisory" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 317.0
+offset_top = 381.0
+offset_right = 464.0
+offset_bottom = 489.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 317.0
+offset_top = 411.0
+offset_right = 464.0
+offset_bottom = 459.0
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 318.5
+offset_top = 417.0
+offset_right = 723.5
+offset_bottom = 476.0
+theme = ExtResource("1_3ifx3")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "ADVISORY"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 321.5
+offset_top = 465.0
+offset_right = 726.5
+offset_bottom = 524.0
+theme = ExtResource("1_3ifx3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "SKILLFUL CONTENT"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 333.5
+offset_top = 380.0
+offset_right = 738.5
+offset_bottom = 439.0
+theme = ExtResource("1_3ifx3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "PARENTAL"

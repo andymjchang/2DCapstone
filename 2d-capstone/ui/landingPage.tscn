@@ -1,57 +1,57 @@
-[gd_scene load_steps=13 format=3 uid="uid://dis3tqrrssvdv"]
+[gd_scene load_steps=16 format=3 uid="uid://dis3tqrrssvdv"]
 
 [ext_resource type="Script" path="res://ui/scripts/landingPage.gd" id="1_4duo3"]
-[ext_resource type="Texture2D" uid="uid://uqstjyc7iyr2" path="res://ui/assets/Main_Menu.png" id="2_3x1ff"]
 [ext_resource type="Texture2D" uid="uid://dxspywuv7m6gp" path="res://ui/assets/Start_button_unpressed.png" id="2_76o7c"]
 [ext_resource type="Texture2D" uid="uid://g15lptde2dlw" path="res://ui/assets/Start_button_pressed.png" id="3_htjxe"]
 [ext_resource type="Texture2D" uid="uid://bpr2jpqk4ugbf" path="res://ui/assets/Quit_button_unpressed.png" id="4_1m2j0"]
 [ext_resource type="Texture2D" uid="uid://cvl0lsfhi2474" path="res://ui/assets/Quit_button_pressed.png" id="5_bjqql"]
-[ext_resource type="Texture2D" uid="uid://2oimrp82wd5r" path="res://ui/assets/Level_Editor_Button_Unpressed.png" id="5_q0m6t"]
-[ext_resource type="Texture2D" uid="uid://c3kyue8ikcygn" path="res://ui/assets/Level_SELECT_Button_Unpressed.png" id="8_tjihd"]
-[ext_resource type="Texture2D" uid="uid://clikapbp8jtdo" path="res://ui/assets/Level_SELECT_button_Pressed.png" id="9_osbfx"]
-[ext_resource type="Texture2D" uid="uid://be1627hjo7mg1" path="res://ui/assets/Options_button_unpressed.png" id="10_v6ykf"]
+[ext_resource type="Texture2D" uid="uid://cna5ly6pyb60n" path="res://ui/assets/level_editor_button_upressed.png" id="5_cqwvl"]
+[ext_resource type="Texture2D" uid="uid://b0a3a04h0veeg" path="res://ui/assets/Level_Editor_Button_Pressed.png" id="6_28gch"]
+[ext_resource type="Texture2D" uid="uid://8wa3onhog521" path="res://ui/assets/Levels_button_unpressed.png" id="9_hcsvi"]
+[ext_resource type="Texture2D" uid="uid://by8ayp2fgfo5w" path="res://ui/assets/Levels_button_pressed.png" id="10_1i44b"]
 [ext_resource type="Texture2D" uid="uid://b315tisfu41j4" path="res://ui/assets/Options_button_pressed.png" id="11_aoani"]
-[ext_resource type="Texture2D" uid="uid://s1wm1fp1e2ar" path="res://ui/assets/TitleAlbumCover.png" id="12_j0q8p"]
+[ext_resource type="Texture2D" uid="uid://cm2uia226ni58" path="res://ui/assets/options_button_upressed.png" id="11_vd7xa"]
+[ext_resource type="AudioStream" uid="uid://puuctcf72yw7" path="res://audioTracks/MainMenu_115bpm.mp3" id="13_1wn55"]
+[ext_resource type="Texture2D" uid="uid://jtrt6x2e2mhf" path="res://ui/assets/Title_Screen.png" id="13_7u8fu"]
+[ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="14_jbabd"]
+[ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="15_y8v3w"]
 
 [node name="LandingPage" type="CanvasLayer"]
 script = ExtResource("1_4duo3")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1920.0
-offset_bottom = 1081.0
-focus_mode = 2
-texture = ExtResource("2_3x1ff")
-expand_mode = 2
+[node name="TitleScreen" type="Sprite2D" parent="."]
+texture = ExtResource("13_7u8fu")
+centered = false
 
 [node name="storyButton" type="TextureButton" parent="."]
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -701.0
-offset_top = -257.0
-offset_right = -57.0
-offset_bottom = -117.0
-grow_horizontal = 0
+offset_left = -89.0
+offset_top = -274.0
+offset_right = 375.0
+offset_bottom = -71.0
+grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("2_76o7c")
 texture_pressed = ExtResource("3_htjxe")
+texture_hover = ExtResource("3_htjxe")
 ignore_texture_size = true
-stretch_mode = 0
 
 [node name="editorButton" type="TextureButton" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 74.0
-offset_top = -126.0
-offset_right = 375.0
-offset_bottom = -31.0
+offset_left = 857.0
+offset_top = -455.0
+offset_right = 1357.0
+offset_bottom = -302.0
 grow_vertical = 0
-texture_normal = ExtResource("5_q0m6t")
-ignore_texture_size = true
-stretch_mode = 0
+texture_normal = ExtResource("5_cqwvl")
+texture_pressed = ExtResource("6_28gch")
+texture_hover = ExtResource("6_28gch")
 
 [node name="quitButton" type="TextureButton" parent="."]
 anchors_preset = 7
@@ -59,46 +59,47 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -225.0
-offset_top = -271.0
-offset_right = 226.0
-offset_bottom = -120.0
+offset_left = 15.0
+offset_top = -152.0
+offset_right = 309.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
 texture_normal = ExtResource("4_1m2j0")
 texture_pressed = ExtResource("5_bjqql")
+texture_hover = ExtResource("5_bjqql")
+ignore_texture_size = true
 
 [node name="levelSelect" type="TextureButton" parent="."]
-offset_left = 52.0
-offset_top = 288.0
-offset_right = 630.0
-offset_bottom = 423.0
-texture_normal = ExtResource("8_tjihd")
-texture_pressed = ExtResource("9_osbfx")
-ignore_texture_size = true
-stretch_mode = 0
+offset_left = 898.0
+offset_top = 478.0
+offset_right = 1286.0
+offset_bottom = 613.0
+texture_normal = ExtResource("9_hcsvi")
+texture_pressed = ExtResource("10_1i44b")
+texture_hover = ExtResource("10_1i44b")
 
 [node name="optionsButton" type="TextureButton" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 1500.0
-offset_top = -126.0
-offset_right = 1801.0
-offset_bottom = -31.0
+offset_left = 915.0
+offset_top = -293.0
+offset_right = 1315.0
+offset_bottom = -169.0
 grow_vertical = 0
-texture_normal = ExtResource("10_v6ykf")
+texture_normal = ExtResource("11_vd7xa")
 texture_pressed = ExtResource("11_aoani")
-ignore_texture_size = true
-stretch_mode = 0
+texture_hover = ExtResource("11_aoani")
 
 [node name="music" type="AudioStreamPlayer2D" parent="." groups=["musicSounds"]]
+stream = ExtResource("13_1wn55")
 bus = &"music"
 
-[node name="TitleAlbumCover" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(620, 540)
-texture = ExtResource("12_j0q8p")
+[node name="Pointer" type="Sprite2D" parent="."]
+position = Vector2(1401, 347)
+texture = ExtResource("14_jbabd")
+script = ExtResource("15_y8v3w")
 
 [connection signal="pressed" from="storyButton" to="." method="_onStoryButtonPressed"]
 [connection signal="pressed" from="editorButton" to="." method="_onEditorButtonPressed"]

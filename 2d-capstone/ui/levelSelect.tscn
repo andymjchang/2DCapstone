@@ -1,27 +1,183 @@
-[gd_scene load_steps=3 format=3 uid="uid://clemg8ird1smt"]
+[gd_scene load_steps=14 format=3 uid="uid://clemg8ird1smt"]
 
-[ext_resource type="Texture2D" uid="uid://uqstjyc7iyr2" path="res://ui/assets/Main_Menu.png" id="1_u6n0r"]
-[ext_resource type="Script" path="res://ui/scripts/levels.gd" id="2_rglla"]
+[ext_resource type="Script" path="res://ui/levelSelect.gd" id="1_1otup"]
+[ext_resource type="Texture2D" uid="uid://dmka458bsdkck" path="res://ui/assets/vinyl_envelope_back.png" id="1_mbnry"]
+[ext_resource type="Texture2D" uid="uid://cfkgyb786idsq" path="res://ui/assets/vinyl_blank.png" id="2_vuw53"]
+[ext_resource type="Texture2D" uid="uid://mji6d62y133n" path="res://ui/assets/Pause_menu_album_sleeve.png" id="3_aoh1x"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="3_ho80d"]
+[ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="4_pejwk"]
+[ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="5_36grs"]
+[ext_resource type="Texture2D" uid="uid://d11gh5clg3uia" path="res://ui/assets/CoverLevel1.png" id="6_lxl33"]
+[ext_resource type="Texture2D" uid="uid://cysw4im823dx8" path="res://animations/raccoonAnims/Raccoon_Animation_Revised/Raccoon_run_sprite_sheet.png" id="7_adm20"]
+[ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="8_8auxv"]
+[ext_resource type="Texture2D" uid="uid://ccteqfnqie0mm" path="res://ui/assets/CoverLevel3.png" id="8_dxyid"]
+[ext_resource type="Texture2D" uid="uid://cfnr0dcodmyop" path="res://ui/assets/CoverLevel2.png" id="8_vl4n3"]
+[ext_resource type="PackedScene" uid="uid://bdrievkpea8pi" path="res://ui/advisory.tscn" id="9_q2xdh"]
 
-[node name="LevelSelect" type="CanvasLayer"]
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_1otup")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1928.0
-offset_bottom = 1092.0
-texture = ExtResource("1_u6n0r")
-expand_mode = 1
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -3.5
+offset_top = -9.0
+offset_right = 1931.5
+offset_bottom = 1089.0
+color = Color(1, 0.956863, 0.933333, 1)
 
-[node name="levels" type="ScrollContainer" parent="."]
-offset_left = 571.0
-offset_top = 526.0
-offset_right = 1363.0
-offset_bottom = 915.0
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
-script = ExtResource("2_rglla")
+[node name="VinylEnvelopeBack" type="Sprite2D" parent="."]
+position = Vector2(752.5, 540)
+texture = ExtResource("1_mbnry")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="levels"]
-layout_mode = 2
+[node name="Vinyl" type="Sprite2D" parent="."]
+position = Vector2(1090, 540)
+rotation = -0.523599
+texture = ExtResource("2_vuw53")
 
-[node name="VScrollBar" type="VScrollBar" parent="levels/VBoxContainer"]
-layout_mode = 2
+[node name="0" type="Node2D" parent="Vinyl"]
+rotation = -0.523599
+
+[node name="Back" type="Label" parent="Vinyl/0"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 270.0
+offset_top = -29.5
+offset_right = 472.0
+offset_bottom = 29.5
+grow_vertical = 2
+theme = ExtResource("3_ho80d")
+text = "Back"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="1" type="Node2D" parent="Vinyl"]
+
+[node name="Level1" type="Label" parent="Vinyl/1"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 270.0
+offset_top = -29.5
+offset_right = 472.0
+offset_bottom = 29.5
+grow_vertical = 2
+theme = ExtResource("3_ho80d")
+text = "Level 1"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="2" type="Node2D" parent="Vinyl"]
+rotation = 0.523599
+
+[node name="Level2" type="Label" parent="Vinyl/2"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 270.0
+offset_top = -30.0
+offset_right = 472.0
+offset_bottom = 30.0
+grow_vertical = 2
+theme = ExtResource("3_ho80d")
+text = "Level 2"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="3" type="Node2D" parent="Vinyl"]
+rotation = 1.0472
+
+[node name="Level 3" type="Label" parent="Vinyl/3"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 270.0
+offset_top = -30.0
+offset_right = 472.0
+offset_bottom = 30.0
+grow_vertical = 2
+theme = ExtResource("3_ho80d")
+text = "Level 3"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Album" type="Sprite2D" parent="."]
+position = Vector2(525.5, 540)
+texture = ExtResource("3_aoh1x")
+
+[node name="Level1" type="Node2D" parent="Album"]
+
+[node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level1"]
+texture = ExtResource("6_lxl33")
+
+[node name="Label" type="Label" parent="Album/Level1"]
+offset_left = -475.0
+offset_top = -487.0
+offset_right = 476.0
+offset_bottom = -428.0
+theme = ExtResource("3_ho80d")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_8auxv")
+text = "Back to Basics
+Level 1"
+horizontal_alignment = 1
+
+[node name="Level2" type="Node2D" parent="Album"]
+visible = false
+
+[node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level2"]
+texture = ExtResource("8_vl4n3")
+
+[node name="RaccoonRunSpriteSheet2" type="Sprite2D" parent="Album/Level2"]
+position = Vector2(-21.5, 76)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("7_adm20")
+hframes = 3
+vframes = 3
+
+[node name="Label" type="Label" parent="Album/Level2"]
+offset_left = -475.0
+offset_top = -487.0
+offset_right = 476.0
+offset_bottom = -428.0
+theme = ExtResource("3_ho80d")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_8auxv")
+text = "Junkyard
+Level 2"
+horizontal_alignment = 1
+
+[node name="Level3" type="Node2D" parent="Album"]
+visible = false
+
+[node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level3"]
+texture = ExtResource("8_dxyid")
+
+[node name="RaccoonRunSpriteSheet" type="Sprite2D" parent="Album/Level3"]
+position = Vector2(-56.5, 100)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("7_adm20")
+hframes = 3
+vframes = 3
+
+[node name="Label" type="Label" parent="Album/Level3"]
+offset_left = -475.0
+offset_top = -487.0
+offset_right = 476.0
+offset_bottom = -428.0
+theme = ExtResource("3_ho80d")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_8auxv")
+text = "Abandoned City
+Level 3"
+horizontal_alignment = 1
+
+[node name="Advisory" parent="Album/Level3" instance=ExtResource("9_q2xdh")]
+
+[node name="Pointer2" type="Sprite2D" parent="." groups=["pulsingObjects"]]
+position = Vector2(1639.5, 540)
+texture = ExtResource("4_pejwk")
+script = ExtResource("5_36grs")
+increasedScale = Vector2(1.1, 1.1)

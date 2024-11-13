@@ -352,6 +352,7 @@ func _onLevelCompleted():
 
 func _process(delta):
 	updateTime(delta)
+	
 
 #TODO add this back in for controller at a later date
 #func _input(event: InputEvent) -> void:

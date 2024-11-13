@@ -1,40 +1,67 @@
 extends CanvasLayer
 
+enum MenuOptions {
+	START,
+	LEVELS,
+	EDITOR,
+	OPTIONS,
+	QUIT
+}
+
+var current_option: int = MenuOptions.START
 @onready var music = $music
-# Called when the node enters the scene tree for the first time.
+@onready var pointer = $Pointer
+
 func _ready():
 	Globals.relocateToCheckpoint = false
 	Globals.checkpoint = null
-	var audioPath = load("res://audioTracks/MainMenu_115bpm.mp3") as AudioStream
-	music.stream = audioPath
 	music.play()
 	music.stream.loop = true
-	$storyButton.grab_focus()
-	pass # Replace with function body.
+	await get_tree().create_timer(0.0).timeout
+	update_pointer_position()
 
+func _process(_delta):
+	if Input.is_action_just_pressed("jump"):
+		current_option = wrapi(current_option - 1, 0, MenuOptions.size())
+		update_pointer_position()
+	elif Input.is_action_just_pressed("slide"):
+		current_option = wrapi(current_option + 1, 0, MenuOptions.size())
+		update_pointer_position()
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		handle_selection()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func update_pointer_position():
+	match current_option:
+		MenuOptions.START:
+			pointer.position.y = $storyButton.position.y + ($storyButton.size.y / 2)
+			Input.warp_mouse($storyButton.global_position + Vector2($storyButton.size.x/2, $storyButton.size.y/2))
+		MenuOptions.LEVELS:
+			pointer.position.y = $levelSelect.position.y + ($levelSelect.size.y / 2)
+			Input.warp_mouse($levelSelect.global_position + Vector2($levelSelect.size.x/2, $levelSelect.size.y/2))
+		MenuOptions.EDITOR:
+			pointer.position.y = $editorButton.position.y + ($editorButton.size.y / 2)
+			Input.warp_mouse($editorButton.global_position + Vector2($editorButton.size.x/2, $editorButton.size.y/2))
+		MenuOptions.OPTIONS:
+			pointer.position.y = $optionsButton.position.y + ($optionsButton.size.y / 2)
+			Input.warp_mouse($optionsButton.global_position + Vector2($optionsButton.size.x/2, $optionsButton.size.y/2))
+		MenuOptions.QUIT:
+			pointer.position.y = $quitButton.position.y + ($quitButton.size.y / 2)
+			Input.warp_mouse($quitButton.global_position + Vector2($quitButton.size.x/2, $quitButton.size.y/2))
 
-#TODO add  this back in for controller at a lter date
-#func _unhandled_input(event):
-	#if event.is_action_pressed("ui_accept"):  # Typically mapped to the "A" button or "Enter"
-		#if Globals.usingController:
-			#$storyButton.emit_signal("pressed")
+func handle_selection():
+	match current_option:
+		MenuOptions.START:
+			_onStoryButtonPressed()
+		MenuOptions.LEVELS:
+			_onLevelSelectPressed()
+		MenuOptions.EDITOR:
+			_onEditorButtonPressed()
+		MenuOptions.OPTIONS:
+			_onOptionsButtonPressed()
+		MenuOptions.QUIT:
+			_onQuitButtonPressed()
 
-#func _input(event: InputEvent) -> void:
-	##check to see whether or not the user has switched to keyboard or controller
-	#print("event calss: ", event.get_class())
-	#
-	#if event.get_class() == "InputEventJoypadButton" or event.get_class() == "InputEventJoypadMotion":
-		##player is using controller
-		#print("making to controlle detction")
-		#Globals.usingController = true
-	#else:
-		##player is not using controller
-		#print("not making it to contolle dection, well not bad but liek its detcting akey idl")
-		#Globals.usingController = false
 func _onStoryButtonPressed():
 	Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 
@@ -46,7 +73,7 @@ func _onQuitButtonPressed():
 	get_tree().quit()
 	
 func _onLevelSelectPressed() -> void:
-	get_tree().change_scene_to_file("res://ui/levelSelect.tscn")
+	Globals.FadeTransition("res://ui/levelSelect.tscn")
 	
 
 

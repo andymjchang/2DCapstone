@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn1epcentmy3x"]
+[gd_scene load_steps=3 format=3 uid="uid://dn1epcentmy3x"]
 
 [ext_resource type="Script" path="res://ui/scripts/keybindings.gd" id="1_ohtkt"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="2_3i2g4"]
 
 [node name="Keybindings" type="Control"]
 layout_mode = 3
@@ -15,7 +16,6 @@ offset_right = 152.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_ohtkt")
@@ -25,96 +25,65 @@ anchors_preset = 0
 
 [node name="jumpKey" type="Button" parent="buttons"]
 layout_mode = 0
-offset_left = -247.0
-offset_top = -286.5
-offset_right = -22.0
-offset_bottom = -255.5
-theme_override_font_sizes/font_size = 0
+offset_left = -485.0
+offset_top = -336.5
+offset_right = -35.0
+offset_bottom = -269.5
+theme = ExtResource("2_3i2g4")
 text = "Jump"
 
 [node name="slideKey" type="Button" parent="buttons"]
 layout_mode = 0
-offset_left = -247.0
-offset_top = -109.0
-offset_right = -22.0
-offset_bottom = -77.0
+offset_left = -485.0
+offset_top = -134.0
+offset_right = -35.0
+offset_bottom = -67.0
+theme = ExtResource("2_3i2g4")
 text = "Slide"
 
 [node name="punchKey" type="Button" parent="buttons"]
 layout_mode = 0
 offset_left = -485.0
-offset_top = -285.0
-offset_right = -260.0
-offset_bottom = -254.0
+offset_top = -536.0
+offset_right = -35.0
+offset_bottom = -469.0
+theme = ExtResource("2_3i2g4")
 text = "Punch
 "
-
-[node name="activateKey" type="Button" parent="buttons"]
-layout_mode = 0
-offset_left = -485.0
-offset_top = -109.0
-offset_right = -260.0
-offset_bottom = -78.0
-text = "Powerup"
-
-[node name="pauseKey" type="Button" parent="buttons"]
-visible = false
-layout_mode = 0
-offset_left = 90.5
-offset_top = -285.5
-offset_right = 279.5
-offset_bottom = -254.5
-text = "Pause"
 
 [node name="currentKeys" type="Control" parent="."]
 anchors_preset = 0
 
 [node name="jumpCurrent" type="TextEdit" parent="currentKeys"]
 layout_mode = 0
-offset_left = -247.0
-offset_top = -233.0
-offset_right = -22.0
-offset_bottom = -135.0
+offset_left = -485.0
+offset_top = -258.0
+offset_right = -35.0
+offset_bottom = -160.0
 editable = false
 
 [node name="slideCurrent" type="TextEdit" parent="currentKeys"]
 layout_mode = 0
-offset_left = -247.0
+offset_left = -485.0
 offset_top = -59.0
-offset_right = -22.0
+offset_right = -35.0
 offset_bottom = 49.0
 editable = false
 
 [node name="punchCurrent" type="TextEdit" parent="currentKeys"]
 layout_mode = 0
 offset_left = -485.0
-offset_top = -236.0
-offset_right = -260.0
-offset_bottom = -137.0
+offset_top = -462.0
+offset_right = -35.0
+offset_bottom = -363.0
 editable = false
-
-[node name="activateCurrent" type="TextEdit" parent="currentKeys"]
-layout_mode = 0
-offset_left = -485.0
-offset_top = -59.0
-offset_right = -260.0
-offset_bottom = 49.0
-editable = false
-
-[node name="pauseCurrent" type="TextEdit" parent="currentKeys"]
-visible = false
-layout_mode = 0
-offset_left = 92.0
-offset_top = -233.5
-offset_right = 278.0
-offset_bottom = -136.5
 
 [node name="backButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = -297.0
-offset_top = 62.5
-offset_right = -208.0
-offset_bottom = 93.5
+offset_left = -359.0
+offset_top = 70.0
+offset_right = -159.0
+offset_bottom = 101.0
 text = "Save"
 
 [connection signal="button_up" from="buttons/jumpKey" to="." method="_onJumpKeyButtonUp"]

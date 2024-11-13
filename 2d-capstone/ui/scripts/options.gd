@@ -70,7 +70,7 @@ func select_current_option() -> void:
 		MenuOptions.KEY_BINDINGS:
 			$Keybindings.visible = true
 		MenuOptions.CALIBRATION:
-			get_tree().change_scene_to_file("res://worlds/calibration.tscn")
+			Globals.FadeTransition("res://worlds/calibration.tscn")
 		MenuOptions.VOLUME:
 			$VolumeScreen.visible = true
 		MenuOptions.BACK:
@@ -84,7 +84,7 @@ func _onKeyBindingsButtonUp() -> void:
 	#get_tree().change_scene_to_file("res://ui/keybindings.tscn")
 	var curScene = get_tree().current_scene
 	if curScene == self:
-		get_tree().change_scene_to_file("res://ui/keybindings.tscn")
+		Globals.FadeTransition("res://ui/keybindings.tscn")
 	else:
 		var kbScene = load("res://ui/keybindings.tscn")
 		var kbInstance = kbScene.instantiate()
@@ -95,7 +95,7 @@ func _onBackButtonUp() -> void:
 	#get_tree().change_scene_to_file("res://ui/pauseScreen.tscn")
 	var curScene = get_tree().current_scene
 	if curScene == self:
-		get_tree().change_scene_to_file("res://ui/landingPage.tscn")
+		Globals.FadeTransition("res://ui/landingPage.tscn")
 	else:
 		get_tree().current_scene.get_node("LevelUI/PauseScreen").visible = true
 		self.queue_free()
@@ -104,7 +104,7 @@ func _onVolumeButtonUp() -> void:
 	#get_tree().change_scene_to_file("res://ui/volumeScreen.tscn")
 	var curScene = get_tree().current_scene
 	if curScene == self:
-		get_tree().change_scene_to_file("res://ui/volumeScreen.tscn")
+		Globals.FadeTransition("res://ui/volumeScreen.tscn")
 	else:
 		var volumeScene = load("res://ui/volumeScreen.tscn")
 		var volumeInstance = volumeScene.instantiate()
