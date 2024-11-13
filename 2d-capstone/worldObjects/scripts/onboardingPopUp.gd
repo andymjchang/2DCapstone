@@ -21,4 +21,6 @@ func _onSpeedChange(newSpeed) -> void:
 
 
 func _onTutorialSlidesSnimationFinished() -> void:
-	animation.visible = false
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 1.0)
+	

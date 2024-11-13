@@ -176,6 +176,7 @@ killFloors
 5500, 625,
 6425, 625,
 goalBlocks
+21500, 0,
 breakableWalls
 ziplines
 placers
