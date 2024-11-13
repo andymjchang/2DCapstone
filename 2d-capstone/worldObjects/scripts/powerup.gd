@@ -11,16 +11,15 @@ func _ready() -> void:
 		powerType = rng.randi_range(2, 3)
 	else:
 		powerType = rng.randi_range(0, 1)
+
+	if Globals.curFile.begins_with("Tutorial"):
+		powerType = Globals.powerType.INVULN
 	$Display.play("display")
 	$Display.frame = powerType
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _onArea2dBodyEntered(body:Node2D) -> void:
 	if "players" in body.get_groups():
+
 		body.emit_signal("getPowerup", powerType)
 		$Display.play("poof")
 		pass
