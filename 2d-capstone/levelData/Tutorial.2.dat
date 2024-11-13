@@ -176,6 +176,7 @@ killFloors
 5500, 625,
 6425, 625,
 goalBlocks
+21500, 0,
 breakableWalls
 ziplines
 placers
@@ -193,6 +194,7 @@ coins
 12225, 450,
 12825, 450,
 13425, 450,
+1150, 525,
 keyBindings
 3025, 350, punch,
 3300, 350, punch,

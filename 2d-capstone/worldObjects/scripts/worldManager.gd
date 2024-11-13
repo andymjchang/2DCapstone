@@ -73,24 +73,20 @@ var skipCoords : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Globals.gameOver = false
-	Globals.inLevel = false
-	loadLevel()
-	Globals.time = 0.0
-	
+	if Globals.curFile:
+		levelFile = Globals.curFile
 	# Get nodes
 	camera = $Camera2D
 	music = camera.get_node("Music")
-	adaptiveMusic = camera.get_node("ExtraTrackMusic")
-	player1 = playersList.get_node("Player1")
 	timerText = $CanvasLayer/Timer
-	scoreText = $CanvasLayer/Score
-
+	scoreText = $CanvasLayer/Score		
+	adaptiveMusic = camera.get_node("ExtraTrackMusic")
+	
 	var backgroundName : String = "Lvl1"
 	if levelFile.begins_with("Tutorial"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Tutorial_New_155bpm.mp3"
-		backgroundName = "Lvl1"
+		backgroundName = "Lvl0"
 	if levelFile.begins_with("Level 1"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Level1_Main_155bpm.mp3"
@@ -100,7 +96,14 @@ func _ready():
 		Globals.currentSongFileName = "Level2_OGNoMelody_156bpm_1.mp3"
 		adaptiveMusic.active = true
 		backgroundName = "Lvl2"
-		
+
+	Globals.gameOver = false
+	Globals.inLevel = false
+	loadLevel()
+	Globals.time = 0.0
+
+	player1 = playersList.get_node("Player1")
+	
 	if levelFile.begins_with("Tutorial"):
 		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
 		var popUpInstance = popUpScene.instantiate()
@@ -190,9 +193,7 @@ func loadLevel():
 	# set file to load
 	#if Globals.currentSongFileName:
 		#levelFile = Globals.currentEditorFileName
-	if Globals.curFile:
-		levelFile = Globals.curFile
-
+	
 	print("level name ", levelFile)
 	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
@@ -264,7 +265,7 @@ func loadLevel():
 				instancedObj.setImage(posPoints)
 			if currentName == "enemies":
 				instancedObj.setEnemyType(posPoints)
-			if name == "mashes":
+			if currentName== "mashes":
 				instancedObj.setTime(posPoints)
 			
 		elif ".mp3" in line:
