@@ -4,6 +4,8 @@ extends Node2D
 
 @onready var delayLabel : Label = $Label
 @onready var averageDelayLabel : Label = $Label2
+@onready var progressLabel : Label = $Progress
+@onready var instructionsLabel : Label = $Instructions
 var bpm = 115.0
 var beat_interval : float
 var next_beat_time : float
@@ -74,7 +76,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		# Store timing difference and calculate average
 		timing_differences.append(timing_difference)
-		if timing_differences.size() > 10: 
+		if timing_differences.size() > 20: 
 			timing_differences.pop_front()
 		
 		# Calculate and display average delay
@@ -87,8 +89,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		# Add timing point to visualization
 		timing_points.append(current_time)
-		if timing_points.size() > 10:
+		if timing_points.size() > 20:
 			timing_points.pop_front()
+			
+		# Update progress label
+		progressLabel.text = "Calibration\nProgress\n%d/20" % timing_points.size()
+		
+		# Update instructions when calibration is complete
+		if timing_points.size() >= 20:
+			instructionsLabel.text = "Calibration Finished! Press Esc to exit."
+			$Button.visible = true
+		
+	# Add ESC key handling
+	if event.is_action_pressed("ui_cancel"):  # "ui_cancel" is the default action for ESC
+		_on_button_button_up()
 
 
 func _on_button_button_up() -> void:
