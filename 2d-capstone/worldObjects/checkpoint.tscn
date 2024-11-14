@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://di7r6ds1tcpfj"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="1_x3sh6"]
-[ext_resource type="Texture2D" uid="uid://dhj3fip0pevjr" path="res://worldObjects/assets/Checkpoint1.png" id="2_iwg2i"]
+[ext_resource type="Texture2D" uid="uid://dmnxu0l1iedti" path="res://worldObjects/assets/Checkpoint1C.png" id="2_juh4q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qpgxu"]
 size = Vector2(95, 88.5)
@@ -22,9 +22,9 @@ shape = SubResource("RectangleShape2D_qpgxu")
 shape = SubResource("RectangleShape2D_qpgxu")
 
 [node name="Checkpoint1" type="Sprite2D" parent="."]
-position = Vector2(24.5, -8.5)
-scale = Vector2(0.238, 0.238)
-texture = ExtResource("2_iwg2i")
+position = Vector2(24.5, -12.5)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_juh4q")
 
 [connection signal="area_entered" from="Point/Bounds" to="." method="_onBoundsAreaEntered"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
