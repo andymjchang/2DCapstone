@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=66 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -42,10 +42,10 @@
 [ext_resource type="Texture2D" uid="uid://l8vpo2u44l4p" path="res://levelEditor/programmerArtAssets/p1checkpoint.png" id="22_1mwd2"]
 [ext_resource type="PackedScene" uid="uid://dam4sj64yck3d" path="res://levelEditorObjects/skipScene.tscn" id="24_5ioff"]
 [ext_resource type="PackedScene" uid="uid://dj0b5a5yg6sr0" path="res://levelEditorObjects/keyPressScene.tscn" id="24_r48c0"]
-[ext_resource type="PackedScene" path="res://levelEditorObjects/mashEnemyScene.tscn" id="25_1gpd6"]
+[ext_resource type="PackedScene" uid="uid://luxlri5v0quk" path="res://levelEditorObjects/mashEnemyScene.tscn" id="25_1gpd6"]
 [ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
 [ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
-[ext_resource type="PackedScene" path="res://levelEditorObjects/holdScene.tscn" id="26_oo2r2"]
+[ext_resource type="PackedScene" uid="uid://b3r5orhxswfha" path="res://levelEditorObjects/holdScene.tscn" id="26_oo2r2"]
 [ext_resource type="PackedScene" uid="uid://drwoyrkcgtkqc" path="res://levelEditorObjects/massMoveScene.tscn" id="27_1iynm"]
 [ext_resource type="Texture2D" uid="uid://dd5m0kwji44w1" path="res://levelEditor/programmerArtAssets/zipline.png" id="30_pq2h6"]
 [ext_resource type="Texture2D" uid="uid://b1ymqen6srbge" path="res://levelEditor/programmerArtAssets/powerup.png" id="33_pappt"]
@@ -55,6 +55,7 @@
 [ext_resource type="Texture2D" uid="uid://1dfh5adfmstx" path="res://levelEditor/programmerArtAssets/play.png" id="37_5oir0"]
 [ext_resource type="Texture2D" uid="uid://cxpyh4hstkkni" path="res://ui/assets/fullHealth.png" id="42_k3b5l"]
 [ext_resource type="Texture2D" uid="uid://pbxrq067grxi" path="res://levelEditor/programmerArtAssets/breakableWall.jpg" id="45_iuf20"]
+[ext_resource type="Texture2D" uid="uid://b62deqkwqbndb" path="res://levelEditor/programmerArtAssets/file.png" id="46_nsemu"]
 [ext_resource type="Texture2D" uid="uid://dsavpthfoealy" path="res://ui/assets/slide.webp" id="46_ochwq"]
 [ext_resource type="Texture2D" uid="uid://bu2yib2n2hcyf" path="res://levelEditor/programmerArtAssets/jumpBoost.png" id="50_nrfgt"]
 [ext_resource type="Texture2D" uid="uid://5uf885vsslwn" path="res://levelEditor/programmerArtAssets/coin.png" id="52_ulykl"]
@@ -176,13 +177,6 @@ offset_right = 143.0
 offset_bottom = 156.0
 text = "Step size"
 
-[node name="bpmLabel3" type="RichTextLabel" parent="UI"]
-offset_left = 5.0
-offset_top = 159.0
-offset_right = 143.0
-offset_bottom = 207.0
-text = "File name"
-
 [node name="TextEdit0" type="TextEdit" parent="UI"]
 offset_left = 93.0
 offset_top = 3.0
@@ -205,14 +199,6 @@ offset_top = 107.0
 offset_right = 208.0
 offset_bottom = 157.0
 text = "1"
-placeholder_text = "Step Size:"
-
-[node name="TextEdit3" type="TextEdit" parent="UI"]
-offset_left = 93.0
-offset_top = 159.0
-offset_right = 208.0
-offset_bottom = 209.0
-text = "MyLevel"
 placeholder_text = "Step Size:"
 
 [node name="objectSelector" type="Control" parent="UI"]
@@ -308,6 +294,20 @@ offset_top = 919.0
 offset_right = 1256.0
 offset_bottom = 969.0
 texture_normal = ExtResource("26_m4kik")
+
+[node name="fileButton" type="TextureButton" parent="UI/objectSelector"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1459.0
+offset_top = 15.0
+offset_right = 1559.0
+offset_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("46_nsemu")
 
 [node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
 layout_mode = 0
@@ -422,8 +422,8 @@ texture_normal = ExtResource("52_ulykl")
 [node name="HBoxContainer3" type="HBoxContainer" parent="UI"]
 offset_left = 8.0
 offset_top = 890.0
-offset_right = 3172.0
-offset_bottom = 1481.0
+offset_right = 4280.0
+offset_bottom = 1790.0
 scale = Vector2(0.1, 0.1)
 size_flags_horizontal = 0
 
@@ -461,6 +461,77 @@ texture_normal = ExtResource("60_w7oji")
 [node name="massMoveButton" type="TextureButton" parent="UI/HBoxContainer3"]
 layout_mode = 2
 texture_normal = ExtResource("62_w2amb")
+
+[node name="FileLoadMode" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect2" type="ColorRect" parent="UI/FileLoadMode"]
+modulate = Color(1, 1, 1, 0.458824)
+offset_right = 1927.0
+offset_bottom = 1079.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/FileLoadMode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 432.0
+offset_top = 196.0
+offset_right = 1448.0
+offset_bottom = 844.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatusMessage" type="Label" parent="UI/FileLoadMode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 442.0
+offset_top = 243.0
+offset_right = 1439.0
+offset_bottom = 520.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Enter a file name."
+horizontal_alignment = 1
+clip_text = true
+
+[node name="Load" type="Button" parent="UI/FileLoadMode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 818.0
+offset_top = 624.5
+offset_right = 1062.0
+offset_bottom = 769.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Load"
+
+[node name="FileName" type="LineEdit" parent="UI/FileLoadMode"]
+top_level = true
+layout_mode = 0
+offset_left = 678.0
+offset_top = 408.0
+offset_right = 1243.0
+offset_bottom = 623.0
+theme_override_font_sizes/font_size = 50
+max_length = 20
 
 [node name="StatusWindow" type="CanvasLayer" parent="."]
 process_mode = 2
@@ -531,7 +602,6 @@ clip_text = true
 [connection signal="text_changed" from="UI/TextEdit0" to="." method="_on_text_edit_0_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
-[connection signal="text_changed" from="UI/TextEdit3" to="." method="_on_text_edit_3_text_changed"]
 [connection signal="button_down" from="UI/objectSelector/p2checkpointButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/p2checkpointButton" to="." method="_on_p2checkpoint_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/HBoxContainer/actionButton" to="." method="_on_test_placer_button_down"]
@@ -552,6 +622,7 @@ clip_text = true
 [connection signal="button_down" from="UI/objectSelector/blockButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/blockButton" to="." method="_on_block_button_button_up"]
 [connection signal="pressed" from="UI/objectSelector/playAudioButton" to="." method="_on_play_audio_button_pressed"]
+[connection signal="pressed" from="UI/objectSelector/fileButton" to="." method="_on_file_button_pressed"]
 [connection signal="button_down" from="UI/objectSelector/saveButton" to="." method="_on_save_button_down"]
 [connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]
@@ -570,5 +641,6 @@ clip_text = true
 [connection signal="button_up" from="UI/HBoxContainer3/skipButton" to="." method="_onSkipButtonUp"]
 [connection signal="button_up" from="UI/HBoxContainer3/holdButton" to="." method="_onHoldButtonUp"]
 [connection signal="button_up" from="UI/HBoxContainer3/massMoveButton" to="." method="_onMassMoveButtonUp"]
+[connection signal="pressed" from="UI/FileLoadMode/Load" to="." method="_on_load_file_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]
