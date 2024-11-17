@@ -1,0 +1,132 @@
+[gd_scene load_steps=19 format=3 uid="uid://c88x1wyuadwpo"]
+
+[ext_resource type="Script" path="res://worldObjects/enemy/mashEnemy.gd" id="1_768lh"]
+[ext_resource type="Texture2D" uid="uid://dhk8ib54ejgwa" path="res://worldObjects/assets/circle.png" id="2_dkl4b"]
+[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_lp128"]
+[ext_resource type="Texture2D" uid="uid://fkay4q6vfugt" path="res://worldObjects/enemy/single_enemy_Rusted_anim_1-sheet.png" id="4_ethhh"]
+[ext_resource type="Texture2D" uid="uid://dcwx1y37lvgxh" path="res://worldObjects/assets/slideEnemy.png" id="5_x3u4e"]
+[ext_resource type="Script" path="res://ui/scripts/pulseAnimatedSprite.gd" id="6_kygsw"]
+[ext_resource type="Texture2D" uid="uid://pj0qfwt8un1l" path="res://worldObjects/enemy/flying enemy 1-sheet.png" id="7_xqsbq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gswvj"]
+size = Vector2(50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gv8c"]
+atlas = ExtResource("4_ethhh")
+region = Rect2(0, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ly2ev"]
+atlas = ExtResource("4_ethhh")
+region = Rect2(800, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbi68"]
+atlas = ExtResource("4_ethhh")
+region = Rect2(1600, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3wfk"]
+atlas = ExtResource("4_ethhh")
+region = Rect2(2400, 0, 800, 800)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l3chy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gv8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ly2ev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbi68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3wfk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_x3u4e")
+}],
+"loop": true,
+"name": &"slideEnemy",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouin1"]
+atlas = ExtResource("7_xqsbq")
+region = Rect2(0, 0, 350, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5qqe"]
+atlas = ExtResource("7_xqsbq")
+region = Rect2(350, 0, 350, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyfgk"]
+atlas = ExtResource("7_xqsbq")
+region = Rect2(700, 0, 350, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8etd"]
+atlas = ExtResource("7_xqsbq")
+region = Rect2(1050, 0, 350, 250)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pk1od"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouin1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5qqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyfgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8etd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Enemy" type="Node2D" groups=["enemies"]]
+script = ExtResource("1_768lh")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_gswvj")
+
+[node name="innerCircle" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_dkl4b")
+
+[node name="ActionIndicator" parent="." instance=ExtResource("3_lp128")]
+position = Vector2(1.19209e-07, -9.53674e-07)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["pulsingObjects"]]
+visible = false
+modulate = Color(1, 0.3437, 0.561508, 1)
+position = Vector2(2, -15)
+scale = Vector2(0.12, 0.12)
+sprite_frames = SubResource("SpriteFrames_l3chy")
+autoplay = "default"
+script = ExtResource("6_kygsw")
+timingScale = 2
+increasedScale = Vector2(0.15, 0.15)
+
+[node name="FlyingAnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["pulsingObjects"]]
+modulate = Color(1, 0.44166, 0.624963, 1)
+position = Vector2(9, -2.38419e-07)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_pk1od")
+autoplay = "default"
+frame_progress = 0.752824
+script = ExtResource("6_kygsw")
+increasedScale = Vector2(0.48, 0.48)
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

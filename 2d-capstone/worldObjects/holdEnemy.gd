@@ -1,31 +1,45 @@
 extends Node2D
 
-@onready var headSprite: Sprite2D = $SlideEnemyHead
+@onready var headSprite = $SlideEnemyHead
 @onready var bodySprites = $Segments
-@onready var tailSprite: Sprite2D = $SlideEnemyEnd
+@onready var tailSprite = $SlideEnemyEnd
 
-var squash_speed: float = 2.0  # Adjust this value to control squashing speed
+var squash_speed: float = 20.0  # Adjust this value to control squashing speed
 var is_squashing: bool = false
 var original_width: float
-
+var original_distance: float
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	var tail_pos = tailSprite.position
+	var head_pos = headSprite.position
+	bodySprites.position.x = (head_pos.x + tail_pos.x) / 2.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept"):
 		start_squash()
 		print("squash")
 	if is_squashing:
-		var new_scale = bodySprites.scale.x - (delta * squash_speed)
-		if new_scale > 0:
-			bodySprites.scale.x = new_scale
-			# Move head closer to tail based on scale change
-			headSprite.position.x = original_width * new_scale
-		else:
+		# Move head towards tail
+		var tail_pos = tailSprite.position
+		var head_pos = headSprite.position
+		headSprite.position.x += squash_speed * delta
+		
+		# Calculate the distance between head and tail
+		var distance = abs(head_pos.x - tail_pos.x)
+		
+		# Stop squashing if head is very close to tail
+		if distance <= headSprite.get_node("Head").texture.get_width() / 4:  # You can adjust this minimum distance
 			is_squashing = false
+			return
+			
+		headSprite.position.x += squash_speed * delta
+		
+		# Update body segments scale and position
+		print(distance)
+		bodySprites.scale.x = distance / original_distance
+		bodySprites.position.x = (head_pos.x + tail_pos.x) / 2.0
 
 func start_squash():
 	is_squashing = true
-	original_width = bodySprites.scale.x
+	original_distance = abs(headSprite.position.x - tailSprite.position.x)
