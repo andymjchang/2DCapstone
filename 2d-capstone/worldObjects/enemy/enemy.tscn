@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://lc6sx7h55k1p"]
+[gd_scene load_steps=19 format=3 uid="uid://lc6sx7h55k1p"]
 
 [ext_resource type="Script" path="res://worldObjects/enemy/enemy.gd" id="1_fjqgg"]
 [ext_resource type="Texture2D" uid="uid://fkay4q6vfugt" path="res://worldObjects/enemy/single_enemy_Rusted_anim_1-sheet.png" id="3_6xp7w"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dcwx1y37lvgxh" path="res://worldObjects/assets/slideEnemy.png" id="5_3lur0"]
 [ext_resource type="Script" path="res://ui/scripts/pulseAnimatedSprite.gd" id="5_4of7g"]
 [ext_resource type="Texture2D" uid="uid://pj0qfwt8un1l" path="res://worldObjects/enemy/flying enemy 1-sheet.png" id="6_83knw"]
-[ext_resource type="PackedScene" uid="uid://b67hvy2k11iou" path="res://worldObjects/enemy/holdEnemy.tscn" id="8_dnsvb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gswvj"]
 size = Vector2(50, 50)
@@ -114,7 +113,6 @@ visible = false
 position = Vector2(2, -15)
 scale = Vector2(0.12, 0.12)
 sprite_frames = SubResource("SpriteFrames_l3chy")
-animation = &"slideEnemy"
 autoplay = "default"
 script = ExtResource("5_4of7g")
 timingScale = 2
@@ -128,8 +126,5 @@ autoplay = "default"
 frame_progress = 0.752824
 script = ExtResource("5_4of7g")
 increasedScale = Vector2(0.48, 0.48)
-
-[node name="SlideEnemy" parent="." instance=ExtResource("8_dnsvb")]
-position = Vector2(-169, -1)
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

@@ -47,6 +47,7 @@ playerSounds=""
 levelMusicSounds=""
 blocks=""
 skips=""
+enemies=""
 
 [input]
 

@@ -91,7 +91,8 @@ func DeathAnimation(delta: float) -> void:
 	else:  # Scale back to normal
 		current_scale = current_scale.move_toward(initial_scale, delta)
 	activeSprite.scale = current_scale
-
+	if death_timer > 2.0:
+		queue_free()
 func GotHit():
 	$ActionIndicator.active = true
 	$ActionIndicator.doNotFadeOut = true
