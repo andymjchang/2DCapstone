@@ -169,7 +169,6 @@ enemies
 18400, 0, enemy,
 18450, 0, enemy,
 18350, 0, enemy,
-150, 525, enemy,
 killFloors
 15600, 600,
 9300, 625,

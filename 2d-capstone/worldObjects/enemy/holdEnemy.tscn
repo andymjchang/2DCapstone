@@ -15,7 +15,7 @@ position = Vector2(300, 0)
 
 [node name="SlideEnemyMiddle" type="Sprite2D" parent="Segments"]
 visible = false
-position = Vector2(-281, 0)
+position = Vector2(-262.5, 0)
 scale = Vector2(0.125, 0.13)
 texture = ExtResource("2_gx76n")
 

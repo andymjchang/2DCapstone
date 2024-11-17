@@ -48,8 +48,10 @@ func _ready() -> void:
 		new_segment.position.x = (i * adjusted_segment_width) - (original_distance / 2) + (new_segment.scale.x * bodySprite.get_texture().get_width() / 2)
 		original_scale = new_segment.scale.x
 		new_segment.visible = true
+		new_segment.flip_h = (true if i % 2 == 0 else false)
 
 	bodySprites.position.x = (head_pos.x + tail_pos.x) / 2.0
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -67,13 +69,14 @@ func _process(delta: float) -> void:
 			
 			var distance = abs(head_pos.x - tail_pos.x)
 			
-			if !Input.is_action_pressed("punch") or distance <= headSprite.get_node("Head").texture.get_width() / 8:
+			if !Input.is_action_pressed("punch") or distance <= 10:
 				Die()
 				return
 			# Update body segments
 			var scale_factor = distance / original_distance
-			bodySprites.scale.x = scale_factor * original_scale
+			bodySprites.scale.x = scale_factor
 			bodySprites.position.x = (head_pos.x + tail_pos.x) / 2.0
+
 
 func start_squash():
 	is_squashing = true
