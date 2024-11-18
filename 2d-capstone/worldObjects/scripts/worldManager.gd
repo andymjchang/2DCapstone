@@ -58,7 +58,10 @@ var adaptiveMusic
 
 var score = 0
 var musicTime = 0.0
-
+var combo = 0
+var accuracy = 100.0
+var accuracyEnemiesHit = 0
+var numEnemiesHit = 0
 @onready var timerText
 @onready var player
 @onready var camera
@@ -453,11 +456,27 @@ func _onRunBoundsBodyExited(body: Node2D) -> void:
 
 func _onScored(id, p_score):
 	var scoreToAdd = 100 - p_score
+	numEnemiesHit += 1
+	UpdateCombo(1)
+	UpdateAccuracy(scoreToAdd)
 	score += scoreToAdd
 	scoreText.lerpText(int(score))
 	if id == "Player1":
 		textPopupScene1.initText(scoreToAdd, player1.position)
-		
+
+func UpdateCombo(num):
+	if num > 0:
+		combo += 1
+	else:
+		combo = 0
+	# Update combo UI
+	$CanvasLayer/ComboLetter/Combo.text = "x" + str(combo)
+	$CanvasLayer/ComboLetter/AnimatedSprite2D.frame = min(4, int(combo / 10))
+
+func UpdateAccuracy(scoreToAdd):
+	accuracyEnemiesHit += scoreToAdd
+	accuracy = accuracyEnemiesHit / numEnemiesHit
+	$CanvasLayer/ComboLetter/Accuracy.text = "%2.1f" % accuracy + "%"
 func _onChangeSpeed(speedType):
 	if speedType == 2:
 		music.pitch_scale = 2.5

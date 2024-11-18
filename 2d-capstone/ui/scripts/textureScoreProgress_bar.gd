@@ -14,17 +14,12 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	numEnemies = self.get_parent().get_parent().get_node("objectList/enemies").get_child_count()
 	if numEnemies > 0 and!enemiesLoaded:
 		enemiesLoaded = true
 		self.min_value = 0
 		self.max_value = numEnemies
-
-		
-
-	
-	
 
 func _scoreIncrease() -> void:
 	#enemy has died

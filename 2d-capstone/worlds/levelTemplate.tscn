@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=45 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -25,17 +25,46 @@
 [ext_resource type="PackedScene" uid="uid://c8pkmhakx7lqg" path="res://worldObjects/keyBinding.tscn" id="16_5ehlb"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
-[ext_resource type="PackedScene" uid="uid://t86xp6tpjvdg" path="res://worldObjects/skip.tscn" id="17_hifbs"]
+[ext_resource type="PackedScene" path="res://worldObjects/skip.tscn" id="17_hifbs"]
 [ext_resource type="Script" path="res://ui/scripts/visualizer.gd" id="18_0o0nt"]
 [ext_resource type="AudioStream" uid="uid://cwunsxkx78vcj" path="res://audioTracks/Tutorial_New_155bpm.mp3" id="18_44qgl"]
 [ext_resource type="PackedScene" path="res://worldObjects/enemy/mashEnemy.tscn" id="18_qn7u4"]
 [ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
+[ext_resource type="Texture2D" uid="uid://bewhewck8tgsu" path="res://ui/assets/comboLetters/Combo_Letter_A.png" id="22_tagkb"]
+[ext_resource type="Texture2D" uid="uid://cxy7dkhdn76kf" path="res://ui/assets/comboLetters/Combo_Letter_B.png" id="23_ge1t8"]
 [ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
+[ext_resource type="Texture2D" uid="uid://dlkwolfx2tjdy" path="res://ui/assets/comboLetters/Combo_Letter_C.png" id="24_5j0f5"]
 [ext_resource type="Script" path="res://worlds/adaptiveMusic.gd" id="25_1auu1"]
+[ext_resource type="Texture2D" uid="uid://bluxdfc4a3ipn" path="res://ui/assets/comboLetters/Combo_Letter_D.png" id="25_mmdtg"]
 [ext_resource type="AudioStream" uid="uid://c8m6611e1qqd3" path="res://audioTracks/Level2_MelodyOnly_156bpm.mp3" id="25_t4rxr"]
+[ext_resource type="Texture2D" uid="uid://c0gjg3ievh7ul" path="res://ui/assets/comboLetters/Combo_Letter_S.png" id="26_6jmkl"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="27_u4i2v"]
 [ext_resource type="PackedScene" uid="uid://g73wmn4soj7v" path="res://worldObjects/skipManager.tscn" id="28_caqgn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_du76p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_mmdtg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_5j0f5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_ge1t8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_tagkb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_6jmkl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rypfk"]
 size = Vector2(12, 1086)
@@ -88,6 +117,35 @@ increasedScale = Vector2(1, 1.5)
 [node name="Visualizer" type="Node2D" parent="CanvasLayer"]
 position = Vector2(780, 25)
 script = ExtResource("18_0o0nt")
+
+[node name="ComboLetter" type="Node2D" parent="CanvasLayer"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/ComboLetter"]
+position = Vector2(1784, 146)
+sprite_frames = SubResource("SpriteFrames_du76p")
+
+[node name="Accuracy" type="Label" parent="CanvasLayer/ComboLetter"]
+offset_left = 1437.0
+offset_top = 92.0
+offset_right = 1697.0
+offset_bottom = 158.0
+theme = ExtResource("27_u4i2v")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 36
+text = "100%"
+horizontal_alignment = 2
+
+[node name="Combo" type="Label" parent="CanvasLayer/ComboLetter"]
+offset_left = 1437.0
+offset_top = 132.0
+offset_right = 1697.0
+offset_bottom = 205.0
+theme = ExtResource("27_u4i2v")
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 60
+text = "x0"
+horizontal_alignment = 2
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2(250, 645)
