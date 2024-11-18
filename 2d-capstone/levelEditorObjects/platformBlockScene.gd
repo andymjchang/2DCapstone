@@ -2,7 +2,8 @@ extends Node2D
 class_name platformBlockScene
 #6 cols  default
 @onready var tileMap = self.get("Node2D/TileMapLayer")
-var numCols = 12
+#this is the default for now
+var numCols = 20
 var extents
 var newPos
 var fillerTiles = [Vector2(2,1),Vector2(2,2),Vector2(2,2), Vector2(2,4)]
@@ -17,6 +18,9 @@ func _ready() -> void:
 	# set the extents to the width of the tile x 12
 	tileMap =  self.get_node("Node2D/TileMapLayer")
 	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
+	setStartTiles()
+	setFillerTiles()
+	setEndTiles()
 	
 func initScene() -> void:
 	if !hasBeenSet:
@@ -42,10 +46,13 @@ func extendByOneTile() -> void :
 	var usedCells = tileMap.get_used_cells()
 	var minMax = getMaxMinCoord(usedCells)
 	#we want to start one col over, so start with max x and min y
-	var startX = minMax[1].x 
+	var startX = minMax[0].x 
 	var startY = minMax[0].y
+	
+	var endX = minMax[1].x
+	var endY = minMax[1].y
 	#we have to reset the end of the tile so that it doesnt look weird
-	for i in range (0,4):
+	for i in range (startY,endY):
 		tileMap.set_cell(Vector2i(startX, startY+i), 1, fillerTiles[i])
 		
 	startX = minMax[1].x + 1
@@ -66,18 +73,30 @@ func decreaseByOneTile() -> void:
 		var usedCells = tileMap.get_used_cells()
 		var minMax = getMaxMinCoord(usedCells)
 		#we want to delete one col
-		var startX = minMax[1].x
+		var startX = minMax[0].x
 		var startY = minMax[0].y
-		for i in range(0,4):
-			tileMap.erase_cell(Vector2i(startX, startY))
-			startY+=1
 		
-		startX-=1
+		var endX = minMax[1].x
+		var endY = minMax[1].y
+		
+		var moveY = startY
+		print("start coords ",startX," , ", startY)
+		print("end coords ",endX," , ", endY)
+		#deleting the end, might need to do this twice
+		for i in range(startY,endY+1):
+			print("deleting coords: ",endX," , ", moveY)
+			tileMap.erase_cell(Vector2i(endX, moveY))
+			moveY+=1
+		
+		#setting the X to the new end
+		endX-=1
 		startY = minMax[0].y
-		for i in range (0,4):
-			tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
-			startY+=1
 		
+		#add in end cap
+		#for i in range (0,endY):
+			#tileMap.set_cell(Vector2i(endX, startY), 1, endTiles[i])
+			#startY+=1
+		#
 		
 		self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x -= tileWidth/2.0
 		self.get_node("Node2D/EditorArea0").global_position.x -= tileWidth/2.0
@@ -99,7 +118,8 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 			maxCoords.y = cell.y
 		if cell.y < minCoords.y:
 			minCoords.y = cell.y
-						
+	
+	print("new min max, ", [minCoords, maxCoords])		
 	return [minCoords, maxCoords]
 	
 #TODO make this work for more than one tilemap
@@ -111,3 +131,59 @@ func setTileMaps(posPoints : Array) -> void:
 		elif posPoints[2] > numCols:
 			while numCols < posPoints[2]:
 				self.extendByOneTile()
+				
+				
+				
+func setStartTiles() -> void:
+	#the start blocks are only 1 tile wide, so we just need to 
+	#get how long it is
+	#TODO minmize doing this
+	var usedCells = tileMap.get_used_cells()
+	var maxMin = getMaxMinCoord(usedCells)
+	var maxY = maxMin[1].y
+	var startX = maxMin[0].x
+	
+	#reset the array
+	startTiles = []
+	for i in maxY:
+		#we need to grab the start tiles, which wi
+		startTiles.append(Vector2(startX,i))
+
+func setEndTiles() -> void:
+	var usedCells = tileMap.get_used_cells()
+	var maxMin = getMaxMinCoord(usedCells)
+	var maxY = maxMin[1].y
+	var startX = maxMin[1].x
+	
+	#reset the array
+	endTiles = []
+	for i in maxY:
+		#we need to grab the end tiles, and store them 
+		endTiles.append(Vector2(startX,i))
+		
+func setFillerTiles() -> void:
+	#we do everything in twos
+	var arrayOne : Array
+	var arrayTwo : Array
+	#we dont grab the start or end tiles
+	var usedCells = tileMap.get_used_cells()
+	var maxMin = getMaxMinCoord(usedCells)
+	var minX = maxMin[0].x
+	var maxX = maxMin[1].x
+	var maxY = maxMin[1].x
+	#start from minx +1 and go to maxx -1
+	fillerTiles = []
+	for currentX in range(minX + 1, maxX, 2):
+		var nextX = currentX + 1
+		var curCoords : Vector2
+		var curNextCoords : Vector2
+		var coordPair : Array
+		var oneLane = []
+		#TODO see if there is a better way to do this
+		for currentY in maxY:
+			curCoords = Vector2(currentX, currentY)
+			curNextCoords = Vector2(currentX + 1, currentY)
+			coordPair = [curCoords,curNextCoords]
+			oneLane.append(coordPair)
+		fillerTiles.append(oneLane)
+	
