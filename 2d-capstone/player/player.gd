@@ -429,8 +429,8 @@ func SlideTweenEnd():
 	tweenHit.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
 
 func PunchTween():
-	camera.zoom = camera.zoom + Vector2(0.04, 0.04)
-	if camera.zoom.x > 2.3 or camera.zoom.y > 2.3:
+	camera.zoom = camera.zoom + Vector2(0.025, 0.025)
+	if camera.zoom.x > 2.15 or camera.zoom.y > 2.15:
 		camera.zoom = Vector2(2.15, 2.15)
 	camera.rotation = max(camera.rotation - 0.01363323, -0.02831615)
 	if tweenHit != null:
