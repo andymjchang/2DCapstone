@@ -471,6 +471,7 @@ offset_bottom = 40.0
 
 [node name="ColorRect2" type="ColorRect" parent="UI/FileLoadMode"]
 modulate = Color(1, 1, 1, 0.458824)
+layout_mode = 0
 offset_right = 1927.0
 offset_bottom = 1079.0
 

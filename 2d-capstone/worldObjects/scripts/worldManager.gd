@@ -244,10 +244,13 @@ func loadLevel():
 				var endPos = Vector2(posPoints[2], posPoints[3])
 				instancedObj.get_node("ziplineStart").global_position = startPos
 				instancedObj.get_node("ziplineEnd").global_position = endPos
+				var playerPlacement = instancedObj.get_node("ziplineStart/PlayerMarker")
 				var vec1 = instancedObj.get_node("ziplineStart/Marker2D").global_position
 				var vec2 = instancedObj.get_node("ziplineEnd/Marker2D").global_position
 				var tgtPosX = (vec1.x + vec2.x)/2
 				var tgtPosY = (vec1.y + vec2.y)/2
+				print("Rotating: ", cos(vec1.angle_to_point(vec2)))
+				#playerPlacement.global_position.y += cos(vec1.angle_to_point(vec2)) * 10
 				var connectLine = ziplineMiddle.instantiate()
 				connectLine.position = Vector2(tgtPosX, tgtPosY)
 				connectLine.rotation = vec1.angle_to_point(vec2)

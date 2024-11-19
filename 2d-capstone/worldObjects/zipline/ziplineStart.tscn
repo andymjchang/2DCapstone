@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="3_vhpky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5w3a6"]
-size = Vector2(88, 227)
+size = Vector2(40, 227)
 
 [node name="ziplineStart" type="Node2D"]
 script = ExtResource("1_oaf1g")
@@ -13,7 +13,7 @@ script = ExtResource("1_oaf1g")
 [node name="ziplineArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ziplineArea"]
-position = Vector2(76, -39.5)
+position = Vector2(140, -39.5)
 shape = SubResource("RectangleShape2D_5w3a6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -24,7 +24,13 @@ texture = ExtResource("1_7lmlu")
 position = Vector2(120, -70)
 
 [node name="PlayerMarker" type="Marker2D" parent="."]
-position = Vector2(120, -22)
+position = Vector2(139, -27)
+
+[node name="ColorRect" type="ColorRect" parent="PlayerMarker"]
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 20.0
 
 [node name="Label" type="Label" parent="."]
 offset_left = -270.0
