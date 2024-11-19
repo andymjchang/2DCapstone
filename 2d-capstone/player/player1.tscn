@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://chjj58435tkhb" path="res://animations/raccoonAnims/raccoon_jump_sprite_sheet.png" id="2_hwmte"]
 [ext_resource type="Texture2D" uid="uid://dekngay2ghh64" path="res://animations/raccoonAnims/Raccoon_punch_sprite_sheet.png" id="3_kqmek"]
 [ext_resource type="Texture2D" uid="uid://coymment44w5p" path="res://animations/raccoonAnims/Raccoon_run_sprite_sheet.png" id="4_vkpc8"]
-[ext_resource type="Texture2D" uid="uid://dpptplv42kqxc" path="res://animations/raccoonAnims/Slide.png" id="5_tonbw"]
 [ext_resource type="Texture2D" uid="uid://b18hph1l64gp1" path="res://animations/raccoonAnims/Zipline_Tango_slide.png" id="6_cw6gs"]
+[ext_resource type="Texture2D" uid="uid://cur3nho7ppwwm" path="res://animations/raccoonAnims/FIXED Slide.png" id="6_oqmgn"]
 [ext_resource type="Texture2D" uid="uid://601aqkhuqjk5" path="res://animations/raccoonAnims/Zipline_Tango_punch.png" id="7_tegds"]
 [ext_resource type="Texture2D" uid="uid://bf5aif1oibn04" path="res://player/playerActionCircle2.png" id="7_tnfmg"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
@@ -157,7 +157,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_tonbw")
+"texture": ExtResource("6_oqmgn")
 }],
 "loop": true,
 "name": &"Slide",
@@ -260,7 +260,7 @@ material = SubResource("ShaderMaterial_3fn7t")
 position = Vector2(-13.75, -1.80001)
 scale = Vector2(0.133929, 0.133929)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Run"
+animation = &"Slide"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-8.4375, 2)
