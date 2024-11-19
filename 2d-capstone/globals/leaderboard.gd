@@ -24,7 +24,7 @@ func get_level_scores(level_index: int) -> Array:
 		leaderboard_data[level_key] = []
 	return leaderboard_data[level_key]
 
-# Adds a new score entry and maintains only top 5 scores
+# Adds a new score entry
 func add_score(level_index: int, score: int, accuracy: float, max_combo: int) -> void:
 	var level_key = "level_" + str(level_index)
 	if not leaderboard_data.has(level_key):
