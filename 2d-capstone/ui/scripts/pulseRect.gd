@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 		processBeat(delta)
 
 func processBeat(delta: float) -> void:
-	beatTimer += delta
+	beatTimer += delta * Globals.scrollSpeed
 	if beatTimer >= beatInterval:
 		beatTimer -= beatInterval
 		startPulse()
