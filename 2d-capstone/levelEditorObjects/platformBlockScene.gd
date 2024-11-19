@@ -88,6 +88,7 @@ func decreaseByOneTile() -> void:
 		#we want to delete two rows, but not starting at the end
 		for i in range (0,2):
 			var curX = endX - (i +3)
+			#var curX = endX - (i)
 			moveY = startY
 			for j in range(startY,endY+1):
 				print("deleting coords: ",curX," , ", moveY)
@@ -109,28 +110,19 @@ func decreaseByOneTile() -> void:
 		#  col 1 col 2 col 3
 		#   1     1     1
 		#
-		for i in range(0,3):
-			#starts at the furthest right box of the end tiles
-			var curX = endX - i
-			var curCol = endTiles[i]
-			var colIndex = 0
+		for i in range(2,-1,-1):
+			#starts at the furthest left box of the end tiles
+			var curX = minMax[1].x - i
 			for j in range(startY,endY+1):
 				var atlasCoords = tileMap.get_cell_atlas_coords(Vector2i(curX, j))
-				tileMap.set_cell(Vector2i(curX-2, j-1), 1, Vector2i(curX, j))
+				print("cur cords: ", curX, " , ", j)
+				print("cur atlas cords: ", atlasCoords)
+				print("setting these coords to top coords: ", curX-2, j-1)
+				tileMap.set_cell(Vector2i(curX-2, j), 1, atlasCoords)
 				tileMap.erase_cell(Vector2i(curX, j))
 				#tileMap.set_cell(Vector2i(curX, startY), 1, curCol[colIndex])
 				#colIndex+=1
-		#for i in 2:
-			#var curEndSet = endTiles[i]
-			#print("end tiles we are setting: ", endTiles[i])
-			#tileMap.set_cell(Vector2i(endX-1, moveY), 1, curEndSet[0])
-			#tileMap.set_cell(Vector2i(endX, moveY), 1, curEndSet[1])
-			#moveY+=1
-		#
-		#moveY = endEnd+2
-		#for i in range(endEnd+2, endY+1):
-			#tileMap.erase_cell(Vector2i(endX, moveY))
-			#moveY+=1
+
 			
 		
 		
