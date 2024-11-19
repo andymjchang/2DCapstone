@@ -53,14 +53,25 @@ func extendByOneTile() -> void :
 	var endX = minMax[1].x
 	var endY = minMax[1].y
 	#we have to reset the end of the tile so that it doesnt look weird
-	for i in range (startY,endY):
-		tileMap.set_cell(Vector2i(startX, startY+i), 1, fillerTiles[i])
-		
-	startX = minMax[1].x + 1
-	startY = minMax[0].y
-	for i in range(0,4):
-		tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
-		startY+=1
+	
+	#we want to move the end cap down by two for all of them 
+	for i in range(0,3):
+			#starts at the furthest left box of the end tiles
+			var curX = minMax[1].x - i
+			for j in range(startY,endY+1):
+				var atlasCoords = tileMap.get_cell_atlas_coords(Vector2i(curX, j))
+				tileMap.set_cell(Vector2i(curX+2, j), 1, atlasCoords)
+				tileMap.erase_cell(Vector2i(curX, j))
+				
+				
+	#for i in range (startY,endY):
+		#tileMap.set_cell(Vector2i(startX, startY+i), 1, fillerTiles[i])
+		#
+	#startX = minMax[1].x + 1
+	#startY = minMax[0].y
+	#for i in range(0,4):
+		#tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
+		#startY+=1
 		
 	#alter the area2d to represent the new size
 	self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x += tileWidth/2.0
@@ -70,7 +81,7 @@ func extendByOneTile() -> void :
 	numCols+=1
 	
 func decreaseByOneTile() -> void: 
-	if numCols > 1:
+	if numCols > 6:
 		var usedCells = tileMap.get_used_cells()
 		var minMax = getMaxMinCoord(usedCells)
 		#we want to delete one col
@@ -81,49 +92,30 @@ func decreaseByOneTile() -> void:
 		var endY = minMax[1].y
 		
 		var moveY = startY
-		print("start coords ",startX," , ", startY)
-		print("end coords ",endX," , ", endY)
-		#deleting the end, might need to do this twice
+
 		
 		#we want to delete two rows, but not starting at the end
 		for i in range (0,2):
-			var curX = endX - (i +3)
-			#var curX = endX - (i)
+			var curX = endX - (i + 3)
 			moveY = startY
 			for j in range(startY,endY+1):
 				print("deleting coords: ",curX," , ", moveY)
 				tileMap.erase_cell(Vector2i(curX, moveY))
 				moveY+=1
-		
-		
-		#now we need to shift the current end by 2 blocks
-		#setting the X to the new end
-		#endX-=1
+
 		startY = minMax[0].y
 		moveY = startY
 		#add in end cap
-		var endStart = endTiles[1][0].y
-		var endEnd = endTiles[1][endTiles[1].size()-1].y
 		
-		
-		#the way end tiles is set up
-		#  col 1 col 2 col 3
-		#   1     1     1
-		#
 		for i in range(2,-1,-1):
 			#starts at the furthest left box of the end tiles
 			var curX = minMax[1].x - i
 			for j in range(startY,endY+1):
 				var atlasCoords = tileMap.get_cell_atlas_coords(Vector2i(curX, j))
-				print("cur cords: ", curX, " , ", j)
-				print("cur atlas cords: ", atlasCoords)
-				print("setting these coords to top coords: ", curX-2, j-1)
 				tileMap.set_cell(Vector2i(curX-2, j), 1, atlasCoords)
 				tileMap.erase_cell(Vector2i(curX, j))
 
 			
-		
-		
 		self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x -= tileWidth
 		self.get_node("Node2D/EditorArea0").global_position.x -= tileWidth
 		newPos = self.get_node("Node2D/EditorArea0").global_position.x 
