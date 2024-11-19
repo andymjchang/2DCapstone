@@ -454,10 +454,9 @@ func _onRunBoundsBodyExited(body: Node2D) -> void:
 		#print("Leaving max run bounds")
 		body.hitBounds = false
 
-func _onScored(id, p_score):
-	var scoreToAdd = 100 - p_score
+func _onScored(id, scoreToAdd):
 	numEnemiesHit += 1
-	UpdateCombo(1)
+	UpdateCombo(scoreToAdd)
 	UpdateAccuracy(scoreToAdd)
 	score += scoreToAdd
 	scoreText.lerpText(int(score))

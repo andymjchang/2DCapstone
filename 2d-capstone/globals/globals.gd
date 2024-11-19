@@ -30,6 +30,7 @@ var coinsCollected = 0.0
 var numBarelys = 0.0
 var numPerfects = 0.0
 var numGoods = 0.0
+var numMisses = 0.0
 var percentageHit = 0.0
 var endScore = 0.0
 var gameOver = false 

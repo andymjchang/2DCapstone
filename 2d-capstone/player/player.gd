@@ -307,7 +307,7 @@ func MonitorAttackHitbox(area : Area2D):
 		punchConnected = true
 		Globals.screenFlashEffect()
 		other.FadeOut()
-		scored.emit(self.name, abs(other.global_position.x - global_position.x))
+		scored.emit(self.name, 100 - abs(other.global_position.x - global_position.x))
 		
 
 func ResetAttack():
@@ -373,6 +373,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 			hitEffect.frame = 0
 			hitEffect.play()
 	elif area.get_parent().ifDead == false :
+		scored.emit(self.name, -1)
 		_onTakeDamage(3)
 
 
