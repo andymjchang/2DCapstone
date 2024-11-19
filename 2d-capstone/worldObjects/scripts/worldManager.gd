@@ -88,7 +88,7 @@ func _ready():
 	var backgroundName : String = "Lvl1"
 	if levelFile.begins_with("Tutorial"):
 		Globals.setBPM(155)
-		Globals.currentSongFileName = "Tutorial_New_155bpm.mp3"
+		Globals.currentSongFileName = "Tutorial_Revamped_155bpm.mp3"
 		backgroundName = "Lvl0"
 	if levelFile.begins_with("Level 1"):
 		Globals.setBPM(155)
@@ -99,6 +99,10 @@ func _ready():
 		Globals.currentSongFileName = "Level2_OGNoMelody_156bpm_1.mp3"
 		adaptiveMusic.active = true
 		backgroundName = "Lvl2"
+	if levelFile.begins_with("CustomLevel"):
+		Globals.setBPM(160)
+		Globals.currentSongFileName = "CustomLevel_160bpm.wav"
+		backgroundName = "LvlCustom"
 
 	Globals.gameOver = false
 	Globals.inLevel = false
