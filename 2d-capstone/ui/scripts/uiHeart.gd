@@ -13,7 +13,7 @@ var increasedScale = Vector2(1.2, 1.2)
 var beatInterval = 0.0
 var beatTimer = 0.0
 var lerpFactor = 0.0
-
+var isPulseActive = false
 # Called when the node enters the scene tree for the first time.
 #TODO rework this for only one player
 func _ready() -> void:
@@ -27,9 +27,12 @@ func _ready() -> void:
 		
 func setBPM():
 	beatInterval = 60.0 / Globals.bpm
+	print("bpm", Globals.bpm)
+	startPulse()
+	isPulseActive = true
 
 func processBeat(delta: float) -> void:
-	beatTimer += delta
+	beatTimer += delta * Globals.scrollSpeed
 	
 	if beatTimer >= beatInterval:
 		beatTimer -= beatInterval
@@ -52,7 +55,8 @@ func _process(delta: float) -> void:
 		zeroHealth = $zeroP2Health
 		fullHealth = $fullP2Health
 	
-	processBeat(delta)
+	if isPulseActive:
+		processBeat(delta)
 		
 #is this redundant?	
 func takeDamage() -> void:

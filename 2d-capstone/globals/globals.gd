@@ -39,7 +39,7 @@ var gameOver = false
 var usingController = false
 
 #volume 
-var playerSoundsVolume =1.0
+var playerSoundsVolume = 1.0
 var musicSoundsVolume = 1.0
 var levelMusicSoundsVolume = 1.0
 

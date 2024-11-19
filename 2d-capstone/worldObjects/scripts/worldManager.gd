@@ -119,10 +119,7 @@ func _ready():
 		
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
-	# set bpm of all pulsing objects
-	for object in get_tree().get_nodes_in_group("pulsingObjects"):
-		object.setBPM()
-		
+
 	# Load background
 	var backgroundScene = load("res://backgrounds/" + backgroundName + "Background.tscn")
 	if backgroundScene:
@@ -180,6 +177,8 @@ func _ready():
 	#startGame()
 	
 func startGame():
+	for object in get_tree().get_nodes_in_group("pulsingObjects"):
+		object.setBPM()
 	music.play(musicTime + Globals.timeDelay)
 	adaptiveMusic.play(musicTime + Globals.timeDelay)
 	print("starting")
@@ -500,7 +499,6 @@ func _onChangeSpeed(speedType):
 		timeMultiplier = 0.8
 	else:						# Return to regular
 		music.pitch_scale = 1
-		#TODO ask andy why this does not work
 		adaptiveMusic.pitch_scale = 1
 		Globals.scrollSpeed = 1
 		timeMultiplier = 1.0
