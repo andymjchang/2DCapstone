@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 	elif isFirstHit:
 		# Count down timer and move
 		timeRemaining -= delta
-		position.x += Globals.pixelsPerFrame * delta
+		position.x += Globals.pixelsPerFrame * delta * Globals.scrollSpeed
 		
 		# Kill enemy when time runs out
 		if timeRemaining <= 0:
