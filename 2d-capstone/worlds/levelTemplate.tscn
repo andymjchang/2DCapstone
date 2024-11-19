@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=47 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -40,7 +40,9 @@
 [ext_resource type="Texture2D" uid="uid://bluxdfc4a3ipn" path="res://ui/assets/comboLetters/Combo_Letter_D.png" id="25_mmdtg"]
 [ext_resource type="AudioStream" uid="uid://c8m6611e1qqd3" path="res://audioTracks/Level2_MelodyOnly_156bpm.mp3" id="25_t4rxr"]
 [ext_resource type="Texture2D" uid="uid://c0gjg3ievh7ul" path="res://ui/assets/comboLetters/Combo_Letter_S.png" id="26_6jmkl"]
+[ext_resource type="Script" path="res://ui/scripts/pulseAnimatedSprite.gd" id="27_8vl6o"]
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="27_u4i2v"]
+[ext_resource type="Material" uid="uid://bprabndekf50s" path="res://shaders/playerGlitch.tres" id="28_62u6b"]
 [ext_resource type="PackedScene" uid="uid://g73wmn4soj7v" path="res://worldObjects/skipManager.tscn" id="28_caqgn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_du76p"]
@@ -120,32 +122,38 @@ script = ExtResource("18_0o0nt")
 
 [node name="ComboLetter" type="Node2D" parent="CanvasLayer"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/ComboLetter"]
-position = Vector2(1784, 146)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/ComboLetter" groups=["pulsingObjects"]]
+position = Vector2(112, 139)
 sprite_frames = SubResource("SpriteFrames_du76p")
+script = ExtResource("27_8vl6o")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ComboLetter"]
+material = ExtResource("28_62u6b")
+offset_left = 55.0
+offset_top = 69.0
+offset_right = 171.0
+offset_bottom = 205.0
 
 [node name="Accuracy" type="Label" parent="CanvasLayer/ComboLetter"]
-offset_left = 1437.0
-offset_top = 92.0
-offset_right = 1697.0
-offset_bottom = 158.0
+offset_left = 198.0
+offset_top = 83.0
+offset_right = 349.0
+offset_bottom = 149.0
 theme = ExtResource("27_u4i2v")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 36
-text = "100%"
-horizontal_alignment = 2
+text = "100.0%"
 
 [node name="Combo" type="Label" parent="CanvasLayer/ComboLetter"]
-offset_left = 1437.0
-offset_top = 132.0
-offset_right = 1697.0
-offset_bottom = 205.0
+offset_left = 201.0
+offset_top = 123.0
+offset_right = 370.0
+offset_bottom = 196.0
 theme = ExtResource("27_u4i2v")
 theme_override_constants/outline_size = 12
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 48
 text = "x0"
-horizontal_alignment = 2
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2(250, 645)
