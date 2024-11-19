@@ -462,7 +462,7 @@ func _onScored(id, scoreToAdd):
 	numEnemiesHit += 1
 	UpdateCombo(scoreToAdd)
 	UpdateAccuracy(scoreToAdd)
-	score += scoreToAdd
+	score += scoreToAdd * Globals.scrollSpeed * Globals.scrollSpeed
 	scoreText.lerpText(int(score))
 	if id == "Player1":
 		textPopupScene1.initText(scoreToAdd, player1.position)
