@@ -147,12 +147,12 @@ text = "100.0%"
 
 [node name="Combo" type="Label" parent="CanvasLayer/ComboLetter"]
 offset_left = 201.0
-offset_top = 123.0
+offset_top = 117.0
 offset_right = 370.0
-offset_bottom = 196.0
+offset_bottom = 204.0
 theme = ExtResource("27_u4i2v")
 theme_override_constants/outline_size = 12
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 72
 text = "x0"
 
 [node name="Background" type="Node2D" parent="."]
