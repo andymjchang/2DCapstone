@@ -1,9 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8v38gkay1bem"]
+[gd_scene load_steps=8 format=3 uid="uid://b8v38gkay1bem"]
 
-[ext_resource type="Texture2D" uid="uid://bu0atyvylqowb" path="res://worldObjects/assets/jumpBoost.png" id="1_1h47c"]
 [ext_resource type="Script" path="res://worldObjects/scripts/jumpBoost.gd" id="1_uu22h"]
+[ext_resource type="Texture2D" uid="uid://bp1td5vb7l334" path="res://worldObjects/assets/powerups/spring/Spring ver 2-2.png" id="2_karcw"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_3qlim"]
-[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="4_oprua"]
+[ext_resource type="Texture2D" uid="uid://d18pbjsfcjmwj" path="res://worldObjects/assets/powerups/spring/Spring ver 2-1.png" id="3_odpet"]
+[ext_resource type="Texture2D" uid="uid://bm817gyqoet5w" path="res://worldObjects/assets/powerups/spring/Spring ver 2-3.png" id="4_qinla"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jgvy8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_odpet")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_karcw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qinla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qinla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_karcw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_karcw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_odpet")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_djwvr"]
 size = Vector2(78, 74)
@@ -11,9 +41,11 @@ size = Vector2(78, 74)
 [node name="JumpBoost" type="Node2D"]
 script = ExtResource("1_uu22h")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.293, 0.293)
-texture = ExtResource("1_1h47c")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -33)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_jgvy8")
+autoplay = "default"
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -22,14 +54,6 @@ shape = SubResource("RectangleShape2D_djwvr")
 
 [node name="ActionIndicator" parent="." instance=ExtResource("3_3qlim")]
 position = Vector2(1.19209e-07, -9.53674e-07)
-
-[node name="Label" type="Label" parent="."]
-offset_left = -165.0
-offset_top = -59.0
-offset_right = 95.0
-theme = ExtResource("4_oprua")
-theme_override_font_sizes/font_size = 24
-text = "SCORE x2!"
 
 [connection signal="body_entered" from="Area2D" to="." method="_OnArea2dBodyEntered"]
 [connection signal="body_exited" from="Area2D" to="." method="_onArea2dBodyExited"]
