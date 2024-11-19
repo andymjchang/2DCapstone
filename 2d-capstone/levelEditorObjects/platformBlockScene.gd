@@ -64,6 +64,29 @@ func extendByOneTile() -> void :
 				tileMap.erase_cell(Vector2i(curX, j))
 				
 				
+	#now we need to add in the blank two spaces we have created
+	
+	#we want to get a random index into our filler array
+	var randIndex = int(randf_range(0,6))
+	var tiles = fillerTiles[randIndex]
+	
+	#now we want to loop through the tiles and set them 
+	
+	var curX = minMax[1].x -2.0
+	
+	#for i in range(0,2):
+		##we are setting 2 cols
+		#curX+=i
+		#var curCol = tiles[i]
+	var tileIndex = 0
+	for j in range(startY,endY+1):
+		#we set the start row
+		var curAtlasCoordPair = tiles[tileIndex]
+		tileMap.set_cell(Vector2i(curX, j), 1, curAtlasCoordPair[0])
+		tileMap.set_cell(Vector2i(curX+1, j), 1, curAtlasCoordPair[1])
+		tileIndex+=1
+			
+			#we want to index into our filler tiles
 	#for i in range (startY,endY):
 		#tileMap.set_cell(Vector2i(startX, startY+i), 1, fillerTiles[i])
 		#
@@ -74,11 +97,11 @@ func extendByOneTile() -> void :
 		#startY+=1
 		
 	#alter the area2d to represent the new size
-	self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x += tileWidth/2.0
-	self.get_node("Node2D/EditorArea0").global_position.x += tileWidth/2.0
+	self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x += tileWidth
+	self.get_node("Node2D/EditorArea0").global_position.x += tileWidth
 	newPos = self.get_node("Node2D/EditorArea0").global_position.x
 	extents = self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x
-	numCols+=1
+	numCols+=2
 	
 func decreaseByOneTile() -> void: 
 	if numCols > 6:
@@ -202,20 +225,25 @@ func setFillerTiles() -> void:
 	var maxMin = getMaxMinCoord(usedCells)
 	var minX = maxMin[0].x
 	var maxX = maxMin[1].x
-	var maxY = maxMin[1].x
+	var minY = maxMin[0].y
+	var maxY = maxMin[1].y
+	
 	#start from minx +1 and go to maxx -1
 	fillerTiles = []
-	for currentX in range(minX + 1, maxX, 2):
+	for currentX in range(minX + 3, maxX-2, 2):
 		var nextX = currentX + 1
 		var curCoords : Vector2
 		var curNextCoords : Vector2
 		var coordPair : Array
 		var oneLane = []
 		#TODO see if there is a better way to do this
-		for currentY in maxY:
-			curCoords = Vector2(currentX, currentY)
-			curNextCoords = Vector2(currentX + 1, currentY)
+		#we are gonna store there atlas coords
+		for j in range(minY,maxY+1):
+			#var atlasCoords = tileMap.get_cell_atlas_coords(Vector2i(curX, j))
+			curCoords = tileMap.get_cell_atlas_coords(Vector2i(currentX, j))
+			curNextCoords = tileMap.get_cell_atlas_coords(Vector2i(currentX + 1, j))
 			coordPair = [curCoords,curNextCoords]
 			oneLane.append(coordPair)
 		fillerTiles.append(oneLane)
+		print("added block")
 	
