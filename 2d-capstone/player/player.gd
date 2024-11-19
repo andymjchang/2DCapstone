@@ -373,7 +373,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 			hitEffect.frame = 0
 			hitEffect.play()
 	elif area.get_parent().ifDead == false :
-		scored.emit(self.name, -1)
+		scored.emit(self.name, -100)
 		_onTakeDamage(3)
 
 
