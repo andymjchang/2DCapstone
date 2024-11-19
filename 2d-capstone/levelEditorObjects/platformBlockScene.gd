@@ -120,17 +120,15 @@ func decreaseByOneTile() -> void:
 				print("setting these coords to top coords: ", curX-2, j-1)
 				tileMap.set_cell(Vector2i(curX-2, j), 1, atlasCoords)
 				tileMap.erase_cell(Vector2i(curX, j))
-				#tileMap.set_cell(Vector2i(curX, startY), 1, curCol[colIndex])
-				#colIndex+=1
 
 			
 		
 		
-		self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x -= tileWidth/2.0
-		self.get_node("Node2D/EditorArea0").global_position.x -= tileWidth/2.0
+		self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x -= tileWidth
+		self.get_node("Node2D/EditorArea0").global_position.x -= tileWidth
 		newPos = self.get_node("Node2D/EditorArea0").global_position.x 
 		extents = self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x
-		numCols-=1
+		numCols-=2
 	
 func getMaxMinCoord(usedCells : Array) -> Array:
 	#get the max/min of the tilemap 
