@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 		if is_squashing:
 			var tail_pos = tailSprite.position
 			var head_pos = headSprite.position
-			headSprite.position.x += Globals.pixelsPerFrame * delta
+			headSprite.position.x += Globals.pixelsPerFrame * delta * Globals.scrollSpeed
 			
 			var distance = abs(head_pos.x - tail_pos.x)
 			
