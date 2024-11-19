@@ -31,7 +31,6 @@ func _ready():
 	extents = extents
 	extents = newWidth/2.0
 	self.get_node("CollisionShape2D").shape.extents.x = extents
-	setFillerTiles()
 	if Globals.curFile.begins_with("Level 2"):
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = true
@@ -44,6 +43,7 @@ func _ready():
 		tileMap = $sprite2D/TileMapLayer
 		allTiles = [startTiles, fillerTiles, endTiles]
 		id = 1
+	setFillerTiles()
 		
 func extendByOneTile() -> void : 
 	#I need to get the max of the col and rows
@@ -63,7 +63,7 @@ func extendByOneTile() -> void :
 			var curX = minMax[1].x - i
 			for j in range(startY,endY+1):
 				var atlasCoords = tileMap.get_cell_atlas_coords(Vector2i(curX, j))
-				tileMap.set_cell(Vector2i(curX+2, j), 1, atlasCoords)
+				tileMap.set_cell(Vector2i(curX+2, j), id, atlasCoords)
 				tileMap.erase_cell(Vector2i(curX, j))
 				
 				
@@ -81,8 +81,8 @@ func extendByOneTile() -> void :
 	for j in range(startY,endY+1):
 		#we set the start row
 		var curAtlasCoordPair = tiles[tileIndex]
-		tileMap.set_cell(Vector2i(curX, j), 1, curAtlasCoordPair[0])
-		tileMap.set_cell(Vector2i(curX+1, j), 1, curAtlasCoordPair[1])
+		tileMap.set_cell(Vector2i(curX, j), id, curAtlasCoordPair[0])
+		tileMap.set_cell(Vector2i(curX+1, j), id, curAtlasCoordPair[1])
 		tileIndex+=1
 			
 	#alter the area2d to represent the new size
@@ -122,7 +122,7 @@ func decreaseByOneTile() -> void:
 			var curX = minMax[1].x - i
 			for j in range(startY,endY+1):
 				var atlasCoords = tileMap.get_cell_atlas_coords(Vector2i(curX, j))
-				tileMap.set_cell(Vector2i(curX-2, j), 1, atlasCoords)
+				tileMap.set_cell(Vector2i(curX-2, j), id, atlasCoords)
 				tileMap.erase_cell(Vector2i(curX, j))
 
 			
@@ -148,6 +148,8 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 	
 func setTileMaps(posPoints : Array):
 	if posPoints.size() >= 3:
+		if posPoints[2]==12:
+			posPoints[2]=20
 		if posPoints[2] < numCols:
 			while numCols > posPoints[2]:
 				self.decreaseByOneTile()
