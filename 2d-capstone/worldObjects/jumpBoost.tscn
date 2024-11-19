@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8v38gkay1bem"]
+[gd_scene load_steps=9 format=3 uid="uid://b8v38gkay1bem"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/jumpBoost.gd" id="1_uu22h"]
 [ext_resource type="Texture2D" uid="uid://bp1td5vb7l334" path="res://worldObjects/assets/powerups/spring/Spring ver 2-2.png" id="2_karcw"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_3qlim"]
 [ext_resource type="Texture2D" uid="uid://d18pbjsfcjmwj" path="res://worldObjects/assets/powerups/spring/Spring ver 2-1.png" id="3_odpet"]
 [ext_resource type="Texture2D" uid="uid://bm817gyqoet5w" path="res://worldObjects/assets/powerups/spring/Spring ver 2-3.png" id="4_qinla"]
+[ext_resource type="Script" path="res://ui/scripts/pulseAnimatedSprite.gd" id="5_0cb0m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jgvy8"]
 animations = [{
@@ -41,11 +42,13 @@ size = Vector2(78, 74)
 [node name="JumpBoost" type="Node2D"]
 script = ExtResource("1_uu22h")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." groups=["pulsingObjects"]]
 position = Vector2(0, -33)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_jgvy8")
 autoplay = "default"
+script = ExtResource("5_0cb0m")
+increasedScale = Vector2(0.22, 0.22)
 
 [node name="Area2D" type="Area2D" parent="."]
 

@@ -477,6 +477,8 @@ func UpdateCombo(num):
 	$CanvasLayer/ComboLetter/AnimatedSprite2D.frame = min(4, int(combo / 10))
 
 func UpdateAccuracy(scoreToAdd):
+	if scoreToAdd < 0:
+		scoreToAdd = 0
 	accuracyEnemiesHit += scoreToAdd
 	accuracy = accuracyEnemiesHit / numEnemiesHit
 	$CanvasLayer/ComboLetter/Accuracy.text = "%2.1f" % accuracy + "%"
