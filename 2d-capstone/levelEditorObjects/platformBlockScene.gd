@@ -27,7 +27,7 @@ func initScene() -> void:
 	if !hasBeenSet:
 		tileMap =  self.get_node("Node2D/TileMapLayer")
 		tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
-		var newWidth = tileWidth * 12.0
+		var newWidth = tileWidth * 20.0
 		extents = self.get_node("Node2D/Area2D/%CollisionShape2D").shape.extents
 		extents = extents
 		extents = newWidth/2.0
@@ -166,6 +166,8 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 #TODO make this work for more than one tilemap
 func setTileMaps(posPoints : Array) -> void:
 	if posPoints.size() > 2:
+		if posPoints[2] == 12:
+			posPoints[2] = 20
 		if posPoints[2] < numCols:
 			while numCols > posPoints[2]:
 				self.decreaseByOneTile()
