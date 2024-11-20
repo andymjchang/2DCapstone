@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgxpb34ug7slp"]
+
+[ext_resource type="Texture2D" uid="uid://cbg070xhmy7ry" path="res://backgrounds/level3_backgrounds/Level 3 BKG 1-Sky.png" id="1_2td3j"]
+[ext_resource type="Texture2D" uid="uid://b4sdcv6073n4c" path="res://backgrounds/level3_backgrounds/Level 3 BKG 2-Far Buildings.png" id="2_5ivia"]
+[ext_resource type="Texture2D" uid="uid://6566eo0me1t" path="res://backgrounds/level3_backgrounds/Level 3 BKG 3-Cars.png" id="3_mpatq"]
+[ext_resource type="Texture2D" uid="uid://8dmmnn3j4fhs" path="res://backgrounds/level3_backgrounds/Level 3 BKG 4-Front Buildings.png" id="4_qewlq"]
+[ext_resource type="Texture2D" uid="uid://dvefr17ln7k1l" path="res://backgrounds/level3_backgrounds/Level 3 BKG 5-Window Lights (Optional).png" id="5_d8674"]
+[ext_resource type="Texture2D" uid="uid://dx0rco1el7hs4" path="res://backgrounds/level3_backgrounds/Level 3 BKG 6-Front Sign.png" id="6_h1qgd"]
+
+[node name="Background" type="Node2D"]
+modulate = Color(0.886262, 0.886261, 0.886262, 1)
+position = Vector2(0, 45)
+
+[node name="Layer0" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.05, 0.05)
+repeat_size = Vector2(960, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Layer0"]
+scale = Vector2(1, 3)
+texture = ExtResource("1_2td3j")
+
+[node name="Layer1" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(960, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Layer1"]
+position = Vector2(0, 10)
+texture = ExtResource("2_5ivia")
+
+[node name="Layer2" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.25, 0.25)
+repeat_size = Vector2(960, 0)
+repeat_times = 3
+
+[node name="Sprite2D2" type="Sprite2D" parent="Layer2"]
+texture = ExtResource("4_qewlq")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Layer2"]
+texture = ExtResource("5_d8674")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Layer2"]
+texture = ExtResource("6_h1qgd")
+
+[node name="Layer3" type="Parallax2D" parent="."]
+scroll_scale = Vector2(1.5, 1.5)
+repeat_size = Vector2(1920, 0)
+repeat_times = 3
+
+[node name="Sprite2D2" type="Sprite2D" parent="Layer3"]
+position = Vector2(0, -224)
+texture = ExtResource("3_mpatq")

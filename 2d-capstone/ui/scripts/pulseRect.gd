@@ -16,7 +16,6 @@ func setBPM():
 	beatInterval = timingScale * 60.0 / Globals.bpm
 	isPulseActive = true
 	startPulse()
-	print("globals time", Globals.time)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if isPulseActive:
