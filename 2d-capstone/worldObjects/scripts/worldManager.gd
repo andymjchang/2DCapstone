@@ -95,7 +95,7 @@ func _ready():
 		backgroundName = "Lvl0"
 	if levelFile.begins_with("Level 1"):
 		Globals.setBPM(155)
-		Globals.currentSongFileName = "Level1_Main_155bpm.mp3"
+		Globals.currentSongFileName = "Level1_Shifted_155bpm.wav"
 		backgroundName = "Lvl1"
 	if levelFile.begins_with("Level 2"):
 		Globals.setBPM(156)
@@ -183,8 +183,8 @@ func _ready():
 func startGame():
 	for object in get_tree().get_nodes_in_group("pulsingObjects"):
 		object.setBPM()
-	music.play(musicTime + Globals.timeDelay)
-	adaptiveMusic.play(musicTime + Globals.timeDelay)
+	music.play(musicTime)
+	adaptiveMusic.play(musicTime)
 	print("starting")
 	Globals.inLevel = true
 	if !Globals.customStart and !Globals.relocateToCheckpoint:

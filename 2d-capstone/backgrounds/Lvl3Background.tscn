@@ -49,5 +49,5 @@ repeat_size = Vector2(1920, 0)
 repeat_times = 3
 
 [node name="Sprite2D2" type="Sprite2D" parent="Layer3"]
-position = Vector2(0, -224)
+position = Vector2(0, -368)
 texture = ExtResource("3_mpatq")
