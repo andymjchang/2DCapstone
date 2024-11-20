@@ -61,6 +61,7 @@ func select_current_option() -> void:
 func _onResumeButtonUp() -> void:
 	self.get_parent().get_parent().music.stream_paused = false
 	self.get_parent().get_parent().adaptiveMusic.stream_paused = false
+	self.visible = false
 
 func _onCheckpointButtonUp() -> void:
 	# Globals.relocateToCheckpoint = true
