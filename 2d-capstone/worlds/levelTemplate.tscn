@@ -73,6 +73,7 @@ animations = [{
 size = Vector2(12, 1086)
 
 [node name="level" type="Node2D" groups=["skips"]]
+position = Vector2(0, -1)
 script = ExtResource("1_fl71r")
 levelFile = "bossTest"
 platformBlockInstance = ExtResource("2_78xmt")

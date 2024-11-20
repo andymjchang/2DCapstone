@@ -30,9 +30,13 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("blocks"):
 		intersecting = false
 	elif body.is_in_group("players"):
-		body.emit_signal("takeDamage", 27)
-		body.position.x = get_tree().root.get_node("level/Camera2D/ActionLine").global_position.x
-		body.position.y = get_tree().root.get_node("level/Camera2D/glitchLines").global_position.y
+		#body.emit_signal("takeDamage", 27)
+		print("Did i exit: ", body.exitedZip)
+		if body.exitedZip:
+			get_tree().root.get_node("level").emit_signal("movePlayer", body.zipDest)
+		else:
+			body.position.x = get_tree().root.get_node("level/Camera2D/ActionLine").global_position.x
+			body.position.y = get_tree().root.get_node("level/Camera2D/glitchLines").global_position.y
 	pass # Replace with function body.
 	
 #func temp () -> void:

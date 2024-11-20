@@ -120,7 +120,6 @@ var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsLis
 
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
-@onready var fileLabel = $UI/TextEdit3
 @onready var measureLines = $measureLines
 @onready var camera = $Camera2D
 @onready var status = $StatusWindow
@@ -144,17 +143,12 @@ func _ready():
 	if Globals.curFile == "":
 		# saveFileName = fileLabel.text
 		Globals.curFile = saveFileName
-	else:
-		fileLabel.text = Globals.curFile
-		saveFileName = fileLabel.text
-	
+
 	if beatsMinLabel.text.is_valid_int():
 		beatsMin = int(beatsMinLabel.text)
 		Globals.setBPM(beatsMin)
 	
 	Globals.stepSize = stepSize
-	if FileAccess.file_exists(levelDataPath + saveFileName + ".dat"):
-		displayStatus(FILE_EXISTS_PATH, true)
 	
 func _process(delta: float) -> void:
 	#if (trackingPosition):
@@ -224,6 +218,10 @@ func updateTime(delta: float):
 	
 func loadLevel():
 	print("save file name, ", saveFileName)
+	for objList in $objectList.get_children():
+		for child in objList.get_children():
+			child.queue_free()
+
 	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlock, platformBlocksList, blockTypes[2]], 
 		"goalBlocks": [goalBlock, goalBlocksList, blockTypes[4]],
@@ -277,9 +275,9 @@ func loadLevel():
 func _on_save_button_down() -> void:
 	save_scene_to_file()
 	
-func _on_text_edit_3_text_changed() -> void:
-	saveFileName = fileLabel.text
-	Globals.curFile = saveFileName
+func _on_file_button_pressed() -> void:
+	setFileLoad()
+	pass # Replace with function body.
 	
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
@@ -585,7 +583,7 @@ func place_block(instance, parent, placePos, initial):
 	else:
 		instance.position = placePos
 		turnOffSnap = false
-	print("list: ", parent, "instance:", instance.get_child(0))
+	#print("list: ", parent, "instance:", instance.get_child(0))
 	parent.add_child(instance)	
 	
 	instance.setArea2D()
@@ -674,14 +672,10 @@ func _on_audio_progress_gui_input(event: InputEvent) -> void:
 
 func _on_yes_pressed() -> void:
 	get_tree().paused = false
-	if isLoad:
-		# load level message
-		loadLevel()
-		isLoad = false
-	else:
-		# overwrite message
-		overwrite = true
-		save_scene_to_file()
+	# overwrite message
+	print("Setting overwrite")
+	overwrite = true
+	save_scene_to_file()
 	status.hide()
 
 
@@ -694,6 +688,7 @@ func displayStatus(message, display):
 	get_tree().paused = true
 	status.show()
 	status.get_node("StatusMessage").text = message
+	status.get_node("Buttons").show()
 	if display:
 		# regular confirmation
 		status.get_node("Buttons/No").text = "No"
@@ -704,8 +699,27 @@ func displayStatus(message, display):
 		status.get_node("Buttons/Yes").hide()
 		status.get_node("Buttons/No").text = "Close"
 
+func setFileLoad():
+	$UI/FileLoadMode.show()
+
+
+func _on_load_file_pressed() -> void:
+	$UI/FileLoadMode/StatusMessage.text = "Enter a file name."
+	var tgtFile = $UI/FileLoadMode/FileName.text
+	print("Tgt:" , tgtFile)
+	if "tutorial" in tgtFile.to_lower() or "level 1" in tgtFile.to_lower() or "level 2" in tgtFile.to_lower() or "level 3" in tgtFile.to_lower():
+		$UI/FileLoadMode/StatusMessage.text = "Cannot open file."
+	elif FileAccess.file_exists(levelDataPath + tgtFile + ".dat"):
+		saveFileName = tgtFile
+		loadLevel()
+		$UI/FileLoadMode.hide()
+	else:
+		saveFileName = tgtFile
+		$UI/FileLoadMode.hide()
+
 func _on_play_level_button_button_down() -> void:
-	# save_scene_to_file()
+	overwrite = true
+	save_scene_to_file()
 	# var scene_instance = levelTemplatePacked.instantiate()
 	
 	get_tree().paused = false
@@ -713,10 +727,11 @@ func _on_play_level_button_button_down() -> void:
 	# Access the current scene and remove it from the scene tree
 	#var current_scene = get_tree().current_scene
 	#Globals.editorNode = current_scene
-	# Globals.enablePreviewUI()
+	Globals.enablePreviewUI()
 	Globals.currentEditorFileName = saveFileName
-	# get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
-	Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+	Globals.curFile = saveFileName
+	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+	#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 	#current_scene.visible = false
 
 	# Add the new scene to the scene tree and set it as the current scene
@@ -792,4 +807,3 @@ func getAreaChildren(coords, coordType) -> Array:
 		returnArray.append(currentBlock)
 	return returnArray
 		
-	

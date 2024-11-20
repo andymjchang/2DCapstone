@@ -21,10 +21,12 @@ func _onBodyEntered(body):
 			var start = get_parent().get_child(START).get_node("Marker2D")
 			var direction = (destination.global_position - start.global_position).normalized()
 			body.position.y = start.get_parent().get_node("PlayerMarker").global_position.y
+			body.get_node("AttackHitbox/CollisionShape2D").scale = Vector2(1, 3)
 			#body.position.y = start.get_parent().get_node("playerMarker").global_position.y
 			print("Destination: ", destination.global_position)
 			print("Velocity: ", direction)
 			#body.position -= direction * Globals.pixelsPerFrame * Globals.scrollSpeed
+			body.zipDest = get_parent().get_child(END).global_position
 			body.velocity = direction * Globals.pixelsPerFrame * Globals.scrollSpeed
 			#body.velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 			#body.velocity.y =
@@ -32,6 +34,9 @@ func _onBodyEntered(body):
 				body.inZipline = true
 				body.relocating = true
 				Globals.vertical = true
+			else:
+				print("Switching to exited")
+				body.exitedZip = true
 
 		elif self.name == "ziplineEnd" and body.inZipline:
 			print("at end")
@@ -39,6 +44,7 @@ func _onBodyEntered(body):
 			body.relocating = false
 			body.get_node("Animation").play("Run")
 			body.position.y -= 100
+			body.get_node("AttackHitbox/CollisionShape2D").scale = Vector2(1, 1)	
 			body.velocity = Vector2(0, 0)
 			Globals.vertical = false
 			Globals.resetCamera = true
