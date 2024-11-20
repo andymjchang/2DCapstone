@@ -6,7 +6,7 @@ extends Node2D
 @onready var averageDelayLabel : Label = $Label2
 @onready var progressLabel : Label = $Progress
 @onready var instructionsLabel : Label = $Instructions
-var bpm = 160.0
+var bpm = 115.0
 var beat_interval : float
 var next_beat_time : float
 var audio_player : AudioStreamPlayer2D
