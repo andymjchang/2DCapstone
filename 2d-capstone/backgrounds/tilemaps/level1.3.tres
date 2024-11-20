@@ -1,9 +1,6 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bu244vrriacce"]
-
-[ext_resource type="Texture2D" uid="uid://cysnbee2j7ptn" path="res://backgrounds/tilemaps/Level_1_tilemap_revised.png" id="1_dxflu"]
+[gd_resource type="TileSet" load_steps=2 format=3 uid="uid://bu244vrriacce"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ka823"]
-texture = ExtResource("1_dxflu")
 texture_region_size = Vector2i(150, 150)
 0:0/0 = 0
 1:0/0 = 0

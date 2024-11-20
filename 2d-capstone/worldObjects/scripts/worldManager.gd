@@ -390,6 +390,7 @@ func _physics_process(_delta):
 		adaptiveMusic.stream_paused = true
 		Globals.paused = true
 		$LevelUI/PauseScreen.visible = true
+		$LevelUI/PauseScreen.slide_in()
 		# Engine.time_scale = 0.0
 		get_tree().paused = true
 	if Globals.vertical:
