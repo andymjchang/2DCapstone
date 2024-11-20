@@ -14,7 +14,7 @@ var checkpoint = null
 var relocateToCheckpoint = false
 var pixelsPerFrame = 300
 var scrollSpeed = 1
-var curFile = "CustomLevel"
+var curFile = "Level 1"
 var bpm : float = 115
 var timeDelay = 0.0
 var screenFlash : bool = true
@@ -67,6 +67,15 @@ var previewNode
 @onready var vignette = $Vignette/ColorRect
 @onready var glitch = $Glitch/TransitionRect
 @onready var screenFlashTimer = $ScreenFlashTimer
+
+# Level sequence definition
+var levelSequence = [
+	"Level 1",
+	"Tutorial_Level2",
+	"Level 2",
+	"Tutorial_Level3",
+	"Level 3"
+]
 
 func _ready():
 	randomize()
@@ -126,6 +135,11 @@ func restartLevelData() -> void:
 	coinsCollected = 0.0
 	percentageHit = 0.0
 
+func getNextLevel(currentLevel: String) -> String:
+	var currentIndex = levelSequence.find(currentLevel)
+	if currentIndex == -1 or currentIndex == levelSequence.size() - 1:
+		return "" # Return empty string if level not found or at end of sequence
+	return levelSequence[currentIndex + 1]
 
 func _on_screen_flash_timer_timeout() -> void:
 	screenFlash = true

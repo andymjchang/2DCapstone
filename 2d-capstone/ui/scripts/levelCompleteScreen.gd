@@ -50,7 +50,12 @@ func select_current_option() -> void:
 	Globals.gameOver = false
 	match current_option:
 		MenuOptions.NEXT_LEVEL:
-			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+			var nextLevel = Globals.getNextLevel(Globals.curFile)
+			if nextLevel != "":
+				Globals.curFile = nextLevel
+				Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+			else:
+				Globals.FadeTransition("res://ui/levelSelect.tscn")
 		MenuOptions.LEVEL_SELECT:
 			Globals.FadeTransition("res://ui/levelSelect.tscn")
 		MenuOptions.RESTART:
