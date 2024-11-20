@@ -220,7 +220,7 @@ func placeWindows() -> void:
 	
 	var curX = 0
 	#place windows
-	for i in range(minX, minX+1):
+	for i in range(minX, maxX+1, length+2):
 		
 		#account for padding
 		print("maxy ", maxY, "window height: ", windowHeight )
