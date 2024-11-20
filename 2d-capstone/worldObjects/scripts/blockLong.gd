@@ -207,8 +207,6 @@ func placeWindows() -> void:
 	#add the buffer
 	var curLength = windowLength[randIndex]  + 1
 	
-	
-	
 	#we need to get the maxMin of our current block after all the de/increases
 	var usedCells = tileMap.get_used_cells()
 	var minMax = getMaxMinCoord(usedCells)
