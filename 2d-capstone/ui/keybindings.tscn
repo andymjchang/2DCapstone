@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dn1epcentmy3x"]
 
 [ext_resource type="Script" path="res://ui/scripts/keybindings.gd" id="1_ohtkt"]
-[ext_resource type="Theme" path="res://ui/MonospaceTheme.tres" id="2_3i2g4"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="2_3i2g4"]
 
 [node name="Keybindings" type="Control"]
 layout_mode = 3
