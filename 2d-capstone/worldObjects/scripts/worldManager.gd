@@ -6,6 +6,7 @@ signal checkGameOver()
 signal levelCompleted()
 signal checkLevelCompleted()
 signal changeSpeed(speedType)
+signal resetLoop(destination)
 signal movePlayer(location)
 
 @export var levelFile : String
@@ -26,6 +27,7 @@ signal movePlayer(location)
 @export var keyBindingInstance : PackedScene
 @export var skipInstance : PackedScene
 @export var mashInstance : PackedScene
+@export var loopInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -44,6 +46,7 @@ signal movePlayer(location)
 @onready var keyBindingList = $objectList/keyBindings
 @onready var skipList = $objectList/skips
 @onready var mashList = $objectList/mashes
+@onready var loopList = $objectList/loops
 
 @onready var onboardingSlides
 
@@ -58,7 +61,10 @@ var adaptiveMusic
 
 var score = 0
 var musicTime = 0.0
-
+var combo = 0
+var accuracy = 100.0
+var accuracyEnemiesHit = 0
+var numEnemiesHit = 0
 @onready var timerText
 @onready var player
 @onready var camera
@@ -85,17 +91,21 @@ func _ready():
 	var backgroundName : String = "Lvl1"
 	if levelFile.begins_with("Tutorial"):
 		Globals.setBPM(155)
-		Globals.currentSongFileName = "Tutorial_New_155bpm.mp3"
+		Globals.currentSongFileName = "Tutorial_Revamped_155bpm.mp3"
 		backgroundName = "Lvl0"
 	if levelFile.begins_with("Level 1"):
 		Globals.setBPM(155)
-		Globals.currentSongFileName = "Level1_Main_155bpm.mp3"
+		Globals.currentSongFileName = "Level1_Shifted_155bpm.wav"
 		backgroundName = "Lvl1"
 	if levelFile.begins_with("Level 2"):
 		Globals.setBPM(156)
 		Globals.currentSongFileName = "Level2_OGNoMelody_156bpm_1.mp3"
 		adaptiveMusic.active = true
 		backgroundName = "Lvl2"
+	if levelFile.begins_with("CustomLevel"):
+		Globals.setBPM(160)
+		Globals.currentSongFileName = "CustomLevel_Shifted_160bpm.wav"
+		backgroundName = "Lvl3"
 
 	Globals.gameOver = false
 	Globals.inLevel = false
@@ -112,10 +122,7 @@ func _ready():
 		
 	# load the actionArrays (This must happen after bpm is set)
 	$objectList/actionIndicators.load_array()
-	# set bpm of all pulsing objects
-	for object in get_tree().get_nodes_in_group("pulsingObjects"):
-		object.setBPM()
-		
+
 	# Load background
 	var backgroundScene = load("res://backgrounds/" + backgroundName + "Background.tscn")
 	if backgroundScene:
@@ -140,6 +147,7 @@ func _ready():
 	self.checkLevelCompleted.connect(_onCheckLevelCompleted)
 	self.levelCompleted.connect(_onLevelCompleted)
 	self.changeSpeed.connect(_onChangeSpeed)
+	self.resetLoop.connect(_onResetLoop)
 	self.movePlayer.connect(_onMovePlayer)
 
 	# Prep players
@@ -173,8 +181,10 @@ func _ready():
 	#startGame()
 	
 func startGame():
-	music.play(musicTime + Globals.timeDelay)
-	adaptiveMusic.play(musicTime + Globals.timeDelay)
+	for object in get_tree().get_nodes_in_group("pulsingObjects"):
+		object.setBPM()
+	music.play(musicTime)
+	adaptiveMusic.play(musicTime)
 	print("starting")
 	Globals.inLevel = true
 	if !Globals.customStart and !Globals.relocateToCheckpoint:
@@ -211,7 +221,9 @@ func loadLevel():
 		"coins": [coinInstance, coinList],
 		"keyBindings":[keyBindingInstance, keyBindingList],
 		"skips":[skipInstance, skipList], 
-		"mashes": [mashInstance, mashList]}
+		"mashes": [mashInstance, mashList],
+		"loops": [loopInstance, loopList]
+		}
 	var instance
 	var instanceParent
 	var currentName = ""
@@ -259,7 +271,13 @@ func loadLevel():
 				connectLine.scale.x = tgtLen / defaultLen
 				objectList.add_child(connectLine)
 				
-			if currentName =="platformBlocks":
+			if name == "loops":
+				var startPos = Vector2(posPoints[0], posPoints[1])
+				var endPos = Vector2(posPoints[2], posPoints[3])
+				instancedObj.get_node("LoopMarkerStart").global_position = startPos
+				instancedObj.get_node("LoopMarkerEnd").global_position = endPos
+				
+			if name =="platformBlocks":
 				instancedObj.setTileMaps(posPoints.duplicate()) 
 				instancedObj.add_to_group("platforms")
 				
@@ -454,13 +472,30 @@ func _onRunBoundsBodyExited(body: Node2D) -> void:
 		#print("Leaving max run bounds")
 		body.hitBounds = false
 
-func _onScored(id, p_score):
-	var scoreToAdd = 100 - p_score
-	score += scoreToAdd
+func _onScored(id, scoreToAdd):
+	numEnemiesHit += 1
+	UpdateCombo(scoreToAdd)
+	UpdateAccuracy(scoreToAdd)
+	score += scoreToAdd * Globals.scrollSpeed * Globals.scrollSpeed
 	scoreText.lerpText(int(score))
 	if id == "Player1":
 		textPopupScene1.initText(scoreToAdd, player1.position)
-		
+
+func UpdateCombo(num):
+	if num > 0:
+		combo += 1
+	else:
+		combo = 0
+	# Update combo UI
+	$CanvasLayer/ComboLetter/Combo.text = "x" + str(combo)
+	$CanvasLayer/ComboLetter/AnimatedSprite2D.frame = min(4, int(combo / 10))
+
+func UpdateAccuracy(scoreToAdd):
+	if scoreToAdd < 0:
+		scoreToAdd = 0
+	accuracyEnemiesHit += scoreToAdd
+	accuracy = accuracyEnemiesHit / numEnemiesHit
+	$CanvasLayer/ComboLetter/Accuracy.text = "%2.1f" % accuracy + "%"
 func _onChangeSpeed(speedType):
 	if speedType == 2:
 		music.pitch_scale = 2.5
@@ -479,7 +514,6 @@ func _onChangeSpeed(speedType):
 		timeMultiplier = 0.8
 	else:						# Return to regular
 		music.pitch_scale = 1
-		#TODO ask andy why this does not work
 		adaptiveMusic.pitch_scale = 1
 		Globals.scrollSpeed = 1
 		timeMultiplier = 1.0
@@ -487,6 +521,31 @@ func _onChangeSpeed(speedType):
 	if onboardingSlides:
 		print("onbaording slides are in ")
 		self.get_tree().current_scene.get_node("Camera2D//onboardingPopUp").emit_signal("speedChange", timeMultiplier)
+
+func _onResetLoop(startTime, destination, enemyPos, powerPos):
+	print("Resetting loop")
+	print("Destination to: ", destination.global_position)
+	print("Restarting to time: ", Globals.time)
+	player1.position.x = destination.global_position.x
+	camera.position.x = destination.global_position.x + player1.position.x
+	
+	var distance = abs(0.0 - player1.global_position.x)
+	musicTime = distance / Globals.pixelsPerFrame
+	Globals.time = musicTime
+	for pos in enemyPos:
+		var instancedObj = enemyInstance.instantiate()	
+		instancedObj.position = pos
+		#instancedObj.get_node("ActionIndicator").initialize()
+		enemiesList.call_deferred("add_child", instancedObj)
+	for pos in powerPos:
+		var instancedObj = powerupInstance.instantiate()	
+		instancedObj.position = pos
+		#instancedObj.get_node("ActionIndicator").initialize()
+		powerupList.add_child(instancedObj)
+	music.play(startTime)
+	actionIndicatorsList.load_array()
+	
+	pass
 
 func _onMovePlayer(location : Vector2):
 	#we have to move player based on new global loaction

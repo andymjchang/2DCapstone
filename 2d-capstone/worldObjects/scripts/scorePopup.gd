@@ -52,10 +52,14 @@ func initText(text, _player_position):
 		labelText = "GOOD!"
 		clefSprite.texture = yellowTiming
 		Globals.numGoods += 1
-	else: 
+	elif text > 0: 
 		labelText = "BARELY!"
 		clefSprite.texture = redTiming
 		Globals.numBarelys += 1
+	else:
+		labelText = "MISS!"
+		clefSprite.texture = redTiming
+		Globals.numMisses += 1
 	
 	# Clear previous letter nodes
 	for letter in letter_nodes:

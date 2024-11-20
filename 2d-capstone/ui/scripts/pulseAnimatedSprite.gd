@@ -7,7 +7,7 @@ extends AnimatedSprite2D
 var beatInterval = 0.0
 var beatTimer = 0.0
 var lerpFactor = 0.0
-var isPulseActive = true
+var isPulseActive = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,6 +15,7 @@ func _ready() -> void:
 	
 func setBPM():
 	beatInterval = timingScale * 60.0 / Globals.bpm
+	isPulseActive = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -22,7 +23,7 @@ func _process(delta: float) -> void:
 		processBeat(delta)
 
 func processBeat(delta: float) -> void:
-	beatTimer += delta
+	beatTimer += delta * Globals.scrollSpeed
 	if beatTimer >= beatInterval:
 		beatTimer -= beatInterval
 		startPulse()

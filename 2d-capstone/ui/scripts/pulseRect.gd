@@ -7,20 +7,22 @@ extends ColorRect
 var beatInterval = 0.0
 var beatTimer = 0.0
 var lerpFactor = 0.0
-
+var isPulseActive = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pivot_offset = size / 2
 
 func setBPM():
 	beatInterval = timingScale * 60.0 / Globals.bpm
-
+	isPulseActive = true
+	startPulse()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	processBeat(delta)
+	if isPulseActive:
+		processBeat(delta)
 
 func processBeat(delta: float) -> void:
-	beatTimer += delta
+	beatTimer += delta * Globals.scrollSpeed
 	if beatTimer >= beatInterval:
 		beatTimer -= beatInterval
 		startPulse()

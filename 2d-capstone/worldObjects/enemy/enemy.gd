@@ -84,7 +84,6 @@ func GotHit():
 	current_scale = initial_scale
 	activeSprite.isPulseActive = false
 	get_tree().current_scene.get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
-
 		
 func setEnemyType(posPoints) -> void :
 	

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwcl1qhm1l82a"]
+
+[ext_resource type="Script" path="res://worldObjects/scripts/loopMarker.gd" id="1_iji7p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_px3m4"]
+size = Vector2(20, 53.2)
+
+[node name="LoopMarkerEnd" type="Node2D"]
+script = ExtResource("1_iji7p")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 7.62939e-06)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_px3m4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -50.0
+offset_top = -133.0
+offset_right = 50.0
+offset_bottom = 132.0
+color = Color(0.447059, 0.54902, 1, 1)
+
+[connection signal="body_entered" from="Area2D" to="." method="_onArea2dBodyEntered"]

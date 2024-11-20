@@ -13,6 +13,7 @@ func _ready() -> void:
 	beatInterval = timingScale * 60.0 / Globals.bpm
 func setBPM():
 	beatInterval = timingScale * 60.0 / Globals.bpm
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	processBeat(delta)

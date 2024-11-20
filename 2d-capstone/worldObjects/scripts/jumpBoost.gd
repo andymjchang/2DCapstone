@@ -15,6 +15,7 @@ func _process(_delta: float) -> void:
 	if playerContact:# and Input.is_action_just_pressed(jump):
 		player.emit_signal("doubleJump")
 		Globals.resetCamera = true
+		$Sprite2D.play()
 	pass
 
 

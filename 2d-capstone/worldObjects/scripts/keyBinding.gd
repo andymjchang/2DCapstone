@@ -5,6 +5,15 @@ var imageName = ""
 var instType = ""
 @onready var sprite = $Sprite2D
 @onready var keyName = $keyName
+
+#sprites
+@onready var pressedLong = $LongPressed
+@onready var pressedShort = $ShortPressed
+@onready var unpressedLong = $LongUnpressed
+@onready var unpressedShort = $ShortUnpressed
+
+var pressedSprite : Sprite2D
+var unpressedSprite : Sprite2D
 var watchEvent
 
 #load controller images
@@ -84,12 +93,16 @@ func _process(delta: float) -> void:
 		if Globals.usingController:
 			sprite.modulate = Color(0.5, 0.5, 0.5)
 		else:
-			$ColorRect.modulate = Color(0.5, 0.5, 0.5)
+			pressedSprite.visible = true
+			unpressedSprite.visible = false
+			#
+			#$ColorRect.modulate = Color(0.5, 0.5, 0.5)
 	if instType and Input.is_action_just_released(instType):
 		if Globals.usingController:
 			sprite.modulate = Color(1.0,1.0,1.0)
 		else:
-			$ColorRect.modulate = Color(1.0,1.0,1.0)
+			pressedSprite.visible = false
+			unpressedSprite.visible = true
 		
 func setKeyBindingImages():
 	
@@ -135,10 +148,30 @@ func setKeyBindingImages():
 		if keyArray.size() > 0:
 			keyArray.sort_custom(sortLength)
 			#"[center]Centered Text[/center]
-			keyName.text = "[center]"+str(keyArray[0]).to_upper()+"[/center]"
-			sprite.visible = false
-			$ColorRect.visible = true
-			keyName.visible = true
+			#keyName.text = "[center]"+str(keyArray[0]).to_upper()+"[/center]"
+			
+			var keyText = keyArray[0]
+			if keyText.length() > 2:
+				pressedSprite = pressedLong
+				unpressedSprite = unpressedLong
+				unpressedSprite.visible = true
+				pressedSprite.visible = false
+				pressedShort.visible = false
+				unpressedShort.visible = false
+				
+			else:
+				pressedSprite = pressedShort
+				unpressedSprite = unpressedShort
+				unpressedSprite.visible = true
+				pressedSprite.visible = false
+				pressedLong.visible = false
+				unpressedLong.visible = false
+				
+			pressedSprite.get_node("Label").text = keyText
+			unpressedSprite.get_node("Label").text = keyText
+			#sprite.visible = false
+			#$ColorRect.visible = true
+			#keyName.visible = true
 					
 					
 					
@@ -174,9 +207,10 @@ func setImage(posPoints : Array) -> void:
 		stretchImage()
 		
 func stretchImage() -> void:
-	var spriteSize = sprite.texture.get_size()
-	var curExtents = $Area2D/CollisionShape2D.shape.extents
-	var newSize = curExtents * 2.0
-	var newScale = newSize/spriteSize
-	sprite.scale = newScale
+	pass
+	#var spriteSize = sprite.texture.get_size()
+	#var curExtents = $Area2D/CollisionShape2D.shape.extents
+	#var newSize = curExtents * 2.0
+	#var newScale = newSize/spriteSize
+	#sprite.scale = newScale
 	

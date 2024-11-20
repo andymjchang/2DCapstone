@@ -36,8 +36,8 @@ func _process(delta: float) -> void:
 	lerpFactor = min(lerpFactor + delta * 2, 1)
 
 func lerpText(score: int, duration: float = 1.0):
-	targetScore = float(score)
-	currentScore = float(text) if text.is_valid_int() else 0
+	targetScore = max(0.0, float(score))
+	currentScore = max(0.0, float(text) if text.is_valid_int() else 0)
 	Globals.endScore = currentScore
 	lerpDuration = duration
 	lerpProgress = 0.0
@@ -57,7 +57,7 @@ func smoothstep(edge0: float, edge1: float, x: float) -> float:
 	return t * t * (3.0 - 2.0 * t)
 
 func format_score(score: int) -> String:
-	return "%05d" % score
+	return "%05d" % max(0, score)
 
 func processBeat(delta: float) -> void:
 	scale = lerp(scale, originalScale, pulseLerpFactor)

@@ -307,7 +307,7 @@ func MonitorAttackHitbox(area : Area2D):
 		punchConnected = true
 		Globals.screenFlashEffect()
 		other.FadeOut()
-		scored.emit(self.name, abs(other.global_position.x - global_position.x))
+		scored.emit(self.name, 100 - abs(other.global_position.x - global_position.x))
 		
 
 func ResetAttack():
@@ -359,7 +359,7 @@ func _onActivatePowerup():
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area.get_parent().enemyType == "slideEnemy" and isSliding: #Globals.isSliding:
+	if "enemyType" in area.get_parent() and area.get_parent().enemyType == "slideEnemy" and isSliding: #Globals.isSliding:
 		#we slid into enemy
 		print("made it into slide damage: ")
 		var other = area.get_parent()
@@ -372,7 +372,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 				# Play hit animation
 			hitEffect.frame = 0
 			hitEffect.play()
-	elif area.get_parent().ifDead == false :
+	elif "ifDead" in area.get_parent() and area.get_parent().ifDead == false :
 		_onTakeDamage(3)
 
 
@@ -414,21 +414,31 @@ func _onGetCoin():
 	Globals.coinsCollected = self.coins
 
 func SlideTweenStart():
-	tweenSlide = create_tween()
-	tweenSlide.tween_property(camera, "rotation", 0.008363323, 0.15)
-	tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.2, 2.2), 0.15)
+	if tweenHit != null:
+		tweenHit.kill()
+	tweenHit = create_tween()
+	tweenHit.tween_property(camera, "rotation", 0.008363323, 0.15)
+	tweenHit.parallel().tween_property(camera, "zoom", Vector2(2.2, 2.2), 0.15)
 
 func SlideTweenEnd():
-	tweenSlide = create_tween()
-	tweenSlide.tween_property(camera, "rotation", 0, 0.15)
-	tweenSlide.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
-
-func PunchTween():
-	camera.zoom = camera.zoom + Vector2(0.025, 0.025)
-	camera.rotation = camera.rotation - 0.01363323
+	if tweenHit != null:
+		tweenHit.kill()
 	tweenHit = create_tween()
 	tweenHit.tween_property(camera, "rotation", 0, 0.15)
 	tweenHit.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 0.15)
+
+func PunchTween():
+	camera.zoom = camera.zoom + Vector2(0.025, 0.025)
+	if camera.zoom.x > 2.15 or camera.zoom.y > 2.15:
+		camera.zoom = Vector2(2.15, 2.15)
+	camera.rotation = max(camera.rotation - 0.01363323, -0.02831615)
+	if tweenHit != null:
+		tweenHit.kill()
+	tweenHit = create_tween()
+	# Add delay chain before the actual tweens
+	tweenHit.tween_interval(0.1)
+	tweenHit.tween_property(camera, "rotation", 0, 0.15)
+	tweenHit.parallel().tween_property(camera, "zoom", Vector2(2.0, 2.0), 1.0)
 
 # Add this new function
 func shake_camera(strength: float = 25.0):

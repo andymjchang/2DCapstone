@@ -57,13 +57,13 @@ func _ready() -> void:
 	timeRemaining = activeTime
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if ifDead:	
 		DeathAnimation(delta)
 	elif isFirstHit:
 		# Count down timer and move
 		timeRemaining -= delta
-		position.x += Globals.pixelsPerFrame * delta
+		position.x += Globals.pixelsPerFrame * delta * Globals.scrollSpeed
 		
 		# Kill enemy when time runs out
 		if timeRemaining <= 0:

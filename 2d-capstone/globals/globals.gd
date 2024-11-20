@@ -14,7 +14,7 @@ var checkpoint = null
 var relocateToCheckpoint = false
 var pixelsPerFrame = 300
 var scrollSpeed = 1
-var curFile = "Tutorial.2"
+var curFile = "CustomLevel"
 var bpm : float = 115
 var timeDelay = 0.0
 var screenFlash : bool = true
@@ -30,6 +30,7 @@ var coinsCollected = 0.0
 var numBarelys = 0.0
 var numPerfects = 0.0
 var numGoods = 0.0
+var numMisses = 0.0
 var percentageHit = 0.0
 var endScore = 0.0
 var gameOver = false 
@@ -38,7 +39,7 @@ var gameOver = false
 var usingController = false
 
 #volume 
-var playerSoundsVolume =1.0
+var playerSoundsVolume = 1.0
 var musicSoundsVolume = 1.0
 var levelMusicSoundsVolume = 1.0
 
