@@ -76,15 +76,20 @@ func slide_in() -> void:
 	
 	# Create tween for slide-in animation
 	var tween = create_tween()
-	tween.set_parallel(true)  # Animate both nodes simultaneously
+	if !tween:
+		print("Failed to create tween")
+		return
+		
+	print("Setting up tween properties")
+	tween.set_parallel(true)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	
-	# Tween both nodes to their original positions
-	tween.tween_property(vinyl, "position:x", 
+	# Store tween as variable to ensure it doesn't get garbage collected
+	var _vinyl_tween = tween.tween_property(vinyl, "position:x",
 		vinyl.position.x - slide_offset, slide_in_duration + 0.75)
-	tween.tween_property(album, "position:x", 
+	var _album_tween = tween.tween_property(album, "position:x", 
 		album.position.x - slide_offset, slide_in_duration)
-	tween.tween_property(albumBack, "position:x",
+	var _back_tween = tween.tween_property(albumBack, "position:x",
 		albumBack.position.x - slide_offset, slide_in_duration)
 	tween.tween_callback(playMusic)
