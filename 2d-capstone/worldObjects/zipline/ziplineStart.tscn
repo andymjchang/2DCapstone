@@ -28,6 +28,7 @@ position = Vector2(120, -70)
 position = Vector2(139, -27)
 
 [node name="ColorRect" type="ColorRect" parent="PlayerMarker"]
+visible = false
 offset_left = -19.0
 offset_top = -20.0
 offset_right = 21.0
