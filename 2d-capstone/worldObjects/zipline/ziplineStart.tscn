@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bam8jg1naascf"]
+[gd_scene load_steps=6 format=3 uid="uid://bam8jg1naascf"]
 
 [ext_resource type="Texture2D" uid="uid://cd3rk1jmye0pd" path="res://worldObjects/zipline/start.png" id="1_7lmlu"]
 [ext_resource type="Script" path="res://worldObjects/zipline/zipline.gd" id="1_oaf1g"]
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="3_vhpky"]
+[ext_resource type="Script" path="res://worldObjects/wall/tutorialText.gd" id="4_c3ik0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5w3a6"]
 size = Vector2(70, 525)
@@ -40,3 +41,4 @@ offset_bottom = -21.0
 theme = ExtResource("3_vhpky")
 text = "HOLD
 JUMP!"
+script = ExtResource("4_c3ik0")
