@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://csh1k6wpxxqre"]
+[gd_scene load_steps=13 format=3 uid="uid://csh1k6wpxxqre"]
 
 [ext_resource type="Texture2D" uid="uid://v6w028pdwdn8" path="res://worldObjects/assets/breakableWall.png" id="1_1xpll"]
 [ext_resource type="Texture2D" uid="uid://dm870min7d5ri" path="res://worldObjects/wall/wallPieces/wallPart1.png" id="3_w7cmg"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cnw1oymwgvwqb" path="res://worldObjects/wall/wallPieces/wallPart5.png" id="7_3wcov"]
 [ext_resource type="Texture2D" uid="uid://dsio6nf1e2a10" path="res://worldObjects/wall/wallPieces/wallPart6.png" id="8_fcfbu"]
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="8_iu4d5"]
+[ext_resource type="Script" path="res://worldObjects/wall/tutorialText.gd" id="9_20sov"]
 
 [sub_resource type="GDScript" id="GDScript_kpawh"]
 script/source = "extends Node2D
@@ -171,5 +172,6 @@ offset_bottom = 99.0
 theme = ExtResource("8_iu4d5")
 text = "PUNCH TO
 BREAK!"
+script = ExtResource("9_20sov")
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
