@@ -28,6 +28,7 @@ var id = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("blocks")
+	var multiplier = 1.0
 	if Globals.curFile.begins_with("Level 2"):
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = true
@@ -35,16 +36,18 @@ func _ready():
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
 		setWindowTiles()
 		id = 0
+		multiplier = 12.0
 	else:
 		$sprite2D/TileMapLayer.visible = true
 		$sprite2D/TileMapLayer2.visible = false
 		tileMap = $sprite2D/TileMapLayer
 		allTiles = [startTiles, fillerTiles, endTiles]
 		id = 1
+		multiplier = 20.0
 	setFillerTiles()
 	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
 	tileHeight = tileMap.tile_set.tile_size.y * tileMap.scale.y 
-	var newWidth = tileWidth * 12.0
+	var newWidth = tileWidth * multiplier
 	extents = self.get_node("CollisionShape2D").shape.extents
 	extents = extents
 	extents = newWidth/2.0
