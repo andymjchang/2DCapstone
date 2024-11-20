@@ -15,6 +15,7 @@ layer = 0
 visible = false
 
 [node name="TextureButton" type="TextureButton" parent="PreviewCanvasLayer"]
+visible = false
 offset_left = 1690.0
 offset_top = 5.0
 offset_right = 2141.0

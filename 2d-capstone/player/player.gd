@@ -41,6 +41,7 @@ var jumpInProgress = false
 var runInProgress = false
 var punchConnected = false
 var isSkipping
+var zipDest
 
 # Jump Hang Time
 var hang_time_duration := 0.05
@@ -128,7 +129,6 @@ func _physics_process(delta: float) -> void:
 			if is_on_floor():
 				if exitedZip:
 					$Animation.play("Run")
-					exitedZip = false
 				hang_time_remaining = 0.0
 				is_hanging = false
 				camera.smooth_pan_to(self.global_position.y + -50)

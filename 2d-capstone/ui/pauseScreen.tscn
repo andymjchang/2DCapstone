@@ -28,7 +28,7 @@ offset_right = 959.0
 offset_bottom = 552.673
 color = Color(1, 0.956863, 0.933333, 0.270588)
 
-[node name="VinylEnvelopeBack" type="Sprite2D" parent="."]
+[node name="Back" type="Sprite2D" parent="."]
 position = Vector2(-158.5, -0.327026)
 texture = ExtResource("2_n50tj")
 

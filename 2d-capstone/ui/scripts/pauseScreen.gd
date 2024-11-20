@@ -10,8 +10,12 @@ enum MenuOptions {
 
 @export var vinyl_rotations: Array[float] = [60.0, 30.0, 0.0, -30.0, -60.0]  # Adjust angles as needed
 @export var rotation_tween_duration: float = 0.15
+@export var slide_in_duration: float = 0.5  # Duration for slide-in animation
+@export var slide_offset: float = -1000  # Starting X offset for slide animation
 
 @onready var vinyl: Sprite2D = $Vinyl
+@onready var album: Sprite2D = $Album 
+@onready var albumBack: Sprite2D = $Back
 
 var current_option: int = 2
 var options_count: int = MenuOptions.size()
@@ -39,6 +43,9 @@ func update_selection() -> void:
 		vinyl_rotations[current_option], rotation_tween_duration)
 
 func select_current_option() -> void:
+	get_tree().paused = false
+	Engine.time_scale = 1.0
+	Globals.paused = false
 	match current_option:
 		MenuOptions.RESUME:
 			_onResumeButtonUp()
@@ -52,9 +59,6 @@ func select_current_option() -> void:
 			_onMainMenuButtonUp()
 
 func _onResumeButtonUp() -> void:
-	get_tree().paused = false
-	self.visible = false
-	Globals.paused = false
 	self.get_parent().get_parent().music.stream_paused = false
 	self.get_parent().get_parent().adaptiveMusic.stream_paused = false
 
@@ -68,22 +72,32 @@ func _onCheckpointButtonUp() -> void:
 
 func _onRestartButtonUp() -> void:
 	Globals.relocateToCheckpoint = false
-	Engine.time_scale = 1.0
-	get_tree().paused = false
-	Globals.paused = false
 	get_tree().reload_current_scene()
 
 func _onMainMenuButtonUp() -> void:
-	Engine.time_scale = 1.0
-	get_tree().paused = false
-	Globals.paused = false
 	Globals.time = 0.0
 	Globals.FadeTransition("res://ui/landingPage.tscn")
 
 
 func _onOptionsButtonUp() -> void:
-	get_tree().paused = false
-	Globals.FadeTransition("res://ui/options.tscn")
-	Engine.time_scale = 1.0
-	Globals.paused = false
 	self.get_parent().get_parent().music.stream_paused = false
+	Globals.FadeTransition("res://ui/options.tscn")
+
+func slide_in() -> void:
+	# Set initial position off-screen
+	vinyl.position.x += slide_offset
+	album.position.x += slide_offset
+	albumBack.position.x += slide_offset
+	# Create tween for slide-in animation
+	var tween = create_tween()
+	tween.set_parallel(true)  # Animate both nodes simultaneously
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	
+	# Tween both nodes to their original positions
+	tween.tween_property(vinyl, "position:x", 
+		vinyl.position.x - slide_offset, slide_in_duration + 0.75)
+	tween.tween_property(album, "position:x", 
+		album.position.x - slide_offset, slide_in_duration)
+	tween.tween_property(albumBack, "position:x",
+		albumBack.position.x - slide_offset, slide_in_duration)

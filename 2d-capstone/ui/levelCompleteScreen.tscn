@@ -10,39 +10,55 @@
 [ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="8_q0prs"]
 
 [node name="levelCompleteScreen" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -908.0
-offset_top = -545.0
-offset_right = -908.0
-offset_bottom = -545.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qafpk")
 
-[node name="jingle" type="AudioStreamPlayer2D" parent="." groups=["musicSounds"]]
+[node name="jingle" type="AudioStreamPlayer" parent="." groups=["musicSounds"]]
 stream = ExtResource("7_j5x8q")
-volume_db = 9.333
 bus = &"music"
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -65.0
-offset_right = 1870.0
-offset_bottom = 1098.0
-color = Color(1, 0.956863, 0.933333, 1)
+layout_mode = 0
+offset_left = -958.0
+offset_top = -539.327
+offset_right = 977.0
+offset_bottom = 558.673
+color = Color(1, 0.956863, 0.933333, 0.65098)
 
-[node name="VinylEnvelopeBack" type="Sprite2D" parent="."]
-position = Vector2(752.5, 545)
+[node name="Back" type="Sprite2D" parent="."]
+position = Vector2(-120.5, 0.672974)
 texture = ExtResource("3_47j5b")
 
 [node name="Vinyl" type="Sprite2D" parent="."]
-position = Vector2(1090, 545)
-rotation = -0.523599
+position = Vector2(217, 0.672974)
+rotation = 0.523599
 texture = ExtResource("4_62kjn")
+
+[node name="0" type="Node2D" parent="Vinyl"]
+rotation = -0.523599
+
+[node name="Next" type="Label" parent="Vinyl/0"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 129.0
+offset_top = -29.0
+offset_right = 480.0
+offset_bottom = 30.0
+grow_vertical = 2
+theme = ExtResource("3_bdee6")
+text = "Next
+Level"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="1" type="Node2D" parent="Vinyl"]
 
@@ -80,72 +96,215 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Album" type="Sprite2D" parent="."]
-position = Vector2(525.5, 545)
+position = Vector2(-347.5, 0.672974)
 texture = ExtResource("6_xsv6n")
 
-[node name="perfectLabel" type="Label" parent="."]
+[node name="gradeLabel" type="Label" parent="."]
 layout_mode = 2
-offset_left = -38.0
-offset_top = 39.0
-offset_right = 1402.0
-offset_bottom = 98.0
+offset_left = -946.0
+offset_top = -442.327
+offset_right = 171.0
+offset_bottom = -153.327
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
-theme_override_font_sizes/font_size = 0
-text = "Num. Perfect:"
+theme_override_font_sizes/font_size = 240
+text = "A"
+horizontal_alignment = 1
 
-[node name="goodLabel" type="Label" parent="."]
+[node name="gradeTitle" type="Label" parent="gradeLabel"]
 layout_mode = 2
-offset_left = -38.0
-offset_top = 95.0
-offset_right = 1402.0
-offset_bottom = 154.0
+offset_top = -90.0
+offset_right = 1117.0
+offset_bottom = 40.0
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
-text = "Num. Good: "
-
-[node name="barelyLabel" type="Label" parent="."]
-layout_mode = 2
-offset_left = -38.0
-offset_top = 151.0
-offset_right = 1402.0
-offset_bottom = 210.0
-size_flags_vertical = 2
-theme = ExtResource("3_bdee6")
-text = "Num. Barely:"
-
-[node name="coinsLabel" type="Label" parent="."]
-layout_mode = 2
-offset_left = -38.0
-offset_top = 207.5
-offset_right = 1402.0
-offset_bottom = 266.5
-size_flags_vertical = 2
-theme = ExtResource("3_bdee6")
-text = "Coins Collected:"
-
-[node name="overallPercentageLabel" type="Label" parent="."]
-layout_mode = 2
-offset_left = -38.0
-offset_top = 263.5
-offset_right = 1402.0
-offset_bottom = 322.5
-size_flags_vertical = 2
-theme = ExtResource("3_bdee6")
-text = "Overall Percentage: "
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 108
+text = "GRADE"
+horizontal_alignment = 1
 
 [node name="scoreLabel" type="Label" parent="."]
 layout_mode = 2
-offset_left = -38.0
-offset_top = 319.5
-offset_right = 1402.0
-offset_bottom = 378.5
+offset_left = -946.0
+offset_top = -192.327
+offset_right = 15.0
+offset_bottom = -76.327
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 84
+text = "00000"
+horizontal_alignment = 2
+
+[node name="scoreTitle" type="Label" parent="scoreLabel"]
+layout_mode = 2
+offset_left = 129.0
+offset_right = 1104.0
+offset_bottom = 116.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 84
 text = "Score: "
 
+[node name="perfectLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = -905.0
+offset_top = -64.327
+offset_right = -434.0
+offset_bottom = 8.67297
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "000"
+horizontal_alignment = 2
+
+[node name="perfectTitle" type="Label" parent="perfectLabel"]
+layout_mode = 2
+offset_right = 1440.0
+offset_bottom = 59.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Perfect:"
+
+[node name="goodLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = -905.0
+offset_top = 10.673
+offset_right = -434.0
+offset_bottom = 83.673
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "000"
+horizontal_alignment = 2
+
+[node name="perfectTitle" type="Label" parent="goodLabel"]
+layout_mode = 2
+offset_right = 1440.0
+offset_bottom = 59.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Good:"
+
+[node name="barelyLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = -905.0
+offset_top = 85.673
+offset_right = -434.0
+offset_bottom = 158.673
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "000"
+horizontal_alignment = 2
+
+[node name="perfectTitle" type="Label" parent="barelyLabel"]
+layout_mode = 2
+offset_right = 1440.0
+offset_bottom = 59.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Barely:"
+
+[node name="missedLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = -905.0
+offset_top = 160.673
+offset_right = -434.0
+offset_bottom = 233.673
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "000"
+horizontal_alignment = 2
+
+[node name="perfectTitle" type="Label" parent="missedLabel"]
+layout_mode = 2
+offset_right = 1440.0
+offset_bottom = 59.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Missed:"
+
+[node name="coinsLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = -905.0
+offset_top = 310.673
+offset_right = -434.0
+offset_bottom = 383.673
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "000"
+horizontal_alignment = 2
+
+[node name="perfectTitle" type="Label" parent="coinsLabel"]
+layout_mode = 2
+offset_right = 1440.0
+offset_bottom = 59.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Coins:"
+
+[node name="accuracyLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = -395.0
+offset_top = 37.673
+offset_right = 172.0
+offset_bottom = 124.673
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 72
+text = "100.0%"
+horizontal_alignment = 1
+
+[node name="accuracyTitle" type="Label" parent="accuracyLabel"]
+layout_mode = 2
+offset_top = -75.0
+offset_right = 567.0
+offset_bottom = 12.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 72
+text = "Accuracy:"
+horizontal_alignment = 1
+
+[node name="comboLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = -395.0
+offset_top = 262.673
+offset_right = 172.0
+offset_bottom = 349.673
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 72
+text = "x0"
+horizontal_alignment = 1
+
+[node name="accuracyTitle" type="Label" parent="comboLabel"]
+layout_mode = 2
+offset_top = -75.0
+offset_right = 567.0
+offset_bottom = 12.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 72
+text = "Max Combo:"
+horizontal_alignment = 1
+
 [node name="Pointer2" type="Sprite2D" parent="." groups=["pulsingObjects"]]
-position = Vector2(1639.5, 540)
+position = Vector2(766.5, -4.32703)
 texture = ExtResource("7_vxoxn")
 script = ExtResource("8_q0prs")
 increasedScale = Vector2(1.1, 1.1)

@@ -89,15 +89,23 @@ func _ready():
 	adaptiveMusic = camera.get_node("ExtraTrackMusic")
 	
 	var backgroundName : String = "Lvl1"
-	if levelFile.begins_with("Tutorial"):
+	if levelFile.begins_with("Level 1"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Tutorial_Revamped_155bpm.mp3"
 		backgroundName = "Lvl0"
-	if levelFile.begins_with("Level 1"):
+	if levelFile.begins_with("Tutorial_Level2"):
+		Globals.setBPM(155)
+		Globals.currentSongFileName = "Tutorial_Revamped_155bpm.mp3"
+		backgroundName = "Lvl1"
+	if levelFile.begins_with("Level 2"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Level1_Shifted_155bpm.wav"
 		backgroundName = "Lvl1"
-	if levelFile.begins_with("Level 2"):
+	if levelFile.begins_with("Tutorial_Level3"):
+		Globals.setBPM(155)
+		Globals.currentSongFileName = "Tutorial_Revamped_155bpm.mp3"
+		backgroundName = "Lvl2"
+	if levelFile.begins_with("Level 3"):
 		Globals.setBPM(156)
 		Globals.currentSongFileName = "Level2_OGNoMelody_156bpm_1.mp3"
 		adaptiveMusic.active = true
@@ -183,8 +191,8 @@ func _ready():
 func startGame():
 	for object in get_tree().get_nodes_in_group("pulsingObjects"):
 		object.setBPM()
-	music.play(musicTime)
-	adaptiveMusic.play(musicTime)
+	music.play(musicTime + Globals.timeDelay)
+	adaptiveMusic.play(musicTime + Globals.timeDelay)
 	print("starting")
 	Globals.inLevel = true
 	if !Globals.customStart and !Globals.relocateToCheckpoint:
@@ -256,10 +264,13 @@ func loadLevel():
 				var endPos = Vector2(posPoints[2], posPoints[3])
 				instancedObj.get_node("ziplineStart").global_position = startPos
 				instancedObj.get_node("ziplineEnd").global_position = endPos
+				var playerPlacement = instancedObj.get_node("ziplineStart/PlayerMarker")
 				var vec1 = instancedObj.get_node("ziplineStart/Marker2D").global_position
 				var vec2 = instancedObj.get_node("ziplineEnd/Marker2D").global_position
 				var tgtPosX = (vec1.x + vec2.x)/2
 				var tgtPosY = (vec1.y + vec2.y)/2
+				print("Rotating: ", cos(vec1.angle_to_point(vec2)))
+				#playerPlacement.global_position.y += cos(vec1.angle_to_point(vec2)) * 10
 				var connectLine = ziplineMiddle.instantiate()
 				connectLine.position = Vector2(tgtPosX, tgtPosY)
 				connectLine.rotation = vec1.angle_to_point(vec2)
@@ -329,7 +340,7 @@ func _onCheckLevelCompleted():
 	print("all reached = ", allReached)
 	if allReached:
 		self.emit_signal("levelCompleted")
-	self.emit_signal("levelCompleted")
+	# self.emit_signal("levelCompleted")
 
 func _onGameOver():
 	var closestPoint = self.getNearestCheckpoint(player1)
@@ -343,10 +354,12 @@ func showGameOver():
 	music.stop()
 	Globals.gameOver = true
 	Globals.inLevel = false
+	
 	$LevelUI/GameOverScreen.visible = true
-	$LevelUI/GameOverScreen.playMusic()
+	$LevelUI/GameOverScreen.slide_in()
 	Globals.restartLevelData()
 	Engine.time_scale = 1.0
+	get_tree().paused = true
 	
 func showLevelCompleted():
 	Engine.time_scale = 1.0
@@ -355,11 +368,9 @@ func showLevelCompleted():
 	Globals.inLevel = false
 	$LevelUI/levelCompleteScreen.emit_signal("updateScoreData")
 	$LevelUI/levelCompleteScreen.visible = true
-	var newAudio = load("res://audioTracks/CourseComplete_153bpm.mp3") as AudioStream
-	$LevelUI/levelCompleteScreen/jingle.stream = newAudio
-	$LevelUI/levelCompleteScreen/jingle.play()
-	
+	$LevelUI/levelCompleteScreen.slide_in()	
 	Globals.restartLevelData()
+	get_tree().paused = true
 	#statusMessage.text = "Level Completed!"
 	#restartButton.visible = true
 	
@@ -390,6 +401,7 @@ func _physics_process(_delta):
 		adaptiveMusic.stream_paused = true
 		Globals.paused = true
 		$LevelUI/PauseScreen.visible = true
+		$LevelUI/PauseScreen.slide_in()
 		# Engine.time_scale = 0.0
 		get_tree().paused = true
 	if Globals.vertical:
@@ -551,5 +563,6 @@ func _onMovePlayer(location : Vector2):
 	skipping = true
 	emit_signal("changeSpeed", 2)
 	player1.emit_signal("skipping")
+	player1.exitedZip = false
 	
 	
