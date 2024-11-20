@@ -122,7 +122,7 @@ func _ready():
 
 	player1 = playersList.get_node("Player1")
 	
-	if levelFile.begins_with("Tutorial"):
+	if levelFile.begins_with("Level 1"):
 		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
 		var popUpInstance = popUpScene.instantiate()
 		$Camera2D.add_child(popUpInstance)
@@ -307,7 +307,7 @@ func loadLevel():
 	$objectList/actionIndicators.load_array()
 	$objectList/skips.loadArray()
 	
-	if levelFile.begins_with("Level 2"):
+	if levelFile.begins_with("Level 3"):
 		for platform in platformBlocksList.get_children():
 			platform.get_node("sprite2D/TileMapLayer").visible = false
 			platform.get_node("sprite2D/TileMapLayer2").visible = true

@@ -39,6 +39,7 @@ offset_top = -142.0
 offset_right = -97.0
 offset_bottom = -21.0
 theme = ExtResource("3_vhpky")
+theme_override_constants/outline_size = 8
 text = "HOLD
 JUMP!"
 script = ExtResource("4_c3ik0")
