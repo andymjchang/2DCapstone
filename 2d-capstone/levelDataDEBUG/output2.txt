@@ -376,7 +376,6 @@ goalBlocks
 breakableWalls
 29925, -600,
 ziplines
-17975, -125, 19225, 200,
 placers
 slideWalls
 3475, -25,
@@ -417,7 +416,5 @@ coins
 keyBindings
 skips
 mashes
-1775, 25, 2300, 25,
-4175, 25, 4700, 25,
 holds
 moveLines

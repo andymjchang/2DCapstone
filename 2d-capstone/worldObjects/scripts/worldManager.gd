@@ -101,7 +101,7 @@ func _ready():
 		backgroundName = "Lvl2"
 	if levelFile.begins_with("CustomLevel"):
 		Globals.setBPM(160)
-		Globals.currentSongFileName = "CustomLevel_160bpm.wav"
+		Globals.currentSongFileName = "CustomLevel_Shifted_160bpm.wav"
 		backgroundName = "LvlCustom"
 
 	Globals.gameOver = false

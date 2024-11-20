@@ -1,6 +1,6 @@
 
 
-inp = open("Lvl1.4.1.dat", "r")
+inp = open("CustomLevel.dat", "r")
 out = open("output.txt", "a")
 
 AMOUNT = -500
