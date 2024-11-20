@@ -200,7 +200,7 @@ func setFillerTiles() -> void:
 func placeWindows() -> void:
 	#we want to get a random window style
 	var randIndex = int(randf_range(0,3))
-	var windowSet = windowTiles[randIndex]
+	var windowSet = windowTiles[1]
 	#add the buffer
 	var curLength = windowLength[randIndex] + 4
 	
@@ -223,9 +223,10 @@ func placeWindows() -> void:
 	for i in range(minX, minX+1):
 		
 		#account for padding
-		for j in range(1, maxY+1, windowHeight+2):
+		#for j in range(1, maxY+1, windowHeight+2):
+		for j in range (1, 2):
 			var upperLeftCorner = Vector2i(i,j)
-			placeOneWindow(upperLeftCorner, windowSet, windowLength[randIndex])
+			placeOneWindow(upperLeftCorner, windowSet, windowLength[1])
 	
 	
 	# we need to divide the length of our block 
@@ -234,16 +235,18 @@ func placeOneWindow(start, windowSet, length) -> void:
 	
 	var index = 0
 	print("window height:", windowHeight)
-	print("window length:", windowLength)
+	print("window length:", length)
 	print("window set: ", windowSet)
 	
 	print("x range: ", start.x, " - ", start.x+length)
 	print("y range: ", start.y ," - ", windowHeight)
-	for i in range(start.x, start.x+length):
-		for j in range(start.y, windowHeight):
-			print("i ", i, " j: ",j)
-			tileMap.set_cell(Vector2i(i, j), 0, windowSet[index])
-			index+=1
+	for i in range(start.x, start.x+length+1):
+		for j in range(start.y, windowHeight+1):
+			if windowSet.size() > index:
+				print("i ", i, " j: ",j)
+				print("atlas coords: ",  windowSet[index])
+				tileMap.set_cell(Vector2i(i, j), 0, windowSet[index])
+				index+=1
 	
 	
 func setWindowTiles() -> void:
