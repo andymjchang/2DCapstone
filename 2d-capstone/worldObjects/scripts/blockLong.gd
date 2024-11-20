@@ -112,7 +112,6 @@ func decreaseByOneTile() -> void:
 		
 		var moveY = startY
 
-		
 		#we want to delete two rows, but not starting at the end
 		for i in range (0,2):
 			var curX = endX - (i + 3)
@@ -125,7 +124,6 @@ func decreaseByOneTile() -> void:
 		startY = minMax[0].y
 		moveY = startY
 		#add in end cap
-		
 		for i in range(2,-1,-1):
 			#starts at the furthest left box of the end tiles
 			var curX = minMax[1].x - i
@@ -223,11 +221,8 @@ func placeWindows() -> void:
 	#place windows
 	for i in range(minX+2, maxX+1, curLength):
 		if i <= maxX - 2 - curLength:
-			
 		#account for padding
-			print("maxy ", maxY, "window height: ", windowHeight )
 			for j in range(1, maxY+1, windowHeight+2):
-				print("i ", i, " j: ",j)
 				var upperLeftCorner = Vector2i(i,j)
 				placeOneWindow(upperLeftCorner, windowSet, windowLength[1])
 	
@@ -246,8 +241,6 @@ func placeOneWindow(start, windowSet, length) -> void:
 	for i in range(start.x, start.x+length+1):
 		for j in range(start.y, windowHeight+start.y):
 			if windowSet.size() > index:
-				print("i2 ", i, " j2: ",j)
-				#print("atlas coords: ",  windowSet[index])
 				tileMap.set_cell(Vector2i(i, j), 0, windowSet[index])
 				index+=1
 	
