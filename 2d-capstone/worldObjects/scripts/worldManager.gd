@@ -27,6 +27,7 @@ signal movePlayer(location)
 @export var keyBindingInstance : PackedScene
 @export var skipInstance : PackedScene
 @export var mashInstance : PackedScene
+@export var loopInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -45,6 +46,7 @@ signal movePlayer(location)
 @onready var keyBindingList = $objectList/keyBindings
 @onready var skipList = $objectList/skips
 @onready var mashList = $objectList/mashes
+@onready var loopList = $objectList/loops
 
 @onready var onboardingSlides
 
@@ -209,7 +211,9 @@ func loadLevel():
 		"coins": [coinInstance, coinList],
 		"keyBindings":[keyBindingInstance, keyBindingList],
 		"skips":[skipInstance, skipList], 
-		"mashes": [mashInstance, mashList]}
+		"mashes": [mashInstance, mashList],
+		"loops": [loopInstance, loopList]
+		}
 	var instance
 	var instanceParent
 	var name = ""
@@ -253,6 +257,12 @@ func loadLevel():
 				var tgtLen = (vec2 - vec1).length()
 				connectLine.scale.x = tgtLen / defaultLen
 				objectList.add_child(connectLine)
+				
+			if name == "loops":
+				var startPos = Vector2(posPoints[0], posPoints[1])
+				var endPos = Vector2(posPoints[2], posPoints[3])
+				instancedObj.get_node("LoopMarkerStart").global_position = startPos
+				instancedObj.get_node("LoopMarkerEnd").global_position = endPos
 				
 			if name =="platformBlocks":
 				instancedObj.setTileMaps(posPoints.duplicate()) 

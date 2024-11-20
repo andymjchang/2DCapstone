@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=37 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -30,6 +30,7 @@
 [ext_resource type="AudioStream" uid="uid://cwunsxkx78vcj" path="res://audioTracks/Tutorial_New_155bpm.mp3" id="18_44qgl"]
 [ext_resource type="PackedScene" uid="uid://h2r5t05jiyo5" path="res://worldObjects/enemy/mashEnemy.tscn" id="18_qn7u4"]
 [ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
+[ext_resource type="PackedScene" uid="uid://ctn54mgrw1nra" path="res://worldObjects/loopMarkers/loopManager.tscn" id="19_yq3bk"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
 [ext_resource type="PackedScene" uid="uid://cng0uyugakene" path="res://worldObjects/glitchLines.tscn" id="23_jq54w"]
@@ -58,6 +59,7 @@ coinInstance = ExtResource("15_4qhng")
 keyBindingInstance = ExtResource("16_5ehlb")
 skipInstance = ExtResource("17_hifbs")
 mashInstance = ExtResource("18_qn7u4")
+loopInstance = ExtResource("19_yq3bk")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
