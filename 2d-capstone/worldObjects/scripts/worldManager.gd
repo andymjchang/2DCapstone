@@ -279,13 +279,14 @@ func loadLevel():
 				connectLine.scale.x = tgtLen / defaultLen
 				objectList.add_child(connectLine)
 				
-			if name == "loops":
+			if currentName == "loops":
 				var startPos = Vector2(posPoints[0], posPoints[1])
 				var endPos = Vector2(posPoints[2], posPoints[3])
 				instancedObj.get_node("LoopMarkerStart").global_position = startPos
 				instancedObj.get_node("LoopMarkerEnd").global_position = endPos
 				
-			if name =="platformBlocks":
+			if currentName =="platformBlocks":
+				print("making it past checl")
 				instancedObj.setTileMaps(posPoints.duplicate()) 
 				instancedObj.add_to_group("platforms")
 				
