@@ -6,6 +6,7 @@ signal checkGameOver()
 signal levelCompleted()
 signal checkLevelCompleted()
 signal changeSpeed(speedType)
+signal resetLoop(destination)
 signal movePlayer(location)
 
 @export var levelFile : String
@@ -26,6 +27,7 @@ signal movePlayer(location)
 @export var keyBindingInstance : PackedScene
 @export var skipInstance : PackedScene
 @export var mashInstance : PackedScene
+@export var loopInstance : PackedScene
 
 @onready var objectList = $objectList
 @onready var platformBlocksList = $objectList/platformBlocks
@@ -44,6 +46,7 @@ signal movePlayer(location)
 @onready var keyBindingList = $objectList/keyBindings
 @onready var skipList = $objectList/skips
 @onready var mashList = $objectList/mashes
+@onready var loopList = $objectList/loops
 
 @onready var onboardingSlides
 
@@ -144,6 +147,7 @@ func _ready():
 	self.checkLevelCompleted.connect(_onCheckLevelCompleted)
 	self.levelCompleted.connect(_onLevelCompleted)
 	self.changeSpeed.connect(_onChangeSpeed)
+	self.resetLoop.connect(_onResetLoop)
 	self.movePlayer.connect(_onMovePlayer)
 
 	# Prep players
@@ -217,7 +221,9 @@ func loadLevel():
 		"coins": [coinInstance, coinList],
 		"keyBindings":[keyBindingInstance, keyBindingList],
 		"skips":[skipInstance, skipList], 
-		"mashes": [mashInstance, mashList]}
+		"mashes": [mashInstance, mashList],
+		"loops": [loopInstance, loopList]
+		}
 	var instance
 	var instanceParent
 	var currentName = ""
@@ -262,7 +268,13 @@ func loadLevel():
 				connectLine.scale.x = tgtLen / defaultLen
 				objectList.add_child(connectLine)
 				
-			if currentName =="platformBlocks":
+			if name == "loops":
+				var startPos = Vector2(posPoints[0], posPoints[1])
+				var endPos = Vector2(posPoints[2], posPoints[3])
+				instancedObj.get_node("LoopMarkerStart").global_position = startPos
+				instancedObj.get_node("LoopMarkerEnd").global_position = endPos
+				
+			if name =="platformBlocks":
 				instancedObj.setTileMaps(posPoints.duplicate()) 
 				instancedObj.add_to_group("platforms")
 				
@@ -506,6 +518,31 @@ func _onChangeSpeed(speedType):
 	if onboardingSlides:
 		print("onbaording slides are in ")
 		self.get_tree().current_scene.get_node("Camera2D//onboardingPopUp").emit_signal("speedChange", timeMultiplier)
+
+func _onResetLoop(startTime, destination, enemyPos, powerPos):
+	print("Resetting loop")
+	print("Destination to: ", destination.global_position)
+	print("Restarting to time: ", Globals.time)
+	player1.position.x = destination.global_position.x
+	camera.position.x = destination.global_position.x + player1.position.x
+	
+	var distance = abs(0.0 - player1.global_position.x)
+	musicTime = distance / Globals.pixelsPerFrame
+	Globals.time = musicTime
+	for pos in enemyPos:
+		var instancedObj = enemyInstance.instantiate()	
+		instancedObj.position = pos
+		#instancedObj.get_node("ActionIndicator").initialize()
+		enemiesList.call_deferred("add_child", instancedObj)
+	for pos in powerPos:
+		var instancedObj = powerupInstance.instantiate()	
+		instancedObj.position = pos
+		#instancedObj.get_node("ActionIndicator").initialize()
+		powerupList.add_child(instancedObj)
+	music.play(startTime)
+	actionIndicatorsList.load_array()
+	
+	pass
 
 func _onMovePlayer(location : Vector2):
 	#we have to move player based on new global loaction

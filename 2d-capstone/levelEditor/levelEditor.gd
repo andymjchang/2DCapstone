@@ -21,7 +21,7 @@ var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
 var isLoad = true
-var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "skip", "mash", "hold", "moveLine"]
+var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "skip", "mash", "hold", "moveLine", "loop"]
 enum {PLAYER1, PLAYER2, NORMAL, ACTIONINDICATOR, GOALBLOCK, ENEMY, KILLFLOOR, CHECKPOINT, BREAKABLEWALL, ZIPLINE, PLACER}
 var delete = "deleteBlock"
 var bindedBlocks = []
@@ -62,6 +62,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @export var mash : PackedScene
 @export var hold : PackedScene
 @export var moveLine : PackedScene
+@export var loop : PackedScene
 
 #block variants list
 @onready var enemyType = {"enemy" : enemyCharacter, "slide" : enemyCharacter}
@@ -72,7 +73,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var typeArrays = { "enemyType" : ["enemy", "slideEnemy"],
 							"platformType" : ["rustic", "city"],
 							"instructionType" : ["punch", "slide", "jump", "activate"],
-							"gameObjectType" : {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin, "skip":skip} }
+							"gameObjectType" : {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin, "skip":skip, "loop":loop} }
 #var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "multiPunch"]
 @onready var typeMap = {blockTypes[1]: "gameObjectType",
 						blockTypes[2]: "platformType",
@@ -87,7 +88,8 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 						blockTypes[13]: "gameObjectType",
 						blockTypes[14]: "gameObjectType",
 						blockTypes[15]: "instructionType",
-						blockTypes[16]: "gameObjectType"}
+						blockTypes[16]: "gameObjectType",
+						blockTypes[20]: "gameObjectType"}
 
 var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
 
@@ -114,8 +116,7 @@ var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsLis
 @onready var mashList = $objectList/mashes
 @onready var holdList = $objectList/holds
 @onready var moveLineList = $objectList/moveLines
-
-
+@onready var loopList = $objectList/loops
 
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
@@ -240,7 +241,8 @@ func loadLevel():
 		"keyBindings":[keyBinding, keyBindingList, blockTypes[15]],
 		"skips":[skip, skipList, blockTypes[16]],
 		"mashes": [mash, mashList, blockTypes[17]],
-		"holds": [hold, holdList, blockTypes[18]]}
+		"holds": [hold, holdList, blockTypes[18]],
+		"loops": [loop, loopList, blockTypes[20]]}
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
@@ -316,6 +318,14 @@ func _onZiplineButtonPressed() -> void:
 	zipParent.blockType = blockTypes[9]
 	ziplineList.add_child(zipParent)
 	place_block(zipParent, ziplineList, camera.position, false)
+	
+func _onLoopButtonPressed() -> void:
+	var loopInstance = loop.instantiate()
+	var loopParent = baseObject.instantiate()
+	loopParent.add_child(loopInstance)
+	loopParent.blockType = blockTypes[9]
+	loopList.add_child(loopParent)
+	place_block(loopParent, loopList, camera.position, false)
 	
 func _onSlideWallButtonUp() -> void:
 	var slideWallInstance = slideWall.instantiate()
@@ -629,6 +639,8 @@ func getList(blockType : String) -> Node:
 		return get_node("objectList/breakableWalls")
 	if blockType == "zipline":
 		return get_node("objectList/ziplines")
+	if blockType == "loop":
+		return get_node("objectList/loops")
 	if blockType == "placer":
 		return get_node("objectList/placers")
 	if blockType == "slideWall":

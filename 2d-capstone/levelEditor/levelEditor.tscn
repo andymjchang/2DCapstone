@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=66 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -46,7 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
 [ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
 [ext_resource type="PackedScene" uid="uid://b3r5orhxswfha" path="res://levelEditorObjects/holdScene.tscn" id="26_oo2r2"]
-[ext_resource type="PackedScene" uid="uid://drwoyrkcgtkqc" path="res://levelEditorObjects/massMoveScene.tscn" id="27_1iynm"]
+[ext_resource type="PackedScene" uid="uid://8slx4t2oi8ub" path="res://levelEditorObjects/loopScene.tscn" id="27_jho4t"]
 [ext_resource type="Texture2D" uid="uid://dd5m0kwji44w1" path="res://levelEditor/programmerArtAssets/zipline.png" id="30_pq2h6"]
 [ext_resource type="Texture2D" uid="uid://b1ymqen6srbge" path="res://levelEditor/programmerArtAssets/powerup.png" id="33_pappt"]
 [ext_resource type="Texture2D" uid="uid://bv8ou5u1pkb2k" path="res://levelEditor/programmerArtAssets/R (1).jpg" id="34_wwivc"]
@@ -59,6 +59,7 @@
 [ext_resource type="Texture2D" uid="uid://bu2yib2n2hcyf" path="res://levelEditor/programmerArtAssets/jumpBoost.png" id="50_nrfgt"]
 [ext_resource type="Texture2D" uid="uid://5uf885vsslwn" path="res://levelEditor/programmerArtAssets/coin.png" id="52_ulykl"]
 [ext_resource type="Texture2D" uid="uid://5pb84xa1vjqv" path="res://ui/assets/multiPunch.jpg" id="53_q0jqn"]
+[ext_resource type="Texture2D" uid="uid://ccf1vp0xq0hae" path="res://levelEditor/programmerArtAssets/loop.png" id="55_xyg3h"]
 [ext_resource type="Texture2D" uid="uid://davg4jbcubgii" path="res://ui/assets/onboarding/waypoint.png" id="56_63qny"]
 [ext_resource type="Texture2D" uid="uid://b5duach4kwhsr" path="res://ui/assets/onboarding/keys/r.png" id="56_va5sc"]
 [ext_resource type="Texture2D" uid="uid://dirtn80sqvt23" path="res://ui/assets/hold.png" id="60_w7oji"]
@@ -94,7 +95,7 @@ keyBinding = ExtResource("24_r48c0")
 skip = ExtResource("24_5ioff")
 mash = ExtResource("25_1gpd6")
 hold = ExtResource("26_oo2r2")
-moveLine = ExtResource("27_1iynm")
+loop = ExtResource("27_jho4t")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(939, 601)
@@ -152,6 +153,8 @@ stream = ExtResource("19_jlcy1")
 [node name="holds" type="Node2D" parent="objectList"]
 
 [node name="moveLines" type="Node2D" parent="objectList"]
+
+[node name="loops" type="Node2D" parent="objectList"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -419,6 +422,10 @@ texture_normal = ExtResource("50_nrfgt")
 layout_mode = 2
 texture_normal = ExtResource("52_ulykl")
 
+[node name="loopButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("55_xyg3h")
+
 [node name="HBoxContainer3" type="HBoxContainer" parent="UI"]
 offset_left = 8.0
 offset_top = 890.0
@@ -562,6 +569,7 @@ clip_text = true
 [connection signal="button_down" from="UI/objectSelector/playLevelButton" to="." method="_on_play_level_button_button_down"]
 [connection signal="pressed" from="UI/objectSelector/HBoxContainer2/jumpBoostButton" to="." method="_onJumpBoostButtonPressed"]
 [connection signal="pressed" from="UI/objectSelector/HBoxContainer2/coinButton" to="." method="_onCoinButtonPressed"]
+[connection signal="pressed" from="UI/objectSelector/HBoxContainer2/loopButton" to="." method="_onLoopButtonPressed"]
 [connection signal="button_up" from="UI/HBoxContainer3/mashButton" to="." method="_onMashButtonUp"]
 [connection signal="button_up" from="UI/HBoxContainer3/p1PlacerButton" to="." method="_on_p_1_placer_button_button_up"]
 [connection signal="button_up" from="UI/HBoxContainer3/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]

@@ -359,7 +359,7 @@ func _onActivatePowerup():
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area.get_parent().enemyType == "slideEnemy" and isSliding: #Globals.isSliding:
+	if "enemyType" in area.get_parent() and area.get_parent().enemyType == "slideEnemy" and isSliding: #Globals.isSliding:
 		#we slid into enemy
 		print("made it into slide damage: ")
 		var other = area.get_parent()
@@ -372,8 +372,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 				# Play hit animation
 			hitEffect.frame = 0
 			hitEffect.play()
-	elif area.get_parent().ifDead == false :
-		scored.emit(self.name, -100)
+	elif "ifDead" in area.get_parent() and area.get_parent().ifDead == false :
 		_onTakeDamage(3)
 
 
