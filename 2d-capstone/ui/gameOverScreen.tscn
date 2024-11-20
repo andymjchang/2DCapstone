@@ -1,14 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://u5byse278f80"]
+[gd_scene load_steps=9 format=3 uid="uid://u5byse278f80"]
 
 [ext_resource type="Script" path="res://ui/scripts/gameOverScreen.gd" id="1_tmgw1"]
-[ext_resource type="Texture2D" uid="uid://gkiuu3artph0" path="res://ui/assets/Game_Over_Menu.png" id="2_g3kqk"]
-[ext_resource type="Texture2D" uid="uid://11uu7t2ekshk" path="res://ui/assets/MainMenu_button_unpressed.png" id="3_gu5dv"]
-[ext_resource type="Texture2D" uid="uid://bbia4tw56raak" path="res://ui/assets/MainMenu_button_pressed.png" id="4_bxjpc"]
-[ext_resource type="Texture2D" uid="uid://73bcgskod8qu" path="res://ui/assets/Restart_button_unpressed.png" id="5_wmnct"]
-[ext_resource type="Texture2D" uid="uid://dbqpl3k5lnxb8" path="res://ui/assets/Restart_button_pressed.png" id="6_1qhke"]
+[ext_resource type="Texture2D" uid="uid://dmka458bsdkck" path="res://ui/assets/vinyl_envelope_back.png" id="3_g2ulw"]
+[ext_resource type="Texture2D" uid="uid://cfkgyb786idsq" path="res://ui/assets/vinyl_blank.png" id="4_u53ul"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="5_6whcx"]
+[ext_resource type="Texture2D" uid="uid://mji6d62y133n" path="res://ui/assets/Pause_menu_album_sleeve.png" id="6_aw4e0"]
 [ext_resource type="AudioStream" uid="uid://ipcdljmmnyyx" path="res://audioTracks/GameOver_120bpm.mp3" id="7_gngc8"]
+[ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="7_nofjy"]
+[ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="8_ewm6r"]
 
 [node name="GameOverScreen" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -19,45 +21,130 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tmgw1")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.291406, 0.270313)
-texture = ExtResource("2_g3kqk")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = -376.0
-offset_top = -192.0
-offset_right = 1174.0
-offset_bottom = 592.0
-scale = Vector2(0.5, 0.5)
-alignment = 1
-
-[node name="menuButton" type="TextureButton" parent="VBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("3_gu5dv")
-texture_pressed = ExtResource("4_bxjpc")
-stretch_mode = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="retryButton" type="TextureButton" parent="VBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("5_wmnct")
-texture_pressed = ExtResource("6_1qhke")
-stretch_mode = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="checkpointButton" type="TextureButton" parent="VBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("5_wmnct")
-texture_pressed = ExtResource("6_1qhke")
-stretch_mode = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="jingle" type="AudioStreamPlayer2D" parent="." groups=["musicSounds"]]
+[node name="gameOverJingle" type="AudioStreamPlayer" parent="." groups=["musicSounds"]]
+process_mode = 3
 stream = ExtResource("7_gngc8")
+volume_db = -6.0
 bus = &"music"
 
-[connection signal="button_up" from="VBoxContainer/menuButton" to="." method="_onMenuButtonUp"]
-[connection signal="button_up" from="VBoxContainer/retryButton" to="." method="_onRetryButtonUp"]
-[connection signal="button_down" from="VBoxContainer/checkpointButton" to="." method="_onCheckpointButtonDown"]
-[connection signal="button_up" from="VBoxContainer/checkpointButton" to="." method="_onCheckpointButtonUp"]
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -976.0
+offset_top = -545.327
+offset_right = 959.0
+offset_bottom = 552.673
+color = Color(1, 0.956863, 0.933333, 0.270588)
+
+[node name="Back" type="Sprite2D" parent="."]
+position = Vector2(-158.5, -0.327026)
+texture = ExtResource("3_g2ulw")
+
+[node name="Vinyl" type="Sprite2D" parent="."]
+position = Vector2(179, -0.327026)
+texture = ExtResource("4_u53ul")
+
+[node name="1" type="Node2D" parent="Vinyl"]
+rotation = -1.0472
+
+[node name="Level1" type="Label" parent="Vinyl/1"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 129.0
+offset_top = -29.0
+offset_right = 480.0
+offset_bottom = 30.0
+grow_vertical = 2
+theme = ExtResource("5_6whcx")
+text = "Level
+Select"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="2" type="Node2D" parent="Vinyl"]
+rotation = -0.523599
+
+[node name="Level2" type="Label" parent="Vinyl/2"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = -60.5
+offset_right = 469.0
+offset_bottom = 60.5
+grow_vertical = 2
+theme = ExtResource("5_6whcx")
+text = "Restart"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="3" type="Node2D" parent="Vinyl"]
+
+[node name="Level2" type="Label" parent="Vinyl/3"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 178.0
+offset_top = -60.0
+offset_right = 467.0
+offset_bottom = 61.0
+grow_vertical = 2
+theme = ExtResource("5_6whcx")
+text = "Last
+Checkpoint"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="4" type="Node2D" parent="Vinyl"]
+rotation = 0.523599
+
+[node name="Level2" type="Label" parent="Vinyl/4"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 178.0
+offset_top = -60.0
+offset_right = 467.0
+offset_bottom = 61.0
+grow_vertical = 2
+theme = ExtResource("5_6whcx")
+text = "Options"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="5" type="Node2D" parent="Vinyl"]
+rotation = 1.0472
+
+[node name="Level2" type="Label" parent="Vinyl/5"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 178.0
+offset_top = -60.0
+offset_right = 467.0
+offset_bottom = 61.0
+grow_vertical = 2
+theme = ExtResource("5_6whcx")
+text = "Menu"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Album" type="Sprite2D" parent="."]
+position = Vector2(-385.5, -0.327026)
+texture = ExtResource("6_aw4e0")
+
+[node name="Pointer2" type="Sprite2D" parent="." groups=["pulsingObjects"]]
+position = Vector2(728.5, 0)
+texture = ExtResource("7_nofjy")
+script = ExtResource("8_ewm6r")
+increasedScale = Vector2(1.1, 1.1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -680.0
+offset_top = -56.0
+offset_right = -160.0
+offset_bottom = 60.0
+theme = ExtResource("5_6whcx")
+theme_override_font_sizes/font_size = 96
+text = "GAME OVER"

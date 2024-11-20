@@ -1,34 +1,117 @@
 extends Control
-@onready var music = $jingle
-# Called when the node enters the scene tree for the first time.
+
+enum MenuOptions {
+	LEVEL_SELECT,
+	RESTART,
+	CHECKPOINT,
+	OPTIONS,
+	MAIN_MENU
+}
+
+@export var vinyl_rotations: Array[float] = [60.0, 30.0, 0.0, -30.0, -60.0]  # Adjust angles as needed
+@export var rotation_tween_duration: float = 0.15
+@export var slide_in_duration: float = 0.5  # Duration for slide-in animation
+@export var slide_offset: float = -1000  # Starting X offset for slide animation
+
+@onready var vinyl: Sprite2D = $Vinyl
+@onready var album: Sprite2D = $Album 
+@onready var albumBack: Sprite2D = $Back
+@onready var music: AudioStreamPlayer = $gameOverJingle
+var current_option: int = 2
+var options_count: int = MenuOptions.size()
+
 func _ready() -> void:
-	var newAudio = load("res://audioTracks/GameOver_120bpm.mp3") as AudioStream
-	music.stream = newAudio
-	music.stream.loop = false
+	update_selection()
 
+func playMusic() -> void:
+	print("Playing game over jingle")
+	music.play()
 
-func _onRetryButtonUp() -> void:
-	Globals.relocateToCheckpoint = false
-	Globals.gameOver = false
+func _input(event: InputEvent) -> void:
+	if !visible:
+		return
+	if event.is_action_pressed("jump"):
+		current_option = (current_option - 1 + options_count) % options_count
+		update_selection()
+	if event.is_action_pressed("slide"):
+		current_option = (current_option + 1) % options_count
+		update_selection()
+	if event.is_action_pressed("ui_accept"):
+		select_current_option()
+
+func update_selection() -> void:
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(vinyl, "rotation_degrees", 
+		vinyl_rotations[current_option], rotation_tween_duration)
+
+func select_current_option() -> void:
+	match current_option:
+		MenuOptions.LEVEL_SELECT:
+			_onLevelSelectButtonUp()
+		MenuOptions.RESTART:
+			_onCheckpointButtonUp()
+		MenuOptions.RESTART:
+			_onRestartButtonUp()
+		MenuOptions.OPTIONS:
+			_onOptionsButtonUp()
+		MenuOptions.MAIN_MENU:
+			_onMainMenuButtonUp()
+
+func _onLevelSelectButtonUp() -> void:
 	Engine.time_scale = 1.0
-	get_tree().reload_current_scene()
-
-
-func _onMenuButtonUp() -> void:
-	Engine.time_scale = 1.0
-	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
-	Globals.gameOver = false
-
-func _onCheckpointButtonDown() -> void:
-	Globals.relocateToCheckpoint = true
-	Globals.inLevel = false
-	Globals.gameOver = false
-
+	get_tree().paused = false
+	Globals.paused = false
+	Globals.time = 0.0
+	Globals.FadeTransition("res://ui/levelSelect.tscn")
 
 func _onCheckpointButtonUp() -> void:
+	# Globals.relocateToCheckpoint = true
+	# Globals.inLevel = false
+	# Globals.paused = false
+	# Engine.time_scale = 1.0
+	# get_tree().reload_current_scene()
+	_onRestartButtonUp()
+
+func _onRestartButtonUp() -> void:
+	Globals.relocateToCheckpoint = false
 	Engine.time_scale = 1.0
+	get_tree().paused = false
+	Globals.paused = false
 	get_tree().reload_current_scene()
+
+func _onMainMenuButtonUp() -> void:
+	Engine.time_scale = 1.0
+	get_tree().paused = false
+	Globals.paused = false
+	Globals.time = 0.0
+	Globals.FadeTransition("res://ui/landingPage.tscn")
+
+
+func _onOptionsButtonUp() -> void:
+	get_tree().paused = false
+	Globals.FadeTransition("res://ui/options.tscn")
+	Engine.time_scale = 1.0
+	Globals.paused = false
+	self.get_parent().get_parent().music.stream_paused = false
+
+func slide_in() -> void:
+	# Set initial position off-screen
+	vinyl.position.x += slide_offset
+	album.position.x += slide_offset
+	albumBack.position.x += slide_offset
+	# Create tween for slide-in animation
+	var tween = create_tween()
+	tween.set_parallel(true)  # Animate both nodes simultaneously
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
 	
-func playMusic() -> void:
-	music.play()
-	
+	# Tween both nodes to their original positions
+	tween.tween_property(vinyl, "position:x", 
+		vinyl.position.x - slide_offset, slide_in_duration + 0.75)
+	tween.tween_property(album, "position:x", 
+		album.position.x - slide_offset, slide_in_duration)
+	tween.tween_property(albumBack, "position:x",
+		albumBack.position.x - slide_offset, slide_in_duration)
+	tween.tween_callback(playMusic)
