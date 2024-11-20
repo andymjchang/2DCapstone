@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8pkmhakx7lqg"]
+[gd_scene load_steps=8 format=3 uid="uid://c8pkmhakx7lqg"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/keyBinding.gd" id="1_a8dno"]
-[ext_resource type="Texture2D" uid="uid://cxpyh4hstkkni" path="res://ui/assets/fullHealth.png" id="2_6w36b"]
+[ext_resource type="Texture2D" uid="uid://c71nm25hhp66h" path="res://ui/assets/onboarding/keyBackgrounds/key_long_pressed.png" id="2_ydsnk"]
+[ext_resource type="Texture2D" uid="uid://dc2huddrx2tpp" path="res://ui/assets/onboarding/keyBackgrounds/key_unpressed.png" id="3_atnw3"]
+[ext_resource type="FontFile" uid="uid://cjf3mxm83h58g" path="res://fonts/bahnschrift.ttf" id="3_dsn1w"]
+[ext_resource type="Texture2D" uid="uid://cgugvymv65o0l" path="res://ui/assets/onboarding/keyBackgrounds/key_pressed.png" id="4_deco1"]
+[ext_resource type="Texture2D" uid="uid://bx6dqbfrtwqe5" path="res://ui/assets/onboarding/keyBackgrounds/key_long_unpressed.png" id="5_h87cy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uh44k"]
 size = Vector2(85, 71)
@@ -9,22 +13,20 @@ size = Vector2(85, 71)
 [node name="keyBinding" type="Node2D"]
 script = ExtResource("1_a8dno")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.153968, 0.151923)
-texture = ExtResource("2_6w36b")
-
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_uh44k")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -29.0
 offset_top = -30.0
 offset_right = 30.0
 offset_bottom = 30.0
 
 [node name="keyName" type="RichTextLabel" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -41,3 +43,79 @@ bbcode_enabled = true
 text = "up"
 fit_content = true
 scroll_active = false
+
+[node name="LongPressed" type="Sprite2D" parent="."]
+scale = Vector2(0.154, 0.152)
+texture = ExtResource("2_ydsnk")
+
+[node name="Label" type="Label" parent="LongPressed"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -572.0
+offset_top = -189.0
+offset_right = -20.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_dsn1w")
+theme_override_font_sizes/font_size = 125
+text = "hi"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShortUnpressed" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.154, 0.152)
+texture = ExtResource("3_atnw3")
+
+[node name="Label" type="Label" parent="ShortUnpressed"]
+offset_left = -97.0
+offset_top = -99.0
+offset_right = 58.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_dsn1w")
+theme_override_font_sizes/font_size = 125
+text = "hi"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShortPressed" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.154, 0.152)
+texture = ExtResource("4_deco1")
+
+[node name="Label" type="Label" parent="ShortPressed"]
+offset_left = -65.0
+offset_top = -72.0
+offset_right = 104.0
+offset_bottom = 99.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_dsn1w")
+theme_override_font_sizes/font_size = 125
+text = "hi"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LongUnpressed" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.153968, 0.151923)
+texture = ExtResource("5_h87cy")
+
+[node name="Label" type="Label" parent="LongUnpressed"]
+offset_left = -279.0
+offset_top = -105.0
+offset_right = 253.0
+offset_bottom = 59.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_dsn1w")
+theme_override_font_sizes/font_size = 125
+text = "hi"
+horizontal_alignment = 1
+vertical_alignment = 1

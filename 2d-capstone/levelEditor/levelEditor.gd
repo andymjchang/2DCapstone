@@ -543,10 +543,6 @@ func _on_block_type_drop_down_item_selected(index: int) -> void:
 		enemyInstance.position = Vector2(450, 450)
 		currentBlock = enemyInstance
 		
-#TODO P button should extend currnt block/enemy by one measure
-# Q should move the enemy back by one button 
-# make the items reclickable
-# bind enemies to block, and when bound to a block they should auto snap
 	
 func startBlockOnNearstBeat(blockInstance):
 	var blockX = blockInstance.position.x
@@ -745,7 +741,6 @@ func _onSetMassMove(coords, val) -> void:
 		bindedBlocks = []
 		print("axis type: ",currentBlock.get_child(0).axisType  )
 		if currentBlock.get_child(0).axisType == "vertical":
-			#get all the blocks to the left 
 			bindedBlocks = getAreaChildren(coords, 0)
 		else:
 			print("horizontal true")
