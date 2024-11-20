@@ -183,8 +183,8 @@ func _ready():
 func startGame():
 	for object in get_tree().get_nodes_in_group("pulsingObjects"):
 		object.setBPM()
-	music.play(musicTime)
-	adaptiveMusic.play(musicTime)
+	music.play(musicTime + Globals.timeDelay)
+	adaptiveMusic.play(musicTime + Globals.timeDelay)
 	print("starting")
 	Globals.inLevel = true
 	if !Globals.customStart and !Globals.relocateToCheckpoint:
