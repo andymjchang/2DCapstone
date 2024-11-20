@@ -66,6 +66,7 @@ func takeDamage() -> void:
 			self.fullHealth.visible = false
 			self.zeroHealth.visible = true
 			healthStatus = "zero"
+			print("deleting a heart")
 		"zero":
 			#should not be getting here
 			print("should not be checking heart still")

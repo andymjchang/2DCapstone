@@ -8,6 +8,7 @@
 script = ExtResource("1_n0dm8")
 
 [node name="fullP1Health" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-2.38419e-07, 0)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_hu6l6")

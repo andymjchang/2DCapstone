@@ -35,7 +35,7 @@ func _onDamageTaken(who) -> void:
 
 	
 func _onHealingTaken(who) -> void:
-	#do damage on current heart
+	#heal by one heart
 	print("ui heal!")
 	if curP2Heart:
 		if curP2HeartIndex + 1 < 3:
