@@ -29,7 +29,7 @@ var id = 1
 func _ready():
 	add_to_group("blocks")
 	var multiplier = 1.0
-	if Globals.curFile.begins_with("Level 2"):
+	if Globals.curFile.begins_with("Level 3"):
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = true
 		tileMap = $sprite2D/TileMapLayer2

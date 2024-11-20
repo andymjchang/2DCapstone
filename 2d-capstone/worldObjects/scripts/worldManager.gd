@@ -89,7 +89,7 @@ func _ready():
 	adaptiveMusic = camera.get_node("ExtraTrackMusic")
 	
 	var backgroundName : String = "Lvl1"
-	if levelFile.begins_with("Tutorial"):
+	if levelFile.begins_with("Level 1"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Tutorial_Revamped_155bpm.mp3"
 		backgroundName = "Lvl0"
@@ -97,7 +97,7 @@ func _ready():
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Tutorial_Revamped_155bpm.mp3"
 		backgroundName = "Lvl1"
-	if levelFile.begins_with("Level 1"):
+	if levelFile.begins_with("Level 2"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Level1_Shifted_155bpm.wav"
 		backgroundName = "Lvl1"
@@ -105,7 +105,7 @@ func _ready():
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Tutorial_Revamped_155bpm.mp3"
 		backgroundName = "Lvl2"
-	if levelFile.begins_with("Level 2"):
+	if levelFile.begins_with("Level 3"):
 		Globals.setBPM(156)
 		Globals.currentSongFileName = "Level2_OGNoMelody_156bpm_1.mp3"
 		adaptiveMusic.active = true
@@ -122,7 +122,7 @@ func _ready():
 
 	player1 = playersList.get_node("Player1")
 	
-	if levelFile.begins_with("Tutorial"):
+	if levelFile.begins_with("Level 1"):
 		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
 		var popUpInstance = popUpScene.instantiate()
 		$Camera2D.add_child(popUpInstance)
@@ -307,7 +307,7 @@ func loadLevel():
 	$objectList/actionIndicators.load_array()
 	$objectList/skips.loadArray()
 	
-	if levelFile.begins_with("Level 2"):
+	if levelFile.begins_with("Level 3"):
 		for platform in platformBlocksList.get_children():
 			platform.get_node("sprite2D/TileMapLayer").visible = false
 			platform.get_node("sprite2D/TileMapLayer2").visible = true
