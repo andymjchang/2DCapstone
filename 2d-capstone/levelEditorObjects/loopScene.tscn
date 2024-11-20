@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyusj04w0ssa3"]
+[gd_scene load_steps=7 format=3 uid="uid://fdmuh63l3tsw"]
 
 [ext_resource type="Script" path="res://levelEditorObjects/ziplineScene.gd" id="1_ytu4j"]
 [ext_resource type="Script" path="res://levelEditorObjects/start.gd" id="2_k3l4u"]
+[ext_resource type="Texture2D" uid="uid://ccf1vp0xq0hae" path="res://levelEditor/programmerArtAssets/loop.png" id="3_tm4ea"]
 [ext_resource type="Script" path="res://levelEditorObjects/end.gd" id="4_alhq5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3yw7x"]
@@ -22,11 +23,8 @@ script = ExtResource("2_k3l4u")
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_3yw7x")
 
-[node name="ColorRect" type="ColorRect" parent="Start"]
-offset_left = -146.0
-offset_top = -151.0
-offset_right = 143.0
-offset_bottom = 146.0
+[node name="Sprite2D" type="Sprite2D" parent="Start"]
+texture = ExtResource("3_tm4ea")
 
 [node name="End" type="Node2D" parent="."]
 script = ExtResource("4_alhq5")
@@ -37,8 +35,5 @@ script = ExtResource("4_alhq5")
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_fjgvp")
 
-[node name="ColorRect" type="ColorRect" parent="End"]
-offset_left = -146.0
-offset_top = -151.0
-offset_right = 143.0
-offset_bottom = 146.0
+[node name="Sprite2D" type="Sprite2D" parent="End"]
+texture = ExtResource("3_tm4ea")

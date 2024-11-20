@@ -41,8 +41,12 @@ powerups
 jumpBoosts
 1025, 525,
 coins
+1350, 450,
 keyBindings
 skips
 mashes
 holds
 moveLines
+loops
+675, 375, 1250, 400,
+950, 550, 1350, 550,
