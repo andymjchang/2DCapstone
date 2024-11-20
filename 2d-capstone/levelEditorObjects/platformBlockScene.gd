@@ -43,10 +43,8 @@ func _process(delta: float) -> void:
 		decreaseByOneTile()
 	
 func extendByOneTile() -> void : 
-	#I need to get the max of the col and rows
 	var usedCells = tileMap.get_used_cells()
 	var minMax = getMaxMinCoord(usedCells)
-	#we want to start one col over, so start with max x and min y
 	var startX = minMax[0].x 
 	var startY = minMax[0].y
 	
@@ -54,31 +52,25 @@ func extendByOneTile() -> void :
 	var endY = minMax[1].y
 	#we have to reset the end of the tile so that it doesnt look weird
 	
-	#we want to move the end cap down by two for all of them 
+	#we want to move the end cap down by two cols
 	for i in range(0,3):
 			#starts at the furthest left box of the end tiles
 			var curX = minMax[1].x - i
 			for j in range(startY,endY+1):
 				var atlasCoords = tileMap.get_cell_atlas_coords(Vector2i(curX, j))
 				tileMap.set_cell(Vector2i(curX+2, j), 1, atlasCoords)
+				#erase the old end cap
 				tileMap.erase_cell(Vector2i(curX, j))
 				
 				
-	#now we need to add in the blank two spaces we have created
-	
+	#now we need to add tiles in the blank two spaces we have created
 	#we want to get a random index into our filler array
 	var randIndex = int(randf_range(0,6))
 	var tiles = fillerTiles[randIndex]
+	var curX = minMax[1].x - 2.0
 	
-	#now we want to loop through the tiles and set them 
-	
-	var curX = minMax[1].x -2.0
-	
-	#for i in range(0,2):
-		##we are setting 2 cols
-		#curX+=i
-		#var curCol = tiles[i]
 	var tileIndex = 0
+	#fill in the blanks
 	for j in range(startY,endY+1):
 		#we set the start row
 		var curAtlasCoordPair = tiles[tileIndex]
@@ -86,23 +78,14 @@ func extendByOneTile() -> void :
 		tileMap.set_cell(Vector2i(curX+1, j), 1, curAtlasCoordPair[1])
 		tileIndex+=1
 			
-			#we want to index into our filler tiles
-	#for i in range (startY,endY):
-		#tileMap.set_cell(Vector2i(startX, startY+i), 1, fillerTiles[i])
-		#
-	#startX = minMax[1].x + 1
-	#startY = minMax[0].y
-	#for i in range(0,4):
-		#tileMap.set_cell(Vector2i(startX, startY), 1, endTiles[i])
-		#startY+=1
-		
-	#alter the area2d to represent the new size
+	#extent shifting
 	self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x += tileWidth
 	self.get_node("Node2D/EditorArea0").global_position.x += tileWidth
 	newPos = self.get_node("Node2D/EditorArea0").global_position.x
 	extents = self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x
 	numCols+=2
 	
+#decrease by 2 rows, cant delete the start or end blocks
 func decreaseByOneTile() -> void: 
 	if numCols > 6:
 		var usedCells = tileMap.get_used_cells()
@@ -117,7 +100,7 @@ func decreaseByOneTile() -> void:
 		var moveY = startY
 
 		
-		#we want to delete two rows, but not starting at the end
+		#we want to delete two rows, but not excluding at the end
 		for i in range (0,2):
 			var curX = endX - (i + 3)
 			moveY = startY
@@ -130,6 +113,7 @@ func decreaseByOneTile() -> void:
 		moveY = startY
 		#add in end cap
 		
+		#shift down the end tiles
 		for i in range(2,-1,-1):
 			#starts at the furthest left box of the end tiles
 			var curX = minMax[1].x - i
@@ -138,13 +122,15 @@ func decreaseByOneTile() -> void:
 				tileMap.set_cell(Vector2i(curX-2, j), 1, atlasCoords)
 				tileMap.erase_cell(Vector2i(curX, j))
 
-			
+		#extent shiftimg	
 		self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x -= tileWidth
 		self.get_node("Node2D/EditorArea0").global_position.x -= tileWidth
 		newPos = self.get_node("Node2D/EditorArea0").global_position.x 
 		extents = self.get_node("Node2D/EditorArea0/%CollisionShape2D").shape.extents.x
 		numCols-=2
 	
+	
+#gets the bound of a platforms tile map
 func getMaxMinCoord(usedCells : Array) -> Array:
 	#get the max/min of the tilemap 
 	var minCoords = Vector2(INF, INF)
@@ -159,15 +145,16 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 			maxCoords.y = cell.y
 		if cell.y < minCoords.y:
 			minCoords.y = cell.y
-	
-	print("new min max, ", [minCoords, maxCoords])		
+
 	return [minCoords, maxCoords]
 	
-#TODO make this work for more than one tilemap
+#called when tiles are loaded into the editor
 func setTileMaps(posPoints : Array) -> void:
 	if posPoints.size() > 2:
+		#did this when we changed how many tiles long a default block was
 		if posPoints[2] == 12:
 			posPoints[2] = 20
+		#dont do anything if the block being loaded in is already default length
 		if posPoints[2] < numCols:
 			while numCols > posPoints[2]:
 				self.decreaseByOneTile()
@@ -177,6 +164,7 @@ func setTileMaps(posPoints : Array) -> void:
 				
 				
 				
+#not using this rn
 func setStartTiles() -> void:
 	#the start blocks are only 1 tile wide, so we just need to 
 	#get how long it is
@@ -192,6 +180,7 @@ func setStartTiles() -> void:
 		#we need to grab the start tiles, which wi
 		startTiles.append(Vector2(startX,i))
 
+#not being used rn
 func setEndTiles() -> void:
 	var usedCells = base.get_used_cells()
 	var maxMin = getMaxMinCoord(usedCells)
@@ -232,6 +221,8 @@ func setFillerTiles() -> void:
 	
 	#start from minx +1 and go to maxx -1
 	fillerTiles = []
+	
+	#store the atlas coords of all the filler tiles, dont include end/start columns
 	for currentX in range(minX + 3, maxX-2, 2):
 		var nextX = currentX + 1
 		var curCoords : Vector2
@@ -239,13 +230,12 @@ func setFillerTiles() -> void:
 		var coordPair : Array
 		var oneLane = []
 		#TODO see if there is a better way to do this
-		#we are gonna store there atlas coords
+		#we want to store the atlas data for two rows in one index
 		for j in range(minY,maxY+1):
-			#var atlasCoords = tileMap.get_cell_atlas_coords(Vector2i(curX, j))
 			curCoords = tileMap.get_cell_atlas_coords(Vector2i(currentX, j))
 			curNextCoords = tileMap.get_cell_atlas_coords(Vector2i(currentX + 1, j))
 			coordPair = [curCoords,curNextCoords]
+			#one lane = two columns
 			oneLane.append(coordPair)
 		fillerTiles.append(oneLane)
-		print("added block")
 	

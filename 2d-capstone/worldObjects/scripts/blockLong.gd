@@ -6,11 +6,15 @@ var actionIndicators
 var curSprite
 
 var numCols = 20
+var numRows = 13
 var extents
 var tileHeight
 var fillerTiles = [Vector2(2,1),Vector2(2,2),Vector2(2,2), Vector2(2,4)]
 var endTiles = [Vector2(4,1),Vector2(3,2),Vector2(3,2), Vector2(4,4)]
 var startTiles = [Vector2(0,1),Vector2(1,2),Vector2(1,3), Vector2(0,4)]
+var windowTiles = []
+var windowLength = [4, 3, 6]
+var windowHeight = 4
 
 var filler2Tiles = [Vector2(4,0),Vector2(4,1),Vector2(4,1) ,Vector2(4,1) ]
 var end2Tiles = [Vector2(5,0),Vector2(5,1),Vector2(5,1) ,Vector2(5,1)]
@@ -36,6 +40,7 @@ func _ready():
 		$sprite2D/TileMapLayer2.visible = true
 		tileMap = $sprite2D/TileMapLayer2
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
+		numCols = 12
 		id = 0
 	else:
 		$sprite2D/TileMapLayer.visible = true
@@ -70,7 +75,8 @@ func extendByOneTile() -> void :
 	#now we need to add in the blank two spaces we have created
 	
 	#we want to get a random index into our filler array
-	var randIndex = int(randf_range(0,6))
+	print("filler tile size: ", fillerTiles.size())
+	var randIndex = int(randf_range(0,fillerTiles.size()))
 	var tiles = fillerTiles[randIndex]
 	
 	#now we want to loop through the tiles and set them 
@@ -156,6 +162,9 @@ func setTileMaps(posPoints : Array):
 		elif posPoints[2] > numCols:
 			while numCols < posPoints[2]:
 				self.extendByOneTile()
+		
+		#if id == 0:
+			#placeWindows()
 				
 func setFillerTiles() -> void:
 	#we do everything in twos
@@ -188,6 +197,71 @@ func setFillerTiles() -> void:
 		fillerTiles.append(oneLane)
 		print("added block")
 	
+func placeWindows() -> void:
+	#we want to get a random window style
+	var randIndex = int(randf_range(0,3))
+	var windowSet = windowTiles[randIndex]
+	#add the buffer
+	var curLength = windowLength[randIndex] + 4
+	
+	
+	
+	#we need to get the maxMin of our current block after all the de/increases
+	var usedCells = tileMap.get_used_cells()
+	var minMax = getMaxMinCoord(usedCells)
+	
+	var minX = minMax[0].x
+	var maxX = minMax[1].x	
+	var maxY = minMax[1].x
+	#we are not counting the side portion of the wall
+	var length = abs(maxX - minX) - 2
+	
+	var numWindows = int(length/curLength)
+	
+	var curX = 0
+	#place windows
+	for i in range(0, numWindows+1):
+		
+		#account for padding
+		for j in range(1, maxY+1, windowHeight+2):
+			var upperLeftCorner = Vector2i(i,j)
+			placeOneWindow(upperLeftCorner, windowSet, windowLength[randIndex])
+	
+	
+	# we need to divide the length of our block 
 
-
+func placeOneWindow(start, windowSet, length) -> void:
+	
+	var index = 0
+	
+	for i in range(start.x, start.x+length+1):
+		for j in range(start.y, windowHeight+1):
+			tileMap.set_cell(Vector2i(i, j), id, windowSet[index])
+			index+=1
+	
+	
+func setWindowTiles() -> void:
+	#set the atlas coords of all the windows\
+	var windowOne = []
+	
+	for i in range(0,6):
+		for j in range(5, 9):
+			var newCoords = Vector2i(i,j)
+			windowOne.append(newCoords)
+	
+	var windowTwo = []
+	
+	for i in range(4,7):
+		for j in range(5, 9):
+			var newCoords = Vector2i(i,j)
+			windowTwo.append(newCoords)
+			
+	var windowThree = []
+	
+	for i in range(6,12):
+		for j in range(5, 9):
+			var newCoords = Vector2i(i,j)
+			windowThree.append(newCoords)
+			
+	windowTiles = [windowOne, windowTwo, windowThree]
 					
