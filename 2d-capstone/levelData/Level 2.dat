@@ -1,5 +1,6 @@
 platformBlocks
 50, 600, 20, <null>, <null>,
+25, 275, 20, <null>, <null>,
 actionIndicators
 playerCheckpoints
 player

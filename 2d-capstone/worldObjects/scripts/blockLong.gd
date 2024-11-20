@@ -212,7 +212,7 @@ func placeWindows() -> void:
 	
 	var minX = minMax[0].x
 	var maxX = minMax[1].x	
-	var maxY = minMax[1].x
+	var maxY = minMax[1].y
 	#we are not counting the side portion of the wall
 	var length = abs(maxX - minX) - 2
 	
@@ -223,8 +223,9 @@ func placeWindows() -> void:
 	for i in range(minX, minX+1):
 		
 		#account for padding
-		#for j in range(1, maxY+1, windowHeight+2):
-		for j in range (1, 2):
+		print("maxy ", maxY, "window height: ", windowHeight )
+		for j in range(1, maxY+1, windowHeight+2):
+			print("i ", i, " j: ",j)
 			var upperLeftCorner = Vector2i(i,j)
 			placeOneWindow(upperLeftCorner, windowSet, windowLength[1])
 	
@@ -234,17 +235,17 @@ func placeWindows() -> void:
 func placeOneWindow(start, windowSet, length) -> void:
 	
 	var index = 0
-	print("window height:", windowHeight)
-	print("window length:", length)
-	print("window set: ", windowSet)
-	
-	print("x range: ", start.x, " - ", start.x+length)
-	print("y range: ", start.y ," - ", windowHeight)
+	#print("window height:", windowHeight)
+	#print("window length:", length)
+	#print("window set: ", windowSet)
+	#
+	#print("x range: ", start.x, " - ", start.x+length)
+	#print("y range: ", start.y ," - ", windowHeight)
 	for i in range(start.x, start.x+length+1):
-		for j in range(start.y, windowHeight+1):
+		for j in range(start.y, windowHeight+start.y):
 			if windowSet.size() > index:
-				print("i ", i, " j: ",j)
-				print("atlas coords: ",  windowSet[index])
+				print("i2 ", i, " j2: ",j)
+				#print("atlas coords: ",  windowSet[index])
 				tileMap.set_cell(Vector2i(i, j), 0, windowSet[index])
 				index+=1
 	
