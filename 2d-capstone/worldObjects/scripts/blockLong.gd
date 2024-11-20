@@ -200,9 +200,9 @@ func setFillerTiles() -> void:
 func placeWindows() -> void:
 	#we want to get a random window style
 	var randIndex = int(randf_range(0,3))
-	var windowSet = windowTiles[1]
+	var windowSet = windowTiles[randIndex]
 	#add the buffer
-	var curLength = windowLength[randIndex] + 4
+	var curLength = windowLength[randIndex]  + 1
 	
 	
 	
@@ -220,14 +220,15 @@ func placeWindows() -> void:
 	
 	var curX = 0
 	#place windows
-	for i in range(minX, maxX+1, length+2):
-		
+	for i in range(minX+2, maxX+1, curLength):
+		if i <= maxX - 2 - curLength:
+			
 		#account for padding
-		print("maxy ", maxY, "window height: ", windowHeight )
-		for j in range(1, maxY+1, windowHeight+2):
-			print("i ", i, " j: ",j)
-			var upperLeftCorner = Vector2i(i,j)
-			placeOneWindow(upperLeftCorner, windowSet, windowLength[1])
+			print("maxy ", maxY, "window height: ", windowHeight )
+			for j in range(1, maxY+1, windowHeight+2):
+				print("i ", i, " j: ",j)
+				var upperLeftCorner = Vector2i(i,j)
+				placeOneWindow(upperLeftCorner, windowSet, windowLength[1])
 	
 	
 	# we need to divide the length of our block 
