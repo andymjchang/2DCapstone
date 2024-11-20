@@ -44,6 +44,8 @@ player
 enemies
 1200, 550, enemy,
 killFloors
+900, 850,
+1625, 850,
 goalBlocks
 5050, 750,
 3050, 875,

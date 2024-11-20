@@ -495,5 +495,6 @@ func _onMovePlayer(location : Vector2):
 	skipping = true
 	emit_signal("changeSpeed", 2)
 	player1.emit_signal("skipping")
+	player1.exitedZip = false
 	
 	

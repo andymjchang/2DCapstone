@@ -26,6 +26,7 @@ func _onBodyEntered(body):
 			print("Destination: ", destination.global_position)
 			print("Velocity: ", direction)
 			#body.position -= direction * Globals.pixelsPerFrame * Globals.scrollSpeed
+			body.zipDest = get_parent().get_child(END).global_position
 			body.velocity = direction * Globals.pixelsPerFrame * Globals.scrollSpeed
 			#body.velocity.x = Globals.pixelsPerFrame * Globals.scrollSpeed
 			#body.velocity.y =
@@ -33,6 +34,9 @@ func _onBodyEntered(body):
 				body.inZipline = true
 				body.relocating = true
 				Globals.vertical = true
+			else:
+				print("Switching to exited")
+				body.exitedZip = true
 
 		elif self.name == "ziplineEnd" and body.inZipline:
 			print("at end")
