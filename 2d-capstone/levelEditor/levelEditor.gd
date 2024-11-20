@@ -707,9 +707,9 @@ func _on_load_file_pressed() -> void:
 	$UI/FileLoadMode/StatusMessage.text = "Enter a file name."
 	var tgtFile = $UI/FileLoadMode/FileName.text
 	print("Tgt:" , tgtFile)
-	if "tutorial" in tgtFile.to_lower() or "level 1" in tgtFile.to_lower() or "level 2" in tgtFile.to_lower() or "level 3" in tgtFile.to_lower():
-		$UI/FileLoadMode/StatusMessage.text = "Cannot open file."
-	elif FileAccess.file_exists(levelDataPath + tgtFile + ".dat"):
+	# if "tutorial" in tgtFile.to_lower() or "level 1" in tgtFile.to_lower() or "level 2" in tgtFile.to_lower() or "level 3" in tgtFile.to_lower():
+	# 	$UI/FileLoadMode/StatusMessage.text = "Cannot open file."
+	if FileAccess.file_exists(levelDataPath + tgtFile + ".dat"):
 		saveFileName = tgtFile
 		loadLevel()
 		$UI/FileLoadMode.hide()

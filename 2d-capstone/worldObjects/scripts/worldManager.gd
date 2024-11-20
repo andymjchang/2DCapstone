@@ -360,11 +360,9 @@ func showLevelCompleted():
 	Globals.inLevel = false
 	$LevelUI/levelCompleteScreen.emit_signal("updateScoreData")
 	$LevelUI/levelCompleteScreen.visible = true
-	var newAudio = load("res://audioTracks/CourseComplete_153bpm.mp3") as AudioStream
-	$LevelUI/levelCompleteScreen/jingle.stream = newAudio
-	$LevelUI/levelCompleteScreen/jingle.play()
-	
+	$LevelUI/levelCompleteScreen.slide_in()	
 	Globals.restartLevelData()
+	get_tree().paused = true
 	#statusMessage.text = "Level Completed!"
 	#restartButton.visible = true
 	

@@ -43,6 +43,9 @@ func update_selection() -> void:
 		vinyl_rotations[current_option], rotation_tween_duration)
 
 func select_current_option() -> void:
+	get_tree().paused = false
+	Engine.time_scale = 1.0
+	Globals.paused = false
 	match current_option:
 		MenuOptions.RESUME:
 			_onResumeButtonUp()
@@ -56,9 +59,6 @@ func select_current_option() -> void:
 			_onMainMenuButtonUp()
 
 func _onResumeButtonUp() -> void:
-	get_tree().paused = false
-	self.visible = false
-	Globals.paused = false
 	self.get_parent().get_parent().music.stream_paused = false
 	self.get_parent().get_parent().adaptiveMusic.stream_paused = false
 
@@ -72,25 +72,16 @@ func _onCheckpointButtonUp() -> void:
 
 func _onRestartButtonUp() -> void:
 	Globals.relocateToCheckpoint = false
-	Engine.time_scale = 1.0
-	get_tree().paused = false
-	Globals.paused = false
 	get_tree().reload_current_scene()
 
 func _onMainMenuButtonUp() -> void:
-	Engine.time_scale = 1.0
-	get_tree().paused = false
-	Globals.paused = false
 	Globals.time = 0.0
 	Globals.FadeTransition("res://ui/landingPage.tscn")
 
 
 func _onOptionsButtonUp() -> void:
-	get_tree().paused = false
-	Globals.FadeTransition("res://ui/options.tscn")
-	Engine.time_scale = 1.0
-	Globals.paused = false
 	self.get_parent().get_parent().music.stream_paused = false
+	Globals.FadeTransition("res://ui/options.tscn")
 
 func slide_in() -> void:
 	# Set initial position off-screen

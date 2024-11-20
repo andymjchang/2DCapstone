@@ -377,6 +377,7 @@ breakableWalls
 ziplines
 17975, -125, 19225, 200,
 placers
+30400, -450, 30400, -450, 30400, -450,
 slideWalls
 3475, -25,
 5575, -25,

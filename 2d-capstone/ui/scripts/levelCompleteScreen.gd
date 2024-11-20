@@ -2,22 +2,26 @@ extends Control
 signal updateScoreData()
 
 enum MenuOptions {
+	NEXT_LEVEL,
 	LEVEL_SELECT,
 	RESTART
 }
 
-@export var vinyl_rotations: Array[float] = [0.0, -30.0]  # Adjust these values as needed
+@export var vinyl_rotations: Array[float] = [30.0, 0.0, -30.0]  
 @export var rotation_tween_duration: float = 0.15
+@export var slide_in_duration: float = 0.5  # Duration for slide-in animation
+@export var slide_offset: float = -1000  # Starting X offset for slide animation
 
 @onready var jingle = $jingle
-@onready var vinyl: Sprite2D
+@onready var vinyl: Sprite2D = $Vinyl
+@onready var album: Sprite2D = $Album 
+@onready var albumBack: Sprite2D = $Back  
 
 var current_option: int = 0
 var options_count: int = MenuOptions.size()
 
 func _ready() -> void:
 	self.updateScoreData.connect(_onUpdateScoreData)
-	vinyl = $Vinyl  # Make sure to add a Vinyl node in the scene
 	update_selection()
 
 func _input(event: InputEvent) -> void:
@@ -40,24 +44,47 @@ func update_selection() -> void:
 		vinyl_rotations[current_option], rotation_tween_duration)
 
 func select_current_option() -> void:
+	jingle.stop()
+	Engine.time_scale = 1.0
+	get_tree().paused = false
+	Globals.gameOver = false
 	match current_option:
+		MenuOptions.NEXT_LEVEL:
+			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 		MenuOptions.LEVEL_SELECT:
-			Engine.time_scale = 1.0
 			Globals.FadeTransition("res://ui/levelSelect.tscn")
-			Globals.gameOver = false
 		MenuOptions.RESTART:
 			Globals.relocateToCheckpoint = false
-			Engine.time_scale = 1.0
 			get_tree().reload_current_scene()
-			Globals.gameOver = false
 
 func _onUpdateScoreData() -> void:
-	$perfectLabel.text += " " + str(Globals.numPerfects)
-	$goodLabel.text += " " + str(Globals.numGoods)
-	$barelyLabel.text += " " + str(Globals.numBarelys)
-	$coinsLabel.text += " " + str(Globals.coinsCollected)
-	$overallPercentageLabel.text += " " + "%2.2f" % Globals.percentageHit + "%"
-	$scoreLabel.text += " "+ str(Globals.endScore)
+	$perfectLabel.text = str(Globals.numPerfects)
+	$goodLabel.text = str(Globals.numGoods)
+	$barelyLabel.text = str(Globals.numBarelys)
+	$coinsLabel.text = str(Globals.coinsCollected)
+	$accuracyLabel.text = "%2.2f" % Globals.percentageHit + "%"
+	$scoreLabel.text = str(Globals.endScore)
 
 func playMusic() -> void:
-	jingle.play()
+	jingle.play(0.0)
+
+func slide_in() -> void:
+	# Set initial position off-screen
+	vinyl.position.x += slide_offset
+	album.position.x += slide_offset
+	albumBack.position.x += slide_offset
+	
+	# Create tween for slide-in animation
+	var tween = create_tween()
+	tween.set_parallel(true)  # Animate both nodes simultaneously
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	
+	# Tween both nodes to their original positions
+	tween.tween_property(vinyl, "position:x", 
+		vinyl.position.x - slide_offset, slide_in_duration + 0.75)
+	tween.tween_property(album, "position:x", 
+		album.position.x - slide_offset, slide_in_duration)
+	tween.tween_property(albumBack, "position:x",
+		albumBack.position.x - slide_offset, slide_in_duration)
+	tween.tween_callback(playMusic)

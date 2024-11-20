@@ -25,7 +25,7 @@ func _ready() -> void:
 
 func playMusic() -> void:
 	print("Playing game over jingle")
-	music.play()
+	music.play(0.0)
 
 func _input(event: InputEvent) -> void:
 	if !visible:
@@ -47,10 +47,14 @@ func update_selection() -> void:
 		vinyl_rotations[current_option], rotation_tween_duration)
 
 func select_current_option() -> void:
+	Engine.time_scale = 1.0
+	get_tree().paused = false
+	Globals.paused = false
+	music.stop()
 	match current_option:
 		MenuOptions.LEVEL_SELECT:
 			_onLevelSelectButtonUp()
-		MenuOptions.RESTART:
+		MenuOptions.CHECKPOINT:
 			_onCheckpointButtonUp()
 		MenuOptions.RESTART:
 			_onRestartButtonUp()
@@ -60,9 +64,6 @@ func select_current_option() -> void:
 			_onMainMenuButtonUp()
 
 func _onLevelSelectButtonUp() -> void:
-	Engine.time_scale = 1.0
-	get_tree().paused = false
-	Globals.paused = false
 	Globals.time = 0.0
 	Globals.FadeTransition("res://ui/levelSelect.tscn")
 
@@ -76,25 +77,16 @@ func _onCheckpointButtonUp() -> void:
 
 func _onRestartButtonUp() -> void:
 	Globals.relocateToCheckpoint = false
-	Engine.time_scale = 1.0
-	get_tree().paused = false
-	Globals.paused = false
 	get_tree().reload_current_scene()
 
 func _onMainMenuButtonUp() -> void:
-	Engine.time_scale = 1.0
-	get_tree().paused = false
-	Globals.paused = false
 	Globals.time = 0.0
 	Globals.FadeTransition("res://ui/landingPage.tscn")
 
 
 func _onOptionsButtonUp() -> void:
-	get_tree().paused = false
-	Globals.FadeTransition("res://ui/options.tscn")
-	Engine.time_scale = 1.0
-	Globals.paused = false
 	self.get_parent().get_parent().music.stream_paused = false
+	Globals.FadeTransition("res://ui/options.tscn")
 
 func slide_in() -> void:
 	# Set initial position off-screen
