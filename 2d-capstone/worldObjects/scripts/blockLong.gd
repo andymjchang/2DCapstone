@@ -28,19 +28,12 @@ var id = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("blocks")
-	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
-	tileHeight = tileMap.tile_set.tile_size.y * tileMap.scale.y 
-	var newWidth = tileWidth * 20.0
-	extents = self.get_node("CollisionShape2D").shape.extents
-	extents = extents
-	extents = newWidth/2.0
-	self.get_node("CollisionShape2D").shape.extents.x = extents
 	if Globals.curFile.begins_with("Level 2"):
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = true
 		tileMap = $sprite2D/TileMapLayer2
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
-		numCols = 12
+		setWindowTiles()
 		id = 0
 	else:
 		$sprite2D/TileMapLayer.visible = true
@@ -49,6 +42,13 @@ func _ready():
 		allTiles = [startTiles, fillerTiles, endTiles]
 		id = 1
 	setFillerTiles()
+	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
+	tileHeight = tileMap.tile_set.tile_size.y * tileMap.scale.y 
+	var newWidth = tileWidth * 12.0
+	extents = self.get_node("CollisionShape2D").shape.extents
+	extents = extents
+	extents = newWidth/2.0
+	self.get_node("CollisionShape2D").shape.extents.x = extents
 		
 func extendByOneTile() -> void : 
 	#I need to get the max of the col and rows
@@ -81,7 +81,7 @@ func extendByOneTile() -> void :
 	
 	#now we want to loop through the tiles and set them 
 	
-	var curX = minMax[1].x -2.0
+	var curX = minMax[1].x - 2.0
 	
 	var tileIndex = 0
 	for j in range(startY,endY+1):
@@ -154,7 +154,7 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 	
 func setTileMaps(posPoints : Array):
 	if posPoints.size() >= 3:
-		if posPoints[2]==12:
+		if posPoints[2] == 12:
 			posPoints[2]=20
 		if posPoints[2] < numCols:
 			while numCols > posPoints[2]:
@@ -163,8 +163,8 @@ func setTileMaps(posPoints : Array):
 			while numCols < posPoints[2]:
 				self.extendByOneTile()
 		
-		#if id == 0:
-			#placeWindows()
+		if id == 0:
+			placeWindows()
 				
 func setFillerTiles() -> void:
 	#we do everything in twos
@@ -233,10 +233,16 @@ func placeWindows() -> void:
 func placeOneWindow(start, windowSet, length) -> void:
 	
 	var index = 0
+	print("window height:", windowHeight)
+	print("window length:", windowLength)
+	print("window set: ", windowSet)
 	
-	for i in range(start.x, start.x+length+1):
-		for j in range(start.y, windowHeight+1):
-			tileMap.set_cell(Vector2i(i, j), id, windowSet[index])
+	print("x range: ", start.x, " - ", start.x+length)
+	print("y range: ", start.y ," - ", windowHeight)
+	for i in range(start.x, start.x+length):
+		for j in range(start.y, windowHeight):
+			print("i ", i, " j: ",j)
+			tileMap.set_cell(Vector2i(i, j), 0, windowSet[index])
 			index+=1
 	
 	
