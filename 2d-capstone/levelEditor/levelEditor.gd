@@ -697,13 +697,20 @@ func setFileLoad():
 
 func _on_load_file_pressed() -> void:
 	var tgtFile = $UI/FileLoadMode/FileName.text
-	if FileAccess.file_exists(levelDataPath + tgtFile + ".dat"):
+	print("Tgt:" , tgtFile)
+	if "Level 1" in tgtFile or "Level 2" in tgtFile or "Level 3" in tgtFile:
+		$UI/FileLoadMode/StatusMessage.text = "Cannot open file."
+	elif FileAccess.file_exists(levelDataPath + tgtFile + ".dat"):
 		saveFileName = tgtFile
 		loadLevel()
 		$UI/FileLoadMode.hide()
+	else:
+		saveFileName = tgtFile
+		$UI/FileLoadMode.hide()
 
 func _on_play_level_button_button_down() -> void:
-	# save_scene_to_file()
+	overwrite = true
+	save_scene_to_file()
 	# var scene_instance = levelTemplatePacked.instantiate()
 	
 	get_tree().paused = false
@@ -711,10 +718,11 @@ func _on_play_level_button_button_down() -> void:
 	# Access the current scene and remove it from the scene tree
 	#var current_scene = get_tree().current_scene
 	#Globals.editorNode = current_scene
-	# Globals.enablePreviewUI()
+	Globals.enablePreviewUI()
 	Globals.currentEditorFileName = saveFileName
-	# get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
-	Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+	Globals.curFile = saveFileName
+	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+	#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 	#current_scene.visible = false
 
 	# Add the new scene to the scene tree and set it as the current scene
