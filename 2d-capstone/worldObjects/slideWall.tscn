@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=4 uid="uid://crscxlpwqp343"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/slideWall.gd" id="1_y7fla"]
-[ext_resource type="TileSet" uid="uid://dwcdn170llf2y" path="res://backgrounds/tilemaps/slideLevel1Revised.tres" id="2_hk8e3"]
-[ext_resource type="TileSet" uid="uid://c4mb28sdp21yv" path="res://backgrounds/tilemaps/level2Revised.tres" id="3_w4x14"]
+[ext_resource type="TileSet" uid="uid://c4r74xh1vg5ub" path="res://backgrounds/tilemaps/slideLevel1Revised.tres" id="2_hk8e3"]
+[ext_resource type="TileSet" uid="uid://dyhex4sh1e2gt" path="res://backgrounds/tilemaps/slideLevel2Revised.tres" id="3_d2ufn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r51o2"]
 size = Vector2(51, 231)
@@ -32,6 +32,6 @@ tile_set = ExtResource("2_hk8e3")
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 scale = Vector2(0.05, 0.05)
 tile_map_data = PackedByteArray("AAD///7/AAAEAAEAAAAAAP7/AAAEAAEAAGAAAP3/AAAEAAEAAAD///3/AAAEAAEAAAD///z/AAAEAAEAAAD///v/AAAEAAEAAAD+//v/AAAAAAEAAAD+//r/AAAAAAEAAAD+//n/AAAAAAEAAAD+//j/AAAAAAEAAAD///j/AAAEAAEAAAD///f/AAAEAAEAAGD///r/AAAEAAEAAGD///n/AAAEAAEAAGD+/+//AAAAAAEAAAD//+//AAAEAAEAAGAAAO//AAAEAAEAAGABAO//AAAFAAEAAAD+//D/AAAAAAEAAAD+//H/AAAAAAEAAAD+//L/AAAAAAEAAAD+//P/AAAAAAEAAAD+//T/AAAAAAEAAAD+//X/AAAAAAEAAAD+//b/AAAAAAEAAAD+//f/AAAAAAEAAAABAPf/AAAFAAEAAAABAPb/AAAFAAEAAAABAPX/AAAFAAEAAAABAPT/AAAFAAEAAAABAPP/AAAFAAEAAAABAPL/AAAFAAIAAAABAPH/AAAFAAEAAAABAPD/AAAFAAIAAAAAAPD/AAAEAAEAAGD///D/AAAEAAEAAGD///H/AAAEAAEAAGD///P/AAAEAAEAAGD///T/AAAEAAEAAGD///X/AAAEAAEAAGD///b/AAAEAAEAAGAAAPf/AAAEAAEAAGAAAPb/AAAEAAEAAGAAAPX/AAAEAAEAAGAAAPT/AAAEAAEAAGAAAPP/AAAEAAEAAGAAAPL/AAAEAAEAAGAAAPH/AAAEAAEAAGD///L/AAAEAAEAAGABAPz/AAAFAAEAAAAAAPz/AAAEAAEAAGAAAPv/AAAEAAEAAGABAPv/AAAFAAEAAAABAPr/AAAFAAEAAAAAAPr/AAAEAAEAAGAAAPn/AAAEAAEAAGABAPn/AAAFAAEAAAABAPj/AAAFAAIAAAAAAPj/AAAEAAEAAGD+//z/AAAAAAEAAAD+//3/AAAAAAEAAAD+//7/AAAAAAEAAAD+////AAAAAAEAAAD/////AAAEAAEAAGD//wAAAAAEAAEAAAAAAAAAAAAEAAEAAAABAAAAAAAFAAEAAAABAP//AAAFAAEAAAABAP7/AAAFAAEAAAAAAP//AAAEAAEAAGABAP3/AAAFAAIAAAD+/+7/AAAAAAAAAAD//+7/AAAAAAAAAAAAAO7/AAAAAAAAAAABAO7/AAAAAAAAAAD+/wAAAAAAAAEAAAA=")
-tile_set = ExtResource("3_w4x14")
+tile_set = ExtResource("3_d2ufn")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

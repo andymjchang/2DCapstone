@@ -282,8 +282,6 @@ func _onRelocate(nearestPoint):
 		checkpoint = nearestPoint
 		position = nearestPoint.position
 
-
-
 func _onAnimationFinished():
 	#print("Finished, ", $Animation.animation)
 	if $Animation.animation == "Jump":
@@ -342,11 +340,11 @@ func _onActivatePowerup():
 			sfxPlayer.stream = healthSfx
 			sfxPlayer.stream.loop = false
 			sfxPlayer.play()
-			var potentialHealth = health + 9
-			if potentialHealth > 27:
-				health = 27
+			var potentialHealth = health + 6
+			if potentialHealth > 18:
+				health = 18
 			else:
-				health += 9
+				health += 6
 			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("increaseHealth", self.name)
 		Globals.powerType.SPEEDUP:
 			worldNode.emit_signal("changeSpeed", 1)

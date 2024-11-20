@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://levelEditorObjects/platformBlockScene.gd" id="1_1wl40"]
 [ext_resource type="Texture2D" uid="uid://b68521xmdsow3" path="res://worldObjects/assets/Platform_2.png" id="2_gep2g"]
-[ext_resource type="TileSet" uid="uid://dwcdn170llf2y" path="res://backgrounds/tilemaps/slideLevel1Revised.tres" id="3_axi3u"]
+[ext_resource type="TileSet" uid="uid://c4r74xh1vg5ub" path="res://backgrounds/tilemaps/slideLevel1Revised.tres" id="3_axi3u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymyh8"]
 resource_local_to_scene = true
