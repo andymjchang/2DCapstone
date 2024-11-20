@@ -12,7 +12,7 @@ func _ready() -> void:
 	else:
 		powerType = rng.randi_range(0, 1)
 
-	if Globals.curFile.begins_with("Tutorial"):
+	if Globals.curFile.begins_with("Level 1"):
 		powerType = Globals.powerType.INVULN
 	$Display.play("display")
 	$Display.frame = powerType

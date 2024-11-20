@@ -6,7 +6,7 @@ var curSprite
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("blocks")
-	if Globals.curFile.begins_with("Level 2"):
+	if Globals.curFile.begins_with("Level 3"):
 		$TileMapLayer.visible = false
 		$TileMapLayer2.visible = true
 	else:

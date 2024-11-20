@@ -74,13 +74,13 @@ func select_current_option() -> void:
 		LevelOptions.BACK:
 			Globals.FadeTransition("res://ui/landingPage.tscn") 		
 		LevelOptions.LEVEL_1:
-			Globals.curFile = "Tutorial"
-			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
-		LevelOptions.LEVEL_2:
 			Globals.curFile = "Level 1"
 			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
-		LevelOptions.LEVEL_3:
+		LevelOptions.LEVEL_2:
 			Globals.curFile = "Level 2"
+			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+		LevelOptions.LEVEL_3:
+			Globals.curFile = "Level 3"
 			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 		LevelOptions.CUSTOM:
 			Globals.curFile = "CustomLevel"

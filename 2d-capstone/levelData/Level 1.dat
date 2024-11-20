@@ -230,16 +230,16 @@ platformBlocks
 29025, 0, 20, <null>, <null>,
 actionIndicators
 playerCheckpoints
-15000, 500,
-1800, 500,
-5400, 500,
-7800, 500,
-11400, 500,
-17400, -25,
-20400, -25,
-23400, -25,
-28200, -75,
-31800, -75,
+15000, 525,
+1800, 525,
+5400, 525,
+7800, 525,
+11400, 525,
+17400, 0,
+20400, 0,
+23400, 0,
+28200, -50,
+31800, -50,
 player
 0, 540,
 enemies
@@ -321,10 +321,6 @@ goalBlocks
 breakableWalls
 ziplines
 placers
-<<<<<<< Updated upstream
-=======
-33675, 75, 34075, -75, 33675, 75,
->>>>>>> Stashed changes
 slideWalls
 12075, 475,
 12675, 475,

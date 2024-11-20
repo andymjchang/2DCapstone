@@ -13,6 +13,7 @@ var current_option: int = MenuOptions.START
 @onready var pointer = $Pointer
 
 func _ready():
+	get_tree().paused = false
 	Globals.relocateToCheckpoint = false
 	Globals.checkpoint = null
 	music.play()
