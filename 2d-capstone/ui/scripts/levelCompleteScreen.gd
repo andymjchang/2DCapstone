@@ -64,12 +64,20 @@ func select_current_option() -> void:
 			get_tree().reload_current_scene()
 
 func _onUpdateScoreData() -> void:
-	$perfectLabel.text = str(Globals.numPerfects)
-	$goodLabel.text = str(Globals.numGoods)
-	$barelyLabel.text = str(Globals.numBarelys)
-	$coinsLabel.text = str(Globals.coinsCollected)
+	$perfectLabel.text = "%03d" % Globals.numPerfects
+	$goodLabel.text = "%03d" % Globals.numGoods
+	$barelyLabel.text = "%03d" % Globals.numBarelys
+	$coinsLabel.text = "%03d" % Globals.coinsCollected
 	$accuracyLabel.text = "%2.2f" % Globals.percentageHit + "%"
-	$scoreLabel.text = str(Globals.endScore)
+	
+	# Create score animation tween
+	var tween = create_tween()
+	var start_score = 0
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_method(func(current_score: int):
+		$scoreLabel.text = "%05d" % current_score,
+		start_score, Globals.endScore, 3.0)
 
 func playMusic() -> void:
 	jingle.play(0.0)

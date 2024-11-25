@@ -143,6 +143,7 @@ offset_right = 1104.0
 offset_bottom = 116.0
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 84
 text = "Score: "
 
@@ -311,6 +312,7 @@ script = ExtResource("8_q0prs")
 increasedScale = Vector2(1.1, 1.1)
 
 [node name="Leaderboard" type="Node2D" parent="."]
+visible = false
 
 [node name="Album2" type="Sprite2D" parent="Leaderboard"]
 position = Vector2(-347.5, 0.672974)
@@ -347,6 +349,7 @@ size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 
 [node name="Rank" type="Label" parent="Leaderboard/Titles"]
+layout_mode = 0
 offset_left = -905.0
 offset_top = -330.0
 offset_right = -560.0
@@ -358,6 +361,7 @@ theme_override_font_sizes/font_size = 60
 text = "Rank"
 
 [node name="Name" type="Label" parent="Leaderboard/Titles"]
+layout_mode = 0
 offset_left = -705.0
 offset_top = -330.0
 offset_right = -360.0
@@ -369,6 +373,7 @@ theme_override_font_sizes/font_size = 60
 text = "Name"
 
 [node name="Score" type="Label" parent="Leaderboard/Titles"]
+layout_mode = 0
 offset_left = -905.0
 offset_top = -330.0
 offset_right = 44.0
@@ -462,6 +467,7 @@ theme_override_font_sizes/font_size = 60
 text = "3"
 
 [node name="Name2" type="Label" parent="Leaderboard/3"]
+layout_mode = 0
 offset_left = 200.0
 offset_top = 0.327
 offset_right = 350.0
@@ -492,6 +498,7 @@ theme_override_font_sizes/font_size = 60
 text = "4"
 
 [node name="Name2" type="Label" parent="Leaderboard/4"]
+layout_mode = 0
 offset_left = 200.0
 offset_top = 0.327
 offset_right = 350.0
@@ -522,6 +529,7 @@ theme_override_font_sizes/font_size = 60
 text = "5"
 
 [node name="Name2" type="Label" parent="Leaderboard/5"]
+layout_mode = 0
 offset_left = 200.0
 offset_top = 0.327
 offset_right = 350.0
@@ -542,23 +550,40 @@ theme_override_constants/outline_size = 6
 text = "Leaderboard"
 horizontal_alignment = 1
 
-[node name="LeftKey" type="Sprite2D" parent="ToggleLabel"]
+[node name="LeftKey" type="Sprite2D" parent="ToggleLabel" groups=["pulsingObjects"]]
 position = Vector2(135.75, 96.125)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("9_e17sk")
+script = ExtResource("8_q0prs")
+timingScale = 2
+increasedScale = Vector2(0.26, 0.26)
 
 [node name="Pointer3" type="Sprite2D" parent="ToggleLabel/LeftKey"]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(-16, -16)
 texture = ExtResource("7_vxoxn")
 
-[node name="RightKey" type="Sprite2D" parent="ToggleLabel"]
+[node name="RightKey" type="Sprite2D" parent="ToggleLabel" groups=["pulsingObjects"]]
 position = Vector2(185.75, 96.125)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("9_e17sk")
+script = ExtResource("8_q0prs")
+increasedScale = Vector2(0.26, 0.26)
 
 [node name="Pointer3" type="Sprite2D" parent="ToggleLabel/RightKey"]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(-16, -16)
 texture = ExtResource("7_vxoxn")
 flip_h = true
+
+[node name="PopupLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -296.0
+offset_top = -355.0
+offset_right = 138.0
+offset_bottom = -234.0
+rotation = -0.174533
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Full Combo!
+New High Score!"
