@@ -50,6 +50,7 @@ func select_current_option() -> void:
 	Globals.gameOver = false
 	match current_option:
 		MenuOptions.NEXT_LEVEL:
+			leaderboard_slide_in()
 			var nextLevel = Globals.getNextLevel(Globals.curFile)
 			if nextLevel != "":
 				Globals.curFile = nextLevel
@@ -81,11 +82,7 @@ func slide_in() -> void:
 	
 	# Create tween for slide-in animation
 	var tween = create_tween()
-	if !tween:
-		print("Failed to create tween")
-		return
-		
-	print("Setting up tween properties")
+
 	tween.set_parallel(true)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
@@ -98,3 +95,16 @@ func slide_in() -> void:
 	var _back_tween = tween.tween_property(albumBack, "position:x",
 		albumBack.position.x - slide_offset, slide_in_duration)
 	tween.tween_callback(playMusic)
+
+func leaderboard_slide_in() -> void:
+	$Leaderboard.visible = true
+	$Leaderboard.position.x += slide_offset
+	
+	var tween = create_tween()
+
+	tween.set_parallel(true)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	
+	tween.tween_property($Leaderboard, "position:x",
+		$Leaderboard.position.x - slide_offset, slide_in_duration + 0.75)

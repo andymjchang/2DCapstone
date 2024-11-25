@@ -308,3 +308,224 @@ position = Vector2(766.5, -4.32703)
 texture = ExtResource("7_vxoxn")
 script = ExtResource("8_q0prs")
 increasedScale = Vector2(1.1, 1.1)
+
+[node name="Leaderboard" type="Node2D" parent="."]
+
+[node name="Album2" type="Sprite2D" parent="Leaderboard"]
+position = Vector2(-347.5, 0.672974)
+texture = ExtResource("6_xsv6n")
+
+[node name="userScore" type="Label" parent="Leaderboard"]
+offset_left = -971.0
+offset_top = -349.327
+offset_right = -10.0
+offset_bottom = -233.327
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 84
+text = "00000"
+horizontal_alignment = 2
+
+[node name="scoreTitle" type="Label" parent="Leaderboard/userScore"]
+layout_mode = 2
+offset_left = 129.0
+offset_right = 1104.0
+offset_bottom = 116.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 84
+text = "Your Score: "
+
+[node name="Titles" type="Control" parent="Leaderboard"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 159.0
+offset_right = 471.0
+offset_bottom = 242.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+
+[node name="Rank" type="Label" parent="Leaderboard/Titles"]
+offset_left = -905.0
+offset_top = -330.0
+offset_right = -560.0
+offset_bottom = -247.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Rank"
+
+[node name="Name" type="Label" parent="Leaderboard/Titles"]
+offset_left = -705.0
+offset_top = -330.0
+offset_right = -360.0
+offset_bottom = -247.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Name"
+
+[node name="Score" type="Label" parent="Leaderboard/Titles"]
+offset_left = -905.0
+offset_top = -330.0
+offset_right = 44.0
+offset_bottom = -247.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Score"
+horizontal_alignment = 2
+
+[node name="1" type="Label" parent="Leaderboard"]
+offset_left = -905.0
+offset_top = -88.0
+offset_right = -15.0
+offset_bottom = -5.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "000"
+horizontal_alignment = 2
+
+[node name="perfectTitle" type="Label" parent="Leaderboard/1"]
+layout_mode = 2
+offset_right = 150.0
+offset_bottom = 83.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "1"
+
+[node name="Name" type="Label" parent="Leaderboard/1"]
+layout_mode = 2
+offset_left = 200.0
+offset_right = 350.0
+offset_bottom = 83.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "1"
+
+[node name="2" type="Label" parent="Leaderboard"]
+offset_left = -905.0
+offset_top = -13.327
+offset_right = -15.0
+offset_bottom = 69.673
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "000"
+horizontal_alignment = 2
+
+[node name="Name2" type="Label" parent="Leaderboard/2"]
+layout_mode = 2
+offset_left = 200.0
+offset_top = 0.327
+offset_right = 350.0
+offset_bottom = 83.327
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "1"
+
+[node name="perfectTitle" type="Label" parent="Leaderboard/2"]
+layout_mode = 2
+offset_right = 1440.0
+offset_bottom = 59.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "2"
+
+[node name="3" type="Label" parent="Leaderboard"]
+offset_left = -905.0
+offset_top = 61.673
+offset_right = -15.0
+offset_bottom = 144.673
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "000"
+horizontal_alignment = 2
+
+[node name="perfectTitle" type="Label" parent="Leaderboard/3"]
+layout_mode = 2
+offset_right = 1440.0
+offset_bottom = 59.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "3"
+
+[node name="Name2" type="Label" parent="Leaderboard/3"]
+offset_left = 200.0
+offset_top = 0.327
+offset_right = 350.0
+offset_bottom = 83.327
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "1"
+
+[node name="4" type="Label" parent="Leaderboard"]
+offset_left = -905.0
+offset_top = 136.673
+offset_right = -15.0
+offset_bottom = 219.673
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "000"
+horizontal_alignment = 2
+
+[node name="perfectTitle" type="Label" parent="Leaderboard/4"]
+layout_mode = 2
+offset_right = 1440.0
+offset_bottom = 59.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "4"
+
+[node name="Name2" type="Label" parent="Leaderboard/4"]
+offset_left = 200.0
+offset_top = 0.327
+offset_right = 350.0
+offset_bottom = 83.327
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "1"
+
+[node name="5" type="Label" parent="Leaderboard"]
+offset_left = -905.0
+offset_top = 211.673
+offset_right = -15.0
+offset_bottom = 294.673
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "000"
+horizontal_alignment = 2
+
+[node name="perfectTitle" type="Label" parent="Leaderboard/5"]
+layout_mode = 2
+offset_right = 1440.0
+offset_bottom = 59.0
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "5"
+
+[node name="Name2" type="Label" parent="Leaderboard/5"]
+offset_left = 200.0
+offset_top = 0.327
+offset_right = 350.0
+offset_bottom = 83.327
+size_flags_vertical = 2
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 60
+text = "1"
