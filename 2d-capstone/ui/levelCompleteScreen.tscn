@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d05n5e2m50hb1"]
+[gd_scene load_steps=10 format=3 uid="uid://d05n5e2m50hb1"]
 
 [ext_resource type="Script" path="res://ui/scripts/levelCompleteScreen.gd" id="1_qafpk"]
 [ext_resource type="Texture2D" uid="uid://dmka458bsdkck" path="res://ui/assets/vinyl_envelope_back.png" id="3_47j5b"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://blg7fxg41fnsb" path="res://audioTracks/CourseComplete_153bpm.mp3" id="7_j5x8q"]
 [ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="7_vxoxn"]
 [ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="8_q0prs"]
+[ext_resource type="Texture2D" uid="uid://dc2huddrx2tpp" path="res://ui/assets/onboarding/keyBackgrounds/key_unpressed.png" id="9_e17sk"]
 
 [node name="levelCompleteScreen" type="Control"]
 process_mode = 3
@@ -529,3 +530,35 @@ size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
 text = "1"
+
+[node name="ToggleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 622.0
+offset_top = -503.0
+offset_right = 919.0
+offset_bottom = -436.0
+theme = ExtResource("3_bdee6")
+theme_override_constants/outline_size = 6
+text = "Leaderboard"
+horizontal_alignment = 1
+
+[node name="LeftKey" type="Sprite2D" parent="ToggleLabel"]
+position = Vector2(135.75, 96.125)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_e17sk")
+
+[node name="Pointer3" type="Sprite2D" parent="ToggleLabel/LeftKey"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-16, -16)
+texture = ExtResource("7_vxoxn")
+
+[node name="RightKey" type="Sprite2D" parent="ToggleLabel"]
+position = Vector2(185.75, 96.125)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_e17sk")
+
+[node name="Pointer3" type="Sprite2D" parent="ToggleLabel/RightKey"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-16, -16)
+texture = ExtResource("7_vxoxn")
+flip_h = true
