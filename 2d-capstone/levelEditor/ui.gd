@@ -50,6 +50,53 @@ func _on_coin_button_mouse_entered() -> void:
 	desc.text = "Coin\n Player collect these to increase their score"
 
 func _on_loop_button_mouse_entered() -> void:
-	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/coinButton)
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/loopButton)
 	helpWindow.show()
 	desc.text = "Loop\n Any portion of the level contained within this item's bounds is looped 3 times"
+
+
+func _on_block_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/jumpBoostButton)
+	helpWindow.show()
+	desc.text = "Block\n Basic block type, these are used to create the ground of a level"
+
+
+func _on_action_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/coinButton)
+	helpWindow.show()
+	desc.text = "Action indicator\n Circular indicators that tell the player when to interact to the beat of the song"
+
+func _on_rac_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/loopButton)
+	helpWindow.show()
+	desc.text = "Spawn player\n Changes the spawn location of the player character"
+
+func _on_p_1_checkpoint_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/loopButton)
+	helpWindow.show()
+	desc.text = "Checkpoint\n Allows the player to reset the level starting at the nearest placed checkpoint"
+
+func _on_goal_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/loopButton)
+	helpWindow.show()
+	desc.text = "Goal\n When the player reaches this item, the level ends"
+
+func _on_enemy_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/loopButton)
+	helpWindow.show()
+	desc.text = "Enemy\n A regular enemy that dies in one successful hit, spawns with an action indicator attached"
+
+func _on_zipline_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/loopButton)
+	helpWindow.show()
+	desc.text = "Zipline\n When the player collides with a zipline, they will be carried from the start zipline to the end zipline"
+
+func _on_powerup_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/loopButton)
+	helpWindow.show()
+	desc.text = "Powerup\n Randomly spawns a powerup that grants invulnerability, heals, speeds up the level, or slows down the level"
+
+func _on_kill_floor_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/loopButton)
+	helpWindow.show()
+	desc.text = "Kill floor\n Floor hazards to require players to make certain jumps or traverse across gaps"
