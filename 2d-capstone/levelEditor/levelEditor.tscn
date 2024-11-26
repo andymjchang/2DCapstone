@@ -498,6 +498,7 @@ theme_override_font_sizes/font_size = 50
 max_length = 20
 
 [node name="HelpWindow" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -506,7 +507,7 @@ offset_bottom = 40.0
 [node name="ColorRect" type="ColorRect" parent="UI/HelpWindow"]
 layout_mode = 0
 offset_right = 338.0
-offset_bottom = 208.0
+offset_bottom = 267.0
 
 [node name="Description" type="Label" parent="UI/HelpWindow"]
 layout_mode = 0
@@ -590,30 +591,47 @@ clip_text = true
 [connection signal="button_down" from="UI/FileButtons/saveButton" to="." method="_on_save_button_down"]
 [connection signal="mouse_entered" from="UI/FileButtons/saveButton" to="UI" method="_on_save_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/FileButtons/saveButton" to="UI" method="_on_button_exited"]
+[connection signal="mouse_entered" from="UI/FileButtons/fileButton" to="UI" method="_on_file_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FileButtons/fileButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/FileButtons/fileButton" to="." method="_on_file_button_pressed"]
 [connection signal="pressed" from="UI/FileButtons/exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="text_changed" from="UI/TextEdit0" to="." method="_on_text_edit_0_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
+[connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Top/jumpBoostButton" to="UI" method="_on_jump_boost_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Top/jumpBoostButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/objectSelector/BlockButtons/Top/jumpBoostButton" to="." method="_onJumpBoostButtonPressed"]
+[connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Top/coinButton" to="UI" method="_on_coin_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Top/coinButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/objectSelector/BlockButtons/Top/coinButton" to="." method="_onCoinButtonPressed"]
+[connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Top/loopButton" to="UI" method="_on_loop_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Top/loopButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/objectSelector/BlockButtons/Top/loopButton" to="." method="_onLoopButtonPressed"]
 [connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/blockButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/blockButton" to="." method="_on_block_button_button_up"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/blockButton" to="UI" method="_on_button_exited"]
 [connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/actionButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/actionButton" to="." method="_on_action_button_button_up"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/actionButton" to="UI" method="_on_button_exited"]
 [connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/mouseButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/mouseButton" to="." method="_on_mouse_button_button_up"]
 [connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/racButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/racButton" to="." method="_on_rac_button_button_up"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/racButton" to="UI" method="_on_button_exited"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/p1checkpointButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/objectSelector/BlockButtons/Bottom/p1checkpointButton" to="." method="_on_p1checkpoint_button_pressed"]
 [connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/goalButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/goalButton" to="." method="_on_goal_button_button_up"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/goalButton" to="UI" method="_on_button_exited"]
 [connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/enemyButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/enemyButton" to="." method="_on_enemy_button_button_up"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/enemyButton" to="UI" method="_on_button_exited"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/ziplineButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/objectSelector/BlockButtons/Bottom/ziplineButton" to="." method="_onZiplineButtonPressed"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/powerupButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/objectSelector/BlockButtons/Bottom/powerupButton" to="." method="_onPowerupButtonPressed"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/killFloorButton" to="." method="_on_kill_floor_button_button_up"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/killFloorButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/objectSelector/playAudioButton" to="." method="_on_play_audio_button_pressed"]
 [connection signal="button_down" from="UI/objectSelector/HBoxContainer/leftButton" to="." method="_on_left_button_button_down"]
 [connection signal="button_down" from="UI/objectSelector/HBoxContainer/rightButton" to="." method="_on_right_button_button_down"]
