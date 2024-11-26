@@ -118,6 +118,8 @@ var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsLis
 @onready var moveLineList = $objectList/moveLines
 @onready var loopList = $objectList/loops
 
+
+
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var measureLines = $measureLines

@@ -43,11 +43,11 @@
 [ext_resource type="PackedScene" uid="uid://dam4sj64yck3d" path="res://levelEditorObjects/skipScene.tscn" id="24_5ioff"]
 [ext_resource type="PackedScene" uid="uid://dj0b5a5yg6sr0" path="res://levelEditorObjects/keyPressScene.tscn" id="24_r48c0"]
 [ext_resource type="PackedScene" uid="uid://luxlri5v0quk" path="res://levelEditorObjects/mashEnemyScene.tscn" id="25_1gpd6"]
-[ext_resource type="Texture2D" uid="uid://cc5lvvxeuvoam" path="res://levelEditor/programmerArtAssets/p2checkpoint.png" id="26_3eu32"]
 [ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
 [ext_resource type="PackedScene" uid="uid://b3r5orhxswfha" path="res://levelEditorObjects/holdScene.tscn" id="26_oo2r2"]
 [ext_resource type="PackedScene" uid="uid://8slx4t2oi8ub" path="res://levelEditorObjects/loopScene.tscn" id="27_jho4t"]
 [ext_resource type="Texture2D" uid="uid://dd5m0kwji44w1" path="res://levelEditor/programmerArtAssets/zipline.png" id="30_pq2h6"]
+[ext_resource type="Script" path="res://levelEditor/ui.gd" id="33_n0vg3"]
 [ext_resource type="Texture2D" uid="uid://b1ymqen6srbge" path="res://levelEditor/programmerArtAssets/powerup.png" id="33_pappt"]
 [ext_resource type="Texture2D" uid="uid://bv8ou5u1pkb2k" path="res://levelEditor/programmerArtAssets/R (1).jpg" id="34_wwivc"]
 [ext_resource type="Script" path="res://levelEditor/textureProgressBar.gd" id="35_lg51b"]
@@ -158,6 +158,36 @@ stream = ExtResource("19_jlcy1")
 [node name="loops" type="Node2D" parent="objectList"]
 
 [node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("33_n0vg3")
+
+[node name="FileButtons" type="HBoxContainer" parent="UI"]
+offset_left = 1489.0
+offset_top = 16.0
+offset_right = 1901.0
+offset_bottom = 116.0
+
+[node name="playLevelButton" type="TextureButton" parent="UI/FileButtons"]
+layout_mode = 2
+texture_normal = ExtResource("37_5oir0")
+
+[node name="saveButton" type="TextureButton" parent="UI/FileButtons"]
+layout_mode = 2
+texture_normal = ExtResource("7_0wc3n")
+
+[node name="fileButton" type="TextureButton" parent="UI/FileButtons"]
+layout_mode = 2
+texture_normal = ExtResource("46_nsemu")
+
+[node name="exitButton" type="TextureButton" parent="UI/FileButtons"]
+layout_mode = 2
+texture_normal = ExtResource("7_esiun")
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+offset_left = -1.0
+offset_top = 915.0
+offset_right = 1922.0
+offset_bottom = 1107.0
+color = Color(0.259294, 0.259294, 0.259294, 1)
 
 [node name="bpmLabel0" type="RichTextLabel" parent="UI"]
 offset_left = 6.0
@@ -208,87 +238,71 @@ placeholder_text = "Step Size:"
 layout_mode = 3
 anchors_preset = 0
 
-[node name="ColorRect" type="ColorRect" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 915.0
-offset_right = 1922.0
-offset_bottom = 1107.0
-color = Color(0.259294, 0.259294, 0.259294, 1)
+[node name="BlockButtons" type="VBoxContainer" parent="UI/objectSelector"]
+layout_mode = 1
+offset_top = 876.0
+offset_right = 932.0
+offset_bottom = 1080.0
 
-[node name="p2checkpointButton" type="TextureButton" parent="UI/objectSelector"]
-visible = false
-layout_mode = 0
-offset_left = 416.0
-offset_top = 848.0
-offset_right = 516.0
-offset_bottom = 948.0
-texture_normal = ExtResource("26_3eu32")
+[node name="Top" type="HBoxContainer" parent="UI/objectSelector/BlockButtons"]
+layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 104.0
-offset_top = 951.0
-offset_right = 949.0
-offset_bottom = 1060.0
+[node name="jumpBoostButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Top"]
+layout_mode = 2
+texture_normal = ExtResource("50_nrfgt")
 
-[node name="actionButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+[node name="coinButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Top"]
+layout_mode = 2
+texture_normal = ExtResource("52_ulykl")
+
+[node name="loopButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Top"]
+layout_mode = 2
+texture_normal = ExtResource("55_xyg3h")
+
+[node name="Bottom" type="HBoxContainer" parent="UI/objectSelector/BlockButtons"]
+layout_mode = 2
+
+[node name="blockButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Bottom"]
+layout_mode = 2
+texture_normal = ExtResource("4_rduon")
+
+[node name="actionButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Bottom"]
 layout_mode = 2
 texture_normal = ExtResource("3_kgvx7")
 
-[node name="mouseButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+[node name="mouseButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Bottom"]
 visible = false
 layout_mode = 2
 texture_normal = ExtResource("7_dw7u5")
 
-[node name="racButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+[node name="racButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Bottom"]
 layout_mode = 2
 texture_normal = ExtResource("8_w245c")
 
-[node name="p1checkpointButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+[node name="p1checkpointButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Bottom"]
 layout_mode = 2
 texture_normal = ExtResource("22_1mwd2")
 
-[node name="goalButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+[node name="goalButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Bottom"]
 layout_mode = 2
 texture_normal = ExtResource("17_3udhx")
 
-[node name="enemyButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+[node name="enemyButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Bottom"]
 layout_mode = 2
 texture_normal = ExtResource("20_rbssn")
 
-[node name="ziplineButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+[node name="ziplineButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Bottom"]
 layout_mode = 2
 texture_normal = ExtResource("30_pq2h6")
 
-[node name="powerupButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+[node name="powerupButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Bottom"]
 layout_mode = 2
 texture_normal = ExtResource("33_pappt")
 
-[node name="exitButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 1795.0
-offset_top = 15.0
-offset_right = 1895.0
-offset_bottom = 115.0
-texture_normal = ExtResource("7_esiun")
-
-[node name="killFloorButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 832.0
-offset_top = 951.0
-offset_right = 924.0
-offset_bottom = 1051.0
+[node name="killFloorButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Bottom"]
+layout_mode = 2
 texture_normal = ExtResource("34_wwivc")
-ignore_texture_size = true
 stretch_mode = 0
-
-[node name="blockButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_top = 955.0
-offset_right = 100.0
-offset_bottom = 1055.0
-texture_normal = ExtResource("4_rduon")
 
 [node name="playAudioButton" type="TextureButton" parent="UI/objectSelector"]
 layout_mode = 0
@@ -298,58 +312,27 @@ offset_right = 1256.0
 offset_bottom = 969.0
 texture_normal = ExtResource("26_m4kik")
 
-[node name="fileButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 1459.0
-offset_top = 15.0
-offset_right = 1559.0
-offset_bottom = 115.0
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("46_nsemu")
-
-[node name="saveButton" type="TextureButton" parent="UI/objectSelector"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/objectSelector"]
 layout_mode = 0
-offset_left = 1680.0
-offset_top = 16.0
-offset_right = 1780.0
-offset_bottom = 116.0
-texture_normal = ExtResource("7_0wc3n")
+offset_left = 1508.0
+offset_top = 980.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 
-[node name="rightButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 1579.0
-offset_top = 954.0
-offset_right = 1679.0
-offset_bottom = 1054.0
-texture_normal = ExtResource("4_7fuo1")
-
-[node name="upButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 1682.0
-offset_top = 954.0
-offset_right = 1782.0
-offset_bottom = 1054.0
-texture_normal = ExtResource("5_8qxnf")
-
-[node name="leftButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 1476.0
-offset_top = 954.0
-offset_right = 1576.0
-offset_bottom = 1054.0
+[node name="leftButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
 texture_normal = ExtResource("5_cuiw6")
 
-[node name="downButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 1785.0
-offset_top = 954.0
-offset_right = 1885.0
-offset_bottom = 1054.0
+[node name="rightButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_7fuo1")
+
+[node name="upButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_8qxnf")
+
+[node name="downButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
+layout_mode = 2
 texture_normal = ExtResource("7_u6v8f")
 
 [node name="audioProgress" type="ProgressBar" parent="UI/objectSelector"]
@@ -399,73 +382,46 @@ layout_mode = 2
 [node name="VScrollBar" type="VScrollBar" parent="UI/objectSelector/audioTracks/VBoxContainer"]
 layout_mode = 2
 
-[node name="playLevelButton" type="TextureButton" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 1565.0
-offset_top = 15.0
-offset_right = 1665.0
-offset_bottom = 115.0
-texture_normal = ExtResource("37_5oir0")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/objectSelector"]
-layout_mode = 0
-offset_left = 521.0
-offset_top = 846.0
-offset_right = 901.0
-offset_bottom = 946.0
-
-[node name="jumpBoostButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer2"]
-layout_mode = 2
-texture_normal = ExtResource("50_nrfgt")
-
-[node name="coinButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer2"]
-layout_mode = 2
-texture_normal = ExtResource("52_ulykl")
-
-[node name="loopButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer2"]
-layout_mode = 2
-texture_normal = ExtResource("55_xyg3h")
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="UI"]
-offset_left = 8.0
-offset_top = 890.0
-offset_right = 4280.0
-offset_bottom = 1790.0
+[node name="MiscButtons" type="HBoxContainer" parent="UI"]
+offset_left = 321.0
+offset_top = 881.0
+offset_right = 4593.0
+offset_bottom = 1781.0
 scale = Vector2(0.1, 0.1)
 size_flags_horizontal = 0
 
-[node name="mashButton" type="TextureButton" parent="UI/HBoxContainer3"]
+[node name="mashButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
 texture_normal = ExtResource("53_q0jqn")
 stretch_mode = 0
 
-[node name="p1PlacerButton" type="TextureButton" parent="UI/HBoxContainer3"]
+[node name="p1PlacerButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
 texture_normal = ExtResource("42_k3b5l")
 
-[node name="breakableWallButton" type="TextureButton" parent="UI/HBoxContainer3"]
+[node name="breakableWallButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
 texture_normal = ExtResource("45_iuf20")
 
-[node name="slideWallButton" type="TextureButton" parent="UI/HBoxContainer3"]
+[node name="slideWallButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
 texture_normal = ExtResource("46_ochwq")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="keyBindingButton" type="TextureButton" parent="UI/HBoxContainer3"]
+[node name="keyBindingButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
 texture_normal = ExtResource("56_va5sc")
 
-[node name="skipButton" type="TextureButton" parent="UI/HBoxContainer3"]
+[node name="skipButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
 texture_normal = ExtResource("56_63qny")
 
-[node name="holdButton" type="TextureButton" parent="UI/HBoxContainer3"]
+[node name="holdButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
 texture_normal = ExtResource("60_w7oji")
 
-[node name="massMoveButton" type="TextureButton" parent="UI/HBoxContainer3"]
+[node name="massMoveButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
 texture_normal = ExtResource("62_w2amb")
 
@@ -541,6 +497,27 @@ offset_bottom = 623.0
 theme_override_font_sizes/font_size = 50
 max_length = 20
 
+[node name="HelpWindow" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/HelpWindow"]
+layout_mode = 0
+offset_right = 338.0
+offset_bottom = 208.0
+
+[node name="Description" type="Label" parent="UI/HelpWindow"]
+layout_mode = 0
+offset_right = 338.0
+offset_bottom = 208.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "sdfsdfds gdfhgbsdfs dgdfbvdfgdfg ghfgh fdg hfghgfhfgdh  hj ghhd fgdsfgdfsad"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="StatusWindow" type="CanvasLayer" parent="."]
 process_mode = 2
 visible = false
@@ -607,49 +584,51 @@ Need 2 players."
 horizontal_alignment = 1
 clip_text = true
 
+[connection signal="button_down" from="UI/FileButtons/playLevelButton" to="." method="_on_play_level_button_button_down"]
+[connection signal="mouse_entered" from="UI/FileButtons/playLevelButton" to="UI" method="_on_play_level_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FileButtons/playLevelButton" to="UI" method="_on_button_exited"]
+[connection signal="button_down" from="UI/FileButtons/saveButton" to="." method="_on_save_button_down"]
+[connection signal="mouse_entered" from="UI/FileButtons/saveButton" to="UI" method="_on_save_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FileButtons/saveButton" to="UI" method="_on_button_exited"]
+[connection signal="pressed" from="UI/FileButtons/fileButton" to="." method="_on_file_button_pressed"]
+[connection signal="pressed" from="UI/FileButtons/exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="text_changed" from="UI/TextEdit0" to="." method="_on_text_edit_0_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit2" to="." method="_on_text_edit_2_text_changed"]
-[connection signal="button_down" from="UI/objectSelector/p2checkpointButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/p2checkpointButton" to="." method="_on_p2checkpoint_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/HBoxContainer/actionButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/HBoxContainer/actionButton" to="." method="_on_action_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/HBoxContainer/mouseButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/HBoxContainer/mouseButton" to="." method="_on_mouse_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/HBoxContainer/racButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/HBoxContainer/racButton" to="." method="_on_rac_button_button_up"]
-[connection signal="pressed" from="UI/objectSelector/HBoxContainer/p1checkpointButton" to="." method="_on_p1checkpoint_button_pressed"]
-[connection signal="button_down" from="UI/objectSelector/HBoxContainer/goalButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/HBoxContainer/goalButton" to="." method="_on_goal_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/HBoxContainer/enemyButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/HBoxContainer/enemyButton" to="." method="_on_enemy_button_button_up"]
-[connection signal="pressed" from="UI/objectSelector/HBoxContainer/ziplineButton" to="." method="_onZiplineButtonPressed"]
-[connection signal="pressed" from="UI/objectSelector/HBoxContainer/powerupButton" to="." method="_onPowerupButtonPressed"]
-[connection signal="pressed" from="UI/objectSelector/exitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="button_up" from="UI/objectSelector/killFloorButton" to="." method="_on_kill_floor_button_button_up"]
-[connection signal="button_down" from="UI/objectSelector/blockButton" to="." method="_on_test_placer_button_down"]
-[connection signal="button_up" from="UI/objectSelector/blockButton" to="." method="_on_block_button_button_up"]
+[connection signal="pressed" from="UI/objectSelector/BlockButtons/Top/jumpBoostButton" to="." method="_onJumpBoostButtonPressed"]
+[connection signal="pressed" from="UI/objectSelector/BlockButtons/Top/coinButton" to="." method="_onCoinButtonPressed"]
+[connection signal="pressed" from="UI/objectSelector/BlockButtons/Top/loopButton" to="." method="_onLoopButtonPressed"]
+[connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/blockButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/blockButton" to="." method="_on_block_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/actionButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/actionButton" to="." method="_on_action_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/mouseButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/mouseButton" to="." method="_on_mouse_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/racButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/racButton" to="." method="_on_rac_button_button_up"]
+[connection signal="pressed" from="UI/objectSelector/BlockButtons/Bottom/p1checkpointButton" to="." method="_on_p1checkpoint_button_pressed"]
+[connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/goalButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/goalButton" to="." method="_on_goal_button_button_up"]
+[connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/enemyButton" to="." method="_on_test_placer_button_down"]
+[connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/enemyButton" to="." method="_on_enemy_button_button_up"]
+[connection signal="pressed" from="UI/objectSelector/BlockButtons/Bottom/ziplineButton" to="." method="_onZiplineButtonPressed"]
+[connection signal="pressed" from="UI/objectSelector/BlockButtons/Bottom/powerupButton" to="." method="_onPowerupButtonPressed"]
+[connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/killFloorButton" to="." method="_on_kill_floor_button_button_up"]
 [connection signal="pressed" from="UI/objectSelector/playAudioButton" to="." method="_on_play_audio_button_pressed"]
-[connection signal="pressed" from="UI/objectSelector/fileButton" to="." method="_on_file_button_pressed"]
-[connection signal="button_down" from="UI/objectSelector/saveButton" to="." method="_on_save_button_down"]
-[connection signal="button_down" from="UI/objectSelector/rightButton" to="." method="_on_right_button_button_down"]
-[connection signal="button_down" from="UI/objectSelector/upButton" to="." method="_on_up_button_button_down"]
-[connection signal="button_down" from="UI/objectSelector/leftButton" to="." method="_on_left_button_button_down"]
-[connection signal="button_down" from="UI/objectSelector/downButton" to="." method="_on_down_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/HBoxContainer/leftButton" to="." method="_on_left_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/HBoxContainer/rightButton" to="." method="_on_right_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/HBoxContainer/upButton" to="." method="_on_up_button_button_down"]
+[connection signal="button_down" from="UI/objectSelector/HBoxContainer/downButton" to="." method="_on_down_button_button_down"]
 [connection signal="gui_input" from="UI/objectSelector/audioProgress" to="." method="_on_audio_progress_gui_input"]
 [connection signal="input_event" from="UI/objectSelector/audioProgress/Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="button_down" from="UI/objectSelector/playLevelButton" to="." method="_on_play_level_button_button_down"]
-[connection signal="pressed" from="UI/objectSelector/HBoxContainer2/jumpBoostButton" to="." method="_onJumpBoostButtonPressed"]
-[connection signal="pressed" from="UI/objectSelector/HBoxContainer2/coinButton" to="." method="_onCoinButtonPressed"]
-[connection signal="pressed" from="UI/objectSelector/HBoxContainer2/loopButton" to="." method="_onLoopButtonPressed"]
-[connection signal="button_up" from="UI/HBoxContainer3/mashButton" to="." method="_onMashButtonUp"]
-[connection signal="button_up" from="UI/HBoxContainer3/p1PlacerButton" to="." method="_on_p_1_placer_button_button_up"]
-[connection signal="button_up" from="UI/HBoxContainer3/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]
-[connection signal="button_up" from="UI/HBoxContainer3/slideWallButton" to="." method="_onSlideWallButtonUp"]
-[connection signal="button_up" from="UI/HBoxContainer3/keyBindingButton" to="." method="_onKeyBindingButtonUp"]
-[connection signal="button_up" from="UI/HBoxContainer3/skipButton" to="." method="_onSkipButtonUp"]
-[connection signal="button_up" from="UI/HBoxContainer3/holdButton" to="." method="_onHoldButtonUp"]
-[connection signal="button_up" from="UI/HBoxContainer3/massMoveButton" to="." method="_onMassMoveButtonUp"]
+[connection signal="button_up" from="UI/MiscButtons/mashButton" to="." method="_onMashButtonUp"]
+[connection signal="button_up" from="UI/MiscButtons/p1PlacerButton" to="." method="_on_p_1_placer_button_button_up"]
+[connection signal="button_up" from="UI/MiscButtons/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]
+[connection signal="button_up" from="UI/MiscButtons/slideWallButton" to="." method="_onSlideWallButtonUp"]
+[connection signal="button_up" from="UI/MiscButtons/keyBindingButton" to="." method="_onKeyBindingButtonUp"]
+[connection signal="button_up" from="UI/MiscButtons/skipButton" to="." method="_onSkipButtonUp"]
+[connection signal="button_up" from="UI/MiscButtons/holdButton" to="." method="_onHoldButtonUp"]
+[connection signal="button_up" from="UI/MiscButtons/massMoveButton" to="." method="_onMassMoveButtonUp"]
 [connection signal="pressed" from="UI/FileLoadMode/Load" to="." method="_on_load_file_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]
