@@ -492,8 +492,8 @@ func save_scene_to_file():
 			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
-				if itemList.name !=  "placers" or itemList.name !=  "moveLines":
-					for item in itemList.get_children():
+				for item in itemList.get_children():
+					if itemList.name !=  "placers" and itemList.name !=  "moveLines":
 						#go through each of the items children areas
 						var childrenList = item.get_child(0).get_children()
 						var index = 0
@@ -504,6 +504,8 @@ func save_scene_to_file():
 						for blockChild in childrenList:
 							#saving for platfrom block differs since their size varies#
 							#TODO I dont want to do this, delegate this work to the child class
+							if itemList.name == "placers":
+								print("we are saving a placer")
 							if itemList.name == "platformBlocks":
 								#save the number of cols as well as the extents so we know where to start drawing	
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", "
