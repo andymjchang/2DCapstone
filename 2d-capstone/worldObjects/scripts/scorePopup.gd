@@ -30,8 +30,8 @@ func _ready():
 	
 	clefSprite.modulate.a = 0.0
 	
-	var min_rotation_degrees = -1.5
-	var max_rotation_degrees = 1.5
+	var min_rotation_degrees = -10.5
+	var max_rotation_degrees = 10.5
 	# Convert degrees to radians for rotation
 	min_rotation = min_rotation_degrees * (PI / 180)
 	max_rotation = max_rotation_degrees * (PI / 180)
@@ -45,15 +45,15 @@ func initText(text, _player_position):
 	$sfxPlayer.play()
 	var labelText = ""
 	if text > 90:
-		labelText = "PERFECT!"
+		labelText = "PERFECT!\n+" + str(int(text))
 		clefSprite.texture = greenTiming
 		Globals.numPerfects += 1
 	elif text > 65:
-		labelText = "GOOD!"
+		labelText = "GOOD!\n +"+ str(int(text))
 		clefSprite.texture = yellowTiming
 		Globals.numGoods += 1
 	elif text > 0: 
-		labelText = "BARELY!"
+		labelText = "BARELY!\n+" + str(int(text))
 		clefSprite.texture = redTiming
 		Globals.numBarelys += 1
 	else:
@@ -68,27 +68,33 @@ func initText(text, _player_position):
 	
 	# Create individual labels for each letter
 	var offset := 0.0
+	var y_offset := 0.0
 	for i in labelText.length():
+		if labelText[i] == "\n":
+			offset = 0.0
+			y_offset += letter_nodes[0].size.y
+			continue
+			
 		var letter_label := Label.new()
 		letter_label.text = labelText[i]
-		letter_label.position.x = offset
-		letter_label.scale = Vector2.ZERO  # Start invisible
-		letter_label.theme = label.theme  # Copy the theme from the main label
-		letter_label.add_theme_font_override("font", label.get_theme_font("font"))  # Copy the font
-		letter_label.add_theme_font_size_override("font_size", label.get_theme_font_size("font_size"))  # Copy the font size
-		letter_label.add_theme_constant_override("outline_size", label.get_theme_constant("outline_size"))  # Copy the outline size
+		letter_label.position = Vector2(offset, y_offset)
+		letter_label.scale = Vector2.ZERO
+		letter_label.theme = label.theme
+		letter_label.add_theme_font_override("font", label.get_theme_font("font"))
+		letter_label.add_theme_font_size_override("font_size", label.get_theme_font_size("font_size"))
+		letter_label.add_theme_constant_override("outline_size", label.get_theme_constant("outline_size"))
 		label.add_child(letter_label)
 		letter_nodes.append(letter_label)
 		offset += letter_label.size.x
 	
-	label.text = ""  # Clear the main label
+	label.text = ""
 	fadeMode = true
 	fadeTimer = FADE_TIME
 	label.modulate.a = 1.0
 	
 	clefSprite.modulate.a = 1.0
 	clefSprite.position = clefDefaultPosition
-	clefSprite.scale = Vector2(0.7, 0.7)  # Start with larger scale
+	clefSprite.scale = Vector2(0.7, 0.7)
 	
 	rotation = randf_range(min_rotation, max_rotation)
 	
@@ -141,12 +147,12 @@ func _process(delta: float) -> void:
 			fadeTimer -= delta
 		elif not hasFadeStarted:
 			hasFadeStarted = true
-			label.modulate.a = 1.0  # Reset alpha when fade starts
+			label.modulate.a = 1.0
 			clefSprite.modulate.a = 1.0
 		else:
 			label.modulate.a -= 0.02
 			clefSprite.modulate.a -= 0.02
 	if label.modulate.a <= 0:
 		fadeMode = false
-		fadeTimer = FADE_TIME # Reset timer for next use
+		fadeTimer = FADE_TIME
 		hasFadeStarted = false

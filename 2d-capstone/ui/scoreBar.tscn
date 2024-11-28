@@ -47,7 +47,7 @@ offset_bottom = 25.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("5_psxq1")
 timingScale = 2
-increasedScale = Vector2(1, 2)
+increasedScale = Vector2(1, 1.5)
 
 [node name="botBlack" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = -1.0
@@ -66,4 +66,4 @@ offset_bottom = 1113.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("5_psxq1")
 timingScale = 2
-increasedScale = Vector2(1, 2)
+increasedScale = Vector2(1, 1.5)
