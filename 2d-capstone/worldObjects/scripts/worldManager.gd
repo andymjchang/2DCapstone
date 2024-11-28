@@ -487,6 +487,8 @@ func UpdateCombo(num):
 	# Update combo UI
 	$CanvasLayer/ComboLetter/Combo.text = "x" + str(combo)
 	$CanvasLayer/ComboLetter/AnimatedSprite2D.frame = min(4, int(combo / 10))
+	$CanvasLayer/ComboLetter/ComboLetterTimer.start()
+	$CanvasLayer/ComboLetter/ColorRect.visible = true
 
 func UpdateAccuracy(scoreToAdd):
 	if scoreToAdd < 0:
@@ -555,3 +557,8 @@ func _onMovePlayer(location : Vector2):
 	player1.exitedZip = false
 	
 	
+
+
+func _on_combo_letter_timer_timeout() -> void:
+	# $CanvasLayer/ComboLetter/ComboLetterTimer.start()
+	$CanvasLayer/ComboLetter/ColorRect.visible = false

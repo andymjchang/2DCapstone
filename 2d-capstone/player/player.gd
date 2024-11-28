@@ -371,6 +371,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 			hitEffect.frame = 0
 			hitEffect.play()
 	elif "ifDead" in area.get_parent() and area.get_parent().ifDead == false :
+		Globals.numMisses += 1
 		_onTakeDamage(3)
 
 

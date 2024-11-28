@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=47 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -26,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worlds/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
 [ext_resource type="PackedScene" uid="uid://t86xp6tpjvdg" path="res://worldObjects/skip.tscn" id="17_hifbs"]
-[ext_resource type="Script" path="res://ui/scripts/visualizer.gd" id="18_0o0nt"]
 [ext_resource type="AudioStream" uid="uid://cwunsxkx78vcj" path="res://audioTracks/Tutorial_New_155bpm.mp3" id="18_44qgl"]
 [ext_resource type="PackedScene" uid="uid://h2r5t05jiyo5" path="res://worldObjects/enemy/mashEnemy.tscn" id="18_qn7u4"]
 [ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
@@ -119,10 +118,6 @@ vertical_alignment = 1
 script = ExtResource("15_mx364")
 increasedScale = Vector2(1, 1.5)
 
-[node name="Visualizer" type="Node2D" parent="CanvasLayer"]
-position = Vector2(780, 25)
-script = ExtResource("18_0o0nt")
-
 [node name="ComboLetter" type="Node2D" parent="CanvasLayer"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/ComboLetter" groups=["pulsingObjects"]]
@@ -157,6 +152,10 @@ theme = ExtResource("27_u4i2v")
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 72
 text = "x0"
+
+[node name="ComboLetterTimer" type="Timer" parent="CanvasLayer/ComboLetter"]
+wait_time = 0.1
+one_shot = true
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2(250, 645)
@@ -253,5 +252,6 @@ visible = false
 
 [node name="LevelUI" parent="." instance=ExtResource("2_50e4x")]
 
+[connection signal="timeout" from="CanvasLayer/ComboLetter/ComboLetterTimer" to="." method="_on_combo_letter_timer_timeout"]
 [connection signal="body_entered" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyEntered"]
 [connection signal="body_exited" from="Camera2D/RunBounds" to="." method="_onRunBoundsBodyExited"]

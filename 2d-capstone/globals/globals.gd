@@ -131,6 +131,7 @@ func restartLevelData() -> void:
 	numBarelys = 0.0
 	numGoods = 0.0
 	numPerfects = 0.0
+	numMisses = 0.0
 	endScore = 0.0
 	coinsCollected = 0.0
 	percentageHit = 0.0
