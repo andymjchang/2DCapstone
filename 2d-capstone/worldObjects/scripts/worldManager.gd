@@ -398,7 +398,6 @@ func _physics_process(_delta):
 		#do go to pause instead
 		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 		music.stream_paused = true
-		#TODO add this back in 
 		adaptiveMusic.stream_paused = true
 		Globals.paused = true
 		$LevelUI/PauseScreen.visible = true

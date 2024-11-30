@@ -523,9 +523,66 @@ func save_scene_to_file():
 						posChain = posChain.substr(0, posChain.length()-1)
 						posChain += "\n"
 						newFile.store_string(posChain)
+				#I want to go through the file and combine all the disconnected blocks into one
+			combineBlocks(newFile)
 	else:
 		displayStatus(UNABLE_TO_SAVE, false)
-		
+	
+func combineBlocks(newFile) -> void:
+	var content = newFile.get_as_text()
+	var allNewBlocks = []
+	#new block, has a start x and an end x and num cols
+	var newBlock = []
+	var newBlockY = -INF
+	var endX
+	var numCols
+	var isPlatform = false
+	#the way that platformBlocks data is set up
+	# x pos, y pos, numCols, extents, newPos
+	#new pos is useless
+	for line in content.split("\n"):
+		#we are satrting a new chain
+			
+		if line == "platformBlocks" and !line.contains(", "):
+			isPlatform = true
+		elif line != "platformBlocks" and !line.contains(", "):
+			isPlatform = false
+		# Position
+		print("cur line: " , line)
+		if line.contains(", ") and isPlatform:
+			#var objectParent = baseObject.instantiate()
+			#var instancedObj = instance.instantiate()
+			var posPoints = []
+			for pos in line.split(", "):
+				pos = pos.replace(",", "")
+				if pos.is_valid_float():
+					posPoints.append(pos.to_float())
+				else:
+					posPoints.append(pos)
+				# we have the psoition of the block being saved, we just need to check too see if the y is the same
+			if newBlock.size() == 0:
+					# we are starting a new block chain
+					#has the same start and end because it is one block
+					
+				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2]]
+				print("starting a new chain: ", newBlock)
+				#if the block we are checking has y/x that is in bounds/close enough - merge
+			elif newBlock[0].y == posPoints[1] and abs(posPoints[0] - newBlock[1].x) < 200 :
+				#change the end bounds
+				newBlock[1] = Vector2(posPoints[0], posPoints[1])
+				#extend the num cols
+				newBlock[2] = newBlock[2] + posPoints[2]
+				print("adding to new block: ", newBlock)
+			else:
+				#we are ending the block chain
+				#there is a chance that this does not get a singular last block chain
+				allNewBlocks.append(newBlock)
+				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2]]
+				print("ending a chain: ", newBlock)
+	
+	
+
+	
 # Recursive function to set owner for all children
 func _set_owner_recursive(node: Node, root: Node):
 	for child in node.get_children():

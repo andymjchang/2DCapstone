@@ -105,7 +105,6 @@ func decreaseByOneTile() -> void:
 			var curX = endX - (i + 3)
 			moveY = startY
 			for j in range(startY,endY+1):
-				print("deleting coords: ",curX," , ", moveY)
 				tileMap.erase_cell(Vector2i(curX, moveY))
 				moveY+=1
 
@@ -191,7 +190,6 @@ func setEndTiles() -> void:
 	
 	#reset the array
 	#it has to hold both cols
-	print("max y: ", maxY, " minY:", minY)
 	
 	endTiles = []
 	var curCol = []
