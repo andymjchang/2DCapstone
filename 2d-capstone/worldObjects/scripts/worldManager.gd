@@ -329,19 +329,7 @@ func _onCheckGameOver():
 		self.emit_signal("gameOver")
 
 func _onCheckLevelCompleted():
-	print("checking if level completed!")
-	var allGoals= get_tree().get_nodes_in_group("goals") 
-	#I dont think I should be checking this all the time
-	var allReached = true
-	for goal in allGoals:
-		if goal.get_class() == "Node2D" and !goal.reached:
-			allReached = false
-			
-	#all player goals have been reached 
-	print("all reached = ", allReached)
-	if allReached:
-		self.emit_signal("levelCompleted")
-	# self.emit_signal("levelCompleted")
+	self.emit_signal("levelCompleted")
 
 func _onGameOver():
 	var closestPoint = self.getNearestCheckpoint(player1)
