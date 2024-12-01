@@ -543,9 +543,9 @@ func combineBlocks(newFile) -> void:
 	for line in content.split("\n"):
 		#we are satrting a new chain
 			
-		if line == "platformBlocks" and !line.contains(", "):
+		if line == "platformBlocks" and not line.contains(", "):
 			isPlatform = true
-		elif line != "platformBlocks" and !line.contains(", "):
+		elif line != "platformBlocks" and not line.contains(", "):
 			isPlatform = false
 		# Position
 		print("cur line: " , line)
@@ -564,7 +564,7 @@ func combineBlocks(newFile) -> void:
 					# we are starting a new block chain
 					#has the same start and end because it is one block
 					
-				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2]]
+				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2],0,0]
 				print("starting a new chain: ", newBlock)
 				#if the block we are checking has y/x that is in bounds/close enough - merge
 			elif newBlock[0].y == posPoints[1] and abs(posPoints[0] - newBlock[1].x) < 200 :
@@ -577,9 +577,9 @@ func combineBlocks(newFile) -> void:
 				#we are ending the block chain
 				#there is a chance that this does not get a singular last block chain
 				allNewBlocks.append(newBlock)
-				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2]]
+				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2],0,0]
 				print("ending a chain: ", newBlock)
-	
+	#now we have to overwite all of the platform code for what we have
 	
 
 	
