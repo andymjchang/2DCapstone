@@ -17,11 +17,13 @@ enum MenuOptions {
 @onready var album: Sprite2D = $Album 
 @onready var albumBack: Sprite2D = $Back  
 
+var jingle_played = false
 var current_option: int = 0
 var options_count: int = MenuOptions.size()
 
 func _ready() -> void:
 	self.updateScoreData.connect(_onUpdateScoreData)
+	$Leaderboard.position.x += slide_offset
 	update_selection()
 
 func _input(event: InputEvent) -> void:
@@ -35,6 +37,11 @@ func _input(event: InputEvent) -> void:
 		update_selection()
 	elif event.is_action_pressed("ui_accept"):
 		select_current_option()
+	elif event.is_action_pressed("ui_left"):
+		leaderboard_slide_in()
+	elif event.is_action_pressed("ui_right"):
+		leaderboard_slide_in()
+	
 
 func update_selection() -> void:
 	var tween = create_tween()
@@ -50,7 +57,6 @@ func select_current_option() -> void:
 	Globals.gameOver = false
 	match current_option:
 		MenuOptions.NEXT_LEVEL:
-			leaderboard_slide_in()
 			var nextLevel = Globals.getNextLevel(Globals.curFile)
 			if nextLevel != "":
 				Globals.curFile = nextLevel
@@ -81,7 +87,9 @@ func _onUpdateScoreData() -> void:
 		start_score, Globals.endScore, 3.0)
 
 func playMusic() -> void:
-	jingle.play(0.0)
+	if !jingle_played:
+		jingle.play(0.0)
+		jingle_played = true
 
 func slide_in() -> void:
 	# Set initial position off-screen
@@ -105,9 +113,14 @@ func slide_in() -> void:
 		albumBack.position.x - slide_offset, slide_in_duration)
 	tween.tween_callback(playMusic)
 
+func disableLeaderboard() -> void:
+	$Leaderboard.visible = false
+
 func leaderboard_slide_in() -> void:
+	if $Leaderboard.visible:
+		leaderboard_slide_out()
+		return
 	$Leaderboard.visible = true
-	$Leaderboard.position.x += slide_offset
 	
 	var tween = create_tween()
 
@@ -116,4 +129,12 @@ func leaderboard_slide_in() -> void:
 	tween.set_trans(Tween.TRANS_CUBIC)
 	
 	tween.tween_property($Leaderboard, "position:x",
-		$Leaderboard.position.x - slide_offset, slide_in_duration + 0.75)
+		0, slide_in_duration)
+
+func leaderboard_slide_out() -> void:
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($Leaderboard, "position:x",
+		$Leaderboard.position.x + (slide_offset + 200), slide_in_duration)
+	tween.tween_callback(disableLeaderboard)

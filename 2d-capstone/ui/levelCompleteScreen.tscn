@@ -100,6 +100,18 @@ vertical_alignment = 1
 position = Vector2(-347.5, 0.672974)
 texture = ExtResource("6_xsv6n")
 
+[node name="PopupLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -296.0
+offset_top = -355.0
+offset_right = 138.0
+offset_bottom = -234.0
+rotation = -0.174533
+theme = ExtResource("3_bdee6")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Full Combo!
+New High Score!"
+
 [node name="gradeLabel" type="Label" parent="."]
 layout_mode = 2
 offset_left = -946.0
@@ -575,15 +587,3 @@ modulate = Color(0, 0, 0, 1)
 position = Vector2(-16, -16)
 texture = ExtResource("7_vxoxn")
 flip_h = true
-
-[node name="PopupLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = -296.0
-offset_top = -355.0
-offset_right = 138.0
-offset_bottom = -234.0
-rotation = -0.174533
-theme = ExtResource("3_bdee6")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Full Combo!
-New High Score!"
