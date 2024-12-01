@@ -10,7 +10,7 @@ enum MenuOptions {
 @export var vinyl_rotations: Array[float] = [30.0, 0.0, -30.0]  
 @export var rotation_tween_duration: float = 0.15
 @export var slide_in_duration: float = 0.5  # Duration for slide-in animation
-@export var slide_offset: float = -1000  # Starting X offset for slide animation
+@export var slide_offset: float = -1200  # Starting X offset for slide animation
 
 @onready var jingle = $jingle
 @onready var vinyl: Sprite2D = $Vinyl
@@ -24,6 +24,7 @@ var options_count: int = MenuOptions.size()
 func _ready() -> void:
 	self.updateScoreData.connect(_onUpdateScoreData)
 	$Leaderboard.position.x += slide_offset
+	$Leaderboard.visible = false
 	update_selection()
 
 func _input(event: InputEvent) -> void:
@@ -70,12 +71,16 @@ func select_current_option() -> void:
 			get_tree().reload_current_scene()
 
 func _onUpdateScoreData() -> void:
+	# Update scoreboard
 	$perfectLabel.text = str(Globals.numPerfects)
 	$goodLabel.text = str(Globals.numGoods)
 	$barelyLabel.text = str(Globals.numBarelys)
 	$missedLabel.text = str(Globals.numMisses)
 	$coinsLabel.text = str(Globals.coinsCollected)
 	$accuracyLabel.text = "%2.2f" % Globals.percentageHit + "%"
+
+	# Update leaderboard
+	$Leaderboard/userScore.text = str(Globals.endScore)
 	
 	# Create score animation tween
 	var tween = create_tween()
@@ -136,5 +141,5 @@ func leaderboard_slide_out() -> void:
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property($Leaderboard, "position:x",
-		$Leaderboard.position.x + (slide_offset + 200), slide_in_duration)
+		$Leaderboard.position.x + (slide_offset), slide_in_duration)
 	tween.tween_callback(disableLeaderboard)

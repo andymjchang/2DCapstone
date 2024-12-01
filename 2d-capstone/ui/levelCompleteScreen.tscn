@@ -324,7 +324,6 @@ script = ExtResource("8_q0prs")
 increasedScale = Vector2(1.1, 1.1)
 
 [node name="Leaderboard" type="Node2D" parent="."]
-visible = false
 
 [node name="Album2" type="Sprite2D" parent="Leaderboard"]
 position = Vector2(-347.5, 0.672974)
