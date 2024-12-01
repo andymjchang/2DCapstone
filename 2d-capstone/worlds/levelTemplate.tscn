@@ -42,7 +42,7 @@
 [ext_resource type="AudioStream" uid="uid://c8m6611e1qqd3" path="res://audioTracks/Level2_MelodyOnly_156bpm.mp3" id="25_t4rxr"]
 [ext_resource type="Texture2D" uid="uid://c0gjg3ievh7ul" path="res://ui/assets/comboLetters/Combo_Letter_S.png" id="26_6jmkl"]
 [ext_resource type="Script" path="res://ui/scripts/pulseAnimatedSprite.gd" id="27_8vl6o"]
-[ext_resource type="Theme" path="res://ui/MonospaceTheme.tres" id="27_u4i2v"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="27_u4i2v"]
 [ext_resource type="Material" uid="uid://bprabndekf50s" path="res://shaders/playerGlitch.tres" id="28_62u6b"]
 [ext_resource type="PackedScene" uid="uid://brhrxx3h4jgeq" path="res://worldObjects/skipManager.tscn" id="28_caqgn"]
 

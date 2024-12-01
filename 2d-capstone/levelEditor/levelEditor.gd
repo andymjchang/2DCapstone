@@ -74,7 +74,12 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 							"platformType" : ["rustic", "city"],
 							"instructionType" : ["punch", "slide", "jump", "activate"],
 							"gameObjectType" : {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin, "skip":skip, "loop":loop} }
-#var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "multiPunch"]
+					#0           1			2			3				4			5		
+#var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", 
+#	6			7					8				9			10			11			12			
+#"killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", 
+#13			 14				15		16		  17	  18		19		20
+#"jumpBoost", "coin", "keyBinding", "skip", "mash", "hold", "moveLine", "loop"]
 @onready var typeMap = {blockTypes[1]: "gameObjectType",
 						blockTypes[2]: "platformType",
 						blockTypes[3]: "gameObjectType",
@@ -89,9 +94,11 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 						blockTypes[14]: "gameObjectType",
 						blockTypes[15]: "instructionType",
 						blockTypes[16]: "gameObjectType",
+						blockTypes[17]: "enemyObjectType",
+						blockTypes[18]: "enemyType",	
 						blockTypes[20]: "gameObjectType"}
 
-var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
+@onready var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList, "loop": loopList}
 
 
 @onready var objectList = $objectList
@@ -132,12 +139,12 @@ var levelSaved = false
 
 
 func _ready():
-	listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
+	listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList, "loop":loopList}
 	Globals.customStart = false
 	Globals.levelEditorTime = 0.0
 	#set signals
 	self.objectClicked.connect(_onObjectClicked)
-	self.setMassMove.connect(_onSetMassMove)
+	self.setMassMove.connect(_onSetMassMove)	
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
 	if Globals.curFile == "":
