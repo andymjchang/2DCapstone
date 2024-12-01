@@ -1,12 +1,12 @@
-[gd_scene load_steps=45 format=3 uid="uid://bwbudlc6eqg88"]
+[gd_scene load_steps=48 format=3 uid="uid://bwbudlc6eqg88"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qyaa7"]
 [ext_resource type="Shader" path="res://shaders/immune.gdshader" id="2_75si5"]
 [ext_resource type="Texture2D" uid="uid://chjj58435tkhb" path="res://animations/raccoonAnims/raccoon_jump_sprite_sheet.png" id="2_hwmte"]
 [ext_resource type="Texture2D" uid="uid://dekngay2ghh64" path="res://animations/raccoonAnims/Raccoon_punch_sprite_sheet.png" id="3_kqmek"]
 [ext_resource type="Texture2D" uid="uid://coymment44w5p" path="res://animations/raccoonAnims/Raccoon_run_sprite_sheet.png" id="4_vkpc8"]
+[ext_resource type="Texture2D" uid="uid://dyrqnnvq6fm5v" path="res://animations/raccoonAnims/Raccoon_slide_sprite_sheet.png" id="6_27tyb"]
 [ext_resource type="Texture2D" uid="uid://b18hph1l64gp1" path="res://animations/raccoonAnims/Zipline_Tango_slide.png" id="6_cw6gs"]
-[ext_resource type="Texture2D" uid="uid://cur3nho7ppwwm" path="res://animations/raccoonAnims/FIXED Slide.png" id="6_oqmgn"]
 [ext_resource type="Texture2D" uid="uid://601aqkhuqjk5" path="res://animations/raccoonAnims/Zipline_Tango_punch.png" id="7_tegds"]
 [ext_resource type="Texture2D" uid="uid://bf5aif1oibn04" path="res://player/playerActionCircle2.png" id="7_tnfmg"]
 [ext_resource type="AudioStream" uid="uid://bplvu64galiw2" path="res://audioEffects/Punch.mp3" id="7_wy6uo"]
@@ -85,6 +85,18 @@ region = Rect2(0, 560, 280, 280)
 atlas = ExtResource("4_vkpc8")
 region = Rect2(280, 560, 280, 280)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_unn78"]
+atlas = ExtResource("6_27tyb")
+region = Rect2(0, 0, 280, 280)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvdvj"]
+atlas = ExtResource("6_27tyb")
+region = Rect2(280, 0, 280, 280)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uit3p"]
+atlas = ExtResource("6_27tyb")
+region = Rect2(560, 0, 280, 280)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_h8xup"]
 animations = [{
 "frames": [{
@@ -157,11 +169,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_oqmgn")
+"texture": SubResource("AtlasTexture_unn78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvdvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uit3p")
 }],
 "loop": true,
 "name": &"Slide",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -257,10 +275,12 @@ script = ExtResource("1_qyaa7")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_3fn7t")
-position = Vector2(-13.75, -1.80001)
+position = Vector2(-13.75, -0.550011)
 scale = Vector2(0.133929, 0.133929)
 sprite_frames = SubResource("SpriteFrames_h8xup")
-animation = &"Slide"
+animation = &"Run"
+autoplay = "Slide"
+frame_progress = 0.307482
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-8.4375, 2)

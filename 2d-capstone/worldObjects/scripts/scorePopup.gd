@@ -45,15 +45,15 @@ func initText(text, _player_position):
 	$sfxPlayer.play()
 	var labelText = ""
 	if text > 90:
-		labelText = "PERFECT!\n+" + str(int(text))
+		labelText = "PERFECT!"
 		clefSprite.texture = greenTiming
 		Globals.numPerfects += 1
 	elif text > 65:
-		labelText = "GOOD!\n +"+ str(int(text))
+		labelText = "GOOD!"
 		clefSprite.texture = yellowTiming
 		Globals.numGoods += 1
 	elif text > 0: 
-		labelText = "BARELY!\n+" + str(int(text))
+		labelText = "BARELY!"
 		clefSprite.texture = redTiming
 		Globals.numBarelys += 1
 	else:
