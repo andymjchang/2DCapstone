@@ -169,9 +169,12 @@ func _process(delta: float) -> void:
 		if !isBinding and currentBlock:
 			#grab the list of similiar types
 			#TODO add a check here to see if this is a valid grab
+			print("tabbing!")
 			var curTypeName = typeMap[currentBlock.blockType]
 			var curTypeList = typeArrays[curTypeName]
 			currentBlock.tabType(curTypeList, curTypeName, listMap)
+		elif isBinding:
+			print("is binding")
 	if Input.is_action_just_pressed("click"):
 		var mouseCoords = get_global_mouse_position()
 		#check to see if we have any objects within those bounds
@@ -199,6 +202,7 @@ func _process(delta: float) -> void:
 			isBinding = false
 			bindedBlocks = []
 		else:
+			print("setting binding to true")
 			isBinding = true
 func _on_text_edit_0_text_changed() -> void:
 	if beatsMinLabel.text.is_valid_int():

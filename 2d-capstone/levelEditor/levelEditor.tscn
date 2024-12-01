@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=68 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -47,6 +47,7 @@
 [ext_resource type="Texture2D" uid="uid://k1dc32r37ecx" path="res://levelEditor/programmerArtAssets/play_audio.png" id="26_m4kik"]
 [ext_resource type="PackedScene" uid="uid://b3r5orhxswfha" path="res://levelEditorObjects/holdScene.tscn" id="26_oo2r2"]
 [ext_resource type="PackedScene" uid="uid://8slx4t2oi8ub" path="res://levelEditorObjects/loopScene.tscn" id="27_jho4t"]
+[ext_resource type="PackedScene" uid="uid://drwoyrkcgtkqc" path="res://levelEditorObjects/massMoveScene.tscn" id="27_weg37"]
 [ext_resource type="Texture2D" uid="uid://dd5m0kwji44w1" path="res://levelEditor/programmerArtAssets/zipline.png" id="30_pq2h6"]
 [ext_resource type="Texture2D" uid="uid://b1ymqen6srbge" path="res://levelEditor/programmerArtAssets/powerup.png" id="33_pappt"]
 [ext_resource type="Texture2D" uid="uid://bv8ou5u1pkb2k" path="res://levelEditor/programmerArtAssets/R (1).jpg" id="34_wwivc"]
@@ -96,6 +97,7 @@ keyBinding = ExtResource("24_r48c0")
 skip = ExtResource("24_5ioff")
 mash = ExtResource("25_1gpd6")
 hold = ExtResource("26_oo2r2")
+moveLine = ExtResource("27_weg37")
 loop = ExtResource("27_jho4t")
 
 [node name="Background" type="Sprite2D" parent="."]
