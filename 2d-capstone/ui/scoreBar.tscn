@@ -15,14 +15,15 @@
 
 [node name="ScoreBar" type="CanvasLayer"]
 
-[node name="Control" type="Control" parent="."]
+[node name="TextureProgressBar" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_3u3ml")
 
-[node name="Level1" type="TextureProgressBar" parent="Control"]
+[node name="Level1" type="TextureProgressBar" parent="TextureProgressBar"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -45,7 +46,8 @@ texture_over = ExtResource("3_ras0b")
 texture_progress = ExtResource("4_irbtt")
 texture_progress_offset = Vector2(160, 55)
 
-[node name="Level2" type="TextureProgressBar" parent="Control"]
+[node name="Level2" type="TextureProgressBar" parent="TextureProgressBar"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,7 +70,8 @@ texture_over = ExtResource("2_of54a")
 texture_progress = ExtResource("3_x6cf0")
 texture_progress_offset = Vector2(160, 55)
 
-[node name="Level3" type="TextureProgressBar" parent="Control"]
+[node name="Level3" type="TextureProgressBar" parent="TextureProgressBar"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -91,7 +94,7 @@ texture_over = ExtResource("6_qjy3c")
 texture_progress = ExtResource("7_rhw4q")
 texture_progress_offset = Vector2(160, 55)
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="TextureProgressBar"]
 layout_mode = 0
 offset_left = 204.8
 offset_top = 59.4
@@ -102,7 +105,7 @@ theme_override_font_sizes/font_size = 36
 text = "C"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="Control"]
+[node name="Label2" type="Label" parent="TextureProgressBar"]
 layout_mode = 0
 offset_left = 268.2
 offset_top = 59.4
@@ -113,7 +116,7 @@ theme_override_font_sizes/font_size = 36
 text = "B"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="Control"]
+[node name="Label3" type="Label" parent="TextureProgressBar"]
 layout_mode = 0
 offset_left = 329.6
 offset_top = 59.4
@@ -124,7 +127,7 @@ theme_override_font_sizes/font_size = 36
 text = "A"
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="Control"]
+[node name="Label4" type="Label" parent="TextureProgressBar"]
 layout_mode = 0
 offset_left = 393.6
 offset_top = 59.4
@@ -135,7 +138,7 @@ theme_override_font_sizes/font_size = 36
 text = "S"
 horizontal_alignment = 1
 
-[node name="Label5" type="Label" parent="Control"]
+[node name="Label5" type="Label" parent="TextureProgressBar"]
 visible = false
 layout_mode = 0
 offset_left = 27.0
