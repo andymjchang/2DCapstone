@@ -35,7 +35,7 @@ var MIN_STEP : int = 25
 var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
 var NEED_PLAYER = "Unable to save.\nNeed 1 player."
-var UNABLE_TO_SAVE = "Unable to save."
+var UNABLE_TO_SAVE = "No file name found.\nEnter a name using\n the file button."
 
 @export var p1Placer : PackedScene
 @export var p2Placer : PackedScene
@@ -733,25 +733,30 @@ func _on_load_file_pressed() -> void:
 	currentFile.text = "Now editing: " + tgtFile + ".dat"
 
 func _on_play_level_button_button_down() -> void:
-	overwrite = true
-	save_scene_to_file()
-	# var scene_instance = levelTemplatePacked.instantiate()
-	
-	get_tree().paused = false
-	
-	# Access the current scene and remove it from the scene tree
-	#var current_scene = get_tree().current_scene
-	#Globals.editorNode = current_scene
-	Globals.enablePreviewUI()
-	Globals.currentEditorFileName = saveFileName
-	Globals.curFile = saveFileName
-	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
-	#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
-	#current_scene.visible = false
+	if saveFileName:
+		save_scene_to_file()
+		overwrite = true
+		save_scene_to_file()
+		# var scene_instance = levelTemplatePacked.instantiate()
+		
+		get_tree().paused = false
+		
+		# Access the current scene and remove it from the scene tree
+		#var current_scene = get_tree().current_scene
+		#Globals.editorNode = current_scene
+		Globals.enablePreviewUI()
+		Globals.currentEditorFileName = saveFileName
+		Globals.curFile = saveFileName
+		get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+		#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+		#current_scene.visible = false
 
-	# Add the new scene to the scene tree and set it as the current scene
-	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
-	#get_tree().current_scene = scene_instance  # Set it as the new current scene
+		# Add the new scene to the scene tree and set it as the current scene
+		#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
+		#get_tree().current_scene = scene_instance  # Set it as the new current scene
+	else:
+		status.show()
+		displayStatus(UNABLE_TO_SAVE, false)
 
 func lengthenPlatform() -> void:
 	#this isnt modular but it will work for now TODO

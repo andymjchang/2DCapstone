@@ -7,6 +7,7 @@ var starting_index = 0
 func load_array():
 	await get_tree().process_frame
 	actionIndicatorArray = get_tree().get_nodes_in_group("actionIndicators")
+	print("Children: ", actionIndicatorArray)
 	for indicator in actionIndicatorArray:
 		indicator.initialize()
 	actionIndicatorArray.sort_custom(sortIndicators)
