@@ -1,4 +1,4 @@
-extends TextureProgressBar
+extends Control
 var enemiesLoaded = false
 signal increaseScore
 var numEnemies = 0.0

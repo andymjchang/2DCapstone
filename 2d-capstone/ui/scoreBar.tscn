@@ -1,24 +1,61 @@
-[gd_scene load_steps=7 format=3 uid="uid://25td4r2m7r1e"]
+[gd_scene load_steps=13 format=3 uid="uid://25td4r2m7r1e"]
 
 [ext_resource type="Texture2D" uid="uid://dbare1v5mrdfe" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_UNDER.png" id="1_3jway"]
+[ext_resource type="Texture2D" uid="uid://c06srwf6fnu0n" path="res://ui/assets/comboMeters/Landfill/2_UNDER.png" id="2_k7yr2"]
 [ext_resource type="Texture2D" uid="uid://c3uj8v4ksdg4g" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_OVER.png" id="2_of54a"]
 [ext_resource type="Script" path="res://ui/scripts/textureScoreProgress_bar.gd" id="3_3u3ml"]
+[ext_resource type="Texture2D" uid="uid://n8xjdbwsv10e" path="res://ui/assets/comboMeters/Landfill/2_OVER.png" id="3_ras0b"]
 [ext_resource type="Texture2D" uid="uid://bwyalplhbx3h7" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_PROGRESS.png" id="3_x6cf0"]
+[ext_resource type="Texture2D" uid="uid://n7pus3sowj4e" path="res://ui/assets/comboMeters/Landfill/2_PROGRESS.png" id="4_irbtt"]
 [ext_resource type="Script" path="res://ui/scripts/pulseRect.gd" id="5_psxq1"]
+[ext_resource type="Texture2D" uid="uid://dxhfd6qve8rn1" path="res://ui/assets/comboMeters/Robot City/3_UNDER.png" id="5_rg2ub"]
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="5_t7bsv"]
+[ext_resource type="Texture2D" uid="uid://wlqrct8fr1oh" path="res://ui/assets/comboMeters/Robot City/3_OVER.png" id="6_qjy3c"]
+[ext_resource type="Texture2D" uid="uid://bcfhy42117185" path="res://ui/assets/comboMeters/Robot City/3_PROGRESS.png" id="7_rhw4q"]
 
 [node name="ScoreBar" type="CanvasLayer"]
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_3u3ml")
+
+[node name="Level1" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -970.0
-offset_top = -488.0
-offset_right = -429.0
-offset_bottom = -247.0
+offset_left = -30.0
+offset_top = 32.0
+offset_right = 511.0
+offset_bottom = 273.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(258, 0)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 100.0
+texture_under = ExtResource("2_k7yr2")
+texture_over = ExtResource("3_ras0b")
+texture_progress = ExtResource("4_irbtt")
+texture_progress_offset = Vector2(160, 55)
+
+[node name="Level2" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = 32.0
+offset_right = 511.0
+offset_bottom = 273.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
@@ -30,59 +67,81 @@ texture_under = ExtResource("1_3jway")
 texture_over = ExtResource("2_of54a")
 texture_progress = ExtResource("3_x6cf0")
 texture_progress_offset = Vector2(160, 55)
-script = ExtResource("3_3u3ml")
 
-[node name="Label" type="Label" parent="TextureProgressBar"]
+[node name="Level3" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = 32.0
+offset_right = 511.0
+offset_bottom = 273.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(258, 0)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 100.0
+texture_under = ExtResource("5_rg2ub")
+texture_over = ExtResource("6_qjy3c")
+texture_progress = ExtResource("7_rhw4q")
+texture_progress_offset = Vector2(160, 55)
+
+[node name="Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 209.0
-offset_top = 10.5
-offset_right = 249.0
-offset_bottom = 69.5
+offset_left = 204.8
+offset_top = 59.4
+offset_right = 244.8
+offset_bottom = 118.4
 theme = ExtResource("5_t7bsv")
 theme_override_font_sizes/font_size = 36
 text = "C"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="TextureProgressBar"]
+[node name="Label2" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 287.0
-offset_top = 10.5
-offset_right = 327.0
-offset_bottom = 69.5
+offset_left = 268.2
+offset_top = 59.4
+offset_right = 308.2
+offset_bottom = 118.4
 theme = ExtResource("5_t7bsv")
 theme_override_font_sizes/font_size = 36
 text = "B"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="TextureProgressBar"]
+[node name="Label3" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 365.0
-offset_top = 10.5
-offset_right = 405.0
-offset_bottom = 69.5
+offset_left = 329.6
+offset_top = 59.4
+offset_right = 369.6
+offset_bottom = 118.4
 theme = ExtResource("5_t7bsv")
 theme_override_font_sizes/font_size = 36
 text = "A"
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="TextureProgressBar"]
+[node name="Label4" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 445.0
-offset_top = 10.5
-offset_right = 485.0
-offset_bottom = 69.5
+offset_left = 393.6
+offset_top = 59.4
+offset_right = 433.6
+offset_bottom = 118.4
 theme = ExtResource("5_t7bsv")
 theme_override_font_sizes/font_size = 36
 text = "S"
 horizontal_alignment = 1
 
-[node name="Label5" type="Label" parent="TextureProgressBar"]
+[node name="Label5" type="Label" parent="Control"]
 visible = false
 layout_mode = 0
-offset_left = -18.25
-offset_top = -37.5
-offset_right = 176.75
-offset_bottom = 351.5
+offset_left = 27.0
+offset_top = 22.0
+offset_right = 222.0
+offset_bottom = 411.0
 theme = ExtResource("5_t7bsv")
 theme_override_font_sizes/font_size = 228
 text = "B"
