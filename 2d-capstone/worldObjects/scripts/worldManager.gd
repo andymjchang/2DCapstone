@@ -114,6 +114,9 @@ func _ready():
 		Globals.setBPM(160)
 		Globals.currentSongFileName = "CustomLevel_Shifted_160bpm.wav"
 		backgroundName = "Lvl3"
+	if levelFile.begins_with("BossLevel"):
+		Globals.setBPM(165)
+		Globals.currentSongFileName = "BossLevel_FINAL_165bpm.mp3"
 
 	Globals.gameOver = false
 	Globals.inLevel = false
