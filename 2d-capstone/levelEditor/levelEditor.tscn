@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=70 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -52,6 +52,7 @@
 [ext_resource type="Script" path="res://levelEditor/textureProgressBar.gd" id="35_lg51b"]
 [ext_resource type="Script" path="res://levelEditor/audioTracks.gd" id="36_wn18y"]
 [ext_resource type="Texture2D" uid="uid://1dfh5adfmstx" path="res://levelEditor/programmerArtAssets/play.png" id="37_5oir0"]
+[ext_resource type="Texture2D" uid="uid://bl0mornmn20bm" path="res://levelEditor/programmerArtAssets/help.png" id="37_frurs"]
 [ext_resource type="Texture2D" uid="uid://bc4p5m76bmftq" path="res://levelEditor/programmerArtAssets/mashEnemy.png" id="41_w3cb3"]
 [ext_resource type="Texture2D" uid="uid://b62deqkwqbndb" path="res://levelEditor/programmerArtAssets/file.png" id="46_nsemu"]
 [ext_resource type="Texture2D" uid="uid://wiekfbvafyq4" path="res://levelEditor/programmerArtAssets/slideWall.png" id="48_w6vdm"]
@@ -66,6 +67,7 @@
 [ext_resource type="Texture2D" uid="uid://cil5cpymxpq4y" path="res://levelEditor/programmerArtAssets/select.png" id="64_4dxtp"]
 [ext_resource type="Texture2D" uid="uid://bax3s0yo5mskj" path="res://levelEditor/programmerArtAssets/massSelect.png" id="65_hersj"]
 [ext_resource type="Texture2D" uid="uid://olygvy43m2yd" path="res://levelEditor/programmerArtAssets/helpBG.png" id="66_u5c76"]
+[ext_resource type="Script" path="res://levelEditor/onboarding.gd" id="68_1fdk7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl84f"]
 size = Vector2(278, 43)
@@ -169,10 +171,14 @@ offset_bottom = 1087.0
 color = Color(0.259294, 0.259294, 0.259294, 1)
 
 [node name="FileButtons" type="HBoxContainer" parent="UI"]
-offset_left = 1489.0
-offset_top = 16.0
-offset_right = 1901.0
-offset_bottom = 116.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -543.0
+offset_top = 25.0
+offset_right = -27.0
+offset_bottom = 125.0
+grow_horizontal = 0
 
 [node name="playLevelButton" type="TextureButton" parent="UI/FileButtons"]
 layout_mode = 2
@@ -185,6 +191,10 @@ texture_normal = ExtResource("7_0wc3n")
 [node name="fileButton" type="TextureButton" parent="UI/FileButtons"]
 layout_mode = 2
 texture_normal = ExtResource("46_nsemu")
+
+[node name="helpButton" type="TextureButton" parent="UI/FileButtons"]
+layout_mode = 2
+texture_normal = ExtResource("37_frurs")
 
 [node name="exitButton" type="TextureButton" parent="UI/FileButtons"]
 layout_mode = 2
@@ -350,9 +360,9 @@ texture_normal = ExtResource("26_m4kik")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/objectSelector"]
 layout_mode = 0
-offset_left = 1476.0
+offset_left = 1470.0
 offset_top = 921.0
-offset_right = 1906.0
+offset_right = 1900.0
 offset_bottom = 1021.0
 theme_override_constants/separation = 10
 
@@ -532,14 +542,19 @@ offset_right = 340.0
 offset_bottom = 270.0
 texture = ExtResource("66_u5c76")
 
-[node name="Description" type="Label" parent="UI/HelpWindow"]
+[node name="Description" type="RichTextLabel" parent="UI/HelpWindow"]
 layout_mode = 0
 offset_right = 338.0
 offset_bottom = 208.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
 text = "sdfsdfds gdfhgbsdfs dgdfbvdfgdfg ghfgh fdg hfghgfhfgdh  hj ghhd fgdsfgdfsad"
-horizontal_alignment = 1
+fit_content = true
+scroll_active = false
 autowrap_mode = 2
 
 [node name="CurrentFile" type="Label" parent="UI"]
@@ -548,8 +563,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -455.0
-offset_top = -48.0
+offset_left = -457.0
+offset_top = -49.0
+offset_right = -9.0
+offset_bottom = -1.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 25
@@ -623,6 +640,58 @@ Need 2 players."
 horizontal_alignment = 1
 clip_text = true
 
+[node name="Onboarding" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("68_1fdk7")
+
+[node name="ColorRect2" type="ColorRect" parent="Onboarding"]
+modulate = Color(1, 1, 1, 0.458824)
+offset_right = 1927.0
+offset_bottom = 1079.0
+
+[node name="ColorRect" type="TextureRect" parent="Onboarding"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -508.0
+offset_top = -324.0
+offset_right = 508.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("66_u5c76")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Onboarding"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -324.5
+offset_right = 500.0
+offset_bottom = 324.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatusMessage" type="Label" parent="Onboarding/VBoxContainer"]
+custom_minimum_size = Vector2(1000, 500)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 80
+text = "
+Welcome to the level editor! Let's go through the basics."
+horizontal_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Button" type="Button" parent="Onboarding/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Continue"
+
 [connection signal="button_down" from="UI/FileButtons/playLevelButton" to="." method="_on_play_level_button_button_down"]
 [connection signal="mouse_entered" from="UI/FileButtons/playLevelButton" to="UI" method="_on_play_level_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/FileButtons/playLevelButton" to="UI" method="_on_button_exited"]
@@ -632,6 +701,8 @@ clip_text = true
 [connection signal="mouse_entered" from="UI/FileButtons/fileButton" to="UI" method="_on_file_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/FileButtons/fileButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/FileButtons/fileButton" to="." method="_on_file_button_pressed"]
+[connection signal="mouse_entered" from="UI/FileButtons/helpButton" to="UI" method="_on_help_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FileButtons/helpButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/FileButtons/exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="text_changed" from="UI/TextEdit0" to="." method="_on_text_edit_0_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
@@ -709,3 +780,4 @@ clip_text = true
 [connection signal="pressed" from="UI/FileLoadMode/Load" to="." method="_on_load_file_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]
+[connection signal="pressed" from="Onboarding/VBoxContainer/Button" to="Onboarding" method="_on_continue_button_pressed"]

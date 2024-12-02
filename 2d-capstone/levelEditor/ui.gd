@@ -23,21 +23,34 @@ func getPosition(tgt):
 	#print("Lower half")
 	return tgt.global_position - Vector2(0, 300)
 
+func formatText(toFormat):
+	return "[center]" + toFormat + "[/center]"
+
+########################################################################################
+### UTILITY ############################################################################
+########################################################################################
+
 func _on_play_level_button_mouse_entered():
 	helpWindow.position = getPosition($FileButtons/playLevelButton)
 	helpWindow.show()
-	desc.text = "Plays the level"
+	desc.text = formatText("[i]DEBUG ONLY[/i]\n\nPlays the level from the level editor")
 	print("Play button entered")
 
 func _on_save_button_mouse_entered() -> void:
-	helpWindow.position = getPosition($FileButtons/playLevelButton)
+	helpWindow.position = getPosition($FileButtons/saveButton)
 	helpWindow.show()
-	desc.text = "Saves the level's data to its file"
+	desc.text = formatText("\n\nSaves the level's data to its file")
 
 func _on_file_button_mouse_entered() -> void:
-	helpWindow.position = getPosition($FileButtons/playLevelButton)
+	helpWindow.position = getPosition($FileButtons/saveButton)
 	helpWindow.show()
-	desc.text = "Opens a level file via an entered name"
+	desc.text = formatText("\n\nOpens a level file via an entered name")
+
+func _on_help_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($FileButtons/saveButton)
+	helpWindow.show()
+	desc.text = formatText("\n\nClick me for help!")
+
 
 ########################################################################################
 ### TOP ROW ############################################################################
@@ -46,37 +59,37 @@ func _on_file_button_mouse_entered() -> void:
 func _on_goal_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/coinButton)
 	helpWindow.show()
-	desc.text = "Goal\n When the player reaches this item, the level ends"
+	desc.text = formatText("[u]Goal[/u]\n When the player reaches this item, the level ends")
 
 func _on_jump_boost_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/coinButton)
 	helpWindow.show()
-	desc.text = "Jump boost\n When the player collides with this object, they are propelled upward"
+	desc.text = formatText("[u]Jump boost[/u]\n When the player collides with this object, they are propelled upward")
 
 func _on_coin_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/coinButton)
 	helpWindow.show()
-	desc.text = "Coin\n Player collect these to increase their score"
+	desc.text = formatText("[u]Coin[/u]\n Player collect these to increase their score")
 
 func _on_powerup_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Powerup\n Randomly spawns a powerup that grants invulnerability, heals, speeds up the level, or slows down the level"
+	desc.text = formatText("[u]Powerup[/u]\n Randomly spawns a powerup that grants invulnerability, heals, speeds up the level, or slows down the level")
 
 func _on_enemy_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Enemy\n A regular enemy that dies in one successful hit, spawns with an action indicator attached"
+	desc.text = formatText("[u]Enemy[/u]\n A regular enemy that dies in one successful hit, spawns with an action indicator attached")
 
 func _on_mash_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Mash enemy\n A special type of enemy the player must mash keys from start (green) to end (red)"
+	desc.text = formatText("[u]Mash enemy[/u]\n A special type of enemy the player must mash keys from start (green) to end (red)")
 
 func _on_hold_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Hold enemy\n A special type of enemy the player must hold punch from start (green) to end (red)"
+	desc.text = formatText("[u]Hold enemy[/u]\n A special type of enemy the player must hold punch from start (green) to end (red)")
 
 
 ########################################################################################
@@ -86,47 +99,47 @@ func _on_hold_button_mouse_entered() -> void:
 func _on_block_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/coinButton)
 	helpWindow.show()
-	desc.text = "Block\n Basic block type, these are used to create the ground of a level"
+	desc.text = formatText("[u]Block[/u]\n Basic block type, these are used to create the ground of a level")
 
 func _on_action_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/coinButton)
 	helpWindow.show()
-	desc.text = "Action indicator\n Circular indicators that tell the player when to interact to the beat of the song"
+	desc.text = formatText("[u]Action indicator[/u]\n Circular indicators that tell the player when to interact to the beat of the song")
 
 func _on_rac_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/coinButton)
 	helpWindow.show()
-	desc.text = "Spawn player\n Changes the spawn location of the player character"
+	desc.text = formatText("[u]Spawn player[/u]\n Changes the spawn location of the player character")
 
 func _on_slide_wall_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Slide wall\n A narrow wall the player can slide under."
+	desc.text = formatText("[u]Slide wall[/u]\n A narrow wall the player can slide under.")
 
 func _on_p_1_checkpoint_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Checkpoint\n Allows the player to reset the level starting at the nearest placed checkpoint"
+	desc.text = formatText("[u]Checkpoint[/u]\n Allows the player to reset the level starting at the nearest placed checkpoint")
 
 func _on_kill_floor_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Kill floor\n Floor hazards to require the player to make certain jumps or traverse across gaps"
+	desc.text = formatText("[u]Kill floor[/u]\n Floor hazards to require the player to make certain jumps or traverse across gaps")
 
 func _on_breakable_wall_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Breakable wall\n A large wall the player must punch to get through"
+	desc.text = formatText("[u]Breakable wall[/u]\n A large wall the player must punch to get through")
 
 func _on_zipline_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Zipline\n When the player collides with a zipline, they will be carried from start (green) to end (red)"
+	desc.text = formatText("[u]Zipline[/u]\n When the player collides with a zipline, they will be carried from start (green) to end (red)")
 
 func _on_loop_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Loop\n Any portion of the level contained within this item's bounds (green to red) is looped 3 times"
+	desc.text = formatText("[u]Loop[/u]\n Any portion of the level contained within this item's bounds (green to red) is looped 3 times")
 
 
 ########################################################################################
@@ -138,17 +151,11 @@ func _on_p_1_placer_button_mouse_entered() -> void:
 	helpWindow.position.y -= 50
 	helpWindow.position.x += 50
 	helpWindow.show()
-	desc.text = "DEBUG ONLY\n Custom start\n Can place the player to spawn at any location in the level"
+	desc.text = formatText("[i]DEBUG ONLY[/i]\n [u]Custom start[/u]\n Can place the player to spawn at any location in the level")
 
 func _on_mass_move_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/jumpBoostButton)
 	helpWindow.position.y -= 25
 	helpWindow.position.x += 50
 	helpWindow.show()
-	desc.text = "Select\n Select multiple objects in the level editor"
-
-
-
-
-
-
+	desc.text = formatText("[u]Select[/u]\n Select multiple objects in the level editor")
