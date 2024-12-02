@@ -580,8 +580,43 @@ func combineBlocks(newFile) -> void:
 				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2],0,0]
 				print("ending a chain: ", newBlock)
 	#now we have to overwite all of the platform code for what we have
-	
-
+	print("all new blocks: ", allNewBlocks)
+	newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
+	for itemList in objectList.get_children():
+				newFile.store_string(itemList.name + "\n")
+				#print("name look here: ", itemList.name)
+				for item in itemList.get_children():
+					if itemList.name !=  "placers" and itemList.name !=  "moveLines" and itemList.name != "platformBlocks":
+						#go through each of the items children areas
+						var childrenList = item.get_child(0).get_children()
+						var index = 0
+						var editorName = "EditorArea"+str(index)
+						var posChain = ""
+						#go through all of the individual block components
+						#TODO deligate this to the children not here
+						for blockChild in childrenList:
+							#saving for platfrom block differs since their size varies#
+							#TODO I dont want to do this, delegate this work to the child class
+							if itemList.name == "placers":
+								print("we are saving a placer")
+							elif itemList.name == "keyBindings":
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().instructionType)+", "
+							elif itemList.name == "enemies":
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().enemyType)+", "
+							elif itemList.name == "mashes":
+								posChain = item.save()
+							else:
+								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
+							index+=1
+							editorName = "EditorArea"+str(index)
+						#print("child list in save, ", childrenList)
+						posChain = posChain.substr(0, posChain.length()-1)
+						posChain += "\n"
+						newFile.store_string(posChain)
+	newFile.store_string("platformBlocks" + "\n")
+	for block in allNewBlocks:
+		var newString = str(block[0].x) +", " + str(block[0].y) + ", " + str(block[2]) + ", 0, 0, \n"
+		newFile.store_string(newString)
 	
 # Recursive function to set owner for all children
 func _set_owner_recursive(node: Node, root: Node):
