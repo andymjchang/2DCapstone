@@ -124,9 +124,10 @@ increasedScale = Vector2(1, 1.5)
 [node name="ComboLetter" type="Node2D" parent="CanvasLayer"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/ComboLetter" groups=["pulsingObjects"]]
-position = Vector2(106, 139)
+position = Vector2(105, 131)
 sprite_frames = SubResource("SpriteFrames_du76p")
 script = ExtResource("27_8vl6o")
+increasedScale = Vector2(1.1, 1.1)
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/ComboLetter"]
 visible = false

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://25td4r2m7r1e"]
+[gd_scene load_steps=7 format=3 uid="uid://25td4r2m7r1e"]
 
 [ext_resource type="Texture2D" uid="uid://dbare1v5mrdfe" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_UNDER.png" id="1_3jway"]
 [ext_resource type="Texture2D" uid="uid://c3uj8v4ksdg4g" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_OVER.png" id="2_of54a"]
 [ext_resource type="Script" path="res://ui/scripts/textureScoreProgress_bar.gd" id="3_3u3ml"]
 [ext_resource type="Texture2D" uid="uid://bwyalplhbx3h7" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_PROGRESS.png" id="3_x6cf0"]
 [ext_resource type="Script" path="res://ui/scripts/pulseRect.gd" id="5_psxq1"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="5_t7bsv"]
 
 [node name="ScoreBar" type="CanvasLayer"]
 
@@ -14,12 +15,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -921.0
-offset_top = -492.0
-offset_right = -404.0
-offset_bottom = -278.0
+offset_left = -970.0
+offset_top = -488.0
+offset_right = -429.0
+offset_bottom = -247.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(258, 0)
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -29,6 +31,62 @@ texture_over = ExtResource("2_of54a")
 texture_progress = ExtResource("3_x6cf0")
 texture_progress_offset = Vector2(160, 55)
 script = ExtResource("3_3u3ml")
+
+[node name="Label" type="Label" parent="TextureProgressBar"]
+layout_mode = 0
+offset_left = 209.0
+offset_top = 10.5
+offset_right = 249.0
+offset_bottom = 69.5
+theme = ExtResource("5_t7bsv")
+theme_override_font_sizes/font_size = 36
+text = "C"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TextureProgressBar"]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 10.5
+offset_right = 327.0
+offset_bottom = 69.5
+theme = ExtResource("5_t7bsv")
+theme_override_font_sizes/font_size = 36
+text = "B"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="TextureProgressBar"]
+layout_mode = 0
+offset_left = 365.0
+offset_top = 10.5
+offset_right = 405.0
+offset_bottom = 69.5
+theme = ExtResource("5_t7bsv")
+theme_override_font_sizes/font_size = 36
+text = "A"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="TextureProgressBar"]
+layout_mode = 0
+offset_left = 445.0
+offset_top = 10.5
+offset_right = 485.0
+offset_bottom = 69.5
+theme = ExtResource("5_t7bsv")
+theme_override_font_sizes/font_size = 36
+text = "S"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="TextureProgressBar"]
+visible = false
+layout_mode = 0
+offset_left = -18.25
+offset_top = -37.5
+offset_right = 176.75
+offset_bottom = 351.5
+theme = ExtResource("5_t7bsv")
+theme_override_font_sizes/font_size = 228
+text = "B"
+horizontal_alignment = 1
 
 [node name="topBlack" type="ColorRect" parent="." groups=["pulsingObjects"]]
 offset_left = -2.0
