@@ -71,7 +71,13 @@ func _on_enemy_button_mouse_entered() -> void:
 func _on_mash_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Mash enemy\n A special type of enemy the player must mash keys to defeat"
+	desc.text = "Mash enemy\n A special type of enemy the player must mash keys from start (green) to end (red)"
+
+func _on_hold_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
+	helpWindow.show()
+	desc.text = "Hold enemy\n A special type of enemy the player must hold punch from start (green) to end (red)"
+
 
 ########################################################################################
 ### BOTTOM ROW #########################################################################
@@ -115,18 +121,31 @@ func _on_breakable_wall_button_mouse_entered() -> void:
 func _on_zipline_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Zipline\n When the player collides with a zipline, they will be carried from the start zipline to the end zipline"
+	desc.text = "Zipline\n When the player collides with a zipline, they will be carried from start (green) to end (red)"
 
 func _on_loop_button_mouse_entered() -> void:
 	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/powerupButton)
 	helpWindow.show()
-	desc.text = "Loop\n Any portion of the level contained within this item's bounds is looped 3 times"
+	desc.text = "Loop\n Any portion of the level contained within this item's bounds (green to red) is looped 3 times"
 
 
+########################################################################################
+### TOOLBAR ############################################################################
+########################################################################################
 
+func _on_p_1_placer_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/jumpBoostButton)
+	helpWindow.position.y -= 50
+	helpWindow.position.x += 50
+	helpWindow.show()
+	desc.text = "DEBUG ONLY\n Custom start\n Can place the player to spawn at any location in the level"
 
-
-
+func _on_mass_move_button_mouse_entered() -> void:
+	helpWindow.position = getPosition($objectSelector/BlockButtons/Top/jumpBoostButton)
+	helpWindow.position.y -= 25
+	helpWindow.position.x += 50
+	helpWindow.show()
+	desc.text = "Select\n Select multiple objects in the level editor"
 
 
 

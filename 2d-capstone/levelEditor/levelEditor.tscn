@@ -199,33 +199,33 @@ color = Color(0.259294, 0.259294, 0.259294, 1)
 
 [node name="bpmLabel0" type="RichTextLabel" parent="UI"]
 offset_left = 6.0
-offset_top = 21.0
+offset_top = 63.0
 offset_right = 144.0
-offset_bottom = 69.0
+offset_bottom = 111.0
 theme_override_font_sizes/normal_font_size = 30
 text = "BPM"
 
 [node name="bpmLabel" type="RichTextLabel" parent="UI"]
 offset_left = 5.0
-offset_top = 149.0
+offset_top = 191.0
 offset_right = 156.0
-offset_bottom = 237.0
+offset_bottom = 279.0
 theme_override_font_sizes/normal_font_size = 30
 text = "Beats per measure"
 
 [node name="bpmLabel2" type="RichTextLabel" parent="UI"]
 offset_left = 5.0
-offset_top = 322.0
+offset_top = 364.0
 offset_right = 143.0
-offset_bottom = 370.0
+offset_bottom = 412.0
 theme_override_font_sizes/normal_font_size = 30
 text = "Step size"
 
 [node name="TextEdit0" type="LineEdit" parent="UI"]
 offset_left = 8.0
-offset_top = 69.0
-offset_right = 123.0
-offset_bottom = 119.0
+offset_top = 111.0
+offset_right = 128.0
+offset_bottom = 161.0
 theme_override_font_sizes/font_size = 30
 text = "160"
 alignment = 1
@@ -233,9 +233,9 @@ max_length = 3
 
 [node name="TextEdit" type="LineEdit" parent="UI"]
 offset_left = 8.0
-offset_top = 238.0
-offset_right = 123.0
-offset_bottom = 288.0
+offset_top = 280.0
+offset_right = 128.0
+offset_bottom = 330.0
 theme_override_font_sizes/font_size = 30
 text = "4"
 alignment = 1
@@ -243,9 +243,9 @@ max_length = 2
 
 [node name="TextEdit2" type="LineEdit" parent="UI"]
 offset_left = 13.0
-offset_top = 370.0
-offset_right = 128.0
-offset_bottom = 420.0
+offset_top = 412.0
+offset_right = 133.0
+offset_bottom = 462.0
 theme_override_font_sizes/font_size = 30
 text = "25"
 alignment = 1
@@ -289,6 +289,11 @@ texture_normal = ExtResource("20_rbssn")
 layout_mode = 2
 texture_normal = ExtResource("41_w3cb3")
 stretch_mode = 0
+
+[node name="holdButton" type="TextureButton" parent="UI/objectSelector/BlockButtons/Top"]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("64_4dxtp")
 
 [node name="Bottom" type="HBoxContainer" parent="UI/objectSelector/BlockButtons"]
 layout_mode = 2
@@ -418,9 +423,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 25.0
-offset_top = -74.0
+offset_top = -18.0
 offset_right = 125.0
-offset_bottom = 234.0
+offset_bottom = 186.0
 grow_vertical = 2
 size_flags_horizontal = 0
 
@@ -437,10 +442,6 @@ texture_normal = ExtResource("56_va5sc")
 visible = false
 layout_mode = 2
 texture_normal = ExtResource("56_63qny")
-
-[node name="holdButton" type="TextureButton" parent="UI/MiscButtons"]
-layout_mode = 2
-texture_normal = ExtResource("64_4dxtp")
 
 [node name="massMoveButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
@@ -654,6 +655,10 @@ clip_text = true
 [connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Top/enemyButton" to="UI" method="_on_button_exited"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Top/mashButton" to="." method="_onMashButtonUp"]
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Top/mashButton" to="UI" method="_on_mash_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Top/mashButton" to="UI" method="_on_button_exited"]
+[connection signal="button_up" from="UI/objectSelector/BlockButtons/Top/holdButton" to="." method="_onHoldButtonUp"]
+[connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Top/holdButton" to="UI" method="_on_hold_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Top/holdButton" to="UI" method="_on_button_exited"]
 [connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/blockButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/blockButton" to="." method="_on_block_button_button_up"]
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/blockButton" to="UI" method="_on_block_button_mouse_entered"]
@@ -670,6 +675,7 @@ clip_text = true
 [connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/racButton" to="UI" method="_on_button_exited"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/slideWallButton" to="." method="_onSlideWallButtonUp"]
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/slideWallButton" to="UI" method="_on_slide_wall_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/slideWallButton" to="UI" method="_on_button_exited"]
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/p1checkpointButton" to="UI" method="_on_p_1_checkpoint_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/p1checkpointButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/objectSelector/BlockButtons/Bottom/p1checkpointButton" to="." method="_on_p1checkpoint_button_pressed"]
@@ -678,6 +684,7 @@ clip_text = true
 [connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/killFloorButton" to="UI" method="_on_button_exited"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/breakableWallButton" to="UI" method="_on_breakable_wall_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/breakableWallButton" to="UI" method="_on_button_exited"]
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/ziplineButton" to="UI" method="_on_zipline_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/ziplineButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/objectSelector/BlockButtons/Bottom/ziplineButton" to="." method="_onZiplineButtonPressed"]
@@ -692,10 +699,13 @@ clip_text = true
 [connection signal="gui_input" from="UI/objectSelector/audioProgress" to="." method="_on_audio_progress_gui_input"]
 [connection signal="input_event" from="UI/objectSelector/audioProgress/Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="button_up" from="UI/MiscButtons/p1PlacerButton" to="." method="_on_p_1_placer_button_button_up"]
+[connection signal="mouse_entered" from="UI/MiscButtons/p1PlacerButton" to="UI" method="_on_p_1_placer_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/MiscButtons/p1PlacerButton" to="UI" method="_on_button_exited"]
 [connection signal="button_up" from="UI/MiscButtons/keyBindingButton" to="." method="_onKeyBindingButtonUp"]
 [connection signal="button_up" from="UI/MiscButtons/skipButton" to="." method="_onSkipButtonUp"]
-[connection signal="button_up" from="UI/MiscButtons/holdButton" to="." method="_onHoldButtonUp"]
 [connection signal="button_up" from="UI/MiscButtons/massMoveButton" to="." method="_onMassMoveButtonUp"]
+[connection signal="mouse_entered" from="UI/MiscButtons/massMoveButton" to="UI" method="_on_mass_move_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/MiscButtons/massMoveButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/FileLoadMode/Load" to="." method="_on_load_file_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]

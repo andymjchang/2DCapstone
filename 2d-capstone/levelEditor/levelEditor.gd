@@ -730,7 +730,7 @@ func _on_load_file_pressed() -> void:
 		saveFileName = tgtFile
 		$UI/FileLoadMode.hide()
 		editingFile = false
-	currentFile.text = "Now editing " + tgtFile
+	currentFile.text = "Now editing: " + tgtFile + ".dat"
 
 func _on_play_level_button_button_down() -> void:
 	overwrite = true
