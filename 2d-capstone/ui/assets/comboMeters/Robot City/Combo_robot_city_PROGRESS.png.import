@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c14bw2bfq0umd"
-path="res://.godot/imported/Combo_meter_robotcity.png-9133574443b1393ab72ec659b9bed88d.ctex"
+uid="uid://b3sukgr1w0bmi"
+path="res://.godot/imported/Combo_robot_city_PROGRESS.png-268d070e85cc1e9b13072ffe04dde3e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/comboMeters/Combo_meter_robotcity.png"
-dest_files=["res://.godot/imported/Combo_meter_robotcity.png-9133574443b1393ab72ec659b9bed88d.ctex"]
+source_file="res://ui/assets/comboMeters/Robot City/Combo_robot_city_PROGRESS.png"
+dest_files=["res://.godot/imported/Combo_robot_city_PROGRESS.png-268d070e85cc1e9b13072ffe04dde3e2.ctex"]
 
 [params]
 

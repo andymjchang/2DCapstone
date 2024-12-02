@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbmc5omctyh7s"
-path="res://.godot/imported/Combo_meter_landfill.png-af89d116e23c20a5ef65ffa8d81b5045.ctex"
+uid="uid://c3uj8v4ksdg4g"
+path="res://.godot/imported/Combo_fallen_city_OVER.png-8db15eed7a7c05b620a8a9f19b0a14d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/comboMeters/Combo_meter_landfill.png"
-dest_files=["res://.godot/imported/Combo_meter_landfill.png-af89d116e23c20a5ef65ffa8d81b5045.ctex"]
+source_file="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_OVER.png"
+dest_files=["res://.godot/imported/Combo_fallen_city_OVER.png-8db15eed7a7c05b620a8a9f19b0a14d5.ctex"]
 
 [params]
 
