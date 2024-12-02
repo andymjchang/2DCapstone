@@ -53,7 +53,6 @@
 [ext_resource type="Script" path="res://levelEditor/audioTracks.gd" id="36_wn18y"]
 [ext_resource type="Texture2D" uid="uid://1dfh5adfmstx" path="res://levelEditor/programmerArtAssets/play.png" id="37_5oir0"]
 [ext_resource type="Texture2D" uid="uid://bc4p5m76bmftq" path="res://levelEditor/programmerArtAssets/mashEnemy.png" id="41_w3cb3"]
-[ext_resource type="Texture2D" uid="uid://cxpyh4hstkkni" path="res://ui/assets/fullHealth.png" id="42_k3b5l"]
 [ext_resource type="Texture2D" uid="uid://b62deqkwqbndb" path="res://levelEditor/programmerArtAssets/file.png" id="46_nsemu"]
 [ext_resource type="Texture2D" uid="uid://wiekfbvafyq4" path="res://levelEditor/programmerArtAssets/slideWall.png" id="48_w6vdm"]
 [ext_resource type="Texture2D" uid="uid://dckpevnlj8i6x" path="res://levelEditor/programmerArtAssets/killFloor.png" id="49_5bwb5"]
@@ -63,8 +62,9 @@
 [ext_resource type="Texture2D" uid="uid://ccf1vp0xq0hae" path="res://levelEditor/programmerArtAssets/loop.png" id="55_xyg3h"]
 [ext_resource type="Texture2D" uid="uid://davg4jbcubgii" path="res://ui/assets/onboarding/waypoint.png" id="56_63qny"]
 [ext_resource type="Texture2D" uid="uid://b5duach4kwhsr" path="res://ui/assets/onboarding/keys/r.png" id="56_va5sc"]
-[ext_resource type="Texture2D" uid="uid://dirtn80sqvt23" path="res://ui/assets/hold.png" id="60_w7oji"]
-[ext_resource type="Texture2D" uid="uid://hk8yyek0ymbh" path="res://ui/assets/massMove.png" id="62_w2amb"]
+[ext_resource type="Texture2D" uid="uid://b3lbp52aj8ln6" path="res://levelEditor/programmerArtAssets/custStart.png" id="61_bhuk4"]
+[ext_resource type="Texture2D" uid="uid://cil5cpymxpq4y" path="res://levelEditor/programmerArtAssets/select.png" id="64_4dxtp"]
+[ext_resource type="Texture2D" uid="uid://bax3s0yo5mskj" path="res://levelEditor/programmerArtAssets/massSelect.png" id="65_hersj"]
 [ext_resource type="Texture2D" uid="uid://olygvy43m2yd" path="res://levelEditor/programmerArtAssets/helpBG.png" id="66_u5c76"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl84f"]
@@ -161,6 +161,13 @@ stream = ExtResource("19_jlcy1")
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("33_n0vg3")
 
+[node name="ToolBar" type="ColorRect" parent="UI"]
+offset_left = -1.0
+offset_top = -30.0
+offset_right = 147.0
+offset_bottom = 1087.0
+color = Color(0.259294, 0.259294, 0.259294, 1)
+
 [node name="FileButtons" type="HBoxContainer" parent="UI"]
 offset_left = 1489.0
 offset_top = 16.0
@@ -183,7 +190,7 @@ texture_normal = ExtResource("46_nsemu")
 layout_mode = 2
 texture_normal = ExtResource("7_esiun")
 
-[node name="ColorRect" type="ColorRect" parent="UI"]
+[node name="ObjectBar" type="ColorRect" parent="UI"]
 offset_left = -1.0
 offset_top = 850.0
 offset_right = 1922.0
@@ -192,48 +199,57 @@ color = Color(0.259294, 0.259294, 0.259294, 1)
 
 [node name="bpmLabel0" type="RichTextLabel" parent="UI"]
 offset_left = 6.0
-offset_top = 4.0
+offset_top = 21.0
 offset_right = 144.0
-offset_bottom = 52.0
+offset_bottom = 69.0
+theme_override_font_sizes/normal_font_size = 30
 text = "BPM"
 
 [node name="bpmLabel" type="RichTextLabel" parent="UI"]
 offset_left = 5.0
-offset_top = 55.0
-offset_right = 143.0
-offset_bottom = 103.0
+offset_top = 149.0
+offset_right = 156.0
+offset_bottom = 237.0
+theme_override_font_sizes/normal_font_size = 30
 text = "Beats per measure"
 
 [node name="bpmLabel2" type="RichTextLabel" parent="UI"]
 offset_left = 5.0
-offset_top = 108.0
+offset_top = 322.0
 offset_right = 143.0
-offset_bottom = 156.0
+offset_bottom = 370.0
+theme_override_font_sizes/normal_font_size = 30
 text = "Step size"
 
-[node name="TextEdit0" type="TextEdit" parent="UI"]
-offset_left = 93.0
-offset_top = 3.0
-offset_right = 208.0
-offset_bottom = 53.0
+[node name="TextEdit0" type="LineEdit" parent="UI"]
+offset_left = 8.0
+offset_top = 69.0
+offset_right = 123.0
+offset_bottom = 119.0
+theme_override_font_sizes/font_size = 30
 text = "160"
-placeholder_text = "BPM: "
+alignment = 1
+max_length = 3
 
-[node name="TextEdit" type="TextEdit" parent="UI"]
-offset_left = 93.0
-offset_top = 55.0
-offset_right = 208.0
-offset_bottom = 105.0
+[node name="TextEdit" type="LineEdit" parent="UI"]
+offset_left = 8.0
+offset_top = 238.0
+offset_right = 123.0
+offset_bottom = 288.0
+theme_override_font_sizes/font_size = 30
 text = "4"
-placeholder_text = "BPM: "
+alignment = 1
+max_length = 2
 
-[node name="TextEdit2" type="TextEdit" parent="UI"]
-offset_left = 93.0
-offset_top = 107.0
-offset_right = 208.0
-offset_bottom = 157.0
-text = "1"
-placeholder_text = "Step Size:"
+[node name="TextEdit2" type="LineEdit" parent="UI"]
+offset_left = 13.0
+offset_top = 370.0
+offset_right = 128.0
+offset_bottom = 420.0
+theme_override_font_sizes/font_size = 30
+text = "25"
+alignment = 1
+max_length = 150
 
 [node name="objectSelector" type="Control" parent="UI"]
 layout_mode = 3
@@ -241,9 +257,9 @@ anchors_preset = 0
 
 [node name="BlockButtons" type="VBoxContainer" parent="UI/objectSelector"]
 layout_mode = 1
-offset_left = 14.0
+offset_left = 25.0
 offset_top = 871.0
-offset_right = 946.0
+offset_right = 957.0
 offset_bottom = 1075.0
 
 [node name="Top" type="HBoxContainer" parent="UI/objectSelector/BlockButtons"]
@@ -322,17 +338,17 @@ texture_normal = ExtResource("55_xyg3h")
 [node name="playAudioButton" type="TextureButton" parent="UI/objectSelector"]
 layout_mode = 0
 offset_left = 1206.0
-offset_top = 919.0
+offset_top = 854.0
 offset_right = 1256.0
-offset_bottom = 969.0
+offset_bottom = 904.0
 texture_normal = ExtResource("26_m4kik")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/objectSelector"]
 layout_mode = 0
-offset_left = 1486.0
-offset_top = 962.0
-offset_right = 1916.0
-offset_bottom = 1062.0
+offset_left = 1476.0
+offset_top = 921.0
+offset_right = 1906.0
+offset_bottom = 1021.0
 theme_override_constants/separation = 10
 
 [node name="leftButton" type="TextureButton" parent="UI/objectSelector/HBoxContainer"]
@@ -353,10 +369,10 @@ texture_normal = ExtResource("7_u6v8f")
 
 [node name="audioProgress" type="ProgressBar" parent="UI/objectSelector"]
 layout_mode = 0
-offset_left = 1095.0
-offset_top = 971.0
-offset_right = 1369.0
-offset_bottom = 1007.0
+offset_left = 1097.0
+offset_top = 906.0
+offset_right = 1371.0
+offset_bottom = 942.0
 script = ExtResource("35_lg51b")
 
 [node name="Area2D" type="Area2D" parent="UI/objectSelector/audioProgress"]
@@ -367,25 +383,24 @@ shape = SubResource("RectangleShape2D_jl84f")
 
 [node name="timeInto" type="RichTextLabel" parent="UI/objectSelector"]
 layout_mode = 0
-offset_left = 970.0
-offset_top = 969.0
-offset_right = 1094.0
-offset_bottom = 1011.0
-text = "Time Into Song:
-"
+offset_left = 1039.0
+offset_top = 916.0
+offset_right = 1093.0
+offset_bottom = 939.0
+text = "0:00"
 
 [node name="timeLeft" type="RichTextLabel" parent="UI/objectSelector"]
 layout_mode = 0
-offset_left = 1371.0
-offset_top = 971.0
-offset_right = 1465.0
-offset_bottom = 1009.0
-text = "Time Left:"
+offset_left = 1375.0
+offset_top = 916.0
+offset_right = 1457.0
+offset_bottom = 941.0
+text = "0:00"
 
 [node name="audioTracks" type="ScrollContainer" parent="UI/objectSelector"]
 layout_mode = 0
 offset_left = 1097.0
-offset_top = 1025.0
+offset_top = 957.0
 offset_right = 1373.0
 offset_bottom = 1070.0
 horizontal_scroll_mode = 0
@@ -398,33 +413,38 @@ layout_mode = 2
 [node name="VScrollBar" type="VScrollBar" parent="UI/objectSelector/audioTracks/VBoxContainer"]
 layout_mode = 2
 
-[node name="MiscButtons" type="HBoxContainer" parent="UI"]
-offset_left = 641.0
-offset_top = 877.0
-offset_right = 3127.0
-offset_bottom = 1777.0
-scale = Vector2(0.1, 0.1)
+[node name="MiscButtons" type="VBoxContainer" parent="UI"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = -74.0
+offset_right = 125.0
+offset_bottom = 234.0
+grow_vertical = 2
 size_flags_horizontal = 0
 
 [node name="p1PlacerButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
-texture_normal = ExtResource("42_k3b5l")
+texture_normal = ExtResource("61_bhuk4")
 
 [node name="keyBindingButton" type="TextureButton" parent="UI/MiscButtons"]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("56_va5sc")
 
 [node name="skipButton" type="TextureButton" parent="UI/MiscButtons"]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("56_63qny")
 
 [node name="holdButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
-texture_normal = ExtResource("60_w7oji")
+texture_normal = ExtResource("64_4dxtp")
 
 [node name="massMoveButton" type="TextureButton" parent="UI/MiscButtons"]
 layout_mode = 2
-texture_normal = ExtResource("62_w2amb")
+texture_normal = ExtResource("65_hersj")
 
 [node name="FileLoadMode" type="Control" parent="UI"]
 visible = false
@@ -499,6 +519,7 @@ theme_override_font_sizes/font_size = 50
 max_length = 20
 
 [node name="HelpWindow" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -520,6 +541,20 @@ text = "sdfsdfds gdfhgbsdfs dgdfbvdfgdfg ghfgh fdg hfghgfhfgdh  hj ghhd fgdsfgdf
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="CurrentFile" type="Label" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -455.0
+offset_top = -48.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25
+text = "No file name found!"
+horizontal_alignment = 1
+
 [node name="StatusWindow" type="CanvasLayer" parent="."]
 process_mode = 2
 visible = false
@@ -529,7 +564,7 @@ modulate = Color(1, 1, 1, 0.458824)
 offset_right = 1927.0
 offset_bottom = 1079.0
 
-[node name="ColorRect" type="ColorRect" parent="StatusWindow"]
+[node name="ColorRect" type="TextureRect" parent="StatusWindow"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -541,6 +576,7 @@ offset_right = 508.0
 offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("66_u5c76")
 
 [node name="Buttons" type="HBoxContainer" parent="StatusWindow"]
 anchors_preset = 8
@@ -549,9 +585,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -260.5
-offset_top = 104.5
+offset_top = 63.5
 offset_right = 260.5
-offset_bottom = 249.5
+offset_bottom = 208.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 200
@@ -617,6 +653,7 @@ clip_text = true
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Top/enemyButton" to="UI" method="_on_enemy_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Top/enemyButton" to="UI" method="_on_button_exited"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Top/mashButton" to="." method="_onMashButtonUp"]
+[connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Top/mashButton" to="UI" method="_on_mash_button_mouse_entered"]
 [connection signal="button_down" from="UI/objectSelector/BlockButtons/Bottom/blockButton" to="." method="_on_test_placer_button_down"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/blockButton" to="." method="_on_block_button_button_up"]
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/blockButton" to="UI" method="_on_block_button_mouse_entered"]
@@ -632,6 +669,7 @@ clip_text = true
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/racButton" to="UI" method="_on_rac_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/racButton" to="UI" method="_on_button_exited"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/slideWallButton" to="." method="_onSlideWallButtonUp"]
+[connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/slideWallButton" to="UI" method="_on_slide_wall_button_mouse_entered"]
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/p1checkpointButton" to="UI" method="_on_p_1_checkpoint_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/p1checkpointButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/objectSelector/BlockButtons/Bottom/p1checkpointButton" to="." method="_on_p1checkpoint_button_pressed"]
@@ -639,6 +677,7 @@ clip_text = true
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/killFloorButton" to="UI" method="_on_kill_floor_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/killFloorButton" to="UI" method="_on_button_exited"]
 [connection signal="button_up" from="UI/objectSelector/BlockButtons/Bottom/breakableWallButton" to="." method="_on_breakable_wall_button_button_up"]
+[connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/breakableWallButton" to="UI" method="_on_breakable_wall_button_mouse_entered"]
 [connection signal="mouse_entered" from="UI/objectSelector/BlockButtons/Bottom/ziplineButton" to="UI" method="_on_zipline_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/objectSelector/BlockButtons/Bottom/ziplineButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/objectSelector/BlockButtons/Bottom/ziplineButton" to="." method="_onZiplineButtonPressed"]

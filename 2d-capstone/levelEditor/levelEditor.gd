@@ -16,7 +16,7 @@ var trackingPosition : bool = false
 var defaultSpawnPosition = Vector2(450, 450)
 var timeHeld = 0.0
 var killFDict: Dictionary = {}
-var saveFileName 
+var saveFileName = null
 var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
@@ -28,13 +28,14 @@ var bindedBlocks = []
 var isBinding = false
 var turnOffSnap = false
 var massMove = false
+var editingFile = false
 
 var MIN_STEP : int = 25
 
 var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
-var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
-
+var NEED_PLAYER = "Unable to save.\nNeed 1 player."
+var UNABLE_TO_SAVE = "Unable to save."
 
 @export var p1Placer : PackedScene
 @export var p2Placer : PackedScene
@@ -126,6 +127,7 @@ var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsLis
 @onready var camera = $Camera2D
 @onready var status = $StatusWindow
 @onready var levelTemplatePacked = preload("res://worlds/levelTemplate.tscn")
+@onready var currentFile = $UI/CurrentFile
 
 var bpm : int = 4
 var beatsMin : int = 120
@@ -158,54 +160,57 @@ func _process(delta: float) -> void:
 		#timeHeld += delta
 	updateTime(delta)
 	
-	if Input.is_action_just_pressed("tab"):
-		#we want to go through the list of objects for current block
-		#TODO add binded block functionality later
-		if !isBinding and currentBlock:
-			#grab the list of similiar types
-			#TODO add a check here to see if this is a valid grab
-			var curTypeName = typeMap[currentBlock.blockType]
-			var curTypeList = typeArrays[curTypeName]
-			currentBlock.tabType(curTypeList, curTypeName, listMap)
-	if Input.is_action_just_pressed("click"):
-		var mouseCoords = get_global_mouse_position()
-		#check to see if we have any objects within those bounds
-	if Input.is_action_just_pressed(delete) and currentBlock:
-		#get current click on block and delete it 
-		var blockList = getList(currentBlock.blockType)
-		for block in blockList.get_children():
-			if block.index == currentBlock.index:
-				#we have found our block, delete
-				currentBlock.queue_free()
-				currentBlock = null
-				break
-				
-		if !massMove:
-			for block in bindedBlocks:
-				block.queue_free()
-		else:
-			emit_signal("_onSetMassMove", null, false)
-	#TODO make sure that pressing l while typing in name doesnt mess anything up 
-	if Input.is_action_just_pressed("lengthenBlock") and currentBlock and currentBlock.blockType == "normal":
-		#extend platform block by one platform block
-		lengthenPlatform()
-	if Input.is_action_just_pressed("bindBlocks"):
-		if isBinding:
-			isBinding = false
-			bindedBlocks = []
-		else:
-			isBinding = true
-func _on_text_edit_0_text_changed() -> void:
+	if not editingFile:
+		if Input.is_action_just_pressed("tab"):
+			#we want to go through the list of objects for current block
+			#TODO add binded block functionality later
+			if !isBinding and currentBlock:
+				#grab the list of similiar types
+				#TODO add a check here to see if this is a valid grab
+				var curTypeName = typeMap[currentBlock.blockType]
+				var curTypeList = typeArrays[curTypeName]
+				currentBlock.tabType(curTypeList, curTypeName, listMap)
+		if Input.is_action_just_pressed("click"):
+			var mouseCoords = get_global_mouse_position()
+			#check to see if we have any objects within those bounds
+		if Input.is_action_just_pressed(delete) and currentBlock:
+			#get current click on block and delete it 
+			var blockList = getList(currentBlock.blockType)
+			for block in blockList.get_children():
+				if block.index == currentBlock.index:
+					#we have found our block, delete
+					currentBlock.queue_free()
+					currentBlock = null
+					break
+					
+			if !massMove:
+				for block in bindedBlocks:
+					block.queue_free()
+			else:
+				emit_signal("_onSetMassMove", null, false)
+		#TODO make sure that pressing l while typing in name doesnt mess anything up 
+		if Input.is_action_just_pressed("lengthenBlock") and currentBlock and currentBlock.blockType == "normal":
+			#extend platform block by one platform block
+			lengthenPlatform()
+		if Input.is_action_just_pressed("bindBlocks"):
+			if isBinding:
+				isBinding = false
+				bindedBlocks = []
+			else:
+				isBinding = true
+
+func _on_text_edit_0_text_changed(new_text) -> void:
 	if beatsMinLabel.text.is_valid_int():
 		beatsMin = int(beatsMinLabel.text)
 		Globals.setBPM(beatsMin)
-func _on_text_edit_text_changed() -> void:
+
+func _on_text_edit_text_changed(new_text) -> void:
 	if bpmLabel.text.is_valid_int():
 		bpm = int(bpmLabel.text)
 		measureLines.beatsPerMeasure = bpm
 		measureLines.queue_redraw()
 
-func _on_text_edit_2_text_changed() -> void:
+func _on_text_edit_2_text_changed(new_text) -> void:
 	if stepLabel.text.is_valid_int():
 		var step = int(stepLabel.text)
 		if (step < MIN_STEP):
@@ -275,11 +280,16 @@ func loadLevel():
 			#do this if object has more than one component
 
 func _on_save_button_down() -> void:
-	save_scene_to_file()
+	if saveFileName:
+		save_scene_to_file()
+	else:
+		status.show()
+		displayStatus(UNABLE_TO_SAVE, false)
+
 	
 func _on_file_button_pressed() -> void:
+	editingFile = true
 	setFileLoad()
-	pass # Replace with function body.
 	
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
@@ -524,7 +534,7 @@ func save_scene_to_file():
 						posChain += "\n"
 						newFile.store_string(posChain)
 	else:
-		displayStatus(UNABLE_TO_SAVE, false)
+		displayStatus(NEED_PLAYER, false)
 		
 # Recursive function to set owner for all children
 func _set_owner_recursive(node: Node, root: Node):
@@ -598,7 +608,7 @@ func place_block(instance, parent, placePos, initial):
 	if massMove and currentBlock.blockType != blockTypes[19]:
 		emit_signal("setMassMove", null, false)
 		
-	_on_text_edit_2_text_changed()
+	_on_text_edit_2_text_changed(10)
 	reset_drag_tracking()
 
 func reset_drag_tracking():
@@ -668,7 +678,7 @@ func setTrackingPosition(setVal : bool) -> void:
 
 
 func _on_audio_progress_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and  event.pressed:
+	if event is InputEventMouseButton and event.pressed:
 		self.get_node("UI/objectSelector/audioProgress").isDragging=true
 
 
@@ -715,9 +725,12 @@ func _on_load_file_pressed() -> void:
 		saveFileName = tgtFile
 		loadLevel()
 		$UI/FileLoadMode.hide()
+		editingFile = false
 	else:
 		saveFileName = tgtFile
 		$UI/FileLoadMode.hide()
+		editingFile = false
+	currentFile.text = "Now editing " + tgtFile
 
 func _on_play_level_button_button_down() -> void:
 	overwrite = true
