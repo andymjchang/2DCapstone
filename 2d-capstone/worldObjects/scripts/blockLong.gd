@@ -232,6 +232,10 @@ func placeWindows() -> void:
 	for i in range(minX+2, maxX+1, curLength):
 		if i <= maxX - 2 - curLength:
 		#account for padding
+			randIndex = int(randf_range(0,3))
+			windowSet = windowTiles[randIndex]
+			#add the buffer
+			curLength = windowLength[randIndex]  + 1
 			for j in range(1, maxY+1, windowHeight+2):
 				var upperLeftCorner = Vector2i(i,j)
 				placeOneWindow(upperLeftCorner, windowSet, windowLength[1])
