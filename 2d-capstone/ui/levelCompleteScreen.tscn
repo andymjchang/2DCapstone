@@ -387,7 +387,7 @@ text = "Name"
 layout_mode = 0
 offset_left = -905.0
 offset_top = -330.0
-offset_right = 44.0
+offset_right = -14.0
 offset_bottom = -247.0
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
@@ -404,7 +404,7 @@ offset_bottom = -5.0
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
-text = "000"
+text = "-----"
 horizontal_alignment = 2
 
 [node name="perfectTitle" type="Label" parent="Leaderboard/1"]
@@ -424,7 +424,7 @@ offset_bottom = 83.0
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
-text = "1"
+text = "-----"
 
 [node name="2" type="Label" parent="Leaderboard"]
 offset_left = -905.0
@@ -434,10 +434,10 @@ offset_bottom = 69.673
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
-text = "000"
+text = "-----"
 horizontal_alignment = 2
 
-[node name="Name2" type="Label" parent="Leaderboard/2"]
+[node name="Name" type="Label" parent="Leaderboard/2"]
 layout_mode = 2
 offset_left = 200.0
 offset_top = 0.327
@@ -446,7 +446,7 @@ offset_bottom = 83.327
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
-text = "1"
+text = "-----"
 
 [node name="perfectTitle" type="Label" parent="Leaderboard/2"]
 layout_mode = 2
@@ -465,7 +465,7 @@ offset_bottom = 144.673
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
-text = "000"
+text = "-----"
 horizontal_alignment = 2
 
 [node name="perfectTitle" type="Label" parent="Leaderboard/3"]
@@ -477,7 +477,7 @@ theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
 text = "3"
 
-[node name="Name2" type="Label" parent="Leaderboard/3"]
+[node name="Name" type="Label" parent="Leaderboard/3"]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 0.327
@@ -486,7 +486,7 @@ offset_bottom = 83.327
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
-text = "1"
+text = "-----"
 
 [node name="4" type="Label" parent="Leaderboard"]
 offset_left = -905.0
@@ -496,7 +496,7 @@ offset_bottom = 219.673
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
-text = "000"
+text = "-----"
 horizontal_alignment = 2
 
 [node name="perfectTitle" type="Label" parent="Leaderboard/4"]
@@ -508,7 +508,7 @@ theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
 text = "4"
 
-[node name="Name2" type="Label" parent="Leaderboard/4"]
+[node name="Name" type="Label" parent="Leaderboard/4"]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 0.327
@@ -517,7 +517,7 @@ offset_bottom = 83.327
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
-text = "1"
+text = "-----"
 
 [node name="5" type="Label" parent="Leaderboard"]
 offset_left = -905.0
@@ -527,7 +527,7 @@ offset_bottom = 294.673
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
-text = "000"
+text = "-----"
 horizontal_alignment = 2
 
 [node name="perfectTitle" type="Label" parent="Leaderboard/5"]
@@ -539,7 +539,7 @@ theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
 text = "5"
 
-[node name="Name2" type="Label" parent="Leaderboard/5"]
+[node name="Name" type="Label" parent="Leaderboard/5"]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 0.327
@@ -548,7 +548,14 @@ offset_bottom = 83.327
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
-text = "1"
+text = "-----"
+
+[node name="TextEdit" type="TextEdit" parent="Leaderboard"]
+offset_left = -667.0
+offset_top = -468.0
+offset_right = -156.0
+offset_bottom = -364.0
+placeholder_text = "Name:"
 
 [node name="ToggleLabel" type="Label" parent="."]
 layout_mode = 0

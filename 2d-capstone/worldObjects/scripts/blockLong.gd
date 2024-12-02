@@ -197,7 +197,6 @@ func setFillerTiles() -> void:
 			coordPair = [curCoords,curNextCoords]
 			oneLane.append(coordPair)
 		fillerTiles.append(oneLane)
-		print("added block")
 	
 func placeWindows() -> void:
 	#we want to get a random window style

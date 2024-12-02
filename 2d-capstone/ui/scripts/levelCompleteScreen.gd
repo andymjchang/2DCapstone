@@ -81,6 +81,20 @@ func _onUpdateScoreData() -> void:
 
 	# Update leaderboard
 	$Leaderboard/userScore.text = str(Globals.endScore)
+	Leaderboard.add_score(Globals.curFile, "Name", Globals.endScore)
+	
+	# Update leaderboard UI entries
+	var scores = Leaderboard.get_level_scores(Globals.curFile)
+	for i in range(scores.size()):
+		var entry_node = $Leaderboard.get_node(str(i + 1))
+		entry_node.text = "%05d" % scores[i].score
+		entry_node.get_node("Name").text = scores[i].name
+		# if (i - 1) <= scores.size():
+		# 	entry_node.get_node("Name").text = scores[i - 1].name
+		# 	entry_node.text = str(scores[i - 1].score)
+		# else:
+		# 	entry_node.get_node("Name").text = "---"
+		# 	entry_node.text = "---"
 	
 	# Create score animation tween
 	var tween = create_tween()

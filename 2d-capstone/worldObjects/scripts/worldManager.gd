@@ -286,7 +286,6 @@ func loadLevel():
 				instancedObj.get_node("LoopMarkerEnd").global_position = endPos
 				
 			if currentName =="platformBlocks":
-				print("making it past checl")
 				instancedObj.setTileMaps(posPoints.duplicate()) 
 				instancedObj.add_to_group("platforms")
 				

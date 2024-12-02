@@ -3,8 +3,8 @@ extends Node2D
 # Structure of leaderboard data:
 # {
 #   "level_1": [
-#     {"score": 1000, "accuracy": 95.5, "max_combo": 50},
-#     {"score": 800, "accuracy": 92.0, "max_combo": 40},
+#     {"name": "Player", "score": 1000},
+#     {"name": "Player", "score": 800},
 #     ...
 #   ],
 #   "level_2": [
@@ -18,22 +18,21 @@ func _ready() -> void:
 	pass  # No longer needs to load from file
 
 # Gets the top scores for a specific level
-func get_level_scores(level_index: int) -> Array:
+func get_level_scores(level_index: String) -> Array:
 	var level_key = "level_" + str(level_index)
 	if not leaderboard_data.has(level_key):
 		leaderboard_data[level_key] = []
 	return leaderboard_data[level_key]
 
 # Adds a new score entry
-func add_score(level_index: int, score: int, accuracy: float, max_combo: int) -> void:
+func add_score(level_index: String, entry_name: String, entry_score: int) -> void:
 	var level_key = "level_" + str(level_index)
 	if not leaderboard_data.has(level_key):
 		leaderboard_data[level_key] = []
 	
 	var new_entry = {
-		"score": score,
-		"accuracy": accuracy,
-		"max_combo": max_combo
+		"name": entry_name,
+		"score": entry_score
 	}
 	
 	leaderboard_data[level_key].append(new_entry)
