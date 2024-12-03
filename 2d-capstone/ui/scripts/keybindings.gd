@@ -39,7 +39,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-	
+func resetAllCommands () -> void:
+	allCommands = { "jump": InputMap.action_get_events("jump"),
+"slide" : InputMap.action_get_events("slide"),
+"punch" : InputMap.action_get_events("punch"),
+"pause" : InputMap.action_get_events("pause"),
+"activate" : InputMap.action_get_events("activate")
+}
 	
 func sortLength(a : String, b : String ):
 	if a.length() < b.length():
@@ -103,12 +109,16 @@ func addCommand(event) -> bool:
 	var allBindings = allCommands[curCommand]
 	var newEvent = event.as_text()
 	
-	
+	print("test: ", curText, ", ", curCommand)
+	var singularBinding
 	#check to see if command already exists, if so do nothing
 	for binding in allBindings:
+		singularBinding = binding
 		if binding.as_text() == event.as_text():
 			return false
 			
+	var swapAction = event
+	print("EVENT! ", event)
 	#check to see if it exists in other places - if so swap
 	for commandKey in nodePairs.keys():
 		var curCommandPair = nodePairs[commandKey]
@@ -122,13 +132,17 @@ func addCommand(event) -> bool:
 			bindingText = bindingText.replace("(", "")
 			bindingText = bindingText.replace(")", "")
 			if bindingText == event.as_text():
-				#we have find the same command in another action, delete
+				#we have find the same command in another action, swap them
 				InputMap.action_erase_event(commandString, event)
-				print("command string: ", commandString)
+				#InputMap.action
+				#we need to get the one command in the one we are swapping from
+				InputMap.action_add_event(commandString,allCommands[curCommand][0])
+				print("command string: ", commandString,allCommands[curCommand])
 				setTextBoxes()
 				break
 	
 	#now we are free to add the command in to where we want to 
+	InputMap.action_erase_event(curCommand,allCommands[curCommand][0])
 	InputMap.action_add_event(curCommand, event)
 	setTextBoxes()
 	#we should retrigger the text formatter
