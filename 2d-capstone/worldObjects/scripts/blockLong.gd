@@ -39,10 +39,10 @@ func _ready():
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
 		setWindowTiles()
 		id = 0
-		multiplier = 12.0
-		minCols = 4
-		numCols = 12
-		capLength = 2
+		multiplier = 20.0
+		minCols = 6
+		numCols = 20
+		capLength = 3
 	else:
 		$sprite2D/TileMapLayer.visible = true
 		$sprite2D/TileMapLayer2.visible = false
@@ -165,8 +165,8 @@ func setTileMaps(posPoints : Array):
 	if posPoints.size() >= 3:
 		#if posPoints[2] == 12:
 			#posPoints[2]=20
-		if id == 0:
-			posPoints[2] -= 2
+		#if id == 0:
+			#posPoints[2] -= 2
 		if posPoints[2] < numCols:
 			while numCols > posPoints[2]:
 				self.decreaseByOneTile()
