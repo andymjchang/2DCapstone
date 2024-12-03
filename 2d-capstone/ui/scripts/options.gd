@@ -1,5 +1,7 @@
 extends Control
 
+signal keybindSet(val)
+
 enum MenuOptions {
 	KEY_BINDINGS,
 	CALIBRATION,
@@ -15,8 +17,13 @@ enum MenuOptions {
 var current_option: int = 0
 var options_count: int = MenuOptions.size()
 
+var allowSelect = true
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#connect signals
+	keybindSet.connect(_onKeyBindSet)
 	# Set initial position off-screen
 	$OptionsMenuVinyl.position.x += slide_offset
 	$Album.position.x += slide_offset
@@ -36,15 +43,20 @@ func _ready() -> void:
 	update_selection()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("jump"):
-		current_option = (current_option - 1 + options_count) % options_count
-		update_selection()
-	elif event.is_action_pressed("slide"):
-		current_option = (current_option + 1) % options_count
-		update_selection()
-	elif event.is_action_pressed("ui_accept"):
-		select_current_option()
+	if allowSelect:
+		if event.is_action_pressed("jump"):
+			current_option = (current_option - 1 + options_count) % options_count
+			update_selection()
+		elif event.is_action_pressed("slide"):
+			current_option = (current_option + 1) % options_count
+			update_selection()
+		elif event.is_action_pressed("ui_accept"):
+			select_current_option()
 
+func _onKeyBindSet(val):
+	print("setting select: ", val)
+	allowSelect = val
+	
 func update_selection() -> void:
 	
 	# Create tween for smooth rotation

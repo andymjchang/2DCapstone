@@ -33,6 +33,7 @@ func _ready() -> void:
 	setTextBoxes()
 	for button in $buttons.get_children():
 		button.connect("button_up", _onKeyButtonUp.bind(button.name))
+		button.focus_mode = Control.FOCUS_NONE
 		
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -90,9 +91,11 @@ func _onBackButtonUp() -> void:
 	for node in get_tree().get_nodes_in_group("Label"):
 		node.deselect()
 	buttonResetting = null
+	self.get_parent().emit_signal("keybindSet", true)
 
 func _onKeyButtonUp(name) -> void:
 	buttonResetting = self.get_node("buttons/"+name)
+	self.get_parent().emit_signal("keybindSet", false)
 	
 func _input(event):
 	if event is InputEventKey and buttonResetting:
