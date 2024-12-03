@@ -7,9 +7,25 @@ var speed: float = 1.5      # How fast the boss moves
 var random_offset: float = 0.0
 var random_timer: float = 0.0
 
+@export var sprite : AnimatedSprite2D
+@export var glitch : ColorRect
+
 func _ready() -> void:
 	initial_y = $Sprite.position.y
 	
+	glitch.modulate.a = 1.0
+	sprite.modulate.a = 0.0
+	
+	# fade out glitch and reduce shake
+	var glitch_tween = create_tween()
+	glitch_tween.set_parallel(true)  # Allow multiple properties to tween simultaneously
+	glitch_tween.tween_property(glitch, "modulate:a", 0.0, 5.0)
+	glitch_tween.tween_property(glitch.material, "shader_parameter/shake_rate", 0.0, 5.0)
+	
+	# fade in sprite
+	var sprite_tween = create_tween()
+	sprite_tween.tween_property(sprite, "modulate:a", 1.0, 5.0)
+
 func _process(delta: float) -> void:
 	time += delta
 	random_timer += delta
@@ -26,4 +42,4 @@ func _process(delta: float) -> void:
 	new_y = clamp(new_y, initial_y - amplitude, initial_y + amplitude)
 	
 	# Update sprite position
-	$Sprite.position.y = new_y
+	sprite.position.y = new_y
