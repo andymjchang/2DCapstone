@@ -508,7 +508,7 @@ func save_scene_to_file():
 								print("we are saving a placer")
 							if itemList.name == "platformBlocks":
 								#save the number of cols as well as the extents so we know where to start drawing	
-								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", "
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().getExtents())+ ", "+str(blockChild.get_parent().newPos)+ ", "
 							elif itemList.name == "keyBindings":
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().instructionType)+", "
 							elif itemList.name == "enemies":
@@ -524,7 +524,7 @@ func save_scene_to_file():
 						posChain += "\n"
 						newFile.store_string(posChain)
 				#I want to go through the file and combine all the disconnected blocks into one
-			#combineBlocks(newFile)
+			combineBlocks(newFile)
 	else:
 		displayStatus(UNABLE_TO_SAVE, false)
 	
@@ -548,7 +548,6 @@ func combineBlocks(newFile) -> void:
 		elif line != "platformBlocks" and not line.contains(", "):
 			isPlatform = false
 		# Position
-		print("cur line: " , line)
 		if line.contains(", ") and isPlatform:
 			#var objectParent = baseObject.instantiate()
 			#var instancedObj = instance.instantiate()
@@ -564,22 +563,29 @@ func combineBlocks(newFile) -> void:
 					# we are starting a new block chain
 					#has the same start and end because it is one block
 					
-				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2],0,0]
+				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2],posPoints[3],posPoints[0]+posPoints[3]]
 				print("starting a new chain: ", newBlock)
 				#if the block we are checking has y/x that is in bounds/close enough - merge
-			elif newBlock[0].y == posPoints[1] and abs(posPoints[0] - newBlock[1].x) < 200 :
+				#this needs to check extents
+				print("pos points extents hopefully: ", posPoints[3])
+				print("block we are checking ",(posPoints[0] - posPoints[3]) , " our cur end: ",newBlock[1].x+newBlock[3])
+			elif newBlock[0].y == posPoints[1] and abs((posPoints[0] - posPoints[3]) - (newBlock[4])) < 100 :
 				#change the end bounds
 				newBlock[1] = Vector2(posPoints[0], posPoints[1])
 				#extend the num cols
 				newBlock[2] = newBlock[2] + posPoints[2]
+				#store the real end 
+				newBlock[4] = posPoints[0]+posPoints[3]
 				print("adding to new block: ", newBlock)
 			else:
 				#we are ending the block chain
 				#there is a chance that this does not get a singular last block chain
 				allNewBlocks.append(newBlock)
-				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2],0,0]
+				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2],posPoints[3],posPoints[0]+posPoints[3]]
 				print("ending a chain: ", newBlock)
 	#now we have to overwite all of the platform code for what we have
+	
+	allNewBlocks.append(newBlock)
 	print("all new blocks: ", allNewBlocks)
 	newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
 	for itemList in objectList.get_children():
@@ -615,7 +621,18 @@ func combineBlocks(newFile) -> void:
 						newFile.store_string(posChain)
 	newFile.store_string("platformBlocks" + "\n")
 	for block in allNewBlocks:
-		var newString = str(block[0].x) +", " + str(block[0].y) + ", " + str(block[2]) + ", 0, 0, \n"
+		#num cols is dependent on length of the start pos and the end pos
+		#we can get the extents from the platfrom block
+		var extentBlock = platformBlock.instantiate()
+		get_tree().current_scene.add_child(extentBlock)
+		var extents = extentBlock.get_node("Node2D/Area2D/CollisionShape2D").shape.extents
+		var actualStart = block[0].x - extents.x
+		var actualEnd = block[1].x + extents.x
+		var length = abs(actualStart - actualEnd)
+		var newNumCols = round(length/extentBlock.getTileWidth())
+		#this might now work for level 3 tilemap
+		#i need to calulat ethe extents
+		var newString = str(int(block[0].x)) +", " + str(int(block[0].y)) + ", " + str(int(newNumCols)) + ", "+str(abs(block[4]-block[0].x))+", "+str(block[0])+", \n"
 		newFile.store_string(newString)
 	
 # Recursive function to set owner for all children

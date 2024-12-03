@@ -13,6 +13,7 @@ slideWalls
 powerups
 jumpBoosts
 coins
+325, 575,
 keyBindings
 skips
 mashes
@@ -20,4 +21,5 @@ holds
 moveLines
 loops
 platformBlocks
-750, 525, 40, 0, 0, 
+1450, 525, 20, 76.5, (1450, 525), 
+475, 275, 228, 1698.900390625, (475, 275), 

@@ -5,12 +5,12 @@ class_name platformBlockScene
 @onready var base = $Node2D/base
 #this is the default for now
 var numCols = 20
-var extents
+@onready var extents : float
 var newPos
 var fillerTiles = [Vector2(2,1),Vector2(2,2),Vector2(2,2), Vector2(2,4)]
 var endTiles = [Vector2(4,1),Vector2(3,2),Vector2(3,2), Vector2(4,4)]
 var startTiles = [Vector2(0,1),Vector2(1,2),Vector2(1,3), Vector2(0,4)]
-var tileWidth
+@onready var tileWidth : float
 var allTiles = [startTiles, fillerTiles, endTiles]
 @export var hasBeenSet : bool = false
 
@@ -19,9 +19,16 @@ func _ready() -> void:
 	# set the extents to the width of the tile x 12
 	tileMap =  self.get_node("Node2D/TileMapLayer")
 	tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
+	extents = self.get_node("Node2D/Area2D/%CollisionShape2D").shape.extents.x
 	setStartTiles()
 	setFillerTiles()
 	setEndTiles()
+	
+func getTileWidth() -> float:
+	return tileWidth
+
+func getExtents() -> float:
+	return extents
 	
 func initScene() -> void:
 	if !hasBeenSet:
