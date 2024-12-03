@@ -142,7 +142,10 @@ func addCommand(event) -> bool:
 				break
 	
 	#now we are free to add the command in to where we want to 
-	InputMap.action_erase_event(curCommand,allCommands[curCommand][0])
+	
+	for command in allCommands[curCommand]:
+		InputMap.action_erase_event(curCommand,command)
+		
 	InputMap.action_add_event(curCommand, event)
 	setTextBoxes()
 	#we should retrigger the text formatter
