@@ -3,9 +3,12 @@ extends Node2D
 var curSprite
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#curSprite = get_node("Sprite2D").duplicate()
-	pass # Replace with function body.
-
+	if Globals.curFile == "Level 3":
+		$Checkpoint2.visible = true
+	elif Globals.curFile == "Level 4":
+		$Checkpoint3.visible = true
+	else:
+		$Checkpoint1.visible = true
 
 func _onBoundsAreaEntered(area):	
 	# Relocating player has reached checkpoint

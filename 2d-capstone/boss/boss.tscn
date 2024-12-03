@@ -1,0 +1,80 @@
+[gd_scene load_steps=16 format=3 uid="uid://b034ssesud1qa"]
+
+[ext_resource type="Texture2D" uid="uid://dou47ix4hwfk7" path="res://boss/Attack/Boss Attack 1.png" id="1_otrbs"]
+[ext_resource type="Texture2D" uid="uid://dxq42l563vyfi" path="res://boss/Attack/Boss Attack 2.png" id="2_ywrif"]
+[ext_resource type="Texture2D" uid="uid://d1j6v63gr5hhc" path="res://boss/Attack/Boss Attack 3.png" id="3_6qa06"]
+[ext_resource type="Texture2D" uid="uid://b8irllis1wtql" path="res://boss/Attack/Boss Attack 4.png" id="4_vqg2d"]
+[ext_resource type="Texture2D" uid="uid://cl6tn52fh7ota" path="res://boss/Attack/Boss Attack 5.png" id="5_8pb0c"]
+[ext_resource type="Texture2D" uid="uid://cwxo4nhxg1lv7" path="res://boss/Attack/Boss Attack 6.png" id="6_85kro"]
+[ext_resource type="Texture2D" uid="uid://d1kw8fng4ppxo" path="res://boss/Attack/Boss Attack 7.png" id="7_5dj1q"]
+[ext_resource type="Texture2D" uid="uid://b3i1lmjjds6iu" path="res://boss/Attack/Boss Attack 8.png" id="8_nksux"]
+[ext_resource type="Texture2D" uid="uid://cgcevo2vu5m1t" path="res://boss/Attack/Boss Attack 9.png" id="9_xxlwe"]
+[ext_resource type="Texture2D" uid="uid://drsehup38apq6" path="res://boss/_UPDATED_ Idle/Boss Idle 1.png" id="10_pvdop"]
+[ext_resource type="Texture2D" uid="uid://dmm0o8jab6o0o" path="res://boss/_UPDATED_ Idle/Boss Idle 2.png" id="11_mt0b4"]
+[ext_resource type="Texture2D" uid="uid://2x00ckxpvjj1" path="res://boss/_UPDATED_ Idle/Boss Idle 3.png" id="12_vwiwk"]
+[ext_resource type="Texture2D" uid="uid://c24c3l31c2ivr" path="res://boss/_UPDATED_ Idle/Boss Idle 4.png" id="13_7n3gx"]
+[ext_resource type="Texture2D" uid="uid://cejqucmv32g02" path="res://boss/_UPDATED_ Idle/Boss Idle 5.png" id="14_j8b66"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3pvj5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_otrbs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ywrif")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6qa06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vqg2d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8pb0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_85kro")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5dj1q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nksux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xxlwe")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_pvdop")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_mt0b4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_vwiwk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_7n3gx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j8b66")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}]
+
+[node name="Boss" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_3pvj5")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.939815

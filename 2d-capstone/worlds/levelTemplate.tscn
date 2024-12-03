@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://b8v38gkay1bem" path="res://worldObjects/jumpBoost.tscn" id="13_iujdl"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="13_sbyxw"]
 [ext_resource type="PackedScene" uid="uid://dchr6kx2lhuq5" path="res://worldObjects/zipline/ziplineMiddle.tscn" id="14_jwoui"]
-[ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="14_rbu47"]
 [ext_resource type="PackedScene" uid="uid://djj8kajulhmho" path="res://worldObjects/coin.tscn" id="15_4qhng"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="15_gryhe"]
 [ext_resource type="Script" path="res://worlds/score.gd" id="15_mx364"]
@@ -44,6 +43,7 @@
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="27_u4i2v"]
 [ext_resource type="Material" uid="uid://bprabndekf50s" path="res://shaders/playerGlitch.tres" id="28_62u6b"]
 [ext_resource type="PackedScene" uid="uid://g73wmn4soj7v" path="res://worldObjects/skipManager.tscn" id="28_caqgn"]
+[ext_resource type="PackedScene" uid="uid://b034ssesud1qa" path="res://boss/boss.tscn" id="39_2c01x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_du76p"]
 animations = [{
@@ -210,6 +210,9 @@ offset_bottom = 374.0
 [node name="glitchLines" parent="Camera2D" instance=ExtResource("23_jq54w")]
 visible = false
 
+[node name="Boss" parent="Camera2D" instance=ExtResource("39_2c01x")]
+position = Vector2(132, -43)
+
 [node name="objectList" type="Node2D" parent="."]
 
 [node name="platformBlocks" type="Node2D" parent="objectList"]
@@ -224,7 +227,6 @@ visible = false
 script = ExtResource("13_euntf")
 
 [node name="playerCheckpoints" type="Node2D" parent="objectList"]
-script = ExtResource("14_rbu47")
 
 [node name="players" type="Node2D" parent="objectList"]
 
