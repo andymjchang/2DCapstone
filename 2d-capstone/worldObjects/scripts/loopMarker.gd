@@ -4,14 +4,6 @@ var distBetween = Vector2.ZERO
 var firstPass = true
 enum {START, END}
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	if self.name == "LoopMarkerStart":
-		var midpoint = (get_parent().get_child(END).position - self.position) / 2
-		get_node("Respawn").position = midpoint
-		var width = get_node("Respawn/CollisionShape2D").shape.extents.x
-		get_node("Respawn/CollisionShape2D").scale.x = midpoint.x / width
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

@@ -284,9 +284,21 @@ func loadLevel():
 				var endPos = Vector2(posPoints[2], posPoints[3])
 				instancedObj.get_node("LoopMarkerStart").global_position = startPos
 				instancedObj.get_node("LoopMarkerEnd").global_position = endPos
+				var loop1 = instancedObj.get_node("LoopMarkerStart").global_position
+				var loop2 = instancedObj.get_node("LoopMarkerEnd").global_position
+				print("Setting up collisions")
+				var loopPoint = (loop1 + loop2) / 2
+				instancedObj.get_node("LoopMarkerStart/Respawn").global_position = loopPoint
+				print("My pos: ", loopPoint)
+				var loopWidth = instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").get_shape().size.x
+				var loopHeight = instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").get_shape().size.y
+				var tgtLoopLen = (loop2 - loop1).length() #
+				print("Tgt length: ", tgtLoopLen)
+				instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").scale = Vector2((tgtLoopLen / loopWidth), 1.5)
+
 				
 			if currentName =="platformBlocks":
-				print("making it past checl")
+				#rint("making it past checl")
 				instancedObj.setTileMaps(posPoints.duplicate()) 
 				instancedObj.add_to_group("platforms")
 				
