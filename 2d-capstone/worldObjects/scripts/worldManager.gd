@@ -235,7 +235,9 @@ func loadLevel():
 	var instance
 	var instanceParent
 	var currentName = ""
-	for line in content.split("\n"):
+	var levelData = content.split("\n")
+	Globals.setBPM(int(levelData[0]))
+	for line in levelData.slice(1):
 		#print("Current line: ", line)
 		if line in instanceList.keys():
 			currentName = line
