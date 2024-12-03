@@ -224,12 +224,14 @@ func _on_text_edit_2_text_changed(new_text) -> void:
 func updateTime(delta: float):
 	Globals.levelEditorTime = Globals.levelEditorTime + delta
 
-	
-func loadLevel():
-	print("save file name, ", saveFileName)
+func clearLevel():
 	for objList in $objectList.get_children():
 		for child in objList.get_children():
 			child.queue_free()
+
+func loadLevel():
+	print("save file name, ", saveFileName)
+	clearLevel()
 
 	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlock, platformBlocksList, blockTypes[2]], 
@@ -736,6 +738,7 @@ func _on_load_file_pressed() -> void:
 	else:
 		saveFileName = tgtFile
 		$UI/FileLoadMode.hide()
+		clearLevel()
 		editingFile = false
 	currentFile.text = "Now editing: " + tgtFile + ".dat"
 
