@@ -20,6 +20,8 @@ enum MenuOptions {
 var jingle_played = false
 var current_option: int = 0
 var options_count: int = MenuOptions.size()
+var playerName: String = "..."
+var playerEntry
 
 func _ready() -> void:
 	self.updateScoreData.connect(_onUpdateScoreData)
@@ -79,22 +81,13 @@ func _onUpdateScoreData() -> void:
 	$coinsLabel.text = str(Globals.coinsCollected)
 	$accuracyLabel.text = "%2.2f" % Globals.percentageHit + "%"
 
-	# Update leaderboard
 	$Leaderboard/userScore.text = str(Globals.endScore)
-	Leaderboard.add_score(Globals.curFile, "Name", Globals.endScore)
-	
-	# Update leaderboard UI entries
-	var scores = Leaderboard.get_level_scores(Globals.curFile)
-	for i in range(scores.size()):
-		var entry_node = $Leaderboard.get_node(str(i + 1))
-		entry_node.text = "%05d" % scores[i].score
-		entry_node.get_node("Name").text = scores[i].name
-		# if (i - 1) <= scores.size():
-		# 	entry_node.get_node("Name").text = scores[i - 1].name
-		# 	entry_node.text = str(scores[i - 1].score)
-		# else:
-		# 	entry_node.get_node("Name").text = "---"
-		# 	entry_node.text = "---"
+	playerEntry = Leaderboard.add_score(Globals.curFile, playerName, Globals.endScore)
+	if playerEntry != null:
+		print("Player made the leaderboard!")
+	else:
+		print("Player didn't make the leaderboard")
+	updateLeaderboard()
 	
 	# Create score animation tween
 	var tween = create_tween()
@@ -104,6 +97,14 @@ func _onUpdateScoreData() -> void:
 	tween.tween_method(func(current_score: int):
 		$scoreLabel.text = "%05d" % current_score,
 		start_score, Globals.endScore, 3.0)
+
+func updateLeaderboard() -> void:
+	# Update leaderboard UI entries
+	var scores = Leaderboard.get_level_scores(Globals.curFile)
+	for i in range(scores.size()):
+		var entry_node = $Leaderboard.get_node(str(i + 1))
+		entry_node.text = "%05d" % scores[i].score
+		entry_node.get_node("Name").text = scores[i].name
 
 func playMusic() -> void:
 	if !jingle_played:
@@ -157,3 +158,11 @@ func leaderboard_slide_out() -> void:
 	tween.tween_property($Leaderboard, "position:x",
 		$Leaderboard.position.x + (slide_offset), slide_in_duration)
 	tween.tween_callback(disableLeaderboard)
+
+
+func _on_text_edit_text_changed() -> void:
+	playerName = $Leaderboard/TextEdit.text
+	if playerEntry != null:
+		print("Updating player name")
+		playerEntry.name = playerName
+		updateLeaderboard()

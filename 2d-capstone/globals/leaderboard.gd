@@ -24,8 +24,8 @@ func get_level_scores(level_index: String) -> Array:
 		leaderboard_data[level_key] = []
 	return leaderboard_data[level_key]
 
-# Adds a new score entry
-func add_score(level_index: String, entry_name: String, entry_score: int) -> void:
+# Adds a new score entry and returns the entry if it made it to the leaderboard, null otherwise
+func add_score(level_index: String, entry_name: String, entry_score: int) -> Dictionary:
 	var level_key = "level_" + str(level_index)
 	if not leaderboard_data.has(level_key):
 		leaderboard_data[level_key] = []
@@ -42,3 +42,6 @@ func add_score(level_index: String, entry_name: String, entry_score: int) -> voi
 	# Keep only top MAX_ENTRIES
 	if leaderboard_data[level_key].size() > MAX_ENTRIES:
 		leaderboard_data[level_key].resize(MAX_ENTRIES)
+	
+	# Return the entry if it made it to the leaderboard, null otherwise
+	return new_entry if new_entry in leaderboard_data[level_key] else null

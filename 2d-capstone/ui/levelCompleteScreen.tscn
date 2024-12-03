@@ -555,6 +555,8 @@ offset_left = -667.0
 offset_top = -468.0
 offset_right = -156.0
 offset_bottom = -364.0
+theme = ExtResource("3_bdee6")
+theme_override_font_sizes/font_size = 48
 placeholder_text = "Name:"
 
 [node name="ToggleLabel" type="Label" parent="."]
@@ -593,3 +595,5 @@ modulate = Color(0, 0, 0, 1)
 position = Vector2(-16, -16)
 texture = ExtResource("7_vxoxn")
 flip_h = true
+
+[connection signal="text_changed" from="Leaderboard/TextEdit" to="." method="_on_text_edit_text_changed"]
