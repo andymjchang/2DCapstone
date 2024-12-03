@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cwc2nel1xt6xx"]
+[gd_scene load_steps=48 format=3 uid="uid://cwc2nel1xt6xx"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_fl71r"]
 [ext_resource type="PackedScene" uid="uid://ddeqbtwpcjgkc" path="res://worlds/levelUI.tscn" id="2_50e4x"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://ctn54mgrw1nra" path="res://worldObjects/loopMarkers/loopManager.tscn" id="19_yq3bk"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
+[ext_resource type="FontFile" uid="uid://cu6pmbl5ix2fe" path="res://fonts/MONOSPACE821BOLDBT.TTF" id="22_4wr3o"]
 [ext_resource type="PackedScene" uid="uid://cdb5n44jar0hf" path="res://ui/progressBar.tscn" id="22_7f6ic"]
 [ext_resource type="Texture2D" uid="uid://bewhewck8tgsu" path="res://ui/assets/comboLetters/Combo_Letter_A.png" id="22_tagkb"]
 [ext_resource type="Texture2D" uid="uid://cxy7dkhdn76kf" path="res://ui/assets/comboLetters/Combo_Letter_B.png" id="23_ge1t8"]
@@ -107,27 +108,26 @@ offset_bottom = 67.0
 theme_override_fonts/normal_font = ExtResource("12_jtaw1")
 
 [node name="Score" type="Label" parent="CanvasLayer"]
-offset_left = 743.0
-offset_top = 132.0
-offset_right = 1193.0
-offset_bottom = 315.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_fonts/font = ExtResource("12_jtaw1")
-theme_override_font_sizes/font_size = 96
+offset_left = 258.0
+offset_top = 145.0
+offset_right = 425.0
+offset_bottom = 209.0
+theme_override_fonts/font = ExtResource("22_4wr3o")
+theme_override_font_sizes/font_size = 48
 text = "00000"
 horizontal_alignment = 1
-vertical_alignment = 1
 script = ExtResource("15_mx364")
 increasedScale = Vector2(1, 1.5)
 
 [node name="ComboLetter" type="Node2D" parent="CanvasLayer"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/ComboLetter" groups=["pulsingObjects"]]
-position = Vector2(105, 131)
+position = Vector2(105, 136)
+scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_du76p")
+frame = 3
 script = ExtResource("27_8vl6o")
-increasedScale = Vector2(1.1, 1.1)
+increasedScale = Vector2(0.88, 0.88)
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/ComboLetter"]
 visible = false
@@ -140,13 +140,14 @@ offset_bottom = 205.0
 [node name="Accuracy" type="Label" parent="CanvasLayer/ComboLetter"]
 offset_left = 1725.0
 offset_top = 56.0
-offset_right = 1876.0
+offset_right = 1896.0
 offset_bottom = 122.0
 theme = ExtResource("27_u4i2v")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 36
 text = "100.0%"
+horizontal_alignment = 2
 
 [node name="Combo" type="Label" parent="CanvasLayer/ComboLetter"]
 offset_left = 1728.0
@@ -157,6 +158,7 @@ theme = ExtResource("27_u4i2v")
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 72
 text = "x0"
+horizontal_alignment = 2
 
 [node name="ComboLetterTimer" type="Timer" parent="CanvasLayer/ComboLetter"]
 wait_time = 0.1
