@@ -68,12 +68,11 @@ func _onLevelSelectButtonUp() -> void:
 	Globals.FadeTransition("res://ui/levelSelect.tscn")
 
 func _onCheckpointButtonUp() -> void:
-	# Globals.relocateToCheckpoint = true
-	# Globals.inLevel = false
-	# Globals.paused = false
-	# Engine.time_scale = 1.0
-	# get_tree().reload_current_scene()
-	_onRestartButtonUp()
+	Globals.relocateToCheckpoint = true
+	Globals.inLevel = false
+	Globals.paused = false
+	Engine.time_scale = 1.0
+	get_tree().reload_current_scene()
 
 func _onRestartButtonUp() -> void:
 	Globals.relocateToCheckpoint = false

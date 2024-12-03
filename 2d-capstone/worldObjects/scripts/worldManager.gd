@@ -559,7 +559,7 @@ func _onResetLoop(startTime, destination, enemyPos, powerPos):
 		var instancedObj = powerupInstance.instantiate()	
 		instancedObj.position = pos
 		#instancedObj.get_node("ActionIndicator").initialize()
-		powerupList.add_child(instancedObj)
+		powerupList.call_deferred("add_child", instancedObj)
 	music.play(startTime)
 	actionIndicatorsList.load_array()
 
