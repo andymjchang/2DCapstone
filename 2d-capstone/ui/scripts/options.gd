@@ -50,9 +50,12 @@ func _input(event: InputEvent) -> void:
 		elif event.is_action_pressed("slide"):
 			current_option = (current_option + 1) % options_count
 			update_selection()
-		elif event.is_action_pressed("ui_accept"):
+		elif event.is_action_pressed("punch") and Globals.usingController:
 			select_current_option()
 
+func controllerNavigate(val):
+	pass
+	
 func _onKeyBindSet(val):
 	print("setting select: ", val)
 	allowSelect = val
@@ -87,6 +90,7 @@ func select_current_option() -> void:
 			$VolumeScreen.visible = true
 		MenuOptions.BACK:
 			_onBackButtonUp()
+
 
 func reset_options() -> void:
 	$VolumeScreen.visible = false

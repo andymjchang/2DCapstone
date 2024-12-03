@@ -29,9 +29,14 @@ func _process(_delta):
 		current_option = wrapi(current_option + 1, 0, MenuOptions.size())
 		update_pointer_position()
 	
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("punch") and Globals.usingController:
+		print("gettig to pucnh detetion")
 		handle_selection()
 
+func controllerNavigate(val):
+	if val:
+		$storyButton.grab_focus()
+		
 func update_pointer_position():
 	match current_option:
 		MenuOptions.START:
@@ -51,6 +56,8 @@ func update_pointer_position():
 			Input.warp_mouse($quitButton.global_position + Vector2($quitButton.size.x/2, $quitButton.size.y/2))
 
 func handle_selection():
+	var focused = get_viewport().gui_get_focus_owner()
+	print("focused: ", focused)
 	match current_option:
 		MenuOptions.START:
 			_onStoryButtonPressed()

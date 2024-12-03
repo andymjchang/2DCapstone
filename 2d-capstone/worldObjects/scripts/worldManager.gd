@@ -187,7 +187,8 @@ func _ready():
 	changeCountdown()
 	emit_signal("changeSpeed", 0)
 	#startGame()
-	
+func controllerNavigate(val) -> void:
+	pass
 func startGame():
 	for object in get_tree().get_nodes_in_group("pulsingObjects"):
 		object.setBPM()

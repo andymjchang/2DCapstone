@@ -33,7 +33,7 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("slide"):
 		current_option = (current_option + 1) % options_count
 		update_selection()
-	elif event.is_action_pressed("ui_accept"):
+	elif event.is_action_pressed("punch") and Globals.usingController:
 		select_current_option()
 
 func update_selection() -> void:

@@ -3,7 +3,7 @@ extends Node2D
 var pathToImage = ""
 var imageName = ""
 var instType = ""
-@onready var sprite = $Sprite2D
+@onready var sprite = $controllerSprite
 @onready var keyName = $keyName
 
 #sprites
@@ -103,7 +103,9 @@ func _process(delta: float) -> void:
 		else:
 			pressedSprite.visible = false
 			unpressedSprite.visible = true
-		
+	
+func controllerNavigate(val):
+	pass	
 func setKeyBindingImages():
 	
 	pathToTarget = keyFolderPath
@@ -141,8 +143,8 @@ func setKeyBindingImages():
 					var newImage = controllerMap[control]
 					print("new Image: ", newImage)
 					sprite.texture = newImage
-					keyName.visible = false
-					$ColorRect.visible = false
+					pressedLong = false
+					unpressedLong.visible = false
 					break
 					
 		if keyArray.size() > 0:

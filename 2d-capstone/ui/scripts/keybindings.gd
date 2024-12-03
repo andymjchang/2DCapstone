@@ -10,7 +10,56 @@ extends Control
 @onready var shortKey = preload("res://ui/assets/onboarding/keyBackgrounds/key_unpressed.png")
 @onready var longKey = preload("res://ui/assets/onboarding/keyBackgrounds/key_long_unpressed.png")
 
+var aController = preload("res://ui/assets/onboarding/keys/a_xbox.png")
+var bController = preload("res://ui/assets/onboarding/keys/b_xbox.png")
+var dPadDownController = preload("res://ui/assets/onboarding/keys/down_xbox.png")
+var LBController = preload("res://ui/assets/onboarding/keys/LB_xbox.png")
+var leftMidController = preload("res://ui/assets/onboarding/keys/left_mid_button_xbox.png")
+var dPadLeftController = preload("res://ui/assets/onboarding/keys/left_xbox.png")
+var LSController = preload("res://ui/assets/onboarding/keys/LS_xbox.png")
+var LTController = preload("res://ui/assets/onboarding/keys/LT_xbox.png")
+var RBController = preload("res://ui/assets/onboarding/keys/RB_xbox.png")
+var rightMidController = preload("res://ui/assets/onboarding/keys/right_mid_button_xbox.png")
+var dPadRightController = preload("res://ui/assets/onboarding/keys/right_xbox.png")
+var RSController = preload("res://ui/assets/onboarding/keys/RS_xbox.png")
+var RTController = preload("res://ui/assets/onboarding/keys/RT_xbox.png")
+var dPadUpController = preload("res://ui/assets/onboarding/keys/up_xbox.png")
+var xController = preload("res://ui/assets/onboarding/keys/x_xbox.png")
+var yController = preload("res://ui/assets/onboarding/keys/y_xbox.png")
+
 @onready var currentKeyList = $currentKeys
+
+
+#data structures
+
+var controllerArray = ["Joypad Button 0", "Joypad Button 1", "Joypad Button 2", "Joypad Button 3", "Joypad Button 4", "Joypad Button 5", "Joypad Button 6", "Joypad Button 7", "Joypad Button 8",  "Joypad Button 9", "Joypad Button 0", "Joypad Button 10", "Joypad Button 12", "Joypad Button 13", "Joypad Button 14", "Joypad Button 15", "Joypad Button 16", "Joypad Button 17", "Joypad Button 18",  "Joypad Button 19"  , "Joypad Button 20", "Joypad Button 21", "Joypad Button 22",  "Joypad Button 23"  ]
+@onready var controllerMap = {controllerArray[0]: aController,
+							controllerArray[1]: bController,
+							controllerArray[2]: xController,
+							controllerArray[3]: yController,
+							controllerArray[4]: LBController,
+							controllerArray[5]: RBController,
+							controllerArray[6]: LSController,
+							controllerArray[7]: RSController,
+							controllerArray[8]: aController, #back/select
+							controllerArray[9]: aController, #start option
+							controllerArray[10]: LSController,
+							controllerArray[11]: RSController,
+							controllerArray[12]: dPadUpController,
+							controllerArray[13]: dPadDownController,
+							controllerArray[14]: dPadLeftController,
+							controllerArray[15]: dPadRightController,
+							controllerArray[16]: aController, #the rest of these are axis contols, do later
+							controllerArray[17]: aController,
+							controllerArray[18]: aController,
+							controllerArray[19]: aController,
+							controllerArray[20]: aController,
+							controllerArray[21]: aController,	
+							controllerArray[22]: aController,
+							controllerArray[23]: aController
+							}
+	
+	
 @onready var allCommands = { "jump": InputMap.action_get_events("jump"),
 "slide" : InputMap.action_get_events("slide"),
 "punch" : InputMap.action_get_events("punch"),
@@ -24,7 +73,13 @@ $buttons/slideKey: [$currentKeys/slideCurrent, "slide"],
 $buttons/punchKey: [$currentKeys/punchCurrent,"punch" ],
 }
 
+#controller sprites
+@onready var punchC = $currentKeys/punchController
+@onready var jumpC = $currentKeys/jumpController
+@onready var slideC = $currentKeys/slideController
+
 var buttonResetting
+
 
 
 
@@ -39,14 +94,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-	
-func resetAllCommands () -> void:
-	allCommands = { "jump": InputMap.action_get_events("jump"),
-"slide" : InputMap.action_get_events("slide"),
-"punch" : InputMap.action_get_events("punch"),
-"pause" : InputMap.action_get_events("pause"),
-"activate" : InputMap.action_get_events("activate")
-}
+
+func controllerNavigate(val):
+	pass
 	
 func sortLength(a : String, b : String ):
 	if a.length() < b.length():
@@ -56,7 +106,7 @@ func sortLength(a : String, b : String ):
 func formatImage(commands) -> String:
 	var returnString = "" 
 	var keyboardArray = []
-	var controllerArray = []
+	var contArray = []
 	var keyboardControls = true
 	#add in a check for whether or not we are doing controller
 	for command in commands:
@@ -66,25 +116,21 @@ func formatImage(commands) -> String:
 		commandText = commandText.replace(" ", "")
 		commandText = commandText.replace("(", "")
 		commandText = commandText.replace(")", "")
-		if command.get_class() == "InputEventKey" and keyboardControls:
+		if command.get_class() == "InputEventKey":
 			keyboardArray.append(str(commandText))
-		elif command.get_class() == "InputEventJoypadMotion" and !keyboardControls:
-			controllerArray.append(str(commandText))
-		elif !keyboardControls:
-			controllerArray.append(str(commandText))
+		elif command.get_class() == "InputEventJoypadMotion":
+			contArray.append(str(command.as_text()))
+		else:
+			contArray.append(str(command.as_text()))
 	
 	#temp solution
 	keyboardArray.sort_custom(sortLength)
-	if keyboardControls:
+	if !Globals.usingController:
 		for keyPress in keyboardArray:
 			returnString += keyPress
-		
-	#returnString += "Keyboard: "
-	#for keyPress in keyboardArray:
-		#returnString += keyPress + ", "
-	#returnString += "\nController: "
-	#for controllerPress in controllerArray	:
-		#returnString += controllerPress + ", "
+	elif Globals.usingController:
+		for controllerPress in contArray	:
+			returnString += controllerPress
 	return returnString
 
 func _onBackButtonUp() -> void:
@@ -166,17 +212,37 @@ func setTextBoxes() -> void:
 	for key in allCommands.keys():
 		var rawText = allCommands[key]
 		print("text: ", formatImage(rawText))
-		#formatText(rawText)
-		#curTextBox.text = formatText(rawText)
 		var imageText = formatImage(rawText)
-		
 		var lengthType = "Short" if imageText.length() < 3 else "Long"
 		var notLengthTpe = "Short" if lengthType == "Long" else "Long"
 		
 		curSprite =  self.get_node("currentKeys/"+str(key)+lengthType+"Current")
 		var notCurSprite = self.get_node("currentKeys/"+str(key)+notLengthTpe+"Current")
-		curSprite.visible = true
-		notCurSprite.visible = false
 		
-		curSprite.get_node("Label").text = imageText
+		if Globals.usingController:
+			curSprite.visible = false
+			notCurSprite.visible = false
+			curSprite = self.get_node("currentKeys/"+str(key)+"Controller")
+			#print("controller name: ", event.as_text())
+			
+			var eventText = imageText
+			for control in controllerArray:
+				print("control: ", control, " event text:", eventText)
+				if control in (imageText):
+					var newImage = controllerMap[control]
+					print("new Image: ", newImage)
+					curSprite.texture = newImage
+					break
+			
+			
+		else:
+			curSprite.visible = true
+			notCurSprite.visible = false
+			curSprite.get_node("Label").text = imageText
+			punchC.visible = false
+			slideC.visible = false
+			jumpC.visible = false
+			
+		
+		
 		
