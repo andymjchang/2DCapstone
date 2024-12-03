@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgjl1xcxhhjxu"]
+[gd_scene load_steps=14 format=3 uid="uid://cgjl1xcxhhjxu"]
 
 [ext_resource type="Texture2D" uid="uid://2kbm71o22fjj" path="res://worldObjects/assets/powerups/invuln.png" id="1_cf53a"]
 [ext_resource type="Script" path="res://worldObjects/scripts/powerup.gd" id="1_t5bed"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://clr5r236a7rkc" path="res://worldObjects/assets/powerups/speedup.png" id="4_mlsi3"]
 [ext_resource type="Texture2D" uid="uid://d21jr8ipfpnpu" path="res://worldObjects/assets/powerups/slowdown.png" id="5_gka8h"]
 [ext_resource type="Texture2D" uid="uid://cuoxttcoy7weh" path="res://worldObjects/enemy/Poof_anim_1-sheet.png" id="6_gie7s"]
+[ext_resource type="Script" path="res://ui/scripts/pulseAnimatedSprite.gd" id="7_8i80t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vs2ps"]
 atlas = ExtResource("6_gie7s")
@@ -67,9 +68,10 @@ size = Vector2(238, 237)
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_t5bed")
 
-[node name="Display" type="AnimatedSprite2D" parent="."]
+[node name="Display" type="AnimatedSprite2D" parent="." groups=["pulsingObjects"]]
 sprite_frames = SubResource("SpriteFrames_ijhdg")
 animation = &"display"
+script = ExtResource("7_8i80t")
 
 [node name="Area2D" type="Area2D" parent="."]
 
