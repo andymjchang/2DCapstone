@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://b034ssesud1qa"]
+[gd_scene load_steps=17 format=3 uid="uid://b034ssesud1qa"]
 
 [ext_resource type="Texture2D" uid="uid://dou47ix4hwfk7" path="res://boss/Attack/Boss Attack 1.png" id="1_otrbs"]
+[ext_resource type="Script" path="res://boss/boss.gd" id="1_vvue2"]
 [ext_resource type="Texture2D" uid="uid://dxq42l563vyfi" path="res://boss/Attack/Boss Attack 2.png" id="2_ywrif"]
 [ext_resource type="Texture2D" uid="uid://d1j6v63gr5hhc" path="res://boss/Attack/Boss Attack 3.png" id="3_6qa06"]
 [ext_resource type="Texture2D" uid="uid://b8irllis1wtql" path="res://boss/Attack/Boss Attack 4.png" id="4_vqg2d"]
@@ -71,10 +72,11 @@ animations = [{
 }]
 
 [node name="Boss" type="Node2D"]
+script = ExtResource("1_vvue2")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_3pvj5")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.939815
+frame_progress = 0.359552
