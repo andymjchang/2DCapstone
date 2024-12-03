@@ -20,7 +20,7 @@ enum MenuOptions {
 var jingle_played = false
 var current_option: int = 0
 var options_count: int = MenuOptions.size()
-var playerName: String = "Name:"
+var playerName: String = ""
 var playerEntry
 var focused = false
 func _ready() -> void:

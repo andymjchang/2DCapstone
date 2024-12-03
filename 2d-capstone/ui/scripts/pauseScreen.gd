@@ -73,7 +73,9 @@ func _onCheckpointButtonUp() -> void:
 	Globals.paused = false
 	Engine.time_scale = 1.0
 	var worldManager = get_tree().get_root().get_node("level")
-	worldManager.getNearestCheckpoint(worldManager.player1)
+	var closestPoint = worldManager.getNearestCheckpoint(worldManager.player1)
+	if closestPoint != null:
+		Globals.checkpoint = closestPoint.position
 	get_tree().reload_current_scene()
 
 func _onRestartButtonUp() -> void:
