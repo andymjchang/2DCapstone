@@ -485,7 +485,7 @@ func UpdateCombo(num):
 		combo = 0
 	# Update combo UI
 	$CanvasLayer/ComboLetter/Combo.text = "x" + str(combo)
-	$CanvasLayer/ComboLetter/AnimatedSprite2D.frame = min(4, int(combo / 10))
+	$CanvasLayer/ComboLetter/AnimatedSprite2D.frame = min(4, int(combo / 20))
 	$CanvasLayer/ComboLetter/ComboLetterTimer.start()
 	$CanvasLayer/ComboLetter/ColorRect.visible = true
 

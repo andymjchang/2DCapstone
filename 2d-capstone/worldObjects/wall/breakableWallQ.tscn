@@ -13,7 +13,6 @@
 [sub_resource type="GDScript" id="GDScript_kpawh"]
 script/source = "extends Node2D
 
-var particleEffect 
 var velocities = [Vector2.ZERO,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO]
 var wallBroken = false
 const FRICTION: float = 0.98
@@ -56,12 +55,8 @@ func _process(delta: float) -> void:
 			punching = player.attack.monitoring	
 	
 		if punching and Globals.inLevel:
-			#particleEffect.emitting = true
-			particleEffect = get_node(\"CPUParticles2D2\")
 			var wallSprite = get_node(\"Area2D/Sprite2D\")
 			#wallSprite.visible = false
-			#particleEffect.emitting = true
-			#particleEffect.visible = true
 			getRandomVelocity()
 			wallBroken = true
 			self.get_node(\"Area2D/Sprite2D\").visible = false
