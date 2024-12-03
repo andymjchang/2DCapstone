@@ -75,7 +75,7 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="Boss" type="CanvasLayer" node_paths=PackedStringArray("sprite", "glitch")]
+[node name="Boss" type="CanvasLayer" node_paths=PackedStringArray("sprite", "glitch") groups=["boss"]]
 script = ExtResource("1_vvue2")
 sprite = NodePath("Sprite")
 glitch = NodePath("Glitch")
