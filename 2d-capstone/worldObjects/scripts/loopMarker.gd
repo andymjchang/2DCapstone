@@ -26,7 +26,7 @@ func _onArea2dBodyEntered(body:Node2D) -> void:
 
 
 func _onRespawnAreaEntered(area:Node2D) -> void:
-	print("Detected item in group: ", area.get_parent().get_parent().get_groups())
+	#print("Detected item in group: ", area.get_parent().get_parent().get_groups())
 	if "enemies" in area.get_parent().get_parent().get_groups():
 		get_parent().emit_signal("recordEnemies", area.get_parent().get_parent())
 	elif "powerup" in area.get_parent().get_groups():
