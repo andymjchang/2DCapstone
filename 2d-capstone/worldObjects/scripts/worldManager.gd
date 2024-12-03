@@ -239,7 +239,9 @@ func loadLevel():
 	var instance
 	var instanceParent
 	var currentName = ""
-	for line in content.split("\n"):
+	var levelData = content.split("\n")
+	Globals.setBPM(int(levelData[0]))
+	for line in levelData.slice(1):
 		#print("Current line: ", line)
 		if line in instanceList.keys():
 			currentName = line
@@ -288,6 +290,18 @@ func loadLevel():
 				var endPos = Vector2(posPoints[2], posPoints[3])
 				instancedObj.get_node("LoopMarkerStart").global_position = startPos
 				instancedObj.get_node("LoopMarkerEnd").global_position = endPos
+				var loop1 = instancedObj.get_node("LoopMarkerStart").global_position
+				var loop2 = instancedObj.get_node("LoopMarkerEnd").global_position
+				print("Setting up collisions")
+				var loopPoint = (loop1 + loop2) / 2
+				instancedObj.get_node("LoopMarkerStart/Respawn").global_position = loopPoint
+				print("My pos: ", loopPoint)
+				var loopWidth = instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").get_shape().size.x
+				var loopHeight = instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").get_shape().size.y
+				var tgtLoopLen = (loop2 - loop1).length() #
+				print("Tgt length: ", tgtLoopLen)
+				instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").scale = Vector2((tgtLoopLen / loopWidth), 1.5)
+
 				
 			if currentName =="platformBlocks":
 				instancedObj.setTileMaps(posPoints.duplicate()) 
@@ -530,8 +544,9 @@ func _onResetLoop(startTime, destination, enemyPos, powerPos):
 	print("Destination to: ", destination.global_position)
 	print("Restarting to time: ", Globals.time)
 	player1.position = destination.global_position
-	camera.position = destination.global_position + player1.position
-	
+	camera.position = destination.global_position
+	camera.position.x += 250
+
 	var distance = abs(0.0 - player1.global_position.x)
 	musicTime = distance / Globals.pixelsPerFrame
 	Globals.time = musicTime
@@ -547,8 +562,6 @@ func _onResetLoop(startTime, destination, enemyPos, powerPos):
 		powerupList.add_child(instancedObj)
 	music.play(startTime)
 	actionIndicatorsList.load_array()
-	
-	pass
 
 func _onMovePlayer(location : Vector2):
 	#we have to move player based on new global loaction

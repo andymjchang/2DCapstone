@@ -136,6 +136,7 @@ var levelSaved = false
 
 
 func _ready():
+	Globals.inEditor = true
 	listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
 	Globals.customStart = false
 	Globals.levelEditorTime = 0.0
@@ -251,7 +252,9 @@ func loadLevel():
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
-	for line in content.split("\n"):
+	var loadContent = content.split("\n")
+	get_node("UI/TextEdit0").text = loadContent[0]
+	for line in loadContent.slice(1):
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			objectList = instanceList.get(line)[1]
@@ -344,7 +347,9 @@ func _onSlideWallButtonUp() -> void:
 	slideWallParent.blockType = blockTypes[12]
 	slideWallList.add_child(slideWallParent)
 	place_block(slideWallParent, slideWallList, camera.position, false)
+
 func _on_exit_button_pressed() -> void:
+	Globals.inEditor = false
 	# This will be the final functionality so players can navigate between menus
 	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 
@@ -502,6 +507,7 @@ func save_scene_to_file():
 			overwrite = false
 			# successful save
 			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
+			newFile.store_string(get_node("UI/TextEdit0").text + "\n")
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
 				if itemList.name !=  "placers" or itemList.name !=  "moveLines":

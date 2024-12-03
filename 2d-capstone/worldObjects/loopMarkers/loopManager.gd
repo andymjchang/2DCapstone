@@ -3,6 +3,8 @@ extends Node2D
 @onready var start = $LoopMarkerStart
 @onready var end = $LoopMarkerEnd
 
+enum {START, END}
+
 var startTime
 var enemiesToRespawn = []
 var powerupsToRespawn = []
@@ -21,7 +23,7 @@ signal recordEnemies(enemyPos)
 signal recordPowers(powerPos)
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _init():
 	recordData.connect(_onRecordData)
 	resetData.connect(_onResetData)
 	recordEnemies.connect(_onRecordEnemies)
