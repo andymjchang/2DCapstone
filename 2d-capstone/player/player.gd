@@ -232,7 +232,7 @@ func _physics_process(delta: float) -> void:
 		var currentY = camera.global_position.y
 		var yDifference = abs(targetY - currentY)
 		if yDifference > 200:  # Adjust this threshold as needed
-			camera.smooth_pan_to(targetY)
+			camera.smooth_pan_to(self.global_position.y + -50)
 	else:
 		invuln = true
 		

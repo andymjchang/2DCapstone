@@ -19,8 +19,8 @@ func _ready() -> void:
 	# fade out glitch and reduce shake
 	var glitch_tween = create_tween()
 	glitch_tween.set_parallel(true)  # Allow multiple properties to tween simultaneously
-	glitch_tween.tween_property(glitch, "modulate:a", 0.0, 5.0)
-	glitch_tween.tween_property(glitch.material, "shader_parameter/shake_rate", 0.0, 5.0)
+	glitch_tween.tween_property(glitch, "modulate:a", 0.0, 3.0)
+	glitch_tween.tween_property(glitch.material, "shader_parameter/shake_rate", 0.0, 3.0)
 	
 	# fade in sprite
 	var sprite_tween = create_tween()

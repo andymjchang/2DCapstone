@@ -5,10 +5,11 @@ enum LevelOptions {
 	LEVEL_1,
 	LEVEL_2,
 	LEVEL_3,
+	LEVEL_4,
 	CUSTOM
 }
 
-@export var vinyl_rotations: Array[float] = [30.0, 0.0, -30.0, -60.0, -90.0]  # Adjust these values as needed
+@export var vinyl_rotations: Array[float] = [30.0, 0.0, -30.0, -60.0, -90.0, -120.0]  # Adjust these values as needed
 @export var rotation_tween_duration: float = 0.15
 @export var slide_in_duration: float = 0.5
 @export var slide_offset: float = -1000
@@ -81,6 +82,9 @@ func select_current_option() -> void:
 			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 		LevelOptions.LEVEL_3:
 			Globals.curFile = "Level 3"
+			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+		LevelOptions.LEVEL_4:
+			Globals.curFile = "bossLevel"
 			Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 		LevelOptions.CUSTOM:
 			Globals.curFile = "CustomLevel"
