@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 var time: float = 0.0
 var initial_y: float
@@ -14,6 +14,7 @@ func _ready() -> void:
 	initial_y = $Sprite.position.y
 	
 	glitch.modulate.a = 1.0
+	glitch.visible = true
 	sprite.modulate.a = 0.0
 	
 	# fade out glitch and reduce shake

@@ -213,7 +213,10 @@ offset_bottom = 374.0
 visible = false
 
 [node name="Boss" parent="Camera2D" instance=ExtResource("39_2c01x")]
-position = Vector2(132, -43)
+offset_left = 132.0
+offset_top = -43.0
+offset_right = 132.0
+offset_bottom = -43.0
 
 [node name="objectList" type="Node2D" parent="."]
 

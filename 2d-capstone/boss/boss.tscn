@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b034ssesud1qa"]
+[gd_scene load_steps=21 format=3 uid="uid://b034ssesud1qa"]
 
 [ext_resource type="Texture2D" uid="uid://dou47ix4hwfk7" path="res://boss/Attack/Boss Attack 1.png" id="1_otrbs"]
 [ext_resource type="Script" path="res://boss/boss.gd" id="1_vvue2"]
@@ -16,6 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://c24c3l31c2ivr" path="res://boss/_UPDATED_ Idle/Boss Idle 4.png" id="13_7n3gx"]
 [ext_resource type="Texture2D" uid="uid://cejqucmv32g02" path="res://boss/_UPDATED_ Idle/Boss Idle 5.png" id="14_j8b66"]
 [ext_resource type="Material" uid="uid://bprabndekf50s" path="res://shaders/playerGlitch.tres" id="16_45am1"]
+[ext_resource type="Texture2D" uid="uid://b2sthekv0ytls" path="res://boss/bosshealthbar_outline.png" id="17_ujhmh"]
+[ext_resource type="Texture2D" uid="uid://ca35wbai2kk1m" path="res://boss/bosshealthbar_inside.png" id="18_ivqff"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="19_7mehh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3pvj5"]
 animations = [{
@@ -72,21 +75,41 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="Boss" type="Node2D" node_paths=PackedStringArray("sprite", "glitch")]
+[node name="Boss" type="CanvasLayer" node_paths=PackedStringArray("sprite", "glitch")]
 script = ExtResource("1_vvue2")
 sprite = NodePath("Sprite")
 glitch = NodePath("Glitch")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+position = Vector2(1286, 479)
 sprite_frames = SubResource("SpriteFrames_3pvj5")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.223081
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Sprite"]
+offset_left = -210.0
+offset_top = -238.0
+offset_right = 167.0
+offset_bottom = -175.0
+value = 100.0
+texture_under = ExtResource("17_ujhmh")
+texture_progress = ExtResource("18_ivqff")
+texture_progress_offset = Vector2(2, 3)
+
+[node name="Boss Name" type="Label" parent="Sprite"]
+offset_left = -210.0
+offset_top = -268.0
+offset_right = 195.0
+offset_bottom = -238.0
+theme = ExtResource("19_7mehh")
+theme_override_font_sizes/font_size = 24
+text = "Robot Overlord"
+
 [node name="Glitch" type="ColorRect" parent="."]
+visible = false
 material = ExtResource("16_45am1")
-offset_left = -103.0
-offset_top = -116.0
-offset_right = 95.0
-offset_bottom = 126.0
+offset_left = 1063.0
+offset_top = 287.0
+offset_right = 1472.0
+offset_bottom = 730.0
