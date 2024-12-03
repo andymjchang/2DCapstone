@@ -28,10 +28,9 @@ func _onArea2dBodyEntered(body:Node2D) -> void:
 
 		elif self.name == "LoopMarkerEnd":
 			print("at end")
-			var destination = get_parent().get_child(START)
+			var destination = get_parent().get_child(START).get_node("destination")
 			print("Got dest: ", destination)
 			get_parent().emit_signal("resetData", destination)
-			#get_tree().root.get_node("level").emit_signal("resetLoop", destination)
 
 
 func _onRespawnAreaEntered(area:Node2D) -> void:

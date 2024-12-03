@@ -7,6 +7,7 @@ var starting_index = 0
 func load_array():
 	await get_tree().process_frame
 	actionIndicatorArray = get_tree().get_nodes_in_group("actionIndicators")
+	print("Children: ", actionIndicatorArray)
 	for indicator in actionIndicatorArray:
 		indicator.initialize()
 	actionIndicatorArray.sort_custom(sortIndicators)
@@ -25,6 +26,8 @@ func _process(_delta: float) -> void:
 	var current_index = starting_index
 	while current_index < actionIndicatorArray.size():
 		var indicator = actionIndicatorArray[current_index]
+		if indicator == null:
+			break
 		current_index += 1
 		if Globals.time + 1.0 >= indicator.get_target_time():
 			#print("current time" + str(currentWorldScene.time))

@@ -525,8 +525,8 @@ func _onResetLoop(startTime, destination, enemyPos, powerPos):
 	print("Resetting loop")
 	print("Destination to: ", destination.global_position)
 	print("Restarting to time: ", Globals.time)
-	player1.position.x = destination.global_position.x
-	camera.position.x = destination.global_position.x + player1.position.x
+	player1.position = destination.global_position
+	camera.position = destination.global_position + player1.position
 	
 	var distance = abs(0.0 - player1.global_position.x)
 	musicTime = distance / Globals.pixelsPerFrame
