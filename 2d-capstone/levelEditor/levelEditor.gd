@@ -136,6 +136,7 @@ var levelSaved = false
 
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	Globals.inEditor = true
 	listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
 	Globals.customStart = false

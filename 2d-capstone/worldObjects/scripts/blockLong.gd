@@ -233,7 +233,7 @@ func placeWindows() -> void:
 func placeOneWindow(start, windowSet, length) -> void:
 	
 	var index = 0
-	print("placing one window")
+	#print("placing one window")
 	#print("window height:", windowHeight)
 	#print("window length:", length)
 	#print("window set: ", windowSet)

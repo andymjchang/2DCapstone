@@ -30,13 +30,20 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if !visible:
 		return
-	if event.is_action_pressed("jump"):
+	if event is InputEventMouseMotion:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	elif event is InputEventMouseMotion:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	elif event.is_action_pressed("jump"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		current_option = (current_option - 1 + options_count) % options_count
 		update_selection()
-	if event.is_action_pressed("slide"):
+	elif event.is_action_pressed("slide"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		current_option = (current_option + 1) % options_count
 		update_selection()
-	if event.is_action_pressed("ui_accept"):
+	elif event.is_action_pressed("ui_accept"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		select_current_option()
 
 func update_selection() -> void:
