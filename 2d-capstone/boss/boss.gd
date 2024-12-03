@@ -9,11 +9,14 @@ var horizontal_speed: float = 0.5      # How fast the horizontal movement is
 var random_offset: float = 0.0
 var random_timer: float = 0.0
 var initial_x: float
-
-var health: int = 200
+var health: int = 150
 
 @export var sprite : AnimatedSprite2D
 @export var glitch : ColorRect
+
+var attack_timer: float = 0.0
+var attack_interval: float = 3.0  # 
+var attack_chance: float = 0.3   
 
 func _ready() -> void:
 	$Sprite/TextureProgressBar.max_value = health
@@ -34,6 +37,8 @@ func _ready() -> void:
 	# fade in sprite
 	var sprite_tween = create_tween()
 	sprite_tween.tween_property(sprite, "modulate:a", 1.0, 5.0)
+	sprite.animation_finished.connect(_on_animation_finished)
+	sprite.play("idle")
 
 func _process(delta: float) -> void:
 	time += delta
@@ -56,6 +61,17 @@ func _process(delta: float) -> void:
 	
 	# Update sprite position
 	sprite.position = Vector2(new_x, new_y)
+	
+	# Handle attack animation
+	attack_timer += delta
+	if attack_timer >= attack_interval:
+		attack_timer = 0.0
+		if randf() < attack_chance and sprite.animation == "idle":
+			sprite.play("attack")
+
+func _on_animation_finished() -> void:
+	if sprite.animation == "attack":
+		sprite.play("idle")
 
 # Called when an enemy dies in boss level
 func enemy_died_in_boss_level() -> void:
