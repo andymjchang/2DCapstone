@@ -21,6 +21,10 @@ var current_option: int = 2
 var options_count: int = MenuOptions.size()
 
 func _ready() -> void:
+	if Globals.inEditor:
+		get_node("Vinyl/5/Level2").text = "Exit"
+	else:
+		get_node("Vinyl/5/Level2").text = "Menu"
 	update_selection()
 
 func _input(event: InputEvent) -> void:
@@ -77,7 +81,11 @@ func _onRestartButtonUp() -> void:
 
 func _onMainMenuButtonUp() -> void:
 	Globals.time = 0.0
-	Globals.FadeTransition("res://ui/landingPage.tscn")
+	if Globals.inEditor:
+		Globals.FadeTransition("res://levelEditor/levelEditor.tscn")
+	else:
+		Globals.FadeTransition("res://ui/landingPage.tscn")
+
 
 
 func _onOptionsButtonUp() -> void:

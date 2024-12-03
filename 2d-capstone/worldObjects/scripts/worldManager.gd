@@ -539,8 +539,9 @@ func _onResetLoop(startTime, destination, enemyPos, powerPos):
 	print("Destination to: ", destination.global_position)
 	print("Restarting to time: ", Globals.time)
 	player1.position = destination.global_position
-	camera.position = destination.global_position + player1.position
-	
+	camera.position = destination.global_position
+	camera.position.x += 250
+
 	var distance = abs(0.0 - player1.global_position.x)
 	musicTime = distance / Globals.pixelsPerFrame
 	Globals.time = musicTime
@@ -556,8 +557,6 @@ func _onResetLoop(startTime, destination, enemyPos, powerPos):
 		powerupList.add_child(instancedObj)
 	music.play(startTime)
 	actionIndicatorsList.load_array()
-	
-	pass
 
 func _onMovePlayer(location : Vector2):
 	#we have to move player based on new global loaction
