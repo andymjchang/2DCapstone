@@ -37,6 +37,15 @@ func _ready():
 		setWindowTiles()
 		id = 0
 		multiplier = 12.0
+	elif Globals.curFile.begins_with("bossLevel"):
+		$sprite2D/TileMapLayer.visible = false
+		$sprite2D/TileMapLayer2.visible = false
+		$sprite2D/TileMapLayer3.visible = true
+		tileMap = $sprite2D/TileMapLayer2
+		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
+		setWindowTiles()
+		id = 0
+		multiplier = 12.0
 	else:
 		$sprite2D/TileMapLayer.visible = true
 		$sprite2D/TileMapLayer2.visible = false
