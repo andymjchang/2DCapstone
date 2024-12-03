@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://djj8kajulhmho"]
+[gd_scene load_steps=5 format=3 uid="uid://djj8kajulhmho"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/coin.gd" id="1_av5nm"]
 [ext_resource type="Texture2D" uid="uid://c71efp8c6h8lo" path="res://worldObjects/assets/coin.png" id="1_jqsns"]
+[ext_resource type="Script" path="res://ui/scripts/pulseSprite.gd" id="3_ipgo3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6unt"]
 size = Vector2(65.5, 78.5)
@@ -9,9 +10,11 @@ size = Vector2(65.5, 78.5)
 [node name="Coin" type="Node2D"]
 script = ExtResource("1_av5nm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["pulsingObjects"]]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_jqsns")
+script = ExtResource("3_ipgo3")
+increasedScale = Vector2(0.325, 0.325)
 
 [node name="Area2D" type="Area2D" parent="."]
 
