@@ -1,17 +1,16 @@
 extends Node2D
-
 var count = 0
 var ifDead = false
 var secondTime = false
 var blockType = "enemy"
 var enemyType = "enemy"
-
+var isBossLevel = false
 @onready var enemyImage = preload("res://worldObjects/assets/singleBot.png") as Texture2D
 @onready var slideEnemyImage = preload("res://worldObjects/assets/slideEnemy.png") as Texture2D
 
 # Death animation
 var velocity = Vector2(0, 0)
-var move_speed = 600
+var move_speed = 600	
 var gravity = 2000
 var min_rotation = 30 * (PI / 180)
 var max_rotation = 45 * (PI / 180)
@@ -29,6 +28,7 @@ var punchesLeft = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	CheckForBoss()
 	# Check for platform below
 	var has_platform_below = check_platform_below()
 	
@@ -77,10 +77,14 @@ func DeathAnimation(delta: float) -> void:
 
 func GotHit():
 	self.ifDead = true
-	velocity.y = randi_range(-600, -500)
+	velocity.y = randf_range(-600, -500)
+	if isBossLevel:
+		velocity.y = randf_range(-500, -400)
+		velocity.x = move_speed
+		get_tree().get_nodes_in_group("boss")[0].enemy_died_in_boss_level()
 	activeSprite.rotation = randf_range(min_rotation, max_rotation)
 	death_timer = 0.0
-	initial_scale = activeSprite.scale  # Store the initial scale
+	initial_scale = activeSprite.scale
 	current_scale = initial_scale
 	activeSprite.isPulseActive = false
 	get_tree().current_scene.get_node("ScoreBar/TextureProgressBar").emit_signal("increaseScore")
@@ -110,3 +114,9 @@ func check_platform_below() -> bool:
 	query.collision_mask = 0b1  # Platform is on layer 1
 	var result = space_state.intersect_ray(query)
 	return result and result.collider.is_in_group("blocks")
+
+func CheckForBoss() -> void:
+	if Globals.curFile == "bossLevel":
+		isBossLevel = true
+		move_speed = 1200
+		gravity = 1200

@@ -4,14 +4,22 @@ var time: float = 0.0
 var initial_y: float
 var amplitude: float = 30.0  # How far up/down the boss moves
 var speed: float = 1.5      # How fast the boss moves
+var horizontal_amplitude: float = 30.0  # How far left/right the boss moves
+var horizontal_speed: float = 0.5      # How fast the horizontal movement is
 var random_offset: float = 0.0
 var random_timer: float = 0.0
+var initial_x: float
+
+var health: int = 200
 
 @export var sprite : AnimatedSprite2D
 @export var glitch : ColorRect
 
 func _ready() -> void:
+	$Sprite/TextureProgressBar.max_value = health
+	$Sprite/TextureProgressBar.value = health
 	initial_y = $Sprite.position.y
+	initial_x = $Sprite.position.x
 	
 	glitch.modulate.a = 1.0
 	glitch.visible = true
@@ -39,8 +47,33 @@ func _process(delta: float) -> void:
 	# Calculate new Y position using sine wave + random offset
 	var new_y = initial_y + (sin(time * speed) * amplitude) + random_offset
 	
-	# Clamp the position to prevent moving too far
+	# Calculate new X position using sine wave (slower and smaller movement)
+	var new_x = initial_x + (sin(time * horizontal_speed) * horizontal_amplitude)
+	
+	# Clamp the positions to prevent moving too far
 	new_y = clamp(new_y, initial_y - amplitude, initial_y + amplitude)
+	new_x = clamp(new_x, initial_x - horizontal_amplitude, initial_x + horizontal_amplitude)
 	
 	# Update sprite position
-	sprite.position.y = new_y
+	sprite.position = Vector2(new_x, new_y)
+
+# Called when an enemy dies in boss level
+func enemy_died_in_boss_level() -> void:
+	take_damage(1)
+	await get_tree().create_timer(0.4).timeout
+	
+	sprite.material.set_shader_parameter("damage_intensity", 0.5)
+	# sprite.scale = sprite.scale * 1.2
+	await get_tree().create_timer(0.25).timeout
+	sprite.material.set_shader_parameter("damage_intensity", 0.0)
+	# sprite.scale = Vector2(1, 1)
+
+func take_damage(amount: int) -> void:
+	health -= amount
+	var progress_bar = sprite.get_node("TextureProgressBar")
+	progress_bar.value = health
+	
+	if health <= 0:
+		var fade_out_tween = create_tween()
+		fade_out_tween.tween_property(sprite, "modulate:a", 0.0, 2.0)
+		await fade_out_tween.finished 

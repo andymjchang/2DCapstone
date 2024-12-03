@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://b034ssesud1qa"]
+[gd_scene load_steps=23 format=3 uid="uid://b034ssesud1qa"]
 
 [ext_resource type="Texture2D" uid="uid://dou47ix4hwfk7" path="res://boss/Attack/Boss Attack 1.png" id="1_otrbs"]
 [ext_resource type="Script" path="res://boss/boss.gd" id="1_vvue2"]
+[ext_resource type="Shader" path="res://shaders/immune.gdshader" id="2_y0hti"]
 [ext_resource type="Texture2D" uid="uid://dxq42l563vyfi" path="res://boss/Attack/Boss Attack 2.png" id="2_ywrif"]
 [ext_resource type="Texture2D" uid="uid://d1j6v63gr5hhc" path="res://boss/Attack/Boss Attack 3.png" id="3_6qa06"]
 [ext_resource type="Texture2D" uid="uid://b8irllis1wtql" path="res://boss/Attack/Boss Attack 4.png" id="4_vqg2d"]
@@ -19,6 +20,16 @@
 [ext_resource type="Texture2D" uid="uid://b2sthekv0ytls" path="res://boss/bosshealthbar_outline.png" id="17_ujhmh"]
 [ext_resource type="Texture2D" uid="uid://ca35wbai2kk1m" path="res://boss/bosshealthbar_inside.png" id="18_ivqff"]
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="19_7mehh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hwhn3"]
+shader = ExtResource("2_y0hti")
+shader_parameter/flash_speed = 2.0
+shader_parameter/damage_flash_speed = 20.0
+shader_parameter/rainbow_saturation = 0.8
+shader_parameter/rainbow_value = 1.0
+shader_parameter/invulnerable_intensity = 0.0
+shader_parameter/damage_intensity = 0.0
+shader_parameter/damage_color = Color(1, 0, 0, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3pvj5"]
 animations = [{
@@ -81,6 +92,7 @@ sprite = NodePath("Sprite")
 glitch = NodePath("Glitch")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_hwhn3")
 position = Vector2(1286, 479)
 sprite_frames = SubResource("SpriteFrames_3pvj5")
 animation = &"idle"
