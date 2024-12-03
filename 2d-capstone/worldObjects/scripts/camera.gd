@@ -15,10 +15,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Globals.inLevel:
 		position.x = position.x + Globals.pixelsPerFrame * delta * Globals.scrollSpeed
-		
-	# Smooth panning only affects Y position
-	if Globals.vertical or is_player_on_ground():
-		position.y = lerp(position.y, target_position.y, panning_speed * delta)  # Use global lerp function
+
+
+	position.y = lerp(position.y, target_position.y, panning_speed * delta)
 
 func moveCamera(newXPos) -> void:
 	#based on the x pos, shift the camera to where the characters are
@@ -34,7 +33,4 @@ func smooth_pan_to(new_y: float) -> void:
 	target_position.y = new_y  # Only set the Y position for panning
 
 func is_player_on_ground() -> bool:
-	# Implement this function to check if the player is on the ground
-	# You'll need to add logic to detect the player's state
-	# For now, we'll return a placeholder value
-	return true  # Replace with actual ground detection logic
+	return true

@@ -73,6 +73,8 @@ var shake_strength = 25.0
 var shake_decay = 5.0
 var shake_intensity = 0.0
 
+var originalCameraOffset = Vector2(250, -70)
+
 func _ready():
 	# Reset shader parameters
 	$Animation.material.set_shader_parameter("damage_intensity", 0.0)
@@ -109,7 +111,7 @@ func _ready():
 	
 	# Attach to glitch line
 	camera = worldNode.get_node("Camera2D")
-	camera.global_position = self.global_position + Vector2(250, -70)
+	camera.global_position = self.global_position + originalCameraOffset
 	var background = worldNode.get_node("Background")
 	background.global_position = camera.global_position
 
@@ -224,6 +226,12 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		if global_position.x > camera.global_position.x - 250:
 			global_position.x = camera.global_position.x - 244
+		
+		var targetY = global_position.y + originalCameraOffset.y
+		var currentY = camera.global_position.y
+		var yDifference = abs(targetY - currentY)
+		if yDifference > 200:  # Adjust this threshold as needed
+			camera.smooth_pan_to(targetY)
 	else:
 		invuln = true
 		
@@ -232,6 +240,14 @@ func _physics_process(delta: float) -> void:
 		var overlappingAreas = attack.get_overlapping_areas()
 		for area in overlappingAreas:
 			MonitorAttackHitbox(area)
+
+	# if not editing and not isSkipping:
+	# 	var targetY = global_position.y + originalCameraOffset.y
+	# 	var currentY = camera.global_position.y
+	# 	var yDifference = abs(targetY - currentY)
+		
+	# 	if yDifference > 100:  # Adjust this threshold as needed
+	# 		camera.smooth_pan_to(self.global_position.y + -50)
 
 func _onTakeDamage(amount):
 	$damagePlayer.play()
