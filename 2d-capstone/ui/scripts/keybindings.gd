@@ -6,6 +6,10 @@ extends Control
 @onready var punchEvents = InputMap.action_get_events("punch")
 @onready var escapeEvents = InputMap.action_get_events("escape")
 
+#sprites
+@onready var shortKey = preload("res://ui/assets/onboarding/keyBackgrounds/key_unpressed.png")
+@onready var longKey = preload("res://ui/assets/onboarding/keyBackgrounds/key_long_unpressed.png")
+
 @onready var currentKeyList = $currentKeys
 @onready var allCommands = { "jump": InputMap.action_get_events("jump"),
 "slide" : InputMap.action_get_events("slide"),
@@ -42,10 +46,12 @@ func sortLength(a : String, b : String ):
 		return false
 	return true
 
-func formatText(commands) -> String:
+func formatImage(commands) -> String:
 	var returnString = "" 
 	var keyboardArray = []
 	var controllerArray = []
+	var keyboardControls = true
+	#add in a check for whether or not we are doing controller
 	for command in commands:
 		#var keyName = OS.get_keycode_string(command.scancode)
 		var commandText = command.as_text()
@@ -53,21 +59,25 @@ func formatText(commands) -> String:
 		commandText = commandText.replace(" ", "")
 		commandText = commandText.replace("(", "")
 		commandText = commandText.replace(")", "")
-		if command.get_class() == "InputEventKey":
+		if command.get_class() == "InputEventKey" and keyboardControls:
 			keyboardArray.append(str(commandText))
-		elif command.get_class() == "InputEventJoypadMotion":
+		elif command.get_class() == "InputEventJoypadMotion" and !keyboardControls:
 			controllerArray.append(str(commandText))
-		else:
+		elif !keyboardControls:
 			controllerArray.append(str(commandText))
 	
 	#temp solution
 	keyboardArray.sort_custom(sortLength)
-	returnString += "Keyboard: "
-	for keyPress in keyboardArray:
-		returnString += keyPress + ", "
-	returnString += "\nController: "
-	for controllerPress in controllerArray	:
-		returnString += controllerPress + ", "
+	if keyboardControls:
+		for keyPress in keyboardArray:
+			returnString += keyPress
+		
+	#returnString += "Keyboard: "
+	#for keyPress in keyboardArray:
+		#returnString += keyPress + ", "
+	#returnString += "\nController: "
+	#for controllerPress in controllerArray	:
+		#returnString += controllerPress + ", "
 	return returnString
 
 func _onBackButtonUp() -> void:
@@ -99,7 +109,7 @@ func addCommand(event) -> bool:
 		if binding.as_text() == event.as_text():
 			return false
 			
-	#check to see if it exists in other places - if so delete
+	#check to see if it exists in other places - if so swap
 	for commandKey in nodePairs.keys():
 		var curCommandPair = nodePairs[commandKey]
 		var commandString = curCommandPair[1]
@@ -130,12 +140,23 @@ func setTextBoxes() -> void:
 	"punch" : InputMap.action_get_events("punch"),
 	}
 	
-	
 	#for button in $buttons.get_children():
 		#button.connect("button_up", _onKeyButtonUp.bind(button.name))
-	var curTextBox
+	var curSprite
 	for key in allCommands.keys():
-		curTextBox =  self.get_node("currentKeys/"+str(key)+"Current")
 		var rawText = allCommands[key]
+		print("text: ", formatImage(rawText))
 		#formatText(rawText)
-		curTextBox.text = formatText(rawText)
+		#curTextBox.text = formatText(rawText)
+		var imageText = formatImage(rawText)
+		
+		var lengthType = "Short" if imageText.length() < 3 else "Long"
+		var notLengthTpe = "Short" if lengthType == "Long" else "Long"
+		
+		curSprite =  self.get_node("currentKeys/"+str(key)+lengthType+"Current")
+		var notCurSprite = self.get_node("currentKeys/"+str(key)+notLengthTpe+"Current")
+		curSprite.visible = true
+		notCurSprite.visible = false
+		
+		curSprite.get_node("Label").text = imageText
+		

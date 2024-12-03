@@ -119,3 +119,15 @@ theme_override_font_sizes/font_size = 125
 text = "hi"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label" type="Label" parent="LongUnpressed/Label"]
+offset_left = -97.0
+offset_top = -99.0
+offset_right = 58.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_dsn1w")
+theme_override_font_sizes/font_size = 125
+text = "hi"
+horizontal_alignment = 1
+vertical_alignment = 1
