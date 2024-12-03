@@ -20,9 +20,9 @@ enum MenuOptions {
 var jingle_played = false
 var current_option: int = 0
 var options_count: int = MenuOptions.size()
-var playerName: String = "..."
+var playerName: String = "Name:"
 var playerEntry
-
+var focused = false
 func _ready() -> void:
 	self.updateScoreData.connect(_onUpdateScoreData)
 	$Leaderboard.position.x += slide_offset
@@ -30,7 +30,7 @@ func _ready() -> void:
 	update_selection()
 
 func _input(event: InputEvent) -> void:
-	if !visible:
+	if !visible or focused:
 		return
 	if event.is_action_pressed("jump"):
 		current_option = (current_option - 1 + options_count) % options_count
@@ -81,12 +81,8 @@ func _onUpdateScoreData() -> void:
 	$coinsLabel.text = str(Globals.coinsCollected)
 	$accuracyLabel.text = "%2.2f" % Globals.percentageHit + "%"
 
-	$Leaderboard/userScore.text = str(Globals.endScore)
+	$Leaderboard/userScore.text = "%05d" % Globals.endScore
 	playerEntry = Leaderboard.add_score(Globals.curFile, playerName, Globals.endScore)
-	if playerEntry != null:
-		print("Player made the leaderboard!")
-	else:
-		print("Player didn't make the leaderboard")
 	updateLeaderboard()
 	
 	# Create score animation tween
@@ -163,6 +159,17 @@ func leaderboard_slide_out() -> void:
 func _on_text_edit_text_changed() -> void:
 	playerName = $Leaderboard/TextEdit.text
 	if playerEntry != null:
-		print("Updating player name")
 		playerEntry.name = playerName
 		updateLeaderboard()
+
+
+func _on_text_edit_focus_entered() -> void:
+	focused = true
+
+func _on_text_edit_focus_exited() -> void:
+	focused = false
+
+
+func _on_save_button_button_down() -> void:
+	$Leaderboard/TextEdit.release_focus()
+	focused = false

@@ -550,11 +550,19 @@ theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 60
 text = "-----"
 
+[node name="SaveButton" type="Button" parent="Leaderboard"]
+offset_left = -222.0
+offset_top = -462.0
+offset_right = -22.0
+offset_bottom = -358.0
+theme = ExtResource("3_bdee6")
+text = "Save"
+
 [node name="TextEdit" type="TextEdit" parent="Leaderboard"]
-offset_left = -667.0
-offset_top = -468.0
-offset_right = -156.0
-offset_bottom = -364.0
+offset_left = -843.0
+offset_top = -462.0
+offset_right = -244.0
+offset_bottom = -358.0
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 48
 placeholder_text = "Name:"
@@ -596,4 +604,6 @@ position = Vector2(-16, -16)
 texture = ExtResource("7_vxoxn")
 flip_h = true
 
+[connection signal="button_down" from="Leaderboard/SaveButton" to="." method="_on_save_button_button_down"]
+[connection signal="focus_entered" from="Leaderboard/TextEdit" to="." method="_on_text_edit_focus_entered"]
 [connection signal="text_changed" from="Leaderboard/TextEdit" to="." method="_on_text_edit_text_changed"]
