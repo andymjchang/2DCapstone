@@ -125,7 +125,6 @@ increasedScale = Vector2(1, 1.5)
 position = Vector2(105, 136)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_du76p")
-frame = 3
 script = ExtResource("27_8vl6o")
 increasedScale = Vector2(0.88, 0.88)
 
