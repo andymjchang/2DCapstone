@@ -321,7 +321,7 @@ func MonitorAttackHitbox(area : Area2D):
 		punchConnected = true
 		Globals.screenFlashEffect()
 		other.FadeOut()
-		scored.emit(self.name, 100 - abs(other.global_position.x - global_position.x))
+		
 		
 
 func ResetAttack():
@@ -421,7 +421,7 @@ func _onDoubleJump():
 	velocity.y = JUMP_VELOCITY * 2.4
 
 func _onGetCoin():
-	print("Coin get")
+	scored.emit(self.name, 100)
 	sfxPlayer.stream = coinGrabSfx
 	sfxPlayer.stream.loop = false
 	sfxPlayer.play()
