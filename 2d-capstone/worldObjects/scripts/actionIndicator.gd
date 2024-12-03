@@ -26,7 +26,8 @@ func initialize():
 	set_target_time(time)
 
 func set_target_time(time: float) -> void:
-	target_time = time
+	if is_instance_valid(self):
+		target_time = time
 
 func get_target_time():
 	return target_time - animation_time

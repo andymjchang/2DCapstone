@@ -16,7 +16,7 @@ var trackingPosition : bool = false
 var defaultSpawnPosition = Vector2(450, 450)
 var timeHeld = 0.0
 var killFDict: Dictionary = {}
-var saveFileName 
+var saveFileName = null
 var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
@@ -28,13 +28,14 @@ var bindedBlocks = []
 var isBinding = false
 var turnOffSnap = false
 var massMove = false
+var editingFile = false
 
 var MIN_STEP : int = 25
 
 var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
-var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
-
+var NEED_PLAYER = "Unable to save.\nNeed 1 player."
+var UNABLE_TO_SAVE = "No file name found.\nEnter a name using\n the file button."
 
 @export var p1Placer : PackedScene
 @export var p2Placer : PackedScene
@@ -74,12 +75,7 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 							"platformType" : ["rustic", "city"],
 							"instructionType" : ["punch", "slide", "jump", "activate"],
 							"gameObjectType" : {"p1checkpoint" : checkpoint, "goalBlock": goalBlock, "powerup":powerup, "actionIndicator":actionIndicator, "killFloor":killFloor, "breakableWall": breakableWall, "zipline": zipline, "slideWall": slideWall, "jumpBoost": jumpBoost, "coin":coin, "skip":skip, "loop":loop} }
-					#0           1			2			3				4			5		
-#var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", 
-#	6			7					8				9			10			11			12			
-#"killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", 
-#13			 14				15		16		  17	  18		19		20
-#"jumpBoost", "coin", "keyBinding", "skip", "mash", "hold", "moveLine", "loop"]
+#var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "multiPunch"]
 @onready var typeMap = {blockTypes[1]: "gameObjectType",
 						blockTypes[2]: "platformType",
 						blockTypes[3]: "gameObjectType",
@@ -94,11 +90,9 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 						blockTypes[14]: "gameObjectType",
 						blockTypes[15]: "instructionType",
 						blockTypes[16]: "gameObjectType",
-						blockTypes[17]: "enemyObjectType",
-						blockTypes[18]: "enemyType",	
 						blockTypes[20]: "gameObjectType"}
 
-@onready var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList, "loop": loopList}
+var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
 
 
 @onready var objectList = $objectList
@@ -125,12 +119,15 @@ var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
 @onready var moveLineList = $objectList/moveLines
 @onready var loopList = $objectList/loops
 
+
+
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var measureLines = $measureLines
 @onready var camera = $Camera2D
 @onready var status = $StatusWindow
 @onready var levelTemplatePacked = preload("res://worlds/levelTemplate.tscn")
+@onready var currentFile = $UI/CurrentFile
 
 var bpm : int = 4
 var beatsMin : int = 120
@@ -139,12 +136,14 @@ var levelSaved = false
 
 
 func _ready():
-	listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList, "loop":loopList}
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Globals.inEditor = true
+	listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
 	Globals.customStart = false
 	Globals.levelEditorTime = 0.0
 	#set signals
 	self.objectClicked.connect(_onObjectClicked)
-	self.setMassMove.connect(_onSetMassMove)	
+	self.setMassMove.connect(_onSetMassMove)
 	measureLines.beatsPerMeasure = bpm
 	measureLines.stepSize = stepSize
 	if Globals.curFile == "":
@@ -163,58 +162,57 @@ func _process(delta: float) -> void:
 		#timeHeld += delta
 	updateTime(delta)
 	
-	if Input.is_action_just_pressed("tab"):
-		#we want to go through the list of objects for current block
-		#TODO add binded block functionality later
-		if !isBinding and currentBlock:
-			#grab the list of similiar types
-			#TODO add a check here to see if this is a valid grab
-			print("tabbing!")
-			var curTypeName = typeMap[currentBlock.blockType]
-			var curTypeList = typeArrays[curTypeName]
-			currentBlock.tabType(curTypeList, curTypeName, listMap)
-		elif isBinding:
-			print("is binding")
-	if Input.is_action_just_pressed("click"):
-		var mouseCoords = get_global_mouse_position()
-		#check to see if we have any objects within those bounds
-	if Input.is_action_just_pressed(delete) and currentBlock:
-		#get current click on block and delete it 
-		var blockList = getList(currentBlock.blockType)
-		for block in blockList.get_children():
-			if block.index == currentBlock.index:
-				#we have found our block, delete
-				currentBlock.queue_free()
-				currentBlock = null
-				break
-				
-		if !massMove:
-			for block in bindedBlocks:
-				block.queue_free()
-		else:
-			emit_signal("_onSetMassMove", null, false)
-	#TODO make sure that pressing l while typing in name doesnt mess anything up 
-	if Input.is_action_just_pressed("lengthenBlock") and currentBlock and currentBlock.blockType == "normal":
-		#extend platform block by one platform block
-		lengthenPlatform()
-	if Input.is_action_just_pressed("bindBlocks"):
-		if isBinding:
-			isBinding = false
-			bindedBlocks = []
-		else:
-			print("setting binding to true")
-			isBinding = true
-func _on_text_edit_0_text_changed() -> void:
+	if not editingFile:
+		if Input.is_action_just_pressed("tab"):
+			#we want to go through the list of objects for current block
+			#TODO add binded block functionality later
+			if !isBinding and currentBlock:
+				#grab the list of similiar types
+				#TODO add a check here to see if this is a valid grab
+				var curTypeName = typeMap[currentBlock.blockType]
+				var curTypeList = typeArrays[curTypeName]
+				currentBlock.tabType(curTypeList, curTypeName, listMap)
+		if Input.is_action_just_pressed("click"):
+			var mouseCoords = get_global_mouse_position()
+			#check to see if we have any objects within those bounds
+		if Input.is_action_just_pressed(delete) and currentBlock:
+			#get current click on block and delete it 
+			var blockList = getList(currentBlock.blockType)
+			for block in blockList.get_children():
+				if block.index == currentBlock.index:
+					#we have found our block, delete
+					currentBlock.queue_free()
+					currentBlock = null
+					break
+					
+			if !massMove:
+				for block in bindedBlocks:
+					block.queue_free()
+			else:
+				emit_signal("_onSetMassMove", null, false)
+		#TODO make sure that pressing l while typing in name doesnt mess anything up 
+		if Input.is_action_just_pressed("lengthenBlock") and currentBlock and currentBlock.blockType == "normal":
+			#extend platform block by one platform block
+			lengthenPlatform()
+		if Input.is_action_just_pressed("bindBlocks"):
+			if isBinding:
+				isBinding = false
+				bindedBlocks = []
+			else:
+				isBinding = true
+
+func _on_text_edit_0_text_changed(new_text) -> void:
 	if beatsMinLabel.text.is_valid_int():
 		beatsMin = int(beatsMinLabel.text)
 		Globals.setBPM(beatsMin)
-func _on_text_edit_text_changed() -> void:
+
+func _on_text_edit_text_changed(new_text) -> void:
 	if bpmLabel.text.is_valid_int():
 		bpm = int(bpmLabel.text)
 		measureLines.beatsPerMeasure = bpm
 		measureLines.queue_redraw()
 
-func _on_text_edit_2_text_changed() -> void:
+func _on_text_edit_2_text_changed(new_text) -> void:
 	if stepLabel.text.is_valid_int():
 		var step = int(stepLabel.text)
 		if (step < MIN_STEP):
@@ -226,12 +224,14 @@ func _on_text_edit_2_text_changed() -> void:
 func updateTime(delta: float):
 	Globals.levelEditorTime = Globals.levelEditorTime + delta
 
-	
-func loadLevel():
-	print("save file name, ", saveFileName)
+func clearLevel():
 	for objList in $objectList.get_children():
 		for child in objList.get_children():
 			child.queue_free()
+
+func loadLevel():
+	print("save file name, ", saveFileName)
+	clearLevel()
 
 	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlock, platformBlocksList, blockTypes[2]], 
@@ -255,7 +255,9 @@ func loadLevel():
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
-	for line in content.split("\n"):
+	var loadContent = content.split("\n")
+	get_node("UI/TextEdit0").text = loadContent[0]
+	for line in loadContent.slice(1):
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			objectList = instanceList.get(line)[1]
@@ -284,11 +286,16 @@ func loadLevel():
 			#do this if object has more than one component
 
 func _on_save_button_down() -> void:
-	save_scene_to_file()
+	if saveFileName:
+		save_scene_to_file()
+	else:
+		status.show()
+		displayStatus(UNABLE_TO_SAVE, false)
+
 	
 func _on_file_button_pressed() -> void:
+	editingFile = true
 	setFileLoad()
-	pass # Replace with function body.
 	
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
@@ -343,7 +350,9 @@ func _onSlideWallButtonUp() -> void:
 	slideWallParent.blockType = blockTypes[12]
 	slideWallList.add_child(slideWallParent)
 	place_block(slideWallParent, slideWallList, camera.position, false)
+
 func _on_exit_button_pressed() -> void:
+	Globals.inEditor = false
 	# This will be the final functionality so players can navigate between menus
 	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 
@@ -501,10 +510,11 @@ func save_scene_to_file():
 			overwrite = false
 			# successful save
 			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
+			newFile.store_string(get_node("UI/TextEdit0").text + "\n")
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
-				for item in itemList.get_children():
-					if itemList.name !=  "placers" and itemList.name !=  "moveLines":
+				if itemList.name !=  "placers" or itemList.name !=  "moveLines":
+					for item in itemList.get_children():
 						#go through each of the items children areas
 						var childrenList = item.get_child(0).get_children()
 						var index = 0
@@ -515,8 +525,6 @@ func save_scene_to_file():
 						for blockChild in childrenList:
 							#saving for platfrom block differs since their size varies#
 							#TODO I dont want to do this, delegate this work to the child class
-							if itemList.name == "placers":
-								print("we are saving a placer")
 							if itemList.name == "platformBlocks":
 								#save the number of cols as well as the extents so we know where to start drawing	
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", "
@@ -535,7 +543,7 @@ func save_scene_to_file():
 						posChain += "\n"
 						newFile.store_string(posChain)
 	else:
-		displayStatus(UNABLE_TO_SAVE, false)
+		displayStatus(NEED_PLAYER, false)
 		
 # Recursive function to set owner for all children
 func _set_owner_recursive(node: Node, root: Node):
@@ -609,7 +617,7 @@ func place_block(instance, parent, placePos, initial):
 	if massMove and currentBlock.blockType != blockTypes[19]:
 		emit_signal("setMassMove", null, false)
 		
-	_on_text_edit_2_text_changed()
+	_on_text_edit_2_text_changed(10)
 	reset_drag_tracking()
 
 func reset_drag_tracking():
@@ -679,7 +687,7 @@ func setTrackingPosition(setVal : bool) -> void:
 
 
 func _on_audio_progress_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and  event.pressed:
+	if event is InputEventMouseButton and event.pressed:
 		self.get_node("UI/objectSelector/audioProgress").isDragging=true
 
 
@@ -726,30 +734,39 @@ func _on_load_file_pressed() -> void:
 		saveFileName = tgtFile
 		loadLevel()
 		$UI/FileLoadMode.hide()
+		editingFile = false
 	else:
 		saveFileName = tgtFile
 		$UI/FileLoadMode.hide()
+		clearLevel()
+		editingFile = false
+	currentFile.text = "Now editing: " + tgtFile + ".dat"
 
 func _on_play_level_button_button_down() -> void:
-	overwrite = true
-	save_scene_to_file()
-	# var scene_instance = levelTemplatePacked.instantiate()
-	
-	get_tree().paused = false
-	
-	# Access the current scene and remove it from the scene tree
-	#var current_scene = get_tree().current_scene
-	#Globals.editorNode = current_scene
-	Globals.enablePreviewUI()
-	Globals.currentEditorFileName = saveFileName
-	Globals.curFile = saveFileName
-	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
-	#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
-	#current_scene.visible = false
+	if saveFileName:
+		save_scene_to_file()
+		overwrite = true
+		save_scene_to_file()
+		# var scene_instance = levelTemplatePacked.instantiate()
+		
+		get_tree().paused = false
+		
+		# Access the current scene and remove it from the scene tree
+		#var current_scene = get_tree().current_scene
+		#Globals.editorNode = current_scene
+		Globals.enablePreviewUI()
+		Globals.currentEditorFileName = saveFileName
+		Globals.curFile = saveFileName
+		get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+		#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+		#current_scene.visible = false
 
-	# Add the new scene to the scene tree and set it as the current scene
-	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
-	#get_tree().current_scene = scene_instance  # Set it as the new current scene
+		# Add the new scene to the scene tree and set it as the current scene
+		#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
+		#get_tree().current_scene = scene_instance  # Set it as the new current scene
+	else:
+		status.show()
+		displayStatus(UNABLE_TO_SAVE, false)
 
 func lengthenPlatform() -> void:
 	#this isnt modular but it will work for now TODO

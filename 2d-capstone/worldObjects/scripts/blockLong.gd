@@ -84,7 +84,7 @@ func extendByOneTile() -> void :
 	#now we need to add in the blank two spaces we have created
 	
 	#we want to get a random index into our filler array
-	print("filler tile size: ", fillerTiles.size())
+	#print("filler tile size: ", fillerTiles.size())
 	var randIndex = int(randf_range(0,fillerTiles.size()))
 	var tiles = fillerTiles[randIndex]
 	
@@ -123,7 +123,7 @@ func decreaseByOneTile() -> void:
 			var curX = endX - (i + capLength)
 			moveY = startY
 			for j in range(startY,endY+1):
-				print("deleting coords: ",curX," , ", moveY)
+				#print("deleting coords: ",curX," , ", moveY)
 				tileMap.erase_cell(Vector2i(curX, moveY))
 				moveY+=1
 
@@ -161,7 +161,7 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 	return [minCoords, maxCoords]
 	
 func setTileMaps(posPoints : Array):
-	print("setting tile maps")
+	#print("setting tile maps")
 	if posPoints.size() >= 3:
 		#if posPoints[2] == 12:
 			#posPoints[2]=20
@@ -206,7 +206,7 @@ func setFillerTiles() -> void:
 			coordPair = [curCoords,curNextCoords]
 			oneLane.append(coordPair)
 		fillerTiles.append(oneLane)
-		print("added block")
+		#print("added block")
 	
 func placeWindows() -> void:
 	#we want to get a random window style
@@ -242,7 +242,7 @@ func placeWindows() -> void:
 func placeOneWindow(start, windowSet, length) -> void:
 	
 	var index = 0
-	print("placing one window")
+	#print("placing one window")
 	#print("window height:", windowHeight)
 	#print("window length:", length)
 	#print("window set: ", windowSet)

@@ -5,6 +5,7 @@ const beatSize : float = 150
 
 var time : float = 0;
 var levelEditorTime = 0.0
+var inEditor = false
 var inLevel = false
 var vertical = false
 var resetCamera = false

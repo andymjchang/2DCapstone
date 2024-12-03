@@ -1,59 +1,9 @@
 platformBlocks
-0, 625, 12, <null>, <null>,
-175, 625, 12, <null>, <null>,
-312, 625, 12, <null>, <null>,
-468, 625, 12, <null>, <null>,
-624, 625, 12, <null>, <null>,
-750, 625, 12, <null>, <null>,
-906, 625, 12, <null>, <null>,
-1062, 625, 12, <null>, <null>,
-1218, 625, 12, <null>, <null>,
-1375, 625, 12, <null>, <null>,
-1531, 625, 12, <null>, <null>,
-1687, 625, 12, <null>, <null>,
-1843, 625, 12, <null>, <null>,
-1999, 625, 12, <null>, <null>,
-2155, 625, 12, <null>, <null>,
-2311, 625, 12, <null>, <null>,
-2467, 625, 12, <null>, <null>,
-2623, 625, 12, <null>, <null>,
-2779, 625, 12, <null>, <null>,
-2935, 625, 12, <null>, <null>,
-3091, 625, 12, <null>, <null>,
-3225, 625, 12, <null>, <null>,
-3381, 625, 12, <null>, <null>,
-3537, 625, 12, <null>, <null>,
-3693, 625, 12, <null>, <null>,
-3849, 625, 12, <null>, <null>,
-4005, 625, 12, <null>, <null>,
-4150, 625, 12, <null>, <null>,
-4306, 625, 12, <null>, <null>,
-4462, 625, 12, <null>, <null>,
-4618, 625, 12, <null>, <null>,
-4774, 625, 12, <null>, <null>,
-4930, 625, 12, <null>, <null>,
-5086, 625, 12, <null>, <null>,
-5242, 625, 12, <null>, <null>,
-5398, 625, 12, <null>, <null>,
-5554, 625, 12, <null>, <null>,
-5710, 625, 12, <null>, <null>,
-5866, 625, 12, <null>, <null>,
-6022, 625, 12, <null>, <null>,
-6178, 625, 12, <null>, <null>,
 actionIndicators
 playerCheckpoints
 player
 0, 540,
 enemies
-2675, 550, enemy,
-150, 575, enemy,
-225, 575, enemy,
-300, 575, enemy,
-400, 575, enemy,
-450, 575, enemy,
-525, 575, enemy,
-625, 575, enemy,
-700, 575, enemy,
 killFloors
 goalBlocks
 breakableWalls
@@ -61,12 +11,10 @@ ziplines
 placers
 slideWalls
 powerups
-1050, 550,
 jumpBoosts
 coins
 keyBindings
-300, 300, punch,
 skips
-875, 550,
-2150, 525,
-4775, 500,
+mashes
+holds
+moveLines

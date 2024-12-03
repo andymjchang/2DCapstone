@@ -21,18 +21,29 @@ var current_option: int = 2
 var options_count: int = MenuOptions.size()
 
 func _ready() -> void:
+	if Globals.inEditor:
+		get_node("Vinyl/5/Level2").text = "Exit"
+	else:
+		get_node("Vinyl/5/Level2").text = "Menu"
 	update_selection()
 
 func _input(event: InputEvent) -> void:
 	if !visible:
 		return
-	if event.is_action_pressed("jump"):
+	if event is InputEventMouseMotion:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	elif event is InputEventMouseMotion:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	elif event.is_action_pressed("jump"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		current_option = (current_option - 1 + options_count) % options_count
 		update_selection()
-	if event.is_action_pressed("slide"):
+	elif event.is_action_pressed("slide"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		current_option = (current_option + 1) % options_count
 		update_selection()
-	if event.is_action_pressed("ui_accept"):
+	elif event.is_action_pressed("ui_accept"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		select_current_option()
 
 func update_selection() -> void:
@@ -77,7 +88,11 @@ func _onRestartButtonUp() -> void:
 
 func _onMainMenuButtonUp() -> void:
 	Globals.time = 0.0
-	Globals.FadeTransition("res://ui/landingPage.tscn")
+	if Globals.inEditor:
+		Globals.FadeTransition("res://levelEditor/levelEditor.tscn")
+	else:
+		Globals.FadeTransition("res://ui/landingPage.tscn")
+
 
 
 func _onOptionsButtonUp() -> void:

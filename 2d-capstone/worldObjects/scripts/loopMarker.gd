@@ -4,14 +4,6 @@ var distBetween = Vector2.ZERO
 var firstPass = true
 enum {START, END}
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	if self.name == "LoopMarkerStart":
-		var midpoint = (get_parent().get_child(END).position - self.position) / 2
-		get_node("Respawn").position = midpoint
-		var width = get_node("Respawn/CollisionShape2D").shape.extents.x
-		get_node("Respawn/CollisionShape2D").scale.x = midpoint.x / width
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -28,14 +20,13 @@ func _onArea2dBodyEntered(body:Node2D) -> void:
 
 		elif self.name == "LoopMarkerEnd":
 			print("at end")
-			var destination = get_parent().get_child(START)
+			var destination = get_parent().get_child(START).get_node("destination")
 			print("Got dest: ", destination)
 			get_parent().emit_signal("resetData", destination)
-			#get_tree().root.get_node("level").emit_signal("resetLoop", destination)
 
 
 func _onRespawnAreaEntered(area:Node2D) -> void:
-	print("Detected item in group: ", area.get_parent().get_parent().get_groups())
+	#print("Detected item in group: ", area.get_parent().get_parent().get_groups())
 	if "enemies" in area.get_parent().get_parent().get_groups():
 		get_parent().emit_signal("recordEnemies", area.get_parent().get_parent())
 	elif "powerup" in area.get_parent().get_groups():
