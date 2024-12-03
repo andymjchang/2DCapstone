@@ -34,6 +34,7 @@ func _ready():
 	#meaning that we have 8 middle pieces, meaning that we cant go less than a total of 4 cols
 	if Globals.curFile.begins_with("Level 3"):
 		$sprite2D/TileMapLayer.visible = false
+		$sprite2D/TileMapLayer3.visible = false
 		$sprite2D/TileMapLayer2.visible = true
 		tileMap = $sprite2D/TileMapLayer2
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
@@ -43,8 +44,21 @@ func _ready():
 		minCols = 6
 		numCols = 20
 		capLength = 3
+	elif Globals.curFile.begins_with("Custom"):
+		$sprite2D/TileMapLayer.visible = false
+		$sprite2D/TileMapLayer2.visible = false
+		$sprite2D/TileMapLayer3.visible = true
+		tileMap = $sprite2D/TileMapLayer3
+		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
+		setWindowTiles()
+		id = 2
+		multiplier = 20.0
+		minCols = 6
+		numCols = 20
+		capLength = 3
 	else:
 		$sprite2D/TileMapLayer.visible = true
+		$sprite2D/TileMapLayer3.visible = false
 		$sprite2D/TileMapLayer2.visible = false
 		tileMap = $sprite2D/TileMapLayer
 		allTiles = [startTiles, fillerTiles, endTiles]
