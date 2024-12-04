@@ -183,10 +183,12 @@ func addCommand(event) -> bool:
 		#	print("binding: ", binding.as_text(), " event: ", event.as_text())
 			var bindingText = binding.as_text()
 			bindingText = bindingText.replace("Physical", "")
-			bindingText = bindingText.replace(" ", "")
-			bindingText = bindingText.replace("(", "")
-			bindingText = bindingText.replace(")", "")
-			if bindingText == event.as_text():
+			if !Globals.usingController:
+				bindingText = bindingText.replace(" ", "")
+				bindingText = bindingText.replace("(", "")
+				bindingText = bindingText.replace(")", "")
+			print("binding text: ", bindingText, " event text: ",event.as_text())
+			if bindingText == event.as_text() and !Globals.usingController:
 				#we have find the same command in another action, swap them
 				InputMap.action_erase_event(commandString, event)
 				#InputMap.action
@@ -195,10 +197,25 @@ func addCommand(event) -> bool:
 				print("command string: ", commandString,allCommands[curCommand])
 				setTextBoxes()
 				break
-	
+			elif event.as_text() in bindingText and Globals.usingController:
+				print("we are swapping controller")
+				
+				print("we are erasing commandString: ", commandString, " event: ",event)
+				InputMap.action_erase_event(commandString, event)
+				#InputMap.action
+				#we need to get the one command in the one we are swapping from
+				if allCommands[curCommand].size() > 1 and Globals.usingController:
+					InputMap.action_add_event(commandString,allCommands[curCommand][1])
+				else:
+					InputMap.action_add_event(commandString,allCommands[curCommand][0])
+				print("command string: ", commandString,allCommands[curCommand])
+				setTextBoxes()
+				break
+			
 	#now we are free to add the command in to where we want to 
 	
 	for command in allCommands[curCommand]:
+		print("we are erasing curCommand: ", curCommand, " command: ",command)
 		InputMap.action_erase_event(curCommand,command)
 		
 	InputMap.action_add_event(curCommand, event)
