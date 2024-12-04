@@ -104,7 +104,7 @@ func _ready():
 	if levelFile.begins_with("Tutorial_Level3"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Tutorial_Revamped_155bpm.mp3"
-		backgroundName = "Lvl3"
+		backgroundName = "Lvl2Tutorial"
 	if levelFile.begins_with("Level 3"):
 		Globals.setBPM(156)
 		Globals.currentSongFileName = "Level2_OGNoMelody_156bpm_1.mp3"
@@ -503,7 +503,7 @@ func UpdateCombo(num):
 		combo = 0
 	# Update combo UI
 	$CanvasLayer/ComboLetter/Combo.text = "x" + str(combo)
-	$CanvasLayer/ComboLetter/AnimatedSprite2D.frame = min(4, int(combo / 20))
+	$CanvasLayer/ComboLetter/AnimatedSprite2D.frame = min(4, int(combo / 25))
 	$CanvasLayer/ComboLetter/ComboLetterTimer.start()
 	$CanvasLayer/ComboLetter/ColorRect.visible = true
 
