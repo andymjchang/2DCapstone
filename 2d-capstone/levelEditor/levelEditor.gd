@@ -118,7 +118,7 @@ var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsLis
 @onready var holdList = $objectList/holds
 @onready var moveLineList = $objectList/moveLines
 @onready var loopList = $objectList/loops
-
+@onready var onboarding = $Onboarding
 
 
 @onready var bpmLabel = $UI/TextEdit
@@ -837,3 +837,5 @@ func getAreaChildren(coords, coordType) -> Array:
 		returnArray.append(currentBlock)
 	return returnArray
 		
+func _on_help_button_pressed():
+	onboarding.show()

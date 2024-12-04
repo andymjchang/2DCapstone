@@ -32,8 +32,6 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseMotion:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	elif event is InputEventMouseMotion:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	elif event.is_action_pressed("jump"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		current_option = (current_option - 1 + options_count) % options_count

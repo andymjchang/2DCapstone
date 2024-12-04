@@ -198,6 +198,10 @@ texture_normal = ExtResource("46_nsemu")
 layout_mode = 2
 texture_normal = ExtResource("37_frurs")
 
+[node name="keybindButton" type="TextureButton" parent="UI/FileButtons"]
+layout_mode = 2
+texture_normal = ExtResource("17_3udhx")
+
 [node name="exitButton" type="TextureButton" parent="UI/FileButtons"]
 layout_mode = 2
 texture_normal = ExtResource("7_esiun")
@@ -672,9 +676,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -500.0
-offset_top = -324.5
+offset_top = -331.5
 offset_right = 500.0
-offset_bottom = 324.5
+offset_bottom = 317.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -689,10 +693,20 @@ horizontal_alignment = 1
 autowrap_mode = 2
 clip_text = true
 
-[node name="Button" type="Button" parent="Onboarding/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Onboarding/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Button" type="Button" parent="Onboarding/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "Continue"
+text = "Next"
+
+[node name="Button2" type="Button" parent="Onboarding/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Exit"
 
 [connection signal="button_down" from="UI/FileButtons/playLevelButton" to="." method="_on_play_level_button_button_down"]
 [connection signal="mouse_entered" from="UI/FileButtons/playLevelButton" to="UI" method="_on_play_level_button_mouse_entered"]
@@ -705,6 +719,9 @@ text = "Continue"
 [connection signal="pressed" from="UI/FileButtons/fileButton" to="." method="_on_file_button_pressed"]
 [connection signal="mouse_entered" from="UI/FileButtons/helpButton" to="UI" method="_on_help_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/FileButtons/helpButton" to="UI" method="_on_button_exited"]
+[connection signal="pressed" from="UI/FileButtons/helpButton" to="." method="_on_help_button_pressed"]
+[connection signal="mouse_entered" from="UI/FileButtons/keybindButton" to="UI" method="_on_keybind_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FileButtons/keybindButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/FileButtons/exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="text_changed" from="UI/TextEdit0" to="." method="_on_text_edit_0_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]
@@ -782,4 +799,5 @@ text = "Continue"
 [connection signal="pressed" from="UI/FileLoadMode/Load" to="." method="_on_load_file_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="StatusWindow/Buttons/No" to="." method="_on_no_pressed"]
-[connection signal="pressed" from="Onboarding/VBoxContainer/Button" to="Onboarding" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="Onboarding/VBoxContainer/HBoxContainer/Button" to="Onboarding" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="Onboarding/VBoxContainer/HBoxContainer/Button2" to="Onboarding" method="_on_exit_button_pressed"]
