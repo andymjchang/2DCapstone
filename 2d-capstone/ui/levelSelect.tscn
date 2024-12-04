@@ -134,22 +134,25 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Album" type="Sprite2D" parent="."]
-position = Vector2(525.5, 540)
+position = Vector2(523.5, 540)
 texture = ExtResource("3_aoh1x")
 
 [node name="Level1" type="Node2D" parent="Album"]
+position = Vector2(2, 0)
 
 [node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level1"]
 position = Vector2(42, 0)
 scale = Vector2(1.18854, 1.18854)
 
 [node name="Level2" type="Node2D" parent="Album"]
+position = Vector2(2, 0)
 
 [node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level2"]
 position = Vector2(42, 0)
 scale = Vector2(1.18, 1.18)
 
 [node name="Level3" type="Node2D" parent="Album"]
+position = Vector2(2, 0)
 
 [node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level3"]
 position = Vector2(42, 0)
