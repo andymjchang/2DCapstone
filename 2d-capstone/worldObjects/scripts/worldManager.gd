@@ -513,6 +513,7 @@ func UpdateAccuracy(scoreToAdd):
 	accuracyEnemiesHit += scoreToAdd
 	accuracy = accuracyEnemiesHit / numEnemiesHit
 	$CanvasLayer/ComboLetter/Accuracy.text = "%2.1f" % accuracy + "%"
+	Globals.percentageHit = accuracy
 func _onChangeSpeed(speedType):
 	if speedType == 2:
 		music.pitch_scale = 2.5
