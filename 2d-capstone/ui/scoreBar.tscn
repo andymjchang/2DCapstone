@@ -1,16 +1,16 @@
 [gd_scene load_steps=13 format=3 uid="uid://25td4r2m7r1e"]
 
-[ext_resource type="Texture2D" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_UNDER.png" id="1_3jway"]
 [ext_resource type="Texture2D" uid="uid://c06srwf6fnu0n" path="res://ui/assets/comboMeters/Landfill/2_UNDER.png" id="2_k7yr2"]
-[ext_resource type="Texture2D" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_OVER.png" id="2_of54a"]
 [ext_resource type="Script" path="res://ui/scripts/textureScoreProgress_bar.gd" id="3_3u3ml"]
 [ext_resource type="Texture2D" uid="uid://n8xjdbwsv10e" path="res://ui/assets/comboMeters/Landfill/2_OVER.png" id="3_ras0b"]
-[ext_resource type="Texture2D" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_PROGRESS.png" id="3_x6cf0"]
 [ext_resource type="Texture2D" uid="uid://n7pus3sowj4e" path="res://ui/assets/comboMeters/Landfill/2_PROGRESS.png" id="4_irbtt"]
+[ext_resource type="Texture2D" uid="uid://c42ol3awgox5q" path="res://ui/assets/comboMeters/Fallen City/1_UNDER.png" id="5_bwjvk"]
 [ext_resource type="Script" path="res://ui/scripts/pulseRect.gd" id="5_psxq1"]
 [ext_resource type="Texture2D" uid="uid://dxhfd6qve8rn1" path="res://ui/assets/comboMeters/Robot City/3_UNDER.png" id="5_rg2ub"]
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="5_t7bsv"]
+[ext_resource type="Texture2D" uid="uid://c2fi8iksdgu42" path="res://ui/assets/comboMeters/Fallen City/1_OVER.png" id="6_d7ndx"]
 [ext_resource type="Texture2D" uid="uid://wlqrct8fr1oh" path="res://ui/assets/comboMeters/Robot City/3_OVER.png" id="6_qjy3c"]
+[ext_resource type="Texture2D" uid="uid://4lvp2j760hcg" path="res://ui/assets/comboMeters/Fallen City/1_PROGRESS.png" id="7_hidwu"]
 [ext_resource type="Texture2D" uid="uid://bcfhy42117185" path="res://ui/assets/comboMeters/Robot City/3_PROGRESS.png" id="7_rhw4q"]
 
 [node name="ScoreBar" type="CanvasLayer"]
@@ -64,9 +64,9 @@ pivot_offset = Vector2(258, 0)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 value = 80.0
-texture_under = ExtResource("1_3jway")
-texture_over = ExtResource("2_of54a")
-texture_progress = ExtResource("3_x6cf0")
+texture_under = ExtResource("5_bwjvk")
+texture_over = ExtResource("6_d7ndx")
+texture_progress = ExtResource("7_hidwu")
 texture_progress_offset = Vector2(160, 55)
 
 [node name="Level3" type="TextureProgressBar" parent="TextureProgressBar"]
