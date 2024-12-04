@@ -113,7 +113,6 @@ visible = false
 position = Vector2(2, -15)
 scale = Vector2(0.12, 0.12)
 sprite_frames = SubResource("SpriteFrames_l3chy")
-animation = &"slideEnemy"
 autoplay = "default"
 script = ExtResource("5_4of7g")
 timingScale = 2

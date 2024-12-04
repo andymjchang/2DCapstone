@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://b67hvy2k11iou"]
+
+[ext_resource type="Script" path="res://worldObjects/enemy/holdEnemy.gd" id="1_7y66u"]
+[ext_resource type="Texture2D" uid="uid://4xxt7v22xvf1" path="res://worldObjects/assets/slideEnemyMiddle.png" id="2_gx76n"]
+[ext_resource type="Script" path="res://ui/scripts/pulseSprite.gd" id="3_e64wo"]
+[ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_lp128"]
+[ext_resource type="Texture2D" uid="uid://xx3s3fxus25v" path="res://worldObjects/assets/slideEnemyHead.png" id="3_o2nwa"]
+[ext_resource type="Texture2D" uid="uid://c25y8iikxiyeo" path="res://worldObjects/assets/slideEnemyEnd.png" id="4_stwwc"]
+
+[node name="holdEnemy" type="Node2D" groups=["enemies"]]
+script = ExtResource("1_7y66u")
+
+[node name="Segments" type="Node2D" parent="."]
+position = Vector2(300, 0)
+
+[node name="SlideEnemyMiddle" type="Sprite2D" parent="Segments"]
+visible = false
+position = Vector2(-262.5, 0)
+scale = Vector2(0.125, 0.13)
+texture = ExtResource("2_gx76n")
+
+[node name="SlideEnemyHead" type="Node2D" parent="."]
+
+[node name="Head" type="Sprite2D" parent="SlideEnemyHead" groups=["pulsingObjects"]]
+position = Vector2(-3, 0)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_o2nwa")
+script = ExtResource("3_e64wo")
+increasedScale = Vector2(0.12, 0.12)
+
+[node name="SlideEnemyEnd" type="Node2D" parent="."]
+position = Vector2(750, 0)
+
+[node name="Tail" type="Sprite2D" parent="SlideEnemyEnd" groups=["pulsingObjects"]]
+position = Vector2(-19, 0)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_stwwc")
+script = ExtResource("3_e64wo")
+increasedScale = Vector2(0.12, 0.12)
+
+[node name="ActionIndicator" parent="." instance=ExtResource("3_lp128")]
