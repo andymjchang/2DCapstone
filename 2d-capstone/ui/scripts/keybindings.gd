@@ -35,7 +35,7 @@ var yController = preload("res://ui/assets/onboarding/keys/y_xbox.png")
 var controllerArray = ["Joypad Button 0", "Joypad Button 1", "Joypad Button 2", "Joypad Button 3", "Joypad Button 4", "Joypad Button 5", "Joypad Button 6", "Joypad Button 7", "Joypad Button 8",  "Joypad Button 9", "Joypad Button 0", "Joypad Button 10", "Joypad Button 12", "Joypad Button 13", "Joypad Button 14", "Joypad Button 15", "Joypad Button 16", "Joypad Button 17", "Joypad Button 18",  "Joypad Button 19"  , "Joypad Button 20", "Joypad Button 21", "Joypad Button 22",  "Joypad Button 23"  ]
 @onready var controllerMap = {controllerArray[0]: aController,
 							controllerArray[1]: bController,
-							controllerArray[2]: xController,
+							controllerArray[2]: LSController,
 							controllerArray[3]: yController,
 							controllerArray[4]: LBController,
 							controllerArray[5]: RBController,
@@ -96,7 +96,8 @@ func _process(delta: float) -> void:
 	pass
 
 func controllerNavigate(val):
-	pass
+	if val:
+		$buttons/jumpKey.grab_focus()
 	
 func sortLength(a : String, b : String ):
 	if a.length() < b.length():
@@ -120,7 +121,7 @@ func formatImage(commands) -> String:
 			keyboardArray.append(str(commandText))
 		elif command.get_class() == "InputEventJoypadMotion":
 			contArray.append(str(command.as_text()))
-		else:
+		elif command.get_class() != "InputEventKey":
 			contArray.append(str(command.as_text()))
 	
 	#temp solution
@@ -129,7 +130,7 @@ func formatImage(commands) -> String:
 		for keyPress in keyboardArray:
 			returnString += keyPress
 	elif Globals.usingController:
-		for controllerPress in contArray	:
+		for controllerPress in contArray:
 			returnString += controllerPress
 	return returnString
 
@@ -145,8 +146,10 @@ func _onKeyButtonUp(name) -> void:
 	
 func _input(event):
 	if event is InputEventKey and buttonResetting:
+		print("EVENT BEING PRESSED: ",event.as_text())
 		addCommand(event)
 	if event is InputEventJoypadButton and buttonResetting:
+		print("EVENT BEING PRESSED: ",event.as_text())
 		addCommand(event)
 		
 
@@ -227,8 +230,8 @@ func setTextBoxes() -> void:
 			
 			var eventText = imageText
 			for control in controllerArray:
-				print("control: ", control, " event text:", eventText)
 				if control in (imageText):
+					print("control: ", control, " event text:", eventText)
 					var newImage = controllerMap[control]
 					print("new Image: ", newImage)
 					curSprite.texture = newImage
