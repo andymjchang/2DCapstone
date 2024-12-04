@@ -65,6 +65,7 @@ func update_selection() -> void:
 	$Album/Level1.visible = false
 	$Album/Level2.visible = false
 	$Album/Level3.visible = false
+	$Album/Level4.visible = false
 	# You can add visual feedback for the current selection here
 	match current_option:
 		LevelOptions.LEVEL_1:
