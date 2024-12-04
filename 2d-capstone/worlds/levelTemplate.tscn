@@ -24,9 +24,9 @@
 [ext_resource type="PackedScene" uid="uid://c8pkmhakx7lqg" path="res://worldObjects/keyBinding.tscn" id="16_5ehlb"]
 [ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worlds/scorePopup.tscn" id="16_kbija"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
-[ext_resource type="PackedScene" path="res://worldObjects/skip.tscn" id="17_hifbs"]
+[ext_resource type="PackedScene" uid="uid://t86xp6tpjvdg" path="res://worldObjects/skip.tscn" id="17_hifbs"]
 [ext_resource type="AudioStream" uid="uid://cwunsxkx78vcj" path="res://audioTracks/Tutorial_New_155bpm.mp3" id="18_44qgl"]
-[ext_resource type="PackedScene" path="res://worldObjects/enemy/mashEnemy.tscn" id="18_qn7u4"]
+[ext_resource type="PackedScene" uid="uid://h2r5t05jiyo5" path="res://worldObjects/enemy/mashEnemy.tscn" id="18_qn7u4"]
 [ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://ctn54mgrw1nra" path="res://worldObjects/loopMarkers/loopManager.tscn" id="19_yq3bk"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
@@ -43,7 +43,7 @@
 [ext_resource type="Script" path="res://ui/scripts/pulseAnimatedSprite.gd" id="27_8vl6o"]
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="27_u4i2v"]
 [ext_resource type="Material" uid="uid://bprabndekf50s" path="res://shaders/playerGlitch.tres" id="28_62u6b"]
-[ext_resource type="PackedScene" uid="uid://g73wmn4soj7v" path="res://worldObjects/skipManager.tscn" id="28_caqgn"]
+[ext_resource type="PackedScene" uid="uid://brhrxx3h4jgeq" path="res://worldObjects/skipManager.tscn" id="28_caqgn"]
 [ext_resource type="PackedScene" uid="uid://b034ssesud1qa" path="res://boss/boss.tscn" id="39_2c01x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_du76p"]
@@ -72,7 +72,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rypfk"]
 size = Vector2(12, 1086)
 
-[node name="level" type="Node2D" groups=["skips"]]
+[node name="level2" type="Node2D" groups=["skips"]]
 position = Vector2(0, 1)
 script = ExtResource("1_fl71r")
 levelFile = "bossTest"
