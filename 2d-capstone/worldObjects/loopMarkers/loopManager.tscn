@@ -1,13 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctn54mgrw1nra"]
+[gd_scene load_steps=5 format=3 uid="uid://ctn54mgrw1nra"]
 
 [ext_resource type="Script" path="res://worldObjects/loopMarkers/loopManager.gd" id="1_e2t5i"]
 [ext_resource type="PackedScene" uid="uid://b1xnmxmo2s7sg" path="res://worldObjects/loopMarkers/loopMarkerStart.tscn" id="1_gh20v"]
 [ext_resource type="PackedScene" uid="uid://bwcl1qhm1l82a" path="res://worldObjects/loopMarkers/loopMarkerEnd.tscn" id="2_6xywe"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="4_ogu8j"]
 
-[node name="LoopManager" type="Node2D"]
+[node name="LoopManager" type="Node2D" node_paths=PackedStringArray("label")]
 script = ExtResource("1_e2t5i")
+label = NodePath("CanvasLayer/Label")
 
 [node name="LoopMarkerStart" parent="." instance=ExtResource("1_gh20v")]
 
 [node name="LoopMarkerEnd" parent="." instance=ExtResource("2_6xywe")]
 position = Vector2(1889, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 525.0
+offset_top = 121.0
+offset_right = 1479.0
+offset_bottom = 180.0
+theme = ExtResource("4_ogu8j")
+text = "	"
