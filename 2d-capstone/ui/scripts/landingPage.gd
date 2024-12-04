@@ -28,9 +28,10 @@ func _process(_delta):
 	elif Input.is_action_just_pressed("slide"):
 		current_option = wrapi(current_option + 1, 0, MenuOptions.size())
 		update_pointer_position()
-	
-	if Input.is_action_just_pressed("punch") and Globals.usingController:
+	elif Input.is_action_just_pressed("punch") and Globals.usingController:
 		print("gettig to pucnh detetion")
+		handle_selection()
+	elif Input.is_action_pressed("ui_accept"):
 		handle_selection()
 
 func controllerNavigate(val):

@@ -38,7 +38,7 @@ var controllerArray = ["Joypad Button 0 ", "Joypad Button 1 ", "Joypad Button 2 
 							controllerArray[2]: xController,
 							controllerArray[3]: yController,
 							controllerArray[4]: LBController,
-							controllerArray[5]: RBController,
+							controllerArray[5]: LSController,
 							controllerArray[6]: LSController,
 							controllerArray[7]: LSController,
 							controllerArray[8]: RSController, #back/select

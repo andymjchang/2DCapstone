@@ -40,23 +40,23 @@ var yController = preload("res://ui/assets/onboarding/keys/y_xbox.png")
 @onready var activateImage = preload("res://ui/assets/onboarding/activateGraphic.png")
 @onready var jumpImage = preload("res://ui/assets/onboarding/jumpGraphic.png")
 
-var controllerArray = ["Joypad Button 0", "Joypad Button 1", "Joypad Button 2", "Joypad Button 3", "Joypad Button 4", "Joypad Button 5", "Joypad Button 6", "Joypad Button 7", "Joypad Button 8",  "Joypad Button 9", "Joypad Button 0", "Joypad Button 10", "Joypad Button 12", "Joypad Button 13", "Joypad Button 14", "Joypad Button 15", "Joypad Button 16", "Joypad Button 17", "Joypad Button 18",  "Joypad Button 19"  , "Joypad Button 20", "Joypad Button 21", "Joypad Button 22",  "Joypad Button 23"  ]
+var controllerArray = ["Joypad Button 0 ", "Joypad Button 1 ", "Joypad Button 2 ", "Joypad Button 3 ", "Joypad Button 4 ", "Joypad Motion on Axis 1", "Joypad Button 6 ", "Joypad Button 7 ", "Joypad Button 8 ",  "Joypad Button 9 ", "Joypad Button 10", "Joypad Button 11 ", "Joypad Button 12 ", "Joypad Button 13 ", "Joypad Button 14 ", "Joypad Button 15 ", "Joypad Button 16 ", "Joypad Button 17 ", "Joypad Button 18 ",  "Joypad Button 19 "  , "Joypad Button 20 ", "Joypad Button 21 ", "Joypad Button 22 ",  "Joypad Button 23 "  ]
 @onready var controllerMap = {controllerArray[0]: aController,
 							controllerArray[1]: bController,
 							controllerArray[2]: xController,
 							controllerArray[3]: yController,
 							controllerArray[4]: LBController,
-							controllerArray[5]: RBController,
+							controllerArray[5]: LSController,
 							controllerArray[6]: LSController,
-							controllerArray[7]: RSController,
-							controllerArray[8]: aController, #back/select
-							controllerArray[9]: aController, #start option
-							controllerArray[10]: LSController,
-							controllerArray[11]: RSController,
-							controllerArray[12]: dPadUpController,
-							controllerArray[13]: dPadDownController,
-							controllerArray[14]: dPadLeftController,
-							controllerArray[15]: dPadRightController,
+							controllerArray[7]: LSController,
+							controllerArray[8]: RSController, #back/select
+							controllerArray[9]: LTController, #start option
+							controllerArray[10]: RTController,
+							controllerArray[11]: dPadUpController,
+							controllerArray[12]: dPadDownController,
+							controllerArray[13]: dPadLeftController,
+							controllerArray[14]: dPadRightController,
+							controllerArray[15]: dPadLeftController,
 							controllerArray[16]: aController, #the rest of these are axis contols, do later
 							controllerArray[17]: aController,
 							controllerArray[18]: aController,
@@ -65,8 +65,7 @@ var controllerArray = ["Joypad Button 0", "Joypad Button 1", "Joypad Button 2", 
 							controllerArray[21]: aController,	
 							controllerArray[22]: aController,
 							controllerArray[23]: aController
-	
-}
+							}
 
 #grab all of the controller images
 
