@@ -29,7 +29,6 @@ func _process(_delta):
 		current_option = wrapi(current_option + 1, 0, MenuOptions.size())
 		update_pointer_position()
 	elif Input.is_action_just_pressed("punch") and Globals.usingController:
-		print("gettig to pucnh detetion")
 		handle_selection()
 	elif Input.is_action_pressed("ui_accept"):
 		handle_selection()
@@ -58,7 +57,6 @@ func update_pointer_position():
 
 func handle_selection():
 	var focused = get_viewport().gui_get_focus_owner()
-	print("focused: ", focused)
 	match current_option:
 		MenuOptions.START:
 			_onStoryButtonPressed()

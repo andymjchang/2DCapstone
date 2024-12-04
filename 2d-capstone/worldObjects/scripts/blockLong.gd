@@ -278,21 +278,21 @@ func setWindowTiles() -> void:
 	#set the atlas coords of all the windows\
 	var windowOne = []
 	
-	for i in range(0,6):
+	for i in range(0,7):
 		for j in range(5, 9):
 			var newCoords = Vector2i(i,j)
 			windowOne.append(newCoords)
 	
 	var windowTwo = []
 	
-	for i in range(4,7):
+	for i in range(6,11):
 		for j in range(5, 9):
 			var newCoords = Vector2i(i,j)
 			windowTwo.append(newCoords)
 			
 	var windowThree = []
 	
-	for i in range(6,12):
+	for i in range(10,20):
 		for j in range(5, 9):
 			var newCoords = Vector2i(i,j)
 			windowThree.append(newCoords)
