@@ -15,7 +15,7 @@ var checkpoint = null
 var relocateToCheckpoint = false
 var pixelsPerFrame = 300
 var scrollSpeed = 1
-var curFile = "Tutorial_Level2"
+var curFile = "Tutorial"
 var bpm : float = 115
 var timeDelay = 0.0
 var screenFlash : bool = true
@@ -75,7 +75,8 @@ var levelSequence = [
 	"Tutorial_Level2",
 	"Level 2",
 	"Tutorial_Level3",
-	"Level 3"
+	"Level 3",
+	"Level 4"
 ]
 
 func _ready():
