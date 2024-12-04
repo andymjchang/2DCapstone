@@ -16,7 +16,7 @@ var trackingPosition : bool = false
 var defaultSpawnPosition = Vector2(450, 450)
 var timeHeld = 0.0
 var killFDict: Dictionary = {}
-var saveFileName = null
+var saveFileName 
 var isPlaying = false
 var levelDataPath = "res://levelData/"
 var overwrite = false
@@ -28,14 +28,13 @@ var bindedBlocks = []
 var isBinding = false
 var turnOffSnap = false
 var massMove = false
-var editingFile = false
 
 var MIN_STEP : int = 25
 
 var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
-var NEED_PLAYER = "Unable to save.\nNeed 1 player."
-var UNABLE_TO_SAVE = "No file name found.\nEnter a name using\n the file button."
+var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
+
 
 @export var p1Placer : PackedScene
 @export var p2Placer : PackedScene
@@ -118,8 +117,6 @@ var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsLis
 @onready var holdList = $objectList/holds
 @onready var moveLineList = $objectList/moveLines
 @onready var loopList = $objectList/loops
-@onready var onboarding = $Onboarding
-
 
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
@@ -127,7 +124,6 @@ var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsLis
 @onready var camera = $Camera2D
 @onready var status = $StatusWindow
 @onready var levelTemplatePacked = preload("res://worlds/levelTemplate.tscn")
-@onready var currentFile = $UI/CurrentFile
 
 var bpm : int = 4
 var beatsMin : int = 120
@@ -136,8 +132,6 @@ var levelSaved = false
 
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	Globals.inEditor = true
 	listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
 	Globals.customStart = false
 	Globals.levelEditorTime = 0.0
@@ -162,57 +156,54 @@ func _process(delta: float) -> void:
 		#timeHeld += delta
 	updateTime(delta)
 	
-	if not editingFile:
-		if Input.is_action_just_pressed("tab"):
-			#we want to go through the list of objects for current block
-			#TODO add binded block functionality later
-			if !isBinding and currentBlock:
-				#grab the list of similiar types
-				#TODO add a check here to see if this is a valid grab
-				var curTypeName = typeMap[currentBlock.blockType]
-				var curTypeList = typeArrays[curTypeName]
-				currentBlock.tabType(curTypeList, curTypeName, listMap)
-		if Input.is_action_just_pressed("click"):
-			var mouseCoords = get_global_mouse_position()
-			#check to see if we have any objects within those bounds
-		if Input.is_action_just_pressed(delete) and currentBlock:
-			#get current click on block and delete it 
-			var blockList = getList(currentBlock.blockType)
-			for block in blockList.get_children():
-				if block.index == currentBlock.index:
-					#we have found our block, delete
-					currentBlock.queue_free()
-					currentBlock = null
-					break
-					
-			if !massMove:
-				for block in bindedBlocks:
-					block.queue_free()
-			else:
-				emit_signal("_onSetMassMove", null, false)
-		#TODO make sure that pressing l while typing in name doesnt mess anything up 
-		if Input.is_action_just_pressed("lengthenBlock") and currentBlock and currentBlock.blockType == "normal":
-			#extend platform block by one platform block
-			lengthenPlatform()
-		if Input.is_action_just_pressed("bindBlocks"):
-			if isBinding:
-				isBinding = false
-				bindedBlocks = []
-			else:
-				isBinding = true
-
-func _on_text_edit_0_text_changed(new_text) -> void:
+	if Input.is_action_just_pressed("tab"):
+		#we want to go through the list of objects for current block
+		#TODO add binded block functionality later
+		if !isBinding and currentBlock:
+			#grab the list of similiar types
+			#TODO add a check here to see if this is a valid grab
+			var curTypeName = typeMap[currentBlock.blockType]
+			var curTypeList = typeArrays[curTypeName]
+			currentBlock.tabType(curTypeList, curTypeName, listMap)
+	if Input.is_action_just_pressed("click"):
+		var mouseCoords = get_global_mouse_position()
+		#check to see if we have any objects within those bounds
+	if Input.is_action_just_pressed(delete) and currentBlock:
+		#get current click on block and delete it 
+		var blockList = getList(currentBlock.blockType)
+		for block in blockList.get_children():
+			if block.index == currentBlock.index:
+				#we have found our block, delete
+				currentBlock.queue_free()
+				currentBlock = null
+				break
+				
+		if !massMove:
+			for block in bindedBlocks:
+				block.queue_free()
+		else:
+			emit_signal("_onSetMassMove", null, false)
+	#TODO make sure that pressing l while typing in name doesnt mess anything up 
+	if Input.is_action_just_pressed("lengthenBlock") and currentBlock and currentBlock.blockType == "normal":
+		#extend platform block by one platform block
+		lengthenPlatform()
+	if Input.is_action_just_pressed("bindBlocks"):
+		if isBinding:
+			isBinding = false
+			bindedBlocks = []
+		else:
+			isBinding = true
+func _on_text_edit_0_text_changed() -> void:
 	if beatsMinLabel.text.is_valid_int():
 		beatsMin = int(beatsMinLabel.text)
 		Globals.setBPM(beatsMin)
-
-func _on_text_edit_text_changed(new_text) -> void:
+func _on_text_edit_text_changed() -> void:
 	if bpmLabel.text.is_valid_int():
 		bpm = int(bpmLabel.text)
 		measureLines.beatsPerMeasure = bpm
 		measureLines.queue_redraw()
 
-func _on_text_edit_2_text_changed(new_text) -> void:
+func _on_text_edit_2_text_changed() -> void:
 	if stepLabel.text.is_valid_int():
 		var step = int(stepLabel.text)
 		if (step < MIN_STEP):
@@ -224,14 +215,12 @@ func _on_text_edit_2_text_changed(new_text) -> void:
 func updateTime(delta: float):
 	Globals.levelEditorTime = Globals.levelEditorTime + delta
 
-func clearLevel():
+	
+func loadLevel():
+	print("save file name, ", saveFileName)
 	for objList in $objectList.get_children():
 		for child in objList.get_children():
 			child.queue_free()
-
-func loadLevel():
-	print("save file name, ", saveFileName)
-	clearLevel()
 
 	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlock, platformBlocksList, blockTypes[2]], 
@@ -255,9 +244,7 @@ func loadLevel():
 	var instance
 	var objectList
 	var blockType = blockTypes[2]
-	var loadContent = content.split("\n")
-	get_node("UI/TextEdit0").text = loadContent[0]
-	for line in loadContent.slice(1):
+	for line in content.split("\n"):
 		if line in instanceList.keys():
 			instance = instanceList.get(line)[0]
 			objectList = instanceList.get(line)[1]
@@ -286,16 +273,11 @@ func loadLevel():
 			#do this if object has more than one component
 
 func _on_save_button_down() -> void:
-	if saveFileName:
-		save_scene_to_file()
-	else:
-		status.show()
-		displayStatus(UNABLE_TO_SAVE, false)
-
+	save_scene_to_file()
 	
 func _on_file_button_pressed() -> void:
-	editingFile = true
 	setFileLoad()
+	pass # Replace with function body.
 	
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
@@ -350,9 +332,7 @@ func _onSlideWallButtonUp() -> void:
 	slideWallParent.blockType = blockTypes[12]
 	slideWallList.add_child(slideWallParent)
 	place_block(slideWallParent, slideWallList, camera.position, false)
-
 func _on_exit_button_pressed() -> void:
-	Globals.inEditor = false
 	# This will be the final functionality so players can navigate between menus
 	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 
@@ -510,11 +490,10 @@ func save_scene_to_file():
 			overwrite = false
 			# successful save
 			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
-			newFile.store_string(get_node("UI/TextEdit0").text + "\n")
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
-				if itemList.name !=  "placers" or itemList.name !=  "moveLines":
-					for item in itemList.get_children():
+				for item in itemList.get_children():
+					if itemList.name !=  "placers" and itemList.name !=  "moveLines":
 						#go through each of the items children areas
 						var childrenList = item.get_child(0).get_children()
 						var index = 0
@@ -525,6 +504,8 @@ func save_scene_to_file():
 						for blockChild in childrenList:
 							#saving for platfrom block differs since their size varies#
 							#TODO I dont want to do this, delegate this work to the child class
+							if itemList.name == "placers":
+								print("we are saving a placer")
 							if itemList.name == "platformBlocks":
 								#save the number of cols as well as the extents so we know where to start drawing	
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().getExtents())+ ", "+str(blockChild.get_parent().newPos)+ ", "
@@ -543,10 +524,8 @@ func save_scene_to_file():
 						posChain += "\n"
 						newFile.store_string(posChain)
 				#I want to go through the file and combine all the disconnected blocks into one
-			combineBlocks(newFile)
+			#combineBlocks(newFile)
 	else:
-		displayStatus(NEED_PLAYER, false)
-		
 		displayStatus(UNABLE_TO_SAVE, false)
 	
 func combineBlocks(newFile) -> void:
@@ -728,7 +707,7 @@ func place_block(instance, parent, placePos, initial):
 	if massMove and currentBlock.blockType != blockTypes[19]:
 		emit_signal("setMassMove", null, false)
 		
-	_on_text_edit_2_text_changed(10)
+	_on_text_edit_2_text_changed()
 	reset_drag_tracking()
 
 func reset_drag_tracking():
@@ -798,7 +777,7 @@ func setTrackingPosition(setVal : bool) -> void:
 
 
 func _on_audio_progress_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and  event.pressed:
 		self.get_node("UI/objectSelector/audioProgress").isDragging=true
 
 
@@ -845,39 +824,30 @@ func _on_load_file_pressed() -> void:
 		saveFileName = tgtFile
 		loadLevel()
 		$UI/FileLoadMode.hide()
-		editingFile = false
 	else:
 		saveFileName = tgtFile
 		$UI/FileLoadMode.hide()
-		clearLevel()
-		editingFile = false
-	currentFile.text = "Now editing: " + tgtFile + ".dat"
 
 func _on_play_level_button_button_down() -> void:
-	if saveFileName:
-		save_scene_to_file()
-		overwrite = true
-		save_scene_to_file()
-		# var scene_instance = levelTemplatePacked.instantiate()
-		
-		get_tree().paused = false
-		
-		# Access the current scene and remove it from the scene tree
-		#var current_scene = get_tree().current_scene
-		#Globals.editorNode = current_scene
-		Globals.enablePreviewUI()
-		Globals.currentEditorFileName = saveFileName
-		Globals.curFile = saveFileName
-		get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
-		#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
-		#current_scene.visible = false
+	overwrite = true
+	save_scene_to_file()
+	# var scene_instance = levelTemplatePacked.instantiate()
+	
+	get_tree().paused = false
+	
+	# Access the current scene and remove it from the scene tree
+	#var current_scene = get_tree().current_scene
+	#Globals.editorNode = current_scene
+	Globals.enablePreviewUI()
+	Globals.currentEditorFileName = saveFileName
+	Globals.curFile = saveFileName
+	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+	#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+	#current_scene.visible = false
 
-		# Add the new scene to the scene tree and set it as the current scene
-		#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
-		#get_tree().current_scene = scene_instance  # Set it as the new current scene
-	else:
-		status.show()
-		displayStatus(UNABLE_TO_SAVE, false)
+	# Add the new scene to the scene tree and set it as the current scene
+	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
+	#get_tree().current_scene = scene_instance  # Set it as the new current scene
 
 func lengthenPlatform() -> void:
 	#this isnt modular but it will work for now TODO
@@ -948,10 +918,3 @@ func getAreaChildren(coords, coordType) -> Array:
 		returnArray.append(currentBlock)
 	return returnArray
 		
-func _on_help_button_pressed():
-	editingFile = true
-	onboarding.set_display("instruction")
-
-func _on_keybind_button_pressed():
-	editingFile = true
-	onboarding.set_display("keybindings")
