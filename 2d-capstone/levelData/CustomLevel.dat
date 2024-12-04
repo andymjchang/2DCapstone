@@ -201,11 +201,11 @@ platformBlocks
 -75, 575, 20, <null>, <null>,
 actionIndicators
 playerCheckpoints
-7100, 0,
-11900, -100,
-17425, -50,
-23850, -325,
-28625, -375,
+7100, 25,
+11900, -75,
+17425, -25,
+23850, -300,
+28625, -350,
 player
 0, 540,
 enemies
@@ -378,7 +378,6 @@ breakableWalls
 ziplines
 17975, -125, 19225, 200,
 placers
-30400, -450, 30400, -450, 30400, -450,
 slideWalls
 3475, -25,
 5575, -25,
