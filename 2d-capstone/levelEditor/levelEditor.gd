@@ -124,7 +124,7 @@ var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsLis
 @onready var measureLines = $measureLines
 @onready var camera = $Camera2D
 @onready var status = $StatusWindow
-@onready var levelTemplatePacked = preload("res://worlds/levelTemplate.tscn")
+@export var levelTemplatePacked : PackedScene
 @onready var currentFile = $UI/CurrentFile
 
 var bpm : int = 4

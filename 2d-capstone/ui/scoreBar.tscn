@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://25td4r2m7r1e"]
 
-[ext_resource type="Texture2D" uid="uid://dbare1v5mrdfe" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_UNDER.png" id="1_3jway"]
+[ext_resource type="Texture2D" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_UNDER.png" id="1_3jway"]
 [ext_resource type="Texture2D" uid="uid://c06srwf6fnu0n" path="res://ui/assets/comboMeters/Landfill/2_UNDER.png" id="2_k7yr2"]
-[ext_resource type="Texture2D" uid="uid://c3uj8v4ksdg4g" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_OVER.png" id="2_of54a"]
+[ext_resource type="Texture2D" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_OVER.png" id="2_of54a"]
 [ext_resource type="Script" path="res://ui/scripts/textureScoreProgress_bar.gd" id="3_3u3ml"]
 [ext_resource type="Texture2D" uid="uid://n8xjdbwsv10e" path="res://ui/assets/comboMeters/Landfill/2_OVER.png" id="3_ras0b"]
-[ext_resource type="Texture2D" uid="uid://bwyalplhbx3h7" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_PROGRESS.png" id="3_x6cf0"]
+[ext_resource type="Texture2D" path="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_PROGRESS.png" id="3_x6cf0"]
 [ext_resource type="Texture2D" uid="uid://n7pus3sowj4e" path="res://ui/assets/comboMeters/Landfill/2_PROGRESS.png" id="4_irbtt"]
 [ext_resource type="Script" path="res://ui/scripts/pulseRect.gd" id="5_psxq1"]
 [ext_resource type="Texture2D" uid="uid://dxhfd6qve8rn1" path="res://ui/assets/comboMeters/Robot City/3_UNDER.png" id="5_rg2ub"]
@@ -63,7 +63,7 @@ scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(258, 0)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-value = 60.0
+value = 80.0
 texture_under = ExtResource("1_3jway")
 texture_over = ExtResource("2_of54a")
 texture_progress = ExtResource("3_x6cf0")
@@ -87,6 +87,7 @@ scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(258, 0)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+max_value = 80.0
 texture_under = ExtResource("5_rg2ub")
 texture_over = ExtResource("6_qjy3c")
 texture_progress = ExtResource("7_rhw4q")
