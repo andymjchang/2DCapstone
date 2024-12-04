@@ -7,7 +7,7 @@
 
 [node name="Background" type="Node2D"]
 modulate = Color(0.886262, 0.886261, 0.886262, 1)
-position = Vector2(0, 75)
+position = Vector2(0, 300)
 
 [node name="Layer0" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.05, 0.05)
