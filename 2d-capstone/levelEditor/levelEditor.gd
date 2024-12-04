@@ -28,6 +28,7 @@ var bindedBlocks = []
 var isBinding = false
 var turnOffSnap = false
 var massMove = false
+var editingFile = false
 
 var MIN_STEP : int = 25
 
@@ -117,13 +118,14 @@ var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsLis
 @onready var holdList = $objectList/holds
 @onready var moveLineList = $objectList/moveLines
 @onready var loopList = $objectList/loops
-
+@onready var onboarding = $Onboarding
 @onready var bpmLabel = $UI/TextEdit
 @onready var stepLabel = $UI/TextEdit2
 @onready var measureLines = $measureLines
 @onready var camera = $Camera2D
 @onready var status = $StatusWindow
 @onready var levelTemplatePacked = preload("res://worlds/levelTemplate.tscn")
+@onready var currentFile = $UI/CurrentFile
 
 var bpm : int = 4
 var beatsMin : int = 120
@@ -155,44 +157,44 @@ func _process(delta: float) -> void:
 		#currentPosition = get_global_mouse_position()
 		#timeHeld += delta
 	updateTime(delta)
-	
-	if Input.is_action_just_pressed("tab"):
-		#we want to go through the list of objects for current block
-		#TODO add binded block functionality later
-		if !isBinding and currentBlock:
-			#grab the list of similiar types
-			#TODO add a check here to see if this is a valid grab
-			var curTypeName = typeMap[currentBlock.blockType]
-			var curTypeList = typeArrays[curTypeName]
-			currentBlock.tabType(curTypeList, curTypeName, listMap)
-	if Input.is_action_just_pressed("click"):
-		var mouseCoords = get_global_mouse_position()
-		#check to see if we have any objects within those bounds
-	if Input.is_action_just_pressed(delete) and currentBlock:
-		#get current click on block and delete it 
-		var blockList = getList(currentBlock.blockType)
-		for block in blockList.get_children():
-			if block.index == currentBlock.index:
-				#we have found our block, delete
-				currentBlock.queue_free()
-				currentBlock = null
-				break
-				
-		if !massMove:
-			for block in bindedBlocks:
-				block.queue_free()
-		else:
-			emit_signal("_onSetMassMove", null, false)
-	#TODO make sure that pressing l while typing in name doesnt mess anything up 
-	if Input.is_action_just_pressed("lengthenBlock") and currentBlock and currentBlock.blockType == "normal":
-		#extend platform block by one platform block
-		lengthenPlatform()
-	if Input.is_action_just_pressed("bindBlocks"):
-		if isBinding:
-			isBinding = false
-			bindedBlocks = []
-		else:
-			isBinding = true
+	if not editingFile:
+		if Input.is_action_just_pressed("tab"):
+			#we want to go through the list of objects for current block
+			#TODO add binded block functionality later
+			if !isBinding and currentBlock:
+				#grab the list of similiar types
+				#TODO add a check here to see if this is a valid grab
+				var curTypeName = typeMap[currentBlock.blockType]
+				var curTypeList = typeArrays[curTypeName]
+				currentBlock.tabType(curTypeList, curTypeName, listMap)
+		if Input.is_action_just_pressed("click"):
+			var mouseCoords = get_global_mouse_position()
+			#check to see if we have any objects within those bounds
+		if Input.is_action_just_pressed(delete) and currentBlock:
+			#get current click on block and delete it 
+			var blockList = getList(currentBlock.blockType)
+			for block in blockList.get_children():
+				if block.index == currentBlock.index:
+					#we have found our block, delete
+					currentBlock.queue_free()
+					currentBlock = null
+					break
+					
+			if !massMove:
+				for block in bindedBlocks:
+					block.queue_free()
+			else:
+				emit_signal("_onSetMassMove", null, false)
+		#TODO make sure that pressing l while typing in name doesnt mess anything up 
+		if Input.is_action_just_pressed("lengthenBlock") and currentBlock and currentBlock.blockType == "normal":
+			#extend platform block by one platform block
+			lengthenPlatform()
+		if Input.is_action_just_pressed("bindBlocks"):
+			if isBinding:
+				isBinding = false
+				bindedBlocks = []
+			else:
+				isBinding = true
 func _on_text_edit_0_text_changed() -> void:
 	if beatsMinLabel.text.is_valid_int():
 		beatsMin = int(beatsMinLabel.text)
@@ -214,10 +216,14 @@ func _on_text_edit_2_text_changed() -> void:
 		
 func updateTime(delta: float):
 	Globals.levelEditorTime = Globals.levelEditorTime + delta
-
+func clearLevel():
+	for objList in $objectList.get_children():
+		for child in objList.get_children():
+			child.queue_free()
 	
 func loadLevel():
 	print("save file name, ", saveFileName)
+	clearLevel()
 	for objList in $objectList.get_children():
 		for child in objList.get_children():
 			child.queue_free()
@@ -276,8 +282,8 @@ func _on_save_button_down() -> void:
 	save_scene_to_file()
 	
 func _on_file_button_pressed() -> void:
+	editingFile = true
 	setFileLoad()
-	pass # Replace with function body.
 	
 func _on_test_placer_button_down() -> void:
 	trackingPosition = true
@@ -824,9 +830,13 @@ func _on_load_file_pressed() -> void:
 		saveFileName = tgtFile
 		loadLevel()
 		$UI/FileLoadMode.hide()
+		editingFile = false
 	else:
 		saveFileName = tgtFile
 		$UI/FileLoadMode.hide()
+		clearLevel()
+		editingFile = false
+	currentFile.text = "Now editing: " + tgtFile + ".dat"
 
 func _on_play_level_button_button_down() -> void:
 	overwrite = true
@@ -917,4 +927,12 @@ func getAreaChildren(coords, coordType) -> Array:
 	if returnArray.size() == 0.0:
 		returnArray.append(currentBlock)
 	return returnArray
+	
+func _on_help_button_pressed():
+	editingFile = true
+	onboarding.set_display("instruction")
+	
+func _on_keybind_button_pressed():
+	editingFile = true
+	onboarding.set_display("keybindings")
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=72 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -54,6 +54,7 @@
 [ext_resource type="Script" path="res://levelEditor/audioTracks.gd" id="36_wn18y"]
 [ext_resource type="Texture2D" uid="uid://1dfh5adfmstx" path="res://levelEditor/programmerArtAssets/play.png" id="37_5oir0"]
 [ext_resource type="Texture2D" uid="uid://bl0mornmn20bm" path="res://levelEditor/programmerArtAssets/help.png" id="37_frurs"]
+[ext_resource type="Texture2D" uid="uid://f7k22hkqf73c" path="res://levelEditor/programmerArtAssets/key.png" id="38_cfsee"]
 [ext_resource type="Texture2D" uid="uid://bc4p5m76bmftq" path="res://levelEditor/programmerArtAssets/mashEnemy.png" id="41_w3cb3"]
 [ext_resource type="Texture2D" uid="uid://b62deqkwqbndb" path="res://levelEditor/programmerArtAssets/file.png" id="46_nsemu"]
 [ext_resource type="Texture2D" uid="uid://wiekfbvafyq4" path="res://levelEditor/programmerArtAssets/slideWall.png" id="48_w6vdm"]
@@ -196,7 +197,7 @@ texture_normal = ExtResource("46_nsemu")
 
 [node name="keybindButton" type="TextureButton" parent="UI/FileButtons"]
 layout_mode = 2
-texture_normal = ExtResource("17_3udhx")
+texture_normal = ExtResource("38_cfsee")
 
 [node name="helpButton" type="TextureButton" parent="UI/FileButtons"]
 layout_mode = 2
