@@ -38,7 +38,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseMotion:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	elif event.is_action_pressed("jump"):
+	if event.is_action_pressed("jump"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		current_option = (current_option - 1 + options_count) % options_count
 		update_selection()
@@ -46,7 +46,7 @@ func _input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		current_option = (current_option + 1) % options_count
 		update_selection()
-	elif event.is_action_pressed("punch") and Globals.usingController:
+	elif event.is_action_pressed("punch"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		select_current_option()
 	elif event.is_action_pressed("ui_left"):
@@ -184,4 +184,5 @@ func _on_text_edit_focus_exited() -> void:
 
 func _on_save_button_button_down() -> void:
 	$Leaderboard/TextEdit.release_focus()
+	$Leaderboard/SaveButton.release_focus()
 	focused = false
