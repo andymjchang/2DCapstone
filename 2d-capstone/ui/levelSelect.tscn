@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://clemg8ird1smt"]
+[gd_scene load_steps=9 format=3 uid="uid://clemg8ird1smt"]
 
 [ext_resource type="Script" path="res://ui/levelSelect.gd" id="1_1otup"]
 [ext_resource type="Texture2D" uid="uid://dmka458bsdkck" path="res://ui/assets/vinyl_envelope_back.png" id="1_mbnry"]
@@ -7,11 +7,7 @@
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="3_ho80d"]
 [ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="4_pejwk"]
 [ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="5_36grs"]
-[ext_resource type="Texture2D" uid="uid://wnwfg830drnm" path="res://ui/assets/Album_covers/Album Covers/vinyl_cover_brown_level_1.png" id="6_gq0g5"]
-[ext_resource type="Texture2D" uid="uid://b5urd2seuwftg" path="res://ui/assets/Album_covers/Album Covers/vinyl_cover_brown_level_2.png" id="7_0ee62"]
-[ext_resource type="Texture2D" uid="uid://df2klcr0poyey" path="res://ui/assets/Album_covers/Album Covers/vinyl_cover_green_level_3.png" id="8_onwoj"]
 [ext_resource type="PackedScene" uid="uid://bdrievkpea8pi" path="res://ui/advisory.tscn" id="9_q2xdh"]
-[ext_resource type="Texture2D" uid="uid://c6u4qxgvfcmq2" path="res://ui/assets/Album_covers/Album Covers/vinyl_sleeve_purple_front_cover.png" id="10_u0fdp"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -146,21 +142,18 @@ texture = ExtResource("3_aoh1x")
 [node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level1"]
 position = Vector2(42, 0)
 scale = Vector2(1.18854, 1.18854)
-texture = ExtResource("6_gq0g5")
 
 [node name="Level2" type="Node2D" parent="Album"]
 
 [node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level2"]
 position = Vector2(42, 0)
 scale = Vector2(1.18, 1.18)
-texture = ExtResource("7_0ee62")
 
 [node name="Level3" type="Node2D" parent="Album"]
 
 [node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level3"]
 position = Vector2(42, 0)
 scale = Vector2(1.18, 1.18)
-texture = ExtResource("8_onwoj")
 
 [node name="Advisory" parent="Album/Level3" instance=ExtResource("9_q2xdh")]
 position = Vector2(-6.5, -39)
@@ -171,7 +164,6 @@ visible = false
 [node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level4"]
 position = Vector2(42, 0)
 scale = Vector2(1.18, 1.18)
-texture = ExtResource("10_u0fdp")
 
 [node name="Advisory" parent="Album/Level4" instance=ExtResource("9_q2xdh")]
 position = Vector2(14.5, -45)
