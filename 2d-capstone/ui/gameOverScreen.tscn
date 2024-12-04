@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://u5byse278f80"]
 
 [ext_resource type="Script" path="res://ui/scripts/gameOverScreen.gd" id="1_tmgw1"]
-[ext_resource type="Texture2D" uid="uid://dmka458bsdkck" path="res://ui/assets/vinyl_envelope_back.png" id="3_g2ulw"]
-[ext_resource type="Texture2D" uid="uid://cfkgyb786idsq" path="res://ui/assets/vinyl_blank.png" id="4_u53ul"]
+[ext_resource type="Texture2D" uid="uid://dflctch1lc6d2" path="res://ui/assets/Vinyl_covers/Vinyl_covers/vinyl_cover_blue_back.png" id="3_gvld7"]
+[ext_resource type="Texture2D" uid="uid://doaukus6erwj4" path="res://ui/assets/Vinyl_covers/Vinyl_covers/vinyl.png" id="4_dn1y5"]
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="5_6whcx"]
-[ext_resource type="Texture2D" uid="uid://mji6d62y133n" path="res://ui/assets/Pause_menu_album_sleeve.png" id="6_aw4e0"]
+[ext_resource type="Texture2D" uid="uid://cw1vb2x5b8tv2" path="res://ui/assets/Vinyl_covers/Vinyl_covers/vinyl_cover_blue_front.png" id="6_obxvx"]
 [ext_resource type="AudioStream" uid="uid://ipcdljmmnyyx" path="res://audioTracks/GameOver_120bpm.mp3" id="7_gngc8"]
 [ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="7_nofjy"]
 [ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="8_ewm6r"]
@@ -37,11 +37,10 @@ color = Color(1, 0.956863, 0.933333, 0.270588)
 
 [node name="Back" type="Sprite2D" parent="."]
 position = Vector2(-158.5, -0.327026)
-texture = ExtResource("3_g2ulw")
+texture = ExtResource("3_gvld7")
 
 [node name="Vinyl" type="Sprite2D" parent="."]
-position = Vector2(179, -0.327026)
-texture = ExtResource("4_u53ul")
+texture = ExtResource("4_dn1y5")
 
 [node name="1" type="Node2D" parent="Vinyl"]
 rotation = -1.0472
@@ -130,8 +129,8 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Album" type="Sprite2D" parent="."]
-position = Vector2(-385.5, -0.327026)
-texture = ExtResource("6_aw4e0")
+position = Vector2(-482, 0)
+texture = ExtResource("6_obxvx")
 
 [node name="Pointer2" type="Sprite2D" parent="." groups=["pulsingObjects"]]
 position = Vector2(728.5, 0)

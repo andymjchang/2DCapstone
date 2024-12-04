@@ -7,7 +7,7 @@ enum MenuOptions {
 	BACK,
 }
 
-@export var vinyl_rotations: Array[float] = [0.0, -32.7, -61.7, -89.2]
+@export var vinyl_rotations: Array[float] = [0.0, -30, -60, -90]
 @export var rotation_tween_duration: float = 0.15  # Duration in seconds
 @export var slide_in_duration: float = 0.5  # Duration for slide-in animation
 @export var slide_offset: float = -1000  # Starting X offset for slide animation

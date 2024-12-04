@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://bnlu5yanfcdgm"]
 
 [ext_resource type="Script" path="res://ui/scripts/pauseScreen.gd" id="1_42jy6"]
-[ext_resource type="Texture2D" uid="uid://dmka458bsdkck" path="res://ui/assets/vinyl_envelope_back.png" id="2_n50tj"]
-[ext_resource type="Texture2D" uid="uid://cfkgyb786idsq" path="res://ui/assets/vinyl_blank.png" id="3_htdc1"]
+[ext_resource type="Texture2D" uid="uid://dflctch1lc6d2" path="res://ui/assets/Vinyl_covers/Vinyl_covers/vinyl_cover_blue_back.png" id="2_1ot22"]
+[ext_resource type="Texture2D" uid="uid://doaukus6erwj4" path="res://ui/assets/Vinyl_covers/Vinyl_covers/vinyl.png" id="3_763f5"]
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="4_bkb1b"]
-[ext_resource type="Texture2D" uid="uid://mji6d62y133n" path="res://ui/assets/Pause_menu_album_sleeve.png" id="5_uesiw"]
+[ext_resource type="Texture2D" uid="uid://cw1vb2x5b8tv2" path="res://ui/assets/Vinyl_covers/Vinyl_covers/vinyl_cover_blue_front.png" id="5_4d3ls"]
 [ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="6_43ulc"]
 [ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="7_v14oi"]
 
@@ -29,12 +29,11 @@ offset_bottom = 552.673
 color = Color(1, 0.956863, 0.933333, 0.270588)
 
 [node name="Back" type="Sprite2D" parent="."]
-position = Vector2(-158.5, -0.327026)
-texture = ExtResource("2_n50tj")
+position = Vector2(-373, 0)
+texture = ExtResource("2_1ot22")
 
 [node name="Vinyl" type="Sprite2D" parent="."]
-position = Vector2(179, -0.327026)
-texture = ExtResource("3_htdc1")
+texture = ExtResource("3_763f5")
 
 [node name="1" type="Node2D" parent="Vinyl"]
 rotation = -1.0472
@@ -122,8 +121,9 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Album" type="Sprite2D" parent="."]
-position = Vector2(-385.5, -0.327026)
-texture = ExtResource("5_uesiw")
+position = Vector2(-475, 0)
+scale = Vector2(1.01458, 1)
+texture = ExtResource("5_4d3ls")
 
 [node name="Pointer2" type="Sprite2D" parent="." groups=["pulsingObjects"]]
 position = Vector2(728.5, 0)

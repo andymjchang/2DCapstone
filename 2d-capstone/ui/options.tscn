@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://doiamwbhll34f"]
+[gd_scene load_steps=10 format=3 uid="uid://doiamwbhll34f"]
 
 [ext_resource type="Script" path="res://ui/scripts/options.gd" id="1_n6aap"]
-[ext_resource type="Texture2D" uid="uid://ctgbh3bxdu020" path="res://ui/assets/options_menu_vinyl.png" id="2_6gwvt"]
-[ext_resource type="Texture2D" uid="uid://dmka458bsdkck" path="res://ui/assets/vinyl_envelope_back.png" id="2_jxcjy"]
-[ext_resource type="Texture2D" uid="uid://mji6d62y133n" path="res://ui/assets/Pause_menu_album_sleeve.png" id="3_o5thn"]
+[ext_resource type="Texture2D" uid="uid://dflctch1lc6d2" path="res://ui/assets/Vinyl_covers/Vinyl_covers/vinyl_cover_blue_back.png" id="2_56s6u"]
+[ext_resource type="Texture2D" uid="uid://doaukus6erwj4" path="res://ui/assets/Vinyl_covers/Vinyl_covers/vinyl.png" id="3_5hxms"]
 [ext_resource type="PackedScene" uid="uid://cp8ha1sehgc3x" path="res://ui/volumeScreen.tscn" id="4_fo0ct"]
+[ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="4_mg53d"]
+[ext_resource type="Texture2D" uid="uid://cw1vb2x5b8tv2" path="res://ui/assets/Vinyl_covers/Vinyl_covers/vinyl_cover_blue_front.png" id="4_x20kq"]
 [ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="5_ad7d3"]
 [ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="6_5eqhw"]
 [ext_resource type="PackedScene" uid="uid://dn1epcentmy3x" path="res://ui/keybindings.tscn" id="7_hr1kh"]
@@ -34,14 +35,82 @@ color = Color(1, 0.956863, 0.933333, 1)
 
 [node name="VinylEnvelopeBack" type="Sprite2D" parent="."]
 position = Vector2(-339, 0)
-texture = ExtResource("2_jxcjy")
+texture = ExtResource("2_56s6u")
 
 [node name="OptionsMenuVinyl" type="Sprite2D" parent="."]
-texture = ExtResource("2_6gwvt")
+texture = ExtResource("3_5hxms")
+
+[node name="3" type="Node2D" parent="OptionsMenuVinyl"]
+
+[node name="Level2" type="Label" parent="OptionsMenuVinyl/3"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 178.0
+offset_top = -60.0
+offset_right = 467.0
+offset_bottom = 61.0
+grow_vertical = 2
+theme = ExtResource("4_mg53d")
+text = "Keybindings"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="4" type="Node2D" parent="OptionsMenuVinyl"]
+rotation = 0.523599
+
+[node name="Level2" type="Label" parent="OptionsMenuVinyl/4"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 178.0
+offset_top = -60.0
+offset_right = 467.0
+offset_bottom = 61.0
+grow_vertical = 2
+theme = ExtResource("4_mg53d")
+text = "Calibration"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="5" type="Node2D" parent="OptionsMenuVinyl"]
+rotation = 1.0472
+
+[node name="Level2" type="Label" parent="OptionsMenuVinyl/5"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 178.0
+offset_top = -60.0
+offset_right = 467.0
+offset_bottom = 61.0
+grow_vertical = 2
+theme = ExtResource("4_mg53d")
+text = "Volume"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="6" type="Node2D" parent="OptionsMenuVinyl"]
+rotation = 1.5708
+
+[node name="Level2" type="Label" parent="OptionsMenuVinyl/6"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 178.0
+offset_top = -60.0
+offset_right = 467.0
+offset_bottom = 61.0
+grow_vertical = 2
+theme = ExtResource("4_mg53d")
+text = "Back"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Album" type="Sprite2D" parent="."]
-position = Vector2(-566, 0)
-texture = ExtResource("3_o5thn")
+position = Vector2(-528, 0)
+scale = Vector2(1.16875, 1)
+texture = ExtResource("4_x20kq")
 
 [node name="Pointer2" type="Sprite2D" parent="." groups=["pulsingObjects"]]
 position = Vector2(629, 0)

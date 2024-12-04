@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://ui/scripts/levelCompleteScreen.gd" id="1_qafpk"]
 [ext_resource type="Texture2D" uid="uid://dmka458bsdkck" path="res://ui/assets/vinyl_envelope_back.png" id="3_47j5b"]
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="3_bdee6"]
-[ext_resource type="Texture2D" uid="uid://cfkgyb786idsq" path="res://ui/assets/vinyl_blank.png" id="4_62kjn"]
-[ext_resource type="Texture2D" uid="uid://mji6d62y133n" path="res://ui/assets/Pause_menu_album_sleeve.png" id="6_xsv6n"]
+[ext_resource type="Texture2D" uid="uid://doaukus6erwj4" path="res://ui/assets/Vinyl_covers/Vinyl_covers/vinyl.png" id="4_e84gv"]
 [ext_resource type="AudioStream" uid="uid://blg7fxg41fnsb" path="res://audioTracks/CourseComplete_153bpm.mp3" id="7_j5x8q"]
 [ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="7_vxoxn"]
 [ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="8_q0prs"]
 [ext_resource type="Texture2D" uid="uid://dc2huddrx2tpp" path="res://ui/assets/onboarding/keyBackgrounds/key_unpressed.png" id="9_e17sk"]
+[ext_resource type="Texture2D" uid="uid://cw1vb2x5b8tv2" path="res://ui/assets/Vinyl_covers/Vinyl_covers/vinyl_cover_blue_front.png" id="9_mdc5e"]
 
 [node name="levelCompleteScreen" type="Control"]
 process_mode = 3
@@ -39,9 +39,9 @@ position = Vector2(-120.5, 0.672974)
 texture = ExtResource("3_47j5b")
 
 [node name="Vinyl" type="Sprite2D" parent="."]
-position = Vector2(217, 0.672974)
+position = Vector2(95, 0)
 rotation = 0.523599
-texture = ExtResource("4_62kjn")
+texture = ExtResource("4_e84gv")
 
 [node name="0" type="Node2D" parent="Vinyl"]
 rotation = -0.523599
@@ -97,20 +97,21 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Album" type="Sprite2D" parent="."]
-position = Vector2(-347.5, 0.672974)
-texture = ExtResource("6_xsv6n")
+position = Vector2(-398, 0.672974)
+scale = Vector2(1.17083, 1)
+texture = ExtResource("9_mdc5e")
 
 [node name="PopupLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = -296.0
-offset_top = -355.0
-offset_right = 138.0
-offset_bottom = -234.0
+offset_left = -705.0
+offset_top = -346.0
+offset_right = -271.0
+offset_bottom = -225.0
 rotation = -0.174533
 theme = ExtResource("3_bdee6")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Full Combo!
-New High Score!"
+text = "New High
+Score!"
 
 [node name="gradeLabel" type="Label" parent="."]
 layout_mode = 2
@@ -139,9 +140,9 @@ horizontal_alignment = 1
 [node name="scoreLabel" type="Label" parent="."]
 layout_mode = 2
 offset_left = -946.0
-offset_top = -192.327
-offset_right = 15.0
-offset_bottom = -76.327
+offset_top = -192.0
+offset_right = -17.0
+offset_bottom = -76.0
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
 theme_override_font_sizes/font_size = 84
@@ -271,9 +272,9 @@ text = "Coins:"
 
 [node name="accuracyLabel" type="Label" parent="."]
 layout_mode = 2
-offset_left = -395.0
+offset_left = -417.0
 offset_top = 37.673
-offset_right = 172.0
+offset_right = 150.0
 offset_bottom = 124.673
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
@@ -295,9 +296,9 @@ horizontal_alignment = 1
 
 [node name="comboLabel" type="Label" parent="."]
 layout_mode = 2
-offset_left = -395.0
+offset_left = -417.0
 offset_top = 262.673
-offset_right = 172.0
+offset_right = 150.0
 offset_bottom = 349.673
 size_flags_vertical = 2
 theme = ExtResource("3_bdee6")
@@ -318,7 +319,7 @@ text = "Max Combo:"
 horizontal_alignment = 1
 
 [node name="Pointer2" type="Sprite2D" parent="." groups=["pulsingObjects"]]
-position = Vector2(766.5, -4.32703)
+position = Vector2(704.5, -4.32703)
 texture = ExtResource("7_vxoxn")
 script = ExtResource("8_q0prs")
 increasedScale = Vector2(1.1, 1.1)
@@ -326,8 +327,9 @@ increasedScale = Vector2(1.1, 1.1)
 [node name="Leaderboard" type="Node2D" parent="."]
 
 [node name="Album2" type="Sprite2D" parent="Leaderboard"]
-position = Vector2(-347.5, 0.672974)
-texture = ExtResource("6_xsv6n")
+position = Vector2(-399, 0.672974)
+scale = Vector2(1.17083, 1)
+texture = ExtResource("9_mdc5e")
 
 [node name="userScore" type="Label" parent="Leaderboard"]
 offset_left = -971.0
