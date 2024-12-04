@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://clemg8ird1smt"]
+[gd_scene load_steps=13 format=3 uid="uid://clemg8ird1smt"]
 
 [ext_resource type="Script" path="res://ui/levelSelect.gd" id="1_1otup"]
 [ext_resource type="Texture2D" uid="uid://dmka458bsdkck" path="res://ui/assets/vinyl_envelope_back.png" id="1_mbnry"]
@@ -7,12 +7,11 @@
 [ext_resource type="Theme" uid="uid://ck1wkv3qelrum" path="res://ui/MonospaceTheme.tres" id="3_ho80d"]
 [ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="4_pejwk"]
 [ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="5_36grs"]
-[ext_resource type="Texture2D" uid="uid://d11gh5clg3uia" path="res://ui/assets/CoverLevel1.png" id="6_lxl33"]
-[ext_resource type="FontFile" uid="uid://ciye4cqh48iks" path="res://fonts/ethnocentric rg.otf" id="8_8auxv"]
-[ext_resource type="Texture2D" uid="uid://ccteqfnqie0mm" path="res://ui/assets/CoverLevel3.png" id="8_dxyid"]
-[ext_resource type="Texture2D" uid="uid://cfnr0dcodmyop" path="res://ui/assets/CoverLevel2.png" id="8_vl4n3"]
+[ext_resource type="Texture2D" uid="uid://wnwfg830drnm" path="res://ui/assets/Album_covers/Album Covers/vinyl_cover_brown_level_1.png" id="6_gq0g5"]
+[ext_resource type="Texture2D" uid="uid://b5urd2seuwftg" path="res://ui/assets/Album_covers/Album Covers/vinyl_cover_brown_level_2.png" id="7_0ee62"]
+[ext_resource type="Texture2D" uid="uid://df2klcr0poyey" path="res://ui/assets/Album_covers/Album Covers/vinyl_cover_green_level_3.png" id="8_onwoj"]
 [ext_resource type="PackedScene" uid="uid://bdrievkpea8pi" path="res://ui/advisory.tscn" id="9_q2xdh"]
-[ext_resource type="Texture2D" uid="uid://coymment44w5p" path="res://animations/raccoonAnims/Raccoon_run_sprite_sheet.png" id="11_q7yeq"]
+[ext_resource type="Texture2D" uid="uid://c6u4qxgvfcmq2" path="res://ui/assets/Album_covers/Album Covers/vinyl_sleeve_purple_front_cover.png" id="10_u0fdp"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -28,6 +27,7 @@ offset_bottom = 1089.0
 color = Color(1, 0.956863, 0.933333, 1)
 
 [node name="VinylEnvelopeBack" type="Sprite2D" parent="."]
+modulate = Color(0.400698, 0.400698, 0.400698, 1)
 position = Vector2(752.5, 540)
 texture = ExtResource("1_mbnry")
 
@@ -144,70 +144,37 @@ texture = ExtResource("3_aoh1x")
 [node name="Level1" type="Node2D" parent="Album"]
 
 [node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level1"]
-texture = ExtResource("6_lxl33")
-
-[node name="Label" type="Label" parent="Album/Level1"]
-offset_left = -475.0
-offset_top = -487.0
-offset_right = 476.0
-offset_bottom = -428.0
-theme = ExtResource("3_ho80d")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("8_8auxv")
-text = "Back to Basics
-Level 1"
-horizontal_alignment = 1
+position = Vector2(42, 0)
+scale = Vector2(1.18854, 1.18854)
+texture = ExtResource("6_gq0g5")
 
 [node name="Level2" type="Node2D" parent="Album"]
 
 [node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level2"]
-texture = ExtResource("8_vl4n3")
-
-[node name="RaccoonRunSpriteSheet2" type="Sprite2D" parent="Album/Level2"]
-position = Vector2(-21.5, 76)
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("11_q7yeq")
-hframes = 3
-vframes = 3
-
-[node name="Label" type="Label" parent="Album/Level2"]
-offset_left = -475.0
-offset_top = -487.0
-offset_right = 476.0
-offset_bottom = -428.0
-theme = ExtResource("3_ho80d")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("8_8auxv")
-text = "Junkyard
-Level 2"
-horizontal_alignment = 1
+position = Vector2(42, 0)
+scale = Vector2(1.18, 1.18)
+texture = ExtResource("7_0ee62")
 
 [node name="Level3" type="Node2D" parent="Album"]
-visible = false
 
 [node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level3"]
-texture = ExtResource("8_dxyid")
-
-[node name="RaccoonRunSpriteSheet" type="Sprite2D" parent="Album/Level3"]
-position = Vector2(-56.5, 100)
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("11_q7yeq")
-hframes = 3
-vframes = 3
-
-[node name="Label" type="Label" parent="Album/Level3"]
-offset_left = -475.0
-offset_top = -487.0
-offset_right = 476.0
-offset_bottom = -428.0
-theme = ExtResource("3_ho80d")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("8_8auxv")
-text = "Abandoned City
-Level 3"
-horizontal_alignment = 1
+position = Vector2(42, 0)
+scale = Vector2(1.18, 1.18)
+texture = ExtResource("8_onwoj")
 
 [node name="Advisory" parent="Album/Level3" instance=ExtResource("9_q2xdh")]
+position = Vector2(-6.5, -39)
+
+[node name="Level4" type="Node2D" parent="Album"]
+visible = false
+
+[node name="Level2BackgroundExample" type="Sprite2D" parent="Album/Level4"]
+position = Vector2(42, 0)
+scale = Vector2(1.18, 1.18)
+texture = ExtResource("10_u0fdp")
+
+[node name="Advisory" parent="Album/Level4" instance=ExtResource("9_q2xdh")]
+position = Vector2(14.5, -45)
 
 [node name="Pointer2" type="Sprite2D" parent="." groups=["pulsingObjects"]]
 position = Vector2(1639.5, 540)

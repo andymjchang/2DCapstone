@@ -66,6 +66,8 @@ func update_selection() -> void:
 			$Album/Level2.visible = true
 		LevelOptions.LEVEL_3:
 			$Album/Level3.visible = true
+		LevelOptions.LEVEL_4:
+			$Album/Level4.visible = true
 		LevelOptions.BACK:
 			# Update UI to show Back is selected
 			pass
