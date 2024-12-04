@@ -96,7 +96,7 @@ func _ready():
 	if levelFile.begins_with("Tutorial_Level2"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Tutorial_Revamped_155bpm.mp3"
-		backgroundName = "Lvl1"
+		backgroundName = "Lvl0"
 	if levelFile.begins_with("Level 2"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Level1_Shifted_155bpm.wav"
@@ -104,7 +104,7 @@ func _ready():
 	if levelFile.begins_with("Tutorial_Level3"):
 		Globals.setBPM(155)
 		Globals.currentSongFileName = "Tutorial_Revamped_155bpm.mp3"
-		backgroundName = "Lvl2"
+		backgroundName = "Lvl3"
 	if levelFile.begins_with("Level 3"):
 		Globals.setBPM(156)
 		Globals.currentSongFileName = "Level2_OGNoMelody_156bpm_1.mp3"

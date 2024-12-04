@@ -40,7 +40,7 @@ func _input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	elif event.is_action_pressed("slide"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	elif event.is_action_pressed("ui_accept"):
+	elif event.is_action_pressed("punch"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 	elif Input.is_action_just_pressed("punch") and Globals.usingController:
