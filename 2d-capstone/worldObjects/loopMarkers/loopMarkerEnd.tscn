@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://worldObjects/scripts/loopMarker.gd" id="1_iji7p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_px3m4"]
-size = Vector2(20, 53.2)
+size = Vector2(0.200001, 53.2)
 
 [node name="LoopMarkerEnd" type="Node2D"]
 script = ExtResource("1_iji7p")
@@ -11,7 +11,7 @@ script = ExtResource("1_iji7p")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 7.62939e-06)
+position = Vector2(0.500002, 7.62939e-06)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_px3m4")
 

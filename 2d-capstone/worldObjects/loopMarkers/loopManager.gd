@@ -51,6 +51,7 @@ func _onResetData(destination):
 				power.queue_free()
 		enemiesToDespawn = []
 		powerupsToDespawn = []
+		startTime = abs(0.0 - destination.global_position.x) / Globals.pixelsPerFrame
 		get_tree().root.get_node("level").emit_signal("resetLoop", startTime, destination, enemiesToRespawn, powerupsToRespawn)
 
 func _onRecordEnemies(enemy):
