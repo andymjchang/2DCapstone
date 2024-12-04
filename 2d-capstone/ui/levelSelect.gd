@@ -49,11 +49,11 @@ func _input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		current_option = (current_option + 1) % options_count
 		update_selection()
-	elif event.is_action_pressed("ui_accept"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	elif event.is_action_pressed("punch") and Globals.usingController:
-		select_current_option()
+		#
+	#elif event.is_action_pressed("punch") and Globals.usingController:
+		#select_current_option()
 	elif Input.is_action_pressed("ui_accept"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		select_current_option()
 
 
