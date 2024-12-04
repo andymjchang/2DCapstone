@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Level2_Main_156bpm_V2.mp3-619e8667b61386dfb5d
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
