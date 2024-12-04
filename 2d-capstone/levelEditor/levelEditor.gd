@@ -532,7 +532,7 @@ func save_scene_to_file():
 						posChain += "\n"
 						newFile.store_string(posChain)
 				#I want to go through the file and combine all the disconnected blocks into one
-			combineBlocks(newFile)
+			#combineBlocks(newFile)
 	else:
 		displayStatus(UNABLE_TO_SAVE, false)
 	

@@ -1,22 +1,6 @@
-155
+160
 platformBlocks
--75, 575, 12, <null>, <null>,
-75, 575, 12, <null>, <null>,
-225, 575, 12, <null>, <null>,
-375, 575, 12, <null>, <null>,
-525, 575, 12, <null>, <null>,
-675, 575, 12, <null>, <null>,
-825, 575, 12, <null>, <null>,
-975, 575, 12, <null>, <null>,
-1125, 575, 12, <null>, <null>,
-1275, 575, 12, <null>, <null>,
-1425, 575, 12, <null>, <null>,
-1575, 575, 12, <null>, <null>,
-1725, 575, 12, <null>, <null>,
-1875, 575, 12, <null>, <null>,
-2025, 575, 12, <null>, <null>,
-2175, 575, 12, <null>, <null>,
-2325, 575, 12, <null>, <null>,
+-75, 575, 328, 1277.70043945313, 1126.19995117188,
 actionIndicators
 playerCheckpoints
 player
@@ -38,3 +22,4 @@ skips
 mashes
 holds
 moveLines
+loops
