@@ -30,6 +30,7 @@ var id = 1
 func _ready():
 	add_to_group("blocks")
 	var multiplier = 1.0
+	print("file we are loading: ", Globals.curFile)
 	#if we are using the level 3 tile map, we want the end/start caps to be 2 tile maps wide
 	#meaning that we have 8 middle pieces, meaning that we cant go less than a total of 4 cols
 	if Globals.curFile.begins_with("Level 3"):
@@ -44,13 +45,12 @@ func _ready():
 		minCols = 6
 		numCols = 20
 		capLength = 3
-	elif Globals.curFile.begins_with("Custom"):
+	elif Globals.curFile.begins_with("Custom") or "boss" in Globals.curFile :
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = false
 		$sprite2D/TileMapLayer3.visible = true
 		tileMap = $sprite2D/TileMapLayer3
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
-		setWindowTiles()
 		id = 2
 		multiplier = 20.0
 		minCols = 6

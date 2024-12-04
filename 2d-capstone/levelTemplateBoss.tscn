@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d4injk3dd2i5f"]
+[gd_scene load_steps=33 format=3 uid="uid://r8odmx3e7rns"]
 
 [ext_resource type="Script" path="res://worldObjects/scripts/worldManager.gd" id="1_r8jc0"]
 [ext_resource type="PackedScene" uid="uid://kw4j0yjkt6bb" path="res://worldObjects/blockLong.tscn" id="2_agp1x"]
@@ -24,7 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://cwunsxkx78vcj" path="res://audioTracks/Tutorial_New_155bpm.mp3" id="22_5w80d"]
 [ext_resource type="PackedScene" uid="uid://jbnrqqpvtubf" path="res://worldObjects/killWall.tscn" id="23_vohyu"]
 [ext_resource type="Texture2D" uid="uid://c3kkhcu3x428f" path="res://player/actionLine.png" id="24_tyerp"]
-[ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worldObjects/scorePopup.tscn" id="25_hcgqr"]
+[ext_resource type="PackedScene" uid="uid://cvljdgtwhans5" path="res://worlds/scorePopup.tscn" id="25_hcgqr"]
 [ext_resource type="Script" path="res://worldObjects/scripts/action_indicator_manager.gd" id="26_3m6cj"]
 [ext_resource type="Script" path="res://worldObjects/scripts/checkpoint.gd" id="27_5hb7q"]
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="28_qn1y4"]
