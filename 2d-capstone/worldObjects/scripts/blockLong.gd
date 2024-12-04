@@ -34,17 +34,31 @@ func _ready():
 	#meaning that we have 8 middle pieces, meaning that we cant go less than a total of 4 cols
 	if Globals.curFile.begins_with("Level 3"):
 		$sprite2D/TileMapLayer.visible = false
+		$sprite2D/TileMapLayer3.visible = false
 		$sprite2D/TileMapLayer2.visible = true
 		tileMap = $sprite2D/TileMapLayer2
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
 		setWindowTiles()
 		id = 0
-		multiplier = 12.0
-		minCols = 4
-		numCols = 12
-		capLength = 2
+		multiplier = 20.0
+		minCols = 6
+		numCols = 20
+		capLength = 3
+	elif Globals.curFile.begins_with("Custom"):
+		$sprite2D/TileMapLayer.visible = false
+		$sprite2D/TileMapLayer2.visible = false
+		$sprite2D/TileMapLayer3.visible = true
+		tileMap = $sprite2D/TileMapLayer3
+		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
+		setWindowTiles()
+		id = 2
+		multiplier = 20.0
+		minCols = 6
+		numCols = 20
+		capLength = 3
 	else:
 		$sprite2D/TileMapLayer.visible = true
+		$sprite2D/TileMapLayer3.visible = false
 		$sprite2D/TileMapLayer2.visible = false
 		tileMap = $sprite2D/TileMapLayer
 		allTiles = [startTiles, fillerTiles, endTiles]
@@ -165,8 +179,8 @@ func setTileMaps(posPoints : Array):
 	if posPoints.size() >= 3:
 		#if posPoints[2] == 12:
 			#posPoints[2]=20
-		if id == 0:
-			posPoints[2] -= 2
+		#if id == 0:
+			#posPoints[2] -= 2
 		if posPoints[2] < numCols:
 			while numCols > posPoints[2]:
 				self.decreaseByOneTile()
@@ -232,6 +246,10 @@ func placeWindows() -> void:
 	for i in range(minX+2, maxX+1, curLength):
 		if i <= maxX - 2 - curLength:
 		#account for padding
+			randIndex = int(randf_range(0,3))
+			windowSet = windowTiles[randIndex]
+			#add the buffer
+			curLength = windowLength[randIndex]  + 1
 			for j in range(1, maxY+1, windowHeight+2):
 				var upperLeftCorner = Vector2i(i,j)
 				placeOneWindow(upperLeftCorner, windowSet, windowLength[1])
@@ -260,21 +278,21 @@ func setWindowTiles() -> void:
 	#set the atlas coords of all the windows\
 	var windowOne = []
 	
-	for i in range(0,6):
+	for i in range(0,7):
 		for j in range(5, 9):
 			var newCoords = Vector2i(i,j)
 			windowOne.append(newCoords)
 	
 	var windowTwo = []
 	
-	for i in range(4,7):
+	for i in range(6,11):
 		for j in range(5, 9):
 			var newCoords = Vector2i(i,j)
 			windowTwo.append(newCoords)
 			
 	var windowThree = []
 	
-	for i in range(6,12):
+	for i in range(10,20):
 		for j in range(5, 9):
 			var newCoords = Vector2i(i,j)
 			windowThree.append(newCoords)

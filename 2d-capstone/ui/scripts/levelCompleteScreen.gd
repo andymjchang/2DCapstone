@@ -43,6 +43,9 @@ func _input(event: InputEvent) -> void:
 		update_selection()
 	elif event.is_action_pressed("ui_accept"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	elif event.is_action_pressed("punch") and Globals.usingController:
+		select_current_option()
+	elif Input.is_action_pressed("ui_accept"):
 		select_current_option()
 
 func update_selection() -> void:

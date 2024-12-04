@@ -190,7 +190,8 @@ func _ready():
 	changeCountdown()
 	emit_signal("changeSpeed", 0)
 	#startGame()
-	
+func controllerNavigate(val) -> void:
+	pass
 func startGame():
 	for object in get_tree().get_nodes_in_group("pulsingObjects"):
 		object.setBPM()
@@ -403,7 +404,6 @@ func _physics_process(_delta):
 		#do go to pause instead
 		#get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 		music.stream_paused = true
-		#TODO add this back in 
 		adaptiveMusic.stream_paused = true
 		Globals.paused = true
 		$LevelUI/PauseScreen.visible = true

@@ -43,6 +43,15 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_accept"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
+	elif Input.is_action_just_pressed("punch") and Globals.usingController:
+		handle_selection()
+	elif Input.is_action_pressed("ui_accept"):
+		handle_selection()
+
+func controllerNavigate(val):
+	if val:
+		$storyButton.grab_focus()
+		
 func update_pointer_position():
 	match current_option:
 		MenuOptions.START:
@@ -62,6 +71,7 @@ func update_pointer_position():
 			#Input.warp_mouse($quitButton.global_position + Vector2($quitButton.size.x/2, $quitButton.size.y/2))
 
 func handle_selection():
+	var focused = get_viewport().gui_get_focus_owner()
 	match current_option:
 		MenuOptions.START:
 			_onStoryButtonPressed()
