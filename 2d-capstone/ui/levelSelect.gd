@@ -36,7 +36,8 @@ func _ready() -> void:
 		$Album.position.x - slide_offset, slide_in_duration)
 
 	update_selection()
-
+func controllerNavigate(val) -> void:
+	pass
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -50,7 +51,11 @@ func _input(event: InputEvent) -> void:
 		update_selection()
 	elif event.is_action_pressed("ui_accept"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	elif event.is_action_pressed("punch") and Globals.usingController:
 		select_current_option()
+	elif Input.is_action_pressed("ui_accept"):
+		select_current_option()
+
 
 func update_selection() -> void:
 	var tween = create_tween()

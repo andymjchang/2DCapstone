@@ -527,7 +527,7 @@ func save_scene_to_file():
 							#TODO I dont want to do this, delegate this work to the child class
 							if itemList.name == "platformBlocks":
 								#save the number of cols as well as the extents so we know where to start drawing	
-								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().extents)+ ", "+str(blockChild.get_parent().newPos)+ ", "
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().getExtents())+ ", "+str(blockChild.get_parent().newPos)+ ", "
 							elif itemList.name == "keyBindings":
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().instructionType)+", "
 							elif itemList.name == "enemies":
@@ -542,9 +542,120 @@ func save_scene_to_file():
 						posChain = posChain.substr(0, posChain.length()-1)
 						posChain += "\n"
 						newFile.store_string(posChain)
+				#I want to go through the file and combine all the disconnected blocks into one
+			combineBlocks(newFile)
 	else:
 		displayStatus(NEED_PLAYER, false)
 		
+		displayStatus(UNABLE_TO_SAVE, false)
+	
+func combineBlocks(newFile) -> void:
+	var content = newFile.get_as_text()
+	var allNewBlocks = []
+	#new block, has a start x and an end x and num cols
+	var newBlock = []
+	var newBlockY = -INF
+	var endX
+	var numCols
+	var isPlatform = false
+	#the way that platformBlocks data is set up
+	# x pos, y pos, numCols, extents, newPos
+	#new pos is useless
+	for line in content.split("\n"):
+		#we are satrting a new chain
+			
+		if line == "platformBlocks" and not line.contains(", "):
+			isPlatform = true
+		elif line != "platformBlocks" and not line.contains(", "):
+			isPlatform = false
+		# Position
+		if line.contains(", ") and isPlatform:
+			#var objectParent = baseObject.instantiate()
+			#var instancedObj = instance.instantiate()
+			var posPoints = []
+			for pos in line.split(", "):
+				pos = pos.replace(",", "")
+				if pos.is_valid_float():
+					posPoints.append(pos.to_float())
+				else:
+					posPoints.append(pos)
+				# we have the psoition of the block being saved, we just need to check too see if the y is the same
+			if newBlock.size() == 0:
+					# we are starting a new block chain
+					#has the same start and end because it is one block
+					
+				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2],posPoints[3],posPoints[0]+posPoints[3]]
+				print("starting a new chain: ", newBlock)
+				#if the block we are checking has y/x that is in bounds/close enough - merge
+				#this needs to check extents
+				print("pos points extents hopefully: ", posPoints[3])
+				print("block we are checking ",(posPoints[0] - posPoints[3]) , " our cur end: ",newBlock[1].x+newBlock[3])
+			elif newBlock[0].y == posPoints[1] and abs((posPoints[0] - posPoints[3]) - (newBlock[4])) < 100 :
+				#change the end bounds
+				newBlock[1] = Vector2(posPoints[0], posPoints[1])
+				#extend the num cols
+				newBlock[2] = newBlock[2] + posPoints[2]
+				#store the real end 
+				newBlock[4] = posPoints[0]+posPoints[3]
+				print("adding to new block: ", newBlock)
+			else:
+				#we are ending the block chain
+				#there is a chance that this does not get a singular last block chain
+				allNewBlocks.append(newBlock)
+				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2],posPoints[3],posPoints[0]+posPoints[3]]
+				print("ending a chain: ", newBlock)
+	#now we have to overwite all of the platform code for what we have
+	
+	allNewBlocks.append(newBlock)
+	print("all new blocks: ", allNewBlocks)
+	newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
+	for itemList in objectList.get_children():
+				newFile.store_string(itemList.name + "\n")
+				#print("name look here: ", itemList.name)
+				for item in itemList.get_children():
+					if itemList.name !=  "placers" and itemList.name !=  "moveLines" and itemList.name != "platformBlocks":
+						#go through each of the items children areas
+						var childrenList = item.get_child(0).get_children()
+						var index = 0
+						var editorName = "EditorArea"+str(index)
+						var posChain = ""
+						#go through all of the individual block components
+						#TODO deligate this to the children not here
+						for blockChild in childrenList:
+							#saving for platfrom block differs since their size varies#
+							#TODO I dont want to do this, delegate this work to the child class
+							if itemList.name == "placers":
+								print("we are saving a placer")
+							elif itemList.name == "keyBindings":
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().instructionType)+", "
+							elif itemList.name == "enemies":
+								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().enemyType)+", "
+							elif itemList.name == "mashes":
+								posChain = item.save()
+							else:
+								posChain = posChain + str(blockChild.get_node(editorName).global_position.x) + ", " + str(blockChild.get_node(editorName).global_position.y) + ", "
+							index+=1
+							editorName = "EditorArea"+str(index)
+						#print("child list in save, ", childrenList)
+						posChain = posChain.substr(0, posChain.length()-1)
+						posChain += "\n"
+						newFile.store_string(posChain)
+	newFile.store_string("platformBlocks" + "\n")
+	for block in allNewBlocks:
+		#num cols is dependent on length of the start pos and the end pos
+		#we can get the extents from the platfrom block
+		var extentBlock = platformBlock.instantiate()
+		get_tree().current_scene.add_child(extentBlock)
+		var extents = extentBlock.get_node("Node2D/Area2D/CollisionShape2D").shape.extents
+		var actualStart = block[0].x - extents.x
+		var actualEnd = block[1].x + extents.x
+		var length = abs(actualStart - actualEnd)
+		var newNumCols = round(length/extentBlock.getTileWidth())
+		#this might now work for level 3 tilemap
+		#i need to calulat ethe extents
+		var newString = str(int(block[0].x)) +", " + str(int(block[0].y)) + ", " + str(int(newNumCols)) + ", "+str(abs(block[4]-block[0].x))+", "+str(block[0])+", \n"
+		newFile.store_string(newString)
+	
 # Recursive function to set owner for all children
 func _set_owner_recursive(node: Node, root: Node):
 	for child in node.get_children():
