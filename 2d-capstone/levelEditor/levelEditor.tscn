@@ -194,13 +194,13 @@ texture_normal = ExtResource("7_0wc3n")
 layout_mode = 2
 texture_normal = ExtResource("46_nsemu")
 
-[node name="helpButton" type="TextureButton" parent="UI/FileButtons"]
-layout_mode = 2
-texture_normal = ExtResource("37_frurs")
-
 [node name="keybindButton" type="TextureButton" parent="UI/FileButtons"]
 layout_mode = 2
 texture_normal = ExtResource("17_3udhx")
+
+[node name="helpButton" type="TextureButton" parent="UI/FileButtons"]
+layout_mode = 2
+texture_normal = ExtResource("37_frurs")
 
 [node name="exitButton" type="TextureButton" parent="UI/FileButtons"]
 layout_mode = 2
@@ -717,11 +717,12 @@ text = "Exit"
 [connection signal="mouse_entered" from="UI/FileButtons/fileButton" to="UI" method="_on_file_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/FileButtons/fileButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/FileButtons/fileButton" to="." method="_on_file_button_pressed"]
+[connection signal="mouse_entered" from="UI/FileButtons/keybindButton" to="UI" method="_on_keybind_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/FileButtons/keybindButton" to="UI" method="_on_button_exited"]
+[connection signal="pressed" from="UI/FileButtons/keybindButton" to="." method="_on_keybind_button_pressed"]
 [connection signal="mouse_entered" from="UI/FileButtons/helpButton" to="UI" method="_on_help_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/FileButtons/helpButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/FileButtons/helpButton" to="." method="_on_help_button_pressed"]
-[connection signal="mouse_entered" from="UI/FileButtons/keybindButton" to="UI" method="_on_keybind_button_mouse_entered"]
-[connection signal="mouse_exited" from="UI/FileButtons/keybindButton" to="UI" method="_on_button_exited"]
 [connection signal="pressed" from="UI/FileButtons/exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="text_changed" from="UI/TextEdit0" to="." method="_on_text_edit_0_text_changed"]
 [connection signal="text_changed" from="UI/TextEdit" to="." method="_on_text_edit_text_changed"]

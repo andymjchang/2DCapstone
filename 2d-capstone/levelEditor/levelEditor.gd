@@ -838,4 +838,9 @@ func getAreaChildren(coords, coordType) -> Array:
 	return returnArray
 		
 func _on_help_button_pressed():
-	onboarding.show()
+	editingFile = true
+	onboarding.set_display("instruction")
+
+func _on_keybind_button_pressed():
+	editingFile = true
+	onboarding.set_display("keybindings")

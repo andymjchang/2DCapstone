@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var curStep = 0
+var displayType = "instruction"
 
 @onready var status = $VBoxContainer/StatusMessage
 
@@ -21,6 +22,13 @@ var instructionText = {
 	13: "\nTo play your level, click the play button! Have fun!"
 }
 
+var keybindings = {
+	0: "\nQ: Shifts camera left\nW: Shifts camera right",
+	1: "Delete: Deletes selected object\nTab: Changes type of selected object",
+	2: "\nL: Adds another floor block to the right of selected floor block",
+	3: "\nB: Select multiple blocks for editing. Press B again to unbind."
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -32,16 +40,29 @@ func _process(delta: float) -> void:
 
 func _on_continue_button_pressed() -> void:
 	curStep += 1
-	if curStep >= instructionText.size():
-		print("end of tutortial reached, ending")
-		curStep = 0
-		status.text = instructionText[curStep]
-		hide()
+	if (displayType == "instruction" and curStep >= instructionText.size()) or (displayType == "keybindings" and curStep >= keybindings.size()):
+		close_window()
 	else:
-		status.text = instructionText[curStep]
+		if displayType == "instruction":
+			status.text = instructionText[curStep]
+		else:
+			status.text = keybindings[curStep]
 
 func _on_exit_button_pressed():
+	close_window()
+	pass # Replace with function body.
+
+func close_window():
+	print("end of tutortial reached, ending")
 	curStep = 0
 	status.text = instructionText[curStep]
+	get_parent().editingFile = false
 	hide()
-	pass # Replace with function body.
+
+func set_display(tgt):
+	displayType = tgt
+	if displayType == "instruction":
+		status.text = instructionText[curStep]
+	else:
+		status.text = keybindings[curStep]
+	show()
