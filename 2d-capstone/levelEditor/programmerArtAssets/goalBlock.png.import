@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckk32prff0pp0"
-path="res://.godot/imported/Level_3_tilemap.png-4e2a4a07f1f51d01b140a4dbe0d27a41.ctex"
+uid="uid://c6n7a6e7kbngp"
+path="res://.godot/imported/goalBlock.png-efbe73b574e4737e008bfc5a4cb7fc31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://backgrounds/tilemaps/Level_3_tilemap.png"
-dest_files=["res://.godot/imported/Level_3_tilemap.png-4e2a4a07f1f51d01b140a4dbe0d27a41.ctex"]
+source_file="res://levelEditor/programmerArtAssets/goalBlock.png"
+dest_files=["res://.godot/imported/goalBlock.png-efbe73b574e4737e008bfc5a4cb7fc31.ctex"]
 
 [params]
 

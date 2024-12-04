@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c57gt1oqgpg2"]
 
-[ext_resource type="Texture2D" uid="uid://cheyr4ahq0rl7" path="res://levelEditor/programmerArtAssets/OIP.jpg" id="2_11mjr"]
+[ext_resource type="Texture2D" uid="uid://c6n7a6e7kbngp" path="res://levelEditor/programmerArtAssets/goalBlock.png" id="1_8hwtv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkiii"]
 size = Vector2(80, 37)
@@ -17,5 +17,6 @@ shape = SubResource("RectangleShape2D_hkiii")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 modulate = Color(0.527864, 0.196212, 0.308652, 1)
-scale = Vector2(0.170886, 0.0780591)
-texture = ExtResource("2_11mjr")
+position = Vector2(-0.272151, -0.617083)
+scale = Vector2(0.425443, 0.445717)
+texture = ExtResource("1_8hwtv")

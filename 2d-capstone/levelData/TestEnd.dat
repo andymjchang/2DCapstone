@@ -1,0 +1,31 @@
+160
+platformBlocks
+25, 650, 20, <null>, <null>,
+149.800003051758, 650, 20, <null>, <null>,
+274.600006103516, 650, 20, <null>, <null>,
+399.399993896484, 650, 20, <null>, <null>,
+524.200012207031, 650, 20, <null>, <null>,
+649, 650, 20, <null>, <null>,
+773.799987792969, 650, 20, <null>, <null>,
+898.599975585938, 650, 20, <null>, <null>,
+actionIndicators
+playerCheckpoints
+player
+0, 588.089050292969,
+enemies
+killFloors
+goalBlocks
+875, 625,
+breakableWalls
+ziplines
+placers
+slideWalls
+powerups
+jumpBoosts
+coins
+keyBindings
+skips
+mashes
+holds
+moveLines
+loops

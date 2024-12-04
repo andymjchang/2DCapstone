@@ -426,8 +426,6 @@ platformBlocks
 59250, 1050, 16, 60.8999977111816, 59234.3984375,
 61300, 1100, 20, <null>, <null>,
 28175, 275, 20, <null>, <null>,
--225, 575, 20, <null>, <null>,
--375, 575, 20, <null>, <null>,
 actionIndicators
 playerCheckpoints
 player

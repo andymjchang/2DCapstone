@@ -5,8 +5,9 @@ var activeSprite
 var actionIndicators
 var curSprite
 
+var capLength = 3
 var numCols = 20
-var numRows = 13
+var minCols = 6
 var extents
 var tileHeight
 var fillerTiles = [Vector2(2,1),Vector2(2,2),Vector2(2,2), Vector2(2,4)]
@@ -29,25 +30,35 @@ var id = 1
 func _ready():
 	add_to_group("blocks")
 	var multiplier = 1.0
+	#if we are using the level 3 tile map, we want the end/start caps to be 2 tile maps wide
+	#meaning that we have 8 middle pieces, meaning that we cant go less than a total of 4 cols
 	if Globals.curFile.begins_with("Level 3"):
 		$sprite2D/TileMapLayer.visible = false
+		$sprite2D/TileMapLayer3.visible = false
 		$sprite2D/TileMapLayer2.visible = true
 		tileMap = $sprite2D/TileMapLayer2
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
 		setWindowTiles()
 		id = 0
-		multiplier = 12.0
-	elif Globals.curFile.begins_with("bossLevel"):
+		multiplier = 20.0
+		minCols = 6
+		numCols = 20
+		capLength = 3
+	elif Globals.curFile.begins_with("Custom"):
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = false
 		$sprite2D/TileMapLayer3.visible = true
-		tileMap = $sprite2D/TileMapLayer2
+		tileMap = $sprite2D/TileMapLayer3
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
 		setWindowTiles()
-		id = 0
-		multiplier = 12.0
+		id = 2
+		multiplier = 20.0
+		minCols = 6
+		numCols = 20
+		capLength = 3
 	else:
 		$sprite2D/TileMapLayer.visible = true
+		$sprite2D/TileMapLayer3.visible = false
 		$sprite2D/TileMapLayer2.visible = false
 		tileMap = $sprite2D/TileMapLayer
 		allTiles = [startTiles, fillerTiles, endTiles]
@@ -75,7 +86,7 @@ func extendByOneTile() -> void :
 	#we have to reset the end of the tile so that it doesnt look weird
 	
 	#we want to move the end cap down by two for all of them 
-	for i in range(0,3):
+	for i in range(0,capLength):
 			#starts at the furthest left box of the end tiles
 			var curX = minMax[1].x - i
 			for j in range(startY,endY+1):
@@ -109,7 +120,7 @@ func extendByOneTile() -> void :
 	numCols+=2
 	
 func decreaseByOneTile() -> void: 
-	if numCols > 6:
+	if numCols > minCols:
 		var usedCells = tileMap.get_used_cells()
 		var minMax = getMaxMinCoord(usedCells)
 		#we want to delete one col
@@ -123,7 +134,7 @@ func decreaseByOneTile() -> void:
 
 		#we want to delete two rows, but not starting at the end
 		for i in range (0,2):
-			var curX = endX - (i + 3)
+			var curX = endX - (i + capLength)
 			moveY = startY
 			for j in range(startY,endY+1):
 				#print("deleting coords: ",curX," , ", moveY)
@@ -133,7 +144,8 @@ func decreaseByOneTile() -> void:
 		startY = minMax[0].y
 		moveY = startY
 		#add in end cap
-		for i in range(2,-1,-1):
+		var startNum = 2 if capLength == 3 else 1
+		for i in range(startNum,-1,-1):
 			#starts at the furthest left box of the end tiles
 			var curX = minMax[1].x - i
 			for j in range(startY,endY+1):
@@ -165,8 +177,10 @@ func getMaxMinCoord(usedCells : Array) -> Array:
 func setTileMaps(posPoints : Array):
 	#print("setting tile maps")
 	if posPoints.size() >= 3:
-		if posPoints[2] == 12:
-			posPoints[2]=20
+		#if posPoints[2] == 12:
+			#posPoints[2]=20
+		#if id == 0:
+			#posPoints[2] -= 2
 		if posPoints[2] < numCols:
 			while numCols > posPoints[2]:
 				self.decreaseByOneTile()
@@ -191,7 +205,7 @@ func setFillerTiles() -> void:
 	
 	#start from minx +1 and go to maxx -1
 	fillerTiles = []
-	for currentX in range(minX + 3, maxX-2, 2):
+	for currentX in range(minX + capLength, maxX-(capLength-1), 2):
 		var nextX = currentX + 1
 		var curCoords : Vector2
 		var curNextCoords : Vector2
@@ -231,6 +245,10 @@ func placeWindows() -> void:
 	for i in range(minX+2, maxX+1, curLength):
 		if i <= maxX - 2 - curLength:
 		#account for padding
+			randIndex = int(randf_range(0,3))
+			windowSet = windowTiles[randIndex]
+			#add the buffer
+			curLength = windowLength[randIndex]  + 1
 			for j in range(1, maxY+1, windowHeight+2):
 				var upperLeftCorner = Vector2i(i,j)
 				placeOneWindow(upperLeftCorner, windowSet, windowLength[1])
@@ -241,7 +259,7 @@ func placeWindows() -> void:
 func placeOneWindow(start, windowSet, length) -> void:
 	
 	var index = 0
-	print("placing one window")
+	#print("placing one window")
 	#print("window height:", windowHeight)
 	#print("window length:", length)
 	#print("window set: ", windowSet)
@@ -259,21 +277,21 @@ func setWindowTiles() -> void:
 	#set the atlas coords of all the windows\
 	var windowOne = []
 	
-	for i in range(0,6):
+	for i in range(0,7):
 		for j in range(5, 9):
 			var newCoords = Vector2i(i,j)
 			windowOne.append(newCoords)
 	
 	var windowTwo = []
 	
-	for i in range(4,7):
+	for i in range(6,11):
 		for j in range(5, 9):
 			var newCoords = Vector2i(i,j)
 			windowTwo.append(newCoords)
 			
 	var windowThree = []
 	
-	for i in range(6,12):
+	for i in range(10,20):
 		for j in range(5, 9):
 			var newCoords = Vector2i(i,j)
 			windowThree.append(newCoords)

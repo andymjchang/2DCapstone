@@ -194,7 +194,7 @@ func tabType(typeOptions, typeName, listMap) -> void:
 		curIndex = keyList.find(blockType)
 		newObjectKey = keyList[curIndex+1] if curIndex+1 <= keyList.size()-1 else keyList[0]
 		newObject = typeOptions[newObjectKey].instantiate()
-		print("new object key", newObjectKey)
+		print("new object key ", newObjectKey)
 		testStr = "objectList/"+ str(listMap[newObjectKey])
 		var listToAddToo = currentScene.get_node(testStr)
 		#TODO dont think I need this

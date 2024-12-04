@@ -24,6 +24,10 @@ var playerName: String = ""
 var playerEntry
 var focused = false
 func _ready() -> void:
+	if Globals.inEditor:
+		get_node("Vinyl/1/Level1").text = "Level\nEditor"
+	else:
+		get_node("Vinyl/1/Level1").text = "Level\nSelect"
 	self.updateScoreData.connect(_onUpdateScoreData)
 	$Leaderboard.position.x += slide_offset
 	$Leaderboard.visible = false
@@ -32,13 +36,18 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if !visible or focused:
 		return
-	if event.is_action_pressed("jump"):
+	if event is InputEventMouseMotion:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	elif event.is_action_pressed("jump"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		current_option = (current_option - 1 + options_count) % options_count
 		update_selection()
 	elif event.is_action_pressed("slide"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		current_option = (current_option + 1) % options_count
 		update_selection()
-	elif event.is_action_pressed("punch"):
+	elif event.is_action_pressed("punch") and Globals.usingController:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		select_current_option()
 	elif event.is_action_pressed("ui_left"):
 		leaderboard_slide_in()
@@ -67,7 +76,10 @@ func select_current_option() -> void:
 			else:
 				Globals.FadeTransition("res://ui/levelSelect.tscn")
 		MenuOptions.LEVEL_SELECT:
-			Globals.FadeTransition("res://ui/levelSelect.tscn")
+			if Globals.inEditor:
+				Globals.FadeTransition("res://levelEditor/levelEditor.tscn")
+			else:
+				Globals.FadeTransition("res://ui/landingPage.tscn")
 		MenuOptions.RESTART:
 			Globals.relocateToCheckpoint = false
 			get_tree().reload_current_scene()

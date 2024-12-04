@@ -51,6 +51,10 @@ func _on_help_button_mouse_entered() -> void:
 	helpWindow.show()
 	desc.text = formatText("\n\nClick me for help!")
 
+func _on_keybind_button_mouse_entered():
+	helpWindow.position = getPosition($FileButtons/saveButton)
+	helpWindow.show()
+	desc.text = formatText("\nShows the keyboard shortcuts for certain commands")
 
 ########################################################################################
 ### TOP ROW ############################################################################
@@ -159,3 +163,5 @@ func _on_mass_move_button_mouse_entered() -> void:
 	helpWindow.position.x += 50
 	helpWindow.show()
 	desc.text = formatText("[u]Select[/u]\n Select multiple objects in the level editor")
+
+
