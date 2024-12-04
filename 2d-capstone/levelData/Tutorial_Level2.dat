@@ -1,5 +1,6 @@
-155
+160
 platformBlocks
+-75, 575, 328, 1277.70043945313, 1126.19995117188,
 actionIndicators
 playerCheckpoints
 player
@@ -22,5 +23,3 @@ mashes
 holds
 moveLines
 loops
-platformBlocks
--75, 575, 327, 2476.5, (-75, 575), 
