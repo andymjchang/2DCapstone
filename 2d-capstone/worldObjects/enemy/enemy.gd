@@ -26,6 +26,9 @@ var activeSprite
 var isMultiPunch = false
 var punchesLeft = 0.0
 
+# Add this near the top with other variables
+var debug_draw_enabled = false  # Toggle for ray visualization
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	CheckForBoss()
@@ -111,14 +114,22 @@ func setEnemyType(posPoints) -> void :
 				$Area2D/CollisionShape2D.shape.extents = Vector2(newXExtents, newYExtents)
 		#set the collision based on it 
 func check_platform_below() -> bool:
+	if debug_draw_enabled:
+		queue_redraw()
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 50))
+	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 60))
 	query.collision_mask = 0b1  # Platform is on layer 1
 	var result = space_state.intersect_ray(query)
 	return result and result.collider.is_in_group("blocks")
 
 func CheckForBoss() -> void:
-	if Globals.curFile == "bossLevel":
+	if Globals.curFile == "BossLevel":
 		isBossLevel = true
 		move_speed = 1200
 		gravity = 1200
+
+# Add this new method
+func _draw() -> void:
+	if debug_draw_enabled:
+		# Draw the raycast line in red
+		draw_line(Vector2.ZERO, Vector2(0, 50), Color.RED, 2.0)
