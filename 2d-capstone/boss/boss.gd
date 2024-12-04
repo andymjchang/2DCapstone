@@ -19,7 +19,7 @@ var attack_interval: float = 3.0  #
 var attack_chance: float = 0.3   
 
 func _ready() -> void:
-	if !Globals.curFile.begins_with("bossLevel"):
+	if !Globals.curFile.begins_with("BossLevel"):
 		self.visible = false
 	$Sprite/TextureProgressBar.max_value = health
 	$Sprite/TextureProgressBar.value = health
