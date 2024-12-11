@@ -37,7 +37,7 @@ func processBeat(delta: float) -> void:
 	
 	if beatTimer >= beatInterval:
 		beatTimer -= beatInterval
-		if healthStatus == "full":
+		if healthStatus == "full" or healthStatus == "half":
 			startPulse()
 	scale = lerp(scale, originalScale, lerpFactor)
 	lerpFactor = min(lerpFactor + delta * 2, 1)
@@ -72,6 +72,7 @@ func takeDamage() -> void:
 			print("deleting a heart")
 		"half":
 			self.fullHealth.visible = false
+			self.halfHealth.visible = false
 			self.zeroHealth.visible = true
 			healthStatus = "zero"
 		"zero":
@@ -81,7 +82,7 @@ func takeDamage() -> void:
 func gainHeart() -> void:
 	#only do this if we are damaged
 	#TODO once we decide if we are doing half heart, incorporate that 
-	if healthStatus == "zero" or "half":
+	if healthStatus == "zero" or healthStatus == "half":
 		self.zeroHealth.visible = false
 		self.halfHealth.visible = false
 		self.fullHealth.visible = true

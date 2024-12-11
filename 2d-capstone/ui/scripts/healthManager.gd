@@ -38,10 +38,12 @@ func _onHealingTaken(who) -> void:
 	#heal by one heart
 	print("ui heal!")
 	if curP2Heart:
-		if curP2HeartIndex + 1 < 3:
+		if curP2HeartIndex + 1 < 3 :
 			curP2HeartIndex += 1
 			curP2Heart = self.get_node("player2").get_child(curP2HeartIndex)
 			curP2Heart.gainHeart()	
+		elif curP2Heart.healthStatus == "half":
+			curP2Heart.gainHeart()
 		else:
 			curP2HeartIndex = 3
 			curP2Heart = self.get_node("player2").get_child(curP2HeartIndex)
