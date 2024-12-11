@@ -356,11 +356,11 @@ func _onActivatePowerup():
 			sfxPlayer.stream = healthSfx
 			sfxPlayer.stream.loop = false
 			sfxPlayer.play()
-			var potentialHealth = health + 6
-			if potentialHealth > 18:
-				health = 18
+			var potentialHealth = health + 1
+			if potentialHealth > 6:
+				health = 6
 			else:
-				health += 6
+				health += 1
 			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("increaseHealth", self.name)
 		Globals.powerType.SPEEDUP:
 			worldNode.emit_signal("changeSpeed", 1)
