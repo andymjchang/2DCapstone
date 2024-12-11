@@ -212,7 +212,7 @@ func loadLevel():
 	#if Globals.currentSongFileName:
 		#levelFile = Globals.currentEditorFileName
 	
-	print("level name ", levelFile)
+	#print("level name ", levelFile)
 	var content
 	if Globals.inEditor:
 		content = FileAccess.open("user://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
@@ -303,7 +303,7 @@ func loadLevel():
 				instancedObj.add_to_group("platforms")
 				
 			if currentName == "keyBindings":
-				print("setting image")
+				#print("setting image")
 				instancedObj.setImage(posPoints)
 			if currentName == "enemies":
 				instancedObj.setEnemyType(posPoints)
@@ -312,7 +312,7 @@ func loadLevel():
 			
 		elif ".mp3" in line:
 			# audio file
-			print("Changing audio to: ", line)
+			#print("Changing audio to: ", line)
 			Globals.currentSongFileName = line
 	
 	# load the actionArrays
@@ -336,7 +336,7 @@ func changeCountdown():
 	statusMessage.text = ""
 
 func _onCheckGameOver():
-	print("Checking if both dead")
+	#print("Checking if both dead")
 	if player1.dead:
 		self.emit_signal("gameOver")
 
@@ -411,7 +411,7 @@ func _physics_process(_delta):
 	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused and !Globals.customStart and !Globals.relocateToCheckpoint and !Globals.gameOver:
 		startGame()
 	elif (Globals.customStart or Globals.relocateToCheckpoint) and !Globals.inLevel and Globals.time >= musicTime + 3.0 and !Globals.gameOver:
-		print("global time: ", Globals.time, " music time: ", musicTime)
+		#print("global time: ", Globals.time, " music time: ", musicTime)
 		startGame()
 		
 	if skipping:
@@ -456,7 +456,7 @@ func getNearestCheckpoint(who):
 						nearestPoint = i
 						shortestDistance = distance
 			#print("Relocating to: ", nearestPoint.position)
-	print("The nearest point is: ", nearestPoint)
+	#print("The nearest point is: ", nearestPoint)
 	return nearestPoint
 	
 # Basic checkpointing system
@@ -468,7 +468,7 @@ func _onResetPosition(who):
 
 func _onEndGameBodyEntered(body:Node2D):
 	if (body.is_in_group("players")):
-		print("Game over!")
+		#print("Game over!")
 		self.emit_signal("gameOver")
 
 func _onRunBoundsBodyEntered(body: Node2D) -> void:
@@ -533,13 +533,13 @@ func _onChangeSpeed(speedType):
 		timeMultiplier = 1.0
 		
 	if onboardingSlides:
-		print("onbaording slides are in ")
+		#print("onbaording slides are in ")
 		self.get_tree().current_scene.get_node("Camera2D//onboardingPopUp").emit_signal("speedChange", timeMultiplier)
 
 func _onResetLoop(startTime, destination, enemyPos, powerPos):
-	print("Resetting loop")
-	print("Destination to: ", destination.global_position)
-	print("Restarting to time: ", Globals.time)
+	#print("Resetting loop")
+	#print("Destination to: ", destination.global_position)
+	#print("Restarting to time: ", Globals.time)
 	player1.position = destination.global_position
 	camera.position = destination.global_position
 	camera.position.x += 250
