@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://bqwryhi02l72w" path="res://ui/healthManager.tscn" id="17_bwxam"]
 [ext_resource type="PackedScene" path="res://worldObjects/skip.tscn" id="17_hifbs"]
 [ext_resource type="AudioStream" uid="uid://cwunsxkx78vcj" path="res://audioTracks/Tutorial_New_155bpm.mp3" id="18_44qgl"]
-[ext_resource type="PackedScene" path="res://worldObjects/enemy/mashEnemy.tscn" id="18_qn7u4"]
+[ext_resource type="PackedScene" uid="uid://elmqse28rdrx" path="res://worldObjects/enemy/mashEnemy.tscn" id="18_qn7u4"]
 [ext_resource type="PackedScene" uid="uid://cgjl1xcxhhjxu" path="res://worldObjects/powerup.tscn" id="19_5vjyv"]
 [ext_resource type="PackedScene" uid="uid://ctn54mgrw1nra" path="res://worldObjects/loopMarkers/loopManager.tscn" id="19_yq3bk"]
 [ext_resource type="PackedScene" uid="uid://25td4r2m7r1e" path="res://ui/scoreBar.tscn" id="20_iu2pl"]
