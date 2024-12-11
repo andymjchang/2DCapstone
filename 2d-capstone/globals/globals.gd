@@ -1,5 +1,8 @@
 extends Node
 
+signal playMove()
+signal playSelect()
+
 const physicsFrameRate : float = 60
 const beatSize : float = 150
 
@@ -82,12 +85,20 @@ var levelSequence = [
 func _ready():
 	#set up controller detection
 	Input.connect("joy_connection_changed",_onJoyConnectionChanged)
+	playMove.connect(_onMoveSound)
+	playSelect.connect(_onSelectSound)
 	randomize()
 	
 
 #func _process(delta: float) -> void:
 	#time += delta;
 
+func _onSelectSound():
+	$selectSound.play()
+	pass
+func _onMoveSound():
+	$moveSound.play()
+	pass
 func _onJoyConnectionChanged(id, connected):
 	print("changing controller val: ", connected)
 	usingController = connected

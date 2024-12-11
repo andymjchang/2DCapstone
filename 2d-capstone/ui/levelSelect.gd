@@ -56,6 +56,7 @@ func _input(event: InputEvent) -> void:
 
 
 func update_selection() -> void:
+	Globals.emit_signal("playMove")
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
@@ -81,6 +82,7 @@ func update_selection() -> void:
 			pass
 
 func select_current_option() -> void:
+	Globals.emit_signal("playSelect")
 	match current_option:
 		LevelOptions.BACK:
 			Globals.FadeTransition("res://ui/landingPage.tscn") 		

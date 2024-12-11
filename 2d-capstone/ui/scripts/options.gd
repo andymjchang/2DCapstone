@@ -66,7 +66,7 @@ func _onKeyBindSet(val):
 	allowSelect = val
 	
 func update_selection() -> void:
-	
+	Globals.emit_signal("playMove")
 	# Create tween for smooth rotation
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
@@ -86,6 +86,7 @@ func update_selection() -> void:
 
 func select_current_option() -> void:
 	reset_options()
+	Globals.emit_signal("playSelect")
 	match current_option:
 		MenuOptions.KEY_BINDINGS:
 			$Keybindings.visible = true

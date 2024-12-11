@@ -53,6 +53,7 @@ func controllerNavigate(val):
 		$storyButton.grab_focus()
 		
 func update_pointer_position():
+	Globals.emit_signal("playMove")
 	match current_option:
 		MenuOptions.START:
 			pointer.position.y = $storyButton.position.y + ($storyButton.size.y / 2)
@@ -71,6 +72,7 @@ func update_pointer_position():
 			#Input.warp_mouse($quitButton.global_position + Vector2($quitButton.size.x/2, $quitButton.size.y/2))
 
 func handle_selection():
+	Globals.emit_signal("playSelect")
 	var focused = get_viewport().gui_get_focus_owner()
 	match current_option:
 		MenuOptions.START:

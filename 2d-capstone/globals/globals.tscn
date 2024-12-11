@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcrbvcdcbn5ay"]
+[gd_scene load_steps=8 format=3 uid="uid://dcrbvcdcbn5ay"]
 
 [ext_resource type="Script" path="res://globals/globals.gd" id="1_nrp7m"]
 [ext_resource type="Texture2D" uid="uid://bpr2jpqk4ugbf" path="res://ui/assets/Quit_button_unpressed.png" id="2_h7na6"]
 [ext_resource type="Texture2D" uid="uid://cvl0lsfhi2474" path="res://ui/assets/Quit_button_pressed.png" id="3_le2si"]
 [ext_resource type="Material" uid="uid://cixtw2m5uipv6" path="res://shaders/vignette.tres" id="4_wlah7"]
 [ext_resource type="Material" uid="uid://b1u8t6hm0lac3" path="res://shaders/screenGlitch.tres" id="5_nr5wo"]
+[ext_resource type="AudioStream" uid="uid://duceu1xbcjbqm" path="res://audioEffects/UI_Main.mp3" id="6_78r7u"]
+[ext_resource type="AudioStream" uid="uid://75f1q0s5n2l0" path="res://audioEffects/UI_Chime.mp3" id="7_osc06"]
 
 [node name="Globals" type="Node2D"]
 process_mode = 3
@@ -42,6 +44,12 @@ offset_bottom = 1080.0
 mouse_filter = 2
 
 [node name="ScreenFlashTimer" type="Timer" parent="."]
+
+[node name="moveSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_78r7u")
+
+[node name="selectSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_osc06")
 
 [connection signal="button_down" from="PreviewCanvasLayer/TextureButton" to="." method="_on_texture_button_button_down"]
 [connection signal="timeout" from="ScreenFlashTimer" to="." method="_on_screen_flash_timer_timeout"]
