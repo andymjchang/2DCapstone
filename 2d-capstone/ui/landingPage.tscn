@@ -1,9 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://dis3tqrrssvdv"]
+[gd_scene load_steps=19 format=3 uid="uid://dis3tqrrssvdv"]
 
 [ext_resource type="Script" path="res://ui/scripts/landingPage.gd" id="1_4duo3"]
 [ext_resource type="Texture2D" uid="uid://dxspywuv7m6gp" path="res://ui/assets/Start_button_unpressed.png" id="2_76o7c"]
+[ext_resource type="Texture2D" uid="uid://jvj24olunor2" path="res://ui/assets/Title_screen/Title_screen/Title_Screen_background.png" id="2_ehksf"]
 [ext_resource type="Texture2D" uid="uid://g15lptde2dlw" path="res://ui/assets/Start_button_pressed.png" id="3_htjxe"]
+[ext_resource type="SpriteFrames" uid="uid://bvss01tsvppyo" path="res://worldObjects/enemy/flying_enemy.tres" id="3_ohmnf"]
 [ext_resource type="Texture2D" uid="uid://bpr2jpqk4ugbf" path="res://ui/assets/Quit_button_unpressed.png" id="4_1m2j0"]
+[ext_resource type="Script" path="res://ui/menu_enemy.gd" id="4_ibw0e"]
 [ext_resource type="Texture2D" uid="uid://cvl0lsfhi2474" path="res://ui/assets/Quit_button_pressed.png" id="5_bjqql"]
 [ext_resource type="Texture2D" uid="uid://cna5ly6pyb60n" path="res://ui/assets/level_editor_button_upressed.png" id="5_cqwvl"]
 [ext_resource type="Texture2D" uid="uid://b0a3a04h0veeg" path="res://ui/assets/Level_Editor_Button_Pressed.png" id="6_28gch"]
@@ -12,15 +15,25 @@
 [ext_resource type="Texture2D" uid="uid://b315tisfu41j4" path="res://ui/assets/Options_button_pressed.png" id="11_aoani"]
 [ext_resource type="Texture2D" uid="uid://cm2uia226ni58" path="res://ui/assets/options_button_upressed.png" id="11_vd7xa"]
 [ext_resource type="AudioStream" uid="uid://puuctcf72yw7" path="res://audioTracks/MainMenu_115bpm.mp3" id="13_1wn55"]
-[ext_resource type="Texture2D" uid="uid://jtrt6x2e2mhf" path="res://ui/assets/Title_Screen.png" id="13_7u8fu"]
 [ext_resource type="Texture2D" uid="uid://dvq2jnoaasowg" path="res://ui/assets/pointer_2.png" id="14_jbabd"]
 [ext_resource type="Script" path="res://ui/scripts/pulseMenuSprite.gd" id="15_y8v3w"]
+[ext_resource type="Texture2D" uid="uid://dc7wymkqbe1ie" path="res://ui/assets/Title_screen/Title_screen/Title_Screen_foreground.png" id="16_h4hq5"]
 
 [node name="LandingPage" type="CanvasLayer"]
 script = ExtResource("1_4duo3")
 
 [node name="TitleScreen" type="Sprite2D" parent="."]
-texture = ExtResource("13_7u8fu")
+texture = ExtResource("2_ehksf")
+centered = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2062, 472)
+sprite_frames = ExtResource("3_ohmnf")
+autoplay = "default"
+script = ExtResource("4_ibw0e")
+
+[node name="TitleScreenForeground" type="Sprite2D" parent="."]
+texture = ExtResource("16_h4hq5")
 centered = false
 
 [node name="storyButton" type="TextureButton" parent="."]

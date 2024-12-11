@@ -47,7 +47,7 @@
 [ext_resource type="PackedScene" path="res://levelEditorObjects/holdScene.tscn" id="26_oo2r2"]
 [ext_resource type="PackedScene" path="res://levelEditorObjects/loopScene.tscn" id="27_jho4t"]
 [ext_resource type="PackedScene" uid="uid://drwoyrkcgtkqc" path="res://levelEditorObjects/massMoveScene.tscn" id="27_v8yd3"]
-[ext_resource type="PackedScene" uid="uid://cwc2nel1xt6xx" path="res://worlds/levelTemplate.tscn" id="29_bin01"]
+[ext_resource type="PackedScene" uid="uid://cwc2nel1xt6xx" path="res://worlds/ziplineTestTemplate.tscn" id="29_bin01"]
 [ext_resource type="Texture2D" uid="uid://dd5m0kwji44w1" path="res://levelEditor/programmerArtAssets/zipline.png" id="30_pq2h6"]
 [ext_resource type="Script" path="res://levelEditor/ui.gd" id="33_n0vg3"]
 [ext_resource type="Texture2D" uid="uid://b1ymqen6srbge" path="res://levelEditor/programmerArtAssets/powerup.png" id="33_pappt"]
