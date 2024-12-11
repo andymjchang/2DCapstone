@@ -434,8 +434,25 @@ script = ExtResource("36_wn18y")
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/objectSelector/audioTracks"]
 layout_mode = 2
 
-[node name="VScrollBar" type="VScrollBar" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+[node name="Button" type="Button" parent="UI/objectSelector/audioTracks/VBoxContainer"]
 layout_mode = 2
+text = "120Metronome_v2.mp3"
+
+[node name="Button5" type="Button" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+layout_mode = 2
+text = "Tutorial_Revamped_155bpm.mp3"
+
+[node name="Button3" type="Button" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+layout_mode = 2
+text = "Level1_Shifted_155bpm.wav"
+
+[node name="Button4" type="Button" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+layout_mode = 2
+text = "Level2_OGNoMelody_156bpm_1.mp3"
+
+[node name="Button2" type="Button" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+layout_mode = 2
+text = "BossLevel_FINAL_165bpm.mp3"
 
 [node name="MiscButtons" type="VBoxContainer" parent="UI"]
 anchors_preset = 4
