@@ -18,7 +18,7 @@ var timeHeld = 0.0
 var killFDict: Dictionary = {}
 var saveFileName 
 var isPlaying = false
-var levelDataPath = "res://levelData/"
+var levelDataPath = "user://levelData/"
 var overwrite = false
 var isLoad = true
 var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "skip", "mash", "hold", "moveLine", "loop"]
@@ -35,6 +35,7 @@ var MIN_STEP : int = 25
 var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
 var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
+var UNABLE_TO_SAVE2 = "Unable to play.\nNeed file name."
 
 
 @export var p1Placer : PackedScene
@@ -134,6 +135,9 @@ var levelSaved = false
 
 
 func _ready():
+	var dir = DirAccess.open("user://")
+	dir.make_dir("levelData")
+	Globals.inEditor = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
 	Globals.customStart = false
@@ -229,7 +233,7 @@ func loadLevel():
 		for child in objList.get_children():
 			child.queue_free()
 
-	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
+	var content = FileAccess.open("user://levelData/" + saveFileName + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlock, platformBlocksList, blockTypes[2]], 
 		"goalBlocks": [goalBlock, goalBlocksList, blockTypes[4]],
 		"killFloors": [killFloor, killFloorsList, blockTypes[6]],
@@ -496,7 +500,8 @@ func save_scene_to_file():
 		else:
 			overwrite = false
 			# successful save
-			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
+			var newFile = FileAccess.open("user://levelData/" + saveFileName + ".dat", 7)
+			print("New file? :", newFile)
 			newFile.store_string(get_node("UI/TextEdit0").text + "\n")
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
@@ -595,7 +600,7 @@ func combineBlocks(newFile) -> void:
 	
 	allNewBlocks.append(newBlock)
 	print("all new blocks: ", allNewBlocks)
-	newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
+	newFile = FileAccess.open("user://levelData/" + saveFileName + ".dat", 7)
 	for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
 				#print("name look here: ", itemList.name)
@@ -826,9 +831,10 @@ func _on_load_file_pressed() -> void:
 	$UI/FileLoadMode/StatusMessage.text = "Enter a file name."
 	var tgtFile = $UI/FileLoadMode/FileName.text
 	print("Tgt:" , tgtFile)
-	# if "tutorial" in tgtFile.to_lower() or "level 1" in tgtFile.to_lower() or "level 2" in tgtFile.to_lower() or "level 3" in tgtFile.to_lower():
-	# 	$UI/FileLoadMode/StatusMessage.text = "Cannot open file."
-	if FileAccess.file_exists(levelDataPath + tgtFile + ".dat"):
+	var protectedFiles = ["level 1", "level 2", "level 3", "bossLevel", "tutorial", "tutorial_level2", "tutorial_level3", "customlevel"]
+	if tgtFile.to_lower() in protectedFiles:
+		$UI/FileLoadMode/StatusMessage.text = "Cannot open file."
+	elif FileAccess.file_exists(levelDataPath + tgtFile + ".dat"):
 		saveFileName = tgtFile
 		loadLevel()
 		$UI/FileLoadMode.hide()
@@ -841,25 +847,28 @@ func _on_load_file_pressed() -> void:
 	currentFile.text = "Now editing: " + tgtFile + ".dat"
 
 func _on_play_level_button_button_down() -> void:
-	overwrite = true
-	save_scene_to_file()
-	# var scene_instance = levelTemplatePacked.instantiate()
-	
-	get_tree().paused = false
-	
-	# Access the current scene and remove it from the scene tree
-	#var current_scene = get_tree().current_scene
-	#Globals.editorNode = current_scene
-	Globals.enablePreviewUI()
-	Globals.currentEditorFileName = saveFileName
-	Globals.curFile = saveFileName
-	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
-	#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
-	#current_scene.visible = false
+	if saveFileName != null:
+		overwrite = true
+		save_scene_to_file()
+		# var scene_instance = levelTemplatePacked.instantiate()
+		
+		get_tree().paused = false
+		
+		# Access the current scene and remove it from the scene tree
+		#var current_scene = get_tree().current_scene
+		#Globals.editorNode = current_scene
+		Globals.enablePreviewUI()
+		Globals.currentEditorFileName = saveFileName
+		Globals.curFile = saveFileName
+		get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+		#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+		#current_scene.visible = false
 
-	# Add the new scene to the scene tree and set it as the current scene
-	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
-	#get_tree().current_scene = scene_instance  # Set it as the new current scene
+		# Add the new scene to the scene tree and set it as the current scene
+		#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
+		#get_tree().current_scene = scene_instance  # Set it as the new current scene
+	else:
+		displayStatus(UNABLE_TO_SAVE2, false)
 
 func lengthenPlatform() -> void:
 	#this isnt modular but it will work for now TODO

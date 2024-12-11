@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	
 	
 func fillAudioScroll() -> void:
-	var audioDirPath = "res://audioTracks"
+	var audioDirPath = "res://audioTracksEditor/"
 	var audioDir = DirAccess.open(audioDirPath)
 	if(audioDir):
 		audioDir.list_dir_begin()
@@ -32,7 +32,7 @@ func fillAudioScroll() -> void:
 			
 func _on_button_pressed(fileName) -> void:
 	Globals.currentSongFileName = fileName
-	var audioPath = "res://audioTracks/" + fileName
+	var audioPath = "res://audioTracksEditor/" + fileName
 	var newAudio = load(audioPath) as AudioStream
 	print("audio path: ", audioPath)
 	print("new audio: ", newAudio)

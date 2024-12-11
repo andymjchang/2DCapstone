@@ -110,10 +110,6 @@ func _ready():
 		Globals.currentSongFileName = "Level2_OGNoMelody_156bpm_1.mp3"
 		adaptiveMusic.active = true
 		backgroundName = "Lvl2"
-	if levelFile.begins_with("CustomLevel"):
-		Globals.setBPM(160)
-		Globals.currentSongFileName = "CustomLevel_Shifted_160bpm.wav"
-		backgroundName = "Lvl3"
 	if levelFile.begins_with("BossLevel"):
 		Globals.setBPM(165)
 		Globals.currentSongFileName = "BossLevel_FINAL_165bpm.mp3"
@@ -217,7 +213,11 @@ func loadLevel():
 		#levelFile = Globals.currentEditorFileName
 	
 	print("level name ", levelFile)
-	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
+	var content
+	if Globals.inEditor:
+		content = FileAccess.open("user://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
+	else:
+		content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],
 		"killFloors": [killFloorInstance, killFloorsList],
