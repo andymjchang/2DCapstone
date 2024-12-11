@@ -53,9 +53,21 @@ func _input(event: InputEvent) -> void:
 		leaderboard_slide_in()
 	elif event.is_action_pressed("ui_right"):
 		leaderboard_slide_in()
+	elif Input.is_action_just_pressed("ui_up"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		current_option = (current_option - 1 + options_count) % options_count
+		update_selection()
+	elif  Input.is_action_just_pressed("ui_down"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		current_option = (current_option + 1) % options_count
+		update_selection()
+	elif Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_select"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		select_current_option()
 	
 
 func update_selection() -> void:
+	Globals.emit_signal("playMove")
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
@@ -63,6 +75,7 @@ func update_selection() -> void:
 		vinyl_rotations[current_option], rotation_tween_duration)
 
 func select_current_option() -> void:
+	Globals.emit_signal("playSelect")
 	jingle.stop()
 	Engine.time_scale = 1.0
 	get_tree().paused = false
