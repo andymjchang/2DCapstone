@@ -26,13 +26,13 @@ var activeSprite
 var isMultiPunch = false
 var punchesLeft = 0.0
 
-# Add this near the top with other variables
-var debug_draw_enabled = false  # Toggle for ray visualization
+var debug_draw_enabled = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	CheckForBoss()
-	# Check for platform below
+	# Defer the platform check to the next frame
+	await get_tree().process_frame
 	var has_platform_below = check_platform_below()
 	
 	# Set up sprites
@@ -120,6 +120,7 @@ func check_platform_below() -> bool:
 	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 60))
 	query.collision_mask = 0b1  # Platform is on layer 1
 	var result = space_state.intersect_ray(query)
+	print("result", result)
 	return result and result.collider.is_in_group("blocks")
 
 func CheckForBoss() -> void:

@@ -34,22 +34,16 @@ var rotationDirection = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Check for platform below
-	var has_platform_below = check_platform_below()
 	
 	# Set up sprites
 	sprite = $AnimatedSprite2D
 	var flying_sprite = $FlyingAnimatedSprite2D
-	
-	if has_platform_below:
-		sprite.visible = true
-		flying_sprite.visible = false
-	else:
-		sprite.visible = false
-		flying_sprite.visible = true
+
+	sprite.visible = true
+	flying_sprite.visible = false
 	
 	# vary animation
-	activeSprite = sprite if has_platform_below else flying_sprite
+	activeSprite = sprite
 	activeSprite.speed_scale = randf_range(0.8, 1.2)
 	activeSprite.frame = randi() % 4
 

@@ -499,6 +499,8 @@ func _onScored(id, scoreToAdd):
 func UpdateCombo(num):
 	if num > 0:
 		combo += 1
+		# Update max combo if current combo is higher
+		Globals.maxCombo = max(Globals.maxCombo, combo)
 	else:
 		combo = 0
 	# Update combo UI

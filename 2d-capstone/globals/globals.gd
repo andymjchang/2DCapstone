@@ -35,6 +35,7 @@ var numMisses = 0.0
 var percentageHit = 0.0
 var endScore = 0.0
 var gameOver = false 
+var maxCombo = 0
 
 #general
 var usingController = false
@@ -76,7 +77,7 @@ var levelSequence = [
 	"Level 2",
 	"Tutorial_Level3",
 	"Level 3",
-	"Level 4"
+	"BossLevel"
 ]
 
 func _ready():
@@ -145,6 +146,7 @@ func restartLevelData() -> void:
 	endScore = 0.0
 	coinsCollected = 0.0
 	percentageHit = 0.0
+	maxCombo = 0
 
 func getNextLevel(currentLevel: String) -> String:
 	var currentIndex = levelSequence.find(currentLevel)

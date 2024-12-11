@@ -92,6 +92,7 @@ func _onUpdateScoreData() -> void:
 	$missedLabel.text = str(Globals.numMisses)
 	$coinsLabel.text = str(Globals.coinsCollected)
 	$accuracyLabel.text = "%2.2f" % Globals.percentageHit + "%"
+	$comboLabel.text = "x" + str(Globals.maxCombo)
 
 	$Leaderboard/userScore.text = "%05d" % Globals.endScore
 	playerEntry = Leaderboard.add_score(Globals.curFile, playerName, Globals.endScore)
