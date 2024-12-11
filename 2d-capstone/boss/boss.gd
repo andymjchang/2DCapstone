@@ -9,7 +9,7 @@ var horizontal_speed: float = 0.5      # How fast the horizontal movement is
 var random_offset: float = 0.0
 var random_timer: float = 0.0
 var initial_x: float
-var health: int = 150
+var health: int = 175
 
 @export var sprite : AnimatedSprite2D
 @export var glitch : ColorRect
