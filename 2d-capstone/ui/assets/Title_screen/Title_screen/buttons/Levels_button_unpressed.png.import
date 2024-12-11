@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwyalplhbx3h7"
-path="res://.godot/imported/Combo_fallen_city_PROGRESS.png-4a8ab078aacefe0350260e8668a6e16b.ctex"
+uid="uid://8oqh3uqa35e1"
+path="res://.godot/imported/Levels_button_unpressed.png-780a23375c358acc5fbafe79de53c26e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_PROGRESS.png"
-dest_files=["res://.godot/imported/Combo_fallen_city_PROGRESS.png-4a8ab078aacefe0350260e8668a6e16b.ctex"]
+source_file="res://ui/assets/Title_screen/Title_screen/buttons/Levels_button_unpressed.png"
+dest_files=["res://.godot/imported/Levels_button_unpressed.png-780a23375c358acc5fbafe79de53c26e.ctex"]
 
 [params]
 

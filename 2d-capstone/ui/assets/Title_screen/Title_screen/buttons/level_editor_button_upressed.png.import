@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbare1v5mrdfe"
-path="res://.godot/imported/Combo_fallen_city_UNDER.png-c1088a7c7c6d2f0459a1a7acc8b6d575.ctex"
+uid="uid://cwmey2dvsn7xy"
+path="res://.godot/imported/level_editor_button_upressed.png-35022d1e1ad9d97d3352fd6c3612c49d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/assets/comboMeters/Fallen City/Combo_fallen_city_UNDER.png"
-dest_files=["res://.godot/imported/Combo_fallen_city_UNDER.png-c1088a7c7c6d2f0459a1a7acc8b6d575.ctex"]
+source_file="res://ui/assets/Title_screen/Title_screen/buttons/level_editor_button_upressed.png"
+dest_files=["res://.godot/imported/level_editor_button_upressed.png-35022d1e1ad9d97d3352fd6c3612c49d.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://b4c6vpxf6xmjv"]
+[gd_scene load_steps=73 format=3 uid="uid://b4c6vpxf6xmjv"]
 
 [ext_resource type="Script" path="res://levelEditor/levelEditor.gd" id="1_15vlh"]
 [ext_resource type="Script" path="res://levelEditor/measureLines.gd" id="2_mulbo"]
@@ -47,6 +47,7 @@
 [ext_resource type="PackedScene" uid="uid://b3r5orhxswfha" path="res://levelEditorObjects/holdScene.tscn" id="26_oo2r2"]
 [ext_resource type="PackedScene" uid="uid://8slx4t2oi8ub" path="res://levelEditorObjects/loopScene.tscn" id="27_jho4t"]
 [ext_resource type="PackedScene" uid="uid://drwoyrkcgtkqc" path="res://levelEditorObjects/massMoveScene.tscn" id="27_v8yd3"]
+[ext_resource type="PackedScene" uid="uid://cwc2nel1xt6xx" path="res://worlds/ziplineTestTemplate.tscn" id="29_bin01"]
 [ext_resource type="Texture2D" uid="uid://dd5m0kwji44w1" path="res://levelEditor/programmerArtAssets/zipline.png" id="30_pq2h6"]
 [ext_resource type="Script" path="res://levelEditor/ui.gd" id="33_n0vg3"]
 [ext_resource type="Texture2D" uid="uid://b1ymqen6srbge" path="res://levelEditor/programmerArtAssets/powerup.png" id="33_pappt"]
@@ -103,6 +104,7 @@ mash = ExtResource("25_1gpd6")
 hold = ExtResource("26_oo2r2")
 moveLine = ExtResource("27_v8yd3")
 loop = ExtResource("27_jho4t")
+levelTemplatePacked = ExtResource("29_bin01")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(939, 601)
@@ -432,8 +434,25 @@ script = ExtResource("36_wn18y")
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/objectSelector/audioTracks"]
 layout_mode = 2
 
-[node name="VScrollBar" type="VScrollBar" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+[node name="Button" type="Button" parent="UI/objectSelector/audioTracks/VBoxContainer"]
 layout_mode = 2
+text = "120Metronome_v2.mp3"
+
+[node name="Button5" type="Button" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+layout_mode = 2
+text = "Tutorial_Revamped_155bpm.mp3"
+
+[node name="Button3" type="Button" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+layout_mode = 2
+text = "Level1_Shifted_155bpm.wav"
+
+[node name="Button4" type="Button" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+layout_mode = 2
+text = "Level2_OGNoMelody_156bpm_1.mp3"
+
+[node name="Button2" type="Button" parent="UI/objectSelector/audioTracks/VBoxContainer"]
+layout_mode = 2
+text = "BossLevel_FINAL_165bpm.mp3"
 
 [node name="MiscButtons" type="VBoxContainer" parent="UI"]
 anchors_preset = 4

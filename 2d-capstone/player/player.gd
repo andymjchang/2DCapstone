@@ -390,6 +390,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	elif "ifDead" in area.get_parent() and area.get_parent().ifDead == false :
 		Globals.numMisses += 1
 		_onTakeDamage(3)
+		scored.emit(self.name, -100)
 
 
 func _on_damaged_timer_timeout() -> void:

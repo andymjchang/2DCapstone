@@ -12,7 +12,7 @@ func _ready():
 	if Globals.curFile.begins_with("Level 3"):
 		$TileMapLayer.visible = false
 		$TileMapLayer2.visible = true
-	elif Globals.curFile.begins_with("bossLevel"):
+	elif Globals.curFile.begins_with("BossLevel"):
 		$TileMapLayer.visible = false
 		$TileMapLayer2.visible = false
 		$TileMapLayer3.visible = true

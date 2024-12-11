@@ -1,57 +1,23 @@
-[gd_scene load_steps=19 format=3 uid="uid://h2r5t05jiyo5"]
+[gd_scene load_steps=14 format=3 uid="uid://elmqse28rdrx"]
 
 [ext_resource type="Script" path="res://worldObjects/enemy/mashEnemy.gd" id="1_d3a42"]
 [ext_resource type="Texture2D" uid="uid://dhk8ib54ejgwa" path="res://worldObjects/assets/circle.png" id="2_24gfp"]
 [ext_resource type="PackedScene" uid="uid://bvhi8ylhyxb4a" path="res://worldObjects/actionIndicator.tscn" id="3_4py2m"]
-[ext_resource type="Texture2D" uid="uid://fkay4q6vfugt" path="res://worldObjects/enemy/single_enemy_Rusted_anim_1-sheet.png" id="4_y0qtf"]
-[ext_resource type="Texture2D" uid="uid://dcwx1y37lvgxh" path="res://worldObjects/assets/slideEnemy.png" id="5_xucib"]
+[ext_resource type="Texture2D" uid="uid://ma022mue67ws" path="res://worldObjects/assets/mash_enemy.png" id="4_nxsh4"]
 [ext_resource type="Script" path="res://ui/scripts/pulseAnimatedSprite.gd" id="6_jtl38"]
 [ext_resource type="Texture2D" uid="uid://pj0qfwt8un1l" path="res://worldObjects/enemy/flying enemy 1-sheet.png" id="7_r8buq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gswvj"]
 size = Vector2(50, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8gv8c"]
-atlas = ExtResource("4_y0qtf")
-region = Rect2(0, 0, 800, 800)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ly2ev"]
-atlas = ExtResource("4_y0qtf")
-region = Rect2(800, 0, 800, 800)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kbi68"]
-atlas = ExtResource("4_y0qtf")
-region = Rect2(1600, 0, 800, 800)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l3wfk"]
-atlas = ExtResource("4_y0qtf")
-region = Rect2(2400, 0, 800, 800)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_l3chy"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_vpxdg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8gv8c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ly2ev")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kbi68")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l3wfk")
+"texture": ExtResource("4_nxsh4")
 }],
 "loop": true,
 "name": &"default",
-"speed": 7.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_xucib")
-}],
-"loop": true,
-"name": &"slideEnemy",
 "speed": 5.0
 }]
 
@@ -109,17 +75,16 @@ texture = ExtResource("2_24gfp")
 position = Vector2(1.19209e-07, -9.53674e-07)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["pulsingObjects"]]
-visible = false
-modulate = Color(1, 0.3437, 0.561508, 1)
 position = Vector2(2, -15)
 scale = Vector2(0.12, 0.12)
-sprite_frames = SubResource("SpriteFrames_l3chy")
+sprite_frames = SubResource("SpriteFrames_vpxdg")
 autoplay = "default"
 script = ExtResource("6_jtl38")
 timingScale = 2
 increasedScale = Vector2(0.15, 0.15)
 
 [node name="FlyingAnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["pulsingObjects"]]
+visible = false
 modulate = Color(1, 0.44166, 0.624963, 1)
 position = Vector2(9, -2.38419e-07)
 scale = Vector2(0.4, 0.4)

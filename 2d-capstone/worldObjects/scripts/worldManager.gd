@@ -110,11 +110,7 @@ func _ready():
 		Globals.currentSongFileName = "Level2_OGNoMelody_156bpm_1.mp3"
 		adaptiveMusic.active = true
 		backgroundName = "Lvl2"
-	if levelFile.begins_with("CustomLevel"):
-		Globals.setBPM(160)
-		Globals.currentSongFileName = "CustomLevel_Shifted_160bpm.wav"
-		backgroundName = "Lvl3"
-	if levelFile.begins_with("bossLevel"):
+	if levelFile.begins_with("BossLevel"):
 		Globals.setBPM(165)
 		Globals.currentSongFileName = "BossLevel_FINAL_165bpm.mp3"
 		backgroundName = "Lvl3"
@@ -198,7 +194,6 @@ func startGame():
 		object.setBPM()
 	music.play(musicTime + Globals.timeDelay)
 	adaptiveMusic.play(musicTime + Globals.timeDelay)
-	print("starting")
 	Globals.inLevel = true
 	if !Globals.customStart and !Globals.relocateToCheckpoint:
 		Globals.time = 0.0
@@ -217,8 +212,12 @@ func loadLevel():
 	#if Globals.currentSongFileName:
 		#levelFile = Globals.currentEditorFileName
 	
-	print("level name ", levelFile)
-	var content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
+	#print("level name ", levelFile)
+	var content
+	if Globals.inEditor:
+		content = FileAccess.open("user://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
+	else:
+		content = FileAccess.open("res://levelData/" + levelFile + ".dat", FileAccess.READ).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlockInstance, platformBlocksList], 
 		"goalBlocks": [goalBlockInstance, goalBlocksList],
 		"killFloors": [killFloorInstance, killFloorsList],
@@ -276,8 +275,6 @@ func loadLevel():
 				var vec2 = instancedObj.get_node("ziplineEnd/Marker2D").global_position
 				var tgtPosX = (vec1.x + vec2.x)/2
 				var tgtPosY = (vec1.y + vec2.y)/2
-				print("Rotating: ", cos(vec1.angle_to_point(vec2)))
-				#playerPlacement.global_position.y += cos(vec1.angle_to_point(vec2)) * 10
 				var connectLine = ziplineMiddle.instantiate()
 				connectLine.position = Vector2(tgtPosX, tgtPosY)
 				connectLine.rotation = vec1.angle_to_point(vec2)
@@ -293,14 +290,11 @@ func loadLevel():
 				instancedObj.get_node("LoopMarkerEnd").global_position = endPos
 				var loop1 = instancedObj.get_node("LoopMarkerStart").global_position
 				var loop2 = instancedObj.get_node("LoopMarkerEnd").global_position
-				print("Setting up collisions")
 				var loopPoint = (loop1 + loop2) / 2
 				instancedObj.get_node("LoopMarkerStart/Respawn").global_position = loopPoint
-				print("My pos: ", loopPoint)
 				var loopWidth = instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").get_shape().size.x
 				var loopHeight = instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").get_shape().size.y
 				var tgtLoopLen = (loop2 - loop1).length() #
-				print("Tgt length: ", tgtLoopLen)
 				instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").scale = Vector2((tgtLoopLen / loopWidth), 1.5)
 
 				
@@ -309,7 +303,7 @@ func loadLevel():
 				instancedObj.add_to_group("platforms")
 				
 			if currentName == "keyBindings":
-				print("setting image")
+				#print("setting image")
 				instancedObj.setImage(posPoints)
 			if currentName == "enemies":
 				instancedObj.setEnemyType(posPoints)
@@ -318,7 +312,7 @@ func loadLevel():
 			
 		elif ".mp3" in line:
 			# audio file
-			print("Changing audio to: ", line)
+			#print("Changing audio to: ", line)
 			Globals.currentSongFileName = line
 	
 	# load the actionArrays
@@ -342,7 +336,7 @@ func changeCountdown():
 	statusMessage.text = ""
 
 func _onCheckGameOver():
-	print("Checking if both dead")
+	#print("Checking if both dead")
 	if player1.dead:
 		self.emit_signal("gameOver")
 
@@ -417,7 +411,7 @@ func _physics_process(_delta):
 	if Globals.time >= 3.0 and !Globals.inLevel and !Globals.paused and !Globals.customStart and !Globals.relocateToCheckpoint and !Globals.gameOver:
 		startGame()
 	elif (Globals.customStart or Globals.relocateToCheckpoint) and !Globals.inLevel and Globals.time >= musicTime + 3.0 and !Globals.gameOver:
-		print("global time: ", Globals.time, " music time: ", musicTime)
+		#print("global time: ", Globals.time, " music time: ", musicTime)
 		startGame()
 		
 	if skipping:
@@ -462,7 +456,7 @@ func getNearestCheckpoint(who):
 						nearestPoint = i
 						shortestDistance = distance
 			#print("Relocating to: ", nearestPoint.position)
-	print("The nearest point is: ", nearestPoint)
+	#print("The nearest point is: ", nearestPoint)
 	return nearestPoint
 	
 # Basic checkpointing system
@@ -474,7 +468,7 @@ func _onResetPosition(who):
 
 func _onEndGameBodyEntered(body:Node2D):
 	if (body.is_in_group("players")):
-		print("Game over!")
+		#print("Game over!")
 		self.emit_signal("gameOver")
 
 func _onRunBoundsBodyEntered(body: Node2D) -> void:
@@ -499,6 +493,8 @@ func _onScored(id, scoreToAdd):
 func UpdateCombo(num):
 	if num > 0:
 		combo += 1
+		# Update max combo if current combo is higher
+		Globals.maxCombo = max(Globals.maxCombo, combo)
 	else:
 		combo = 0
 	# Update combo UI
@@ -537,13 +533,13 @@ func _onChangeSpeed(speedType):
 		timeMultiplier = 1.0
 		
 	if onboardingSlides:
-		print("onbaording slides are in ")
+		#print("onbaording slides are in ")
 		self.get_tree().current_scene.get_node("Camera2D//onboardingPopUp").emit_signal("speedChange", timeMultiplier)
 
 func _onResetLoop(startTime, destination, enemyPos, powerPos):
-	print("Resetting loop")
-	print("Destination to: ", destination.global_position)
-	print("Restarting to time: ", Globals.time)
+	#print("Resetting loop")
+	#print("Destination to: ", destination.global_position)
+	#print("Restarting to time: ", Globals.time)
 	player1.position = destination.global_position
 	camera.position = destination.global_position
 	camera.position.x += 250

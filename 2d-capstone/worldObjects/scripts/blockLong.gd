@@ -45,7 +45,7 @@ func _ready():
 		minCols = 6
 		numCols = 20
 		capLength = 3
-	elif Globals.curFile.begins_with("Custom") or "boss" in Globals.curFile :
+	elif Globals.curFile.begins_with("Custom") or "Boss" in Globals.curFile :
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = false
 		$sprite2D/TileMapLayer3.visible = true

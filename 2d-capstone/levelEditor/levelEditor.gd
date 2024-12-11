@@ -18,7 +18,7 @@ var timeHeld = 0.0
 var killFDict: Dictionary = {}
 var saveFileName 
 var isPlaying = false
-var levelDataPath = "res://levelData/"
+var levelDataPath = "user://levelData/"
 var overwrite = false
 var isLoad = true
 var blockTypes = ["player1", "powerup", "normal", "actionIndicator", "goalBlock", "enemy", "killFloor", "p1checkpoint", "p2checkpoint", "breakableWall", "zipline", "placer", "slideWall", "jumpBoost", "coin", "keyBinding", "skip", "mash", "hold", "moveLine", "loop"]
@@ -35,6 +35,7 @@ var MIN_STEP : int = 25
 var FILE_EXISTS_PATH = "Level with file name \ndetected. Load?"
 var OVERWRITE_FILE = "Overwrite existing\nfile?"
 var UNABLE_TO_SAVE = "Unable to save.\nNeed 1 player."
+var UNABLE_TO_SAVE2 = "Unable to play.\nNeed file name."
 
 
 @export var p1Placer : PackedScene
@@ -124,7 +125,7 @@ var listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsLis
 @onready var measureLines = $measureLines
 @onready var camera = $Camera2D
 @onready var status = $StatusWindow
-@onready var levelTemplatePacked = preload("res://worlds/levelTemplate.tscn")
+@export var levelTemplatePacked : PackedScene
 @onready var currentFile = $UI/CurrentFile
 
 var bpm : int = 4
@@ -134,6 +135,9 @@ var levelSaved = false
 
 
 func _ready():
+	var dir = DirAccess.open("user://")
+	dir.make_dir("levelData")
+	Globals.inEditor = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	listMap = {"powerup" : powerupList , "actionIndicator" : actionIndicatorsList, "goalBlock" : goalBlocksList, "enemy" : enemyList, "killFloor" : killFloorsList, "p1checkpoint": p1checkpointsList, "breakableWall" : bWallsList, "zipline": ziplineList,  "slideWall": slideWallList, "jumpBoost": 	jumpList, "coin": coinList, "keyBinding": keyBindingList, "skip": skipList, "mash": mashList, "hold": holdList}
 	Globals.customStart = false
@@ -223,13 +227,13 @@ func clearLevel():
 			child.queue_free()
 	
 func loadLevel():
-	print("save file name, ", saveFileName)
+	#print("save file name, ", saveFileName)
 	clearLevel()
 	for objList in $objectList.get_children():
 		for child in objList.get_children():
 			child.queue_free()
 
-	var content = FileAccess.open("res://levelData/" + saveFileName + ".dat", 1).get_as_text()
+	var content = FileAccess.open("user://levelData/" + saveFileName + ".dat", 1).get_as_text()
 	var instanceList = {"platformBlocks": [platformBlock, platformBlocksList, blockTypes[2]], 
 		"goalBlocks": [goalBlock, goalBlocksList, blockTypes[4]],
 		"killFloors": [killFloor, killFloorsList, blockTypes[6]],
@@ -496,7 +500,8 @@ func save_scene_to_file():
 		else:
 			overwrite = false
 			# successful save
-			var newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
+			var newFile = FileAccess.open("user://levelData/" + saveFileName + ".dat", 7)
+			#print("New file? :", newFile)
 			newFile.store_string(get_node("UI/TextEdit0").text + "\n")
 			for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
@@ -513,7 +518,8 @@ func save_scene_to_file():
 							#saving for platfrom block differs since their size varies#
 							#TODO I dont want to do this, delegate this work to the child class
 							if itemList.name == "placers":
-								print("we are saving a placer")
+								pass
+								#print("we are saving a placer")
 							if itemList.name == "platformBlocks":
 								#save the number of cols as well as the extents so we know where to start drawing	
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+str(blockChild.get_parent().numCols) + ", " + str(blockChild.get_parent().getExtents())+ ", "+str(blockChild.get_parent().newPos)+ ", "
@@ -572,11 +578,11 @@ func combineBlocks(newFile) -> void:
 					#has the same start and end because it is one block
 					
 				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2],posPoints[3],posPoints[0]+posPoints[3]]
-				print("starting a new chain: ", newBlock)
+				#print("starting a new chain: ", newBlock)
 				#if the block we are checking has y/x that is in bounds/close enough - merge
 				#this needs to check extents
-				print("pos points extents hopefully: ", posPoints[3])
-				print("block we are checking ",(posPoints[0] - posPoints[3]) , " our cur end: ",newBlock[1].x+newBlock[3])
+				#print("pos points extents hopefully: ", posPoints[3])
+				#print("block we are checking ",(posPoints[0] - posPoints[3]) , " our cur end: ",newBlock[1].x+newBlock[3])
 			elif newBlock[0].y == posPoints[1] and abs((posPoints[0] - posPoints[3]) - (newBlock[4])) < 100 :
 				#change the end bounds
 				newBlock[1] = Vector2(posPoints[0], posPoints[1])
@@ -584,18 +590,18 @@ func combineBlocks(newFile) -> void:
 				newBlock[2] = newBlock[2] + posPoints[2]
 				#store the real end 
 				newBlock[4] = posPoints[0]+posPoints[3]
-				print("adding to new block: ", newBlock)
+				#print("adding to new block: ", newBlock)
 			else:
 				#we are ending the block chain
 				#there is a chance that this does not get a singular last block chain
 				allNewBlocks.append(newBlock)
 				newBlock = [Vector2(posPoints[0],posPoints[1]),Vector2(posPoints[0],posPoints[1]), posPoints[2],posPoints[3],posPoints[0]+posPoints[3]]
-				print("ending a chain: ", newBlock)
+				#print("ending a chain: ", newBlock)
 	#now we have to overwite all of the platform code for what we have
 	
 	allNewBlocks.append(newBlock)
-	print("all new blocks: ", allNewBlocks)
-	newFile = FileAccess.open("res://levelData/" + saveFileName + ".dat", 7)
+	#print("all new blocks: ", allNewBlocks)
+	newFile = FileAccess.open("user://levelData/" + saveFileName + ".dat", 7)
 	for itemList in objectList.get_children():
 				newFile.store_string(itemList.name + "\n")
 				#print("name look here: ", itemList.name)
@@ -612,7 +618,8 @@ func combineBlocks(newFile) -> void:
 							#saving for platfrom block differs since their size varies#
 							#TODO I dont want to do this, delegate this work to the child class
 							if itemList.name == "placers":
-								print("we are saving a placer")
+								pass
+								#print("we are saving a placer")
 							elif itemList.name == "keyBindings":
 								posChain = str(blockChild.global_position.x) + ", " + str(blockChild.global_position.y)+", "+ str(blockChild.get_parent().instructionType)+", "
 							elif itemList.name == "enemies":
@@ -792,7 +799,7 @@ func _on_audio_progress_gui_input(event: InputEvent) -> void:
 func _on_yes_pressed() -> void:
 	get_tree().paused = false
 	# overwrite message
-	print("Setting overwrite")
+	#print("Setting overwrite")
 	overwrite = true
 	save_scene_to_file()
 	status.hide()
@@ -825,10 +832,11 @@ func setFileLoad():
 func _on_load_file_pressed() -> void:
 	$UI/FileLoadMode/StatusMessage.text = "Enter a file name."
 	var tgtFile = $UI/FileLoadMode/FileName.text
-	print("Tgt:" , tgtFile)
-	# if "tutorial" in tgtFile.to_lower() or "level 1" in tgtFile.to_lower() or "level 2" in tgtFile.to_lower() or "level 3" in tgtFile.to_lower():
-	# 	$UI/FileLoadMode/StatusMessage.text = "Cannot open file."
-	if FileAccess.file_exists(levelDataPath + tgtFile + ".dat"):
+	#print("Tgt:" , tgtFile)
+	var protectedFiles = ["level 1", "level 2", "level 3", "bossLevel", "tutorial", "tutorial_level2", "tutorial_level3", "customlevel"]
+	if tgtFile.to_lower() in protectedFiles:
+		$UI/FileLoadMode/StatusMessage.text = "Cannot open file."
+	elif FileAccess.file_exists(levelDataPath + tgtFile + ".dat"):
 		saveFileName = tgtFile
 		loadLevel()
 		$UI/FileLoadMode.hide()
@@ -841,25 +849,28 @@ func _on_load_file_pressed() -> void:
 	currentFile.text = "Now editing: " + tgtFile + ".dat"
 
 func _on_play_level_button_button_down() -> void:
-	overwrite = true
-	save_scene_to_file()
-	# var scene_instance = levelTemplatePacked.instantiate()
-	
-	get_tree().paused = false
-	
-	# Access the current scene and remove it from the scene tree
-	#var current_scene = get_tree().current_scene
-	#Globals.editorNode = current_scene
-	Globals.enablePreviewUI()
-	Globals.currentEditorFileName = saveFileName
-	Globals.curFile = saveFileName
-	get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
-	#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
-	#current_scene.visible = false
+	if saveFileName != null:
+		overwrite = true
+		save_scene_to_file()
+		# var scene_instance = levelTemplatePacked.instantiate()
+		
+		get_tree().paused = false
+		
+		# Access the current scene and remove it from the scene tree
+		#var current_scene = get_tree().current_scene
+		#Globals.editorNode = current_scene
+		Globals.enablePreviewUI()
+		Globals.currentEditorFileName = saveFileName
+		Globals.curFile = saveFileName
+		get_tree().change_scene_to_file("res://worlds/levelTemplate.tscn")
+		#Globals.FadeTransition("res://worlds/levelTemplate.tscn")
+		#current_scene.visible = false
 
-	# Add the new scene to the scene tree and set it as the current scene
-	#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
-	#get_tree().current_scene = scene_instance  # Set it as the new current scene
+		# Add the new scene to the scene tree and set it as the current scene
+		#get_tree().root.add_child(scene_instance)  # Add new scene instance to the tree
+		#get_tree().current_scene = scene_instance  # Set it as the new current scene
+	else:
+		displayStatus(UNABLE_TO_SAVE2, false)
 
 func lengthenPlatform() -> void:
 	#this isnt modular but it will work for now TODO
@@ -889,11 +900,11 @@ func _onSetMassMove(coords, val) -> void:
 		isBinding = false
 		#just clearing as like a sanity check
 		bindedBlocks = []
-		print("axis type: ",currentBlock.get_child(0).axisType  )
+		#print("axis type: ",currentBlock.get_child(0).axisType  )
 		if currentBlock.get_child(0).axisType == "vertical":
 			bindedBlocks = getAreaChildren(coords, 0)
 		else:
-			print("horizontal true")
+			#print("horizontal true")
 			bindedBlocks = getAreaChildren(coords, 1)
 
 func getAreaChildren(coords, coordType) -> Array:
@@ -914,11 +925,11 @@ func getAreaChildren(coords, coordType) -> Array:
 			for item in itemList.get_children():
 				#return [start.global_position.y, end.global_position.y, endMinVec.x, endMaxvec.x]
 				var pos = item.global_position
-				print("coord type: ", coordType, " other coord type: ", coordTypeComplement)
-				print("min max array: ", minMax)
-				print("coords we are checking: ", pos)
+				#print("coord type: ", coordType, " other coord type: ", coordTypeComplement)
+				#print("min max array: ", minMax)
+				#print("coords we are checking: ", pos)
 				if  pos[coordType] >= minMax[0] && pos[coordType] <= minMax[1] && pos[coordTypeComplement] >= minMax[2] && pos[coordTypeComplement] <= minMax[3]:
-					print("making it inside")
+					#print("making it inside")
 					returnArray.append(item)
 	
 	

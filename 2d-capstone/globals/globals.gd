@@ -18,7 +18,7 @@ var checkpoint = null
 var relocateToCheckpoint = false
 var pixelsPerFrame = 300
 var scrollSpeed = 1
-var curFile = "Tutorial_Level3"
+var curFile = "Level 1"
 var bpm : float = 115
 var timeDelay = 0.0
 var screenFlash : bool = true
@@ -38,6 +38,7 @@ var numMisses = 0.0
 var percentageHit = 0.0
 var endScore = 0.0
 var gameOver = false 
+var maxCombo = 0
 
 #general
 var usingController = false
@@ -66,8 +67,8 @@ var currentSongFileName
 
 # Nodes
 var previewNode
-@onready var editorNode = preload("res://levelEditor/levelEditor.tscn")
-@onready var screenFlashNode = preload("res://screenEffects/screenFlashEffect.tscn")
+@onready var editorNode = load("res://levelEditor/levelEditor.tscn")
+@onready var screenFlashNode = load("res://screenEffects/screenFlashEffect.tscn")
 @onready var vignette = $Vignette/ColorRect
 @onready var glitch = $Glitch/TransitionRect
 @onready var screenFlashTimer = $ScreenFlashTimer
@@ -79,7 +80,7 @@ var levelSequence = [
 	"Level 2",
 	"Tutorial_Level3",
 	"Level 3",
-	"Level 4"
+	"BossLevel"
 ]
 
 func _ready():
@@ -156,6 +157,7 @@ func restartLevelData() -> void:
 	endScore = 0.0
 	coinsCollected = 0.0
 	percentageHit = 0.0
+	maxCombo = 0
 
 func getNextLevel(currentLevel: String) -> String:
 	var currentIndex = levelSequence.find(currentLevel)

@@ -15,6 +15,7 @@ var current_option: int = MenuOptions.START
 func _ready():
 	get_tree().paused = false
 	Globals.relocateToCheckpoint = false
+	Globals.inEditor = false
 	Globals.checkpoint = null
 	music.play()
 	music.stream.loop = true
