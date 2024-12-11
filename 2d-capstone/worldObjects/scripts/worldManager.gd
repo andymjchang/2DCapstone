@@ -198,7 +198,6 @@ func startGame():
 		object.setBPM()
 	music.play(musicTime + Globals.timeDelay)
 	adaptiveMusic.play(musicTime + Globals.timeDelay)
-	print("starting")
 	Globals.inLevel = true
 	if !Globals.customStart and !Globals.relocateToCheckpoint:
 		Globals.time = 0.0
@@ -276,8 +275,6 @@ func loadLevel():
 				var vec2 = instancedObj.get_node("ziplineEnd/Marker2D").global_position
 				var tgtPosX = (vec1.x + vec2.x)/2
 				var tgtPosY = (vec1.y + vec2.y)/2
-				print("Rotating: ", cos(vec1.angle_to_point(vec2)))
-				#playerPlacement.global_position.y += cos(vec1.angle_to_point(vec2)) * 10
 				var connectLine = ziplineMiddle.instantiate()
 				connectLine.position = Vector2(tgtPosX, tgtPosY)
 				connectLine.rotation = vec1.angle_to_point(vec2)
@@ -293,14 +290,11 @@ func loadLevel():
 				instancedObj.get_node("LoopMarkerEnd").global_position = endPos
 				var loop1 = instancedObj.get_node("LoopMarkerStart").global_position
 				var loop2 = instancedObj.get_node("LoopMarkerEnd").global_position
-				print("Setting up collisions")
 				var loopPoint = (loop1 + loop2) / 2
 				instancedObj.get_node("LoopMarkerStart/Respawn").global_position = loopPoint
-				print("My pos: ", loopPoint)
 				var loopWidth = instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").get_shape().size.x
 				var loopHeight = instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").get_shape().size.y
 				var tgtLoopLen = (loop2 - loop1).length() #
-				print("Tgt length: ", tgtLoopLen)
 				instancedObj.get_node("LoopMarkerStart/Respawn/CollisionShape2D").scale = Vector2((tgtLoopLen / loopWidth), 1.5)
 
 				
