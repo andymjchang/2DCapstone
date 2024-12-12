@@ -67,8 +67,8 @@ var currentSongFileName
 
 # Nodes
 var previewNode
-@onready var editorNode = load("res://levelEditor/levelEditor.tscn")
-@onready var screenFlashNode = load("res://screenEffects/screenFlashEffect.tscn")
+@onready var editorNode = preload("res://levelEditor/levelEditor.tscn")
+@onready var screenFlashNode = preload("res://screenEffects/screenFlashEffect.tscn")
 @onready var vignette = $Vignette/ColorRect
 @onready var glitch = $Glitch/TransitionRect
 @onready var screenFlashTimer = $ScreenFlashTimer

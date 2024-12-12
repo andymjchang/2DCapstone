@@ -122,14 +122,11 @@ func _ready():
 
 	player1 = playersList.get_node("Player1")
 	
-	if levelFile.begins_with("Level 1"):
-		var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
-		var popUpInstance = popUpScene.instantiate()
-		$Camera2D.add_child(popUpInstance)
-		onboardingSlides = $Camera2D/onboardingPopUp/tutorialSlides
-		
-	# load the actionArrays (This must happen after bpm is set)
-	$objectList/actionIndicators.load_array()
+	# if levelFile.begins_with("Level 1"):
+	# 	var popUpScene = load("res://worldObjects/onboardingPopUp.tscn")
+	# 	var popUpInstance = popUpScene.instantiate()
+	# 	$Camera2D.add_child(popUpInstance)
+	# 	onboardingSlides = $Camera2D/onboardingPopUp/tutorialSlides
 
 	# Load background
 	var backgroundScene = load("res://backgrounds/" + backgroundName + "Background.tscn")
