@@ -30,7 +30,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("blocks"):
 		intersecting = false
 	elif body.is_in_group("players"):
-		#body.emit_signal("takeDamage", 27)
+		body.emit_signal("takeDamage", 1)
 		print("Did i exit: ", body.exitedZip)
 		if body.exitedZip:
 			body.zipDest.y -= 75
