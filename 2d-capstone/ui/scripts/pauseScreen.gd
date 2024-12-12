@@ -26,23 +26,35 @@ func _ready() -> void:
 	else:
 		get_node("Vinyl/5/Level2").text = "Menu"
 	update_selection()
+	
+func _process(delta: float) -> void:
+	if !visible:
+		return
+	if Input.is_action_just_pressed("ui_up"):
+		current_option = (current_option - 1 + options_count) % options_count
+		update_selection()
+	elif  Input.is_action_just_pressed("ui_down"):
+		current_option = (current_option + 1) % options_count
+		update_selection()
+	elif Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_select"):
+		select_current_option()
 
 func _input(event: InputEvent) -> void:
 	if !visible:
 		return
 	if event is InputEventMouseMotion:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	elif Input.is_action_just_pressed("ui_up"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		current_option = (current_option - 1 + options_count) % options_count
-		update_selection()
-	elif  Input.is_action_just_pressed("ui_down"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		current_option = (current_option + 1) % options_count
-		update_selection()
-	elif Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_select"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		select_current_option()
+	#elif Input.is_action_just_pressed("ui_up"):
+		#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		#current_option = (current_option - 1 + options_count) % options_count
+		#update_selection()
+	#elif  Input.is_action_just_pressed("ui_down"):
+		#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		#current_option = (current_option + 1) % options_count
+		#update_selection()
+	#elif Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_select"):
+		#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		#select_current_option()
 
 func update_selection() -> void:
 	Globals.emit_signal("playMove")

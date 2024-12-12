@@ -32,6 +32,17 @@ func _ready() -> void:
 	$Leaderboard.position.x += slide_offset
 	$Leaderboard.visible = false
 	update_selection()
+func _process(delta: float) -> void:
+	if !visible:
+		return
+	if Input.is_action_just_pressed("ui_up"):
+		current_option = (current_option - 1 + options_count) % options_count
+		update_selection()
+	elif  Input.is_action_just_pressed("ui_down"):
+		current_option = (current_option + 1) % options_count
+		update_selection()
+	elif Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_select"):
+		select_current_option()
 
 func _input(event: InputEvent) -> void:
 	if !visible or focused:
@@ -42,18 +53,18 @@ func _input(event: InputEvent) -> void:
 		leaderboard_slide_in()
 	elif event.is_action_pressed("ui_right"):
 		leaderboard_slide_in()
-	elif Input.is_action_just_pressed("ui_up"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		current_option = (current_option - 1 + options_count) % options_count
-		update_selection()
-	elif  Input.is_action_just_pressed("ui_down"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		current_option = (current_option + 1) % options_count
-		update_selection()
-	elif Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_select"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		select_current_option()
-	
+	#elif Input.is_action_just_pressed("ui_up"):
+		#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		#current_option = (current_option - 1 + options_count) % options_count
+		#update_selection()
+	#elif  Input.is_action_just_pressed("ui_down"):
+		#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		#current_option = (current_option + 1) % options_count
+		#update_selection()
+	#elif Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_select"):
+		#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		#select_current_option()
+	#
 
 func update_selection() -> void:
 	Globals.emit_signal("playMove")
