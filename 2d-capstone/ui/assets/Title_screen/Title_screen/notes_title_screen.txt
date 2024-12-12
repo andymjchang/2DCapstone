@@ -1,1 +1,0 @@
-The buttons are placed on top of the staff. The buttons are highlighted blue when clicked or when the mouse pointer hovers over them.
