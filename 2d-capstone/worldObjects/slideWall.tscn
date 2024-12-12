@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://c1btpqyrfhiy1" path="res://backgrounds/tilemaps/Level_3_wall.png" id="4_o2j1n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r51o2"]
-size = Vector2(51, 231)
+size = Vector2(26, 231)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_87q6c"]
-size = Vector2(50, 231)
+size = Vector2(25, 231)
 
 [node name="SlideWall" type="StaticBody2D" groups=["blocks"]]
 script = ExtResource("1_y7fla")
@@ -18,11 +18,11 @@ script = ExtResource("1_y7fla")
 position = Vector2(0, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-0.5, -111.5)
+position = Vector2(-13, -111.5)
 shape = SubResource("RectangleShape2D_r51o2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -103.5)
+position = Vector2(-12.5, -103.5)
 shape = SubResource("RectangleShape2D_87q6c")
 
 [node name="TileMapLayer" type="Sprite2D" parent="."]
