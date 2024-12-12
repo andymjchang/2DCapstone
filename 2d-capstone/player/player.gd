@@ -14,7 +14,7 @@ signal notSkipping()
 var curSprite
 var JUMP_VELOCITY = -550.0
 var SPEED = 150.0
-var health = 18 # 3 hits
+var health = 6 # 3 hits
 var blockType = "player"
 var invuln = false
 var dead = false
@@ -263,8 +263,7 @@ func _onTakeDamage(amount):
 			if amount == 10:
 				amount = health
 			health -= amount
-			if health % 2  == 0:
-				get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
+			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("decreaseHealth", self.name)
 			if health <= 0:
 				# Reset shader parameters on death
 				$Animation.material.set_shader_parameter("damage_intensity", 0.0)
@@ -357,11 +356,11 @@ func _onActivatePowerup():
 			sfxPlayer.stream = healthSfx
 			sfxPlayer.stream.loop = false
 			sfxPlayer.play()
-			var potentialHealth = health + 6
-			if potentialHealth > 18:
-				health = 18
+			var potentialHealth = health + 1
+			if potentialHealth > 6:
+				health = 6
 			else:
-				health += 6
+				health += 1
 			get_parent().get_parent().get_parent().get_node("HealthManager").emit_signal("increaseHealth", self.name)
 		Globals.powerType.SPEEDUP:
 			worldNode.emit_signal("changeSpeed", 1)
@@ -389,7 +388,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 			hitEffect.play()
 	elif "ifDead" in area.get_parent() and area.get_parent().ifDead == false :
 		Globals.numMisses += 1
-		_onTakeDamage(3)
+		_onTakeDamage(1)
 		scored.emit(self.name, -100)
 
 

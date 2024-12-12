@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rnyv2nk0ye0m"
-path="res://.godot/imported/Slide_wall_level_2.png-9c71b9d9c801efab43ea5a0c70422994.ctex"
+uid="uid://bgjm38f1xlrjk"
+path="res://.godot/imported/halfHeart.png-8579e34c9f053d7df4d69830d65aba3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://backgrounds/tilemaps/Slide_wall_level_2.png"
-dest_files=["res://.godot/imported/Slide_wall_level_2.png-9c71b9d9c801efab43ea5a0c70422994.ctex"]
+source_file="res://ui/assets/halfHeart.png"
+dest_files=["res://.godot/imported/halfHeart.png-8579e34c9f053d7df4d69830d65aba3d.ctex"]
 
 [params]
 

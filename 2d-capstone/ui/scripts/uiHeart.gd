@@ -5,6 +5,7 @@ var healthStatus= "full"
 var player : String 
 @onready var fullHealth = $fullP1Health
 @onready var zeroHealth = $zeroP1Health
+@onready var halfHealth = $halfP1Health
 var changed = true
 
 # variables for controlling pulse
@@ -36,7 +37,7 @@ func processBeat(delta: float) -> void:
 	
 	if beatTimer >= beatInterval:
 		beatTimer -= beatInterval
-		if healthStatus == "full":
+		if healthStatus == "full" or healthStatus == "half":
 			startPulse()
 	scale = lerp(scale, originalScale, lerpFactor)
 	lerpFactor = min(lerpFactor + delta * 2, 1)
@@ -47,13 +48,14 @@ func startPulse():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if player == "player2" and changed:
-		self.get_node("fullP2Health").visible = true
+		self.get_node("fullP1Health").visible = true
 		self.get_node("zeroP2Health").visible = false
-		self.get_node("fullP1Health").visible = false
+		self.get_node("fullP2Health").visible = false
 		self.get_node("zeroP1Health").visible = false
+		self.get_node("halfP1Health").visible = false
 		changed = false
-		zeroHealth = $zeroP2Health
-		fullHealth = $fullP2Health
+		#zeroHealth = $zeroP2Health
+		#fullHealth = $fullP2Health
 	
 	if isPulseActive:
 		processBeat(delta)
@@ -64,9 +66,15 @@ func takeDamage() -> void:
 		"full":
 			#decrease to half
 			self.fullHealth.visible = false
+			self.zeroHealth.visible = false
+			self.halfHealth.visible = true
+			healthStatus = "half"
+			print("deleting a heart")
+		"half":
+			self.fullHealth.visible = false
+			self.halfHealth.visible = false
 			self.zeroHealth.visible = true
 			healthStatus = "zero"
-			print("deleting a heart")
 		"zero":
 			#should not be getting here
 			print("should not be checking heart still")
@@ -74,8 +82,9 @@ func takeDamage() -> void:
 func gainHeart() -> void:
 	#only do this if we are damaged
 	#TODO once we decide if we are doing half heart, incorporate that 
-	if healthStatus == "zero":
+	if healthStatus == "zero" or healthStatus == "half":
 		self.zeroHealth.visible = false
+		self.halfHealth.visible = false
 		self.fullHealth.visible = true
 		healthStatus = "full"
 		

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://worldObjects/scripts/slideWall.gd" id="1_y7fla"]
 [ext_resource type="Texture2D" uid="uid://bls8vddwvag34" path="res://backgrounds/tilemaps/Sllide_Wall2.png" id="2_qiodv"]
-[ext_resource type="Texture2D" uid="uid://3nrtfvneisds" path="res://backgrounds/tilemaps/Slide_wall_level_2.png" id="3_rj24f"]
+[ext_resource type="Texture2D" uid="uid://rnyv2nk0ye0m" path="res://backgrounds/tilemaps/Slide_wall_level_2.png" id="3_rj24f"]
 [ext_resource type="Texture2D" uid="uid://c1btpqyrfhiy1" path="res://backgrounds/tilemaps/Level_3_wall.png" id="4_o2j1n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r51o2"]
