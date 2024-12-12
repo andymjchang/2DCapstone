@@ -20,7 +20,7 @@ var attack_chance: float = 0.3
 
 func _ready() -> void:
 	if !Globals.curFile.begins_with("BossLevel"):
-		self.visible = false
+		queue_free()
 	$Sprite/TextureProgressBar.max_value = health
 	$Sprite/TextureProgressBar.value = health
 	initial_y = $Sprite.position.y
