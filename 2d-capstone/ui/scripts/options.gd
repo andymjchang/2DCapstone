@@ -70,6 +70,8 @@ func _input(event: InputEvent) -> void:
 			select_current_option()
 
 func controllerNavigate(val):
+	if $Keybindings.visible:
+		$Keybindings.controllerNavigate(val)
 	pass
 	
 func _onKeyBindSet(val):

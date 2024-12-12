@@ -96,8 +96,10 @@ func _process(delta: float) -> void:
 	pass
 
 func controllerNavigate(val):
-	if val:
-		$buttons/jumpKey.grab_focus()
+	print("in keybind controller naviagte")
+	setTextBoxes()
+	#if val:
+		#$buttons/jumpKey.grab_focus()
 	
 func sortLength(a : String, b : String ):
 	if a.length() < b.length():
@@ -243,9 +245,11 @@ func setTextBoxes() -> void:
 		var notCurSprite = self.get_node("currentKeys/"+str(key)+notLengthTpe+"Current")
 		
 		if Globals.usingController:
+			print("resetting text boxes with controller images")
 			curSprite.visible = false
 			notCurSprite.visible = false
 			curSprite = self.get_node("currentKeys/"+str(key)+"Controller")
+			curSprite.visible = true
 			#print("controller name: ", event.as_text())
 			
 			var eventText = imageText

@@ -104,7 +104,9 @@ func _process(delta: float) -> void:
 			unpressedSprite.visible = true
 	
 func controllerNavigate(val):
-	pass	
+	setKeyBindingImages()
+	
+	
 func setKeyBindingImages():
 	
 	pathToTarget = keyFolderPath
