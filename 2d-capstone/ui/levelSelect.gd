@@ -41,24 +41,13 @@ func controllerNavigate(val) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	elif event.is_action_pressed("jump"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		current_option = (current_option - 1 + options_count) % options_count
-		update_selection()
-	elif event.is_action_pressed("slide"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		current_option = (current_option + 1) % options_count
-		update_selection()
-	elif event.is_action_pressed("punch"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		select_current_option()
 	elif Input.is_action_just_pressed("ui_up"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		current_option = (current_option - 1 + options_count) % options_count
 		update_selection()
 	elif  Input.is_action_just_pressed("ui_down"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		current_option = (current_option + 1) % options_count
+		current_option = (current_option + 1 + options_count) % options_count
 		update_selection()
 	elif Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_select"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

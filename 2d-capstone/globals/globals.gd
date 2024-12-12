@@ -104,7 +104,8 @@ func _onJoyConnectionChanged(id, connected):
 	print("changing controller val: ", connected)
 	usingController = connected
 	print("current scene: ", get_tree().current_scene)
-	get_tree().current_scene.controllerNavigate(connected)
+	if get_tree().current_scene.has_method("controllerNavigate"):
+		get_tree().current_scene.controllerNavigate(connected)
 func enablePreviewUI():
 	$PreviewCanvasLayer.visible = true
 func disablePreviewUI():

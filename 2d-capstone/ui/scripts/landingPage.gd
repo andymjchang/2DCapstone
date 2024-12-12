@@ -23,13 +23,7 @@ func _ready():
 	update_pointer_position()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("jump"):
-		current_option = wrapi(current_option - 1, 0, MenuOptions.size())
-		update_pointer_position()
-	elif Input.is_action_just_pressed("slide"):
-		current_option = wrapi(current_option + 1, 0, MenuOptions.size())
-		update_pointer_position()
-	elif Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed("ui_up"):
 		current_option = wrapi(current_option - 1, 0, MenuOptions.size())
 		update_pointer_position()
 	elif  Input.is_action_just_pressed("ui_down"):
@@ -43,17 +37,13 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseMotion:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	elif event.is_action_pressed("jump"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	elif event.is_action_pressed("slide"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	elif event.is_action_pressed("punch"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	elif Input.is_action_just_pressed("ui_up"):
-		current_option = wrapi(current_option - 1, 0, MenuOptions.size())
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		current_option = wrapi(current_option, 0, MenuOptions.size())
 		update_pointer_position()
 	elif  Input.is_action_just_pressed("ui_down"):
-		current_option = wrapi(current_option + 1, 0, MenuOptions.size())
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		current_option = wrapi(current_option, 0, MenuOptions.size())
 		update_pointer_position()
 	elif Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_select"):
 		handle_selection()

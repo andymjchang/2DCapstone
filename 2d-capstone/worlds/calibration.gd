@@ -97,7 +97,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		# Update instructions when calibration is complete
 		if timing_points.size() >= 20:
-			instructionsLabel.text = "Calibration Finished! Press Esc to exit."
+			instructionsLabel.text = "Calibration Finished! Press Esc/Share to exit."
+			$Sprite2D.visible = false
 			$Button.visible = true
 		
 	# Add ESC key handling
