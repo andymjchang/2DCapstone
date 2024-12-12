@@ -59,8 +59,9 @@ func _input(event: InputEvent) -> void:
 		handle_selection()
 
 func controllerNavigate(val):
-	if val:
-		$storyButton.grab_focus()
+	pass
+	#if val:
+		#$storyButton.grab_focus()
 		
 func update_pointer_position():
 	Globals.emit_signal("playMove")

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dxspywuv7m6gp" path="res://ui/assets/Start_button_unpressed.png" id="2_76o7c"]
 [ext_resource type="Texture2D" uid="uid://jvj24olunor2" path="res://ui/assets/Title_screen/Title_screen/Title_Screen_background.png" id="2_ehksf"]
 [ext_resource type="Texture2D" uid="uid://g15lptde2dlw" path="res://ui/assets/Start_button_pressed.png" id="3_htjxe"]
-[ext_resource type="SpriteFrames" uid="uid://bvss01tsvppyo" path="res://worldObjects/enemy/flying_enemy.tres" id="3_ohmnf"]
+[ext_resource type="SpriteFrames" uid="uid://up87u0vyllg5" path="res://worldObjects/enemy/flying_enemy.tres" id="3_ohmnf"]
 [ext_resource type="Texture2D" uid="uid://bpr2jpqk4ugbf" path="res://ui/assets/Quit_button_unpressed.png" id="4_1m2j0"]
 [ext_resource type="Script" path="res://ui/menu_enemy.gd" id="4_ibw0e"]
 [ext_resource type="Texture2D" uid="uid://cvl0lsfhi2474" path="res://ui/assets/Quit_button_pressed.png" id="5_bjqql"]
