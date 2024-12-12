@@ -53,10 +53,9 @@ func _process(delta: float) -> void:
 			select_current_option()
 
 func _input(event: InputEvent) -> void:
-	pass
-	#if allowSelect:
-		#if event is InputEventMouseMotion:
-			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if allowSelect:
+		if event is InputEventMouseMotion:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		#elif Input.is_action_just_pressed("ui_up"):
 			#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 			#current_option = wrapi(current_option - 1, 0, MenuOptions.size())
