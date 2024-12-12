@@ -39,15 +39,17 @@ func _onHealingTaken(who) -> void:
 	print("ui heal!")
 	if curP2Heart:
 		if curP2HeartIndex + 1 < 3 :
+			#we are not at full health
 			curP2HeartIndex += 1
 			curP2Heart = self.get_node("player2").get_child(curP2HeartIndex)
 			curP2Heart.gainHeart()	
 		elif curP2Heart.healthStatus == "half":
+			#refills to full heart
 			curP2Heart.gainHeart()
 		else:
-			curP2HeartIndex = 3
+			#sanity check, strongarming the last heart to be the current
+			curP2HeartIndex = 2
 			curP2Heart = self.get_node("player2").get_child(curP2HeartIndex)
-			#curP2Heart.gainHeart()	
 func _onUIRevive(who):
 	print("made it to ui revive")
 	curP2Heart =  $player2/UiHeart3
