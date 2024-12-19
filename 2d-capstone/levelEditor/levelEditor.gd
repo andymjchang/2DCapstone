@@ -345,6 +345,7 @@ func _onSlideWallButtonUp() -> void:
 	place_block(slideWallParent, slideWallList, camera.position, false)
 func _on_exit_button_pressed() -> void:
 	# This will be the final functionality so players can navigate between menus
+	Globals.curFile = "Level 1"
 	get_tree().change_scene_to_file("res://ui/landingPage.tscn")
 
 	# For debugging

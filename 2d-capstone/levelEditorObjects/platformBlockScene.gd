@@ -2,7 +2,7 @@ extends Node2D
 class_name platformBlockScene
 #6 cols  default
 @onready var tileMap = self.get("Node2D/TileMapLayer")
-@onready var base = $Node2D/base
+@onready var base = $Node2D/TileMapLayer
 #this is the default for now
 var numCols = 20
 @onready var extents : float

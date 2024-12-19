@@ -36,6 +36,7 @@ func _ready():
 	if Globals.curFile.begins_with("Level 3"):
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer3.visible = false
+		$sprite2D/TileMapLayer4.visible = false
 		$sprite2D/TileMapLayer2.visible = true
 		tileMap = $sprite2D/TileMapLayer2
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
@@ -49,6 +50,7 @@ func _ready():
 		$sprite2D/TileMapLayer.visible = false
 		$sprite2D/TileMapLayer2.visible = false
 		$sprite2D/TileMapLayer3.visible = true
+		$sprite2D/TileMapLayer4.visible = false
 		tileMap = $sprite2D/TileMapLayer3
 		allTiles = [start2Tiles, filler2Tiles, end2Tiles]
 		id = 2
@@ -60,6 +62,7 @@ func _ready():
 		$sprite2D/TileMapLayer.visible = true
 		$sprite2D/TileMapLayer3.visible = false
 		$sprite2D/TileMapLayer2.visible = false
+		$sprite2D/TileMapLayer4.visible = false
 		tileMap = $sprite2D/TileMapLayer
 		allTiles = [startTiles, fillerTiles, endTiles]
 		id = 1
@@ -181,6 +184,28 @@ func setTileMaps(posPoints : Array):
 			#posPoints[2]=20
 		#if id == 0:
 			#posPoints[2] -= 2
+		var multiplier = 1.0
+		if Globals.curFile.begins_with("Level 3") and posPoints[1] < 500:
+			$sprite2D/TileMapLayer.visible = false
+			$sprite2D/TileMapLayer3.visible = false
+			$sprite2D/TileMapLayer2.visible = false
+			$sprite2D/TileMapLayer4.visible = true
+			tileMap = $sprite2D/TileMapLayer4
+			allTiles = [start2Tiles, filler2Tiles, end2Tiles]
+			id = 3
+			multiplier = 20.0
+			minCols = 6
+			numCols = 20
+			capLength = 3
+			setFillerTiles()
+			tileWidth = tileMap.tile_set.tile_size.x * tileMap.scale.x
+			tileHeight = tileMap.tile_set.tile_size.y * tileMap.scale.y 
+			var newWidth = tileWidth * multiplier
+			extents = self.get_node("CollisionShape2D").shape.extents
+			extents = extents
+			extents = newWidth/2.0
+			self.get_node("CollisionShape2D").shape.extents.x = extents
+			
 		if posPoints[2] < numCols:
 			while numCols > posPoints[2]:
 				self.decreaseByOneTile()

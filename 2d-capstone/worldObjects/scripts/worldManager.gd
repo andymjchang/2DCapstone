@@ -316,10 +316,10 @@ func loadLevel():
 	$objectList/actionIndicators.load_array()
 	$objectList/skips.loadArray()
 	
-	if levelFile.begins_with("Level 3"):
-		for platform in platformBlocksList.get_children():
-			platform.get_node("sprite2D/TileMapLayer").visible = false
-			platform.get_node("sprite2D/TileMapLayer2").visible = true
+	#if levelFile.begins_with("Level 3"):
+		#for platform in platformBlocksList.get_children():
+			#platform.get_node("sprite2D/TileMapLayer").visible = false
+			#platform.get_node("sprite2D/TileMapLayer2").visible = true
 
 func changeCountdown():
 	await get_tree().create_timer(1.0).timeout
