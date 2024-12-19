@@ -87,9 +87,11 @@ func select_current_option() -> void:
 				Globals.curFile = nextLevel
 				Globals.FadeTransition("res://worlds/levelTemplate.tscn")
 			else:
+				Globals.curFile = "Level 1"
 				Globals.FadeTransition("res://ui/levelSelect.tscn")
 		MenuOptions.LEVEL_SELECT:
 			if Globals.inEditor:
+				Globals.curFile = "Level 1"
 				Globals.FadeTransition("res://levelEditor/levelEditor.tscn")
 			else:
 				Globals.FadeTransition("res://ui/landingPage.tscn")

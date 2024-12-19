@@ -77,8 +77,12 @@ func select_current_option() -> void:
 		MenuOptions.RESTART:
 			_onRestartButtonUp()
 		MenuOptions.OPTIONS:
+			if Globals.inEditor:
+				Globals.curFile = "Level 1"
 			_onOptionsButtonUp()
 		MenuOptions.MAIN_MENU:
+			if Globals.inEditor:
+				Globals.curFile = "Level 1"
 			_onMainMenuButtonUp()
 
 func _onResumeButtonUp() -> void:

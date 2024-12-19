@@ -76,14 +76,20 @@ func select_current_option() -> void:
 	music.stop()
 	match current_option:
 		MenuOptions.LEVEL_SELECT:
+			if Globals.inEditor:
+				Globals.curFile = "Level 1"
 			_onLevelSelectButtonUp()
 		MenuOptions.CHECKPOINT:
 			_onCheckpointButtonUp()
 		MenuOptions.RESTART:
 			_onRestartButtonUp()
 		MenuOptions.OPTIONS:
+			if Globals.inEditor:
+				Globals.curFile = "Level 1"
 			_onOptionsButtonUp()
 		MenuOptions.MAIN_MENU:
+			if Globals.inEditor:
+				Globals.curFile = "Level 1"
 			_onMainMenuButtonUp()
 
 func _onLevelSelectButtonUp() -> void:
