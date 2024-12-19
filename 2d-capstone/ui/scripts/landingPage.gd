@@ -4,7 +4,8 @@ enum MenuOptions {
 	START,
 	LEVELS,
 	EDITOR,
-	OPTIONS
+	OPTIONS,
+	QUIT
 }
 
 var current_option: int = MenuOptions.START
@@ -67,6 +68,9 @@ func update_pointer_position():
 		MenuOptions.OPTIONS:
 			pointer.position.y = $optionsButton.position.y + ($optionsButton.size.y / 2)
 			#Input.warp_mouse($optionsButton.global_position + Vector2($optionsButton.size.x/2, $optionsButton.size.y/2))
+		MenuOptions.QUIT:
+			pointer.position.y = $quitButton.position.y + ($quitButton.size.y / 2)
+			#Input.warp_mouse($quitButton.global_position + Vector2($quitButton.size.x/2, $quitButton.size.y/2))
 
 func handle_selection():
 	Globals.emit_signal("playSelect")
@@ -80,6 +84,8 @@ func handle_selection():
 			_onEditorButtonPressed()
 		MenuOptions.OPTIONS:
 			_onOptionsButtonPressed()
+		MenuOptions.QUIT:
+			_onQuitButtonPressed()
 
 func _onStoryButtonPressed():
 	Globals.FadeTransition("res://worlds/levelTemplate.tscn")
@@ -87,6 +93,9 @@ func _onStoryButtonPressed():
 func _onEditorButtonPressed():
 	# get_tree().change_scene_to_file("res://levelEditor/levelEditor.tscn")
 	Globals.FadeTransition("res://levelEditor/levelEditor.tscn")
+
+func _onQuitButtonPressed():
+	get_tree().quit()
 	
 func _onLevelSelectPressed() -> void:
 	Globals.FadeTransition("res://ui/levelSelect.tscn")
