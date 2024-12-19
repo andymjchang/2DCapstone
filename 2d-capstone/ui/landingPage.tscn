@@ -1,13 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://dis3tqrrssvdv"]
+[gd_scene load_steps=17 format=3 uid="uid://dis3tqrrssvdv"]
 
 [ext_resource type="Script" path="res://ui/scripts/landingPage.gd" id="1_4duo3"]
 [ext_resource type="Texture2D" uid="uid://dxspywuv7m6gp" path="res://ui/assets/Start_button_unpressed.png" id="2_76o7c"]
 [ext_resource type="Texture2D" uid="uid://jvj24olunor2" path="res://ui/assets/Title_screen/Title_screen/Title_Screen_background.png" id="2_ehksf"]
 [ext_resource type="Texture2D" uid="uid://g15lptde2dlw" path="res://ui/assets/Start_button_pressed.png" id="3_htjxe"]
 [ext_resource type="SpriteFrames" uid="uid://up87u0vyllg5" path="res://worldObjects/enemy/flying_enemy.tres" id="3_ohmnf"]
-[ext_resource type="Texture2D" uid="uid://bpr2jpqk4ugbf" path="res://ui/assets/Quit_button_unpressed.png" id="4_1m2j0"]
 [ext_resource type="Script" path="res://ui/menu_enemy.gd" id="4_ibw0e"]
-[ext_resource type="Texture2D" uid="uid://cvl0lsfhi2474" path="res://ui/assets/Quit_button_pressed.png" id="5_bjqql"]
 [ext_resource type="Texture2D" uid="uid://cna5ly6pyb60n" path="res://ui/assets/level_editor_button_upressed.png" id="5_cqwvl"]
 [ext_resource type="Texture2D" uid="uid://b0a3a04h0veeg" path="res://ui/assets/Level_Editor_Button_Pressed.png" id="6_28gch"]
 [ext_resource type="Texture2D" uid="uid://8wa3onhog521" path="res://ui/assets/Levels_button_unpressed.png" id="9_hcsvi"]
@@ -66,23 +64,6 @@ texture_normal = ExtResource("5_cqwvl")
 texture_pressed = ExtResource("6_28gch")
 texture_hover = ExtResource("6_28gch")
 
-[node name="quitButton" type="TextureButton" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = -152.0
-offset_right = 309.0
-offset_bottom = -32.0
-grow_horizontal = 2
-grow_vertical = 0
-texture_normal = ExtResource("4_1m2j0")
-texture_pressed = ExtResource("5_bjqql")
-texture_hover = ExtResource("5_bjqql")
-ignore_texture_size = true
-
 [node name="levelSelect" type="TextureButton" parent="."]
 offset_left = 898.0
 offset_top = 478.0
@@ -116,6 +97,5 @@ script = ExtResource("15_y8v3w")
 
 [connection signal="pressed" from="storyButton" to="." method="_onStoryButtonPressed"]
 [connection signal="pressed" from="editorButton" to="." method="_onEditorButtonPressed"]
-[connection signal="pressed" from="quitButton" to="." method="_onQuitButtonPressed"]
 [connection signal="pressed" from="levelSelect" to="." method="_onLevelSelectPressed"]
 [connection signal="pressed" from="optionsButton" to="." method="_onOptionsButtonPressed"]
